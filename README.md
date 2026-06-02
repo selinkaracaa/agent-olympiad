@@ -30,12 +30,12 @@ agent-olympiad-econ/
 |---|---|---|
 | econ_ieo_2019_q1 | 2019 | Mechanism Design (Cake Cutting) |
 | econ_ieo_2019_q5 | 2019 | Short Run vs Long Run / Adverse Selection |
+| econ_ieo_2020_q2 | 2020 | Optimal Lockdown / Nash Equilibrium vs Social Optimum |
 | econ_ieo_2021_q1 | 2021 | Dynamic Equilibrium (Oil & Gas Markets) |
-| econ_ieo_2021_q3 | 2021 | Vaccination Game Theory |
+| econ_ieo_2021_q3 | 2021 | Pandemic Possibility Frontier |
+| econ_ieo_2021_q5 | 2021 | Vaccination Dilemmas / Crowding Out |
 | econ_ieo_2022_q1 | 2022 | Measuring Inequality / Data Bias |
 | econ_ieo_2022_q5 | 2022 | Bandwagon Effect / Solar Panels |
-| econ_ieo_2023_q1 | 2023 | Human Capital Theory / Career NPV |
-| econ_ieo_2023_q4 | 2023 | IRR and Government Intervention |
 | econ_ieo_2024_q1 | 2024 | Mortgage Securitization / Adverse Selection |
 | econ_ieo_2025_q1 | 2025 | Conspicuous Consumption / Signaling Game |
 
