@@ -16,7 +16,7 @@ Existing AI benchmarks focus heavily on paper-based math and physics (AMC, IMO, 
 ## Repository Structure
 
 ```
-agent-olympiad-econ/
+agent-olympiad/
 ├── README.md
 ├── data/
 │   ├── raw/               # Original IEO exam PDFs (2018–2025)
