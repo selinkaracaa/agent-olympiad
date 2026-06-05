@@ -1,0 +1,96 @@
+import json
+import os
+from openai import OpenAI
+
+client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
+MODEL = "gpt-4o"
+
+with open("data/processed/ieo_benchmark.json") as f:
+    problems = json.load(f)
+
+results = []
+
+for problem in problems:
+    print(f"\n{'='*60}")
+    print(f"Running: {problem['problem_id']} — {problem['topic']}")
+
+    # Step 1: Agent attempts the problem
+    agent_response = client.chat.completions.create(
+        model=MODEL,
+        messages=[
+            {
+                "role": "system",
+                "content": "You are a student taking the International Economics Olympiad. Answer the following question as completely and carefully as possible. Show all your reasoning and working."
+            },
+            {
+                "role": "user",
+                "content": problem["problem_description"]
+            }
+        ]
+    )
+    agent_answer = agent_response.choices[0].message.content
+    print(f"Agent answered ({len(agent_answer)} chars)")
+
+    # Step 2: LLM Judge scores the agent's answer
+    judge_prompt = f"""You are an expert economics judge scoring a student's answer to an International Economics Olympiad question.
+
+QUESTION:
+{problem["problem_description"]}
+
+OFFICIAL SAMPLE SOLUTION:
+{problem["gold_label"]["sample_solution"]}
+
+OFFICIAL GRADING RUBRIC:
+{problem["gold_label"]["grading_rubric"]}
+
+STUDENT'S ANSWER:
+{agent_answer}
+
+Your task:
+1. Score the student's answer according to the official grading rubric above.
+2. The maximum score is {problem["total_points"]} points.
+3. For each criterion in the rubric, state how many points the student earned and why.
+4. End with a TOTAL SCORE in the format: "TOTAL: X/{problem["total_points"]}"
+"""
+
+    judge_response = client.chat.completions.create(
+        model=MODEL,
+        messages=[
+            {
+                "role": "system",
+                "content": "You are a strict but fair economics olympiad judge. Score answers accurately according to the provided rubric."
+            },
+            {
+                "role": "user",
+                "content": judge_prompt
+            }
+        ]
+    )
+    judge_feedback = judge_response.choices[0].message.content
+    print(f"Judge scored.")
+
+    results.append({
+        "problem_id": problem["problem_id"],
+        "year": problem["year"],
+        "topic": problem["topic"],
+        "total_points": problem["total_points"],
+        "agent_answer": agent_answer,
+        "judge_feedback": judge_feedback
+    })
+
+# Save results
+output_path = "data/processed/experiment_results.json"
+with open(output_path, "w") as f:
+    json.dump(results, f, indent=2)
+
+print(f"\n\nAll done! Results saved to {output_path}")
+
+# Print summary table
+print("\n" + "="*60)
+print("SCORE SUMMARY")
+print("="*60)
+for r in results:
+    # Extract score from judge feedback
+    lines = r["judge_feedback"].split("\n")
+    score_line = next((l for l in reversed(lines) if "TOTAL:" in l), "TOTAL: ?")
+    print(f"{r['problem_id']:<30} {score_line.strip()}")
