@@ -1,9 +1,26 @@
 import json
 import os
-from openai import OpenAI
+import time
+from google import genai
+from google.genai import errors as genai_errors
 
-client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
-MODEL = "gpt-4o"
+client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
+MODEL = "gemini-2.5-flash-lite"
+
+
+def generate_with_retry(contents, max_retries=5):
+    for attempt in range(max_retries):
+        try:
+            response = client.models.generate_content(model=MODEL, contents=contents)
+            return response.text
+        except genai_errors.ServerError as e:
+            if attempt < max_retries - 1:
+                wait = 10 * (attempt + 1)
+                print(f"  [503 retry {attempt+1}/{max_retries}, waiting {wait}s]")
+                time.sleep(wait)
+            else:
+                raise
+
 
 with open("data/processed/ieo_benchmark.json") as f:
     problems = json.load(f)
@@ -15,21 +32,12 @@ for problem in problems:
     print(f"Running: {problem['problem_id']} — {problem['topic']}")
 
     # Step 1: Agent attempts the problem
-    agent_response = client.chat.completions.create(
-        model=MODEL,
-        messages=[
-            {
-                "role": "system",
-                "content": "You are a student taking the International Economics Olympiad. Answer the following question as completely and carefully as possible. Show all your reasoning and working."
-            },
-            {
-                "role": "user",
-                "content": problem["problem_description"]
-            }
-        ]
-    )
-    agent_answer = agent_response.choices[0].message.content
-    print(f"Agent answered ({len(agent_answer)} chars)")
+    agent_prompt = f"""You are a student taking the International Economics Olympiad. Answer the following question as completely and carefully as possible. Show all your reasoning and working.
+
+{problem["problem_description"]}"""
+
+    agent_answer = generate_with_retry(agent_prompt)
+    print(f"  Agent answered ({len(agent_answer)} chars)")
 
     # Step 2: LLM Judge scores the agent's answer
     judge_prompt = f"""You are an expert economics judge scoring a student's answer to an International Economics Olympiad question.
@@ -53,21 +61,8 @@ Your task:
 4. End with a TOTAL SCORE in the format: "TOTAL: X/{problem["total_points"]}"
 """
 
-    judge_response = client.chat.completions.create(
-        model=MODEL,
-        messages=[
-            {
-                "role": "system",
-                "content": "You are a strict but fair economics olympiad judge. Score answers accurately according to the provided rubric."
-            },
-            {
-                "role": "user",
-                "content": judge_prompt
-            }
-        ]
-    )
-    judge_feedback = judge_response.choices[0].message.content
-    print(f"Judge scored.")
+    judge_feedback = generate_with_retry(judge_prompt)
+    print(f"  Judge scored.")
 
     results.append({
         "problem_id": problem["problem_id"],
@@ -87,10 +82,9 @@ print(f"\n\nAll done! Results saved to {output_path}")
 
 # Print summary table
 print("\n" + "="*60)
-print("SCORE SUMMARY")
+print(f"SCORE SUMMARY ({MODEL})")
 print("="*60)
 for r in results:
-    # Extract score from judge feedback
     lines = r["judge_feedback"].split("\n")
     score_line = next((l for l in reversed(lines) if "TOTAL:" in l), "TOTAL: ?")
     print(f"{r['problem_id']:<30} {score_line.strip()}")
