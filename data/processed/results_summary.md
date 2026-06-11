@@ -35,7 +35,11 @@
 - External judge gives more differentiated and reliable scores — recommended for future runs
 ## Table 3: Human Students vs LLM Models (External GPT-5.5 Judge)
 
-*Human stats from official IEO Final Reports. N/A = report not yet available.*
+*Human stats sourced from official IEO Final Reports (publicly available on ecolymp.org):*
+- *2019: https://files.ecolymp.org/2019/IEO_Final_Report_2019.pdf*
+- *2020: https://files.ecolymp.org/2020/IEO_Final_Report_2020.pdf*
+- *2021: https://files.ecolymp.org/2021/IEO_Final_Report_2021.pdf*
+- *2022 & 2025: Final Reports not yet accessible (server error / not yet published)*
 
 | Question | Human Avg | Human Max | # Who Got Max | GPT-5.5 | Claude | sonar-pro | Gemini |
 |---|---|---|---|---|---|---|---|
