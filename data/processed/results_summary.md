@@ -33,6 +33,7 @@
 - **Self-judging is inconsistent**: sonar-pro goes up (+11) with external judge, Claude goes down (-9)
 - **GPT-5.5 scores highest** under both conditions; **Gemini 3.5 Flash scores lowest** (82 self / 109 external)
 - External judge gives more differentiated and reliable scores — recommended for future runs
+
 ## Table 3: Human Students vs LLM Models (External GPT-5.5 Judge)
 
 *Human stats sourced from official IEO Final Reports (publicly available on ecolymp.org):*
@@ -41,16 +42,16 @@
 - *2021: https://files.ecolymp.org/2021/IEO_Final_Report_2021.pdf*
 - *2022 & 2025: Final Reports not yet accessible (server error / not yet published)*
 
-| Question | Human Avg | Human Max | # Who Got Max | GPT-5.5 | Claude | sonar-pro | Gemini |
-|---|---|---|---|---|---|---|---|
-| Mechanism Design (2019) | 13.4/30 | 30/30 | 8 students | 30/30 | 12/30 | 12/30 | 15/30 |
-| Optimal Lockdown (2020) | 15.1/30 | 30/30 | 5 students | 28/30 | 30/30 | 24/30 | 30/30 |
-| Dynamic Equilibrium (2021) | 14.5/30 | 30/30 | 17 students | 30/30 | 30/30 | 25/30 | 20/30 |
-| Going Green (2022) | N/A | N/A | N/A | 30/30 | 27/30 | 23/30 | 14/30 |
-| Buying Cars (2025) | N/A | N/A | N/A | 30/30 | 30/30 | 29/30 | 30/30 |
+| Question | Total Students | Human Avg | Human Max | # Who Got Max | GPT-5.5 | Claude | sonar-pro | Gemini |
+|---|---|---|---|---|---|---|---|---|
+| Mechanism Design (2019) | 131 | 13.4/30 | 30/30 | 8 | 30/30 | 12/30 | 12/30 | 15/30 |
+| Optimal Lockdown (2020) | 130 | 15.1/30 | 30/30 | 5 | 28/30 | 30/30 | 24/30 | 30/30 |
+| Dynamic Equilibrium (2021) | 217 | 14.5/30 | 30/30 | 17 | 30/30 | 30/30 | 25/30 | 20/30 |
+| Going Green (2022) | N/A | N/A | N/A | N/A | 30/30 | 27/30 | 23/30 | 14/30 |
+| Buying Cars (2025) | N/A | N/A | N/A | N/A | 30/30 | 30/30 | 29/30 | 30/30 |
 
 ### What this shows
 - **Average human student scores 13–15/30** on these questions; LLMs score 24–30/30
-- Only **5–17 students out of 50–171 attempted** achieved a perfect score — yet GPT-5.5 scores perfect on every question
+- Only **5–17 students out of 130–217** achieved a perfect score — yet GPT-5.5 scores perfect on every question
 - This suggests either (a) LLM judge is still too lenient, or (b) these questions are within LLMs' training distribution and don't challenge them as agentic tasks should
 - **This is the core argument for why a new, truly agentic benchmark is needed**
