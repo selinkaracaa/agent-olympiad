@@ -22,9 +22,11 @@ agent-olympiad/
 ├── data/
 │   ├── raw/                   # Original IEO exam PDFs (2018–2025)
 │   └── processed/
-│       ├── ieo_benchmark.json          # Structured benchmark (5 questions)
-│       ├── results_<model>.json        # Raw results per model
-│       └── results_summary.md          # Multi-model score comparison
+│       ├── ieo_benchmark.json                    # Structured benchmark (5 open questions + business case)
+│       ├── results_<model>.json                  # Raw single-agent results per model
+│       ├── results_summary.md                    # Multi-model score comparison (open questions)
+│       ├── results_multiagent_summary.md         # Business case multi-agent results summary
+│       └── multiagent_<model>_judgedby_<judge>.json  # Full multi-agent discussion + report + score
 ```
 
 ## Dataset Summary
