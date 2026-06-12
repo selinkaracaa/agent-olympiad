@@ -4,7 +4,11 @@
     "competition": "International Economics Olympiad",
     "year": 2019,
     "topic": "Mechanism Design",
-    "agentic_properties": ["sequential game theory", "creative mechanism design", "multi-constraint reasoning"],
+    "agentic_properties": [
+      "sequential game theory",
+      "creative mechanism design",
+      "multi-constraint reasoning"
+    ],
     "source_file": "data/raw/2019.pdf",
     "task_type": "open_question",
     "total_points": 30,
@@ -19,7 +23,12 @@
     "competition": "International Economics Olympiad",
     "year": 2021,
     "topic": "Dynamic Equilibrium",
-    "agentic_properties": ["multi-period iterative reasoning", "cobweb dynamics", "divergence analysis", "numeric proof required"],
+    "agentic_properties": [
+      "multi-period iterative reasoning",
+      "cobweb dynamics",
+      "divergence analysis",
+      "numeric proof required"
+    ],
     "source_file": "data/raw/2021.pdf",
     "task_type": "open_question",
     "total_points": 30,
@@ -34,13 +43,19 @@
     "competition": "International Economics Olympiad",
     "year": 2022,
     "topic": "Going Green (Bandwagon Effect)",
-    "agentic_properties": ["iterative equilibrium process", "multiple equilibria", "path dependence", "quadratic solving", "policy intervention analysis"],
+    "agentic_properties": [
+      "iterative equilibrium process",
+      "multiple equilibria",
+      "path dependence",
+      "quadratic solving",
+      "policy intervention analysis"
+    ],
     "source_file": "data/raw/2022.pdf",
     "task_type": "open_question",
     "total_points": 30,
     "problem_description": "There are two groups of consumers of solar panels in country S: 150,000 households who consider purchasing them because they care about the environment and 200,000 households who consider purchasing them because it is trendy (this is sometimes called the bandwagon effect). The demanded quantities of the solar panels are given by:\n\nQ_c(are) = 150,000 - 5p, Q_b(andwagon) = 40,000 - 5p + 500*sqrt(N),\n\nwhere p is the price of a solar panel (in USD) and N is the total quantity of solar panel users (in equilibrium, N = Q_c + Q_b). For simplicity, assume that Q_c, Q_b, and N can be non-integer.\n\nThe supply of the solar panels is perfectly elastic, p = 25,000.\n\nThe market adjusts to the equilibrium in the following way. First, customers who care about the environment decide whether they will have solar panels. At every step after that, customers from the 'trendy' group observe the quantity of solar panels around and decide whether they will have solar panels based on this observation. This goes on until everyone is happy with their choice.\n\n(a) (5 rp) How many solar panels will be purchased?\n\n(b) (15 rp) The government introduces a per-unit subsidy s = $5,000. Calculate the quantity of solar panels in equilibrium.\n\n(c) (10 rp) After the equilibrium from (b) is reached, the government surprisingly eliminates the subsidy. Customers have the opportunity to return the once-purchased solar panels and get $25,000 refunded (and indeed do this if their willingness to pay is below 25,000 per panel). Find the new equilibrium quantity of installed solar panels. Is your answer the same as in (a)? Why or why not?",
     "gold_label": {
-      "sample_solution": "(a) Q_c = 150,000 - 5*25,000 = 25,000 solar panels purchased by the first group. As for the second (bandwagon) group, in the first period Q_b = 40,000 - 5*25,000 + 500*sqrt(25,000). This is negative, so no panels will be purchased by the second group. So, N* = 25,000.\n\n(b) The price for customers is now p - s = 20,000. Quantity demanded by those who care is Q_c = 150,000 - 5*20,000 = 50,000. This allows for positive number of panels to be purchased by the second group. The process continues until the equilibrium is reached. In equilibrium: N = 50,000 + 40,000 - 5*20,000 + 500*sqrt(N). Rewriting with x = sqrt(N): x^2 - 500x + 10,000 = 0. Solutions: x = 50*(5 +/- sqrt(21)). The answer must be greater than 101,803, so N* ≈ 229,564.\n\n(c) Those who care will adjust first and return back to Q_c = 25,000. The equilibrium condition is: N = 25,000 + 40,000 - 5*25,000 + 500*sqrt(N). Rewriting with x = sqrt(N): x^2 - 500x + 60,000 = 0. Solutions: x = 300 or x = 200, giving N = 90,000 or N = 40,000. The answer is N* = 90,000. Even though there is no subsidy anymore, the number is different from (a), because of the equilibrium dynamics: the 'bandwagon' customers immediately saw a lot of solar panels around, so they did not want to get rid of them.",
+      "sample_solution": "(a) Q_c = 150,000 - 5*25,000 = 25,000 solar panels purchased by the first group. As for the second (bandwagon) group, in the first period Q_b = 40,000 - 5*25,000 + 500*sqrt(25,000). This is negative, so no panels will be purchased by the second group. So, N* = 25,000.\n\n(b) The price for customers is now p - s = 20,000. Quantity demanded by those who care is Q_c = 150,000 - 5*20,000 = 50,000. This allows for positive number of panels to be purchased by the second group. The process continues until the equilibrium is reached. In equilibrium: N = 50,000 + 40,000 - 5*20,000 + 500*sqrt(N). Rewriting with x = sqrt(N): x^2 - 500x + 10,000 = 0. Solutions: x = 50*(5 +/- sqrt(21)). The answer must be greater than 101,803, so N* \u2248 229,564.\n\n(c) Those who care will adjust first and return back to Q_c = 25,000. The equilibrium condition is: N = 25,000 + 40,000 - 5*25,000 + 500*sqrt(N). Rewriting with x = sqrt(N): x^2 - 500x + 60,000 = 0. Solutions: x = 300 or x = 200, giving N = 90,000 or N = 40,000. The answer is N* = 90,000. Even though there is no subsidy anymore, the number is different from (a), because of the equilibrium dynamics: the 'bandwagon' customers immediately saw a lot of solar panels around, so they did not want to get rid of them.",
       "grading_rubric": "6 points for making sure that under the calculated Q_c, Q_b is positive, so the equilibrium condition can be applied. This should be done at least for p = 25,000 (then, for the case with subsidy the result will follow).\n\n10 points for specifying the equilibrium condition with all parameters plugged in.\n\n6 points for solving for equilibrium values of N (2 points for each from (a), (b), (c)).\n\n3 points for noticing that Q_b is too big and correcting it to 200,000 (1 point for each from (a), (b), (c)).\n\n5 points for pointing out that the result in (c) is the same as in (a) because nothing changed.\n\nNote: This is the corrected version of the question. The original task as presented to students had a typo (Q_c = 150,000 - p instead of 150,000 - 5p)."
     }
   },
@@ -49,7 +64,12 @@
     "competition": "International Economics Olympiad",
     "year": 2020,
     "topic": "Optimal Lockdown",
-    "agentic_properties": ["Nash equilibrium vs social optimum", "integer optimization", "externality reasoning", "multi-step numeric proof"],
+    "agentic_properties": [
+      "Nash equilibrium vs social optimum",
+      "integer optimization",
+      "externality reasoning",
+      "multi-step numeric proof"
+    ],
     "source_file": "data/raw/2020.pdf",
     "task_type": "open_question",
     "total_points": 30,
@@ -64,7 +84,13 @@
     "competition": "International Economics Olympiad",
     "year": 2025,
     "topic": "Buying Cars",
-    "agentic_properties": ["narrative construction", "Prisoner's dilemma", "policy design with payoff matrix", "repeated game theory", "folk theorem reasoning"],
+    "agentic_properties": [
+      "narrative construction",
+      "Prisoner's dilemma",
+      "policy design with payoff matrix",
+      "repeated game theory",
+      "folk theorem reasoning"
+    ],
     "source_file": "data/raw/2025.pdf",
     "task_type": "open_question",
     "total_points": 30,
@@ -72,21 +98,6 @@
     "gold_label": {
       "sample_solution": "(a) There might be different narratives. But, as the game represents a Prisoners' dilemma, any narrative must be consistent with: both are better off if both buy modest cars than if both buy luxury cars; a family prefers to buy a luxury car if the other family buys a modest car. A nice example could use conspicuous consumption, where consumption is driven by a desire to signal wealth or status rather than purely practical needs. A luxury car does not provide a better service than a modest car, but social status. But a family obtains social status only when they are the only ones with a luxury car. This is also known as the 'keeping up with the Joneses' phenomenon or the Veblen effect.\n\n(b) Nash Equilibrium: NE = (Luxury, Luxury). Reason: For both families, luxury is a dominant strategy. The Nash equilibrium is not Pareto efficient, since the outcome (Modest, Modest) would be better for both parties.\n\n(c) There might be different answers, but all must provide a payoff where (Modest, Modest) is the new equilibrium. One example: a tax on luxury cars that reduces the payoffs by 0.75. New matrix: (Modest, Modest) = (2, 2); (Modest, Luxury) = (0.5, 1.75); (Luxury, Modest) = (1.75, 0.5); (Luxury, Luxury) = (0.25, 0.25). The new equilibrium in dominant strategies is (Modest, Modest).\n\n(d) The narrative describes a 'repeated Prisoners' dilemma'. With sufficiently patient families (meaning families value future payoffs sufficiently enough), the Pareto-efficient (Modest, Modest) outcome can be observed as the result of a credible threat: if one family buys a luxury car, all families will switch to buying luxury cars indefinitely. The prospect of continuously receiving a payoff of only 1 (instead of 2) in future periods, deters any single family from unilaterally buying a luxury car in the present and obtaining 2.5, but only for one period.",
       "grading_rubric": "(a) 4 points for providing a consistent narrative. 2 points for referring to conspicuous consumption, 'keeping up with the Joneses' or the Veblen effect, or other consistent externality effect.\n\n(b) 1 point for stating that (Luxury, Luxury) is the unique NE. 3 points for the correct argument of the equilibrium: either dominant strategies or Nash equilibrium as best response for both families. 2 points for the correct argument that the NE is not Pareto efficient.\n\n(c) 4 points for the description of a reasonable policy that yields a Pareto improving outcome. 4 points for a payoff matrix that is consistent with the policy description (only awarded if the policy is reasonable and yields a Pareto improvement).\n\n(d) 2 points for identifying that repeating the game is the key element. 4 points for providing a well argued reason consistent with the observations. 4 points for describing the strategy that sustains the (Modest, Modest) equilibrium."
-    }
-  },
-  {
-    "problem_id": "econ_ieo_2023_bc",
-    "competition": "International Economics Olympiad",
-    "year": 2023,
-    "topic": "Business Case — Public Private Partnership",
-    "agentic_properties": ["multi-stakeholder analysis", "financial modeling", "real-world research required", "open-ended recommendation", "team collaboration"],
-    "source_file": "https://files.ecolymp.org/2023/tasks/IEO_case_2023.pdf",
-    "task_type": "business_case",
-    "total_points": 100,
-    "problem_description": "Your organization is consulting a construction company on applying (or not) for participating in a Public Private Partnership (PPP) with the University of Thessaly (UTH) to reform an abandoned area into an open campus, and run it under a contract for 30 years.\n\nBackground: UTH has just absorbed two neighboring educational organizations, becoming the third most populated university in Greece. In Volos alone, UTH has more than 12,000 students, but available dormitories can accommodate only 40 students. UTH recently became owner of an abandoned cotton factory building on a plot of about 88,000 m2, where it plans to create teaching and research facilities, dormitories for ~750 individuals, a school, sports facilities, and green areas.\n\nUTH is looking for a contractor to: demolish most existing old buildings, build or renovate a total of 52,500 m2 of near-zero energy buildings on 32,000 m2 of the plot, and reform the rest into parking areas, sports facilities, roads, and pedestrian streets. Under the PPP contract, after construction the University will pay the contractor for using the property, administrative expenses, insurance, and maintenance for 30 years, after which UTH maintains the whole property.\n\nWhile the University estimates the project cost at 94 million euros, your client has three options:\n1. Apply, accepting the amount estimated by the University\n2. Apply, suggesting a different amount\n3. Not apply\n\nYou have to:\n- Analyze the environment of this project and point out probable opportunities and risks\n- Account for main expected costs (design and construction costs, operating costs, insurance, interest)\n- Explain the composition of the capital used based on its cost; if you choose not to apply, explain the reasons\n- Define what benefits your client could expect as a contractor based on the potential benefits of 'green buildings' for both the occupants and the wider society\n- Define the break-even point of this project, if any\n\nFormat: Written business case report covering all five deliverables above, ending with a clear final recommendation (apply / counter-propose / reject) with justification.",
-    "gold_label": {
-      "sample_solution": null,
-      "grading_rubric": "Evaluated on 4 dimensions, each worth 25 points (total 100 points):\n\n1. ANALYTICAL (25 pts): Has the team identified the problems and goals of their client? Has the team demonstrated the ability to effectively synthesize the information? Do you recognize a broad perspective, inclusion of different stakeholders, and/or deep analysis and accurate understanding of the task?\n\n2. CONCEPTUAL (25 pts): Is the model of analysis complex and adequate? Has the team presented a clear structure of thoughts and arguments? Are the underlying assumptions reasonable and realistically backed by evidence? Do you recognize high level of business sense and the ability to apply economic concepts? Has the team presented a well-developed strategy and made realistic recommendations? Do you recognize complete coverage of key issues? Has the team demonstrated the ability to think outside of the box?\n\n3. QUANTITATIVE (25 pts): How precise were the calculations and projections? Are predictions convincing?\n\n4. COMMUNICATION (25 pts): Is the presentation/report simple to follow? Was communication professional and proper, supporting their recommendations? Is the full coverage of required deliverables visible?\n\nSource: https://files.ecolymp.org/2023/tasks/IEO_case_criteria_2023.pdf"
     }
   }
 ]
