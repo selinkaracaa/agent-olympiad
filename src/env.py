@@ -29,6 +29,34 @@ TEAM_SIZE_MATRIX = {
     "jessup": 5,
     "iiot": 4,
     "icpc": 3,
+    "ccdc": 8,
+    "cfa_research_challenge": 4,
+    "codecontests": 3,
+    "cybench": 5,
+    "debatebench": 8,
+    "eoes": 3,
+    "ethics_bowl_appe": 5,
+    "ethics_bowl_nhseb": 5,
+    "gcch_harvard": 4,
+    "history_olympiad": 4,
+    "ichto": 3,
+    "ioaa": 5,
+    "ioai": 4,
+    "iol": 4,
+    "modeling_agent": 4,
+    "mystery_hunt": 12,
+    "nyu_ctf_bench": 5,
+    "pumac_power": 8,
+    "qanta": 4,
+    "science_bowl": 4,
+    "vis_moot": 5,
+    "wharton_investment": 5,
+    "ioai_team": 4,
+    "wro": 3,
+    "envirothon": 5,
+    "science_olympiad": 15,
+    "odyssey_of_the_mind": 7,
+    "wmtc": 6,
 }
 
 COMPETITION_TOOL_REGISTRY = {
@@ -50,6 +78,31 @@ COMPETITION_TOOL_REGISTRY = {
     "hmmt_team": [],
     "hmmt_guts": [],
     "wsc_writing": [],
+    "cfa_research_challenge": ["web_search"],
+    "eoes": ["use_calculator", "read_lab_equipment"],
+    "ethics_bowl_appe": [],
+    "ethics_bowl_nhseb": [],
+    "ichto": [],
+    "modeling_agent": ["execute_code", "web_search"],
+    "pumac_power": [],
+    "vis_moot": ["web_search"],
+    "wharton_investment": ["web_search"],
+    "ccdc": ["execute_code", "web_search"],
+    "debatebench": [],
+    "gcch_harvard": ["web_search"],
+    "ioai_team": ["execute_code", "web_search"],
+    "wro": [],
+    "envirothon": ["web_search"],
+    "science_olympiad": [],
+    "odyssey_of_the_mind": [],
+    "wmtc": [],
+    # auxiliary question corpora (index_aux.json)
+    "qanta": [],
+    "science_bowl": [],
+    "codecontests": ["execute_code"],
+    "mystery_hunt": [],
+    "nyu_ctf_bench": ["execute_code", "web_search"],
+    "cybench": ["execute_code", "web_search"],
 }
 
 ALL_ACTIONS = {
@@ -113,7 +166,15 @@ class OlympiadEnvironment:
         self.problem_data = self._load_problem()
 
         problem_team_size = self.problem_data.get("team_size")
-        self.team_size = int(problem_team_size) if problem_team_size else TEAM_SIZE_MATRIX.get(competition_id, 3)
+        self.team_size = self._coerce_team_size(problem_team_size, competition_id)
+
+    @staticmethod
+    def _coerce_team_size(raw: Any, competition_id: str) -> int:
+        if isinstance(raw, int) and raw > 0:
+            return raw
+        if isinstance(raw, str) and raw.strip().isdigit():
+            return int(raw.strip())
+        return TEAM_SIZE_MATRIX.get(competition_id, 3)
 
     def _benchmark_file(self) -> str:
         return os.path.join(self.base_path, self.competition_id, "benchmark.json")

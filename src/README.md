@@ -17,22 +17,9 @@ python3 src/main.py
 # Live run on ARML Local 2009, all three schemas
 export PERPLEXITY_API_KEY="..."
 python3 src/run_exam.py --all-schemas
-
-# Generic PDF-first presentation run
-export OPENAI_API_KEY="..."
-python3 src/run_presentation_artifact.py \
-  --task-pdf path/to/task.pdf \
-  --rubric path/to/rubric.json
-
-# Evaluate an existing HTML or PDF deck
-python3 src/evaluate_artifact.py path/to/slides.html \
-  --task-pdf path/to/task.pdf \
-  --rubric path/to/rubric.json
 ```
 
 Results land in [`../results/`](../results/). See [`../results/ARML_LOCAL_2009.md`](../results/ARML_LOCAL_2009.md) for the first evaluation write-up.
-See [`../docs/EVALUATION.md`](../docs/EVALUATION.md) for artifact scoring,
-human calibration, and evaluator readiness by deliverable.
 
 ---
 

@@ -1,0 +1,39 @@
+---
+description: Iron law — never modify the original 12 upstream benchmark tracks
+alwaysApply: true
+---
+
+# Upstream benchmarks are immutable
+
+The original OlympiadMAS catalog tracks from `selinkaracaa/agent-olympiad` `main` are **iron law**. Do not edit, reformat, rewrite paths, add fields, or "sync" them.
+
+## Locked paths (do not modify)
+
+- `data/benchmarks/index.json`
+- `data/benchmarks/arml_local/`
+- `data/benchmarks/arml_national_power/`
+- `data/benchmarks/arml_national_team/`
+- `data/benchmarks/arml_power/`
+- `data/benchmarks/icpc/`
+- `data/benchmarks/ieo_business_case/`
+- `data/benchmarks/iiot/`
+- `data/benchmarks/ijso_practical/`
+- `data/benchmarks/ioaa_group/`
+- `data/benchmarks/iol_team/`
+- `data/benchmarks/jessup/`
+- `data/benchmarks/wsc_writing/`
+
+Also do not modify the corresponding original raw packs that upstream already shipped under `data/raw/` for those tracks (e.g. existing `arml*`, `icpc`, `iol`, `iiot`, `ijso`, `ioaa`, `jessup`, `business_case`, `wsc_writing` files that were already on `main`), unless the user explicitly asks to change a specific file.
+
+## What you may change
+
+Only **our** additions:
+
+- New tracks under `data/benchmarks/<new_id>/`
+- `data/benchmarks/index2.json`, `index_aux.json`, and other new indexes
+- New raw packs under `data/raw/<new_id>/`
+- `from_zhongzheng/`, `data/viz/`, docs we own, extraction tooling outside those locked paths
+
+## If a fix seems needed on a locked track
+
+Stop and ask. Prefer putting corrected/extended data in a parallel new track or in `index2` / staging — never silently patch the locked originals.
