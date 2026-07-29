@@ -24,8 +24,7 @@ python data/viz/generate.py
 - **Coarse task-mode mix under two weighting views** — [PNG](06_task_types.png)
 - **Multi-dimensional formal-catalog storyboard** — [PNG](07_storyboard.png)
 - **Coarse-domain composition pie charts** — [PNG](08_domains_pie.png)
-- **Per-benchmark multi-dimensional profiles** — [PNG](09_benchmark_profiles.png)
-- **Current primary question and task-unit distribution** — [PNG](10_question_distribution.png)
+- **Current primary question and task-unit distribution** — [PNG](09_question_distribution.png)
 
 ## Statistical guardrails
 

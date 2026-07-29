@@ -1,6 +1,6 @@
 {
   "schema_version": "2.0",
-  "generated_at_utc": "2026-07-29T19:13:23.375439+00:00",
+  "generated_at_utc": "2026-07-29T19:15:11.880862+00:00",
   "snapshot_date": "2026-07-28",
   "taxonomy_version": "2026-07-28.formal-v1",
   "sources": {
@@ -193,11 +193,7 @@
       "description": "Coarse-domain composition pie charts"
     },
     {
-      "png": "09_benchmark_profiles.png",
-      "description": "Per-benchmark multi-dimensional profiles"
-    },
-    {
-      "png": "10_question_distribution.png",
+      "png": "09_question_distribution.png",
       "description": "Current primary question and task-unit distribution"
     }
   ],

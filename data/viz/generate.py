@@ -161,9 +161,8 @@ FIGURES = [
     ("06_task_types", "Coarse task-mode mix under two weighting views"),
     ("07_storyboard", "Multi-dimensional formal-catalog storyboard"),
     ("08_domains_pie", "Coarse-domain composition pie charts"),
-    ("09_benchmark_profiles", "Per-benchmark multi-dimensional profiles"),
     (
-        "10_question_distribution",
+        "09_question_distribution",
         "Current primary question and task-unit distribution",
     ),
 ]
@@ -1112,215 +1111,6 @@ def figure_domains_pie(metrics: dict[str, Any]) -> None:
     save_figure(fig, "08_domains_pie")
 
 
-def figure_benchmark_profiles(metrics: dict[str, Any]) -> None:
-    domain_rank = {domain: index for index, domain in enumerate(COARSE_DOMAINS)}
-    tracks = sorted(
-        metrics["tracks"].values(),
-        key=lambda metric: (
-            domain_rank[metric["coarse_domain"]],
-            -metric["count"],
-            metric["id"],
-        ),
-    )
-    y = np.arange(len(tracks))
-
-    def team_midpoint(metric: dict[str, Any]) -> float | None:
-        values = metric["team_values"]
-        return float(np.mean(values)) if values else None
-
-    panels: list[tuple[str, list[float | None], str]] = [
-        (
-            "Session records",
-            [float(metric["count"]) for metric in tracks],
-            "log",
-        ),
-        (
-            "Team size",
-            [team_midpoint(metric) for metric in tracks],
-            "linear",
-        ),
-        (
-            "Observed years",
-            [float(len(metric["years"])) for metric in tracks],
-            "linear",
-        ),
-        (
-            "Expected\nanswer",
-            [
-                100 * metric["expected_present"] / metric["count"]
-                for metric in tracks
-            ],
-            "percent",
-        ),
-        (
-            "Rubric",
-            [
-                100 * metric["rubric_present"] / metric["count"]
-                for metric in tracks
-            ],
-            "percent",
-        ),
-        (
-            "Human\nbaseline",
-            [
-                100 * metric["baseline_present"] / metric["count"]
-                for metric in tracks
-            ],
-            "percent",
-        ),
-        (
-            "Catalog\ngold",
-            [
-                float({"missing": 0, "partial": 1, "full": 2}[metric["catalog_gold"]])
-                for metric in tracks
-            ],
-            "gold",
-        ),
-    ]
-
-    fig, axes = plt.subplots(
-        1,
-        len(panels),
-        figsize=(19, 16),
-        sharey=True,
-        gridspec_kw={"width_ratios": [1.25, 1, 1, 1, 1, 1, 1.15]},
-    )
-    fig.subplots_adjust(
-        left=0.19,
-        right=0.985,
-        top=0.90,
-        bottom=0.15,
-        wspace=0.10,
-    )
-    fig.suptitle(
-        "Per-benchmark multidimensional profiles",
-        fontsize=19,
-        fontweight="bold",
-    )
-    fig.text(
-        0.5,
-        0.925,
-        "One row per benchmark; marker fill = domain, marker shape = evaluator type, outline = catalog status",
-        ha="center",
-        color=COLORS["muted"],
-        fontsize=10,
-    )
-
-    for ax, (title, values, scale) in zip(axes, panels):
-        for position, metric, value in zip(y, tracks, values):
-            if value is None:
-                ax.scatter(
-                    0,
-                    position,
-                    marker="x",
-                    s=34,
-                    color=COLORS["gray"],
-                    linewidth=1.2,
-                    zorder=3,
-                )
-                continue
-            marker = "o" if metric["type"] == "test_based" else "s"
-            ax.scatter(
-                value,
-                position,
-                marker=marker,
-                s=52,
-                facecolor=COARSE_COLORS[metric["coarse_domain"]],
-                edgecolor=STATUS_COLORS[metric["status"]],
-                linewidth=1.6,
-                zorder=3,
-            )
-
-        ax.set_title(title, fontsize=11, pad=10)
-        ax.grid(axis="x")
-        ax.grid(axis="y", linestyle="-", alpha=0.22)
-        if scale == "log":
-            ax.set_xscale("log")
-            ax.set_xlabel("# rows")
-        elif scale == "percent":
-            ax.set_xlim(-5, 105)
-            ax.set_xticks([0, 50, 100])
-            ax.set_xlabel("% rows")
-        elif scale == "gold":
-            ax.set_xlim(-0.45, 2.45)
-            ax.set_xticks([0, 1, 2], ["None", "Partial", "Full"])
-            ax.tick_params(axis="x", labelrotation=35)
-        else:
-            numeric = [value for value in values if value is not None]
-            upper = max(numeric) if numeric else 1
-            ax.set_xlim(-0.04 * upper, upper * 1.08)
-            ax.set_xlabel("midpoint" if title == "Team size" else "# exact years")
-
-    axes[0].set_yticks(y, [metric["id"] for metric in tracks], fontsize=8)
-    axes[0].invert_yaxis()
-    for ax in axes[1:]:
-        ax.tick_params(axis="y", labelleft=False)
-
-    domain_handles = [
-        Patch(color=COARSE_COLORS[domain], label=domain)
-        for domain in COARSE_DOMAINS
-    ]
-    encoding_handles = [
-        Line2D(
-            [0],
-            [0],
-            marker="o",
-            linestyle="",
-            markerfacecolor=COLORS["gray"],
-            markeredgecolor=COLORS["ink"],
-            label="Test-based",
-        ),
-        Line2D(
-            [0],
-            [0],
-            marker="s",
-            linestyle="",
-            markerfacecolor=COLORS["gray"],
-            markeredgecolor=COLORS["ink"],
-            label="Rubric-based",
-        ),
-        Line2D(
-            [0],
-            [0],
-            marker="x",
-            linestyle="",
-            color=COLORS["gray"],
-            label="Missing team-size value",
-        ),
-    ]
-    status_handles = [
-        Line2D(
-            [0],
-            [0],
-            marker="o",
-            linestyle="",
-            markerfacecolor="white",
-            markeredgecolor=STATUS_COLORS[status],
-            markeredgewidth=1.8,
-            label=label,
-        )
-        for status, label in (
-            ("collected", "Collected"),
-            ("partial", "Partial"),
-            ("pipeline_working", "Pipeline working"),
-        )
-    ]
-    first_legend = fig.legend(
-        handles=domain_handles,
-        loc="lower center",
-        bbox_to_anchor=(0.5, 0.065),
-        ncol=4,
-    )
-    fig.add_artist(first_legend)
-    fig.legend(
-        handles=encoding_handles + status_handles,
-        loc="lower center",
-        bbox_to_anchor=(0.5, 0.025),
-        ncol=6,
-    )
-    save_figure(fig, "09_benchmark_profiles")
-
-
 def figure_question_distribution(metrics: dict[str, Any]) -> None:
     question_units = metrics["question_units_by_dataset"]
     explicit_questions = metrics["question_count_by_dataset"]
@@ -1538,7 +1328,7 @@ def figure_question_distribution(metrics: dict[str, Any]) -> None:
         fontsize=10,
         color=COLORS["muted"],
     )
-    save_figure(fig, "10_question_distribution")
+    save_figure(fig, "09_question_distribution")
 
 
 def write_summary(metrics: dict[str, Any]) -> None:
@@ -1738,7 +1528,6 @@ def main() -> int:
     figure_task_modes(metrics)
     figure_storyboard(metrics)
     figure_domains_pie(metrics)
-    figure_benchmark_profiles(metrics)
     figure_question_distribution(metrics)
     write_summary(metrics)
     print(
