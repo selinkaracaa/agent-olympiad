@@ -2,7 +2,7 @@
 
 Snapshot: **2026-07-28**  
 Taxonomy: **2026-07-28.formal-v1**  
-Primary source: `data/benchmarks/index2.json`  
+Primary source: `data/benchmarks/index_new.json`  
 Auxiliary source: `data/benchmarks/index_aux.json`
 
 Current scope: **34 primary dataset IDs / 914 session records**, plus **6 auxiliary corpora / 175,380 rows**.
@@ -33,7 +33,7 @@ python data/viz/generate.py
 ## Statistical guardrails
 
 - Do not pool primary session records with auxiliary question/challenge rows.
-- `index2.json`, not the smaller `index.json`, defines the primary scope here.
+- `index_new.json` (merged `index.json` + promotions) defines the primary scope here.
 - Catalog evaluator type and gold claims are metadata, not quality audits.
 - Embedded-answer, rubric, and human-baseline coverage are measured directly from JSON rows.
 - Equal-ID, source-family, capped, and raw-row views answer different questions.

@@ -1,5 +1,5 @@
 {
-  "description": "OlympiadMAS — primary multi-agent session tracks (34); auxiliary question corpora → index_aux.json",
+  "description": "OlympiadMAS — primary multi-agent session tracks (34 = index.json core 12 + fork promotions); auxiliary question corpora → index_aux.json",
   "target_per_olympiad": 30,
   "note_on_30": "Collect one full published team task per slot (internal sub-parts stay together). Combine across years/contests to reach 30 where history allows; some olympiads have fewer than 30 available.",
   "olympiads": [
@@ -9,7 +9,7 @@
       "type": "test_based",
       "team_size": 3,
       "benchmark_path": "data/benchmarks/ijso_practical/benchmark.json",
-      "problems_collected": 14,
+      "problems_collected": 12,
       "target": 30,
       "human_score_out_of": 40,
       "ai_judge_out_of": 40,
@@ -58,9 +58,9 @@
         "notes": "Solutions PDF per year. Human gold e.g. 200.0/200 (2025 Taiwan)."
       },
       "collection_strategy": "One full team contest per year; 2003–2025",
-      "status": "partial",
+      "status": "collected",
       "slots_scaffolded": 21,
-      "gold_solutions": 17
+      "gold_solutions": 15
     },
     {
       "id": "ioaa_group",
@@ -78,7 +78,7 @@
         "notes": "Marking schemes in solution PDFs. Winner = fastest team."
       },
       "collection_strategy": "One full group competition per IOAA edition (2007–2024)",
-      "status": "collected",
+      "status": "partial",
       "slots_scaffolded": 18,
       "gold_solutions": 4
     },
@@ -86,7 +86,7 @@
       "id": "arml_power",
       "name": "ARML Power Contest",
       "type": "test_based",
-      "team_size": 15,
+      "team_size": "variable",
       "benchmark_path": "data/benchmarks/arml_power/benchmark.json",
       "problems_collected": 15,
       "target": 30,
@@ -98,7 +98,7 @@
         "notes": "Solution PDFs published each season. Top teams 36–40/40."
       },
       "collection_strategy": "One full power round per contest season (~2/year since 1994)",
-      "status": "collected",
+      "status": "partial",
       "slots_scaffolded": 30,
       "gold_solutions": 11
     },
@@ -118,8 +118,7 @@
         "notes": "Solution sections in national meet PDFs and 2009–2014 book."
       },
       "collection_strategy": "One team round per national meet year",
-      "status": "collected",
-      "gold_solutions": 10
+      "status": "partial"
     },
     {
       "id": "arml_national_power",
@@ -137,8 +136,7 @@
         "notes": "Solution sections in national meet PDFs and 2009–2014 book."
       },
       "collection_strategy": "One power round per national meet year",
-      "status": "collected",
-      "gold_solutions": 10
+      "status": "partial"
     },
     {
       "id": "arml_local",
@@ -156,8 +154,7 @@
         "notes": "Team solutions in 2009–2014 book."
       },
       "collection_strategy": "One local team round per year from ARML book",
-      "status": "collected",
-      "gold_solutions": 6
+      "status": "partial"
     },
     {
       "id": "wsc_writing",
@@ -176,8 +173,7 @@
         "notes": "Published essay prompts and rubrics per annual season. Top team scores available from leaderboards."
       },
       "collection_strategy": "One collaborative writing portfolio (3 essays on shared theme) per annual WSC season",
-      "status": "collected",
-      "gold_solutions": 0
+      "status": "collected"
     },
     {
       "id": "jessup",

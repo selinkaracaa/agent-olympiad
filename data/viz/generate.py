@@ -1,10 +1,10 @@
 """Generate the current formal benchmark statistical figures.
 
 Data contract:
-  - primary session catalog: data/benchmarks/index2.json
+  - primary session catalog: data/benchmarks/index_new.json
   - auxiliary corpora: data/benchmarks/index_aux.json
 
-The smaller data/benchmarks/index.json is intentionally not used here.
+Reads the merged catalog data/benchmarks/index_new.json (index.json core + promotions).
 """
 
 from __future__ import annotations
@@ -78,7 +78,7 @@ COARSE_COLORS = {
     "Business & economics": COLORS["green"],
 }
 
-# index2 has eight historical entries without an explicit domain. Keep this
+# index_new has eight historical entries without an explicit domain. Keep this
 # mapping versioned so figures never silently depend on missing catalog fields.
 DOMAIN_OVERRIDES = {
     "ijso_practical": "Science lab",
@@ -325,7 +325,7 @@ def load_portfolio() -> tuple[
     dict[str, list[dict[str, Any]]],
     dict[str, list[dict[str, Any]]],
 ]:
-    primary_catalog = load_json(BENCHMARKS / "index2.json")["olympiads"]
+    primary_catalog = load_json(BENCHMARKS / "index_new.json")["olympiads"]
     auxiliary_catalog = load_json(BENCHMARKS / "index_aux.json")["olympiads"]
     primary_rows: dict[str, list[dict[str, Any]]] = {}
     auxiliary_rows: dict[str, list[dict[str, Any]]] = {}
@@ -576,7 +576,7 @@ def figure_overview(metrics: dict[str, Any]) -> None:
     fig.text(
         0.5,
         0.943,
-        "index2.json primary session catalog + index_aux.json auxiliary corpora",
+        "index_new.json primary session catalog + index_aux.json auxiliary corpora",
         ha="center",
         fontsize=11.5,
         color="#475569",
@@ -1842,9 +1842,9 @@ def write_summary(metrics: dict[str, Any]) -> None:
         "snapshot_date": SNAPSHOT_DATE,
         "taxonomy_version": TAXONOMY_VERSION,
         "sources": {
-            "primary": "data/benchmarks/index2.json",
+            "primary": "data/benchmarks/index_new.json",
             "auxiliary": "data/benchmarks/index_aux.json",
-            "excluded_catalog": "data/benchmarks/index.json",
+            "core_subset": "data/benchmarks/index.json",
         },
         "name": "OlympiadMAS",
         "n_primary_dataset_ids": len(metrics["primary"]),
@@ -1938,7 +1938,7 @@ def write_summary(metrics: dict[str, Any]) -> None:
         ],
         "guardrails": [
             "Primary session records and auxiliary corpus rows are separate units.",
-            "The primary catalog is index2.json; index.json is not merged into these figures.",
+            "The primary catalog is index_new.json (index.json core + fork promotions).",
             "Catalog gold claims are distinct from embedded expected-answer payload coverage.",
             "Temporal dots show exact nominal archive years and do not imply annual continuity.",
             "Question_count exists only for the three newly promoted archives and is not a portfolio-wide field.",
@@ -1956,7 +1956,7 @@ def write_summary(metrics: dict[str, Any]) -> None:
         "",
         f"Snapshot: **{SNAPSHOT_DATE}**  ",
         f"Taxonomy: **{TAXONOMY_VERSION}**  ",
-        "Primary source: `data/benchmarks/index2.json`  ",
+        "Primary source: `data/benchmarks/index_new.json`  ",
         "Auxiliary source: `data/benchmarks/index_aux.json`",
         "",
         (
@@ -1986,7 +1986,7 @@ def write_summary(metrics: dict[str, Any]) -> None:
             "## Statistical guardrails",
             "",
             "- Do not pool primary session records with auxiliary question/challenge rows.",
-            "- `index2.json`, not the smaller `index.json`, defines the primary scope here.",
+            "- `index_new.json` (merged `index.json` + promotions) defines the primary scope here.",
             "- Catalog evaluator type and gold claims are metadata, not quality audits.",
             "- Embedded-answer, rubric, and human-baseline coverage are measured directly from JSON rows.",
             "- Equal-ID, source-family, capped, and raw-row views answer different questions.",

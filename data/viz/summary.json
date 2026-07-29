@@ -4,9 +4,9 @@
   "snapshot_date": "2026-07-28",
   "taxonomy_version": "2026-07-28.formal-v1",
   "sources": {
-    "primary": "data/benchmarks/index2.json",
+    "primary": "data/benchmarks/index_new.json",
     "auxiliary": "data/benchmarks/index_aux.json",
-    "excluded_catalog": "data/benchmarks/index.json"
+    "core_subset": "data/benchmarks/index.json"
   },
   "name": "OlympiadMAS",
   "n_primary_dataset_ids": 34,
@@ -215,7 +215,7 @@
   ],
   "guardrails": [
     "Primary session records and auxiliary corpus rows are separate units.",
-    "The primary catalog is index2.json; index.json is not merged into these figures.",
+    "The primary catalog is index_new.json (index.json core + fork promotions).",
     "Catalog gold claims are distinct from embedded expected-answer payload coverage.",
     "Temporal dots show exact nominal archive years and do not imply annual continuity.",
     "Question_count exists only for the three newly promoted archives and is not a portfolio-wide field.",

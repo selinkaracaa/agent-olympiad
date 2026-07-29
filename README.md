@@ -10,7 +10,7 @@ Benchmark **multi-agent AI teams** on olympiad-style **team tasks**. Part of the
 |-----|----------|
 | [`docs/DATA_COLLECTION.md`](docs/DATA_COLLECTION.md) | Canonical tracker — 20 source-collected competitions + 33 external benchmark datasets |
 | [`data/benchmarks/index.json`](data/benchmarks/index.json) | Primary session catalog (main) |
-| [`data/benchmarks/index2.json`](data/benchmarks/index2.json) | Expanded primary session tracks |
+| [`data/benchmarks/index_new.json`](data/benchmarks/index_new.json) | Expanded primary session tracks (index.json + promotions) |
 | [`data/benchmarks/index_aux.json`](data/benchmarks/index_aux.json) | Auxiliary question corpora (辅集) |
 | [`initial_experiments/`](initial_experiments/) | Archived smoke tests and early multi-agent runs |
 

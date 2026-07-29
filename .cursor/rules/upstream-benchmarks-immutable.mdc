@@ -30,10 +30,10 @@ Also do not modify the corresponding original raw packs that upstream already sh
 Only **our** additions:
 
 - New tracks under `data/benchmarks/<new_id>/`
-- `data/benchmarks/index2.json`, `index_aux.json`, and other new indexes
+- `data/benchmarks/index_new.json`, `index_aux.json`, and other new indexes
 - New raw packs under `data/raw/<new_id>/`
 - `from_zhongzheng/`, `data/viz/`, docs we own, extraction tooling outside those locked paths
 
 ## If a fix seems needed on a locked track
 
-Stop and ask. Prefer putting corrected/extended data in a parallel new track or in `index2` / staging — never silently patch the locked originals.
+Stop and ask. Prefer putting corrected/extended data in a parallel new track or in `index_new` / staging — never silently patch the locked originals.

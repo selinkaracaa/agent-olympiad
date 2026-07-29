@@ -1,8 +1,8 @@
 {
-  "description": "OlympiadMAS auxiliary corpora (辅集) — question-level skill probes / secondary splits. Not counted toward primary session catalog (index.json / index2.json).",
+  "description": "OlympiadMAS auxiliary corpora (辅集) — question-level skill probes / secondary splits. Not counted toward primary session catalog (index.json / index_new.json).",
   "role": "auxiliary",
   "eval_unit_default": "question",
-  "note": "Prefer session tracks in index.json / index2.json for multi-agent olympiad eval. These datasets are single-question (or CTF/puzzle) rows; sample or packet-aggregate. Policy: benchmark_extracted/UNIT_POLICY.md.",
+  "note": "Prefer session tracks in index.json / index_new.json for multi-agent olympiad eval. These datasets are single-question (or CTF/puzzle) rows; sample or packet-aggregate. Policy: benchmark_extracted/UNIT_POLICY.md.",
   "olympiads": [
     {
       "id": "qanta",
