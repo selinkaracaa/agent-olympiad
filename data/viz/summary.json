@@ -1,6 +1,6 @@
 {
   "schema_version": "2.0",
-  "generated_at_utc": "2026-07-29T19:08:02.182651+00:00",
+  "generated_at_utc": "2026-07-29T19:13:23.375439+00:00",
   "snapshot_date": "2026-07-28",
   "taxonomy_version": "2026-07-28.formal-v1",
   "sources": {
@@ -177,31 +177,27 @@
       "description": "Configured team size and primary scale"
     },
     {
-      "png": "05_coverage_gold.png",
-      "description": "Field, payload, path, and governance completeness"
-    },
-    {
-      "png": "06_year_coverage.png",
+      "png": "05_year_coverage.png",
       "description": "Exact-year primary archive presence"
     },
     {
-      "png": "07_task_types.png",
+      "png": "06_task_types.png",
       "description": "Coarse task-mode mix under two weighting views"
     },
     {
-      "png": "08_storyboard.png",
+      "png": "07_storyboard.png",
       "description": "Multi-dimensional formal-catalog storyboard"
     },
     {
-      "png": "09_domains_pie.png",
+      "png": "08_domains_pie.png",
       "description": "Coarse-domain composition pie charts"
     },
     {
-      "png": "10_benchmark_profiles.png",
+      "png": "09_benchmark_profiles.png",
       "description": "Per-benchmark multi-dimensional profiles"
     },
     {
-      "png": "11_question_distribution.png",
+      "png": "10_question_distribution.png",
       "description": "Current primary question and task-unit distribution"
     }
   ],

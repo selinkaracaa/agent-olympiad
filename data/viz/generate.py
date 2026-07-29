@@ -20,7 +20,6 @@ from typing import Any, Callable
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 import numpy as np
-from matplotlib.colors import ListedColormap
 from matplotlib.lines import Line2D
 from matplotlib.patches import FancyBboxPatch, Patch
 
@@ -158,14 +157,13 @@ FIGURES = [
     ("02_scale_by_track", "Primary session scale and auxiliary row scale"),
     ("03_domain_type_heatmap", "Coarse domain by catalog evaluator type"),
     ("04_teamsize_scale_scatter", "Configured team size and primary scale"),
-    ("05_coverage_gold", "Field, payload, path, and governance completeness"),
-    ("06_year_coverage", "Exact-year primary archive presence"),
-    ("07_task_types", "Coarse task-mode mix under two weighting views"),
-    ("08_storyboard", "Multi-dimensional formal-catalog storyboard"),
-    ("09_domains_pie", "Coarse-domain composition pie charts"),
-    ("10_benchmark_profiles", "Per-benchmark multi-dimensional profiles"),
+    ("05_year_coverage", "Exact-year primary archive presence"),
+    ("06_task_types", "Coarse task-mode mix under two weighting views"),
+    ("07_storyboard", "Multi-dimensional formal-catalog storyboard"),
+    ("08_domains_pie", "Coarse-domain composition pie charts"),
+    ("09_benchmark_profiles", "Per-benchmark multi-dimensional profiles"),
     (
-        "11_question_distribution",
+        "10_question_distribution",
         "Current primary question and task-unit distribution",
     ),
 ]
@@ -200,28 +198,6 @@ def nested(row: dict[str, Any], *keys: str) -> Any:
             return None
         value = value.get(key)
     return value
-
-
-def field_state(rows: list[dict[str, Any]], getter: Callable[[dict[str, Any]], Any]) -> str:
-    present = sum(nonempty(getter(row)) for row in rows)
-    if present == 0:
-        return "missing"
-    if present == len(rows):
-        return "full"
-    return "partial"
-
-
-def path_state(rows: list[dict[str, Any]], key: str) -> str:
-    present = 0
-    for row in rows:
-        raw = row.get(key)
-        if isinstance(raw, str) and raw.strip() and (REPO / raw).is_file():
-            present += 1
-    if present == 0:
-        return "missing"
-    if present == len(rows):
-        return "full"
-    return "partial"
 
 
 def extract_years(value: Any) -> set[int]:
@@ -827,97 +803,6 @@ def figure_team_size(metrics: dict[str, Any]) -> None:
     save_figure(fig, "04_teamsize_scale_scatter")
 
 
-def figure_completeness(metrics: dict[str, Any]) -> None:
-    columns: list[tuple[str, Callable[[dict[str, Any], list[dict[str, Any]]], str]]] = [
-        ("Catalog\ngold claim", lambda metric, rows: metric["catalog_gold"]),
-        (
-            "Embedded\nanswer",
-            lambda metric, rows: field_state(
-                rows, lambda row: nested(row, "gold_label", "expected_answer")
-            ),
-        ),
-        (
-            "Rubric",
-            lambda metric, rows: field_state(
-                rows, lambda row: nested(row, "gold_label", "grading_rubric")
-            ),
-        ),
-        (
-            "Human\nbaseline",
-            lambda metric, rows: field_state(
-                rows, lambda row: nested(row, "gold_label", "human_baseline")
-            ),
-        ),
-        ("Source\nfield", lambda metric, rows: field_state(rows, lambda row: row.get("source_file"))),
-        ("Source path\nresolves", lambda metric, rows: path_state(rows, "source_file")),
-        ("Year", lambda metric, rows: field_state(rows, lambda row: row.get("year"))),
-        ("Eval unit", lambda metric, rows: field_state(rows, lambda row: row.get("eval_unit"))),
-        ("Row team\nsize", lambda metric, rows: field_state(rows, lambda row: row.get("team_size"))),
-        ("Time\nlimit", lambda metric, rows: field_state(rows, lambda row: row.get("time_limit"))),
-        ("Roles", lambda metric, rows: field_state(rows, lambda row: row.get("role_specification"))),
-        (
-            "Interaction",
-            lambda metric, rows: field_state(rows, lambda row: row.get("interaction_protocol")),
-        ),
-        (
-            "Shared\nartifact",
-            lambda metric, rows: field_state(rows, lambda row: row.get("shared_artifact")),
-        ),
-        (
-            "Aggregation",
-            lambda metric, rows: field_state(rows, lambda row: row.get("aggregation_rule")),
-        ),
-    ]
-    state_to_value = {"missing": 0, "partial": 1, "full": 2}
-    ordered = sorted(
-        metrics["tracks"].values(),
-        key=lambda metric: (metric["coarse_domain"], metric["id"]),
-    )
-    matrix = np.zeros((len(ordered), len(columns)), dtype=int)
-    labels: list[list[str]] = []
-    for row_index, metric in enumerate(ordered):
-        row_states: list[str] = []
-        for column_index, (_, evaluator) in enumerate(columns):
-            state = evaluator(metric, metric["rows"])
-            matrix[row_index, column_index] = state_to_value[state]
-            row_states.append(state)
-        labels.append(row_states)
-
-    cmap = ListedColormap(["#d8d5d1", "#df955d", "#397d62"])
-    fig, ax = plt.subplots(figsize=(16, 14), constrained_layout=True)
-    ax.imshow(matrix, cmap=cmap, vmin=-0.5, vmax=2.5, aspect="auto")
-    ax.set_xticks(range(len(columns)), [label for label, _ in columns])
-    ax.set_yticks(range(len(ordered)), [metric["id"] for metric in ordered])
-    ax.tick_params(axis="x", labelrotation=0, labelsize=8)
-    for row in range(matrix.shape[0]):
-        for column in range(matrix.shape[1]):
-            token = {"missing": "×", "partial": "◐", "full": "●"}[labels[row][column]]
-            ax.text(
-                column,
-                row,
-                token,
-                ha="center",
-                va="center",
-                color="white" if matrix[row, column] >= 1 else "#6b6762",
-                fontsize=8.5,
-            )
-    ax.set_title(
-        "Benchmark readiness matrix\n"
-        "fields, payloads, paths, and coordination metadata"
-    )
-    ax.set_ylabel("Primary dataset ID")
-    ax.legend(
-        handles=[
-            Patch(color="#397d62", label="Full"),
-            Patch(color="#df955d", label="Partial"),
-            Patch(color="#d8d5d1", label="Missing"),
-        ],
-        loc="upper left",
-        bbox_to_anchor=(1.005, 1),
-    )
-    save_figure(fig, "05_coverage_gold")
-
-
 def figure_years(metrics: dict[str, Any]) -> None:
     with_years = [
         metric for metric in metrics["tracks"].values() if metric["years"]
@@ -972,7 +857,7 @@ def figure_years(metrics: dict[str, Any]) -> None:
         ncol=2,
         loc="upper left",
     )
-    save_figure(fig, "06_year_coverage")
+    save_figure(fig, "05_year_coverage")
 
 
 def figure_task_modes(metrics: dict[str, Any]) -> None:
@@ -1008,7 +893,7 @@ def figure_task_modes(metrics: dict[str, Any]) -> None:
         fontsize=18,
         fontweight="bold",
     )
-    save_figure(fig, "07_task_types")
+    save_figure(fig, "06_task_types")
 
 
 def figure_storyboard(metrics: dict[str, Any]) -> None:
@@ -1162,7 +1047,7 @@ def figure_storyboard(metrics: dict[str, Any]) -> None:
         color="#78736e",
         style="italic",
     )
-    save_figure(fig, "08_storyboard")
+    save_figure(fig, "07_storyboard")
 
 
 def figure_domains_pie(metrics: dict[str, Any]) -> None:
@@ -1224,7 +1109,7 @@ def figure_domains_pie(metrics: dict[str, Any]) -> None:
         ncol=4,
         bbox_to_anchor=(0.5, -0.01),
     )
-    save_figure(fig, "09_domains_pie")
+    save_figure(fig, "08_domains_pie")
 
 
 def figure_benchmark_profiles(metrics: dict[str, Any]) -> None:
@@ -1433,7 +1318,7 @@ def figure_benchmark_profiles(metrics: dict[str, Any]) -> None:
         bbox_to_anchor=(0.5, 0.025),
         ncol=6,
     )
-    save_figure(fig, "10_benchmark_profiles")
+    save_figure(fig, "09_benchmark_profiles")
 
 
 def figure_question_distribution(metrics: dict[str, Any]) -> None:
@@ -1653,7 +1538,7 @@ def figure_question_distribution(metrics: dict[str, Any]) -> None:
         fontsize=10,
         color=COLORS["muted"],
     )
-    save_figure(fig, "11_question_distribution")
+    save_figure(fig, "10_question_distribution")
 
 
 def write_summary(metrics: dict[str, Any]) -> None:
@@ -1849,7 +1734,6 @@ def main() -> int:
     figure_scale(metrics)
     figure_domain_type(metrics)
     figure_team_size(metrics)
-    figure_completeness(metrics)
     figure_years(metrics)
     figure_task_modes(metrics)
     figure_storyboard(metrics)
