@@ -9,3 +9,10 @@ initial_experiments/results/**/*.log
 
 # Local meeting notes — not for GitHub
 MEETING_BRIEF.md
+
+# Raw data lives on HF (akaaafk/multiagent_bench) — run download_data.py to fetch.
+# Only the READMEs are tracked in git.
+art/**
+!art/README.md
+olympiad/**
+!olympiad/README.md

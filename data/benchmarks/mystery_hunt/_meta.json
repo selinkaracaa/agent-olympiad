@@ -1,0 +1,11 @@
+{
+  "tsv_rows": 2299,
+  "filled_from_local_html": 2024,
+  "still_empty_or_image": 44,
+  "source": "benchmark/MIT_Mystery_Hunt/answers.tsv + puzzles/by_tsv",
+  "role": "auxiliary",
+  "eval_unit": "question",
+  "count": 2299,
+  "promoted_from": "benchmark_extracted/mystery_hunt",
+  "aux_reason": "单题/拼图 — MIT Mystery Hunt puzzles"
+}

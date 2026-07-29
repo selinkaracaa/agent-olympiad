@@ -1,0 +1,9 @@
+{
+  "team_section_only": true,
+  "sections_stripped": [
+    "individual",
+    "relay"
+  ],
+  "note": "Extracted text cropped to Team Round only; source PDFs still bundle Individual + Relay + Team.",
+  "count": 3
+}

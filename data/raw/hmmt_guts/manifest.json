@@ -1,0 +1,953 @@
+{
+  "name": "HMMT Guts Archive",
+  "as_of": "2026-07-28",
+  "source": {
+    "publisher": "Harvard-MIT Mathematics Tournament (HMMT)",
+    "archive_index": "https://www.hmmt.org/www/archive/problems",
+    "format_description": "https://www.hmmt.org/www/tournaments/testing",
+    "source_url_pattern": "https://hmmt-archive.s3.amazonaws.com/tournaments/{year}/{season}/guts/{type}.pdf"
+  },
+  "layout": "{season}/{year}/{type}.pdf",
+  "coverage": [
+    {
+      "season": "feb",
+      "first_year": 2000,
+      "last_year": 2026,
+      "event_count": 27
+    },
+    {
+      "season": "nov",
+      "first_year": 2008,
+      "last_year": 2025,
+      "event_count": 18
+    }
+  ],
+  "counts": {
+    "events": 45,
+    "pdf_files": 90,
+    "pages": 950,
+    "bytes": 17764262,
+    "missing_files": 0
+  },
+  "acquisition": {
+    "reused_official_copies": 21,
+    "downloaded_from_official_archive": 69
+  },
+  "validation": {
+    "pdf_signature_valid": 90,
+    "pypdf_parse_valid": 90,
+    "pymupdf_parse_valid": 90,
+    "official_md5_etag_and_size_match": 90,
+    "visual_samples": [
+      "feb/2000/problems.pdf page 1",
+      "feb/2026/problems.pdf page 1"
+    ]
+  },
+  "rights": {
+    "copyright_holder": "HMMT",
+    "license": null,
+    "note": "The official archive is public, but no content redistribution license was identified. Confirm reuse and redistribution terms with HMMT before publication."
+  },
+  "files": [
+    {
+      "path": "feb/2000/problems.pdf",
+      "season": "feb",
+      "year": 2000,
+      "type": "problems",
+      "bytes": 77060,
+      "pages": 8,
+      "sha256": "2dec12c417a220a07d932828747d786fd87f4f8835dde7124c38021c2afbc78e",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2000/feb/guts/problems.pdf"
+    },
+    {
+      "path": "feb/2000/solutions.pdf",
+      "season": "feb",
+      "year": 2000,
+      "type": "solutions",
+      "bytes": 41141,
+      "pages": 2,
+      "sha256": "679af84eb1eee9ffe93ad059a4959bb9026c4615a1d078b5c3c15ee9eb2ec02c",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2000/feb/guts/solutions.pdf"
+    },
+    {
+      "path": "feb/2001/problems.pdf",
+      "season": "feb",
+      "year": 2001,
+      "type": "problems",
+      "bytes": 99675,
+      "pages": 6,
+      "sha256": "10995248daf522f19e828460513bee553df25b6d4e74701f305e510cfee17d33",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2001/feb/guts/problems.pdf"
+    },
+    {
+      "path": "feb/2001/solutions.pdf",
+      "season": "feb",
+      "year": 2001,
+      "type": "solutions",
+      "bytes": 121807,
+      "pages": 9,
+      "sha256": "62044c445c48b28bf9e4f0c577d05e9c1f7909ab3493915f7f282c859c9eeed5",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2001/feb/guts/solutions.pdf"
+    },
+    {
+      "path": "feb/2002/problems.pdf",
+      "season": "feb",
+      "year": 2002,
+      "type": "problems",
+      "bytes": 93135,
+      "pages": 10,
+      "sha256": "f4c3852cb62a8abd299a90244907ea7185c2b0bb088229675cef339d5fbfa75e",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2002/feb/guts/problems.pdf"
+    },
+    {
+      "path": "feb/2002/solutions.pdf",
+      "season": "feb",
+      "year": 2002,
+      "type": "solutions",
+      "bytes": 145284,
+      "pages": 16,
+      "sha256": "42d269d4a6df1061c216792737f42e5ca5352a9868072c4c962464da2a64b0b7",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2002/feb/guts/solutions.pdf"
+    },
+    {
+      "path": "feb/2003/problems.pdf",
+      "season": "feb",
+      "year": 2003,
+      "type": "problems",
+      "bytes": 95372,
+      "pages": 6,
+      "sha256": "c1e79d8ea9e754c5b8afcb045f8bd8c1ae384c09f17317d43d49a4af608e64af",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2003/feb/guts/problems.pdf"
+    },
+    {
+      "path": "feb/2003/solutions.pdf",
+      "season": "feb",
+      "year": 2003,
+      "type": "solutions",
+      "bytes": 161219,
+      "pages": 14,
+      "sha256": "b7d34331027013ad540de90d6674816bccbef7a24c774aa4072a81f61c6dbac3",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2003/feb/guts/solutions.pdf"
+    },
+    {
+      "path": "feb/2004/problems.pdf",
+      "season": "feb",
+      "year": 2004,
+      "type": "problems",
+      "bytes": 95021,
+      "pages": 7,
+      "sha256": "3ee18981a3b7680fd96f50316d1e70bf30b57e3843e3f644044a6ee5491ba0a8",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2004/feb/guts/problems.pdf"
+    },
+    {
+      "path": "feb/2004/solutions.pdf",
+      "season": "feb",
+      "year": 2004,
+      "type": "solutions",
+      "bytes": 152257,
+      "pages": 17,
+      "sha256": "52af673639316d92178ab41e069044b1e25aaecd4086a0ee3a50c07dfda9a460",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2004/feb/guts/solutions.pdf"
+    },
+    {
+      "path": "feb/2005/problems.pdf",
+      "season": "feb",
+      "year": 2005,
+      "type": "problems",
+      "bytes": 76737,
+      "pages": 7,
+      "sha256": "7f7bf4ec48ce9e895508a39a832f489430e7535c92943091bd56647f9ae3c914",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2005/feb/guts/problems.pdf"
+    },
+    {
+      "path": "feb/2005/solutions.pdf",
+      "season": "feb",
+      "year": 2005,
+      "type": "solutions",
+      "bytes": 181801,
+      "pages": 18,
+      "sha256": "98ec1a73aba4c0de118671ef09ab073d0d1980251c7da152f07bc57ad206048f",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2005/feb/guts/solutions.pdf"
+    },
+    {
+      "path": "feb/2006/problems.pdf",
+      "season": "feb",
+      "year": 2006,
+      "type": "problems",
+      "bytes": 106599,
+      "pages": 6,
+      "sha256": "8549982413eb5ac49dc628c5ea007411731f0594a2db9d84b6a1b44d5644cb74",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2006/feb/guts/problems.pdf"
+    },
+    {
+      "path": "feb/2006/solutions.pdf",
+      "season": "feb",
+      "year": 2006,
+      "type": "solutions",
+      "bytes": 194724,
+      "pages": 17,
+      "sha256": "4b97d5b8de9d929c2a2fc89d4596728efd5f980423bb7609dea36bb70d2f9df6",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2006/feb/guts/solutions.pdf"
+    },
+    {
+      "path": "feb/2007/problems.pdf",
+      "season": "feb",
+      "year": 2007,
+      "type": "problems",
+      "bytes": 119370,
+      "pages": 5,
+      "sha256": "04b20ab0eb238f09882e4d613a7bc28f8abc10fd8aa298d95f3424459f895cd4",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2007/feb/guts/problems.pdf"
+    },
+    {
+      "path": "feb/2007/solutions.pdf",
+      "season": "feb",
+      "year": 2007,
+      "type": "solutions",
+      "bytes": 425735,
+      "pages": 14,
+      "sha256": "35136036cfb33977d8ad29f8c7619f0e3d7151f728882490558ad0c42c36ea33",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2007/feb/guts/solutions.pdf"
+    },
+    {
+      "path": "feb/2008/problems.pdf",
+      "season": "feb",
+      "year": 2008,
+      "type": "problems",
+      "bytes": 103609,
+      "pages": 5,
+      "sha256": "b97b8a71bc1e898fbe6d2a5260d26da54ae1f89ab32baa596f202dd02a5d7d1f",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2008/feb/guts/problems.pdf"
+    },
+    {
+      "path": "feb/2008/solutions.pdf",
+      "season": "feb",
+      "year": 2008,
+      "type": "solutions",
+      "bytes": 163385,
+      "pages": 11,
+      "sha256": "1501be1ee3fd02b2a626fd4dd6fdea7585e91b7eae409bf8008d8f4d18843cf4",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2008/feb/guts/solutions.pdf"
+    },
+    {
+      "path": "feb/2009/problems.pdf",
+      "season": "feb",
+      "year": 2009,
+      "type": "problems",
+      "bytes": 102981,
+      "pages": 5,
+      "sha256": "c3ecdc04f2caa126f9ed72fd71de2dc83603dee8063282eef455a29189261724",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2009/feb/guts/problems.pdf"
+    },
+    {
+      "path": "feb/2009/solutions.pdf",
+      "season": "feb",
+      "year": 2009,
+      "type": "solutions",
+      "bytes": 139320,
+      "pages": 9,
+      "sha256": "eeda49cbc5628f6f9dcad1a66baf140d6189e899af36c16588fbb61d3b83463d",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2009/feb/guts/solutions.pdf"
+    },
+    {
+      "path": "feb/2010/problems.pdf",
+      "season": "feb",
+      "year": 2010,
+      "type": "problems",
+      "bytes": 102135,
+      "pages": 5,
+      "sha256": "4a2cd55e8eea5407c37e4f8aec2a2a6752bb4dfbfdbd4f046eaca580c8ac62cf",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2010/feb/guts/problems.pdf"
+    },
+    {
+      "path": "feb/2010/solutions.pdf",
+      "season": "feb",
+      "year": 2010,
+      "type": "solutions",
+      "bytes": 237391,
+      "pages": 15,
+      "sha256": "7f0755377505eb98485e68da7e45b0bf8b1e1157b64c76a8c142aca540cb3728",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2010/feb/guts/solutions.pdf"
+    },
+    {
+      "path": "feb/2011/problems.pdf",
+      "season": "feb",
+      "year": 2011,
+      "type": "problems",
+      "bytes": 182881,
+      "pages": 4,
+      "sha256": "8f6ae5c69b549cbd95fac14bc95d080fd5a06f0945820c95bb3e0ee1b70d65c8",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2011/feb/guts/problems.pdf"
+    },
+    {
+      "path": "feb/2011/solutions.pdf",
+      "season": "feb",
+      "year": 2011,
+      "type": "solutions",
+      "bytes": 307532,
+      "pages": 19,
+      "sha256": "35ebea78b21c22234a0e94a15ac3c250561986880221c0e6a514cf02053aacbe",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2011/feb/guts/solutions.pdf"
+    },
+    {
+      "path": "feb/2012/problems.pdf",
+      "season": "feb",
+      "year": 2012,
+      "type": "problems",
+      "bytes": 163118,
+      "pages": 7,
+      "sha256": "2dbd33a9d7dbea709c87311b2a34fb6cea293bfd694d95cbb8a0add3fa650750",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2012/feb/guts/problems.pdf"
+    },
+    {
+      "path": "feb/2012/solutions.pdf",
+      "season": "feb",
+      "year": 2012,
+      "type": "solutions",
+      "bytes": 166932,
+      "pages": 13,
+      "sha256": "b1f7144157807ea45f016fef6898c708d090fac5bdddfedf3ea8ae37fc5859e4",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2012/feb/guts/solutions.pdf"
+    },
+    {
+      "path": "feb/2013/problems.pdf",
+      "season": "feb",
+      "year": 2013,
+      "type": "problems",
+      "bytes": 166353,
+      "pages": 6,
+      "sha256": "5e48aae0a348c04a9a54acb8de9b4c06eb5617e941a56810c66d47ab6ad4e8a6",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2013/feb/guts/problems.pdf"
+    },
+    {
+      "path": "feb/2013/solutions.pdf",
+      "season": "feb",
+      "year": 2013,
+      "type": "solutions",
+      "bytes": 155120,
+      "pages": 11,
+      "sha256": "e10f17cbb8eb6447cc213c243b008075985524fb39da61f3cf0cf6e983e89cc3",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2013/feb/guts/solutions.pdf"
+    },
+    {
+      "path": "feb/2014/problems.pdf",
+      "season": "feb",
+      "year": 2014,
+      "type": "problems",
+      "bytes": 1084413,
+      "pages": 10,
+      "sha256": "03a20d807fa7842fb13058386e8246ce17a03779195eb3091fabaa11ff58103d",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2014/feb/guts/problems.pdf"
+    },
+    {
+      "path": "feb/2014/solutions.pdf",
+      "season": "feb",
+      "year": 2014,
+      "type": "solutions",
+      "bytes": 248954,
+      "pages": 13,
+      "sha256": "67f628a9d70fc82efc94fbd3f892964962cf447303963334a2cfb7beddd408f4",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2014/feb/guts/solutions.pdf"
+    },
+    {
+      "path": "feb/2015/problems.pdf",
+      "season": "feb",
+      "year": 2015,
+      "type": "problems",
+      "bytes": 89556,
+      "pages": 9,
+      "sha256": "e3d7060c1842d816d60495fdeca41edeae82a132c9a15de4ddafa986ed97f565",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2015/feb/guts/problems.pdf"
+    },
+    {
+      "path": "feb/2015/solutions.pdf",
+      "season": "feb",
+      "year": 2015,
+      "type": "solutions",
+      "bytes": 229141,
+      "pages": 17,
+      "sha256": "560cfe13cc4d0ac7de6ff4981b3ee4266efa6c94d24152acd948837652adfa9b",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2015/feb/guts/solutions.pdf"
+    },
+    {
+      "path": "feb/2016/problems.pdf",
+      "season": "feb",
+      "year": 2016,
+      "type": "problems",
+      "bytes": 165460,
+      "pages": 5,
+      "sha256": "4ad10a6e4890c919742bb3303d945ce64597b702b74665f602d58a69ddb4a9c3",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2016/feb/guts/problems.pdf"
+    },
+    {
+      "path": "feb/2016/solutions.pdf",
+      "season": "feb",
+      "year": 2016,
+      "type": "solutions",
+      "bytes": 278096,
+      "pages": 14,
+      "sha256": "03186fdce205e7c8de2f467fca83e92d42badcc0ad454f0d74c2f4f33e64b6ce",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2016/feb/guts/solutions.pdf"
+    },
+    {
+      "path": "feb/2017/problems.pdf",
+      "season": "feb",
+      "year": 2017,
+      "type": "problems",
+      "bytes": 182592,
+      "pages": 6,
+      "sha256": "405511cbfd408801980eccfba92249c819cd1c784823ebd0fa0ccb0305a62db4",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2017/feb/guts/problems.pdf"
+    },
+    {
+      "path": "feb/2017/solutions.pdf",
+      "season": "feb",
+      "year": 2017,
+      "type": "solutions",
+      "bytes": 221389,
+      "pages": 12,
+      "sha256": "e8e35d1acf067e658f2dbf8d4b839643130f71a0fb8e9e4ee3da274b1c6cf374",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2017/feb/guts/solutions.pdf"
+    },
+    {
+      "path": "feb/2018/problems.pdf",
+      "season": "feb",
+      "year": 2018,
+      "type": "problems",
+      "bytes": 138735,
+      "pages": 5,
+      "sha256": "5b8c1c69351ac03af0df3ec0ef4108f059c824f19158556a791d81795de29daa",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2018/feb/guts/problems.pdf"
+    },
+    {
+      "path": "feb/2018/solutions.pdf",
+      "season": "feb",
+      "year": 2018,
+      "type": "solutions",
+      "bytes": 238802,
+      "pages": 14,
+      "sha256": "0467337253bd554910c7db7781745a33b4d9d48356b64a5849e8ece49065f5e6",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2018/feb/guts/solutions.pdf"
+    },
+    {
+      "path": "feb/2019/problems.pdf",
+      "season": "feb",
+      "year": 2019,
+      "type": "problems",
+      "bytes": 204493,
+      "pages": 6,
+      "sha256": "94173a33d33d3666a1a5f6a4d4a02a6e60e4401aca949eb8d5e1a9ab27802df1",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2019/feb/guts/problems.pdf"
+    },
+    {
+      "path": "feb/2019/solutions.pdf",
+      "season": "feb",
+      "year": 2019,
+      "type": "solutions",
+      "bytes": 304422,
+      "pages": 18,
+      "sha256": "0735b47440056700b7914ab1df1583841e565691580dea1712ba76fcba1b59a5",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2019/feb/guts/solutions.pdf"
+    },
+    {
+      "path": "feb/2020/problems.pdf",
+      "season": "feb",
+      "year": 2020,
+      "type": "problems",
+      "bytes": 170786,
+      "pages": 5,
+      "sha256": "af71e8df1ad736c59c97fd1acba49e642975b5286df8922d805ebb17cab768b8",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2020/feb/guts/problems.pdf"
+    },
+    {
+      "path": "feb/2020/solutions.pdf",
+      "season": "feb",
+      "year": 2020,
+      "type": "solutions",
+      "bytes": 316608,
+      "pages": 20,
+      "sha256": "0a5c89f63c12ac83b51e11625de39f4a5f657f1648e2bffe7ab8c4edc8784f38",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2020/feb/guts/solutions.pdf"
+    },
+    {
+      "path": "feb/2021/problems.pdf",
+      "season": "feb",
+      "year": 2021,
+      "type": "problems",
+      "bytes": 144434,
+      "pages": 9,
+      "sha256": "e17504091b3051dd870ae446763e121c02163b988feb347eb2fa864804bc1e8d",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2021/feb/guts/problems.pdf"
+    },
+    {
+      "path": "feb/2021/solutions.pdf",
+      "season": "feb",
+      "year": 2021,
+      "type": "solutions",
+      "bytes": 238477,
+      "pages": 16,
+      "sha256": "66e3b4d1b9b048b3fa974420a1b97985921231e61c786142bd82632bf2999203",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2021/feb/guts/solutions.pdf"
+    },
+    {
+      "path": "feb/2022/problems.pdf",
+      "season": "feb",
+      "year": 2022,
+      "type": "problems",
+      "bytes": 160411,
+      "pages": 7,
+      "sha256": "be444019a89992f2babcf390629d9b6f63a89922eb68f6e5e2c7cbbe73ce1cff",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2022/feb/guts/problems.pdf"
+    },
+    {
+      "path": "feb/2022/solutions.pdf",
+      "season": "feb",
+      "year": 2022,
+      "type": "solutions",
+      "bytes": 261086,
+      "pages": 15,
+      "sha256": "d59d1076c40d617e6939ef8032d684ee20a85aa93d8e791959053232415398cd",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2022/feb/guts/solutions.pdf"
+    },
+    {
+      "path": "feb/2023/problems.pdf",
+      "season": "feb",
+      "year": 2023,
+      "type": "problems",
+      "bytes": 350632,
+      "pages": 7,
+      "sha256": "2183613c3025c6aa58a7596ed8ef21a50b5161457f624c73c3635369369a11f4",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2023/feb/guts/problems.pdf"
+    },
+    {
+      "path": "feb/2023/solutions.pdf",
+      "season": "feb",
+      "year": 2023,
+      "type": "solutions",
+      "bytes": 485953,
+      "pages": 17,
+      "sha256": "e935ac60dc6964f780ad04661048ef8832cf0c259c64f43ddb562276e2f7acee",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2023/feb/guts/solutions.pdf"
+    },
+    {
+      "path": "feb/2024/problems.pdf",
+      "season": "feb",
+      "year": 2024,
+      "type": "problems",
+      "bytes": 58857,
+      "pages": 5,
+      "sha256": "a8774d321b756415e6cb831020b9979c80f2fcede95e6e54d171305d7d6c6e41",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2024/feb/guts/problems.pdf"
+    },
+    {
+      "path": "feb/2024/solutions.pdf",
+      "season": "feb",
+      "year": 2024,
+      "type": "solutions",
+      "bytes": 204809,
+      "pages": 23,
+      "sha256": "f8c3ce0a71c808fb04f16e368ae408a5ddd94b57f2e7f5771795b802fa2e9bb4",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2024/feb/guts/solutions.pdf"
+    },
+    {
+      "path": "feb/2025/problems.pdf",
+      "season": "feb",
+      "year": 2025,
+      "type": "problems",
+      "bytes": 182393,
+      "pages": 6,
+      "sha256": "cd95fc5dbbe200a61d3ec0fcba6d2d47002bbbc19539ec186215ac77ce21ea70",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2025/feb/guts/problems.pdf"
+    },
+    {
+      "path": "feb/2025/solutions.pdf",
+      "season": "feb",
+      "year": 2025,
+      "type": "solutions",
+      "bytes": 381652,
+      "pages": 22,
+      "sha256": "d3aeba4b9a805c3374f4d76b462252a8c37925021494620d2a74305b42a96115",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2025/feb/guts/solutions.pdf"
+    },
+    {
+      "path": "feb/2026/problems.pdf",
+      "season": "feb",
+      "year": 2026,
+      "type": "problems",
+      "bytes": 68654,
+      "pages": 8,
+      "sha256": "3263da3c82bc6a2a78e76ffddbc90716894a22cb0f0b92dfa506a6b75bc34020",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2026/feb/guts/problems.pdf"
+    },
+    {
+      "path": "feb/2026/solutions.pdf",
+      "season": "feb",
+      "year": 2026,
+      "type": "solutions",
+      "bytes": 330914,
+      "pages": 32,
+      "sha256": "503217a27a71e247482d75e18c7a969f0afc2781eb63ead60406f602d54d948f",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2026/feb/guts/solutions.pdf"
+    },
+    {
+      "path": "nov/2008/problems.pdf",
+      "season": "nov",
+      "year": 2008,
+      "type": "problems",
+      "bytes": 78620,
+      "pages": 4,
+      "sha256": "b0493320d2c9dfa0340e772632024a7fa27c9a4fbf4f77f869014078a980bc0e",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2008/nov/guts/problems.pdf"
+    },
+    {
+      "path": "nov/2008/solutions.pdf",
+      "season": "nov",
+      "year": 2008,
+      "type": "solutions",
+      "bytes": 122088,
+      "pages": 7,
+      "sha256": "095ba736991210a1eb7584cf5e1916bd63d027dc5c8fd334edc6deaeca316054",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2008/nov/guts/solutions.pdf"
+    },
+    {
+      "path": "nov/2009/problems.pdf",
+      "season": "nov",
+      "year": 2009,
+      "type": "problems",
+      "bytes": 79418,
+      "pages": 4,
+      "sha256": "098a4007e737a9aadbeb86aae26467524de96328361b1683b9a26344de8a473a",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2009/nov/guts/problems.pdf"
+    },
+    {
+      "path": "nov/2009/solutions.pdf",
+      "season": "nov",
+      "year": 2009,
+      "type": "solutions",
+      "bytes": 136283,
+      "pages": 9,
+      "sha256": "bd6331188744a875945e155fceb0305b1a291293258327ba0e18a443e28ebb3b",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2009/nov/guts/solutions.pdf"
+    },
+    {
+      "path": "nov/2010/problems.pdf",
+      "season": "nov",
+      "year": 2010,
+      "type": "problems",
+      "bytes": 81320,
+      "pages": 3,
+      "sha256": "f0c845b65e67c1e593fc138600ffdd3b02770a4d7eebcf3502b32ed959f39976",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2010/nov/guts/problems.pdf"
+    },
+    {
+      "path": "nov/2010/solutions.pdf",
+      "season": "nov",
+      "year": 2010,
+      "type": "solutions",
+      "bytes": 159426,
+      "pages": 12,
+      "sha256": "5d014c16eaa3412c668e2571c128bc9e194807b5749581b7a4597e7ca36304da",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2010/nov/guts/solutions.pdf"
+    },
+    {
+      "path": "nov/2011/problems.pdf",
+      "season": "nov",
+      "year": 2011,
+      "type": "problems",
+      "bytes": 145013,
+      "pages": 9,
+      "sha256": "a7cccdbd98705b795068536be83523c03f39c6a455d193258175618bfc724d69",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2011/nov/guts/problems.pdf"
+    },
+    {
+      "path": "nov/2011/solutions.pdf",
+      "season": "nov",
+      "year": 2011,
+      "type": "solutions",
+      "bytes": 174364,
+      "pages": 14,
+      "sha256": "7905fe5fef3fc7392f65937f9501e12b3d6b0b84b9638cfeebe70d5c8acd1212",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2011/nov/guts/solutions.pdf"
+    },
+    {
+      "path": "nov/2012/problems.pdf",
+      "season": "nov",
+      "year": 2012,
+      "type": "problems",
+      "bytes": 56392,
+      "pages": 4,
+      "sha256": "773de0bb0797889fda516fd4851642732bd6a13b26a85717c80c16ef41b06b3e",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2012/nov/guts/problems.pdf"
+    },
+    {
+      "path": "nov/2012/solutions.pdf",
+      "season": "nov",
+      "year": 2012,
+      "type": "solutions",
+      "bytes": 88204,
+      "pages": 8,
+      "sha256": "daccfed2369d3699ec3ec5ee0581909c8aa0501adac031c728626be69fee09c9",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2012/nov/guts/solutions.pdf"
+    },
+    {
+      "path": "nov/2013/problems.pdf",
+      "season": "nov",
+      "year": 2013,
+      "type": "problems",
+      "bytes": 144171,
+      "pages": 5,
+      "sha256": "ca28fb53ce45df6cdd92b93eabffe54238cf55e466333dca0662a1f92417f566",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2013/nov/guts/problems.pdf"
+    },
+    {
+      "path": "nov/2013/solutions.pdf",
+      "season": "nov",
+      "year": 2013,
+      "type": "solutions",
+      "bytes": 231005,
+      "pages": 9,
+      "sha256": "de045ca00316da2e470ce822989c55baeb2b16e6e283d507ef1914127e626bee",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2013/nov/guts/solutions.pdf"
+    },
+    {
+      "path": "nov/2014/problems.pdf",
+      "season": "nov",
+      "year": 2014,
+      "type": "problems",
+      "bytes": 78703,
+      "pages": 6,
+      "sha256": "d4ef9eeecdb11a80ec1015eb0fec40ea6df2361f8513f069081e005e5520b8d5",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2014/nov/guts/problems.pdf"
+    },
+    {
+      "path": "nov/2014/solutions.pdf",
+      "season": "nov",
+      "year": 2014,
+      "type": "solutions",
+      "bytes": 146459,
+      "pages": 11,
+      "sha256": "a944c7c76cdd4efa2614037a141b2a7e5260db0798c795408564c2702f1f9a56",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2014/nov/guts/solutions.pdf"
+    },
+    {
+      "path": "nov/2015/problems.pdf",
+      "season": "nov",
+      "year": 2015,
+      "type": "problems",
+      "bytes": 152250,
+      "pages": 5,
+      "sha256": "dde6419f10342f8ba77fe1b8da093662a5fbe431cd8efdfa5b1f4b1ef8f789d2",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2015/nov/guts/problems.pdf"
+    },
+    {
+      "path": "nov/2015/solutions.pdf",
+      "season": "nov",
+      "year": 2015,
+      "type": "solutions",
+      "bytes": 217614,
+      "pages": 11,
+      "sha256": "fa3afd5f86f8d9590f9087d3fb65f1f33fcd9d2e364e9ba75c40d5ee26c70157",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2015/nov/guts/solutions.pdf"
+    },
+    {
+      "path": "nov/2016/problems.pdf",
+      "season": "nov",
+      "year": 2016,
+      "type": "problems",
+      "bytes": 128928,
+      "pages": 6,
+      "sha256": "778569335da1fffd6b8b8cc51a0a222d2e1a01b58744bfa8013ec9bb2fa61fde",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2016/nov/guts/problems.pdf"
+    },
+    {
+      "path": "nov/2016/solutions.pdf",
+      "season": "nov",
+      "year": 2016,
+      "type": "solutions",
+      "bytes": 230708,
+      "pages": 10,
+      "sha256": "0116ac59d89d3fea20b28cd5b70ad1ba7ce07565ca0893d3b9e96d0a08337916",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2016/nov/guts/solutions.pdf"
+    },
+    {
+      "path": "nov/2017/problems.pdf",
+      "season": "nov",
+      "year": 2017,
+      "type": "problems",
+      "bytes": 187299,
+      "pages": 6,
+      "sha256": "86262f899e7297992863e4461dba9a8157b24577fa4c25f0bc24f62d6bad5d32",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2017/nov/guts/problems.pdf"
+    },
+    {
+      "path": "nov/2017/solutions.pdf",
+      "season": "nov",
+      "year": 2017,
+      "type": "solutions",
+      "bytes": 282656,
+      "pages": 14,
+      "sha256": "13ec26a4c216fa2dc9ecc5b223a9e851c8bba06c357bc78dc8af0f146210d568",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2017/nov/guts/solutions.pdf"
+    },
+    {
+      "path": "nov/2018/problems.pdf",
+      "season": "nov",
+      "year": 2018,
+      "type": "problems",
+      "bytes": 155339,
+      "pages": 6,
+      "sha256": "4fcbf3250888812f1046503c267c0a7e3c16dbc38b048563f27d523bd3a35fa7",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2018/nov/guts/problems.pdf"
+    },
+    {
+      "path": "nov/2018/solutions.pdf",
+      "season": "nov",
+      "year": 2018,
+      "type": "solutions",
+      "bytes": 430413,
+      "pages": 18,
+      "sha256": "e80774bcfcb1ccc82581635a7af54514bc07cfe286b595ee7a30c7e8b85e60b5",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2018/nov/guts/solutions.pdf"
+    },
+    {
+      "path": "nov/2019/problems.pdf",
+      "season": "nov",
+      "year": 2019,
+      "type": "problems",
+      "bytes": 190121,
+      "pages": 6,
+      "sha256": "bf1dbdcaf2bc4843dfee9fe7fb3ee651274ceedece027790b30b4082d1424381",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2019/nov/guts/problems.pdf"
+    },
+    {
+      "path": "nov/2019/solutions.pdf",
+      "season": "nov",
+      "year": 2019,
+      "type": "solutions",
+      "bytes": 247489,
+      "pages": 14,
+      "sha256": "1a4e2fa24cf349908c68f91262612ebb9f77a51568fbad805c21bf3fb14f43df",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2019/nov/guts/solutions.pdf"
+    },
+    {
+      "path": "nov/2020/problems.pdf",
+      "season": "nov",
+      "year": 2020,
+      "type": "problems",
+      "bytes": 137607,
+      "pages": 6,
+      "sha256": "a0dcfeb35b9c1cd02a7715dd306429febe352c9132d453ac4d31fd49db7bb734",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2020/nov/guts/problems.pdf"
+    },
+    {
+      "path": "nov/2020/solutions.pdf",
+      "season": "nov",
+      "year": 2020,
+      "type": "solutions",
+      "bytes": 264804,
+      "pages": 16,
+      "sha256": "44228e11cd3936ad2a5a0391ad58c6a7b758f2d3c4cfc6e9121448d94c405ea6",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2020/nov/guts/solutions.pdf"
+    },
+    {
+      "path": "nov/2021/problems.pdf",
+      "season": "nov",
+      "year": 2021,
+      "type": "problems",
+      "bytes": 172211,
+      "pages": 7,
+      "sha256": "6cbbefca49e630f634419c9acf367a2d3eeac017685a1962455723cd3c904dfc",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2021/nov/guts/problems.pdf"
+    },
+    {
+      "path": "nov/2021/solutions.pdf",
+      "season": "nov",
+      "year": 2021,
+      "type": "solutions",
+      "bytes": 284990,
+      "pages": 16,
+      "sha256": "2c100d9cfd3768ab7fc6308783b8c6083691fc6f0e690ac8d3facdaa303e3f74",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2021/nov/guts/solutions.pdf"
+    },
+    {
+      "path": "nov/2022/problems.pdf",
+      "season": "nov",
+      "year": 2022,
+      "type": "problems",
+      "bytes": 172438,
+      "pages": 4,
+      "sha256": "acc82796da7f3374ddc1175a3b834b4e64f5f6760ce67f5c33ad89abdf7b69f8",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2022/nov/guts/problems.pdf"
+    },
+    {
+      "path": "nov/2022/solutions.pdf",
+      "season": "nov",
+      "year": 2022,
+      "type": "solutions",
+      "bytes": 228481,
+      "pages": 13,
+      "sha256": "15d49dfb89d6418be8efe88debd48d6b2b4147b294f1ce18044f6f83109965e4",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2022/nov/guts/solutions.pdf"
+    },
+    {
+      "path": "nov/2023/problems.pdf",
+      "season": "nov",
+      "year": 2023,
+      "type": "problems",
+      "bytes": 151016,
+      "pages": 6,
+      "sha256": "8be7e2dcda9bcdabc904aa381bb8d5e05fb9c47c3ba5e8724d93aed3cb4ab214",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2023/nov/guts/problems.pdf"
+    },
+    {
+      "path": "nov/2023/solutions.pdf",
+      "season": "nov",
+      "year": 2023,
+      "type": "solutions",
+      "bytes": 329207,
+      "pages": 21,
+      "sha256": "17e78dc26653bf0bdecce46ad8f03dd42fbd4c02c6b6290e703c1490160558ff",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2023/nov/guts/solutions.pdf"
+    },
+    {
+      "path": "nov/2024/problems.pdf",
+      "season": "nov",
+      "year": 2024,
+      "type": "problems",
+      "bytes": 150606,
+      "pages": 7,
+      "sha256": "85cdf1fa0fb6968fc21d0a91c0e190cf41aba5613d018fb8a055744d56cdd426",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2024/nov/guts/problems.pdf"
+    },
+    {
+      "path": "nov/2024/solutions.pdf",
+      "season": "nov",
+      "year": 2024,
+      "type": "solutions",
+      "bytes": 412217,
+      "pages": 23,
+      "sha256": "3d78355e6b981f8cfea3018194601aec27bf945380c24c7149c90d5ed8d22713",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2024/nov/guts/solutions.pdf"
+    },
+    {
+      "path": "nov/2025/problems.pdf",
+      "season": "nov",
+      "year": 2025,
+      "type": "problems",
+      "bytes": 200136,
+      "pages": 7,
+      "sha256": "072a62367a9217911fb8edbb6658d1a7a777d1dc7f80b2eaf26901e3f65fe0c3",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2025/nov/guts/problems.pdf"
+    },
+    {
+      "path": "nov/2025/solutions.pdf",
+      "season": "nov",
+      "year": 2025,
+      "type": "solutions",
+      "bytes": 396853,
+      "pages": 30,
+      "sha256": "d0569f7498460d3eca9e623bc345683e8a3c8f33b5065dbc2c332736441fb949",
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2025/nov/guts/solutions.pdf"
+    }
+  ]
+}

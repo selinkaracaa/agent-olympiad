@@ -1,0 +1,12 @@
+{
+  "split_counts": {
+    "test": 200,
+    "development": 57
+  },
+  "readme_claims_200_test_challenges": true,
+  "role": "auxiliary",
+  "eval_unit": "question",
+  "count": 257,
+  "promoted_from": "benchmark_extracted/nyu_ctf_bench",
+  "aux_reason": "CTF 单题 — NYU CTF Bench challenges"
+}

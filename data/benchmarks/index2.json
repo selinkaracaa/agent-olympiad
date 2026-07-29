@@ -1,0 +1,683 @@
+{
+  "description": "OlympiadMAS — primary multi-agent session tracks (34); auxiliary question corpora → index_aux.json",
+  "target_per_olympiad": 30,
+  "note_on_30": "Collect one full published team task per slot (internal sub-parts stay together). Combine across years/contests to reach 30 where history allows; some olympiads have fewer than 30 available.",
+  "olympiads": [
+    {
+      "id": "ijso_practical",
+      "name": "International Junior Science Olympiad — Practical (Team)",
+      "type": "test_based",
+      "team_size": 3,
+      "benchmark_path": "data/benchmarks/ijso_practical/benchmark.json",
+      "problems_collected": 14,
+      "target": 30,
+      "human_score_out_of": 40,
+      "ai_judge_out_of": 40,
+      "source_url": "https://ijsoweb.org/downloads",
+      "gold_scores": {
+        "available": "partial",
+        "notes": "Marking schemes in answer PDFs. Gold practical team = top /40."
+      },
+      "collection_strategy": "One full team practical per IJSO year; ~30 editions since 2004",
+      "status": "partial",
+      "slots_scaffolded": 30,
+      "gold_solutions": 12
+    },
+    {
+      "id": "ieo_business_case",
+      "name": "International Economics Olympiad — Business Case",
+      "type": "rubric_based",
+      "team_size": 5,
+      "benchmark_path": "data/benchmarks/ieo_business_case/benchmark.json",
+      "problems_collected": 5,
+      "target": 30,
+      "human_score_out_of": "50 BC raw; 100 overall",
+      "ai_judge_out_of": 50,
+      "source_url": "https://ieo-official.org/prepare",
+      "gold_scores": {
+        "available": true,
+        "notes": "2025 winner Canada 92.5/100 overall raw. https://2025.ieo-official.org/results",
+        "human_baseline_2025_winner": "Canada 92.5/100 overall"
+      },
+      "collection_strategy": "One full business case per IEO year (2021–2025 available so far)",
+      "status": "pipeline_working"
+    },
+    {
+      "id": "iol_team",
+      "name": "International Linguistics Olympiad — Team Contest",
+      "type": "test_based",
+      "team_size": 4,
+      "benchmark_path": "data/benchmarks/iol_team/benchmark.json",
+      "problems_collected": 21,
+      "target": 21,
+      "human_score_out_of": "varies by year",
+      "ai_judge_out_of": 100,
+      "source_url": "https://ioling.org/problems/by_year/",
+      "gold_scores": {
+        "available": "partial",
+        "notes": "Solutions PDF per year. Human gold e.g. 200.0/200 (2025 Taiwan)."
+      },
+      "collection_strategy": "One full team contest per year; 2003–2025",
+      "status": "partial",
+      "slots_scaffolded": 21,
+      "gold_solutions": 17
+    },
+    {
+      "id": "ioaa_group",
+      "name": "International Olympiad on Astronomy and Astrophysics — Group Competition",
+      "type": "test_based",
+      "team_size": 5,
+      "benchmark_path": "data/benchmarks/ioaa_group/benchmark.json",
+      "problems_collected": 9,
+      "target": 18,
+      "human_score_out_of": "time-ranked",
+      "ai_judge_out_of": 100,
+      "source_url": "https://ioaastrophysics.org/resources/problems-from-past-ioaa",
+      "gold_scores": {
+        "available": "partial",
+        "notes": "Marking schemes in solution PDFs. Winner = fastest team."
+      },
+      "collection_strategy": "One full group competition per IOAA edition (2007–2024)",
+      "status": "collected",
+      "slots_scaffolded": 18,
+      "gold_solutions": 4
+    },
+    {
+      "id": "arml_power",
+      "name": "ARML Power Contest",
+      "type": "test_based",
+      "team_size": 15,
+      "benchmark_path": "data/benchmarks/arml_power/benchmark.json",
+      "problems_collected": 15,
+      "target": 30,
+      "human_score_out_of": 40,
+      "ai_judge_out_of": 40,
+      "source_url": "https://www.arml.com/ARML/arml_2019/page/index.php?page=5&page_type=public&show_page=samples",
+      "gold_scores": {
+        "available": true,
+        "notes": "Solution PDFs published each season. Top teams 36–40/40."
+      },
+      "collection_strategy": "One full power round per contest season (~2/year since 1994)",
+      "status": "collected",
+      "slots_scaffolded": 30,
+      "gold_solutions": 11
+    },
+    {
+      "id": "arml_national_team",
+      "name": "ARML National Meet — Team Round",
+      "type": "test_based",
+      "team_size": 15,
+      "benchmark_path": "data/benchmarks/arml_national_team/benchmark.json",
+      "problems_collected": 11,
+      "target": 30,
+      "human_score_out_of": 50,
+      "ai_judge_out_of": 50,
+      "source_url": "https://www.arml.com/",
+      "gold_scores": {
+        "available": "partial",
+        "notes": "Solution sections in national meet PDFs and 2009–2014 book."
+      },
+      "collection_strategy": "One team round per national meet year",
+      "status": "collected",
+      "gold_solutions": 10
+    },
+    {
+      "id": "arml_national_power",
+      "name": "ARML National Meet — Power Round",
+      "type": "test_based",
+      "team_size": 15,
+      "benchmark_path": "data/benchmarks/arml_national_power/benchmark.json",
+      "problems_collected": 11,
+      "target": 30,
+      "human_score_out_of": 50,
+      "ai_judge_out_of": 50,
+      "source_url": "https://www.arml.com/",
+      "gold_scores": {
+        "available": "partial",
+        "notes": "Solution sections in national meet PDFs and 2009–2014 book."
+      },
+      "collection_strategy": "One power round per national meet year",
+      "status": "collected",
+      "gold_solutions": 10
+    },
+    {
+      "id": "arml_local",
+      "name": "ARML Local",
+      "type": "test_based",
+      "team_size": 6,
+      "benchmark_path": "data/benchmarks/arml_local/benchmark.json",
+      "problems_collected": 6,
+      "target": 30,
+      "human_score_out_of": "40 or 60",
+      "ai_judge_out_of": 60,
+      "source_url": "https://www.arml.com/ARML/arml_2019/public_contest_files/2009_2014_book/ARML_2009_2014.pdf",
+      "gold_scores": {
+        "available": "partial",
+        "notes": "Team solutions in 2009–2014 book."
+      },
+      "collection_strategy": "One local team round per year from ARML book",
+      "status": "collected",
+      "gold_solutions": 6
+    },
+    {
+      "id": "wsc_writing",
+      "name": "World Scholar's Cup — Collaborative Writing",
+      "domain": "Literature / Humanities",
+      "type": "rubric_based",
+      "team_size": 3,
+      "benchmark_path": "data/benchmarks/wsc_writing/benchmark.json",
+      "problems_collected": 42,
+      "target": 20,
+      "human_score_out_of": "varies by rubric",
+      "ai_judge_out_of": 100,
+      "source_url": "https://scholarscup.org/about/",
+      "gold_scores": {
+        "available": "partial",
+        "notes": "Published essay prompts and rubrics per annual season. Top team scores available from leaderboards."
+      },
+      "collection_strategy": "One collaborative writing portfolio (3 essays on shared theme) per annual WSC season",
+      "status": "collected",
+      "gold_solutions": 0
+    },
+    {
+      "id": "jessup",
+      "name": "Philip C. Jessup International Law Moot Court Competition",
+      "domain": "International Law",
+      "type": "rubric_based",
+      "team_size": "2-5",
+      "benchmark_path": "data/benchmarks/jessup/benchmark.json",
+      "problems_collected": 1,
+      "target": 20,
+      "human_score_out_of": "varies (memorial + oral rounds)",
+      "ai_judge_out_of": 100,
+      "source_url": "https://www.ilsa.org/jessup/",
+      "gold_scores": {
+        "available": true,
+        "notes": "Compromis (problem) published annually since 1960. Winning memorials available via Jessup Compendium / HeinOnline."
+      },
+      "collection_strategy": "One Compromis per year; agents write memorials arguing both Applicant and Respondent sides",
+      "status": "collected"
+    },
+    {
+      "id": "iiot",
+      "name": "International Informatics Olympiad in Teams (IIOT)",
+      "domain": "Informatics / Computer Science",
+      "type": "test_based",
+      "team_size": 4,
+      "benchmark_path": "data/benchmarks/iiot/benchmark.json",
+      "problems_collected": 38,
+      "target": 20,
+      "human_score_out_of": "varies by contest",
+      "ai_judge_out_of": 100,
+      "source_url": "https://iio.team/",
+      "gold_scores": {
+        "available": "partial",
+        "notes": "Task statements and results published at iio.team/competition/tasks. Scoring based on automated judge (accepted / wrong answer)."
+      },
+      "collection_strategy": "One full contest set per IIOT edition (international round); teams of 4 solve algorithmic problems in 3–4 hours",
+      "status": "collected"
+    },
+    {
+      "id": "icpc",
+      "name": "ICPC — International Collegiate Programming Contest",
+      "domain": "Informatics / Computer Science",
+      "type": "test_based",
+      "team_size": 3,
+      "benchmark_path": "data/benchmarks/icpc/benchmark.json",
+      "problems_collected": 158,
+      "target": 20,
+      "human_score_out_of": "number of problems solved (varies)",
+      "ai_judge_out_of": 100,
+      "source_url": "https://icpc.global/",
+      "gold_scores": {
+        "available": true,
+        "notes": "World Finals problem sets and solutions published since 1976 at problems.icpc.io and icpc.kattis.com."
+      },
+      "collection_strategy": "One World Finals problem set per year; teams of 3 solve algorithmic problems on 1 computer in 5 hours",
+      "status": "collected"
+    },
+    {
+      "id": "cfa_research_challenge",
+      "name": "CFA Institute Research Challenge",
+      "domain": "Finance",
+      "type": "rubric_based",
+      "team_size": 4,
+      "benchmark_path": "data/benchmarks/cfa_research_challenge/benchmark.json",
+      "target": 30,
+      "human_score_out_of": "varies by local/regional/global",
+      "ai_judge_out_of": 100,
+      "source_url": "https://www.cfainstitute.org/insights/events/research-challenge/past-champions",
+      "gold_scores": {
+        "available": true,
+        "notes": "Champion equity reports / presentations used as reference solutions in staging extract."
+      },
+      "collection_strategy": "One equity-research case / champion set per available season",
+      "status": "collected",
+      "problems_collected": 19,
+      "gold_solutions": 19
+    },
+    {
+      "id": "eoes",
+      "name": "European Olympiad of Experimental Science (EOES / EUSO)",
+      "domain": "Science lab",
+      "type": "test_based",
+      "team_size": 3,
+      "benchmark_path": "data/benchmarks/eoes/benchmark.json",
+      "target": 30,
+      "human_score_out_of": "varies by year",
+      "ai_judge_out_of": 100,
+      "source_url": "https://www.eoes.science/Previous%20olympiads/previous.html",
+      "gold_scores": {
+        "available": "partial",
+        "notes": "Lab practical packets; marking schemes not fully digitized — rubric placeholders in gold_label."
+      },
+      "collection_strategy": "One EOES/EUSO practical packet per available year",
+      "status": "collected",
+      "problems_collected": 79,
+      "gold_solutions": 0
+    },
+    {
+      "id": "ethics_bowl_appe",
+      "name": "APPE Intercollegiate Ethics Bowl",
+      "domain": "Ethics",
+      "type": "rubric_based",
+      "team_size": 5,
+      "benchmark_path": "data/benchmarks/ethics_bowl_appe/benchmark.json",
+      "target": 30,
+      "human_score_out_of": "judge ranks / scores",
+      "ai_judge_out_of": 100,
+      "source_url": "https://www.appeieo.org/",
+      "gold_scores": {
+        "available": false,
+        "notes": "Case sets with ethics-bowl rubric; no single official answer key."
+      },
+      "collection_strategy": "One APPE Ethics Bowl case set per available season",
+      "status": "collected",
+      "problems_collected": 12,
+      "gold_solutions": 0
+    },
+    {
+      "id": "ethics_bowl_nhseb",
+      "name": "National High School Ethics Bowl",
+      "domain": "Ethics",
+      "type": "rubric_based",
+      "team_size": 5,
+      "benchmark_path": "data/benchmarks/ethics_bowl_nhseb/benchmark.json",
+      "target": 20,
+      "human_score_out_of": "judge ranks / scores",
+      "ai_judge_out_of": 100,
+      "source_url": "https://nhseb.org/case-library",
+      "gold_scores": {
+        "available": false,
+        "notes": "Case set with NHSEB rubric; expand year coverage."
+      },
+      "collection_strategy": "One NHSEB National Case Set PDF per season from nhseb.org/s/ (official National Case Set archive)",
+      "status": "collected",
+      "problems_collected": 14,
+      "gold_solutions": 0
+    },
+    {
+      "id": "ichto",
+      "name": "International Chemistry Tournament (IChTo)",
+      "domain": "Chemistry",
+      "type": "rubric_based",
+      "team_size": 3,
+      "benchmark_path": "data/benchmarks/ichto/benchmark.json",
+      "target": 30,
+      "human_score_out_of": "tournament ranking",
+      "ai_judge_out_of": 100,
+      "source_url": "http://ichto.org/en/problems/",
+      "gold_scores": {
+        "available": "partial",
+        "notes": "Problem sets published; solutions/marking uneven across years."
+      },
+      "collection_strategy": "One IChTo problem set per available tournament year",
+      "status": "collected",
+      "problems_collected": 9,
+      "gold_solutions": 0
+    },
+    {
+      "id": "modeling_agent",
+      "name": "COMAP Math Modeling (HiMCM / MCM / ICM / IM2C / MidMCM)",
+      "domain": "Math modeling",
+      "type": "rubric_based",
+      "team_size": 4,
+      "benchmark_path": "data/benchmarks/modeling_agent/benchmark.json",
+      "target": 30,
+      "human_score_out_of": "Outstanding / Finalist designations",
+      "ai_judge_out_of": 100,
+      "source_url": "https://www.comap.com/contests",
+      "gold_scores": {
+        "available": "partial",
+        "notes": "Official problems + COMAP modeling rubrics; outstanding papers not bulk-included."
+      },
+      "collection_strategy": "One COMAP modeling problem per contest/year slot",
+      "status": "collected",
+      "problems_collected": 68,
+      "gold_solutions": 0
+    },
+    {
+      "id": "pumac_power",
+      "name": "PUMaC Power Round",
+      "domain": "Mathematics",
+      "type": "test_based",
+      "team_size": 8,
+      "benchmark_path": "data/benchmarks/pumac_power/benchmark.json",
+      "target": 30,
+      "human_score_out_of": "varies by year",
+      "ai_judge_out_of": 100,
+      "source_url": "https://jason-shi-f9dm.squarespace.com/archives",
+      "gold_scores": {
+        "available": "partial",
+        "notes": "Power-round packets; solution PDFs linked when present in local archive."
+      },
+      "collection_strategy": "One PUMaC Power Round per year group (+ misc)",
+      "status": "collected",
+      "problems_collected": 18,
+      "gold_solutions": 1
+    },
+    {
+      "id": "vis_moot",
+      "name": "Willem C. Vis International Commercial Arbitration Moot",
+      "domain": "International Law",
+      "type": "rubric_based",
+      "team_size": 5,
+      "benchmark_path": "data/benchmarks/vis_moot/benchmark.json",
+      "target": 20,
+      "human_score_out_of": "memorial + oral rounds",
+      "ai_judge_out_of": 100,
+      "source_url": "https://www.vismoot.org/",
+      "gold_scores": {
+        "available": false,
+        "notes": "Problem (Vis moot case) published annually; winning memorials not bundled."
+      },
+      "collection_strategy": "One Vis Moot problem per available year",
+      "status": "collected",
+      "problems_collected": 8,
+      "gold_solutions": 0
+    },
+    {
+      "id": "wharton_investment",
+      "name": "Wharton Global High School Investment Competition",
+      "domain": "Finance",
+      "type": "rubric_based",
+      "team_size": 5,
+      "benchmark_path": "data/benchmarks/wharton_investment/benchmark.json",
+      "target": 20,
+      "human_score_out_of": "competition rankings",
+      "ai_judge_out_of": 100,
+      "source_url": "https://globalyouth.wharton.upenn.edu/",
+      "gold_scores": {
+        "available": false,
+        "notes": "Investment briefs with rubric; expand seasons."
+      },
+      "collection_strategy": "One Wharton Investment Competition brief per available season",
+      "status": "collected",
+      "problems_collected": 4,
+      "gold_solutions": 0
+    },
+    {
+      "id": "ccdc",
+      "name": "National Collegiate Cyber Defense Competition (NCCDC)",
+      "domain": "Cybersecurity / CTF",
+      "type": "test_based",
+      "team_size": 8,
+      "benchmark_path": "data/benchmarks/ccdc/benchmark.json",
+      "target": 30,
+      "human_score_out_of": "competition ranking / points",
+      "ai_judge_out_of": 100,
+      "source_url": "https://www.nationalccdc.org/",
+      "gold_scores": {
+        "available": false,
+        "notes": "Team Packet scenario briefs; live injects/VMs not included. Some PDFs are image-only stubs."
+      },
+      "collection_strategy": "One nationals Team Packet (or support doc) per available year in local archive",
+      "status": "partial",
+      "problems_collected": 17,
+      "gold_solutions": 0
+    },
+    {
+      "id": "debatebench",
+      "name": "DebateBench (WUDC / BP)",
+      "domain": "Debate",
+      "type": "rubric_based",
+      "team_size": 8,
+      "benchmark_path": "data/benchmarks/debatebench/benchmark.json",
+      "target": 30,
+      "human_score_out_of": "speaker / team ranks",
+      "ai_judge_out_of": 100,
+      "source_url": "https://huggingface.co/datasets",
+      "gold_scores": {
+        "available": false,
+        "notes": "Cleaned BP debate transcripts with debate rubrics; no single gold speech."
+      },
+      "collection_strategy": "One cleaned debate transcript per staging record",
+      "status": "collected",
+      "problems_collected": 32,
+      "gold_solutions": 0
+    },
+    {
+      "id": "gcch_harvard",
+      "name": "Global Case Competition at Harvard",
+      "domain": "Business / Case",
+      "type": "rubric_based",
+      "team_size": 4,
+      "benchmark_path": "data/benchmarks/gcch_harvard/benchmark.json",
+      "target": 30,
+      "human_score_out_of": "competition ranking",
+      "ai_judge_out_of": 100,
+      "source_url": "https://www.gcchatharvard.com/",
+      "gold_scores": {
+        "available": "partial",
+        "notes": "Official cases + some winning team papers in local archive."
+      },
+      "collection_strategy": "One GCCH case / paper packet per available year",
+      "status": "collected",
+      "problems_collected": 16,
+      "gold_solutions": 0
+    },
+    {
+      "id": "history_olympiad",
+      "name": "International History Olympiad / IHBB — History Bowl",
+      "domain": "History",
+      "type": "test_based",
+      "team_size": 4,
+      "benchmark_path": "data/benchmarks/history_olympiad/benchmark.json",
+      "target": 30,
+      "human_score_out_of": "bowl scoring (tossup / bonus)",
+      "ai_judge_out_of": 100,
+      "source_url": "https://www.historyolympiad.com/resources/",
+      "gold_scores": {
+        "available": "partial",
+        "notes": "Answers from packet ANSWER lines when present. Includes open IHBB Asia Varsity/JV Bowl PDFs."
+      },
+      "collection_strategy": "One History Bowl round/session per open Bowl PDF (IHO + IHBB Asia Varsity/JV; Bee / Middle School excluded)",
+      "status": "collected",
+      "problems_collected": 95,
+      "gold_solutions": 95
+    },
+    {
+      "id": "envirothon",
+      "name": "NCF-Envirothon",
+      "domain": "Environmental science",
+      "type": "rubric_based",
+      "team_size": 5,
+      "benchmark_path": "data/benchmarks/envirothon/benchmark.json",
+      "target": 30,
+      "human_score_out_of": "station tests + oral presentation",
+      "ai_judge_out_of": 100,
+      "source_url": "https://envirothon.org/",
+      "gold_scores": {
+        "available": false,
+        "notes": "Current Issue study guides + OP rules; no answer keys published."
+      },
+      "collection_strategy": "One Current Issue session (Part A/B + OP rules) per year from envirothon.org",
+      "status": "collected",
+      "problems_collected": 4,
+      "gold_solutions": 0
+    },
+    {
+      "id": "ioai_team",
+      "name": "International Olympiad in Artificial Intelligence — Team Challenge",
+      "domain": "Artificial Intelligence",
+      "type": "rubric_based",
+      "team_size": 4,
+      "benchmark_path": "data/benchmarks/ioai_team/benchmark.json",
+      "target": 30,
+      "human_score_out_of": "jury / task-specific",
+      "ai_judge_out_of": 100,
+      "source_url": "https://ioai-official.org/resources/",
+      "gold_scores": {
+        "available": "partial",
+        "notes": "2024 Practical has published best-solution ZIP; 2025 scoring task-specific."
+      },
+      "collection_strategy": "One Team Challenge / Practical Round packet per available year",
+      "status": "collected",
+      "problems_collected": 2,
+      "gold_solutions": 0
+    },
+    {
+      "id": "science_olympiad",
+      "name": "Science Olympiad (USA)",
+      "domain": "Science / STEM",
+      "type": "test_based",
+      "team_size": 15,
+      "benchmark_path": "data/benchmarks/science_olympiad/benchmark.json",
+      "target": 30,
+      "human_score_out_of": "event places (lowest aggregate)",
+      "ai_judge_out_of": 100,
+      "source_url": "https://www.soinc.org/",
+      "gold_scores": {
+        "available": "partial",
+        "notes": "Only free soinc.org sample packets mirrored; rules manuals membership-locked."
+      },
+      "collection_strategy": "Free official sample exams / logistics until licensed Rules Manuals available",
+      "status": "partial",
+      "problems_collected": 2,
+      "gold_solutions": 0
+    },
+    {
+      "id": "wro",
+      "name": "World Robot Olympiad",
+      "domain": "Robotics / STEM",
+      "type": "rubric_based",
+      "team_size": "2-3",
+      "benchmark_path": "data/benchmarks/wro/benchmark.json",
+      "target": 30,
+      "human_score_out_of": "season scoring tables",
+      "ai_judge_out_of": 100,
+      "source_url": "https://wro-association.org/",
+      "gold_scores": {
+        "available": false,
+        "notes": "Official Games & Rules PDFs; no single numeric gold key."
+      },
+      "collection_strategy": "Future Innovators Mission + RoboMission age-group game rules per season",
+      "status": "collected",
+      "problems_collected": 20,
+      "gold_solutions": 0
+    },
+    {
+      "id": "odyssey_of_the_mind",
+      "name": "Odyssey of the Mind",
+      "domain": "Creative problem-solving",
+      "type": "rubric_based",
+      "team_size": 7,
+      "benchmark_path": "data/benchmarks/odyssey_of_the_mind/benchmark.json",
+      "target": 30,
+      "human_score_out_of": "Long-Term + Style + Spontaneous",
+      "ai_judge_out_of": 100,
+      "source_url": "https://odysseyofthemind.com/past-problems/",
+      "gold_scores": {
+        "available": false,
+        "notes": "Public synopses only; full scoring packets membership-locked."
+      },
+      "collection_strategy": "One year of public Long-Term Problem synopses per session",
+      "status": "partial",
+      "problems_collected": 50,
+      "gold_solutions": 0
+    },
+    {
+      "id": "wmtc",
+      "name": "World Mathematics Team Championship",
+      "domain": "Mathematics",
+      "type": "test_based",
+      "team_size": 6,
+      "benchmark_path": "data/benchmarks/wmtc/benchmark.json",
+      "target": 30,
+      "human_score_out_of": 200,
+      "ai_judge_out_of": 100,
+      "source_url": "https://wmtc.international/",
+      "gold_scores": {
+        "available": "partial",
+        "notes": "Team Round solutions cropped from official solutions PDFs. Individual/Relay ignored for MultiAgentBench."
+      },
+      "collection_strategy": "One year×level Team Round session; Individual/Relay text stripped from bundled PDFs",
+      "status": "collected",
+      "problems_collected": 3,
+      "gold_solutions": 3,
+      "note": "Team-section-only extract from mixed publisher PDFs"
+    },
+    {
+      "id": "fyziklani",
+      "name": "Physics Brawl Online (Fyziklání)",
+      "domain": "Physics",
+      "type": "test_based",
+      "team_size": 5,
+      "benchmark_path": "data/benchmarks/fyziklani/benchmark.json",
+      "problems_collected": 14,
+      "target": 30,
+      "human_score_out_of": "varies",
+      "ai_judge_out_of": 100,
+      "source_url": "https://physicsbrawl.org/archive",
+      "gold_scores": {
+        "available": true,
+        "notes": "14/14 staging records have expected_answer."
+      },
+      "collection_strategy": "One Physics Brawl Online session per year with problem-only visual assets",
+      "status": "partial",
+      "gold_solutions": 14
+    },
+    {
+      "id": "hmmt_guts",
+      "name": "HMMT Guts Round (February and November)",
+      "domain": "Mathematics",
+      "type": "test_based",
+      "team_size": "6 or 8",
+      "benchmark_path": "data/benchmarks/hmmt_guts/benchmark.json",
+      "problems_collected": 45,
+      "target": 30,
+      "human_score_out_of": "varies",
+      "ai_judge_out_of": 100,
+      "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2000/feb/guts/problems.pdf",
+      "gold_scores": {
+        "available": "partial",
+        "notes": "44 sessions have complete official packets; February 2000 has an official answer sheet with four blank entries."
+      },
+      "collection_strategy": "One complete HMMT Guts Round per season and year",
+      "status": "partial",
+      "gold_solutions": 45
+    },
+    {
+      "id": "purple_comet",
+      "name": "Purple Comet! Math Meet",
+      "domain": "Mathematics",
+      "type": "test_based",
+      "team_size": 6,
+      "benchmark_path": "data/benchmarks/purple_comet/benchmark.json",
+      "problems_collected": 44,
+      "target": 30,
+      "human_score_out_of": "varies",
+      "ai_judge_out_of": 100,
+      "source_url": "https://purplecomet.org/files/2005HS_English.pdf",
+      "gold_scores": {
+        "available": true,
+        "notes": "44/44 staging records have expected_answer."
+      },
+      "collection_strategy": "One Purple Comet division session per year with official numeric answer list",
+      "status": "collected",
+      "gold_solutions": 44
+    }
+  ],
+  "auxiliary_index": "data/benchmarks/index_aux.json",
+  "auxiliary_note": "Question-level corpora (qanta, science_bowl, codecontests, mystery_hunt, nyu_ctf_bench, cybench) live in index_aux.json — not primary session eval."
+}
