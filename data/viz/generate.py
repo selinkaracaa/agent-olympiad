@@ -163,10 +163,9 @@ FIGURES = [
     ("07_task_types", "Coarse task-mode mix under two weighting views"),
     ("08_storyboard", "Multi-dimensional formal-catalog storyboard"),
     ("09_domains_pie", "Coarse-domain composition pie charts"),
-    ("10_domain_weighting_divergence", "Detailed-domain weighting divergence"),
-    ("11_benchmark_profiles", "Per-benchmark multi-dimensional profiles"),
+    ("10_benchmark_profiles", "Per-benchmark multi-dimensional profiles"),
     (
-        "12_question_distribution",
+        "11_question_distribution",
         "Current primary question and task-unit distribution",
     ),
 ]
@@ -1228,70 +1227,6 @@ def figure_domains_pie(metrics: dict[str, Any]) -> None:
     save_figure(fig, "09_domains_pie")
 
 
-def figure_domain_weighting_divergence(metrics: dict[str, Any]) -> None:
-    track_counts = Counter(metric["domain"] for metric in metrics["tracks"].values())
-    row_counts = Counter()
-    for metric in metrics["tracks"].values():
-        row_counts[metric["domain"]] += metric["count"]
-    domains = sorted(
-        track_counts,
-        key=lambda domain: (row_counts[domain] / metrics["primary_total"], domain),
-    )
-    track_shares = [
-        100 * track_counts[domain] / len(metrics["primary"]) for domain in domains
-    ]
-    row_shares = [
-        100 * row_counts[domain] / metrics["primary_total"] for domain in domains
-    ]
-
-    fig, ax = plt.subplots(figsize=(14, 11), constrained_layout=True)
-    y = np.arange(len(domains))
-    for position, left, right in zip(y, track_shares, row_shares):
-        ax.hlines(
-            position,
-            min(left, right),
-            max(left, right),
-            color="#bbb6b0",
-            linewidth=1.7,
-        )
-    ax.scatter(
-        track_shares,
-        y,
-        color=COLORS["green"],
-        s=54,
-        label="Equal dataset-ID share",
-        zorder=3,
-    )
-    ax.scatter(
-        row_shares,
-        y,
-        color=COLORS["blue"],
-        s=54,
-        marker="s",
-        label="Raw session-row share",
-        zorder=3,
-    )
-    ax.set_yticks(y, domains)
-    ax.set_xlabel("Share of primary portfolio (%)")
-    ax.set_title(
-        "Detailed-domain weighting divergence\n"
-        "benchmark-ID share vs session-row share"
-    )
-    ax.grid(axis="x")
-    ax.legend(loc="lower right")
-    for position, track_share, row_share in zip(y, track_shares, row_shares):
-        if max(track_share, row_share) >= 8:
-            ax.text(
-                max(track_share, row_share) + 0.3,
-                position,
-                f"{track_share:.1f}% IDs / {row_share:.1f}% rows",
-                va="center",
-                fontsize=7.5,
-                color=COLORS["muted"],
-            )
-    save_figure(fig, "10_domain_weighting_divergence")
-
-
 def figure_benchmark_profiles(metrics: dict[str, Any]) -> None:
     domain_rank = {domain: index for index, domain in enumerate(COARSE_DOMAINS)}
     tracks = sorted(
@@ -1498,7 +1433,7 @@ def figure_benchmark_profiles(metrics: dict[str, Any]) -> None:
         bbox_to_anchor=(0.5, 0.025),
         ncol=6,
     )
-    save_figure(fig, "11_benchmark_profiles")
+    save_figure(fig, "10_benchmark_profiles")
 
 
 def figure_question_distribution(metrics: dict[str, Any]) -> None:
@@ -1718,7 +1653,7 @@ def figure_question_distribution(metrics: dict[str, Any]) -> None:
         fontsize=10,
         color=COLORS["muted"],
     )
-    save_figure(fig, "12_question_distribution")
+    save_figure(fig, "11_question_distribution")
 
 
 def write_summary(metrics: dict[str, Any]) -> None:
@@ -1919,7 +1854,6 @@ def main() -> int:
     figure_task_modes(metrics)
     figure_storyboard(metrics)
     figure_domains_pie(metrics)
-    figure_domain_weighting_divergence(metrics)
     figure_benchmark_profiles(metrics)
     figure_question_distribution(metrics)
     write_summary(metrics)

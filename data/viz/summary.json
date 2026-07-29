@@ -1,6 +1,6 @@
 {
   "schema_version": "2.0",
-  "generated_at_utc": "2026-07-29T19:02:48.158811+00:00",
+  "generated_at_utc": "2026-07-29T19:08:02.182651+00:00",
   "snapshot_date": "2026-07-28",
   "taxonomy_version": "2026-07-28.formal-v1",
   "sources": {
@@ -197,15 +197,11 @@
       "description": "Coarse-domain composition pie charts"
     },
     {
-      "png": "10_domain_weighting_divergence.png",
-      "description": "Detailed-domain weighting divergence"
-    },
-    {
-      "png": "11_benchmark_profiles.png",
+      "png": "10_benchmark_profiles.png",
       "description": "Per-benchmark multi-dimensional profiles"
     },
     {
-      "png": "12_question_distribution.png",
+      "png": "11_question_distribution.png",
       "description": "Current primary question and task-unit distribution"
     }
   ],
