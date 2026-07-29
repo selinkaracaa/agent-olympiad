@@ -9,7 +9,7 @@
       "type": "test_based",
       "team_size": 3,
       "benchmark_path": "data/benchmarks/ijso_practical/benchmark.json",
-      "problems_collected": 12,
+      "problems_collected": 14,
       "target": 30,
       "human_score_out_of": 40,
       "ai_judge_out_of": 40,

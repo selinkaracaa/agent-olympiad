@@ -1,6 +1,6 @@
 {
   "schema_version": "2.0",
-  "generated_at_utc": "2026-07-29T15:16:47.579406+00:00",
+  "generated_at_utc": "2026-07-29T19:02:48.158811+00:00",
   "snapshot_date": "2026-07-28",
   "taxonomy_version": "2026-07-28.formal-v1",
   "sources": {
@@ -20,9 +20,9 @@
     "rubric_based": 16
   },
   "catalog_status_primary": {
-    "partial": 7,
+    "partial": 11,
     "pipeline_working": 1,
-    "collected": 26
+    "collected": 22
   },
   "record_status_primary": {
     "placeholder": 8,
@@ -185,31 +185,27 @@
       "description": "Exact-year primary archive presence"
     },
     {
-      "png": "07_family_radar.png",
-      "description": "Domain weighting sensitivity"
-    },
-    {
-      "png": "08_task_types.png",
+      "png": "07_task_types.png",
       "description": "Coarse task-mode mix under two weighting views"
     },
     {
-      "png": "09_storyboard.png",
+      "png": "08_storyboard.png",
       "description": "Multi-dimensional formal-catalog storyboard"
     },
     {
-      "png": "10_domains_pie.png",
+      "png": "09_domains_pie.png",
       "description": "Coarse-domain composition pie charts"
     },
     {
-      "png": "11_domain_weighting_divergence.png",
+      "png": "10_domain_weighting_divergence.png",
       "description": "Detailed-domain weighting divergence"
     },
     {
-      "png": "12_benchmark_profiles.png",
+      "png": "11_benchmark_profiles.png",
       "description": "Per-benchmark multi-dimensional profiles"
     },
     {
-      "png": "13_question_distribution.png",
+      "png": "12_question_distribution.png",
       "description": "Current primary question and task-unit distribution"
     }
   ],
@@ -220,6 +216,6 @@
     "Temporal dots show exact nominal archive years and do not imply annual continuity.",
     "Question_count exists only for the three newly promoted archives and is not a portfolio-wide field.",
     "The primary question distribution uses positive question_count where stored; every other primary row contributes one question/task unit.",
-    "Equal dataset-ID weighting is sensitive to track splitting; the source-family view merges four ARML IDs."
+    "Equal dataset-ID weighting is sensitive to track splitting (e.g. four ARML IDs)."
   ]
 }

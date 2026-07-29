@@ -22,13 +22,12 @@ python data/viz/generate.py
 - **Configured team size and primary scale** — [PNG](04_teamsize_scale_scatter.png)
 - **Field, payload, path, and governance completeness** — [PNG](05_coverage_gold.png)
 - **Exact-year primary archive presence** — [PNG](06_year_coverage.png)
-- **Domain weighting sensitivity** — [PNG](07_family_radar.png)
-- **Coarse task-mode mix under two weighting views** — [PNG](08_task_types.png)
-- **Multi-dimensional formal-catalog storyboard** — [PNG](09_storyboard.png)
-- **Coarse-domain composition pie charts** — [PNG](10_domains_pie.png)
-- **Detailed-domain weighting divergence** — [PNG](11_domain_weighting_divergence.png)
-- **Per-benchmark multi-dimensional profiles** — [PNG](12_benchmark_profiles.png)
-- **Current primary question and task-unit distribution** — [PNG](13_question_distribution.png)
+- **Coarse task-mode mix under two weighting views** — [PNG](07_task_types.png)
+- **Multi-dimensional formal-catalog storyboard** — [PNG](08_storyboard.png)
+- **Coarse-domain composition pie charts** — [PNG](09_domains_pie.png)
+- **Detailed-domain weighting divergence** — [PNG](10_domain_weighting_divergence.png)
+- **Per-benchmark multi-dimensional profiles** — [PNG](11_benchmark_profiles.png)
+- **Current primary question and task-unit distribution** — [PNG](12_question_distribution.png)
 
 ## Statistical guardrails
 
@@ -36,6 +35,6 @@ python data/viz/generate.py
 - `index_new.json` (merged `index.json` + promotions) defines the primary scope here.
 - Catalog evaluator type and gold claims are metadata, not quality audits.
 - Embedded-answer, rubric, and human-baseline coverage are measured directly from JSON rows.
-- Equal-ID, source-family, capped, and raw-row views answer different questions.
+- Equal-ID and raw-row views answer different questions about portfolio composition.
 - Exact-year dots show nominal archive presence, not continuous evaluable coverage.
 - The primary question distribution uses positive `question_count` values where stored; every other primary row contributes one question/task unit.

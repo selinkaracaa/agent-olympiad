@@ -160,14 +160,13 @@ FIGURES = [
     ("04_teamsize_scale_scatter", "Configured team size and primary scale"),
     ("05_coverage_gold", "Field, payload, path, and governance completeness"),
     ("06_year_coverage", "Exact-year primary archive presence"),
-    ("07_family_radar", "Domain weighting sensitivity"),
-    ("08_task_types", "Coarse task-mode mix under two weighting views"),
-    ("09_storyboard", "Multi-dimensional formal-catalog storyboard"),
-    ("10_domains_pie", "Coarse-domain composition pie charts"),
-    ("11_domain_weighting_divergence", "Detailed-domain weighting divergence"),
-    ("12_benchmark_profiles", "Per-benchmark multi-dimensional profiles"),
+    ("07_task_types", "Coarse task-mode mix under two weighting views"),
+    ("08_storyboard", "Multi-dimensional formal-catalog storyboard"),
+    ("09_domains_pie", "Coarse-domain composition pie charts"),
+    ("10_domain_weighting_divergence", "Detailed-domain weighting divergence"),
+    ("11_benchmark_profiles", "Per-benchmark multi-dimensional profiles"),
     (
-        "13_question_distribution",
+        "12_question_distribution",
         "Current primary question and task-unit distribution",
     ),
 ]
@@ -977,99 +976,6 @@ def figure_years(metrics: dict[str, Any]) -> None:
     save_figure(fig, "06_year_coverage")
 
 
-def weighting_views(metrics: dict[str, Any]) -> dict[str, dict[str, float]]:
-    track_values = list(metrics["tracks"].values())
-    views: dict[str, dict[str, float]] = {}
-
-    equal_ids = Counter(metric["coarse_domain"] for metric in track_values)
-    views["Equal dataset IDs"] = {
-        domain: equal_ids[domain] for domain in COARSE_DOMAINS
-    }
-
-    session_rows = Counter()
-    capped = Counter()
-    for metric in track_values:
-        session_rows[metric["coarse_domain"]] += metric["count"]
-        capped[metric["coarse_domain"]] += min(metric["count"], 30)
-    views["Raw session rows"] = {
-        domain: session_rows[domain] for domain in COARSE_DOMAINS
-    }
-    views["Capped at 30 / ID"] = {
-        domain: capped[domain] for domain in COARSE_DOMAINS
-    }
-
-    family_domains: dict[str, str] = {}
-    for metric in track_values:
-        family = metric["source_family"]
-        domain = metric["coarse_domain"]
-        previous = family_domains.setdefault(family, domain)
-        if previous != domain:
-            raise AssertionError(f"Source family {family} spans coarse domains")
-    family_counts = Counter(family_domains.values())
-    views["Equal source families"] = {
-        domain: family_counts[domain] for domain in COARSE_DOMAINS
-    }
-    return views
-
-
-def figure_weighting(metrics: dict[str, Any]) -> None:
-    views = weighting_views(metrics)
-    view_order = [
-        "Raw session rows",
-        "Equal dataset IDs",
-        "Equal source families",
-        "Capped at 30 / ID",
-    ]
-    matrix = np.zeros((len(COARSE_DOMAINS), len(view_order)))
-    for column, view in enumerate(view_order):
-        values = views[view]
-        total = sum(values.values())
-        for row, domain in enumerate(COARSE_DOMAINS):
-            matrix[row, column] = 100 * values[domain] / total
-
-    fig, ax = plt.subplots(figsize=(12, 8.8))
-    fig.subplots_adjust(left=0.20, right=0.90, top=0.90, bottom=0.18)
-    image = ax.imshow(matrix, cmap="YlGnBu", aspect="auto", vmin=0, vmax=matrix.max())
-    display_labels = [
-        "Raw session\nrows",
-        "Equal dataset\nIDs",
-        "Equal source\nfamilies",
-        "Capped at 30\nper ID",
-    ]
-    ax.set_xticks(range(len(view_order)), display_labels)
-    ax.set_yticks(range(len(COARSE_DOMAINS)), COARSE_DOMAINS)
-    ax.tick_params(axis="x", labelrotation=0)
-    for row in range(matrix.shape[0]):
-        for column in range(matrix.shape[1]):
-            value = matrix[row, column]
-            ax.text(
-                column,
-                row,
-                f"{value:.1f}%",
-                ha="center",
-                va="center",
-                fontweight="bold",
-                color="white" if value >= matrix.max() * 0.58 else COLORS["ink"],
-            )
-    ax.set_title(
-        "Domain share under four weighting rules"
-    )
-    ax.set_xlabel("Portfolio weighting view")
-    fig.text(
-        0.5,
-        0.035,
-        f"Primary only · {len(metrics['primary'])} dataset IDs · "
-        f"{metrics['n_source_families']} source families · "
-        "four ARML variants merge to one family",
-        ha="center",
-        fontsize=9,
-        color=COLORS["muted"],
-    )
-    colorbar = fig.colorbar(image, ax=ax, shrink=0.78)
-    colorbar.set_label("Share within weighting view")
-    save_figure(fig, "07_family_radar")
-
-
 def figure_task_modes(metrics: dict[str, Any]) -> None:
     id_counts = Counter(metric["task_mode"] for metric in metrics["tracks"].values())
     row_counts = Counter()
@@ -1103,7 +1009,7 @@ def figure_task_modes(metrics: dict[str, Any]) -> None:
         fontsize=18,
         fontweight="bold",
     )
-    save_figure(fig, "08_task_types")
+    save_figure(fig, "07_task_types")
 
 
 def figure_storyboard(metrics: dict[str, Any]) -> None:
@@ -1257,7 +1163,7 @@ def figure_storyboard(metrics: dict[str, Any]) -> None:
         color="#78736e",
         style="italic",
     )
-    save_figure(fig, "09_storyboard")
+    save_figure(fig, "08_storyboard")
 
 
 def figure_domains_pie(metrics: dict[str, Any]) -> None:
@@ -1319,7 +1225,7 @@ def figure_domains_pie(metrics: dict[str, Any]) -> None:
         ncol=4,
         bbox_to_anchor=(0.5, -0.01),
     )
-    save_figure(fig, "10_domains_pie")
+    save_figure(fig, "09_domains_pie")
 
 
 def figure_domain_weighting_divergence(metrics: dict[str, Any]) -> None:
@@ -1383,7 +1289,7 @@ def figure_domain_weighting_divergence(metrics: dict[str, Any]) -> None:
                 fontsize=7.5,
                 color=COLORS["muted"],
             )
-    save_figure(fig, "11_domain_weighting_divergence")
+    save_figure(fig, "10_domain_weighting_divergence")
 
 
 def figure_benchmark_profiles(metrics: dict[str, Any]) -> None:
@@ -1592,7 +1498,7 @@ def figure_benchmark_profiles(metrics: dict[str, Any]) -> None:
         bbox_to_anchor=(0.5, 0.025),
         ncol=6,
     )
-    save_figure(fig, "12_benchmark_profiles")
+    save_figure(fig, "11_benchmark_profiles")
 
 
 def figure_question_distribution(metrics: dict[str, Any]) -> None:
@@ -1812,7 +1718,7 @@ def figure_question_distribution(metrics: dict[str, Any]) -> None:
         fontsize=10,
         color=COLORS["muted"],
     )
-    save_figure(fig, "13_question_distribution")
+    save_figure(fig, "12_question_distribution")
 
 
 def write_summary(metrics: dict[str, Any]) -> None:
@@ -1943,7 +1849,7 @@ def write_summary(metrics: dict[str, Any]) -> None:
             "Temporal dots show exact nominal archive years and do not imply annual continuity.",
             "Question_count exists only for the three newly promoted archives and is not a portfolio-wide field.",
             "The primary question distribution uses positive question_count where stored; every other primary row contributes one question/task unit.",
-            "Equal dataset-ID weighting is sensitive to track splitting; the source-family view merges four ARML IDs.",
+            "Equal dataset-ID weighting is sensitive to track splitting (e.g. four ARML IDs).",
         ],
     }
     (OUTPUT / "summary.json").write_text(
@@ -1989,7 +1895,7 @@ def write_summary(metrics: dict[str, Any]) -> None:
             "- `index_new.json` (merged `index.json` + promotions) defines the primary scope here.",
             "- Catalog evaluator type and gold claims are metadata, not quality audits.",
             "- Embedded-answer, rubric, and human-baseline coverage are measured directly from JSON rows.",
-            "- Equal-ID, source-family, capped, and raw-row views answer different questions.",
+            "- Equal-ID and raw-row views answer different questions about portfolio composition.",
             "- Exact-year dots show nominal archive presence, not continuous evaluable coverage.",
             "- The primary question distribution uses positive `question_count` values where stored; every other primary row contributes one question/task unit.",
             "",
@@ -2010,7 +1916,6 @@ def main() -> int:
     figure_team_size(metrics)
     figure_completeness(metrics)
     figure_years(metrics)
-    figure_weighting(metrics)
     figure_task_modes(metrics)
     figure_storyboard(metrics)
     figure_domains_pie(metrics)
