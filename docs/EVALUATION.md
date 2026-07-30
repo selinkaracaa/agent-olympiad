@@ -3,86 +3,133 @@
 The benchmark uses the simplest defensible evaluator for each deliverable type.
 Scores from different evaluator versions are not treated as interchangeable.
 
-## Evaluator registry
+## Unified design
 
-| Deliverable | Evaluator | Current status |
+1. **Input / output media** — contest PDFs (and rendered submissions) parse to
+   **text** and/or **page images**. No third special PDF path.
+2. **Granularity** — `question` (one item) vs `competition` (full packet).
+3. **Evaluators by type** — each benchmark problem has `evaluation.evaluator_id`
+   after `collectors/enrich_evaluation_metadata.py`:
+   - **gold** (`gold_answer_v1`) when short answers exist in `gold_label.parts`
+   - **LLM rubric** (`rubric_llm_v1` / `slide_deck_v1`) for open-ended work
+   - **deferred** for programming sandboxes / true oral AV / instrument labs
+
+## Coverage after enrichment
+
+| Family | Evaluator | Notes |
 |---|---|---|
-| Numerical answer sheet | Official gold / multipart deterministic grader | ARML pilot available; multipart grader still needs generalization |
-| Proof or worked answer | Official marking scheme + structured LLM judge | Feasible after canonical score integration |
-| Slide deck | Original task PDF + task-specific structured rubric + rendered-deck multimodal judge | `slide_deck_v1` MVP |
-| Essay / report / memorial | Structured rubric judge | Later; requires domain-specific rubrics and calibration |
-| Programming submission | Official tests in an isolated judge | Deferred until test data and sandbox exist |
-| Physical lab task | Instrument observations + report rubric | Deferred; text-only simulation is not competition-faithful |
-| Oral presentation / Q&A | Human or validated audiovisual protocol | Deferred; slides alone cannot measure delivery |
+| ARML Local / National Team (short answers) | `gold_answer_v1` | curated finals in `data/rubrics/arml_*_short_answers.json` (diagram/ambiguous left blank → skipped) |
+| ARML Power / proof packets | `rubric_llm_v1` | `team_power_proof_40_v1` |
+| IOL / IOAA worked answers | `rubric_llm_v1` | `worked_answer_100_v1` |
+| IEO business case | `slide_deck_v1` | shared slide pipeline |
+| WSC writing | `rubric_llm_v1` | `wsc_writing_28_v1` |
+| Jessup memorial | `rubric_llm_v1` | written only; oral deferred |
+| IJSO practical | `rubric_llm_v1` | **report proxy**; instruments not observed |
+| ICPC / IIOT | `programming_judge` | **deferred** until sandbox + tests |
 
-## Generic slide-deck evaluator v1
-
-The evaluator receives:
-
-1. the original task PDF;
-2. a structured task-specific rubric;
-3. the team's normalized submission PDF;
-4. deterministic format checks.
-
-Models may submit a self-contained HTML deck or a PDF. HTML is validated and
-rendered to PDF before judging. The evaluator returns criterion-level JSON with
-scores, visible slide evidence, justification, confidence, warnings, and
-limitations. Oral delivery, timing, Q&A, and on-stage teamwork are explicitly
-outside the score.
-
-Run a complete PDF-first team experiment:
+Refresh metadata:
 
 ```bash
-export OPENAI_API_KEY="..."
+python3 collectors/enrich_evaluation_metadata.py
+```
+
+## Presentation / slide path (connected)
+
+Last week's slide evaluator is the same `slide_deck_v1` used everywhere:
+
+| Entry | Role |
+|---|---|
+| `src/evaluation/slides_pipeline.py` | Shared normalize + judge |
+| `src/evaluate_artifact.py` | Score an existing HTML/PDF deck |
+| `src/evaluate_submission.py` | Registry dispatch (IEO → slide_deck_v1) |
+| `src/run_presentation_artifact.py` | Team generates HTML → same judge |
+
+```bash
+export PERPLEXITY_API_KEY="pplx-..."
+
+python3 src/evaluate_artifact.py results/demo_yusen/submission.pdf \
+  --benchmark data/benchmarks/ieo_business_case/benchmark.json \
+  --problem-id ieo_business_case_2024 \
+  --provider perplexity --media images
+
 python3 src/run_presentation_artifact.py \
-  --task-pdf path/to/task.pdf \
-  --rubric path/to/rubric.json \
-  --task-label "business case" \
-  --rounds 3 \
-  --agent-model gpt-4.1 \
-  --judge-model gpt-4.1
+  --benchmark data/benchmarks/ieo_business_case/benchmark.json \
+  --problem-id ieo_business_case_2024 \
+  --provider perplexity --media images --rounds 2
 ```
 
-Evaluate an existing HTML or PDF deck:
+## Media + providers
+
+| Provider | Native PDF | Multi-image | Typical path |
+|---|---|---|---|
+| Perplexity | prefer images | yes | PDF → PNG → judge |
+| OpenAI | yes | yes | PDF or images |
 
 ```bash
-export OPENAI_API_KEY="..."
-python3 src/evaluate_artifact.py path/to/slides.html \
-  --task-pdf path/to/task.pdf \
-  --rubric path/to/rubric.json \
-  --model gpt-4.1
+export PERPLEXITY_API_KEY="pplx-..."
+python3 src/smoke_multimodal.py data/raw/business_case/2024.pdf --pages 1-2
 ```
 
-[`data/rubrics/business_case_slides_50.json`](../data/rubrics/business_case_slides_50.json)
-is an example rubric for an IEO-like business case. It is not coupled to the
-archived IEO experiment or to a benchmark ID.
+## Run evaluators
+
+```bash
+# Benchmark-aware (uses problem.evaluation + gold_label.parts)
+python3 src/evaluate_submission.py \
+  --benchmark data/benchmarks/wsc_writing/benchmark.json \
+  --problem-id wsc_writing_gq_001 \
+  --submission-text essay.txt \
+  --provider perplexity \
+  --media text
+
+python3 src/evaluate_submission.py \
+  --benchmark data/benchmarks/arml_local/benchmark.json \
+  --problem-id arml_local_2009 \
+  --submission-text answers.txt \
+  --provider perplexity \
+  --media text
+
+python3 src/evaluate_submission.py \
+  --benchmark data/benchmarks/ieo_business_case/benchmark.json \
+  --problem-id ieo_business_case_2024 \
+  --submission results/demo_yusen/submission.pdf \
+  --provider perplexity \
+  --media images
+```
+
+## Gold parts schema
+
+```json
+{
+  "parts": [
+    {
+      "id": "1",
+      "expected": "(-6, 13)",
+      "points": 4,
+      "reference": "official solution excerpt...",
+      "match_mode": "normalized"
+    }
+  ]
+}
+```
+
+`match_mode` is `normalized` when a short `expected` exists, else `reference_llm`
+(use the rubric LLM judge with the reference text).
 
 ## Human calibration protocol
 
-Human calibration starts only after the evaluator passes schema, rendering, and
-repeatability tests.
+Human calibration starts only after schema, rendering, and repeatability tests.
 
-1. Select at least 12 anonymized decks spanning deliberately weak, medium, and
-   strong quality.
-2. Give every judge the same original case PDF, structured rubric, and written
-   instruction that oral performance is not observable.
-3. Obtain at least two independent human ratings per deck without showing AI
-   scores or model identities.
-4. Record criterion scores and cited slide evidence, not only a total.
-5. Measure:
-   - mean absolute error between AI and mean human score;
-   - Spearman rank correlation;
-   - criterion-level agreement;
-   - human-human disagreement as the comparison ceiling.
-6. Tune prompts on a calibration subset and report final agreement on a held-out
-   subset.
-7. Freeze evaluator, rubric, and prompt versions before benchmark reporting.
+1. ≥12 anonymized submissions spanning weak/medium/strong.
+2. Same task PDF, rubric, and “oral not observable” instructions.
+3. ≥2 independent human ratings; no AI scores shown.
+4. Criterion scores + evidence, not only totals.
+5. MAE, Spearman, criterion agreement, human-human ceiling.
+6. Tune on a calibration subset; report held-out agreement.
+7. Freeze evaluator/rubric/prompt versions before reporting.
 
 ## Artifact safety
 
-- Agent-visible and judge-only assets are separate.
-- PDFs use repository-relative paths, checksums, and explicit page ranges.
-- Missing assets or checksum mismatches fail the run.
-- Official solutions must never be included in an agent-visible packet.
-- Extracted text may support search/debugging, but it is not silently substituted
-  for a missing source PDF in multimodal runs.
+- Agent-visible vs judge-only assets stay separate.
+- PDFs use relative paths, checksums, page ranges.
+- Official solutions are judge-only.
+- Page-image packets respect `max_pages` / context limits.

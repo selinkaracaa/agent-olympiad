@@ -62,8 +62,43 @@ def _attachment_bytes(attachment: LLMAttachment) -> bytes:
     return output.getvalue()
 
 
+def _openai_style_content(request: LLMRequest) -> list[dict[str, str]]:
+    content: list[dict[str, str]] = [{"type": "input_text", "text": request.user_prompt}]
+    for attachment in request.attachments:
+        encoded = base64.b64encode(_attachment_bytes(attachment)).decode("ascii")
+        if attachment.mime_type == "application/pdf":
+            content.append(
+                {
+                    "type": "input_file",
+                    "filename": attachment.path.name,
+                    "file_data": f"data:application/pdf;base64,{encoded}",
+                }
+            )
+        elif attachment.mime_type.startswith("image/"):
+            content.append(
+                {
+                    "type": "input_image",
+                    "image_url": f"data:{attachment.mime_type};base64,{encoded}",
+                }
+            )
+        else:
+            raise ValueError(f"Unsupported attachment MIME type: {attachment.mime_type}")
+    return content
+
+
+def _response_output_text(data: dict[str, Any]) -> str:
+    chunks: list[str] = []
+    for item in data.get("output", []):
+        for content in item.get("content", []):
+            if content.get("type") == "output_text" and content.get("text"):
+                chunks.append(str(content["text"]))
+    if chunks:
+        return "\n".join(chunks)
+    return str(data)
+
+
 def make_openai_responses_caller(model: str = "gpt-4.1") -> RequestFn:
-    """Create a file-capable OpenAI Responses API caller."""
+    """Create a file-capable OpenAI Responses API caller (PDF + images)."""
     api_key = os.environ.get("OPENAI_API_KEY")
     if not api_key:
         raise ValueError("Set OPENAI_API_KEY to use direct PDF/image inputs.")
@@ -73,31 +108,10 @@ def make_openai_responses_caller(model: str = "gpt-4.1") -> RequestFn:
     client = OpenAI(api_key=api_key)
 
     def call(request: LLMRequest) -> LLMResponse:
-        content: list[dict[str, str]] = [{"type": "input_text", "text": request.user_prompt}]
-        for attachment in request.attachments:
-            encoded = base64.b64encode(_attachment_bytes(attachment)).decode("ascii")
-            if attachment.mime_type == "application/pdf":
-                content.append(
-                    {
-                        "type": "input_file",
-                        "filename": attachment.path.name,
-                        "file_data": f"data:application/pdf;base64,{encoded}",
-                    }
-                )
-            elif attachment.mime_type.startswith("image/"):
-                content.append(
-                    {
-                        "type": "input_image",
-                        "image_url": f"data:{attachment.mime_type};base64,{encoded}",
-                    }
-                )
-            else:
-                raise ValueError(f"Unsupported attachment MIME type: {attachment.mime_type}")
-
         response = client.responses.create(
             model=model,
             instructions=request.system_prompt,
-            input=[{"role": "user", "content": content}],
+            input=[{"role": "user", "content": _openai_style_content(request)}],
         )
         usage = {}
         if getattr(response, "usage", None):
@@ -111,6 +125,96 @@ def make_openai_responses_caller(model: str = "gpt-4.1") -> RequestFn:
         )
 
     return call
+
+
+def make_perplexity_responses_caller(
+    model: str = "openai/gpt-5.4",
+) -> RequestFn:
+    """Perplexity Agent API caller with multi-image (and optional PDF) attachments.
+
+    Prefer page images for vision models. Native PDF `input_file` support varies by
+    backend; rasterize with artifacts.pdf_ingest when in doubt.
+    """
+    api_key = os.environ.get("PERPLEXITY_API_KEY")
+    if not api_key:
+        raise ValueError("Set PERPLEXITY_API_KEY to use Perplexity multimodal calls.")
+
+    import requests
+
+    headers = {"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"}
+
+    def call(request: LLMRequest, max_retries: int = 3) -> LLMResponse:
+        content = _openai_style_content(request)
+        # Prepend system guidance into the first text block for Agent API.
+        if request.system_prompt.strip():
+            content = [
+                {
+                    "type": "input_text",
+                    "text": f"{request.system_prompt.strip()}\n\n{request.user_prompt}",
+                },
+                *[part for part in content if part.get("type") != "input_text"],
+            ]
+        payload = {
+            "model": model,
+            "input": [{"role": "user", "content": content}],
+            "max_output_tokens": 16000,
+        }
+        last_error: Exception | None = None
+        for attempt in range(max_retries):
+            try:
+                resp = requests.post(
+                    "https://api.perplexity.ai/v1/agent",
+                    headers=headers,
+                    json=payload,
+                    timeout=180,
+                )
+                if not resp.ok:
+                    detail = resp.text[:800]
+                    raise requests.exceptions.HTTPError(
+                        f"{resp.status_code} {resp.reason}: {detail}",
+                        response=resp,
+                    )
+                data = resp.json()
+                usage = data.get("usage") if isinstance(data.get("usage"), dict) else {}
+                return LLMResponse(
+                    text=_response_output_text(data),
+                    provider="perplexity",
+                    model=model,
+                    usage=usage,
+                )
+            except requests.exceptions.SSLError as exc:
+                last_error = RuntimeError(
+                    "TLS failed talking to api.perplexity.ai (often a huge image "
+                    "payload). Re-render pages as smaller JPEGs, or retry with "
+                    "--pages 1-1. Original error: "
+                    f"{exc}"
+                )
+                if attempt < max_retries - 1:
+                    time.sleep(5 * (attempt + 1))
+                else:
+                    raise last_error from exc
+            except requests.exceptions.RequestException as exc:
+                last_error = exc
+                if attempt < max_retries - 1:
+                    time.sleep(10 * (attempt + 1))
+                else:
+                    raise
+        raise RuntimeError(f"Perplexity multimodal call failed: {last_error}")
+
+    return call
+
+
+def resolve_request_fn(
+    provider: str = "perplexity",
+    model: str | None = None,
+) -> RequestFn:
+    """Factory for multimodal judges/agents."""
+    provider = provider.lower().strip()
+    if provider in {"perplexity", "pplx"}:
+        return make_perplexity_responses_caller(model=model or "openai/gpt-5.4")
+    if provider in {"openai", "oai"}:
+        return make_openai_responses_caller(model=model or "gpt-4.1")
+    raise ValueError(f"Unknown multimodal provider: {provider}")
 
 
 def bind_attachments(

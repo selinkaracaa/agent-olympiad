@@ -1,0 +1,40 @@
+{
+  "rubric_id": "practical_report_40_v1",
+  "title": "Team practical written-report rubric (instruments not observed)",
+  "total_points": 40,
+  "criteria": [
+    {
+      "id": "procedure",
+      "name": "Procedure understanding",
+      "max_score": 10,
+      "observable": true,
+      "description": "Describes a coherent experimental procedure and controls."
+    },
+    {
+      "id": "analysis",
+      "name": "Data analysis & reasoning",
+      "max_score": 15,
+      "observable": true,
+      "description": "Analyses, calculations, and scientific reasoning in the report."
+    },
+    {
+      "id": "conclusions",
+      "name": "Conclusions & uncertainty",
+      "max_score": 10,
+      "observable": true,
+      "description": "Conclusions follow from stated data; uncertainties discussed."
+    },
+    {
+      "id": "communication",
+      "name": "Report communication",
+      "max_score": 5,
+      "observable": true,
+      "description": "Clear tables/figures/text presentation in the written report."
+    }
+  ],
+  "not_observable_from_deck": [
+    "physical instrument operation",
+    "lab safety behavior",
+    "true measured raw data fidelity"
+  ]
+}

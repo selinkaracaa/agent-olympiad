@@ -1,0 +1,110 @@
+{
+  "_comment": "Hand-curated short answers for ARML National Team Round where the official final is a clear short value. Omitted IDs stay reference_llm.",
+  "arml_national_team_2009": {
+    "1": {"expected": "135432"},
+    "3": {"expected": "32"},
+    "4": {"expected": "49/3", "aliases": ["\\frac{49}{3}"]},
+    "5": {"expected": "(2+√2, 1+√2)", "aliases": ["(2+\\sqrt{2},\\sqrt{2}+1)", "(2 + √2, √2 + 1)"]},
+    "6": {"expected": "2604"},
+    "8": {"expected": "179/250", "aliases": ["\\frac{179}{250}"]},
+    "9": {"expected": "15/2", "aliases": ["\\frac{15}{2}", "7.5"]},
+    "10": {"expected": "(15-8√3)/33", "aliases": ["\\frac{15-8\\sqrt{3}}{33}"]}
+  },
+  "arml_national_team_2010": {
+    "1": {"expected": "(-6, 6) and (2, 6)", "aliases": ["(-6,6),(2,6)", "2"]},
+    "2": {"expected": "10000000001", "aliases": ["10,000,000,001", "1010+1"]},
+    "3": {"expected": "100337"},
+    "4": {"expected": "392"},
+    "5": {"expected": "84"},
+    "6": {"expected": "3851"},
+    "7": {"expected": "√2/3", "aliases": ["\\frac{\\sqrt{2}}{3}", "\\sqrt{2}/3"]},
+    "8": {"expected": "529"},
+    "9": {"expected": "5∛4", "aliases": ["5\\sqrt[3]{4}", "5 * 4^{1/3}"]},
+    "10": {"expected": "6248"}
+  },
+  "arml_national_team_2011": {
+    "1": {"expected": "15/4", "aliases": ["\\frac{15}{4}"]},
+    "2": {"expected": "253"},
+    "3": {"expected": "20"},
+    "4": {"expected": "(5π/4)√17", "aliases": ["\\frac{5\\pi}{4}\\sqrt{17}"]},
+    "5": {"expected": "9/2", "aliases": ["\\frac{9}{2}", "4.5"]},
+    "6": {"expected": "96"},
+    "7": {"expected": "4096"},
+    "8": {"expected": "70"},
+    "9": {"expected": "11"},
+    "10": {"expected": "548π", "aliases": ["548\\pi"]}
+  },
+  "arml_national_team_2012": {
+    "1": {"expected": "64-64π+32π√2", "aliases": ["64-64\\pi+32\\pi\\sqrt{2}"]},
+    "3": {"expected": "165"},
+    "4": {"expected": "820"},
+    "5": {"expected": "10+2√2", "aliases": ["10+2\\sqrt{2}", "k=10+2√2"]},
+    "6": {"expected": "-23/60", "aliases": ["-\\frac{23}{60}"]},
+    "7": {"expected": "9/5", "aliases": ["\\frac{9}{5}"]},
+    "8": {"expected": "47"},
+    "9": {"expected": "6"},
+    "10": {"expected": "146"}
+  },
+  "arml_national_team_2013": {
+    "1": {"expected": "12", "aliases": ["y=12"]},
+    "2": {"expected": "1525"},
+    "3": {"expected": "272"},
+    "6": {"expected": "-1/2", "aliases": ["-\\frac{1}{2}"]},
+    "7": {"expected": "14"},
+    "8": {"expected": "-21"},
+    "9": {"expected": "5√39/3", "aliases": ["\\frac{5\\sqrt{39}}{3}"]},
+    "10": {"expected": "448"}
+  },
+  "arml_national_team_2014": {
+    "2": {"expected": "(1/4, 1/27)", "aliases": ["(\\frac{1}{4},\\frac{1}{27})"]},
+    "3": {"expected": "(2/7)√53", "aliases": ["\\frac{2}{7}\\sqrt{53}", "2√53/7"]},
+    "4": {"expected": "326"},
+    "5": {"expected": "43/48", "aliases": ["\\frac{43}{48}"]},
+    "6": {"expected": "3432"},
+    "7": {"expected": "45/2", "aliases": ["\\frac{45}{2}", "22.5"]},
+    "8": {"expected": "2+π", "aliases": ["2+\\pi"]},
+    "9": {"expected": "10"},
+    "10": {"expected": "136"}
+  },
+  "arml_national_team_2016": {
+    "1": {"expected": "-31/6", "aliases": ["-\\frac{31}{6}"]},
+    "2": {"expected": "√3", "aliases": ["\\sqrt{3}", "b=√3"]},
+    "4": {"expected": "51/100", "aliases": ["\\frac{51}{100}", "0.51"]},
+    "5": {"expected": "37"},
+    "7": {"expected": "20/27", "aliases": ["\\frac{20}{27}"]},
+    "8": {"expected": "119√3/6", "aliases": ["\\frac{119\\sqrt{3}}{6}"]},
+    "9": {"expected": "240"}
+  },
+  "arml_national_team_2017": {
+    "1": {"expected": "9"},
+    "2": {"expected": "1"},
+    "3": {"expected": "64-32√3", "aliases": ["64-32\\sqrt{3}"]},
+    "4": {"expected": "3/250", "aliases": ["\\frac{3}{250}", "9/750"]},
+    "5": {"expected": "6673335"},
+    "6": {"expected": "21"},
+    "7": {"expected": "2062"},
+    "9": {"expected": "64026"},
+    "10": {"expected": "1029"}
+  },
+  "arml_national_team_2018": {
+    "1": {"expected": "19"},
+    "2": {"expected": "5400/109", "aliases": ["\\frac{5400}{109}"]},
+    "3": {"expected": "342√3", "aliases": ["342\\sqrt{3}", "k=342√3"]},
+    "4": {"expected": "1/18", "aliases": ["\\frac{1}{18}"]},
+    "5": {"expected": "(2, 3)", "aliases": ["(2,3)"]},
+    "6": {"expected": "2√73", "aliases": ["2\\sqrt{73}", "√292"]},
+    "7": {"expected": "2038181"},
+    "8": {"expected": "132"},
+    "9": {"expected": "20π", "aliases": ["20\\pi"]}
+  },
+  "arml_national_team_2019": {
+    "1": {"expected": "216"},
+    "2": {"expected": "12"},
+    "4": {"expected": "22.5", "aliases": ["22.5°", "45/2"]},
+    "5": {"expected": "66/7", "aliases": ["\\frac{66}{7}"]},
+    "6": {"expected": "505/8076", "aliases": ["\\frac{505}{8076}"]},
+    "7": {"expected": "7986"},
+    "8": {"expected": "29"},
+    "10": {"expected": "800/3", "aliases": ["\\frac{800}{3}"]}
+  }
+}

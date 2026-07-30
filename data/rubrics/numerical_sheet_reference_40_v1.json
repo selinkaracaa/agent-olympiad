@@ -1,0 +1,22 @@
+{
+  "rubric_id": "numerical_sheet_reference_40_v1",
+  "title": "Numerical team sheet graded against official solutions",
+  "total_points": 40,
+  "criteria": [
+    {
+      "id": "answers",
+      "name": "Answer correctness",
+      "max_score": 32,
+      "observable": true,
+      "description": "Final answers match official solutions (equivalent forms allowed)."
+    },
+    {
+      "id": "completeness",
+      "name": "Completeness",
+      "max_score": 8,
+      "observable": true,
+      "description": "All required problems have attempted final answers."
+    }
+  ],
+  "not_observable_from_deck": []
+}

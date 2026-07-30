@@ -330,15 +330,10 @@ def load_benchmarks(benchmark_path, olympiad_id):
             data = json.load(f)
         return data if isinstance(data, list) else [data]
 
-    default = os.path.join(REPO_ROOT, "data", "benchmarks", "ieo_business_case", "benchmark.json")
-    if os.path.exists(default):
-        with open(default) as f:
-            data = json.load(f)
-        return data if isinstance(data, list) else [data]
-
-    with open(os.path.join(RESULTS_DIR, "legacy", "ieo_benchmark.json")) as f:
-        all_problems = json.load(f)
-    return [p for p in all_problems if p.get("task_type") == "business_case"]
+    raise ValueError(
+        "Provide --olympiad <id> or --benchmark <path>. "
+        "(Solo IEO open-question defaults were removed.)"
+    )
 
 
 def ready_problems(problems, limit, year, years, with_gold):

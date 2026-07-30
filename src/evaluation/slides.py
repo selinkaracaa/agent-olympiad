@@ -3,14 +3,18 @@
 from __future__ import annotations
 
 import json
-from dataclasses import dataclass
-from typing import Protocol
+from dataclasses import dataclass, field
+from pathlib import Path
+from typing import Literal, Protocol
 
 from artifacts.assets import Asset
+from artifacts.pdf_ingest import parse_pdf
 from artifacts.slides import NormalizedSubmission
 from llm import LLMAttachment, LLMRequest, RequestFn
 
 from .models import EvaluationError, EvaluationResult, Rubric, parse_evaluation_payload
+
+MediaAttach = Literal["pdf", "images"]
 
 
 class Evaluator(Protocol):
@@ -27,6 +31,9 @@ class SlideDeckEvaluator:
     evaluator_version: str = "1.0.0"
     prompt_version: str = "slide_deck_pdf_v1"
     task_label: str = "presentation task"
+    media: MediaAttach = "pdf"
+    image_work_dir: Path | None = None
+    _image_attachments: list[LLMAttachment] = field(default_factory=list, init=False, repr=False)
 
     def _system_prompt(self) -> str:
         return (
@@ -85,34 +92,74 @@ REQUIRED JSON SHAPE:
 {json.dumps(schema, indent=2)}
 """
 
+    def _attachments(self) -> tuple[LLMAttachment, ...]:
+        if self.media == "pdf":
+            return (
+                LLMAttachment(
+                    path=self.task_asset.path,
+                    mime_type=self.task_asset.mime_type,
+                    role=self.task_asset.role,
+                    page_start=self.task_asset.page_start,
+                    page_end=self.task_asset.page_end,
+                ),
+                LLMAttachment(
+                    path=self.submission.pdf_path,
+                    mime_type="application/pdf",
+                    role="judge_only",
+                ),
+            )
+
+        work = Path(self.image_work_dir or (self.submission.pdf_path.parent / "judge_pages"))
+        task_pages = parse_pdf(
+            self.task_asset.path,
+            work / "task",
+            media="images",
+            page_start=self.task_asset.page_start,
+            page_end=self.task_asset.page_end,
+            stem="task",
+        )
+        deck_pages = parse_pdf(
+            self.submission.pdf_path,
+            work / "deck",
+            media="images",
+            stem="deck",
+        )
+        attachments: list[LLMAttachment] = []
+        for image in task_pages.page_images:
+            attachments.append(
+                LLMAttachment(path=image.path, mime_type=image.mime_type, role="agent_visible")
+            )
+        for image in deck_pages.page_images:
+            attachments.append(
+                LLMAttachment(path=image.path, mime_type=image.mime_type, role="judge_only")
+            )
+        self._image_attachments = attachments
+        self.prompt_version = "slide_deck_images_v1"
+        return tuple(attachments)
+
     def evaluate(self) -> EvaluationResult:
         if not self.submission.validation.valid:
             raise EvaluationError(
                 "Submission failed deterministic validation: "
                 + "; ".join(self.submission.validation.errors)
             )
+        attachments = self._attachments()
+        user_prompt = self._user_prompt()
+        if self.media == "images":
+            user_prompt = (
+                "Page images are attached in order: first the official task pages, "
+                "then the team's slide pages.\n\n" + user_prompt
+            )
         response = self.request_fn(
             LLMRequest(
                 system_prompt=self._system_prompt(),
-                user_prompt=self._user_prompt(),
-                attachments=(
-                    LLMAttachment(
-                        path=self.task_asset.path,
-                        mime_type=self.task_asset.mime_type,
-                        role=self.task_asset.role,
-                        page_start=self.task_asset.page_start,
-                        page_end=self.task_asset.page_end,
-                    ),
-                    LLMAttachment(
-                        path=self.submission.pdf_path,
-                        mime_type="application/pdf",
-                        role="judge_only",
-                    ),
-                ),
+                user_prompt=user_prompt,
+                attachments=attachments,
                 purpose="evaluation",
                 metadata={
                     "evaluator_id": self.evaluator_id,
                     "rubric_id": self.rubric.rubric_id,
+                    "media": self.media,
                 },
             )
         )

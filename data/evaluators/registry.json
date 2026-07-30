@@ -1,19 +1,41 @@
 {
-  "version": 1,
+  "version": 3,
+  "notes": "Every benchmark problem should carry evaluation.evaluator_id after running collectors/enrich_evaluation_metadata.py. Strategies: gold, llm_judge, or deferred.",
   "evaluators": [
+    {
+      "id": "gold_answer_v1",
+      "task_types": ["team_contest", "numerical_sheet"],
+      "submission_mime_types": ["text/plain"],
+      "strategy": "official_gold_multipart",
+      "status": "mvp",
+      "requires": ["gold_label.parts or gold_label.answers"]
+    },
     {
       "id": "slide_deck_v1",
       "task_types": ["business_case", "research_presentation", "case_presentation"],
       "submission_mime_types": ["text/html", "application/pdf"],
       "strategy": "deterministic_artifact_checks_plus_multimodal_rubric",
-      "status": "mvp"
+      "status": "mvp",
+      "media": ["pdf", "images"]
     },
     {
-      "id": "gold_answer_v1",
-      "task_types": ["team_contest", "team_power"],
-      "submission_mime_types": ["text/plain"],
-      "strategy": "official_gold",
-      "status": "existing_needs_multipart_generalization"
+      "id": "rubric_llm_v1",
+      "task_types": [
+        "essay",
+        "report",
+        "memorial",
+        "proof_packet",
+        "team_power",
+        "collaborative_writing_discussion",
+        "moot_court",
+        "team_practical",
+        "team_contest",
+        "worked_answers"
+      ],
+      "submission_mime_types": ["application/pdf", "text/plain", "text/html"],
+      "strategy": "structured_rubric_llm_judge",
+      "status": "mvp",
+      "notes": "Default path for open-ended contests; uses task text/images + optional official reference."
     },
     {
       "id": "programming_judge",
@@ -24,17 +46,19 @@
     },
     {
       "id": "physical_lab_judge",
-      "task_types": ["team_practical"],
+      "task_types": [],
       "submission_mime_types": ["application/pdf"],
       "strategy": "instrument_observations_plus_report_rubric",
-      "status": "deferred_missing_physical_observations"
+      "status": "deferred_missing_physical_observations",
+      "notes": "team_practical uses rubric_llm_v1 report proxy until instruments exist."
     },
     {
       "id": "oral_performance_judge",
-      "task_types": ["oral_presentation", "moot_court"],
+      "task_types": ["oral_presentation"],
       "submission_mime_types": ["video/mp4", "audio/mpeg"],
       "strategy": "validated_audiovisual_or_human_protocol",
-      "status": "deferred"
+      "status": "deferred",
+      "notes": "moot_court memorials use rubric_llm_v1; oral remains deferred."
     }
   ]
 }

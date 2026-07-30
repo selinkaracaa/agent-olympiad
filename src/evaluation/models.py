@@ -107,6 +107,32 @@ class EvaluationResult:
             )
 
 
+def scale_rubric(rubric: Rubric, total_points: float) -> Rubric:
+    """Proportionally rescale criterion maxima to a target total."""
+    if abs(rubric.total_points - total_points) < 1e-6:
+        return rubric
+    if rubric.total_points <= 0:
+        raise EvaluationError("Cannot scale a zero-point rubric.")
+    factor = total_points / rubric.total_points
+    criteria = tuple(
+        Criterion(
+            id=item.id,
+            name=item.name,
+            max_score=item.max_score * factor,
+            description=item.description,
+            observable=item.observable,
+        )
+        for item in rubric.criteria
+    )
+    return Rubric(
+        rubric_id=f"{rubric.rubric_id}_scaled_{total_points:g}",
+        title=rubric.title,
+        total_points=total_points,
+        criteria=criteria,
+        not_observable_from_deck=rubric.not_observable_from_deck,
+    )
+
+
 def load_rubric(path: str | Path) -> Rubric:
     with Path(path).open(encoding="utf-8") as source:
         raw = json.load(source)

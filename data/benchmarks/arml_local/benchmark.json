@@ -3,108 +3,725 @@
     "problem_id": "arml_local_2009",
     "competition": "ARML Local",
     "year": 2009,
-    "topic": "Team Round \u2014 2009",
+    "topic": "Team Round — 2009",
     "task_type": "team_contest",
     "team_size": 6,
     "source_url": "https://www.arml.com/ARML/arml_2019/public_contest_files/2009_2014_book/ARML_2009_2014.pdf",
     "source_file": "data/raw/arml_local/ARML_2009_2014.pdf",
     "total_points": 40,
-    "problem_description": "Team Problems 1. Suppose that 3 + 2i is one root of a quadratic function f(x) =x2 +Ax +B, where A and B are real numbers. Compute the ordered pair ( A,B ). 2. If f(x) is a line of slope \u22123, compute the slope of the line f(f(f(x))) +f(f(x)) +f(x). 3. A six-sided die has these markings on its sides: $12, $12, $16, $16, $26, and $26. The following game is played. The die is rolled and the player wins whatever amount of money comes up. The player keeps rolling the die and winning money until a money amount comes up a second time, in which case the game ends. A sample game would be rolls of $16, $12, and $16, in which case the player wins $44. Compute the expected winnings by the player in this game. 4. If f (x) = logx (x + 2), compute 3f(3)+f(9). 5. In an equiangular hexagon ABCDEF , AB =BC = 3, CD = 8, and EF = 5. Compute the area of ABCDEF . 6. Compute the number of values of \u03b8 with 0\u2264\u03b8\u2264 2\u03c0 for which|sin\u03b8| +|cos\u03b8| = 4 3. 7. You are playing a game. Your opponent has distributed \ufb01ve red balls into \ufb01ve boxes ran- domly. All arrangements are equally likely; that is, the left-to-right placements [0 , 0, 5, 0, 0], [0, 2, 0, 3, 0], and [1, 1, 1, 1, 1] are equally likely. You place one blue ball into each box. The player with the most balls in a box wins the box (neither player wins a box with the same number of balls of each color). Whoever wins the most boxes wins the game. Compute the probability you win the game. 8. When (x +y +z)2009 is expanded and like terms are grouped, there are k terms with coe\ufb03- cients that are not multiples of \ufb01ve. Compute k. 9. On equilateral triangle ABC, points D and E are on sides AC and BC such that AD = BE = 1. BD and AE meet at F . Given AB = 3, compute the area of triangle ADF . 262\n\nTeam Problems 263 10. To solve a KenKen puzzle, you \ufb01ll in an n\u00d7n grid with the digits 1,...,n according to the following two rules: 1. Each row and column contains exactly one of each digit. 2. Each bold-outlined group of cells is a cage contain- ing digits which achieve the speci\ufb01ed result using the speci\ufb01ed mathematical operation: addition (+), subtraction (-), multiplication ( \u00d7), and division (\u00f7) on the digits in some order. Digits may repeat inside a cage. A solved 3\u00d73 KenKen appears to the right. Below is a 5\u00d75 KenKen puzzle. On your answer sheet, enter the digits in the starred squares in the correctly solved KenKen puzzle, in order from left to right . In the example, you would enter 1, 2, 3. Digits may appear more than once in the starred squares.",
+    "problem_description": "Team Problems 1. Suppose that 3 + 2i is one root of a quadratic function f(x) =x2 +Ax +B, where A and B are real numbers. Compute the ordered pair ( A,B ). 2. If f(x) is a line of slope −3, compute the slope of the line f(f(f(x))) +f(f(x)) +f(x). 3. A six-sided die has these markings on its sides: $12, $12, $16, $16, $26, and $26. The following game is played. The die is rolled and the player wins whatever amount of money comes up. The player keeps rolling the die and winning money until a money amount comes up a second time, in which case the game ends. A sample game would be rolls of $16, $12, and $16, in which case the player wins $44. Compute the expected winnings by the player in this game. 4. If f (x) = logx (x + 2), compute 3f(3)+f(9). 5. In an equiangular hexagon ABCDEF , AB =BC = 3, CD = 8, and EF = 5. Compute the area of ABCDEF . 6. Compute the number of values of θ with 0≤θ≤ 2π for which|sinθ| +|cosθ| = 4 3. 7. You are playing a game. Your opponent has distributed ﬁve red balls into ﬁve boxes ran- domly. All arrangements are equally likely; that is, the left-to-right placements [0 , 0, 5, 0, 0], [0, 2, 0, 3, 0], and [1, 1, 1, 1, 1] are equally likely. You place one blue ball into each box. The player with the most balls in a box wins the box (neither player wins a box with the same number of balls of each color). Whoever wins the most boxes wins the game. Compute the probability you win the game. 8. When (x +y +z)2009 is expanded and like terms are grouped, there are k terms with coeﬃ- cients that are not multiples of ﬁve. Compute k. 9. On equilateral triangle ABC, points D and E are on sides AC and BC such that AD = BE = 1. BD and AE meet at F . Given AB = 3, compute the area of triangle ADF . 262\n\nTeam Problems 263 10. To solve a KenKen puzzle, you ﬁll in an n×n grid with the digits 1,...,n according to the following two rules: 1. Each row and column contains exactly one of each digit. 2. Each bold-outlined group of cells is a cage contain- ing digits which achieve the speciﬁed result using the speciﬁed mathematical operation: addition (+), subtraction (-), multiplication ( ×), and division (÷) on the digits in some order. Digits may repeat inside a cage. A solved 3×3 KenKen appears to the right. Below is a 5×5 KenKen puzzle. On your answer sheet, enter the digits in the starred squares in the correctly solved KenKen puzzle, in order from left to right . In the example, you would enter 1, 2, 3. Digits may appear more than once in the starred squares.",
     "gold_label": {
-      "expected_answer": "Team Solutions 1. The other root of this quadratic equation is 3 \u2212 2i. A is\u22121 times the sum of the roots (6), B is the product of the roots (13), so the ordered pair is ( \u22126, 13) . 2. As the line is unspeci\ufb01ed, let f(x) = \u22123x. f(f(x)) = f(\u22123x) = \u22123 (\u22123x) = 9 x and f(f(f(x))) = f(9x) = \u22123(9x) = \u221227x. The sum of these three functions is \u221221x, so the slope is \u221221 . 3. The expected amount of money earned per throw is $18 (the average of the values on the faces), so the problem reduces to determining the expected number of throws. The game will end in 2 to 4 throws, with 2 throws occurring 1/3 of the time, 3 throws occurring 4/9 of the time (the probability the second throw is di\ufb00erent than the \ufb01rst is 2/3, the probability the third throw is the same as either the \ufb01rst or second is 2/3), and 4 throws is 1\u22121/3\u22124/9 = 2/9. Thus, the expected number of throws is 2\u00d7(1/3)+3\u00d7(4/9)+4\u00d7(2/9) = 26/9, so the expected winnings is (26/9)\u00d7 $18 = $52 . 4. 3f(3)+f(9) = 3log3 5+log9 11 = 3log3 5\u00d7 3log9 11 = 5\u00d7 ( 91/2)log9 11 = 5\u00d7 ( 9log9 11)1/2 = 5 \u221a 11 . 5. Extend the sides AB, CD, and EF to obtain an equilateral triangle XYZ as shown. If we set DE = u and AF = v, then we have 3 + 3 + v = 3 + 8 +u = u + 5 +v, from which we conclude that u = 1 and v = 6. By subtraction of areas, we get: [ABCDEF ] = [XYZ ]\u2212 [AFX ]\u2212 [BYC ]\u2212 [DZE ] = \u221a 3 4 ( 122\u2212 62\u2212 32\u2212 12) = 49 \u221a 3 2 . 264\n\n2009 ARML Local Team Solutions 265 6. Points on the unit circle have coordinates (cos \u03b8, sin\u03b8) for some value of \u03b8, 0\u2264 \u03b8\u2264 2\u03c0. So, we can view these points on the plane. |x| +|y| =k describes a square with corners at (\u00b1k, 0) and (0,\u00b1k). Each edge of this square intersects the unit circle twice, provided 1 < k < \u221a 2, so there are 8 points of intersection. 7. There are (5+5\u22121 5\u22121 ) = 126 arrangements of the red balls, all equally likely. You win if and only if your opponent puts three or more red balls in any single box. For example: [3,1,1,0,0] means that your opponent wins the \ufb01rst box and you win the last two. There are \ufb01ve arrangements with \ufb01ve balls in one box, twenty arrangements with four in one box and a single ball in the other, and \ufb01fty arrangements with three in one box, and either two in one other box or a single ball in two boxes. The probability of winning is 50+20+5 126 = 75 126 = 25 42 . 8. The coe\ufb03cient of the term xaybzc is 2009! a!b!c!, where we assume a +b +c = 2009. The number of powers of \ufb01ve in the numerator is \u230a 2009 5 \u230b + \u230a 2009 52 \u230b + \u230a 2009 53 \u230b + \u230a 2009 54 \u230b = 401 + 80 + 16 + 3. In order for this to equal the number of powers of \ufb01ve in the denominator, we need \u230a a 5k \u230b + \u230a b 5k \u230b +\u230a c 5k \u230b = \u230a 2009 5k \u230b for all k. Note that the \ufb02oor function is sub-additive, so we will always have LHS\u2264RHS . Noting that 2009 10 = 310145, we \ufb01rst distribute the three powers of 5 4 among a, b, and c. There are (3+3\u22121 3\u22121 ) = 10 ways to place them. After doing this, we have placed 15 of the 16 powers of 53, so we only get to distribute one more, and there are (1+3\u22121 3\u22121 ) = 3 places for it to go. After this, all 80 powers of 5 2 have been taken care of, and we have 1 leftover power of 5 to place (3 places for it to go as well). After this, we have coe\ufb03cients summing to 2005, so we can place the remaining 4 powers anywhere: there are (4+3\u22121 3\u22121 ) = 15 places for these. Overall, there are 10\u00d73\u00d71\u00d73\u00d715 = 1350 terms whose coe\ufb03cients are not multiples of 5.\n\n266 2009 ARML Local Team Solutions 9. The area equals AD\u00b7AF\u00b7 sin \u2220DAF 2 = AF\u00b7 sin \u2220CAE 2 . Dropping perpendiculars from E and F to AB at points K and L we get BL = 1 2 and AF AE = AK AL = 3/2 5/2 = 3 5. The area of triangle ADF is: 3 10\u00b7AE\u00b7 sin \u2220CAE = 3 10\u00b7CE\u00b7 sin \u2220ACE = 3 10\u00b7 2\u00b7 \u221a 3 2 = 3 \u221a 3 10 using the Law of Sines on\u25b3ACE. 10. The answer is 2 , 1, 4, 2, 2 , and the solved puzzle is shown below. There are many ways to get to the \ufb01nal solution. The key thing to note is the unique arrangements of digits in the L-shaped 75\u00d7, 16\u00d7, and 2\u00d7 cages immediately give you the lower half of the puzzle, since the 1\u2212 cage in the lower right corner is uniquely determined by the other digits in the L-shaped cages.",
-      "grading_rubric": "ARML Local Team Round \u2014 numerical answers, 4 points each.",
-      "human_baseline": null
+      "expected_answer": "Team Solutions 1. The other root of this quadratic equation is 3 − 2i. A is−1 times the sum of the roots (6), B is the product of the roots (13), so the ordered pair is ( −6, 13) . 2. As the line is unspeciﬁed, let f(x) = −3x. f(f(x)) = f(−3x) = −3 (−3x) = 9 x and f(f(f(x))) = f(9x) = −3(9x) = −27x. The sum of these three functions is −21x, so the slope is −21 . 3. The expected amount of money earned per throw is $18 (the average of the values on the faces), so the problem reduces to determining the expected number of throws. The game will end in 2 to 4 throws, with 2 throws occurring 1/3 of the time, 3 throws occurring 4/9 of the time (the probability the second throw is diﬀerent than the ﬁrst is 2/3, the probability the third throw is the same as either the ﬁrst or second is 2/3), and 4 throws is 1−1/3−4/9 = 2/9. Thus, the expected number of throws is 2×(1/3)+3×(4/9)+4×(2/9) = 26/9, so the expected winnings is (26/9)× $18 = $52 . 4. 3f(3)+f(9) = 3log3 5+log9 11 = 3log3 5× 3log9 11 = 5× ( 91/2)log9 11 = 5× ( 9log9 11)1/2 = 5 √ 11 . 5. Extend the sides AB, CD, and EF to obtain an equilateral triangle XYZ as shown. If we set DE = u and AF = v, then we have 3 + 3 + v = 3 + 8 +u = u + 5 +v, from which we conclude that u = 1 and v = 6. By subtraction of areas, we get: [ABCDEF ] = [XYZ ]− [AFX ]− [BYC ]− [DZE ] = √ 3 4 ( 122− 62− 32− 12) = 49 √ 3 2 . 264\n\n2009 ARML Local Team Solutions 265 6. Points on the unit circle have coordinates (cos θ, sinθ) for some value of θ, 0≤ θ≤ 2π. So, we can view these points on the plane. |x| +|y| =k describes a square with corners at (±k, 0) and (0,±k). Each edge of this square intersects the unit circle twice, provided 1 < k < √ 2, so there are 8 points of intersection. 7. There are (5+5−1 5−1 ) = 126 arrangements of the red balls, all equally likely. You win if and only if your opponent puts three or more red balls in any single box. For example: [3,1,1,0,0] means that your opponent wins the ﬁrst box and you win the last two. There are ﬁve arrangements with ﬁve balls in one box, twenty arrangements with four in one box and a single ball in the other, and ﬁfty arrangements with three in one box, and either two in one other box or a single ball in two boxes. The probability of winning is 50+20+5 126 = 75 126 = 25 42 . 8. The coeﬃcient of the term xaybzc is 2009! a!b!c!, where we assume a +b +c = 2009. The number of powers of ﬁve in the numerator is ⌊ 2009 5 ⌋ + ⌊ 2009 52 ⌋ + ⌊ 2009 53 ⌋ + ⌊ 2009 54 ⌋ = 401 + 80 + 16 + 3. In order for this to equal the number of powers of ﬁve in the denominator, we need ⌊ a 5k ⌋ + ⌊ b 5k ⌋ +⌊ c 5k ⌋ = ⌊ 2009 5k ⌋ for all k. Note that the ﬂoor function is sub-additive, so we will always have LHS≤RHS . Noting that 2009 10 = 310145, we ﬁrst distribute the three powers of 5 4 among a, b, and c. There are (3+3−1 3−1 ) = 10 ways to place them. After doing this, we have placed 15 of the 16 powers of 53, so we only get to distribute one more, and there are (1+3−1 3−1 ) = 3 places for it to go. After this, all 80 powers of 5 2 have been taken care of, and we have 1 leftover power of 5 to place (3 places for it to go as well). After this, we have coeﬃcients summing to 2005, so we can place the remaining 4 powers anywhere: there are (4+3−1 3−1 ) = 15 places for these. Overall, there are 10×3×1×3×15 = 1350 terms whose coeﬃcients are not multiples of 5.\n\n266 2009 ARML Local Team Solutions 9. The area equals AD·AF· sin ∠DAF 2 = AF· sin ∠CAE 2 . Dropping perpendiculars from E and F to AB at points K and L we get BL = 1 2 and AF AE = AK AL = 3/2 5/2 = 3 5. The area of triangle ADF is: 3 10·AE· sin ∠CAE = 3 10·CE· sin ∠ACE = 3 10· 2· √ 3 2 = 3 √ 3 10 using the Law of Sines on△ACE. 10. The answer is 2 , 1, 4, 2, 2 , and the solved puzzle is shown below. There are many ways to get to the ﬁnal solution. The key thing to note is the unique arrangements of digits in the L-shaped 75×, 16×, and 2× cages immediately give you the lower half of the puzzle, since the 1− cage in the lower right corner is uniquely determined by the other digits in the L-shaped cages.",
+      "grading_rubric": "ARML Local Team Round — numerical answers, 4 points each.",
+      "human_baseline": null,
+      "parts": [
+        {
+          "id": "1",
+          "expected": "(-6, 13)",
+          "points": 4.444444444444445,
+          "reference": "Team Solutions 1. The other root of this quadratic equation is 3 − 2i. A is−1 times the sum of the roots (6), B is the product of the roots (13), so the ordered pair is ( −6, 13) . 2. As the line is unspeciﬁed, let f(x) = −3x. f(f(x)) = f(−3x) = −3 (−3x) = 9 x and f(f(f(x))) = f(9x) = −3(9x) = −27x. The sum of these three functions is −21x, so the slope is −21 . 3. The expected amount of money earned per throw is $18 (the average of the values on the faces), so the problem reduces to determining the expected number of throws. The game will end in 2 to 4 throws, with 2 throws occurring 1/3 of the time, 3 throws occurring 4/9 of the time (the probability the second throw is diﬀerent than the ﬁrst is 2/3, the probability the third throw is the same as either the ﬁrst or second is 2/3), and 4 throws is 1−1/3−4/9 = 2/9. Thus, the expected number of throws is 2×(1/3)+3×(4/9)+4×(2/9) = 26/9, so the expected winnings is (26/9)× $18 = $52 . 4. 3f(3)+f(9) = 3log3 5+log9 11 = 3log3 5× 3log9 11 = 5× ( 91/2)log9 11 = 5× ( 9log9 11)1/2 = 5 √ 11 . 5. Extend the sides AB, CD, and EF to obtain an equilateral triangle XYZ as shown. If we set DE = u and AF = v, then we have 3 + 3 + v = 3 + 8 +u = u + 5 +v, from which we conclude that u = 1 and v = 6. By subtraction of areas, we get: [ABCDEF ] = [XYZ ]− [AFX ]− [BYC ]− [DZE ] = √ 3 4 ( 122− 62− 32− 12) = 49 √ 3 2 . 264\n\n2009 ARML Local Team Solutions 265 6. Points on the unit circle have coordinates (cos θ, sinθ) for some value of θ, 0≤ θ≤ 2π. So, we can view these points on the plane. |x| +|y| =k describes a square with corners at (±k, 0) and (0,±k). Each edge of this square intersects the unit circle twice, provided 1 < k < √ 2, so there are 8 points of intersection. 7. There are (5+5−1 5−1 ) = 126 arrangements of the red balls, all equally likely. You win if and only if your opponent puts three or more red balls in any single box. For example: [3,1,1,0,0] means that your opponent wins the ﬁrst box and you win the last two. There are ﬁve arrangements with ﬁve balls in one box, twenty arrangements with four in one box and a single ball in the other, and ﬁfty arrangements with three in one box, and either two in one other box or a single ball in two boxes. The probability of winning is 50+20+5 126 = 75 126 = 25 42 . 8. The coeﬃcient of the term xaybzc is 2009! a!b!c!, where we assume a +b +c = 2009. The number of powers of ﬁve in the numerator is ⌊ 2009 5 ⌋ + ⌊ 2009 52 ⌋ + ⌊ 2009 53 ⌋ + ⌊ 2009 54 ⌋ = 401 + 80 + 16 + 3. In order for this to equal the number of powers of ﬁve in the denominator, we need ⌊ a 5k ⌋ + ⌊ b 5k ⌋ +⌊ c 5k ⌋ = ⌊ 2009 5k ⌋ for all k. Note that the ﬂoor function is sub-additive, so we will always have LHS≤RHS . Noting that 2009 10 = 310145, we ﬁrst distribute the three powers of 5 4 among a, b, and c. There are (3+3−1 3−1 ) = 10 ways to place them. After doing this, we have placed 15 of the 16 powers of 53, so we only get to distribute one more, and there are (1+3−1 3−1 ) = 3 places for it to go. After this, all 80 powers of 5 2 have been taken care of, and we have 1 leftover power of 5 to place (3 places for it to go as well). After this, we have coeﬃcients summing to 2005, so we can place the remaining 4 powers anywhere: there are (4+3−1 3−1 ) = 15 places for these. Overall, there are 10×3×1×3×15 = 1350 terms whose coeﬃcients are not multiples of 5.\n\n266 2009 ARML Local Team Solutions 9. The area equals AD·AF· sin ∠DAF 2 = AF· sin ∠CAE 2 . Dropping perpendiculars from E and F to AB at points K and L we get BL = 1 2 and AF AE = AK AL = 3/2 5/2 = 3 5. The area of triangle ADF is: 3 10·AE· sin ∠CAE = 3 10·CE· sin ∠ACE = 3 10· 2· √ 3 2 = 3 √ 3 10 using the Law of Sines on△ACE. 10. The answer is 2 , 1, 4, 2, 2 , and the solved puzzle is shown below. There are many ways to get to the ﬁnal solution. The key thing to note is the unique arrangements of digits in the L-shaped 75×, 16×, and 2× cages immediately give you the lower half of the puzzle, since the 1− cage in the lower right corner is uniquely determined by the other digits in the L-shaped cages.",
+          "match_mode": "normalized",
+          "aliases": [
+            "(-6,13)",
+            "(-6, 13)",
+            "(-6,13)"
+          ]
+        },
+        {
+          "id": "2",
+          "expected": "-21",
+          "points": 4.444444444444445,
+          "reference": "Official short answer: -21",
+          "match_mode": "normalized",
+          "aliases": [
+            "slope -21",
+            "−21"
+          ]
+        },
+        {
+          "id": "3",
+          "expected": "52",
+          "points": 4.444444444444445,
+          "reference": "Official short answer: 52",
+          "match_mode": "normalized",
+          "aliases": [
+            "$52",
+            "52 dollars"
+          ]
+        },
+        {
+          "id": "4",
+          "expected": "5√11",
+          "points": 4.444444444444445,
+          "reference": "Official short answer: 5√11",
+          "match_mode": "normalized",
+          "aliases": [
+            "5\\sqrt{11}",
+            "5sqrt(11)"
+          ]
+        },
+        {
+          "id": "5",
+          "expected": "49√3/2",
+          "points": 4.444444444444445,
+          "reference": "Official short answer: 49√3/2",
+          "match_mode": "normalized",
+          "aliases": [
+            "\\frac{49\\sqrt{3}}{2}",
+            "49\\sqrt{3}/2"
+          ]
+        },
+        {
+          "id": "6",
+          "expected": "8",
+          "points": 4.444444444444445,
+          "reference": "Official short answer: 8",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "7",
+          "expected": "25/42",
+          "points": 4.444444444444445,
+          "reference": "Official short answer: 25/42",
+          "match_mode": "normalized",
+          "aliases": [
+            "\\frac{25}{42}",
+            "75/126"
+          ]
+        },
+        {
+          "id": "8",
+          "expected": "1350",
+          "points": 4.444444444444445,
+          "reference": "Official short answer: 1350",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "9",
+          "expected": "3√3/10",
+          "points": 4.444444444444445,
+          "reference": "Official short answer: 3√3/10",
+          "match_mode": "normalized",
+          "aliases": [
+            "\\frac{3\\sqrt{3}}{10}",
+            "3\\sqrt{3}/10"
+          ]
+        },
+        {
+          "id": "10",
+          "expected": "",
+          "points": 0.0,
+          "reference": "",
+          "match_mode": "reference_llm",
+          "aliases": []
+        }
+      ]
     },
-    "status": "collected"
+    "status": "collected",
+    "competition_id": "arml_local",
+    "evaluation": {
+      "evaluator_id": "gold_answer_v1",
+      "status": "ready",
+      "rubric_path": "data/rubrics/numerical_sheet_reference_40_v1.json",
+      "fallback_evaluator_id": "rubric_llm_v1",
+      "deliverable": "answer_sheet",
+      "short_answer_source": "data/rubrics/arml_local_short_answers.json"
+    }
   },
   {
     "problem_id": "arml_local_2010",
     "competition": "ARML Local",
     "year": 2010,
-    "topic": "Team Round \u2014 2010",
+    "topic": "Team Round — 2010",
     "task_type": "team_contest",
     "team_size": 6,
     "source_url": "https://www.arml.com/ARML/arml_2019/public_contest_files/2009_2014_book/ARML_2009_2014.pdf",
     "source_file": "data/raw/arml_local/ARML_2009_2014.pdf",
     "total_points": 40,
-    "problem_description": "Team Problems 1. Let S be the set of positive factors of 2010. Compute the median of S. 2. Point P is located in the interior of rectangle ABCD and PA = 56, PB = 25 and PC = 33. Compute PD . 3. At a meeting of the Nuclear Powerplant Workers of America, every person has 3, 4, 5, 6, or 7 \ufb01ngers on each hand, with the probability of having k \ufb01ngers on a hand being 22\u2212|5\u2212k| 10 . If the number of \ufb01ngers on a worker\u2019s left hand is independent of the number of \ufb01ngers on the worker\u2019s right hand, compute the probability that a NPWA member has at least 10 \ufb01ngers. 4. Given an unlimited set of identical 1 \u00d7 1, 1\u00d7 2, and 1\u00d7 3 tiles, compute the number of ways to cover a 1\u00d7 8 rectangle with the tiles without overlapping tiles and with all tiles entirely inside the rectangle. Rotations of a set of tiles are considered distinct (for examples, two 1\u00d73 tiles followed by a 1\u00d7 2 tile is a distinct tiling from a 1 \u00d7 2 tile followed by two 1\u00d7 3 tiles). 5. For two positive integers x and y, x2\u2212y2 = 240. Compute the (positive) di\ufb00erence between the largest and the smallest possible values of xy. 6. Walls are erected on a frictionless surface in the form of an equilateral triangle \u25b3ABC of side length 1. A tiny super bouncy ball is \ufb01red from vertex A at side BC. The ball bounces o\ufb00 of 9 walls before hitting a vertex of the triangle for the \ufb01rst time. Compute the total distance travelled by the ball upon arrival. 7. A hexagonal pyramid has a regular hexagon of side length 1 for a base, and its apex is located a distance 1 directly above the center of the hexagon. A sphere inscribed inside the pyramid touches every face of the pyramid. Compute the radius of the inscribed sphere. 8. The function f(x) = x4 + 3x3\u2212 4x2 x2 + 4x\u2212 4 is negative over two di\ufb00erent intervals of the real numbers. Compute the sum of the lengths of the two intervals. 9. The set of points S ={(x,y ) :|x| +|x\u2212y| +|x +y|\u2264 k} has area 10 in the xy-plane. Com- pute k. 10. A B C \u00d7 D E F E C D E C 4 6 B C In the multiplication problem above, A, B, C, D, E, and F are distinct, non-zero digits. Compute the six-digit number ABCDEF . 286",
+    "problem_description": "Team Problems 1. Let S be the set of positive factors of 2010. Compute the median of S. 2. Point P is located in the interior of rectangle ABCD and PA = 56, PB = 25 and PC = 33. Compute PD . 3. At a meeting of the Nuclear Powerplant Workers of America, every person has 3, 4, 5, 6, or 7 ﬁngers on each hand, with the probability of having k ﬁngers on a hand being 22−|5−k| 10 . If the number of ﬁngers on a worker’s left hand is independent of the number of ﬁngers on the worker’s right hand, compute the probability that a NPWA member has at least 10 ﬁngers. 4. Given an unlimited set of identical 1 × 1, 1× 2, and 1× 3 tiles, compute the number of ways to cover a 1× 8 rectangle with the tiles without overlapping tiles and with all tiles entirely inside the rectangle. Rotations of a set of tiles are considered distinct (for examples, two 1×3 tiles followed by a 1× 2 tile is a distinct tiling from a 1 × 2 tile followed by two 1× 3 tiles). 5. For two positive integers x and y, x2−y2 = 240. Compute the (positive) diﬀerence between the largest and the smallest possible values of xy. 6. Walls are erected on a frictionless surface in the form of an equilateral triangle △ABC of side length 1. A tiny super bouncy ball is ﬁred from vertex A at side BC. The ball bounces oﬀ of 9 walls before hitting a vertex of the triangle for the ﬁrst time. Compute the total distance travelled by the ball upon arrival. 7. A hexagonal pyramid has a regular hexagon of side length 1 for a base, and its apex is located a distance 1 directly above the center of the hexagon. A sphere inscribed inside the pyramid touches every face of the pyramid. Compute the radius of the inscribed sphere. 8. The function f(x) = x4 + 3x3− 4x2 x2 + 4x− 4 is negative over two diﬀerent intervals of the real numbers. Compute the sum of the lengths of the two intervals. 9. The set of points S ={(x,y ) :|x| +|x−y| +|x +y|≤ k} has area 10 in the xy-plane. Com- pute k. 10. A B C × D E F E C D E C 4 6 B C In the multiplication problem above, A, B, C, D, E, and F are distinct, non-zero digits. Compute the six-digit number ABCDEF . 286",
     "gold_label": {
-      "expected_answer": "Team Solutions 1. 2010 = 2\u00d7 3\u00d7 5\u00d7 67, so 2010 has 16 factors. Eight of them are going to be multiples of 67, eight are not. The smallest of the former is 67, the largest of the latter is 30. Their average is 97 /2 or 48.5. 2. In any rectangle, the sum of the squares of the distances from an interior point to opposite vertices is invariant, i.e., this sum is the same for both pairs of opposite vertices. Thus, PA 2 +PC 2 =PB 2 +PD 2 and we have 562 +33 2 = 252 +PD 2\u2192 3136+1089 = 625+ PD 2\u2192 PD 2 = 3600\u2192PD = 60 . Alternate Solution: Suppose the point P were located on the side AB. Then\u25b3PBC is a right triangle and, using the Pythagorean Theorem, BC 2 = 464. Now \u25b3PAD is also a right triangle. Therefore, PD 2 = 562 + 464 = 3600\u2192 PD = 60. This solution assumes that the solution is invariant for points P located in the interior of the rectangle OR on the rectangle. A nice topic for discussion! 3. The probability distribution on number of \ufb01ngers per hand is (0 .1, 0.2, 0.4, 0.2, 0.1). By sym- metry, the probability of having 10 + k \ufb01ngers is equal to the probability of having 10 \u2212k \ufb01ngers. The probability of having 10 \ufb01ngers is 0 .12 + 0.22 + 0.42 + 0.22 + 0.12 = 0.26. The probability of having greater than 10 \ufb01ngers is (1 \u2212 0.26)/2 = 0 .37, so the probability of having at least 10 \ufb01ngers is 0.26 + 0.37 = 0.63 . Note: We apologize to any nuclear powerplant workers o\ufb00ended by this question. Please don\u2019t come after us. After all, we can see you glowing from a mile away. 4. Let T (n) denote the number of ways a 1 \u00d7n rectangle can be tiled using these tiles. T (n) satis\ufb01es the recursion relation T (n) =T (n\u2212 1) +T (n\u2212 2) +T (n\u2212 3) for all positive n with the initial condition T (0) = 1, T (n) = 0 for n <0 (consider the size of the rightmost tile of any tiling). The \ufb01rst few values of T (n) for non-negative n are 1, 1, 2, 4, 7, 13, 24, 44, 81 . 5. We want the values of x and y to be alternately as close and as far apart as possible, i.e., maximize and minimize |x\u2212y|. Clearly, the maximum occurs when x = 240 and y = 1 (or vice versa). Factoring, 240 = 24\u00d7 3\u00d7 5 and x = 16 and y = 15. x2\u2212y2 = (x+y)(x\u2212y)\u2192 { x +y = 240 x\u2212y = 1 or { x +y = 16 x\u2212y = 15 , but each of these systems pro- duce non-integer values ofx andy. Clearly, for integer values ofx andy, the parity ofx+y and x\u2212y must be the same. Revising our choices forx andy { x +y = 120 x\u2212y = 2 or { x +y = 20 x\u2212y = 12 \u2192 (x,y ) = (61, 59) or (16, 4). 61(59)\u2212 16(4) = (60 + 1)(60\u2212 1)\u2212 64 = 3600\u2212 1\u2212 64 = 3535 . 6. Since angles are preserved upon hitting walls, we can use a series of re\ufb02ections to express the ball\u2019s path as a straight line through a triangular tiling of the plane. In Figure 1 below, 287\n\n288 Team Solutions \u25b3ABC is at the top and the triangles below contain the number of walls the ball must pass through (bounce o\ufb00 of, in the original triangle) in order to enter: Of the vertices in the \u20189-bounce\u2019 row of triangles, all but two of them are impossible to reach (see the dotted lines in Figure 2), since they correspond to paths that pass through at least one corner of\u25b3ABC previously. The two vertices that are reachable, P andQ, are both equidistant from A (the solid lines in Figure 2); hence the total distance travelled is AP =AQ = \u221a( 3 \u221a 3 )2 + 22 = \u221a 31 . A picture of the ball\u2019s path (in the direction towards P ) is shown below. The path towards Q is its mirror image: 7. The volume of a pyramid is Bh 3 , where B is the area of the base and h is the height. The hexagon has area 6\u00d7 \u221a 3 4 , so the volume of the pyramid is \u221a 3 2 . We can also dissect the pyramid into 7 smaller pyramids whose bases are the 7 faces of the original pyramid, and whose apexes (apices?) are the center of the inscribed sphere. Since the height of each of these pyramids is r, the radius of the sphere, we have \u221a 3 2 = 1 3\u00d7r\u00d7 ( 6\u00d7 \u221a 3 4 + 6L ) , where L is the area of one of the 6 lateral faces of the pyramid. Each of these faces is an isosceles triangle with\n\nTeam Solutions 289 base 1 and leg \u221a 2. We then have a height of \u221a 7 2 , and so L = \u221a 7 4 . Solving for r we get r 3 ( 6\u00b7 \u221a 3 4 + 6\u00b7 \u221a 7 4 ) = \u221a 3 2 \u2192r = \u221a 3\u221a 3 + \u221a 7 = \u221a 21\u2212 3 4 . 8. f(x) = x4 + 3x3\u2212 4x2 x2 + 4x\u2212 4 = x2 (x + 4) (x\u2212 1)( x + (2\u2212 2 \u221a 2) )( x + ( 2 + 2 \u221a 2 )). f(x) has zeroes at 0, 1, and \u22124 and asymptotes at\u22122\u2212 2 \u221a 2 and\u22122 + 2 \u221a 2 (approximately\u22124.8 and 0.8). Testing the sign of a single point in the interval between two zeroes or asymptotes give you the sign of the function over the entire interval. The function is negative between \u22122\u2212 2 \u221a 2 and\u22124 as well as between\u22122 + 2 \u221a 2 and 1. The sum of the lengths of these intervals is ( 1\u2212 ( 2 \u221a 2\u2212 2 )) +( \u22124\u2212 ( \u22122 \u221a 2\u2212 2 )) = 1\u2212 2 \u221a 2 + 2\u2212 4 + 2 \u221a 2 + 2 = 1 . 9. Noting that the function f (x,y ) =|x| +|x\u2212y| +|x +y| is symmetric about both the x- and y-axis, it su\ufb03ces to compute value of k for which the area in the \ufb01rst quadrant is 5/2. When x\u2265y,|x| +|x\u2212y| +|x +y| =x +x\u2212y +x +y = 3x. When x\u2264y,|x| +|x\u2212y| +|x +y| = x +y\u2212x +x +y =x + 2y. For a \ufb01xed value of k, this function looks like the graphic below in the \ufb01rst quadrant. The area of the region is 1 2 (k 2 + k 3 ) k 3 = 5k2 36 = 5 2\u2192k = 3 \u221a 2 . 10. E\u00d7C and D\u00d7C both end in C, and the only non-zero C for which that is possible for two di\ufb00erent digits is 5. E and D must be odd, so by looking in the thousands column, we conclude that D is 3. From that same column we conclude that D\u00d7A =D, so A must be 1. 1B5\u00d7 3 = 3E5, and the only distinct non-zero B and odd E that hold are B = 2 and E = 7. 125\u00d7 7 =F 75, so F = 8. Therefore, ABCDEF = 125378 . The completed multiplication is given below. 1 2 5 \u00d7 3 7 8 7 5 3 7 5 4 6 2 5",
-      "grading_rubric": "ARML Local Team Round \u2014 numerical answers, 4 points each.",
-      "human_baseline": null
+      "expected_answer": "Team Solutions 1. 2010 = 2× 3× 5× 67, so 2010 has 16 factors. Eight of them are going to be multiples of 67, eight are not. The smallest of the former is 67, the largest of the latter is 30. Their average is 97 /2 or 48.5. 2. In any rectangle, the sum of the squares of the distances from an interior point to opposite vertices is invariant, i.e., this sum is the same for both pairs of opposite vertices. Thus, PA 2 +PC 2 =PB 2 +PD 2 and we have 562 +33 2 = 252 +PD 2→ 3136+1089 = 625+ PD 2→ PD 2 = 3600→PD = 60 . Alternate Solution: Suppose the point P were located on the side AB. Then△PBC is a right triangle and, using the Pythagorean Theorem, BC 2 = 464. Now △PAD is also a right triangle. Therefore, PD 2 = 562 + 464 = 3600→ PD = 60. This solution assumes that the solution is invariant for points P located in the interior of the rectangle OR on the rectangle. A nice topic for discussion! 3. The probability distribution on number of ﬁngers per hand is (0 .1, 0.2, 0.4, 0.2, 0.1). By sym- metry, the probability of having 10 + k ﬁngers is equal to the probability of having 10 −k ﬁngers. The probability of having 10 ﬁngers is 0 .12 + 0.22 + 0.42 + 0.22 + 0.12 = 0.26. The probability of having greater than 10 ﬁngers is (1 − 0.26)/2 = 0 .37, so the probability of having at least 10 ﬁngers is 0.26 + 0.37 = 0.63 . Note: We apologize to any nuclear powerplant workers oﬀended by this question. Please don’t come after us. After all, we can see you glowing from a mile away. 4. Let T (n) denote the number of ways a 1 ×n rectangle can be tiled using these tiles. T (n) satisﬁes the recursion relation T (n) =T (n− 1) +T (n− 2) +T (n− 3) for all positive n with the initial condition T (0) = 1, T (n) = 0 for n <0 (consider the size of the rightmost tile of any tiling). The ﬁrst few values of T (n) for non-negative n are 1, 1, 2, 4, 7, 13, 24, 44, 81 . 5. We want the values of x and y to be alternately as close and as far apart as possible, i.e., maximize and minimize |x−y|. Clearly, the maximum occurs when x = 240 and y = 1 (or vice versa). Factoring, 240 = 24× 3× 5 and x = 16 and y = 15. x2−y2 = (x+y)(x−y)→ { x +y = 240 x−y = 1 or { x +y = 16 x−y = 15 , but each of these systems pro- duce non-integer values ofx andy. Clearly, for integer values ofx andy, the parity ofx+y and x−y must be the same. Revising our choices forx andy { x +y = 120 x−y = 2 or { x +y = 20 x−y = 12 → (x,y ) = (61, 59) or (16, 4). 61(59)− 16(4) = (60 + 1)(60− 1)− 64 = 3600− 1− 64 = 3535 . 6. Since angles are preserved upon hitting walls, we can use a series of reﬂections to express the ball’s path as a straight line through a triangular tiling of the plane. In Figure 1 below, 287\n\n288 Team Solutions △ABC is at the top and the triangles below contain the number of walls the ball must pass through (bounce oﬀ of, in the original triangle) in order to enter: Of the vertices in the ‘9-bounce’ row of triangles, all but two of them are impossible to reach (see the dotted lines in Figure 2), since they correspond to paths that pass through at least one corner of△ABC previously. The two vertices that are reachable, P andQ, are both equidistant from A (the solid lines in Figure 2); hence the total distance travelled is AP =AQ = √( 3 √ 3 )2 + 22 = √ 31 . A picture of the ball’s path (in the direction towards P ) is shown below. The path towards Q is its mirror image: 7. The volume of a pyramid is Bh 3 , where B is the area of the base and h is the height. The hexagon has area 6× √ 3 4 , so the volume of the pyramid is √ 3 2 . We can also dissect the pyramid into 7 smaller pyramids whose bases are the 7 faces of the original pyramid, and whose apexes (apices?) are the center of the inscribed sphere. Since the height of each of these pyramids is r, the radius of the sphere, we have √ 3 2 = 1 3×r× ( 6× √ 3 4 + 6L ) , where L is the area of one of the 6 lateral faces of the pyramid. Each of these faces is an isosceles triangle with\n\nTeam Solutions 289 base 1 and leg √ 2. We then have a height of √ 7 2 , and so L = √ 7 4 . Solving for r we get r 3 ( 6· √ 3 4 + 6· √ 7 4 ) = √ 3 2 →r = √ 3√ 3 + √ 7 = √ 21− 3 4 . 8. f(x) = x4 + 3x3− 4x2 x2 + 4x− 4 = x2 (x + 4) (x− 1)( x + (2− 2 √ 2) )( x + ( 2 + 2 √ 2 )). f(x) has zeroes at 0, 1, and −4 and asymptotes at−2− 2 √ 2 and−2 + 2 √ 2 (approximately−4.8 and 0.8). Testing the sign of a single point in the interval between two zeroes or asymptotes give you the sign of the function over the entire interval. The function is negative between −2− 2 √ 2 and−4 as well as between−2 + 2 √ 2 and 1. The sum of the lengths of these intervals is ( 1− ( 2 √ 2− 2 )) +( −4− ( −2 √ 2− 2 )) = 1− 2 √ 2 + 2− 4 + 2 √ 2 + 2 = 1 . 9. Noting that the function f (x,y ) =|x| +|x−y| +|x +y| is symmetric about both the x- and y-axis, it suﬃces to compute value of k for which the area in the ﬁrst quadrant is 5/2. When x≥y,|x| +|x−y| +|x +y| =x +x−y +x +y = 3x. When x≤y,|x| +|x−y| +|x +y| = x +y−x +x +y =x + 2y. For a ﬁxed value of k, this function looks like the graphic below in the ﬁrst quadrant. The area of the region is 1 2 (k 2 + k 3 ) k 3 = 5k2 36 = 5 2→k = 3 √ 2 . 10. E×C and D×C both end in C, and the only non-zero C for which that is possible for two diﬀerent digits is 5. E and D must be odd, so by looking in the thousands column, we conclude that D is 3. From that same column we conclude that D×A =D, so A must be 1. 1B5× 3 = 3E5, and the only distinct non-zero B and odd E that hold are B = 2 and E = 7. 125× 7 =F 75, so F = 8. Therefore, ABCDEF = 125378 . The completed multiplication is given below. 1 2 5 × 3 7 8 7 5 3 7 5 4 6 2 5",
+      "grading_rubric": "ARML Local Team Round — numerical answers, 4 points each.",
+      "human_baseline": null,
+      "parts": [
+        {
+          "id": "1",
+          "expected": "48.5",
+          "points": 6.666666666666667,
+          "reference": "Team Solutions 1. 2010 = 2× 3× 5× 67, so 2010 has 16 factors. Eight of them are going to be multiples of 67, eight are not. The smallest of the former is 67, the largest of the latter is 30. Their average is 97 /2 or 48.5. 2. In any rectangle, the sum of the squares of the distances from an interior point to opposite vertices is invariant, i.e., this sum is the same for both pairs of opposite vertices. Thus, PA 2 +PC 2 =PB 2 +PD 2 and we have 562 +33 2 = 252 +PD 2→ 3136+1089 = 625+ PD 2→ PD 2 = 3600→PD = 60 . Alternate Solution: Suppose the point P were located on the side AB. Then△PBC is a right triangle and, using the Pythagorean Theorem, BC 2 = 464. Now △PAD is also a right triangle. Therefore, PD 2 = 562 + 464 = 3600→ PD = 60. This solution assumes that the solution is invariant for points P located in the interior of the rectangle OR on the rectangle. A nice topic for discussion! 3. The probability distribution on number of ﬁngers per hand is (0 .1, 0.2, 0.4, 0.2, 0.1). By sym- metry, the probability of having 10 + k ﬁngers is equal to the probability of having 10 −k ﬁngers. The probability of having 10 ﬁngers is 0 .12 + 0.22 + 0.42 + 0.22 + 0.12 = 0.26. The probability of having greater than 10 ﬁngers is (1 − 0.26)/2 = 0 .37, so the probability of having at least 10 ﬁngers is 0.26 + 0.37 = 0.63 . Note: We apologize to any nuclear powerplant workers oﬀended by this question. Please don’t come after us. After all, we can see you glowing from a mile away. 4. Let T (n) denote the number of ways a 1 ×n rectangle can be tiled using these tiles. T (n) satisﬁes the recursion relation T (n) =T (n− 1) +T (n− 2) +T (n− 3) for all positive n with the initial condition T (0) = 1, T (n) = 0 for n <0 (consider the size of the rightmost tile of any tiling). The ﬁrst few values of T (n) for non-negative n are 1, 1, 2, 4, 7, 13, 24, 44, 81 . 5. We want the values of x and y to be alternately as close and as far apart as possible, i.e., maximize and minimize |x−y|. Clearly, the maximum occurs when x = 240 and y = 1 (or vice versa). Factoring, 240 = 24× 3× 5 and x = 16 and y = 15. x2−y2 = (x+y)(x−y)→ { x +y = 240 x−y = 1 or { x +y = 16 x−y = 15 , but each of these systems pro- duce non-integer values ofx andy. Clearly, for integer values ofx andy, the parity ofx+y and x−y must be the same. Revising our choices forx andy { x +y = 120 x−y = 2 or { x +y = 20 x−y = 12 → (x,y ) = (61, 59) or (16, 4). 61(59)− 16(4) = (60 + 1)(60− 1)− 64 = 3600− 1− 64 = 3535 . 6. Since angles are preserved upon hitting walls, we can use a series of reﬂections to express the ball’s path as a straight line through a triangular tiling of the plane. In Figure 1 below, 287\n\n288 Team Solutions △ABC is at the top and the triangles below contain the number of walls the ball must pass through (bounce oﬀ of, in the original triangle) in order to enter: Of the vertices in the ‘9-bounce’ row of triangles, all but two of them are impossible to reach (see the dotted lines in Figure 2), since they correspond to paths that pass through at least one corner of△ABC previously. The two vertices that are reachable, P andQ, are both equidistant from A (the solid lines in Figure 2); hence the total distance travelled is AP =AQ = √( 3 √ 3 )2 + 22 = √ 31 . A picture of the ball’s path (in the direction towards P ) is shown below. The path towards Q is its mirror image: 7. The volume of a pyramid is Bh 3 , where B is the area of the base and h is the height. The hexagon has area 6× √ 3 4 , so the volume of the pyramid is √ 3 2 . We can also dissect the pyramid into 7 smaller pyramids whose bases are the 7 faces of the original pyramid, and whose apexes (apices?) are the center of the inscribed sphere. Since the height of each of these pyramids is r, the radius of the sphere, we have √ 3 2 = 1 3×r× ( 6× √ 3 4 + 6L ) , where L is the area of one of the 6 lateral faces of the pyramid. Each of these faces is an isosceles triangle with\n\nTeam Solutions 289 base 1 and leg √ 2. We then have a height of √ 7 2 , and so L = √ 7 4 . Solving for r we get r 3 ( 6· √ 3 4 + 6· √ 7 4 ) = √ 3 2 →r = √ 3√ 3 + √ 7 = √ 21− 3 4 . 8. f(x) = x4 + 3x3− 4x2 x2 + 4x− 4 = x2 (x + 4) (x− 1)( x + (2− 2 √ 2) )( x + ( 2 + 2 √ 2 )). f(x) has zeroes at 0, 1, and −4 and asymptotes at−2− 2 √ 2 and−2 + 2 √ 2 (approximately−4.8 and 0.8). Testing the sign of a single point in the interval between two zeroes or asymptotes give you the sign of the function over the entire interval. The function is negative between −2− 2 √ 2 and−4 as well as between−2 + 2 √ 2 and 1. The sum of the lengths of these intervals is ( 1− ( 2 √ 2− 2 )) +( −4− ( −2 √ 2− 2 )) = 1− 2 √ 2 + 2− 4 + 2 √ 2 + 2 = 1 . 9. Noting that the function f (x,y ) =|x| +|x−y| +|x +y| is symmetric about both the x- and y-axis, it suﬃces to compute value of k for which the area in the ﬁrst quadrant is 5/2. When x≥y,|x| +|x−y| +|x +y| =x +x−y +x +y = 3x. When x≤y,|x| +|x−y| +|x +y| = x +y−x +x +y =x + 2y. For a ﬁxed value of k, this function looks like the graphic below in the ﬁrst quadrant. The area of the region is 1 2 (k 2 + k 3 ) k 3 = 5k2 36 = 5 2→k = 3 √ 2 . 10. E×C and D×C both end in C, and the only non-zero C for which that is possible for two diﬀerent digits is 5. E and D must be odd, so by looking in the thousands column, we conclude that D is 3. From that same column we conclude that D×A =D, so A must be 1. 1B5× 3 = 3E5, and the only distinct non-zero B and odd E that hold are B = 2 and E = 7. 125× 7 =F 75, so F = 8. Therefore, ABCDEF = 125378 . The completed multiplication is given below. 1 2 5 × 3 7 8 7 5 3 7 5 4 6 2 5",
+          "match_mode": "normalized",
+          "aliases": [
+            "97/2",
+            "\\frac{97}{2}"
+          ]
+        },
+        {
+          "id": "2",
+          "expected": "60",
+          "points": 6.666666666666667,
+          "reference": "Official short answer: 60",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "3",
+          "expected": "0.63",
+          "points": 6.666666666666667,
+          "reference": "Official short answer: 0.63",
+          "match_mode": "normalized",
+          "aliases": [
+            "63/100",
+            "\\frac{63}{100}"
+          ]
+        },
+        {
+          "id": "4",
+          "expected": "",
+          "points": 0.0,
+          "reference": "",
+          "match_mode": "reference_llm",
+          "aliases": []
+        },
+        {
+          "id": "5",
+          "expected": "3535",
+          "points": 6.666666666666667,
+          "reference": "Official short answer: 3535",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "6",
+          "expected": "",
+          "points": 0.0,
+          "reference": "",
+          "match_mode": "reference_llm",
+          "aliases": []
+        },
+        {
+          "id": "7",
+          "expected": "",
+          "points": 0.0,
+          "reference": "",
+          "match_mode": "reference_llm",
+          "aliases": []
+        },
+        {
+          "id": "8",
+          "expected": "",
+          "points": 0.0,
+          "reference": "",
+          "match_mode": "reference_llm",
+          "aliases": []
+        },
+        {
+          "id": "9",
+          "expected": "3√2",
+          "points": 6.666666666666667,
+          "reference": "Official short answer: 3√2",
+          "match_mode": "normalized",
+          "aliases": [
+            "3\\sqrt{2}"
+          ]
+        },
+        {
+          "id": "10",
+          "expected": "125378",
+          "points": 6.666666666666667,
+          "reference": "Official short answer: 125378",
+          "match_mode": "normalized",
+          "aliases": []
+        }
+      ]
     },
-    "status": "collected"
+    "status": "collected",
+    "competition_id": "arml_local",
+    "evaluation": {
+      "evaluator_id": "gold_answer_v1",
+      "status": "ready",
+      "rubric_path": "data/rubrics/numerical_sheet_reference_40_v1.json",
+      "fallback_evaluator_id": "rubric_llm_v1",
+      "deliverable": "answer_sheet",
+      "short_answer_source": "data/rubrics/arml_local_short_answers.json"
+    }
   },
   {
     "problem_id": "arml_local_2011",
     "competition": "ARML Local",
     "year": 2011,
-    "topic": "Team Round \u2014 2011",
+    "topic": "Team Round — 2011",
     "task_type": "team_contest",
     "team_size": 6,
     "source_url": "https://www.arml.com/ARML/arml_2019/public_contest_files/2009_2014_book/ARML_2009_2014.pdf",
     "source_file": "data/raw/arml_local/ARML_2009_2014.pdf",
     "total_points": 40,
-    "problem_description": "Team Problems 1. Let 1 .81 = 1 .81818181... = N D , where N and D are two positive integers. Compute the minimum value of N +D. 2. A two-digit numberN is chosen at random, with all two-digit numbers equally likely. Compute the probability that at least one of log 2N, log3N, log5N, or log 7N is an integer. 3. The di\ufb00erence between the areas of the circumcircle and incircle of an equilateral triangle is 27\u03c0. Compute the area of the triangle. 4. If Sam arranges his candies in piles of 6, there are 2 left over. If he arranges them in piles of 9, there are 5 left over. If he arranges them in piles of 15, there are 11 left over. Sam has between 100 and 200 candies. Compute how many candies Sam has. 5. Quadrilateral JANE is inscribed in a circle. Diameter JN has length 50, AN = 48 and NE = 30. Compute the perimeter of JANE . 6. A fair coin is \ufb02ipped repeatedly and the throws are recorded until three consecutive \ufb02ips are (in order) Heads, Heads, and Tails or Heads, Tails, and Tails. Compute the probability that the sequence Heads, Heads, and Tails appears \ufb01rst. 7. Let a,b,c, andd be real numbers such that the graphs of y =\u2212|x\u2212a| +b andy =|x\u2212c| +d intersect at (2, 1) and (8,\u22121). Compute a +c. 8. Given triangle ABC with AB = 6,BC = 8, and AC = 7. Point D is on AC such that BD bisects angle B. Circles C1 and C2 are drawn such that C1 is internally tangent to each side of triangle ABD, and C2 is internally tangent to each side of triangle CBD . Compute the sum of the areas of circles C1 and C2. 9. Compute 1 1\u00d7 3 + 1 3\u00d7 5 +\u00b7\u00b7\u00b7 + 1 2007\u00d7 2009 + 1 2009\u00d7 2011 = 1005\u2211 n=1 1 (2n\u2212 1) (2n + 1). 10. An ordered partition of an integer N is a sequence of positive integers that sum to N. As an example, 1 + 3, 2 + 1 + 1, and 1 + 1 + 2 are distinct ordered partitions of 4. Compute the number of ordered partitions of 10 that consist of only odd positive integers. 310",
+    "problem_description": "Team Problems 1. Let 1 .81 = 1 .81818181... = N D , where N and D are two positive integers. Compute the minimum value of N +D. 2. A two-digit numberN is chosen at random, with all two-digit numbers equally likely. Compute the probability that at least one of log 2N, log3N, log5N, or log 7N is an integer. 3. The diﬀerence between the areas of the circumcircle and incircle of an equilateral triangle is 27π. Compute the area of the triangle. 4. If Sam arranges his candies in piles of 6, there are 2 left over. If he arranges them in piles of 9, there are 5 left over. If he arranges them in piles of 15, there are 11 left over. Sam has between 100 and 200 candies. Compute how many candies Sam has. 5. Quadrilateral JANE is inscribed in a circle. Diameter JN has length 50, AN = 48 and NE = 30. Compute the perimeter of JANE . 6. A fair coin is ﬂipped repeatedly and the throws are recorded until three consecutive ﬂips are (in order) Heads, Heads, and Tails or Heads, Tails, and Tails. Compute the probability that the sequence Heads, Heads, and Tails appears ﬁrst. 7. Let a,b,c, andd be real numbers such that the graphs of y =−|x−a| +b andy =|x−c| +d intersect at (2, 1) and (8,−1). Compute a +c. 8. Given triangle ABC with AB = 6,BC = 8, and AC = 7. Point D is on AC such that BD bisects angle B. Circles C1 and C2 are drawn such that C1 is internally tangent to each side of triangle ABD, and C2 is internally tangent to each side of triangle CBD . Compute the sum of the areas of circles C1 and C2. 9. Compute 1 1× 3 + 1 3× 5 +··· + 1 2007× 2009 + 1 2009× 2011 = 1005∑ n=1 1 (2n− 1) (2n + 1). 10. An ordered partition of an integer N is a sequence of positive integers that sum to N. As an example, 1 + 3, 2 + 1 + 1, and 1 + 1 + 2 are distinct ordered partitions of 4. Compute the number of ordered partitions of 10 that consist of only odd positive integers. 310",
     "gold_label": {
-      "expected_answer": "Team Solutions 1. Let x = 1.818181... , then 100x = 181.818181... = 180 +x, so 99x = 180\u2192x = 180 99 = 20 11\u2192 N +D = 31 . 2. There are 90 two digit numbers. Any power of 2, 3, 5, or 7 will result in one of the four logs to be an integer. There are 7 two-digit powers of these numbers: 16, 32, 64, 27, 81, 25, and 49. The answer is 7 /90 . 3. Let R and r be circumradius and inradius of equilateral triangle ABC, respectively, and let M be the midpoint of AB (as well as the point of tangency of AB to the incircle). If O is the center of the circles, then OAM is a 30-60-90 triangle. Accordingly, the circumradius is twice that of the inradius. \u03c0R2\u2212\u03c0r2 = 27\u03c0\u2192 (2r)2\u2212r2 = 27 \u2192 3r2 = 27 \u2192 r = 3. AM = 3 \u221a 3\u2192AB = 6 \u221a 3, so the area of ABC is (AB2) \u221a 3 4 = ( 6 \u221a 3 )2\u221a 3 4 = 27 \u221a 3 . 4. Note that in each case the left over pile is four candies short of a full pile. Accordingly, assume Sam was given four additional candies. Then the number of candies he has is a multiple of 6, 9, and 15. The least common multiple of these numbers is 90. Because he has between 100 and 200 candies, Sam must have 180 in his possession. Taking back the 4 additional candies, Sam started with 176 . 5. JAN and JEN are both right triangles, since JN is a diameter of the circle. Accordingly, JA = 14 and JE = 40. The perimeter of the quadrilateral is 48 + 14 + 30 + 40 = 132 . 6. Let p be the probability that HHT appears \ufb01rst. The \ufb01rst time a heads is \ufb02ipped, if the next \ufb02ip is also a heads, then HHT must appear before HTT (as there will be a string of two or more heads terminated by a tails \ufb02ip, forming HHT). If the next \ufb02ip is tails, then if the following \ufb02ip is also tails, HTT appears \ufb01rst. If the following \ufb02ip is heads, then the process repeats itself, and the probability that HHT appears \ufb01rst is p. Thus, looking at the two \ufb02ips after the \ufb01rst heads come up, we get p = Pr(H on 2 nd \ufb02ip) + Pr(T on 2nd \ufb02ip, H on 3 rd \ufb02ip). Thusp = 1/2 + (1/4)p\u2192 (3/4)p = 1/2\u2192p = 2/3 . 7. Note that the intersection points (2 , 1) and (8,\u22121) are two of the four corners of a rectangle whose other corners are the points ( a,b ) and (c,d ). In addition, the slopes of the segments joining the corners of the rectangle all have slope +1 or\u22121. To \ufb01nd the unknown corners, you can solve the two systems{y\u22121 =x\u22122,y +1 =\u2212(x\u22128)} and{y\u22121 =\u2212(x\u22122),y +1 = x\u22128} to get the points (4, 3) and (6,\u22123). Therefore, a +c = 4 + 6 = 10 . 311\n\n312 Team Solutions 8. By the Angle Bisector Theorem, we have AD = 3 and DC = 4. Now we \ufb01nd the length of BD by the Law of Cosines. Since angles ADB and CDB are supplementary, their cosines are additive inverses of each other, so we equate BD 2+9\u221236 6BD = 64\u2212BD 2\u221216 8BD and solve to obtain BD = 6. We \ufb01nd the inradius of circle C1 by taking advantage of the formula Area = rs, where r is the inradius and s is the semiperimeter of the circumscribed triangle. In the case of triangle ABD, we have 9 \u221a 15 4 =r1\u00b7 15 2 , so r1 = 3 \u221a 15 10 and the area of C1 is 27\u03c0 20 . In the case of triangle CBD , we have 3 \u221a 15 = r2\u00b7 9, so r1 = \u221a 15 3 and the area of C2 is 15\u03c0 9 . The desired sum is 181 \u03c0/60 . 9. Note that 1005\u2211 n=1 1 (2n\u2212 1) (2n + 1) = 1005\u2211 n=1 1 2 ( 1 (2n\u2212 1)\u2212 1 (2n + 1) ) = 1 2 (1005\u2211 n=1 1 (2n\u2212 1)\u2212 1005\u2211 n=1 1 (2n + 1) ) = 1 2 ( 1\u2212 1 2011 ) = 1055 2011 . 10. Note that there must be an even number of terms in the sum, and each term must be at least one. Let T be the number of terms in the sum. Note that by subtracting one from each term in an ordered partition of 10, there is a one-to-one correspondence between ordered partitions of 10 consisting of only odd positive integers and ordered partitions of 10\u2212T that consists only of non-negative even integers (for example: 3+1+5+1 = 10 and 2+0+4+0 = 6). Similarly, there is a 1-to-1 correspondence between ordered partitions of 10 \u2212T that consists of only non-negative even integers and ordered partitions of 10\u2212T 2 that consist of only non-negative integers (for example: 2 + 0 + 4 + 0 = 6 and 1 + 0 + 2 + 0 = 3). This set can be counted easily using \u201cstars-and-bars\u201d or your favorite balls-in-buckets counting technique: there are( 10\u2212T 2 +(T\u22121) (T\u22121) ) ways to do this. Therefore, the answer is 5\u2211 k=1 ( 10\u22122k 2 + (2k\u2212 1) (2k\u2212 1) ) = 5\u2211 k=1 (5 +k\u2212 1 (2k\u2212 1) ) = (5 1 ) + (6 3 ) + (7 5 ) + (8 7 ) + (9 9 ) = 5 + 20 + 21 + 8 + 1 = 55. Note: An alternate solution is to show that the number of ordered partitions of n using odd positive integers is the nth Fibonacci number is an exercise left to the reader. (Hint: Split the set of ordered partitions of n into those whose last term is or is not 1.)",
-      "grading_rubric": "ARML Local Team Round \u2014 numerical answers, 4 points each.",
-      "human_baseline": null
+      "expected_answer": "Team Solutions 1. Let x = 1.818181... , then 100x = 181.818181... = 180 +x, so 99x = 180→x = 180 99 = 20 11→ N +D = 31 . 2. There are 90 two digit numbers. Any power of 2, 3, 5, or 7 will result in one of the four logs to be an integer. There are 7 two-digit powers of these numbers: 16, 32, 64, 27, 81, 25, and 49. The answer is 7 /90 . 3. Let R and r be circumradius and inradius of equilateral triangle ABC, respectively, and let M be the midpoint of AB (as well as the point of tangency of AB to the incircle). If O is the center of the circles, then OAM is a 30-60-90 triangle. Accordingly, the circumradius is twice that of the inradius. πR2−πr2 = 27π→ (2r)2−r2 = 27 → 3r2 = 27 → r = 3. AM = 3 √ 3→AB = 6 √ 3, so the area of ABC is (AB2) √ 3 4 = ( 6 √ 3 )2√ 3 4 = 27 √ 3 . 4. Note that in each case the left over pile is four candies short of a full pile. Accordingly, assume Sam was given four additional candies. Then the number of candies he has is a multiple of 6, 9, and 15. The least common multiple of these numbers is 90. Because he has between 100 and 200 candies, Sam must have 180 in his possession. Taking back the 4 additional candies, Sam started with 176 . 5. JAN and JEN are both right triangles, since JN is a diameter of the circle. Accordingly, JA = 14 and JE = 40. The perimeter of the quadrilateral is 48 + 14 + 30 + 40 = 132 . 6. Let p be the probability that HHT appears ﬁrst. The ﬁrst time a heads is ﬂipped, if the next ﬂip is also a heads, then HHT must appear before HTT (as there will be a string of two or more heads terminated by a tails ﬂip, forming HHT). If the next ﬂip is tails, then if the following ﬂip is also tails, HTT appears ﬁrst. If the following ﬂip is heads, then the process repeats itself, and the probability that HHT appears ﬁrst is p. Thus, looking at the two ﬂips after the ﬁrst heads come up, we get p = Pr(H on 2 nd ﬂip) + Pr(T on 2nd ﬂip, H on 3 rd ﬂip). Thusp = 1/2 + (1/4)p→ (3/4)p = 1/2→p = 2/3 . 7. Note that the intersection points (2 , 1) and (8,−1) are two of the four corners of a rectangle whose other corners are the points ( a,b ) and (c,d ). In addition, the slopes of the segments joining the corners of the rectangle all have slope +1 or−1. To ﬁnd the unknown corners, you can solve the two systems{y−1 =x−2,y +1 =−(x−8)} and{y−1 =−(x−2),y +1 = x−8} to get the points (4, 3) and (6,−3). Therefore, a +c = 4 + 6 = 10 . 311\n\n312 Team Solutions 8. By the Angle Bisector Theorem, we have AD = 3 and DC = 4. Now we ﬁnd the length of BD by the Law of Cosines. Since angles ADB and CDB are supplementary, their cosines are additive inverses of each other, so we equate BD 2+9−36 6BD = 64−BD 2−16 8BD and solve to obtain BD = 6. We ﬁnd the inradius of circle C1 by taking advantage of the formula Area = rs, where r is the inradius and s is the semiperimeter of the circumscribed triangle. In the case of triangle ABD, we have 9 √ 15 4 =r1· 15 2 , so r1 = 3 √ 15 10 and the area of C1 is 27π 20 . In the case of triangle CBD , we have 3 √ 15 = r2· 9, so r1 = √ 15 3 and the area of C2 is 15π 9 . The desired sum is 181 π/60 . 9. Note that 1005∑ n=1 1 (2n− 1) (2n + 1) = 1005∑ n=1 1 2 ( 1 (2n− 1)− 1 (2n + 1) ) = 1 2 (1005∑ n=1 1 (2n− 1)− 1005∑ n=1 1 (2n + 1) ) = 1 2 ( 1− 1 2011 ) = 1055 2011 . 10. Note that there must be an even number of terms in the sum, and each term must be at least one. Let T be the number of terms in the sum. Note that by subtracting one from each term in an ordered partition of 10, there is a one-to-one correspondence between ordered partitions of 10 consisting of only odd positive integers and ordered partitions of 10−T that consists only of non-negative even integers (for example: 3+1+5+1 = 10 and 2+0+4+0 = 6). Similarly, there is a 1-to-1 correspondence between ordered partitions of 10 −T that consists of only non-negative even integers and ordered partitions of 10−T 2 that consist of only non-negative integers (for example: 2 + 0 + 4 + 0 = 6 and 1 + 0 + 2 + 0 = 3). This set can be counted easily using “stars-and-bars” or your favorite balls-in-buckets counting technique: there are( 10−T 2 +(T−1) (T−1) ) ways to do this. Therefore, the answer is 5∑ k=1 ( 10−2k 2 + (2k− 1) (2k− 1) ) = 5∑ k=1 (5 +k− 1 (2k− 1) ) = (5 1 ) + (6 3 ) + (7 5 ) + (8 7 ) + (9 9 ) = 5 + 20 + 21 + 8 + 1 = 55. Note: An alternate solution is to show that the number of ordered partitions of n using odd positive integers is the nth Fibonacci number is an exercise left to the reader. (Hint: Split the set of ordered partitions of n into those whose last term is or is not 1.)",
+      "grading_rubric": "ARML Local Team Round — numerical answers, 4 points each.",
+      "human_baseline": null,
+      "parts": [
+        {
+          "id": "1",
+          "expected": "31",
+          "points": 5.0,
+          "reference": "Team Solutions 1. Let x = 1.818181... , then 100x = 181.818181... = 180 +x, so 99x = 180→x = 180 99 = 20 11→ N +D = 31 . 2. There are 90 two digit numbers. Any power of 2, 3, 5, or 7 will result in one of the four logs to be an integer. There are 7 two-digit powers of these numbers: 16, 32, 64, 27, 81, 25, and 49. The answer is 7 /90 . 3. Let R and r be circumradius and inradius of equilateral triangle ABC, respectively, and let M be the midpoint of AB (as well as the point of tangency of AB to the incircle). If O is the center of the circles, then OAM is a 30-60-90 triangle. Accordingly, the circumradius is twice that of the inradius. πR2−πr2 = 27π→ (2r)2−r2 = 27 → 3r2 = 27 → r = 3. AM = 3 √ 3→AB = 6 √ 3, so the area of ABC is (AB2) √ 3 4 = ( 6 √ 3 )2√ 3 4 = 27 √ 3 . 4. Note that in each case the left over pile is four candies short of a full pile. Accordingly, assume Sam was given four additional candies. Then the number of candies he has is a multiple of 6, 9, and 15. The least common multiple of these numbers is 90. Because he has between 100 and 200 candies, Sam must have 180 in his possession. Taking back the 4 additional candies, Sam started with 176 . 5. JAN and JEN are both right triangles, since JN is a diameter of the circle. Accordingly, JA = 14 and JE = 40. The perimeter of the quadrilateral is 48 + 14 + 30 + 40 = 132 . 6. Let p be the probability that HHT appears ﬁrst. The ﬁrst time a heads is ﬂipped, if the next ﬂip is also a heads, then HHT must appear before HTT (as there will be a string of two or more heads terminated by a tails ﬂip, forming HHT). If the next ﬂip is tails, then if the following ﬂip is also tails, HTT appears ﬁrst. If the following ﬂip is heads, then the process repeats itself, and the probability that HHT appears ﬁrst is p. Thus, looking at the two ﬂips after the ﬁrst heads come up, we get p = Pr(H on 2 nd ﬂip) + Pr(T on 2nd ﬂip, H on 3 rd ﬂip). Thusp = 1/2 + (1/4)p→ (3/4)p = 1/2→p = 2/3 . 7. Note that the intersection points (2 , 1) and (8,−1) are two of the four corners of a rectangle whose other corners are the points ( a,b ) and (c,d ). In addition, the slopes of the segments joining the corners of the rectangle all have slope +1 or−1. To ﬁnd the unknown corners, you can solve the two systems{y−1 =x−2,y +1 =−(x−8)} and{y−1 =−(x−2),y +1 = x−8} to get the points (4, 3) and (6,−3). Therefore, a +c = 4 + 6 = 10 . 311\n\n312 Team Solutions 8. By the Angle Bisector Theorem, we have AD = 3 and DC = 4. Now we ﬁnd the length of BD by the Law of Cosines. Since angles ADB and CDB are supplementary, their cosines are additive inverses of each other, so we equate BD 2+9−36 6BD = 64−BD 2−16 8BD and solve to obtain BD = 6. We ﬁnd the inradius of circle C1 by taking advantage of the formula Area = rs, where r is the inradius and s is the semiperimeter of the circumscribed triangle. In the case of triangle ABD, we have 9 √ 15 4 =r1· 15 2 , so r1 = 3 √ 15 10 and the area of C1 is 27π 20 . In the case of triangle CBD , we have 3 √ 15 = r2· 9, so r1 = √ 15 3 and the area of C2 is 15π 9 . The desired sum is 181 π/60 . 9. Note that 1005∑ n=1 1 (2n− 1) (2n + 1) = 1005∑ n=1 1 2 ( 1 (2n− 1)− 1 (2n + 1) ) = 1 2 (1005∑ n=1 1 (2n− 1)− 1005∑ n=1 1 (2n + 1) ) = 1 2 ( 1− 1 2011 ) = 1055 2011 . 10. Note that there must be an even number of terms in the sum, and each term must be at least one. Let T be the number of terms in the sum. Note that by subtracting one from each term in an ordered partition of 10, there is a one-to-one correspondence between ordered partitions of 10 consisting of only odd positive integers and ordered partitions of 10−T that consists only of non-negative even integers (for example: 3+1+5+1 = 10 and 2+0+4+0 = 6). Similarly, there is a 1-to-1 correspondence between ordered partitions of 10 −T that consists of only non-negative even integers and ordered partitions of 10−T 2 that consist of only non-negative integers (for example: 2 + 0 + 4 + 0 = 6 and 1 + 0 + 2 + 0 = 3). This set can be counted easily using “stars-and-bars” or your favorite balls-in-buckets counting technique: there are( 10−T 2 +(T−1) (T−1) ) ways to do this. Therefore, the answer is 5∑ k=1 ( 10−2k 2 + (2k− 1) (2k− 1) ) = 5∑ k=1 (5 +k− 1 (2k− 1) ) = (5 1 ) + (6 3 ) + (7 5 ) + (8 7 ) + (9 9 ) = 5 + 20 + 21 + 8 + 1 = 55. Note: An alternate solution is to show that the number of ordered partitions of n using odd positive integers is the nth Fibonacci number is an exercise left to the reader. (Hint: Split the set of ordered partitions of n into those whose last term is or is not 1.)",
+          "match_mode": "normalized",
+          "aliases": [
+            "N+D=31",
+            "20/11"
+          ]
+        },
+        {
+          "id": "2",
+          "expected": "7/90",
+          "points": 5.0,
+          "reference": "Official short answer: 7/90",
+          "match_mode": "normalized",
+          "aliases": [
+            "\\frac{7}{90}"
+          ]
+        },
+        {
+          "id": "3",
+          "expected": "27√3",
+          "points": 5.0,
+          "reference": "Official short answer: 27√3",
+          "match_mode": "normalized",
+          "aliases": [
+            "27\\sqrt{3}"
+          ]
+        },
+        {
+          "id": "4",
+          "expected": "176",
+          "points": 5.0,
+          "reference": "Official short answer: 176",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "5",
+          "expected": "132",
+          "points": 5.0,
+          "reference": "Official short answer: 132",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "6",
+          "expected": "2/3",
+          "points": 5.0,
+          "reference": "Official short answer: 2/3",
+          "match_mode": "normalized",
+          "aliases": [
+            "\\frac{2}{3}"
+          ]
+        },
+        {
+          "id": "7",
+          "expected": "10",
+          "points": 5.0,
+          "reference": "Official short answer: 10",
+          "match_mode": "normalized",
+          "aliases": [
+            "a+c=10"
+          ]
+        },
+        {
+          "id": "8",
+          "expected": "",
+          "points": 0.0,
+          "reference": "",
+          "match_mode": "reference_llm",
+          "aliases": []
+        },
+        {
+          "id": "9",
+          "expected": "",
+          "points": 0.0,
+          "reference": "",
+          "match_mode": "reference_llm",
+          "aliases": []
+        },
+        {
+          "id": "10",
+          "expected": "55",
+          "points": 5.0,
+          "reference": "Official short answer: 55",
+          "match_mode": "normalized",
+          "aliases": []
+        }
+      ]
     },
-    "status": "collected"
+    "status": "collected",
+    "competition_id": "arml_local",
+    "evaluation": {
+      "evaluator_id": "gold_answer_v1",
+      "status": "ready",
+      "rubric_path": "data/rubrics/numerical_sheet_reference_40_v1.json",
+      "fallback_evaluator_id": "rubric_llm_v1",
+      "deliverable": "answer_sheet",
+      "short_answer_source": "data/rubrics/arml_local_short_answers.json"
+    }
   },
   {
     "problem_id": "arml_local_2012",
     "competition": "ARML Local",
     "year": 2012,
-    "topic": "Team Round \u2014 2012",
+    "topic": "Team Round — 2012",
     "task_type": "team_contest",
     "team_size": 6,
     "source_url": "https://www.arml.com/ARML/arml_2019/public_contest_files/2009_2014_book/ARML_2009_2014.pdf",
     "source_file": "data/raw/arml_local/ARML_2009_2014.pdf",
     "total_points": 40,
-    "problem_description": "Team Problems 1. Compute the smallest positive integer for which the product of its digits is 96. 2. Compute the smallest integer n> 1 such that 10n has exactly 21 more factors than n. 3. The area of a right triangle ABC is 6 and the length of the hypotenuse AB is 10. Compute sin 2A. 4. Let T be the set of all two digit positive integers, and let Sk be the sum of all elements of T except k. Compute the value of k such that Sk is a palindrome (that is, the digits of the number read the same forwards as backwards, such as 12321). 5. Let A,B,C,D , and E be a sequence of increasing positive integers. The set {18, 20, 21, 22, 23, 24, 25, 26, 28, 29} is the set of all pairwise sums of distinct integers in the sequence. Compute the ordered 5-tuple (A,B,C,D,E ). 6. Compute the surface area of the boundary of the following region: { (x,y,z ) :x2 +y2\u2264 4,|x|\u2264 1,|z|\u2264 4 } . 7. Compute the number of ordered 4-tuples (a,b,c,d ) of positive integers such thata+b+c+d = 45 and no two of the integers di\ufb00er by a multiple of 5. 8. A fair ten-sided die with the digits 0 to 9 (inclusive) on its faces is rolled three times. If M is the expected value of the largest possible three-digit number that can be formed using each of the three digits rolled exactly once, compute \u230aM\u230b, the greatest integer less than or equal to M. For example, if 4, 5, and 4 were rolled, the largest possible three-digit number would be 544. If three zeroes are rolled, the largest possible number is zero. 9. Compute the sum of all solutions to (log a (2a\u2212 7)) ( loga\u22122a ) =\u22121 2 . 10. Let {x} denote the fractional part of x. Compute the largest x such that{x}2 =x2\u2212 56. 328",
+    "problem_description": "Team Problems 1. Compute the smallest positive integer for which the product of its digits is 96. 2. Compute the smallest integer n> 1 such that 10n has exactly 21 more factors than n. 3. The area of a right triangle ABC is 6 and the length of the hypotenuse AB is 10. Compute sin 2A. 4. Let T be the set of all two digit positive integers, and let Sk be the sum of all elements of T except k. Compute the value of k such that Sk is a palindrome (that is, the digits of the number read the same forwards as backwards, such as 12321). 5. Let A,B,C,D , and E be a sequence of increasing positive integers. The set {18, 20, 21, 22, 23, 24, 25, 26, 28, 29} is the set of all pairwise sums of distinct integers in the sequence. Compute the ordered 5-tuple (A,B,C,D,E ). 6. Compute the surface area of the boundary of the following region: { (x,y,z ) :x2 +y2≤ 4,|x|≤ 1,|z|≤ 4 } . 7. Compute the number of ordered 4-tuples (a,b,c,d ) of positive integers such thata+b+c+d = 45 and no two of the integers diﬀer by a multiple of 5. 8. A fair ten-sided die with the digits 0 to 9 (inclusive) on its faces is rolled three times. If M is the expected value of the largest possible three-digit number that can be formed using each of the three digits rolled exactly once, compute ⌊M⌋, the greatest integer less than or equal to M. For example, if 4, 5, and 4 were rolled, the largest possible three-digit number would be 544. If three zeroes are rolled, the largest possible number is zero. 9. Compute the sum of all solutions to (log a (2a− 7)) ( loga−2a ) =−1 2 . 10. Let {x} denote the fractional part of x. Compute the largest x such that{x}2 =x2− 56. 328",
     "gold_label": {
-      "expected_answer": "Team Solutions 1. The correct answer will have digits in increasing order, so a strategy would be to look for the largest single digit factor of 96 (8) and iterate (left with 12, largest factor is 6, leaving 2). The answer is 268 . 2. Let n = 2a3b5c; then m = 10n = 2a+13b5c+1. Note that n has (a + 1)(b + 1)(c + 1) factors, and m has (a + 2)(b + 1)(c + 2) factors. The di\ufb00erence is ( b + 1) (a +c + 3) = 21. Arguably, c should be zero to minimize the value of n, so (b + 1)(a + 3) = 21 has non-negative integer solutions of (a,b ) = (18, 0), (4, 2), and (0, 6). The smallest of these is the middle, which is equal to 2 432 = 144 . 3. Let the legs of the triangle be x and y, then xy = 12, so: sin 2A = 2sinA cosA = 2 (x 10 )( y 10 ) = xy 50 = 6 25 . 4. The sum of the elements in T is 4905. The \ufb01rst palindrome less than 4905 is 4884, so 21 has been removed from the set. 5. Note that the sum of the pairwise sums is 4 times the sum of the elements in the sequence, so A +B +C +D +E = 59. Note also that A +B = 18 andD +E = 29, soC = 12. The second smallest sum is A +C, so A = 8 and therefore B = 10. By similar reasoning, C +E = 28, so E = 16 and D = 13, so the answer is (8 , 10, 12, 13, 16) . 6. The cross section of this cylindrical region looks like a circle of radius 2 with sectors cut o\ufb00 by the chords x = 1 and x =\u22121. Thus we can compute its area by breaking it into 30-60-90 triangles and 60\u25e6 circular wedges. Thus the surface area of the of top and bottom of the solid is 2 \u221a 3 + 4\u03c0 3 . The sides consist of two rectangles of height 8 and width 2 \u221a 3, and two curved walls of height 8 and width 2\u03c0 3 . Thus the surface area is 2 ( 2 \u221a 3 + 4\u03c0 3 ) + 2\u00d7 16 \u221a 3 + 2\u00d7 16\u03c0 3 = 36 \u221a 3 + 40\u03c0 3 . 7. The only way that none of the four integers can di\ufb00er by a multiple of 5 is if they all have di\ufb00erent residues modulo 5, and these residues must sum to a multiple of 5. The only way this is possible is if the residues are 1, 2, 3, and 4. There are 4! = 24 ways to arrange the 329\n\n330 Team Solutions residues, then we are left with 7 \u201cblocks\u201d of \ufb01ve to be distributed among the four numbers, of which there are C(10, 7) = 120 ways to distribute, so the answer is 2880 . 8. Let A, B, and C be the largest, middle and smallest number rolled. By symmetry, we know that E[A] = 9\u2212E[C] and that E[B] = 4 .5, and the expected value of ABC is 100E[A] + 10E[B] +E[C], so the challenge is to determine the expected value of the largest die roll. This is 9\u2211 k=0 kP (A =k), where P (A =k) =P (x1\u2264k)P (x2\u2264k)P (x3\u2264k)\u2212P (x1\u2264k\u2212 1)P (x2\u2264k\u2212 1)P (x3\u2264k\u2212 1), which is (k + 1)3\u2212k3 1000 = 3k2 + 3k + 1 1000 . The expected value of A is 6.975, so the expected value of the largest possible three digit number formed is 697.5 + 45 + 2.025 = 744.525. We are looking for the integer portion, which is 744 . 9. log (2a\u2212 7) loga \u00b7 loga log(a\u2212 2) =\u22121 2\u2192 log (2a\u2212 7) =\u22121 2log (a\u2212 2) \u2192 2a\u2212 7 = 1\u221aa\u2212 2 Let x =\u221aa\u2212 2\u2192 2x2\u2212 3 = 1 x\u2192 2x3\u2212 3x\u2212 1 = 0 \u2192 (x + 1) (2x2\u2212 2x\u2212 1) = 0 \u2192 x = 2\u00b1 \u221a 12 4 \u2192 x = 1 + \u221a 3 2 \u2192\u221aa\u2212 2 = 1 + \u221a 3 2 \u2192 a = 2 + ( 1 + \u221a 3 2 )2 \u2192 a = 2 + 4 + 2 \u221a 3 4 \u2192 a = 3 + \u221a 3 2 = 6 + \u221a 3 2 . 10. Since the left hand side of the equation is between 0 and 1, we know that 7 \u2264 x\u2264 8, so let x = 7 +y, where y ={x} is between 0 and 1. So y2 = (7 +y)2\u2212 56\u2192 0 = 49 + 14y\u2212 56\u2192 y = 0.5\u2192x = 7.5 .",
-      "grading_rubric": "ARML Local Team Round \u2014 numerical answers, 4 points each.",
-      "human_baseline": null
+      "expected_answer": "Team Solutions 1. The correct answer will have digits in increasing order, so a strategy would be to look for the largest single digit factor of 96 (8) and iterate (left with 12, largest factor is 6, leaving 2). The answer is 268 . 2. Let n = 2a3b5c; then m = 10n = 2a+13b5c+1. Note that n has (a + 1)(b + 1)(c + 1) factors, and m has (a + 2)(b + 1)(c + 2) factors. The diﬀerence is ( b + 1) (a +c + 3) = 21. Arguably, c should be zero to minimize the value of n, so (b + 1)(a + 3) = 21 has non-negative integer solutions of (a,b ) = (18, 0), (4, 2), and (0, 6). The smallest of these is the middle, which is equal to 2 432 = 144 . 3. Let the legs of the triangle be x and y, then xy = 12, so: sin 2A = 2sinA cosA = 2 (x 10 )( y 10 ) = xy 50 = 6 25 . 4. The sum of the elements in T is 4905. The ﬁrst palindrome less than 4905 is 4884, so 21 has been removed from the set. 5. Note that the sum of the pairwise sums is 4 times the sum of the elements in the sequence, so A +B +C +D +E = 59. Note also that A +B = 18 andD +E = 29, soC = 12. The second smallest sum is A +C, so A = 8 and therefore B = 10. By similar reasoning, C +E = 28, so E = 16 and D = 13, so the answer is (8 , 10, 12, 13, 16) . 6. The cross section of this cylindrical region looks like a circle of radius 2 with sectors cut oﬀ by the chords x = 1 and x =−1. Thus we can compute its area by breaking it into 30-60-90 triangles and 60◦ circular wedges. Thus the surface area of the of top and bottom of the solid is 2 √ 3 + 4π 3 . The sides consist of two rectangles of height 8 and width 2 √ 3, and two curved walls of height 8 and width 2π 3 . Thus the surface area is 2 ( 2 √ 3 + 4π 3 ) + 2× 16 √ 3 + 2× 16π 3 = 36 √ 3 + 40π 3 . 7. The only way that none of the four integers can diﬀer by a multiple of 5 is if they all have diﬀerent residues modulo 5, and these residues must sum to a multiple of 5. The only way this is possible is if the residues are 1, 2, 3, and 4. There are 4! = 24 ways to arrange the 329\n\n330 Team Solutions residues, then we are left with 7 “blocks” of ﬁve to be distributed among the four numbers, of which there are C(10, 7) = 120 ways to distribute, so the answer is 2880 . 8. Let A, B, and C be the largest, middle and smallest number rolled. By symmetry, we know that E[A] = 9−E[C] and that E[B] = 4 .5, and the expected value of ABC is 100E[A] + 10E[B] +E[C], so the challenge is to determine the expected value of the largest die roll. This is 9∑ k=0 kP (A =k), where P (A =k) =P (x1≤k)P (x2≤k)P (x3≤k)−P (x1≤k− 1)P (x2≤k− 1)P (x3≤k− 1), which is (k + 1)3−k3 1000 = 3k2 + 3k + 1 1000 . The expected value of A is 6.975, so the expected value of the largest possible three digit number formed is 697.5 + 45 + 2.025 = 744.525. We are looking for the integer portion, which is 744 . 9. log (2a− 7) loga · loga log(a− 2) =−1 2→ log (2a− 7) =−1 2log (a− 2) → 2a− 7 = 1√a− 2 Let x =√a− 2→ 2x2− 3 = 1 x→ 2x3− 3x− 1 = 0 → (x + 1) (2x2− 2x− 1) = 0 → x = 2± √ 12 4 → x = 1 + √ 3 2 →√a− 2 = 1 + √ 3 2 → a = 2 + ( 1 + √ 3 2 )2 → a = 2 + 4 + 2 √ 3 4 → a = 3 + √ 3 2 = 6 + √ 3 2 . 10. Since the left hand side of the equation is between 0 and 1, we know that 7 ≤ x≤ 8, so let x = 7 +y, where y ={x} is between 0 and 1. So y2 = (7 +y)2− 56→ 0 = 49 + 14y− 56→ y = 0.5→x = 7.5 .",
+      "grading_rubric": "ARML Local Team Round — numerical answers, 4 points each.",
+      "human_baseline": null,
+      "parts": [
+        {
+          "id": "1",
+          "expected": "268",
+          "points": 4.444444444444445,
+          "reference": "Team Solutions 1. The correct answer will have digits in increasing order, so a strategy would be to look for the largest single digit factor of 96 (8) and iterate (left with 12, largest factor is 6, leaving 2). The answer is 268 . 2. Let n = 2a3b5c; then m = 10n = 2a+13b5c+1. Note that n has (a + 1)(b + 1)(c + 1) factors, and m has (a + 2)(b + 1)(c + 2) factors. The diﬀerence is ( b + 1) (a +c + 3) = 21. Arguably, c should be zero to minimize the value of n, so (b + 1)(a + 3) = 21 has non-negative integer solutions of (a,b ) = (18, 0), (4, 2), and (0, 6). The smallest of these is the middle, which is equal to 2 432 = 144 . 3. Let the legs of the triangle be x and y, then xy = 12, so: sin 2A = 2sinA cosA = 2 (x 10 )( y 10 ) = xy 50 = 6 25 . 4. The sum of the elements in T is 4905. The ﬁrst palindrome less than 4905 is 4884, so 21 has been removed from the set. 5. Note that the sum of the pairwise sums is 4 times the sum of the elements in the sequence, so A +B +C +D +E = 59. Note also that A +B = 18 andD +E = 29, soC = 12. The second smallest sum is A +C, so A = 8 and therefore B = 10. By similar reasoning, C +E = 28, so E = 16 and D = 13, so the answer is (8 , 10, 12, 13, 16) . 6. The cross section of this cylindrical region looks like a circle of radius 2 with sectors cut oﬀ by the chords x = 1 and x =−1. Thus we can compute its area by breaking it into 30-60-90 triangles and 60◦ circular wedges. Thus the surface area of the of top and bottom of the solid is 2 √ 3 + 4π 3 . The sides consist of two rectangles of height 8 and width 2 √ 3, and two curved walls of height 8 and width 2π 3 . Thus the surface area is 2 ( 2 √ 3 + 4π 3 ) + 2× 16 √ 3 + 2× 16π 3 = 36 √ 3 + 40π 3 . 7. The only way that none of the four integers can diﬀer by a multiple of 5 is if they all have diﬀerent residues modulo 5, and these residues must sum to a multiple of 5. The only way this is possible is if the residues are 1, 2, 3, and 4. There are 4! = 24 ways to arrange the 329\n\n330 Team Solutions residues, then we are left with 7 “blocks” of ﬁve to be distributed among the four numbers, of which there are C(10, 7) = 120 ways to distribute, so the answer is 2880 . 8. Let A, B, and C be the largest, middle and smallest number rolled. By symmetry, we know that E[A] = 9−E[C] and that E[B] = 4 .5, and the expected value of ABC is 100E[A] + 10E[B] +E[C], so the challenge is to determine the expected value of the largest die roll. This is 9∑ k=0 kP (A =k), where P (A =k) =P (x1≤k)P (x2≤k)P (x3≤k)−P (x1≤k− 1)P (x2≤k− 1)P (x3≤k− 1), which is (k + 1)3−k3 1000 = 3k2 + 3k + 1 1000 . The expected value of A is 6.975, so the expected value of the largest possible three digit number formed is 697.5 + 45 + 2.025 = 744.525. We are looking for the integer portion, which is 744 . 9. log (2a− 7) loga · loga log(a− 2) =−1 2→ log (2a− 7) =−1 2log (a− 2) → 2a− 7 = 1√a− 2 Let x =√a− 2→ 2x2− 3 = 1 x→ 2x3− 3x− 1 = 0 → (x + 1) (2x2− 2x− 1) = 0 → x = 2± √ 12 4 → x = 1 + √ 3 2 →√a− 2 = 1 + √ 3 2 → a = 2 + ( 1 + √ 3 2 )2 → a = 2 + 4 + 2 √ 3 4 → a = 3 + √ 3 2 = 6 + √ 3 2 . 10. Since the left hand side of the equation is between 0 and 1, we know that 7 ≤ x≤ 8, so let x = 7 +y, where y ={x} is between 0 and 1. So y2 = (7 +y)2− 56→ 0 = 49 + 14y− 56→ y = 0.5→x = 7.5 .",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "2",
+          "expected": "144",
+          "points": 4.444444444444445,
+          "reference": "Official short answer: 144",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "3",
+          "expected": "6/25",
+          "points": 4.444444444444445,
+          "reference": "Official short answer: 6/25",
+          "match_mode": "normalized",
+          "aliases": [
+            "\\frac{6}{25}"
+          ]
+        },
+        {
+          "id": "4",
+          "expected": "21",
+          "points": 4.444444444444445,
+          "reference": "Official short answer: 21",
+          "match_mode": "normalized",
+          "aliases": [
+            "4884"
+          ]
+        },
+        {
+          "id": "5",
+          "expected": "(8, 10, 12, 13, 16)",
+          "points": 4.444444444444445,
+          "reference": "Official short answer: (8, 10, 12, 13, 16)",
+          "match_mode": "normalized",
+          "aliases": [
+            "(8,10,12,13,16)"
+          ]
+        },
+        {
+          "id": "6",
+          "expected": "",
+          "points": 0.0,
+          "reference": "",
+          "match_mode": "reference_llm",
+          "aliases": []
+        },
+        {
+          "id": "7",
+          "expected": "2880",
+          "points": 4.444444444444445,
+          "reference": "Official short answer: 2880",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "8",
+          "expected": "744",
+          "points": 4.444444444444445,
+          "reference": "Official short answer: 744",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "9",
+          "expected": "(6+√3)/2",
+          "points": 4.444444444444445,
+          "reference": "Official short answer: (6+√3)/2",
+          "match_mode": "normalized",
+          "aliases": [
+            "\\frac{6+\\sqrt{3}}{2}",
+            "3+√3/2"
+          ]
+        },
+        {
+          "id": "10",
+          "expected": "7.5",
+          "points": 4.444444444444445,
+          "reference": "Official short answer: 7.5",
+          "match_mode": "normalized",
+          "aliases": [
+            "15/2",
+            "\\frac{15}{2}"
+          ]
+        }
+      ]
     },
-    "status": "collected"
+    "status": "collected",
+    "competition_id": "arml_local",
+    "evaluation": {
+      "evaluator_id": "gold_answer_v1",
+      "status": "ready",
+      "rubric_path": "data/rubrics/numerical_sheet_reference_40_v1.json",
+      "fallback_evaluator_id": "rubric_llm_v1",
+      "deliverable": "answer_sheet",
+      "short_answer_source": "data/rubrics/arml_local_short_answers.json"
+    }
   },
   {
     "problem_id": "arml_local_2013",
     "competition": "ARML Local",
     "year": 2013,
-    "topic": "Team Round \u2014 2013",
+    "topic": "Team Round — 2013",
     "task_type": "team_contest",
     "team_size": 6,
     "source_url": "https://www.arml.com/ARML/arml_2019/public_contest_files/2009_2014_book/ARML_2009_2014.pdf",
     "source_file": "data/raw/arml_local/ARML_2009_2014.pdf",
     "total_points": 40,
-    "problem_description": "Team Problems 1. Compute the number of digits in the base-10 representation of 2 3344556. 2. Compute the length of the interval of the set of numbers x that satisfy \u230ax2\u230b =\u230a(x + 3)2\u230b, where\u230ax\u230b denotes the greatest integer less than or equal to x. 3. The sequence x1,x 2,x 3,... is formed by settingx1 = 1,x2 =\u22123, and forn> 2,xn is obtained by cubing one of the previous terms, chosen uniformly at random. Compute the probability (as a fraction) that x1x2x3x4x5 > 1000. 4. Compute the remainder when 8 8\u2212 44 is divided by 4 4\u2212 22. 5. A,B , and C are chosen at random (with replacement) from the set of digits {0, 1, 2,..., 9}. Compute the probability (as a fraction) that the units digit of ABC is a six. Note that 0 0 is unde\ufb01ned. 6. Compute the smallest integer b with exactly 4 positive integer divisors such that, when ex- pressed in base b, the number b! ends in exactly 10 zeroes. 7. Three balls of radius 1 are sitting on the surface of a table and are mutually tangent to each other. A solid circular cone of height 2 has its base on the surface of the table, and the lateral surface of the cone is tangent to each of the three spheres. Compute the radius of the base of the cone. 8. Compute the smallest positive angle x in degrees such that cos 2x = 1\u2212 sin 46\u25e6 2 sin2 112\u25e6\u2212 sin 46\u25e6 + 1. 9. For non-zero complex numbers a and b, the chain of equalities a b + 1 = b\u2212 7a a + 5 = 3b +a 4b + 5 is satis\ufb01ed. Compute the value of a + 6b. 10. Let S be the set{1, 2, 3, 4}. Compute the number of functions f :S\u2192S such that f(1) +f(f(1)) +f(f(f(1))) +f(f(f(f(1)))) = 13. 346",
+    "problem_description": "Team Problems 1. Compute the number of digits in the base-10 representation of 2 3344556. 2. Compute the length of the interval of the set of numbers x that satisfy ⌊x2⌋ =⌊(x + 3)2⌋, where⌊x⌋ denotes the greatest integer less than or equal to x. 3. The sequence x1,x 2,x 3,... is formed by settingx1 = 1,x2 =−3, and forn> 2,xn is obtained by cubing one of the previous terms, chosen uniformly at random. Compute the probability (as a fraction) that x1x2x3x4x5 > 1000. 4. Compute the remainder when 8 8− 44 is divided by 4 4− 22. 5. A,B , and C are chosen at random (with replacement) from the set of digits {0, 1, 2,..., 9}. Compute the probability (as a fraction) that the units digit of ABC is a six. Note that 0 0 is undeﬁned. 6. Compute the smallest integer b with exactly 4 positive integer divisors such that, when ex- pressed in base b, the number b! ends in exactly 10 zeroes. 7. Three balls of radius 1 are sitting on the surface of a table and are mutually tangent to each other. A solid circular cone of height 2 has its base on the surface of the table, and the lateral surface of the cone is tangent to each of the three spheres. Compute the radius of the base of the cone. 8. Compute the smallest positive angle x in degrees such that cos 2x = 1− sin 46◦ 2 sin2 112◦− sin 46◦ + 1. 9. For non-zero complex numbers a and b, the chain of equalities a b + 1 = b− 7a a + 5 = 3b +a 4b + 5 is satisﬁed. Compute the value of a + 6b. 10. Let S be the set{1, 2, 3, 4}. Compute the number of functions f :S→S such that f(1) +f(f(1)) +f(f(f(1))) +f(f(f(f(1)))) = 13. 346",
     "gold_label": {
-      "expected_answer": "Team Solutions 1. 2 3344556 = 106\u00d7 27\u00d7 34 = 106\u00d7 128\u00d7 81\u2248 106\u00d7 128\u00d7 80 = 107\u00d7 1024 = 1.024\u00d7 1010 which has 11 digits. 2. Look at the graph of y = \u230ax2\u230b and \ufb01nd plateaus of the graphs that are separated by a distance of 3, as y = \u230a (x + 3)2\u230b is simply the same graph left-shifted by three units. The largest distance between two points on the level y = 0 is 2, on the level y = 1 is 2 \u221a 2, and on the level y = 2 is 2 \u221a 3. Points in di\ufb00erent plateaus on higher levels are separated by a distance greater than three, so all solutions occur on the level y = 2. The left interval on the levely = 2 of the graph of y =\u230ax2\u230b is (\u2212 \u221a 3,\u2212 \u221a 2], and the right interval on the level y = 2 on the graph of y = \u230a (x + 3)2\u230b is [ \u221a 2\u2212 3, \u221a 3\u2212 3). The intersection between the two intervals is [ \u221a 2\u2212 3,\u2212 \u221a 2], so the length of the interval is 3 \u2212 2 \u221a 2 . 3. For the product to be positive, there must be two or four negative terms in the sequence. Having only two negative terms implies that \u22123 and\u221227 are the only terms in the sequence not equal to one, and thus the product is less than 1000. Therefore, the last four terms must all be not equal to one. In that case, the product is at least \u22123\u00d7\u2212 27\u00d7\u2212 27\u00d7\u2212 27> 1000, so it su\ufb03ces for all of the terms to be negative. This occurs with probability 1 2\u00d7 2 3\u00d7 3 4 = 1 4 . 4. 4 4\u2212 22 = 28\u2212 22 = 22(26\u2212 1) and 88\u2212 44 = 224\u2212 28 = 22(222\u2212 26) = 22 (222\u2212 216 + 216\u2212 210 + 210\u2212 24) + 22 (24\u2212 26) = 22 (26\u2212 1) (216 + 210 + 24) + (26\u2212 28) = 22 (26\u2212 1) (216 + 210 + 24) + (\u221228 + 26\u2212 22 + 22) = 22 (26\u2212 1) (216 + 210 + 24)\u2212 (28\u2212 22) + (26\u2212 22) = 22 (26\u2212 1) (216 + 210 + 24)\u2212 22 (26\u2212 1) + (26\u2212 22). The \ufb01rst two terms are multiples of 4 4\u2212 22, so we are only interested in the last term, which is 26\u2212 22 = 64\u2212 4 = 60 , which is less than 4 4\u2212 22. 347\n\n348 Team Solutions 5. We know that A must be even and non-zero. If A is 6, then BC > 0 so there are 9\u00d7 10 = 90 choices for B and C. If A is 4, then BC must be even and greater than zero, so there are 4\u00d7 9 = 36 choices for B and C (as B must be non-zero and even and C must be non- zero). If A is 2 or 8, then BC must be a multiple of four and greater than zero, so there are 2\u00d7 9 + 2\u00d7 8 = 34 choices for B andC (conditioning on whether B is 0 or 2 mod 4: if B is a multiple of 4 then C must be non-zero, if B is even but not a multiple of four, then C cannot be 0 or 1). The total is 194, so the probability (as a fraction) is 194 1000 = 97 500 = 0.194 . 6. If b = p\u00d7q, with p and q primes and p < q, then b! is divisible by qp (as there are exactly p multiples of q between 1 and pq) but not divisible by qp+1, so (b!)b ends in p zeroes, which won\u2019t work, since 10 is not prime. Therefore, b = p3 for a prime p. Then b! is divisible by pp2+p+1 (as there are p2 multiples of p between 1 and p3, p multiples of p2, and 1 multiple of p3) but not divisible by pp2+p+2, so (b!)b ends in \u230a p2 +p + 1 3 \u230b zeroes. Testing values of p quickly gets p = 5, so b = 53 = 125 . 7. Let the apex of the cone be A, the center of its base B, and let P be a point of tangency between the side of the cone and one of the spheres. In the vertical cross-section below we label O,Q, andR as the center, bottom, and top of that sphere, and C the point on the base of the cone such that P is on AC. If we projected the centers of all three spheres onto the table\u2019s surface, B would be the center of an equilateral triangle of side length 2. So BQ = 2\u221a 3 = 2 \u221a 3 3 . Note that AP = AR = BQ and BC + CP = BQ, so we know that if the radius of the base of the cone is r, then AP =AR =BC +CQ =r +PC =r +AC\u2212AP\u2192AC = 2\u00d7AP\u2212r: 22 +r2 =AC2 = (2\u00d7AP\u2212r)2 = ( 4 \u221a 3 3 \u2212r )2 =r2\u2212 8 \u221a 3 3 r + 16 3 8 \u221a 3 3 r = 4 3\u2192r = \u221a 3 6 . 8. Invert and subtract 1 from both sides, then take the square root to get |tanx| = \u221a 2 cos2 22\u25e6 1\u2212 sin 46\u25e6 = \u221a 1 + (2 cos2 22\u25e6\u2212 1) 1\u2212 cos 44\u25e6 = \u221a 1 + cos 44\u25e6 1\u2212 cos 44\u25e6 = cot 22\u25e6. And the smallest positive angle x in degrees that satis\ufb01es this is x = 68\u25e6 .\n\nTeam Solutions 349 9. Using the property u v + x y = u +x v +y if u v = x y (unless v,y , or v +y = 0): a b + 1 = 3 (b\u2212 7a 3b +a ) + 22 ( a b + 1 ) \u2212 3b +a 4b + 5 = 0 32 + 3a + 18b unless 32 + 3a + 18b = 0. If 32 + 3a + 18b\u0338= 0, then a = 0, a contradiction to the conditions in the problem. Therefore 32 + 3a + 18b = 0, so a + 6b = \u221232 3 . 10. Consider the orbit of 1 under repeated applications of f. If f(1) = 1, then the orbit is 1 \u2192 1\u2192 1\u2192 1\u2192 1, but 1 + 1 + 1 + 1< 13. If f(1) = 2, then the next three values must sum to 11, so must be 1 \u2192 2\u2192 3\u2192 4\u2192 4 or 1\u2192 2\u2192 4\u2192 3\u2192 4 (1\u2192 2\u2192 4\u2192 4\u2192 3 is impossible, since 4 maps to two di\ufb00erent numbers). Iff(1) = 3, then the next three values must sum to 10, so must be some arrangement of 4, 4, 2 or 4, 3, 3, leading to two solutions 1 \u2192 3\u2192 2\u2192 4\u2192 4 and 1\u2192 3\u2192 4\u2192 2\u2192 4. The other possible arrangements lead to contradictions. Iff(1) = 4, then the next three values must sum to 9, so must be some arrangement of 4 , 4, 1 or 4, 3, 2 or 3, 3, 3, leading to three solutions: 1 \u2192 4\u2192 3\u2192 3\u2192 3, 1\u2192 4\u2192 2\u2192 3\u2192 4, and 1\u2192 4\u2192 3\u2192 2\u2192 4. The other possible arrangements lead to contradictions. Note that for the \ufb01rst orbit, there are four possible functions with this orbit, since f(2) can be anything in S. The answer is 10 .",
-      "grading_rubric": "ARML Local Team Round \u2014 numerical answers, 4 points each.",
-      "human_baseline": null
+      "expected_answer": "Team Solutions 1. 2 3344556 = 106× 27× 34 = 106× 128× 81≈ 106× 128× 80 = 107× 1024 = 1.024× 1010 which has 11 digits. 2. Look at the graph of y = ⌊x2⌋ and ﬁnd plateaus of the graphs that are separated by a distance of 3, as y = ⌊ (x + 3)2⌋ is simply the same graph left-shifted by three units. The largest distance between two points on the level y = 0 is 2, on the level y = 1 is 2 √ 2, and on the level y = 2 is 2 √ 3. Points in diﬀerent plateaus on higher levels are separated by a distance greater than three, so all solutions occur on the level y = 2. The left interval on the levely = 2 of the graph of y =⌊x2⌋ is (− √ 3,− √ 2], and the right interval on the level y = 2 on the graph of y = ⌊ (x + 3)2⌋ is [ √ 2− 3, √ 3− 3). The intersection between the two intervals is [ √ 2− 3,− √ 2], so the length of the interval is 3 − 2 √ 2 . 3. For the product to be positive, there must be two or four negative terms in the sequence. Having only two negative terms implies that −3 and−27 are the only terms in the sequence not equal to one, and thus the product is less than 1000. Therefore, the last four terms must all be not equal to one. In that case, the product is at least −3×− 27×− 27×− 27> 1000, so it suﬃces for all of the terms to be negative. This occurs with probability 1 2× 2 3× 3 4 = 1 4 . 4. 4 4− 22 = 28− 22 = 22(26− 1) and 88− 44 = 224− 28 = 22(222− 26) = 22 (222− 216 + 216− 210 + 210− 24) + 22 (24− 26) = 22 (26− 1) (216 + 210 + 24) + (26− 28) = 22 (26− 1) (216 + 210 + 24) + (−28 + 26− 22 + 22) = 22 (26− 1) (216 + 210 + 24)− (28− 22) + (26− 22) = 22 (26− 1) (216 + 210 + 24)− 22 (26− 1) + (26− 22). The ﬁrst two terms are multiples of 4 4− 22, so we are only interested in the last term, which is 26− 22 = 64− 4 = 60 , which is less than 4 4− 22. 347\n\n348 Team Solutions 5. We know that A must be even and non-zero. If A is 6, then BC > 0 so there are 9× 10 = 90 choices for B and C. If A is 4, then BC must be even and greater than zero, so there are 4× 9 = 36 choices for B and C (as B must be non-zero and even and C must be non- zero). If A is 2 or 8, then BC must be a multiple of four and greater than zero, so there are 2× 9 + 2× 8 = 34 choices for B andC (conditioning on whether B is 0 or 2 mod 4: if B is a multiple of 4 then C must be non-zero, if B is even but not a multiple of four, then C cannot be 0 or 1). The total is 194, so the probability (as a fraction) is 194 1000 = 97 500 = 0.194 . 6. If b = p×q, with p and q primes and p < q, then b! is divisible by qp (as there are exactly p multiples of q between 1 and pq) but not divisible by qp+1, so (b!)b ends in p zeroes, which won’t work, since 10 is not prime. Therefore, b = p3 for a prime p. Then b! is divisible by pp2+p+1 (as there are p2 multiples of p between 1 and p3, p multiples of p2, and 1 multiple of p3) but not divisible by pp2+p+2, so (b!)b ends in ⌊ p2 +p + 1 3 ⌋ zeroes. Testing values of p quickly gets p = 5, so b = 53 = 125 . 7. Let the apex of the cone be A, the center of its base B, and let P be a point of tangency between the side of the cone and one of the spheres. In the vertical cross-section below we label O,Q, andR as the center, bottom, and top of that sphere, and C the point on the base of the cone such that P is on AC. If we projected the centers of all three spheres onto the table’s surface, B would be the center of an equilateral triangle of side length 2. So BQ = 2√ 3 = 2 √ 3 3 . Note that AP = AR = BQ and BC + CP = BQ, so we know that if the radius of the base of the cone is r, then AP =AR =BC +CQ =r +PC =r +AC−AP→AC = 2×AP−r: 22 +r2 =AC2 = (2×AP−r)2 = ( 4 √ 3 3 −r )2 =r2− 8 √ 3 3 r + 16 3 8 √ 3 3 r = 4 3→r = √ 3 6 . 8. Invert and subtract 1 from both sides, then take the square root to get |tanx| = √ 2 cos2 22◦ 1− sin 46◦ = √ 1 + (2 cos2 22◦− 1) 1− cos 44◦ = √ 1 + cos 44◦ 1− cos 44◦ = cot 22◦. And the smallest positive angle x in degrees that satisﬁes this is x = 68◦ .\n\nTeam Solutions 349 9. Using the property u v + x y = u +x v +y if u v = x y (unless v,y , or v +y = 0): a b + 1 = 3 (b− 7a 3b +a ) + 22 ( a b + 1 ) − 3b +a 4b + 5 = 0 32 + 3a + 18b unless 32 + 3a + 18b = 0. If 32 + 3a + 18b̸= 0, then a = 0, a contradiction to the conditions in the problem. Therefore 32 + 3a + 18b = 0, so a + 6b = −32 3 . 10. Consider the orbit of 1 under repeated applications of f. If f(1) = 1, then the orbit is 1 → 1→ 1→ 1→ 1, but 1 + 1 + 1 + 1< 13. If f(1) = 2, then the next three values must sum to 11, so must be 1 → 2→ 3→ 4→ 4 or 1→ 2→ 4→ 3→ 4 (1→ 2→ 4→ 4→ 3 is impossible, since 4 maps to two diﬀerent numbers). Iff(1) = 3, then the next three values must sum to 10, so must be some arrangement of 4, 4, 2 or 4, 3, 3, leading to two solutions 1 → 3→ 2→ 4→ 4 and 1→ 3→ 4→ 2→ 4. The other possible arrangements lead to contradictions. Iff(1) = 4, then the next three values must sum to 9, so must be some arrangement of 4 , 4, 1 or 4, 3, 2 or 3, 3, 3, leading to three solutions: 1 → 4→ 3→ 3→ 3, 1→ 4→ 2→ 3→ 4, and 1→ 4→ 3→ 2→ 4. The other possible arrangements lead to contradictions. Note that for the ﬁrst orbit, there are four possible functions with this orbit, since f(2) can be anything in S. The answer is 10 .",
+      "grading_rubric": "ARML Local Team Round — numerical answers, 4 points each.",
+      "human_baseline": null,
+      "parts": [
+        {
+          "id": "1",
+          "expected": "11",
+          "points": 6.666666666666667,
+          "reference": "Team Solutions 1. 2 3344556 = 106× 27× 34 = 106× 128× 81≈ 106× 128× 80 = 107× 1024 = 1.024× 1010 which has 11 digits. 2. Look at the graph of y = ⌊x2⌋ and ﬁnd plateaus of the graphs that are separated by a distance of 3, as y = ⌊ (x + 3)2⌋ is simply the same graph left-shifted by three units. The largest distance between two points on the level y = 0 is 2, on the level y = 1 is 2 √ 2, and on the level y = 2 is 2 √ 3. Points in diﬀerent plateaus on higher levels are separated by a distance greater than three, so all solutions occur on the level y = 2. The left interval on the levely = 2 of the graph of y =⌊x2⌋ is (− √ 3,− √ 2], and the right interval on the level y = 2 on the graph of y = ⌊ (x + 3)2⌋ is [ √ 2− 3, √ 3− 3). The intersection between the two intervals is [ √ 2− 3,− √ 2], so the length of the interval is 3 − 2 √ 2 . 3. For the product to be positive, there must be two or four negative terms in the sequence. Having only two negative terms implies that −3 and−27 are the only terms in the sequence not equal to one, and thus the product is less than 1000. Therefore, the last four terms must all be not equal to one. In that case, the product is at least −3×− 27×− 27×− 27> 1000, so it suﬃces for all of the terms to be negative. This occurs with probability 1 2× 2 3× 3 4 = 1 4 . 4. 4 4− 22 = 28− 22 = 22(26− 1) and 88− 44 = 224− 28 = 22(222− 26) = 22 (222− 216 + 216− 210 + 210− 24) + 22 (24− 26) = 22 (26− 1) (216 + 210 + 24) + (26− 28) = 22 (26− 1) (216 + 210 + 24) + (−28 + 26− 22 + 22) = 22 (26− 1) (216 + 210 + 24)− (28− 22) + (26− 22) = 22 (26− 1) (216 + 210 + 24)− 22 (26− 1) + (26− 22). The ﬁrst two terms are multiples of 4 4− 22, so we are only interested in the last term, which is 26− 22 = 64− 4 = 60 , which is less than 4 4− 22. 347\n\n348 Team Solutions 5. We know that A must be even and non-zero. If A is 6, then BC > 0 so there are 9× 10 = 90 choices for B and C. If A is 4, then BC must be even and greater than zero, so there are 4× 9 = 36 choices for B and C (as B must be non-zero and even and C must be non- zero). If A is 2 or 8, then BC must be a multiple of four and greater than zero, so there are 2× 9 + 2× 8 = 34 choices for B andC (conditioning on whether B is 0 or 2 mod 4: if B is a multiple of 4 then C must be non-zero, if B is even but not a multiple of four, then C cannot be 0 or 1). The total is 194, so the probability (as a fraction) is 194 1000 = 97 500 = 0.194 . 6. If b = p×q, with p and q primes and p < q, then b! is divisible by qp (as there are exactly p multiples of q between 1 and pq) but not divisible by qp+1, so (b!)b ends in p zeroes, which won’t work, since 10 is not prime. Therefore, b = p3 for a prime p. Then b! is divisible by pp2+p+1 (as there are p2 multiples of p between 1 and p3, p multiples of p2, and 1 multiple of p3) but not divisible by pp2+p+2, so (b!)b ends in ⌊ p2 +p + 1 3 ⌋ zeroes. Testing values of p quickly gets p = 5, so b = 53 = 125 . 7. Let the apex of the cone be A, the center of its base B, and let P be a point of tangency between the side of the cone and one of the spheres. In the vertical cross-section below we label O,Q, andR as the center, bottom, and top of that sphere, and C the point on the base of the cone such that P is on AC. If we projected the centers of all three spheres onto the table’s surface, B would be the center of an equilateral triangle of side length 2. So BQ = 2√ 3 = 2 √ 3 3 . Note that AP = AR = BQ and BC + CP = BQ, so we know that if the radius of the base of the cone is r, then AP =AR =BC +CQ =r +PC =r +AC−AP→AC = 2×AP−r: 22 +r2 =AC2 = (2×AP−r)2 = ( 4 √ 3 3 −r )2 =r2− 8 √ 3 3 r + 16 3 8 √ 3 3 r = 4 3→r = √ 3 6 . 8. Invert and subtract 1 from both sides, then take the square root to get |tanx| = √ 2 cos2 22◦ 1− sin 46◦ = √ 1 + (2 cos2 22◦− 1) 1− cos 44◦ = √ 1 + cos 44◦ 1− cos 44◦ = cot 22◦. And the smallest positive angle x in degrees that satisﬁes this is x = 68◦ .\n\nTeam Solutions 349 9. Using the property u v + x y = u +x v +y if u v = x y (unless v,y , or v +y = 0): a b + 1 = 3 (b− 7a 3b +a ) + 22 ( a b + 1 ) − 3b +a 4b + 5 = 0 32 + 3a + 18b unless 32 + 3a + 18b = 0. If 32 + 3a + 18b̸= 0, then a = 0, a contradiction to the conditions in the problem. Therefore 32 + 3a + 18b = 0, so a + 6b = −32 3 . 10. Consider the orbit of 1 under repeated applications of f. If f(1) = 1, then the orbit is 1 → 1→ 1→ 1→ 1, but 1 + 1 + 1 + 1< 13. If f(1) = 2, then the next three values must sum to 11, so must be 1 → 2→ 3→ 4→ 4 or 1→ 2→ 4→ 3→ 4 (1→ 2→ 4→ 4→ 3 is impossible, since 4 maps to two diﬀerent numbers). Iff(1) = 3, then the next three values must sum to 10, so must be some arrangement of 4, 4, 2 or 4, 3, 3, leading to two solutions 1 → 3→ 2→ 4→ 4 and 1→ 3→ 4→ 2→ 4. The other possible arrangements lead to contradictions. Iff(1) = 4, then the next three values must sum to 9, so must be some arrangement of 4 , 4, 1 or 4, 3, 2 or 3, 3, 3, leading to three solutions: 1 → 4→ 3→ 3→ 3, 1→ 4→ 2→ 3→ 4, and 1→ 4→ 3→ 2→ 4. The other possible arrangements lead to contradictions. Note that for the ﬁrst orbit, there are four possible functions with this orbit, since f(2) can be anything in S. The answer is 10 .",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "2",
+          "expected": "3-2√2",
+          "points": 6.666666666666667,
+          "reference": "Official short answer: 3-2√2",
+          "match_mode": "normalized",
+          "aliases": [
+            "3-2\\sqrt{2}",
+            "3 − 2√2"
+          ]
+        },
+        {
+          "id": "3",
+          "expected": "1/4",
+          "points": 6.666666666666667,
+          "reference": "Official short answer: 1/4",
+          "match_mode": "normalized",
+          "aliases": [
+            "\\frac{1}{4}"
+          ]
+        },
+        {
+          "id": "4",
+          "expected": "60",
+          "points": 6.666666666666667,
+          "reference": "Official short answer: 60",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "5",
+          "expected": "0.194",
+          "points": 6.666666666666667,
+          "reference": "Official short answer: 0.194",
+          "match_mode": "normalized",
+          "aliases": [
+            "97/500",
+            "\\frac{97}{500}",
+            "194/1000"
+          ]
+        },
+        {
+          "id": "6",
+          "expected": "",
+          "points": 0.0,
+          "reference": "",
+          "match_mode": "reference_llm",
+          "aliases": []
+        },
+        {
+          "id": "7",
+          "expected": "",
+          "points": 0.0,
+          "reference": "",
+          "match_mode": "reference_llm",
+          "aliases": []
+        },
+        {
+          "id": "8",
+          "expected": "",
+          "points": 0.0,
+          "reference": "",
+          "match_mode": "reference_llm",
+          "aliases": []
+        },
+        {
+          "id": "9",
+          "expected": "",
+          "points": 0.0,
+          "reference": "",
+          "match_mode": "reference_llm",
+          "aliases": []
+        },
+        {
+          "id": "10",
+          "expected": "10",
+          "points": 6.666666666666667,
+          "reference": "Official short answer: 10",
+          "match_mode": "normalized",
+          "aliases": []
+        }
+      ]
     },
-    "status": "collected"
+    "status": "collected",
+    "competition_id": "arml_local",
+    "evaluation": {
+      "evaluator_id": "gold_answer_v1",
+      "status": "ready",
+      "rubric_path": "data/rubrics/numerical_sheet_reference_40_v1.json",
+      "fallback_evaluator_id": "rubric_llm_v1",
+      "deliverable": "answer_sheet",
+      "short_answer_source": "data/rubrics/arml_local_short_answers.json"
+    }
   },
   {
     "problem_id": "arml_local_2014",
     "competition": "ARML Local",
     "year": 2014,
-    "topic": "Team Round \u2014 2014",
+    "topic": "Team Round — 2014",
     "task_type": "team_contest",
     "team_size": 6,
     "source_url": "https://www.arml.com/ARML/arml_2019/public_contest_files/2009_2014_book/ARML_2009_2014.pdf",
     "source_file": "data/raw/arml_local/ARML_2009_2014.pdf",
     "total_points": 60,
-    "problem_description": "Team Problems Note: In 2014, the Theme Round was removed and the Team Round was expanded to 15 questions and 45 minutes. 1. There are two times between noon and 1 pm where the hour and minute hands of a clock are perpendicular. Compute the number of minutes between these two times. 2. The three distinct integer roots of x3 +qx2\u2212 2qx\u2212 8 = 0 form an arithmetic progression. Compute q. 3. Suppose that n leaves a remainder of 24 when divided by 77. If n leaves a remainder of A when divided by 7 and a remainder of B when divided by 11, compute A +B. 4. Compute the length of the interval of values x for which 1 x +\u221ax + 1 x\u2212\u221ax\u2265 1. 5. Compute the number of positive integer factors of N = 1,004,006,004,001. 6. For a positive integer n, let p(n) be the product of the digits of n. Compute the number of positive integers less than 1000 for which p(p(n)) = 6. 7. The continued fraction 1+ 1 3+ 1 1+ 1 3+ 1 ... = A+ \u221a B C for integersA,B , andC. Compute the minimum value of A +B +C. 8. Compute the number of ways to color the cells of a 3 \u00d7 3 grid red, green, or blue such that each color appears in at least two cells and no cells that share an edge have the same color. Note that re\ufb02ections and rotations of a grid are considered distinct. 9. A quadrilateral MATH is inscribed in a circle of radius 10. MA = AT = 12 and MH = TH = 16. Compute the radius of the circle inscribed within MATH . 10. Let the legs of a right triangle have lengths x and y. If x +y = 98 and x3 +y3 = 517832, compute the area of the triangle. 11. The expression n2 +n\u2212 9 is a multiple of 101 for two positive integers less than 100. One of these integers is 10. Compute the other one. 12. The graph of the line y = kx intersects the graph of y =|x\u2212 4| at A and B, where A is to the left of B. Let O be the origin. If OA =AB, compute k. 13. Two circles pass through the points (9 , 0) and (8, 7) and are tangent to the y-axis. Compute the sum of the radii of these two circles. 14. If 2 (GERMAN) = 5 (MANGER), and every letter corresponds to a di\ufb00erent non-zero digit, compute the value of ENGRAM. 368\n\nTeam Problems 369 15. An interior diagonal of a polyhedronP is a line segment whose endpoints are vertices ofP and which lies entirely in the interior of P (that is, does not intersect any faces of P ), except for its endpoints. Find the maximum possible number of interior diagonals if P has 12 vertices.",
+    "problem_description": "Team Problems Note: In 2014, the Theme Round was removed and the Team Round was expanded to 15 questions and 45 minutes. 1. There are two times between noon and 1 pm where the hour and minute hands of a clock are perpendicular. Compute the number of minutes between these two times. 2. The three distinct integer roots of x3 +qx2− 2qx− 8 = 0 form an arithmetic progression. Compute q. 3. Suppose that n leaves a remainder of 24 when divided by 77. If n leaves a remainder of A when divided by 7 and a remainder of B when divided by 11, compute A +B. 4. Compute the length of the interval of values x for which 1 x +√x + 1 x−√x≥ 1. 5. Compute the number of positive integer factors of N = 1,004,006,004,001. 6. For a positive integer n, let p(n) be the product of the digits of n. Compute the number of positive integers less than 1000 for which p(p(n)) = 6. 7. The continued fraction 1+ 1 3+ 1 1+ 1 3+ 1 ... = A+ √ B C for integersA,B , andC. Compute the minimum value of A +B +C. 8. Compute the number of ways to color the cells of a 3 × 3 grid red, green, or blue such that each color appears in at least two cells and no cells that share an edge have the same color. Note that reﬂections and rotations of a grid are considered distinct. 9. A quadrilateral MATH is inscribed in a circle of radius 10. MA = AT = 12 and MH = TH = 16. Compute the radius of the circle inscribed within MATH . 10. Let the legs of a right triangle have lengths x and y. If x +y = 98 and x3 +y3 = 517832, compute the area of the triangle. 11. The expression n2 +n− 9 is a multiple of 101 for two positive integers less than 100. One of these integers is 10. Compute the other one. 12. The graph of the line y = kx intersects the graph of y =|x− 4| at A and B, where A is to the left of B. Let O be the origin. If OA =AB, compute k. 13. Two circles pass through the points (9 , 0) and (8, 7) and are tangent to the y-axis. Compute the sum of the radii of these two circles. 14. If 2 (GERMAN) = 5 (MANGER), and every letter corresponds to a diﬀerent non-zero digit, compute the value of ENGRAM. 368\n\nTeam Problems 369 15. An interior diagonal of a polyhedronP is a line segment whose endpoints are vertices ofP and which lies entirely in the interior of P (that is, does not intersect any faces of P ), except for its endpoints. Find the maximum possible number of interior diagonals if P has 12 vertices.",
     "gold_label": {
-      "expected_answer": "Team Solutions 1. The minute hand moves at a rate of 360 degrees per hour (or 6 degrees per minute), the hour hand moves at a rate of 30 degrees per hour (or 0.5 degrees per minute). Therefore, the angle between the hour and the minute hand increases by 5.5 degrees per minute. The \ufb01rst time the hands are perpendicular, the angle between them is 90 degrees. The second time is when the angle is 270 degrees, which occurs 180/5.5 or 360 /11 minutes later. 2. The product of the roots is 8, and the possible sets of distinct integer roots are {\u00b11,\u00b12,\u00b14}, {\u00b12,\u00b12,\u00b12}, and {\u00b11,\u00b11,\u00b18} where either zero or two of the roots are negative. Of all of the cases listed here, only one has distinct roots in arithmetic progression with two roots negative,{\u22124,\u22121, 2}. The corresponding polynomial is (x\u22122)(x+1)(x+4) = x3+3x2\u22126x\u22128, and the answer is q = 3 . 3. n = 77k +24 for some integer value of k. When n is divided by 7, the 77k term divides evenly, so the remainder is the residue of 24 modulo 7, or 3. Similarly when n is divided by 11, the remainder is 2. The answer is 3 + 2 = 5 . 4. 1 x +\u221ax + 1 x\u2212\u221ax = 2x x(x\u2212 1). The domain of the function is all positive x except 1. For x between 0 and 1, the denominator is negative, so the function is negative. For x greater than 1, the function is strictly decreasing. It equals 1 when 2x x(x\u2212 1) = 1\u2192 2x = x2\u2212x\u2192 x2\u2212 3x = 0\u2192x = 3, so the interval is (1, 3), which has length 2 . 5. Considering that the non-zero digits of N look like binomial coe\ufb03cients, N is the binomial expansion of (1000 + 1)4. Since 1001 = 7\u00d7 11\u00d7 13, 1,004,006,004,001 = 74\u00d7 114\u00d7 134. The prime factorization of any factor of N will have 0 to 4 powers of each of the primes 7, 11, and 13, so the total number of factors is 5 3 = 125 . 6. In order for p(p(n)) = 6, p(n) must be 6, 16, or 32 (no other product of up to three digits k has the property that p(k) = 6). Treat the cases individually. p(n) = 6: If n has one digit, then n = 6. If n has two digits, then n is either 16, 23, 32, or 61. If n has three digits, the digits of n must be some permutation of 116 or 123. There are three of the former (ignoring duplicates) and six of the latter, so there are 14 numbers less than 1000 for which p(n) = 6. p(n) = 16: All digits will be powers of two. There are three two digit numbers: 28, 44, and 82, and (6 4 ) \u2212 3 = 12 three digit numbers (think of the digits as distinct boxes and the four powers of two as identical balls to be distributed in three buckets, but we need to throw out the three cases where all four balls go into one bucket) so there are 15 numbers less than 1000 for which p(n) = 16. p(n) = 32: All digits will be powers of two. There are two two-digit numbers: 48, and 84, and(7 5 ) \u2212 6\u2212 3 = 12 three digit numbers (again, think of the digits as distinct boxes and the \ufb01ve powers of two as identical balls to be distributed, but we have to remove the six cases where 370\n\nTeam Solutions 371 one box gets 4 balls and the three cases where one box gets 5 balls, so there are 14 numbers less than 1000 for which p(n) = 32. The total is 14 + 15 + 14 = 43 . 7. x = 1 + 1 3+ 1 1+ 1 3+ 1 ... \u2192x = 1 + 1 3+ 1 x \u2192x\u2212 1 = 1 3+ 1 x \u2192 3x + 1\u2212 3\u2212 1 x = 1\u2192 3x2\u2212 3x\u2212 1 = 0\u2192x = 3\u00b1 \u221a 21 6 . The positive root is the value, so A +B +C = 3 + 21 + 6 = 30 . 8. Assume the center is blue. Then 1, 2, 3, or 4 of the corners must be blue. If 1 corner is blue, there are 4 possible corners to choose from and 2 ways to \ufb01nish the grid with alternating red and green squares. If 2 corners are blue and the 2 corners are opposite, there are two ways to choose opposing corners and 2 ways to color each of the remaining paths of 3 squares with alternating colors. If 2 corners are blue and the corners are consecutive, there are 4 ways to choose consecutive corners, 2 ways to color the square between the two blue corners, and 2 ways to color the remaining squares. If three of the corners are blue, there are 4 ways to choose three blue corners, 2 choices for the color of each of the squares between 2 blue corners, and 2 ways to color the path of length 3. However, we must discard two of those cases that only contain 1 red or green square in the corner. If 4 corners are blue, there are C(4, 2) = 6 ways to pick the two green (or red) cells. Totaling these cases up we get (4\u00d7 2) + (2\u00d7 2\u00d7 2) + (4\u00d7 2\u00d7 2) + (4\u00d7 (2\u00d7 2\u00d7 2\u2212 2)) + 6 = 62. Since there are three colors to choose for the center square, the answer is 186 . 9. Since AH is a diameter of length 20, we know thatHAM is a right triangle with right angle at M. Let the center of the inscribed circle beN, and let radii of the inscribed circle intersectMA atY andMH atX. Then MYNX is a square of side length r. Further, triangles AYN and AMH are similar; thus YN MH = AY AM\u2192 r 16 = 12\u2212r 12 \u2192 12r = 192\u2212 16r\u2192r = 192 28 = 48 7 .\n\n372 Team Solutions 10. We can factorx3+y3 = (x+y)(x2\u2212xy+y2), so 517832 = 98(x2\u2212xy+y2)\u2192x2\u2212xy+y2 = 5284. In addition, (x +y)2 =x2 + 2xy +y2 = 982 = 9604. Subtracting the \ufb01rst equation from the second, we get that 3xy = 4320, so the area of the triangle is xy 2 = 4320 6 = 720 . 11. Let n = 10 +t, then the expression is (10 + t)2 + (10 +t)\u2212 9 =t2 + 21t + 101. For this value to be a multiple of 101, it means that t2 + 21t = t(t + 21) must be a multiple of 101. Since 101 is prime, one of the two factors must be a multiple of 101. Since t can be at most 89, t + 21 = 101\u2192t = 80\u2192n = 90 . 12. A and B must be on di\ufb00erent branches of the absolute value graph, and the x-coordinates of O, A, and B must be evenly spaced. Let the points be O(0, 0), A(t, 4\u2212t), and B(2t, 2t\u2212 4). Equating OA and AB, we are looking for the solution to \u221a t2 + (4\u2212t)2 = \u221a t2 + (3t\u2212 8)2. Squaring both sides and subtracting t2 from each side yields (4\u2212t)2 = (3t\u2212 8)2, yielding two solutions, t = 2, 3. If t = 2, the points are (0, 0), (2, 2), and (4, 0), which are not collinear. If t = 3, the points are (0, 0), (3, 1), and (6, 2), which are collinear, so k = 1/3 . 13. Assume the circle has center ( x,y ) and radius r. The following three equations must be satis\ufb01ed: (x\u2212 9)2 +y2 = r2 (x\u2212 8)2 + (y\u2212 7)2 = r2 x = r. Subtracting the \ufb01rst equation from the second, we get 2x\u221217\u221214y+49 = 0\u2192 14y\u22122x\u221232 = 0\u2192 x = 7y\u2212 16. Squaring the third equation and subtracting it from the second, we get \u221216x + 64 + (y\u2212 7)2 = 0. Substituting x = 7y\u2212 16 gives\u221216(7y\u2212 16) + 64 + (y\u2212 7)2 = 0\u2192y2\u2212 126y + 369 = 0. Therefore, y is either 3 or 123, with corresponding values of x (and radii) of 5 and 845. The sum of the radii is 850 . 14. Let x = GER, y = MAN, then 2(1000x +y) = 5(1000y +x)\u2192 1995x = 4998y\u2192 x y = 4998 1995 = 238 95 . Since both x and y must be three digit integers with all non-zero digits, we multiply the numerator and denominator by 3 to get x = 714 and y = 285, rearranging the digits to get ENGRAM = 157482 . 15. It is fair to assume that each face of a polyhedron with the maximal number of interior diagonals is a triangle (otherwise some diagonals are on the faces of the polyhedron). If a triangular faced polyhedron P has F faces, E edges, and V vertices, then it has (V 2 ) \u2212E interior diagonals. For a polyhedron with all triangular faces, 3 F = 2E. Using Euler\u2019s formula for polyhedra ( V +F =E + 2), we get V + 2E 3 = E + 2\u2192 E = 3V \u2212 6, so the maximal number of interior diagonals is (V 2 ) \u2212 3(V\u2212 2) = (V\u22123)(V\u22124) 2 , which for V = 12 is 36 . A sample polyhedron that has 36 interior diagonals is two convex pyramids that share a common decagon base.\n\nIndividual Problems 1. Compute the area of the region de\ufb01ned by 2 |x\u2212y| +|y|\u2264 2. 2. Compute the sum of all integers of the form 2 0 1 4AB 5 that are multiples of 225. 3. Compute the sum of all solutions to log 4x + logx2 1 8 = 1. 4. In triangle COW , CO = OW = 2014, and m \u2220O = 2\u03b8. In triangle PIG , PI = IG = 2014, and m\u2220I =\u03b8. If COW and PIG have the same area, compute \u03b8 in degrees. 5. For a positive integer n, let s(n) be the sum of the digits of n. Compute the number of positive integers less than 1000 for which the digits are non-decreasing from left to right and s(s(s(n))) = 3. 6. Compute the integer value of a such that 2\u2212i is a solution to x3 +ax =\u221220. 7. Compute the whole number N such that N 6 = 6,321,363,049. 8. Given a circle O with center E and diameter AB, C is on O and D is on AB such that CD bisects \u2220ACB. If AE = 13 and BC = 10, compute ED. 9. Jef is playing a game with three rounds. In Round 1, he \ufb02ips 4 coins. In Round 2 and Round 3 he can re-\ufb02ip some or all (or none) of the coins and wins the game if all of the coins are heads or all of the coins are tails at the end of any round. Assuming Jef uses an optimal strategy, compute the probability he wins the game. 10. In rectangle MATH , MA = 3 and AT = 1. Equilateral triangles \u25b3THE and\u25b3HUM are constructed in the same plane as the rectangle. Compute the ratio between the largest and smallest possible area of \u25b3UAE . 373\n\nIndividual Solutions 1. Consider splitting the plane into four regions, depending on whetherx\u2212y andy are positive or negative. If both are positive, the boundary of the region is 2( x\u2212y) +y = 2\u2192 2x\u2212y = 2. If x\u2212y is negative andy is positive, the boundary of the region is 2(y\u2212x)+y = 2\u2192 3y\u22122x = 2. Ifx\u2212y is positive andy is negative, the boundary of the region is 2(x\u2212y)\u2212y = 2\u2192 2x\u22123y = 2. If both are negative, then the boundary of the region is 2(y\u2212x)\u2212y = 2\u2192y\u22122x = 2. Putting these together gives the region shown below, two triangles\u25b3DBA and\u25b3DBC with base and height of 2, giving a total area of 4 . 2. To be a multiple of 225, the number must be both a multiple of 25 (which means B is either 2 or 7) and a multiple of 9 (2 + 0 + 1 + 4 + A +B + 5 = 12 +A +B must be a multiple of 9, giving A is 4 or 8, respectively). The numbers are 2014425 and 2014875, giving a sum of 4029300 . 3. Using the fact that logab = logcb logca, we get log4x+logx2 1 8 = log2x log2 4 +log2(1/8) log2x2 = log2x 2 \u2212 3 2 log2x. Letting u = log2x, u 2\u2212 3 2u = 1\u2192u2\u2212 3 = 2u\u2192u2\u2212 2u\u2212 3 = 0\u2192 (u\u2212 3)(u + 1) = 0\u2192 u = 3,\u22121\u2192x = 8, 1/2. The sum of the solutions is 17 /2 . 4. Since the areas are equal, we have 1 2\u00d7 2014\u00d7 2014\u00d7 sin(2\u03b8) = 1 2\u00d7 2014\u00d7 2014\u00d7 sin(\u03b8)\u2192 sin(2\u03b8) = sin(\u03b8). Using the double-angle formula, 2 sin(\u03b8) cos(\u03b8) = sin(\u03b8)\u2192 cos(\u03b8) = 1/2\u2192\u03b8 = 60\u25e6 . 5. s(s(s(n))) = 3\u2192s(n) = 3, 12, or 21. Consider the cases separately. s(n) = 3: There are three solutions: 3, 12, and 111. s(n) = 12: There are 4 two-digit solutions: 39, 48, 57, 66. For the three-digit solutions, condition o\ufb00 the hundreds digit h: \ufb01nd the smallest solution starting with each h and each new solution is 9 more until the units digit is less than the tens digit: 129, 138, 147, 156, 228, 237, 246, 255, 336, 345, and 444 are the solutions. 374\n\nIndividual Solutions 375 s(n) = 21: There are no two-digit solutions. For the three-digit solutions, condition o\ufb00 the hundreds digit h: \ufb01nd the smallest solution starting with each h and each new solution is 9 more until the units digit is less than the tens digit: 399, 489, 579, 588, 669, 678, and 777 are the solutions. There are 25 solutions in total. 6. If 2 \u2212i is a root of x3 +ax + 20, so is 2 + i. Since (2 + i)(2\u2212i) = 5 and the product of the roots is\u221220, the third root is\u22124. The linear coe\ufb03cient is the sum of the pairwise products of the roots, which is (\u22124(2 +i)) + (\u22124(2\u2212i)) + ((2 +i)(2\u2212i)) =\u22128 + 4i\u2212 8\u2212 4i + 5 =\u221211 . 7. The only units digits whose sixth powers end in 9 are 3 and 7. Since 40 6 = 4,096,000,000 and 506 = 15,625,000,000, 40<N < 50, so N = 43 or N = 47. Since N 6 is closer to 406 than 506, N must be 43 . 8. Since \u2220ACB is inscribed on a semicircle, it is a right angle, and so \u25b3ABC is right with hypotenuse 26 and BC = 10, so AC = 24. By the Angle Bisector Theorem, AD DB = AC CB , so 13 +ED 13\u2212ED = 24 10 can be solved to obtain ED = 91 17 . 9. The probability of getting 0 to 4 heads on the \ufb01rst \ufb02ip are 1/16, 4/16, 6/16, 4/16, and 1/16, respectively. If 0 or 4 heads are \ufb02ipped, Jef wins. If 1 or 3 heads are \ufb02ipped, the one di\ufb00erent coin is \ufb02ipped with the goal of matching the other three. In this case, Jef will succeed with probability 3/4. If 2 heads are \ufb02ipped, either pair should be re\ufb02ipped with the goal of matching the other pair. Each coin will match the other pair with probability 3/4, so Jef wins in this case with probability 9/16. The total probability of winning is 1 16 (1) + 4 16 (3 4 ) + 6 16 ( 9 16 ) + 4 16 (3 4 ) + 1 16 (1) = 182 256 = 91 128 .",
-      "grading_rubric": "ARML Local Team Round \u2014 numerical answers, 4 points each.",
-      "human_baseline": null
+      "expected_answer": "Team Solutions 1. The minute hand moves at a rate of 360 degrees per hour (or 6 degrees per minute), the hour hand moves at a rate of 30 degrees per hour (or 0.5 degrees per minute). Therefore, the angle between the hour and the minute hand increases by 5.5 degrees per minute. The ﬁrst time the hands are perpendicular, the angle between them is 90 degrees. The second time is when the angle is 270 degrees, which occurs 180/5.5 or 360 /11 minutes later. 2. The product of the roots is 8, and the possible sets of distinct integer roots are {±1,±2,±4}, {±2,±2,±2}, and {±1,±1,±8} where either zero or two of the roots are negative. Of all of the cases listed here, only one has distinct roots in arithmetic progression with two roots negative,{−4,−1, 2}. The corresponding polynomial is (x−2)(x+1)(x+4) = x3+3x2−6x−8, and the answer is q = 3 . 3. n = 77k +24 for some integer value of k. When n is divided by 7, the 77k term divides evenly, so the remainder is the residue of 24 modulo 7, or 3. Similarly when n is divided by 11, the remainder is 2. The answer is 3 + 2 = 5 . 4. 1 x +√x + 1 x−√x = 2x x(x− 1). The domain of the function is all positive x except 1. For x between 0 and 1, the denominator is negative, so the function is negative. For x greater than 1, the function is strictly decreasing. It equals 1 when 2x x(x− 1) = 1→ 2x = x2−x→ x2− 3x = 0→x = 3, so the interval is (1, 3), which has length 2 . 5. Considering that the non-zero digits of N look like binomial coeﬃcients, N is the binomial expansion of (1000 + 1)4. Since 1001 = 7× 11× 13, 1,004,006,004,001 = 74× 114× 134. The prime factorization of any factor of N will have 0 to 4 powers of each of the primes 7, 11, and 13, so the total number of factors is 5 3 = 125 . 6. In order for p(p(n)) = 6, p(n) must be 6, 16, or 32 (no other product of up to three digits k has the property that p(k) = 6). Treat the cases individually. p(n) = 6: If n has one digit, then n = 6. If n has two digits, then n is either 16, 23, 32, or 61. If n has three digits, the digits of n must be some permutation of 116 or 123. There are three of the former (ignoring duplicates) and six of the latter, so there are 14 numbers less than 1000 for which p(n) = 6. p(n) = 16: All digits will be powers of two. There are three two digit numbers: 28, 44, and 82, and (6 4 ) − 3 = 12 three digit numbers (think of the digits as distinct boxes and the four powers of two as identical balls to be distributed in three buckets, but we need to throw out the three cases where all four balls go into one bucket) so there are 15 numbers less than 1000 for which p(n) = 16. p(n) = 32: All digits will be powers of two. There are two two-digit numbers: 48, and 84, and(7 5 ) − 6− 3 = 12 three digit numbers (again, think of the digits as distinct boxes and the ﬁve powers of two as identical balls to be distributed, but we have to remove the six cases where 370\n\nTeam Solutions 371 one box gets 4 balls and the three cases where one box gets 5 balls, so there are 14 numbers less than 1000 for which p(n) = 32. The total is 14 + 15 + 14 = 43 . 7. x = 1 + 1 3+ 1 1+ 1 3+ 1 ... →x = 1 + 1 3+ 1 x →x− 1 = 1 3+ 1 x → 3x + 1− 3− 1 x = 1→ 3x2− 3x− 1 = 0→x = 3± √ 21 6 . The positive root is the value, so A +B +C = 3 + 21 + 6 = 30 . 8. Assume the center is blue. Then 1, 2, 3, or 4 of the corners must be blue. If 1 corner is blue, there are 4 possible corners to choose from and 2 ways to ﬁnish the grid with alternating red and green squares. If 2 corners are blue and the 2 corners are opposite, there are two ways to choose opposing corners and 2 ways to color each of the remaining paths of 3 squares with alternating colors. If 2 corners are blue and the corners are consecutive, there are 4 ways to choose consecutive corners, 2 ways to color the square between the two blue corners, and 2 ways to color the remaining squares. If three of the corners are blue, there are 4 ways to choose three blue corners, 2 choices for the color of each of the squares between 2 blue corners, and 2 ways to color the path of length 3. However, we must discard two of those cases that only contain 1 red or green square in the corner. If 4 corners are blue, there are C(4, 2) = 6 ways to pick the two green (or red) cells. Totaling these cases up we get (4× 2) + (2× 2× 2) + (4× 2× 2) + (4× (2× 2× 2− 2)) + 6 = 62. Since there are three colors to choose for the center square, the answer is 186 . 9. Since AH is a diameter of length 20, we know thatHAM is a right triangle with right angle at M. Let the center of the inscribed circle beN, and let radii of the inscribed circle intersectMA atY andMH atX. Then MYNX is a square of side length r. Further, triangles AYN and AMH are similar; thus YN MH = AY AM→ r 16 = 12−r 12 → 12r = 192− 16r→r = 192 28 = 48 7 .\n\n372 Team Solutions 10. We can factorx3+y3 = (x+y)(x2−xy+y2), so 517832 = 98(x2−xy+y2)→x2−xy+y2 = 5284. In addition, (x +y)2 =x2 + 2xy +y2 = 982 = 9604. Subtracting the ﬁrst equation from the second, we get that 3xy = 4320, so the area of the triangle is xy 2 = 4320 6 = 720 . 11. Let n = 10 +t, then the expression is (10 + t)2 + (10 +t)− 9 =t2 + 21t + 101. For this value to be a multiple of 101, it means that t2 + 21t = t(t + 21) must be a multiple of 101. Since 101 is prime, one of the two factors must be a multiple of 101. Since t can be at most 89, t + 21 = 101→t = 80→n = 90 . 12. A and B must be on diﬀerent branches of the absolute value graph, and the x-coordinates of O, A, and B must be evenly spaced. Let the points be O(0, 0), A(t, 4−t), and B(2t, 2t− 4). Equating OA and AB, we are looking for the solution to √ t2 + (4−t)2 = √ t2 + (3t− 8)2. Squaring both sides and subtracting t2 from each side yields (4−t)2 = (3t− 8)2, yielding two solutions, t = 2, 3. If t = 2, the points are (0, 0), (2, 2), and (4, 0), which are not collinear. If t = 3, the points are (0, 0), (3, 1), and (6, 2), which are collinear, so k = 1/3 . 13. Assume the circle has center ( x,y ) and radius r. The following three equations must be satisﬁed: (x− 9)2 +y2 = r2 (x− 8)2 + (y− 7)2 = r2 x = r. Subtracting the ﬁrst equation from the second, we get 2x−17−14y+49 = 0→ 14y−2x−32 = 0→ x = 7y− 16. Squaring the third equation and subtracting it from the second, we get −16x + 64 + (y− 7)2 = 0. Substituting x = 7y− 16 gives−16(7y− 16) + 64 + (y− 7)2 = 0→y2− 126y + 369 = 0. Therefore, y is either 3 or 123, with corresponding values of x (and radii) of 5 and 845. The sum of the radii is 850 . 14. Let x = GER, y = MAN, then 2(1000x +y) = 5(1000y +x)→ 1995x = 4998y→ x y = 4998 1995 = 238 95 . Since both x and y must be three digit integers with all non-zero digits, we multiply the numerator and denominator by 3 to get x = 714 and y = 285, rearranging the digits to get ENGRAM = 157482 . 15. It is fair to assume that each face of a polyhedron with the maximal number of interior diagonals is a triangle (otherwise some diagonals are on the faces of the polyhedron). If a triangular faced polyhedron P has F faces, E edges, and V vertices, then it has (V 2 ) −E interior diagonals. For a polyhedron with all triangular faces, 3 F = 2E. Using Euler’s formula for polyhedra ( V +F =E + 2), we get V + 2E 3 = E + 2→ E = 3V − 6, so the maximal number of interior diagonals is (V 2 ) − 3(V− 2) = (V−3)(V−4) 2 , which for V = 12 is 36 . A sample polyhedron that has 36 interior diagonals is two convex pyramids that share a common decagon base.\n\nIndividual Problems 1. Compute the area of the region deﬁned by 2 |x−y| +|y|≤ 2. 2. Compute the sum of all integers of the form 2 0 1 4AB 5 that are multiples of 225. 3. Compute the sum of all solutions to log 4x + logx2 1 8 = 1. 4. In triangle COW , CO = OW = 2014, and m ∠O = 2θ. In triangle PIG , PI = IG = 2014, and m∠I =θ. If COW and PIG have the same area, compute θ in degrees. 5. For a positive integer n, let s(n) be the sum of the digits of n. Compute the number of positive integers less than 1000 for which the digits are non-decreasing from left to right and s(s(s(n))) = 3. 6. Compute the integer value of a such that 2−i is a solution to x3 +ax =−20. 7. Compute the whole number N such that N 6 = 6,321,363,049. 8. Given a circle O with center E and diameter AB, C is on O and D is on AB such that CD bisects ∠ACB. If AE = 13 and BC = 10, compute ED. 9. Jef is playing a game with three rounds. In Round 1, he ﬂips 4 coins. In Round 2 and Round 3 he can re-ﬂip some or all (or none) of the coins and wins the game if all of the coins are heads or all of the coins are tails at the end of any round. Assuming Jef uses an optimal strategy, compute the probability he wins the game. 10. In rectangle MATH , MA = 3 and AT = 1. Equilateral triangles △THE and△HUM are constructed in the same plane as the rectangle. Compute the ratio between the largest and smallest possible area of △UAE . 373\n\nIndividual Solutions 1. Consider splitting the plane into four regions, depending on whetherx−y andy are positive or negative. If both are positive, the boundary of the region is 2( x−y) +y = 2→ 2x−y = 2. If x−y is negative andy is positive, the boundary of the region is 2(y−x)+y = 2→ 3y−2x = 2. Ifx−y is positive andy is negative, the boundary of the region is 2(x−y)−y = 2→ 2x−3y = 2. If both are negative, then the boundary of the region is 2(y−x)−y = 2→y−2x = 2. Putting these together gives the region shown below, two triangles△DBA and△DBC with base and height of 2, giving a total area of 4 . 2. To be a multiple of 225, the number must be both a multiple of 25 (which means B is either 2 or 7) and a multiple of 9 (2 + 0 + 1 + 4 + A +B + 5 = 12 +A +B must be a multiple of 9, giving A is 4 or 8, respectively). The numbers are 2014425 and 2014875, giving a sum of 4029300 . 3. Using the fact that logab = logcb logca, we get log4x+logx2 1 8 = log2x log2 4 +log2(1/8) log2x2 = log2x 2 − 3 2 log2x. Letting u = log2x, u 2− 3 2u = 1→u2− 3 = 2u→u2− 2u− 3 = 0→ (u− 3)(u + 1) = 0→ u = 3,−1→x = 8, 1/2. The sum of the solutions is 17 /2 . 4. Since the areas are equal, we have 1 2× 2014× 2014× sin(2θ) = 1 2× 2014× 2014× sin(θ)→ sin(2θ) = sin(θ). Using the double-angle formula, 2 sin(θ) cos(θ) = sin(θ)→ cos(θ) = 1/2→θ = 60◦ . 5. s(s(s(n))) = 3→s(n) = 3, 12, or 21. Consider the cases separately. s(n) = 3: There are three solutions: 3, 12, and 111. s(n) = 12: There are 4 two-digit solutions: 39, 48, 57, 66. For the three-digit solutions, condition oﬀ the hundreds digit h: ﬁnd the smallest solution starting with each h and each new solution is 9 more until the units digit is less than the tens digit: 129, 138, 147, 156, 228, 237, 246, 255, 336, 345, and 444 are the solutions. 374\n\nIndividual Solutions 375 s(n) = 21: There are no two-digit solutions. For the three-digit solutions, condition oﬀ the hundreds digit h: ﬁnd the smallest solution starting with each h and each new solution is 9 more until the units digit is less than the tens digit: 399, 489, 579, 588, 669, 678, and 777 are the solutions. There are 25 solutions in total. 6. If 2 −i is a root of x3 +ax + 20, so is 2 + i. Since (2 + i)(2−i) = 5 and the product of the roots is−20, the third root is−4. The linear coeﬃcient is the sum of the pairwise products of the roots, which is (−4(2 +i)) + (−4(2−i)) + ((2 +i)(2−i)) =−8 + 4i− 8− 4i + 5 =−11 . 7. The only units digits whose sixth powers end in 9 are 3 and 7. Since 40 6 = 4,096,000,000 and 506 = 15,625,000,000, 40<N < 50, so N = 43 or N = 47. Since N 6 is closer to 406 than 506, N must be 43 . 8. Since ∠ACB is inscribed on a semicircle, it is a right angle, and so △ABC is right with hypotenuse 26 and BC = 10, so AC = 24. By the Angle Bisector Theorem, AD DB = AC CB , so 13 +ED 13−ED = 24 10 can be solved to obtain ED = 91 17 . 9. The probability of getting 0 to 4 heads on the ﬁrst ﬂip are 1/16, 4/16, 6/16, 4/16, and 1/16, respectively. If 0 or 4 heads are ﬂipped, Jef wins. If 1 or 3 heads are ﬂipped, the one diﬀerent coin is ﬂipped with the goal of matching the other three. In this case, Jef will succeed with probability 3/4. If 2 heads are ﬂipped, either pair should be reﬂipped with the goal of matching the other pair. Each coin will match the other pair with probability 3/4, so Jef wins in this case with probability 9/16. The total probability of winning is 1 16 (1) + 4 16 (3 4 ) + 6 16 ( 9 16 ) + 4 16 (3 4 ) + 1 16 (1) = 182 256 = 91 128 .",
+      "grading_rubric": "ARML Local Team Round — numerical answers, 4 points each.",
+      "human_baseline": null,
+      "parts": [
+        {
+          "id": "1",
+          "expected": "360/11",
+          "points": 10.0,
+          "reference": "Official short answer: 360/11",
+          "match_mode": "normalized",
+          "aliases": [
+            "\\frac{360}{11}",
+            "180/5.5"
+          ]
+        },
+        {
+          "id": "2",
+          "expected": "3",
+          "points": 10.0,
+          "reference": "Official short answer: 3",
+          "match_mode": "normalized",
+          "aliases": [
+            "q=3",
+            "q = 3"
+          ]
+        },
+        {
+          "id": "3",
+          "expected": "5",
+          "points": 10.0,
+          "reference": "Official short answer: 5",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "4",
+          "expected": "2",
+          "points": 10.0,
+          "reference": "Official short answer: 2",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "5",
+          "expected": "125",
+          "points": 10.0,
+          "reference": "Official short answer: 125",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "6",
+          "expected": "",
+          "points": 0.0,
+          "reference": "",
+          "match_mode": "reference_llm",
+          "aliases": []
+        },
+        {
+          "id": "7",
+          "expected": "",
+          "points": 0.0,
+          "reference": "",
+          "match_mode": "reference_llm",
+          "aliases": []
+        },
+        {
+          "id": "8",
+          "expected": "",
+          "points": 0.0,
+          "reference": "",
+          "match_mode": "reference_llm",
+          "aliases": []
+        },
+        {
+          "id": "9",
+          "expected": "91/128",
+          "points": 10.0,
+          "reference": "Official short answer: 91/128",
+          "match_mode": "normalized",
+          "aliases": [
+            "\\frac{91}{128}",
+            "182/256"
+          ]
+        },
+        {
+          "id": "10",
+          "expected": "",
+          "points": 0.0,
+          "reference": "",
+          "match_mode": "reference_llm",
+          "aliases": []
+        }
+      ]
     },
-    "status": "collected"
+    "status": "collected",
+    "competition_id": "arml_local",
+    "evaluation": {
+      "evaluator_id": "gold_answer_v1",
+      "status": "ready",
+      "rubric_path": "data/rubrics/numerical_sheet_reference_40_v1.json",
+      "fallback_evaluator_id": "rubric_llm_v1",
+      "deliverable": "answer_sheet",
+      "short_answer_source": "data/rubrics/arml_local_short_answers.json"
+    }
   }
 ]
