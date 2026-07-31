@@ -115,21 +115,4 @@ python3 src/evaluate_submission.py \
 `match_mode` is `normalized` when a short `expected` exists, else `reference_llm`
 (use the rubric LLM judge with the reference text).
 
-## Human calibration protocol
 
-Human calibration starts only after schema, rendering, and repeatability tests.
-
-1. ≥12 anonymized submissions spanning weak/medium/strong.
-2. Same task PDF, rubric, and “oral not observable” instructions.
-3. ≥2 independent human ratings; no AI scores shown.
-4. Criterion scores + evidence, not only totals.
-5. MAE, Spearman, criterion agreement, human-human ceiling.
-6. Tune on a calibration subset; report held-out agreement.
-7. Freeze evaluator/rubric/prompt versions before reporting.
-
-## Artifact safety
-
-- Agent-visible vs judge-only assets stay separate.
-- PDFs use relative paths, checksums, page ranges.
-- Official solutions are judge-only.
-- Page-image packets respect `max_pages` / context limits.
