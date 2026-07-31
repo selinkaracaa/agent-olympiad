@@ -1,6 +1,8 @@
 # Initial experiments (archived)
 
-Early multi-agent smoke tests and exploratory runs on the first 5 competition types (IOL, IOAA, ARML Power, IJSO, IEO Business Case). These were **not** part of the current data-collection benchmark — kept for reference only.
+Early **multi-agent** smoke tests on IOL, IOAA, ARML Power, IJSO (and later
+presentation-style pilots). Solo / single-agent IEO open-question experiments
+were removed.
 
 ## Contents
 
@@ -10,8 +12,7 @@ Early multi-agent smoke tests and exploratory runs on the first 5 competition ty
 | `src/score_teamwork.py` | Teamwork scorer on saved discussion logs |
 | `docs/STATUS.md` | Experiment results (smoke tests, gold batch, GPT runs) |
 | `docs/FORMAT.md` | Per-olympiad format and scoring notes from that phase |
-| `results/` | All run outputs (`gold-batch-2025-06-19/`, `iol-gpt55/`, `legacy/`, …) |
-| `archive/` | Legacy solo IEO open-question experiment (`run_experiment.py`, PDFs) |
+| `results/` | Multi-agent run outputs (`gold-batch-2025-06-19/`, `iol-gpt55/`, …) |
 
 ## Re-run (optional)
 

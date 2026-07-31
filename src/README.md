@@ -17,9 +17,36 @@ python3 src/main.py
 # Live run on ARML Local 2009, all three schemas
 export PERPLEXITY_API_KEY="..."
 python3 src/run_exam.py --all-schemas
+
+# Smoke: PDF → page images → Perplexity multi-image read
+python3 src/smoke_multimodal.py data/raw/business_case/2024.pdf --pages 1-2
+
+# Unified evaluator (registry: gold vs LLM-judge by task type)
+python3 src/evaluate_submission.py \
+  --benchmark data/benchmarks/ieo_business_case/benchmark.json \
+  --problem-id ieo_business_case_2024 \
+  --submission path/to/deck.pdf \
+  --provider perplexity \
+  --media images
+
+# Presentation helper (same slide_deck_v1 pipeline)
+python3 src/evaluate_artifact.py path/to/slides.html \
+  --benchmark data/benchmarks/ieo_business_case/benchmark.json \
+  --problem-id ieo_business_case_2024 \
+  --provider perplexity \
+  --media images
+
+# Full presentation team run → same judge
+python3 src/run_presentation_artifact.py \
+  --benchmark data/benchmarks/ieo_business_case/benchmark.json \
+  --problem-id ieo_business_case_2024 \
+  --provider perplexity \
+  --media images
 ```
 
 Results land in [`../results/`](../results/). See [`../results/ARML_LOCAL_2009.md`](../results/ARML_LOCAL_2009.md) for the first evaluation write-up.
+See [`../docs/EVALUATION.md`](../docs/EVALUATION.md) for dual media (text/images),
+question vs competition modes, gold vs LLM-judge registry, and calibration.
 
 ---
 

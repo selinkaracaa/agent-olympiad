@@ -1,0 +1,39 @@
+{
+  "rubric_id": "wsc_writing_28_v1",
+  "title": "WSC collaborative writing rubric",
+  "total_points": 28,
+  "criteria": [
+    {
+      "id": "focus_argument",
+      "name": "Focus & argumentation",
+      "max_score": 7,
+      "observable": true,
+      "description": "Clear thesis, coherent argument structure, and sustained focus on the prompt."
+    },
+    {
+      "id": "theme_evidence",
+      "name": "Theme & evidence",
+      "max_score": 7,
+      "observable": true,
+      "description": "Uses the assigned theme and supporting evidence effectively."
+    },
+    {
+      "id": "style_clarity",
+      "name": "Style & clarity",
+      "max_score": 7,
+      "observable": true,
+      "description": "Clear, readable collaborative prose with appropriate style."
+    },
+    {
+      "id": "originality",
+      "name": "Originality & persuasiveness",
+      "max_score": 7,
+      "observable": true,
+      "description": "Insightful, persuasive, and non-generic contribution."
+    }
+  ],
+  "not_observable_from_deck": [
+    "live discussion dynamics",
+    "oral presentation"
+  ]
+}
