@@ -94,15 +94,15 @@ For each competition, the AI agent must be given exactly the same resources a hu
 | | |
 |---|---|
 | **Domain** | Science — physics, chemistry, biology, earth science, energy, math (buzzer quiz) |
-| **Years/sessions** | 33 sample-set groups (HS: 17, MS: 16), 1990s–2022 |
-| **Questions** | **~23,691** across 508 PDFs (11,846 Toss-Up + 11,845 Bonus; typical round 23+23 or 25+25) |
+| **Years/sessions** | HS sample sets only (MS dropped), 1990s–2022 |
+| **Questions** | **~11.6k HS** in full archive; primary eval is ≤20/year subsample (~140) |
 | **Team size** | 4 students + 1 alternate |
 | **Time** | Short timed buzzer rounds |
 | **Answer type** | Spoken short answers; Toss-Up = no conferring, Bonus = team conferring allowed |
 | **Grading** | Objective answers, auto-gradable; buzzer collaboration can be simulated |
 | **Source** | No calculators, no references |
 | **Link** | [science.osti.gov NSB resources](https://science.osti.gov/wdts/nsb/Regional-Competitions/Resources) |
-| **Data** | `data/raw/science_bowl/` — `HS-Sample-Questions/` (17 sets) + `MS-Sample-Questions/` (16 sets), 508 PDFs |
+| **Data** | `data/raw/science_bowl/` — `HS-Sample-Questions/` only |
 | **Notes** | Toss-Up (individual decision) vs Bonus (team deliberation) is a built-in "individual vs team" controlled-comparison scenario. |
 
 ---

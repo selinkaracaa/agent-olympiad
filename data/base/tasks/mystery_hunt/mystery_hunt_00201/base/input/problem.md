@@ -1,0 +1,3 @@
+# 2002/green/A/Puzzle.html
+
+Mystery Hunt 2002, Green, House Puzzle A Green 2002 MIT Mystery Hunt ON TOUR I love travelling the country. Diamond deserts, purple mountains majesty, deer and antelope roaming all over the place. That road trip in '95, what a time. The right traveling companions are definitely a must -- they make the miles fly by. I never guessed Ayn, Terrence, and Charles would be such fun to travel with. Augusta, ME 5 4 2 6 5 11 2 5 Ithaca, NY 8 3 6 8 4 2 7 3 Dewey Beach, DE 4 2 5 5 4 4 5 4 Charlotte, NC 7 4 9 4 6 12 3 4 Oak Ridge, TN 4 11 4 3 6 2 3 5 Rochester, IN 10 5 3 4 2 3 11 4 Carbondale, IL 12 4 5 6 9 7 4 5 Odessa, TX 3 10 21 10 18 19 2 4 Roswell, NM 8 11 2 4 8 8 3 4

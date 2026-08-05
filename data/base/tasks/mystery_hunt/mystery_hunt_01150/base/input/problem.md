@@ -1,0 +1,3 @@
+# 2009/puzzles/his_botany_student/PUZZLE/
+
+His Botany Student His Botany Student Ooh, you need an herbal infusion! You're in luck! Back in my home in far-off America, I just love to experiment with cross-pollination. Plant 1 (4&gt;10&lt;6) Plant 2 (7&gt;9&lt;4) Plant 3 (9&gt;9&lt;5) Plant 4 (9&gt;4-4&lt;7) Plant 5 (5&gt;9&lt;7) Plant 6 (6&gt;5 4&lt;10) Plant 7 (9&gt;10&lt;4'1 7) Plant 8 (7&gt;6 5&lt;9) Plant 9 (8&gt;8&lt;6) Plant 10 (6&gt;3-3'1 5&lt;8) Plant 11 (8&gt;5 5&lt;9) Plant 12 (3&gt;7&lt;8) Plant 13 (7&gt;10&lt;10) Plant 14 (6&gt;8&lt;8) Plant 15 (6&gt;9&lt;6) Plant 16 (5&gt;7&lt;9) Plant 17 Plant 18 Plant 19 Plant 20 Plant 21 Plant 22 Plant 23 Plant 24 Plant 25 Plant 26 Plant 27 Plant 28 Plant 29 Plant 30 Final Crossbreed

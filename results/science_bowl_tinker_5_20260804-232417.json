@@ -1,0 +1,175 @@
+{
+  "competition": "science_bowl",
+  "model": "openai/gpt-oss-20b",
+  "schema": "round_table",
+  "rounds": 1,
+  "problem_count": 5,
+  "usage": {
+    "prompt_tokens": 11240,
+    "completion_tokens": 4901,
+    "calls": 25
+  },
+  "correct": 0,
+  "results": [
+    {
+      "problem_id": "science_bowl_sample_set_10_10a_hs_reg_2016_bonus_13",
+      "question": "An electron is fired through parallel plate electrodes that are 5 millimeters apart. A 2 millitesla magnetic field is perpendicular to the electric field between the plates, which have a potential difference of 600 volts. If the electron is NOT deflected, at what speed, in meters per second and in scientific notation, is it traveling?",
+      "final_answer": "",
+      "expected_answer": "6.0 x 107",
+      "grade": {
+        "graded": false,
+        "reason": "No submission yet.",
+        "score": null,
+        "max_score": null
+      },
+      "turns_used": 5,
+      "chat_messages": 4,
+      "discussion": [
+        {
+          "sender": "Agent_1",
+          "message": "(empty response)"
+        },
+        {
+          "sender": "Agent_2",
+          "message": "actionspeak: The electron experiences an electric force \\(qE\\) upward and a magnetic force \\(qvB\\) sideways. For no deflection the forces must balance: \\(qE = qv"
+        },
+        {
+          "sender": "Agent_3",
+          "message": "(empty response)"
+        },
+        {
+          "sender": "Agent_4",
+          "message": "The electric field between the plates is  \n\n\\[\nE=\\frac{V}{d}=\\frac{600\\;\\text{V}}{5\\times10^{-3}\\;\\text{m}}=1.2\\times10^{5}\\;\\text{V/m}.\n\\]\n\nFor an electron the electric force"
+        }
+      ]
+    },
+    {
+      "problem_id": "science_bowl_sample_set_10_10a_hs_reg_2016_toss_up_16",
+      "question": "The size of most mammalian cells is closest to which of the following? W) 1 picometer X) 1 micrometer Y) 1 millimeter Z) 1 centimeter",
+      "final_answer": "",
+      "expected_answer": "X) 1 MICROMETER",
+      "grade": {
+        "graded": false,
+        "reason": "No submission yet.",
+        "score": null,
+        "max_score": null
+      },
+      "turns_used": 5,
+      "chat_messages": 4,
+      "discussion": [
+        {
+          "sender": "Agent_1",
+          "message": "The typical diameter of a mammalian cell is on the order of 10–30 µm.  \nAmong the choices, the one that is closest to this range is **X) 1 micrometer**."
+        },
+        {
+          "sender": "Agent_2",
+          "message": "The typical diameter of a mammalian cell is about 10–"
+        },
+        {
+          "sender": "Agent_3",
+          "message": "The typical diameter of a mammalian cell is on the order of 10–30 µm.  The only option that is in the micrometer range is **X) 1 µm**, which is the closest to the true size.  Therefore the correct answer is X."
+        },
+        {
+          "sender": "Agent_4",
+          "message": "(empty response)"
+        }
+      ]
+    },
+    {
+      "problem_id": "science_bowl_sample_set_10_10a_hs_reg_2016_toss_up_17",
+      "question": "What is the derivative with respect to x of -5 divided by x6?",
+      "final_answer": "",
+      "expected_answer": "30/x7 (DO NOT ACCEPT: 30x -7)",
+      "grade": {
+        "graded": false,
+        "reason": "No submission yet.",
+        "score": null,
+        "max_score": null
+      },
+      "turns_used": 5,
+      "chat_messages": 4,
+      "discussion": [
+        {
+          "sender": "Agent_1",
+          "message": "30/x⁷"
+        },
+        {
+          "sender": "Agent_2",
+          "message": "30/x⁷"
+        },
+        {
+          "sender": "Agent_3",
+          "message": "30/x⁷"
+        },
+        {
+          "sender": "Agent_4",
+          "message": "30/x⁷"
+        }
+      ]
+    },
+    {
+      "problem_id": "science_bowl_sample_set_10_11a_hs_reg_2016_bonus_22",
+      "question": "An SN1 reaction is performed by reacting sodium bromide with (S)-2-chlorobutane, and generates a 1 molar mixture of 70% (S)-2-bromobutane and 30% (R)-2- bromobutane. If the optical rotation of the solution was 9.2°, what is the optical rotation of pure (S)- 2-bromobutane, to the nearest degree?",
+      "final_answer": "",
+      "expected_answer": "23 2016 NSB® Regional High School Questions Page 12",
+      "grade": {
+        "graded": false,
+        "reason": "No submission yet.",
+        "score": null,
+        "max_score": null
+      },
+      "turns_used": 5,
+      "chat_messages": 4,
+      "discussion": [
+        {
+          "sender": "Agent_1",
+          "message": "The observed rotation of the mixture is the weighted average of the rotations of the two enantiomers:\n\n\\[\n\\alpha_{\\text{mix}} = f_S\\,\\alpha_S + f_R\\,\\alpha_R\n\\]\n\nFor a pair of enantiomers, the rotations are equal in magnitude and opposite in sign:\n\n\\[\n\\alpha_R = -\\alpha_S\n\\]\n\nWith \\(f_S ="
+        },
+        {
+          "sender": "Agent_2",
+          "message": "The observed rotation is the weighted average of the two enantiomers:\n\n\\[\n\\alpha_{\\text{mix}} = f_S\\,\\alpha_S + f_R\\,\\alpha_R\n\\]\n\nFor a pair of enantiomers, the rotations are equal in magnitude and opposite in sign:\n\n\\[\n\\alpha_R = -\\alpha_S\n\\]\n\nWith \\(f_S = 0.70\\) and \\(f_R = 0.30\\):\n\n\\[\n\\alpha_{\\text{mix}} = 0.70\\,\\alpha_S + 0.30\\,(-\\alpha_S) = (0"
+        },
+        {
+          "sender": "Agent_3",
+          "message": "The observed rotation is the weighted average of the two enantiomers:\n\n\\[\n\\alpha_{\\text{mix}} = f_S\\,\\alpha_S + f_R\\,\\alpha_R\n\\]\n\nFor a pair of enantiomers, \\(\\alpha_R = -\\alpha_S\\).  \nWith \\(f_S = 0.70\\) and \\(f_R = 0.30\\):\n\n\\[\n\\alpha_{\\text{mix}} = 0.70\\,\\alpha_S + 0.30(-\\alpha_S) = (0.70-0.30)\\alpha_S = 0.40\\,\\alpha_S"
+        },
+        {
+          "sender": "Agent_4",
+          "message": "The observed rotation of the mixture is the weighted average of the two enantiomers:\n\n\\[\n\\alpha_{\\text{mix}} = f_S\\,\\alpha_S + f_R\\,\\alpha_R\n\\]\n\nFor a pair of enantiomers, the rotations are equal in magnitude and opposite in sign:\n\n\\[\n\\alpha_R = -\\alpha_S\n\\]\n\nWith \\(f_S = 0.70\\) and \\(f_R = 0.30\\):\n\n\\[\n\\alpha"
+        }
+      ]
+    },
+    {
+      "problem_id": "science_bowl_sample_set_10_12a_hs_reg_2016_bonus_02",
+      "question": "Phosphorus is an essential nutrient for phytoplankton. Identify all of the following three processes that remove phosphorus from the Indian Ocean photic zone: 1) Marine snow; 2) Coastal upwelling; 3) Deposition of windblown dust from Australia.",
+      "final_answer": "",
+      "expected_answer": "1 2016 NSB® Regional High School Questions Page 2",
+      "grade": {
+        "graded": false,
+        "reason": "No submission yet.",
+        "score": null,
+        "max_score": null
+      },
+      "turns_used": 5,
+      "chat_messages": 4,
+      "discussion": [
+        {
+          "sender": "Agent_1",
+          "message": "**Answer:**  \nOnly **1) Marine snow** removes phosphorus from the Indian Ocean photic zone.\n\n**Reasoning:**  \n- **Marine snow** consists of sinking organic particles that transport phosphorus from the surface (photic zone) to deeper waters,"
+        },
+        {
+          "sender": "Agent_2",
+          "message": "**Answer:**  \nOnly **1) Marine snow** removes phosphorus from the Indian Ocean photic zone.\n\n**Reasoning**\n\n- **Marine snow**: Organic particles (detritus, fecal pellets, etc.) sink from the surface, carrying dissolved and"
+        },
+        {
+          "sender": "Agent_3",
+          "message": "**Answer:** Only **1) Marine snow** removes phosphorus from the Indian Ocean photic zone.  \n\n**Reasoning:**  \n- **Marine snow** consists of sinking organic particles (detritus, fecal pellets, etc.) that transport phosphorus from the surface (photic zone) to"
+        },
+        {
+          "sender": "Agent_4",
+          "message": "**Answer:**  \nOnly **1) Marine snow** removes phosphorus from the Indian Ocean photic zone.\n\n**Reasoning:**  \n- **Marine"
+        }
+      ]
+    }
+  ]
+}

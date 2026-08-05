@@ -1,0 +1,3 @@
+# Philosophy
+
+His was charged with atheism for calling God the universal moral order in "On the Grounds of Our Belief in a Divine Government of the Universe," a preface to an essay by his friend F. K. Forberg. He lectured "On the Idea of a True War" and wrote about Characteristics of the Present Age and, after being booted out of Jena, was eventually elected rector of the new University of Berlin where he had given his Addresses to the German Nation in 1807. Also the author of The Vocation of Man and The Vocation of the Scholar, FTP, name this son of a ribbon weaver who journeyed to Konigsberg to meet Kant, and whose best known work is his Attempt at a Critique of All Revelation.

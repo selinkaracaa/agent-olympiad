@@ -2,8 +2,15 @@ import ast
 import json
 import operator
 import os
+import re
 import subprocess
+import sys
+from html import unescape
 from typing import Any, Optional
+from urllib.parse import parse_qs, quote_plus, urlparse
+from urllib.request import Request, urlopen
+
+from runtimes import CompetitionRuntime, RuntimeUnavailableError
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DEFAULT_BENCHMARK_PATH = os.path.join(REPO_ROOT, "data", "benchmarks")
@@ -31,7 +38,6 @@ TEAM_SIZE_MATRIX = {
     "icpc": 3,
     "ccdc": 8,
     "cfa_research_challenge": 4,
-    "codecontests": 3,
     "cybench": 5,
     "debatebench": 8,
     "eoes": 3,
@@ -43,7 +49,6 @@ TEAM_SIZE_MATRIX = {
     "ioaa": 5,
     "ioai": 4,
     "iol": 4,
-    "modeling_agent": 4,
     "mystery_hunt": 12,
     "nyu_ctf_bench": 5,
     "pumac_power": 8,
@@ -66,9 +71,9 @@ COMPETITION_TOOL_REGISTRY = {
     "icpc": ["execute_code"],
     "mcm": ["execute_code", "web_search"],
     "icm": ["execute_code", "web_search"],
-    "ieo_business_case": ["web_search"],
+    "ieo_business_case": ["use_calculator", "execute_code", "web_search"],
     "jessup": ["web_search"],
-    "ijso_practical": ["use_calculator", "read_lab_equipment"],
+    "ijso_practical": ["use_calculator", "inspect_environment"],
     "ioaa_group": ["use_calculator", "read_star_chart"],
     "iol_team": [],
     "arml_power": [],
@@ -78,31 +83,34 @@ COMPETITION_TOOL_REGISTRY = {
     "hmmt_team": [],
     "hmmt_guts": [],
     "wsc_writing": [],
-    "cfa_research_challenge": ["web_search"],
-    "eoes": ["use_calculator", "read_lab_equipment"],
+    "cfa_research_challenge": ["use_calculator", "execute_code", "web_search"],
+    "eoes": ["use_calculator", "inspect_environment"],
     "ethics_bowl_appe": [],
     "ethics_bowl_nhseb": [],
-    "ichto": [],
-    "modeling_agent": ["execute_code", "web_search"],
-    "pumac_power": [],
+    "ichto": ["use_calculator", "execute_code", "web_search"],
+    "pumac_power": ["use_calculator", "execute_code", "web_search"],
     "vis_moot": ["web_search"],
-    "wharton_investment": ["web_search"],
-    "ccdc": ["execute_code", "web_search"],
+    "wharton_investment": ["use_calculator", "execute_code", "web_search"],
+    "ccdc": ["inspect_environment"],
     "debatebench": [],
-    "gcch_harvard": ["web_search"],
+    "gcch_harvard": ["use_calculator", "execute_code", "web_search"],
     "ioai_team": ["execute_code", "web_search"],
-    "wro": [],
+    "wro": ["inspect_environment"],
     "envirothon": ["web_search"],
-    "science_olympiad": [],
+    "science_olympiad": ["use_calculator", "read_official_materials"],
     "odyssey_of_the_mind": [],
     "wmtc": [],
-    # auxiliary question corpora (index_aux.json)
+    # question-level skill corpora (promoted into primary catalog)
     "qanta": [],
     "science_bowl": [],
-    "codecontests": ["execute_code"],
-    "mystery_hunt": [],
+    "mystery_hunt": ["execute_code", "web_search"],
     "nyu_ctf_bench": ["execute_code", "web_search"],
-    "cybench": ["execute_code", "web_search"],
+    "cybench": [
+        "inspect_environment",
+        "start_environment",
+        "execute_environment_command",
+        "reset_environment",
+    ],
 }
 
 ALL_ACTIONS = {
@@ -112,8 +120,13 @@ ALL_ACTIONS = {
     "use_calculator",
     "execute_code",
     "web_search",
+    "read_official_materials",
     "read_lab_equipment",
     "read_star_chart",
+    "inspect_environment",
+    "start_environment",
+    "execute_environment_command",
+    "reset_environment",
 }
 
 TOOL_ACTIONS = ALL_ACTIONS - {"speak", "write_scratchpad", "submit_final"}
@@ -162,8 +175,11 @@ class OlympiadEnvironment:
         self.submitted = False
         self.submitted_by: Optional[str] = None
 
-        self.allowed_tools = list(COMPETITION_TOOL_REGISTRY.get(competition_id, []))
         self.problem_data = self._load_problem()
+        self.runtime = CompetitionRuntime(competition_id, self.problem_data)
+        self.allowed_tools = list(COMPETITION_TOOL_REGISTRY.get(competition_id, []))
+        if competition_id == "cybench" and self.runtime.allows_open_internet():
+            self.allowed_tools.append("web_search")
 
         problem_team_size = self.problem_data.get("team_size")
         self.team_size = self._coerce_team_size(problem_team_size, competition_id)
@@ -284,11 +300,24 @@ class OlympiadEnvironment:
         elif action_type == "execute_code":
             result = self._run_code(payload)
         elif action_type == "web_search":
-            result = f"[web_search stub] Query recorded: {payload}. (No live search in v1.)"
+            result = self._run_web_search(payload)
+        elif action_type == "read_official_materials":
+            result = self._read_official_materials(payload)
         elif action_type == "read_lab_equipment":
-            result = f"[read_lab_equipment stub] Simulated reading for: {payload}"
+            result = (
+                "Lab equipment is not connected to a task-specific simulator. "
+                "Use inspect_environment for the verified runtime status."
+            )
         elif action_type == "read_star_chart":
             result = f"[read_star_chart stub] Simulated star chart for: {payload}"
+        elif action_type == "inspect_environment":
+            result = self.runtime.inspect()
+        elif action_type == "start_environment":
+            result = self._run_runtime_action("start", payload)
+        elif action_type == "execute_environment_command":
+            result = self._run_runtime_action("execute", payload)
+        elif action_type == "reset_environment":
+            result = self._run_runtime_action("reset", payload)
         else:
             result = f"Operational error: action '{action_type}' not implemented."
 
@@ -331,7 +360,7 @@ class OlympiadEnvironment:
     def _run_code(self, payload: str) -> str:
         try:
             proc = subprocess.run(
-                ["python3", "-c", payload],
+                [sys.executable, "-I", "-c", payload],
                 capture_output=True,
                 text=True,
                 timeout=5,
@@ -346,6 +375,109 @@ class OlympiadEnvironment:
             return "Code error: execution timed out after 5 seconds."
         except OSError as exc:
             return f"Code error: {exc}"
+
+    @staticmethod
+    def _run_web_search(query: str) -> str:
+        if not query.strip():
+            return "Web search error: query cannot be empty."
+        try:
+            request = Request(
+                f"https://lite.duckduckgo.com/lite/?q={quote_plus(query.strip())}",
+                headers={"User-Agent": "Mozilla/5.0 AgentOlympiad/1.0"},
+            )
+            with urlopen(request, timeout=10) as response:
+                html = response.read(1_000_000).decode("utf-8", errors="replace")
+            matches = re.findall(
+                r"<a[^>]+href=[\"']([^\"']+)[\"'][^>]*>(.*?)</a>",
+                html,
+                flags=re.IGNORECASE | re.DOTALL,
+            )
+            results = []
+            for url, title_html in matches:
+                title = unescape(re.sub(r"<[^>]+>", "", title_html)).strip()
+                if not title or title.lower() == "duckduckgo":
+                    continue
+                if url.startswith("//duckduckgo.com/l/"):
+                    url = parse_qs(urlparse("https:" + url).query).get("uddg", [url])[0]
+                results.append(f"- {title}\n  {unescape(url)}")
+                if len(results) == 5:
+                    break
+            if not results:
+                return "Web search returned no parseable results."
+            return "Web search results:\n" + "\n".join(results)
+        except (OSError, TimeoutError, ValueError) as exc:
+            return f"Web search error: {exc}"
+
+    def _read_official_materials(self, query: str) -> str:
+        raw_root = os.path.realpath(os.path.join(REPO_ROOT, "data", "raw"))
+        declared = [self.problem_data.get("source_file")]
+        declared.extend(self.problem_data.get("agent_visible_files") or [])
+        files = []
+        for value in declared:
+            if not value:
+                continue
+            candidate = os.path.realpath(os.path.join(REPO_ROOT, str(value)))
+            if os.path.commonpath([candidate, raw_root]) != raw_root:
+                continue
+            if os.path.isfile(candidate):
+                files.append(candidate)
+
+        if not files:
+            return (
+                "Official-material lookup unavailable: this problem has no existing "
+                "agent-visible source files under data/raw."
+            )
+
+        needle = query.strip().lower()
+        excerpts = []
+        for path in files[:10]:
+            try:
+                if path.lower().endswith(".pdf"):
+                    from pypdf import PdfReader
+
+                    pages = []
+                    for page in PdfReader(path).pages:
+                        page_text = page.extract_text() or ""
+                        if re.search(r"\bANSWER\s+KEY\b", page_text[:500], re.IGNORECASE):
+                            break
+                        pages.append(page_text)
+                    text = "\n".join(pages)
+                elif path.lower().endswith((".txt", ".md", ".json", ".csv")):
+                    with open(path, "r", encoding="utf-8", errors="replace") as handle:
+                        text = handle.read(2_000_000)
+                else:
+                    excerpts.append(f"{os.path.relpath(path, REPO_ROOT)} (binary material)")
+                    continue
+            except (OSError, ValueError) as exc:
+                excerpts.append(f"{os.path.relpath(path, REPO_ROOT)}: read error: {exc}")
+                continue
+
+            if not needle:
+                excerpt = text[:1500]
+            else:
+                index = text.lower().find(needle)
+                if index < 0:
+                    continue
+                excerpt = text[max(0, index - 500) : index + len(needle) + 1000]
+            excerpts.append(f"=== {os.path.relpath(path, REPO_ROOT)} ===\n{excerpt.strip()}")
+
+        if not excerpts:
+            return f"No occurrence of {query!r} in the declared official materials."
+        return "\n\n".join(excerpts)[:12000]
+
+    def _run_runtime_action(self, action: str, payload: str) -> str:
+        try:
+            if action == "start":
+                return self.runtime.start()
+            if action == "execute":
+                return self.runtime.execute(payload)
+            if action == "reset":
+                return self.runtime.reset()
+            return f"Unknown runtime action: {action}"
+        except (RuntimeUnavailableError, RuntimeError, ValueError, OSError) as exc:
+            return f"Environment error: {exc}"
+        except subprocess.TimeoutExpired:
+            return "Environment error: Docker operation timed out."
 
     @staticmethod
     def _normalize_answer(text: str) -> str:

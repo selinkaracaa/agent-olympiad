@@ -1,0 +1,3 @@
+# Science
+
+Those containing an odd number of electrons provide a controlled environment for studying the Kondo effect. They could perhaps be used as artificial fluorophores for intraoperative detection of tumors, because their theoretically high quantum yield gives them useful optical properties. Fabrication processes include epitaxy, in which they form spontaneously, and lithography. They are quasi-zero dimensional and have a sharp density of states making them potentially useful for manufacturing blue lasers or qubits. They are semiconductor devices containing small numbers of electrons or holes confined in all three dimensions. FTP, what are these objects sometimes referred to as "artificial atoms"?

@@ -1,0 +1,3 @@
+# History
+
+This event resulted when a seventeen-year-old attempted an assassination at an embassy in Paris. Although his original target was not present at the time, he was able to kill Ernst vom Rath. Orders released on the fifteenth anniversary of the Beer Hall Putsch called for the damage and looting of Jewish property. The position of the government at the time was that these were "spontaneous demonstrations," even though this event was planned in advance by Hitler's Chief of Propaganda, Goebbels. FTP, name this two-day event where Germans destroyed Jewish businesses and synagogues.          |

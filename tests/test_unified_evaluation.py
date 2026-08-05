@@ -16,7 +16,12 @@ from artifacts.pdf_ingest import PdfIngestError, parse_pdf, slice_pdf
 from evaluation.default_rubrics import ensure_default_rubrics
 from evaluation.gold import GoldAnswerEvaluator, load_gold_parts, parse_numbered_answers
 from evaluation.modes import QuestionSpec, build_competition_packet, build_question_packet
-from evaluation.registry import RegistryError, resolve_evaluator_spec, strategy_kind
+from evaluation.registry import (
+    RegistryError,
+    resolve_evaluator_by_id,
+    resolve_evaluator_spec,
+    strategy_kind,
+)
 import json
 
 
@@ -86,6 +91,14 @@ class RegistryAndModeTests(unittest.TestCase):
         self.assertEqual(writing.id, "rubric_llm_v1")
         with self.assertRaises(RegistryError):
             resolve_evaluator_spec("oral_presentation")
+
+    def test_registry_dispatch_by_explicit_id(self):
+        rubric = resolve_evaluator_by_id("rubric_llm_v1")
+        self.assertEqual(rubric.id, "rubric_llm_v1")
+        with self.assertRaises(RegistryError):
+            resolve_evaluator_by_id("missing_evaluator")
+        with self.assertRaises(RegistryError):
+            resolve_evaluator_by_id("programming_judge")
 
     def test_question_and_competition_packets(self):
         with tempfile.TemporaryDirectory() as temp_dir:

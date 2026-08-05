@@ -1,0 +1,43 @@
+{
+  "rubric_id": "cfa_research_challenge_written_report_current_v1",
+  "type": "structured_rubric",
+  "title": "CFA Institute Research Challenge Research Report Evaluation Form",
+  "competition_id": "cfa_research_challenge",
+  "deliverable": "written_report",
+  "rules_edition": "2026-2027",
+  "total_points": 100,
+  "criteria": [
+    {"id": "business_description", "name": "Business Description", "max_score": 5},
+    {"id": "industry_competitive_positioning", "name": "Industry Overview & Competitive Positioning", "max_score": 10},
+    {"id": "investment_summary", "name": "Investment Summary", "max_score": 15},
+    {"id": "valuation", "name": "Valuation", "max_score": 20},
+    {"id": "financial_analysis", "name": "Financial Analysis", "max_score": 20},
+    {"id": "investment_risks", "name": "Investment Risks", "max_score": 15},
+    {"id": "esg", "name": "Environmental, Social, Governance", "max_score": 15}
+  ],
+  "scoring": {
+    "grader_method": "Graders independently evaluate each written report using the Research Report Evaluation Form.",
+    "tiebreak_order": [
+      "Financial Analysis",
+      "Valuation",
+      "Investment Summary",
+      "Industry Overview & Competitive Positioning",
+      "Investment Risks",
+      "Environmental, Social, Governance",
+      "Business Description"
+    ]
+  },
+  "provenance": {
+    "official_only": true,
+    "publisher": "CFA Institute",
+    "accessed_on": "2026-07-31",
+    "sources": [
+      {
+        "title": "CFA Institute Research Challenge Official Rules 2026-2027",
+        "url": "https://www.cfainstitute.org/sites/default/files/-/media/documents/support/research-challenge/challenge/research-challenge-official-rules.pdf",
+        "evidence": "Appendix D publishes all seven maximum scores and the 100-point total; Appendix G publishes the tiebreak order."
+      }
+    ],
+    "applicability_note": "This file records the current official rules edition. Exact historical season boundaries for earlier benchmark years are not asserted."
+  }
+}

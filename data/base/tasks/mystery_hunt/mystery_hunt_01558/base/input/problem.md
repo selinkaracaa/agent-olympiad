@@ -1,0 +1,3 @@
+# 2012/puzzles/ben_bitdiddle/investigators_report/
+
+Investigator’s Report Investigator’s Report Ben Bitdiddle edits theater reviews written by his fleet of critic bots, who are sent out for the tedious meatspace part of the job. Contact HQ to obtain some components he recently posted on reuse@mit.edu . The following guidelines should help you assemble your components properly. If you don&rsquo;t follow the guidelines, replacements are available, but we will be cranky. You need to assemble all of the components. Plan your assembly order accordingly. Don&rsquo;t solder the 8-pin IC directly to anything. Ben Bitdiddle Ben Bitdiddle

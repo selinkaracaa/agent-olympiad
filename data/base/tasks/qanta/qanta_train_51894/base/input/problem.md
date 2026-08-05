@@ -1,0 +1,3 @@
+# Trash
+
+Behind Kent Nilsson's 49 goals, they made the playoffs in 1981 and won their first playoff series, sweeping the Chicago Blackhawks, before losing in the semifinals to the Minnesota North Stars. Their first appearance in the Stanley Cup finals was a loss to the Montreal Canadiens in 1986, but they managed to win the title in 1989, ending Lanny McDonald's career with a Stanley Cup celebration. In 2004, after a seven-year absence from the playoffs, they returned and beat all three Western Conference division champions on their way to another Stanley Cup Final. FTP, name this Canadian team who beat Vancouver, Detroit, and San Jose before losing to Tampa Bay in 7 games that year.

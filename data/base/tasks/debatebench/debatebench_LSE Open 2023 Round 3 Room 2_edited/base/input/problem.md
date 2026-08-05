@@ -1,0 +1,388 @@
+# LSE Open 2023 Round 3 Room 2_edited
+
+<pm> 
+Pretty straight forward case from opening government, we came to see that oh there is principle of legatee, that will lead to better outcomes for the poor and ultimately let better long-term outcomes for investment and infrastructure for the energy sector. 
+ 
+Whatever, we will have substantial taxes on additional profit. Notice profit, not revenue. So, the bottom line for companies for the additional money that they make in terms of increased prices, not the core business. So, in the same way that tax and like toxic rockets are based on incomes, your additional income or your additional net profit is going to be taxed. 
+  
+We will use these tasks, we need to subsidize energy for these four minutes. I'm going to characterize this debate, why we think energy prices are currently high and why generally they're high in the status quo. The reason why energy prices are so high is primarily because of the conflict in Ukraine. 
+
+That is that have been embargoes and often taken against Russia to not buy their oil, and therefore the supply of oil and the supply of energy has gone down. And that has led to increased prices because companies in the West know that they can charge higher prices. Lining up of principle, do we think that this arbitrary scarcity should be taxed? 
+
+We think, one, how can you don't deserve this money insofar as we think that people occupied when you're fighting better or superior service and you provide service for more individuals. The fact that you arbitrarily had scarcity and there was a global situation and actually a tragedy that led to you having an arbitrary advantage shouldn't mean that you get additional benefit from that. 
+
+So, enterprise companies don't deserve that money. We think they deserve to be taxed. But secondly, when do we tax? I think that we tax, especially an additional marginal tax on those who unfairly benefit from society, and we take that tax and give it to those who are exploitative. That is why we have additional taxes on the rich who are able to exploit and take advantage of society and we give them back to the poor because those are the individuals who were exploited to support those who are rich. 
+
+Insofar it's not the case, I think we justify only two-prong level of principle: why one completely deserves this money and two why those were exploited by these increased prices due. enterprise is not the case. I think we need a justification from opposition why these companies deserve this money. I think any team that tries to explain why this profit is more than justified is going to lose. Yeah, 
+
+<poi>
+these companies necessarily are making extraordinary profit when you tax them. One is this health supports version and two it's just the subset of companies who made profits in that specific period.
+</poi>
+
+I'm just confused with POIs. I think like the motion presumes that companies have made an additional profit. If they haven't in the status quo, we're happy to support a general principle of taxing companies. 
+
+And to be clear, I think in the vast majority of instances, the reason why energy prices are high isn't because companies have decided to revolutionize energy and provide a better service. Maybe vast majority instances prices of energy go up because of arbitrary scarcity. And so we generally support the principle of taxing businesses when they make a large amount of profit based on that arbitrary scarcity, and we think this goes beyond energy. 
+
+We're highly supported in other instances as well. Second argument: why do you think subsidizing the poor is good? I think this is obviously a huge intuitive impact as far as it's massively increasing the affordability of the poor and makes sure that people are able to afford basic necessities. I think the price of energy is probably currently one of the biggest factors that is limiting household income and often means that families can't put food on the table because the price of gas is so high for them to be able to, no thank you, to go to work and for their children for them to be able to heat their homes when the temperature is cold. 
+
+I think at the point in which we're able to subsidize energy for those who are most vulnerable, that's a huge impact for our side of the house. To be clear on mutual accessibility, we think that it's quite obvious that justifying as a politician why money taken from exploitative energy companies given to the poor for the purpose of energy is probably one of the easiest qualities to justify to the public. To say using this tax money for this purpose is probably the right way to go. 
+  
+It's not the case any kind of opposition counterpart needs to argue why should my people to get a policy that's not this quick just as effective economically and just as politically at our policy, given it's probably very, very easy for politicians to justify why this money should be spent on the poor, given that they're the ones who are most exploited and most vulnerable to these price spikes and given that these price spikes are arbitrarily benefiting companies on the basis of scarcity. Go
+
+<poi>
+yeah, so the extension of your principle is that you set the swimming pool tax at 100 because all of it's arbitrary. Do you support that? 
+</poi>
+
+We don't support 100% tax enterprise. We think on the important there is some additional service that big companies are having to provide, but we support like substantial like 60 to 70 taxes perhaps. But I think this is, you know, but the general principle I don't, I, you know, I'm not that good at maths and finance, so pick whatever number you think is reasonable and we'll go with that. 
+ 
+Um, third argument: why do you think this will lead to more investment in infrastructure and lower prices in the long term? The reason for this is because at the point of which your bottom line profit is being taxed, it's in your incentive to not have as much of a profit. Do you want the way that you do that effectively as a company is often to invest in capital expenditures that doesn't show up in here? 
+ 
+It's not the case it is in the incentive of energy companies to rather than letting money go to like run, rather than letting that money trickle down to the bottom line and then getting most of it taxed, which is a waste, to actually use that money for something that will benefit their business in the long term. What that means is investing in capital in infrastructure and investing in things that will increase the value of energy in the long term. 
+  
+Secondly, I think often, and as we've characterized, the reason why energy prices are high is because of artificial scarcity. What this looks like in the real world is companies often colluding to meet sole providers in certain geographical regions such that they can charge whatever price they want in that region because there's incentive for these companies to collude together and just, you know, kind of taper off different regions and just split them up between themselves such that one company can benefit from the monopoly that they have in that area. 
+ 
+The reason why that's important is because what that means is that it's in your incentive to decrease supply because you can charge a higher price for that as an entry supply company, and insofar as demand for energy is inelastic, increasing prices will increase your profit on average as far as the amount that your demand would decrease by is offset by the amount of your price increase. 
+  
+Insofar as that the case, I think we are able to tip that incentive enterprise. The marginal benefit that you get from raising the prices is now hugely, hugely counteractive by the massive taxes imposed upon you. At that point, the superior strategy to generate more profit in the long term is actually increase supply and be willing to take the hit on price. And so far as when prices are low, the windfall tax no longer applies. 
+ 
+Insofar the case, we dramatically change the incentive for companies to create more difficult scarcity and to, for example, shut down supply plans, which they've done in the past in order to decrease supply and increase prices at the point. It was not the case I think you're likely to increase the supply of energy around the world and reduce prices for those who are most vulnerable. 
+
+The third point here is that we think specifically kind of capital investment take place is going to be in renewables. The reason for that is because if you're going to allocate your money towards a certain kind of expenditure, you might as well do it towards something that you're going to get additional tax benefits from. Governments are currently offering massive benefits to companies for investing in renewables. 
+  
+The reason why they don't do it in the status quo is because the marginal benefit for renewables doesn't make up for the additional benefit that you can just get from price gouging customers on your core business. The way we switch that is, again, by reducing the marginal benefit of price gouging and by increasing prices and rather increasing the increasingly beneficial companies when they actually invest in in in ... 
+ 
+What are the impacts of this argument? One, I think across the line we get reduced costs and increased supply for the vast majority of individuals as far as we increase the incentive of companies to, instead of increasing prices as a way of maximizing revenue, to rather decrease costs and increase supply. They're likely to have increased renewables. 
+And tax on all those grounds. 
+</pm>
+
+<lo>
+A few observations about that speech. One, Nikki cannot model that they're going to use the excess revenues that come from this tax and funnel it into subsidizing energy for poor people. Important reason that CO correctly points out in a POI: this is a simple explosion, therefore they do not get yacht to say where this money will go. 
+
+Secondly, and as much as subsidization is likely to happen on either side of the debate, which is the largest margin is in instances where it is politically unpopular. If you justified subsidies in this instance, Mighty, there are strong degrees of political opposition to such subsidies in certain instances. 
+ 
+And therefore it is unlikely that in the most severe cases this excess tax money that is sort of like being taxed on these companies is then going to be funneled into subsidies for certain individuals. So, the relative mileage that they get out of that model, even if you think that they can do it, needs to be weighed against our more direct argument about why prices increase on aggregate on their side of the house. 
+
+Three claims: one, windfall taxes increase aggregate energy prices. two, we hasten the pace of renewable energy development and three, why this is principally unjustified. Two broad mechanisms under this argument about why they increase aggregate energy prices. The first is that this is likely going to have a highly regressive impact because under the status quo, energies are expecting a certain degree of profit. 
+
+This shifts the expectation that they have in terms of how much profit they will make and forces energy companies to adjust importantly in four ways. One, and as much as they're being aggressively taxed, they need to find a way to make up for that money, and therefore they need to raise taxes elsewhere, i.e., in normal times. 
+ 
+Two, there's an expectation, and when energy prices rise again, they will be further aggressively taxed due to the aggressive nature of this tax and the political justifications that they themselves talk about. But thirdly, do not let them get away with the soft stance. No, this is a continued increase, i.e., the windfall tax increases overcome to a significant extent. 
+
+And what that then means is that God needs to defend this tax from going on increasingly into the future, and therefore this tax is like going to be disproportionately, I honestly, why is this likely to be bad? Because what this then means is that that creates a huge incentive to raise aggregate energy prices in order to compensate for the profit hit that you are taking under this model. 
+ 
+I need the very, very high tax that their model engenders. One system that has a regressive impact. Why? Because given that individuals' demand for energy is inelastic, i.e., on both sides of this debate, you need to pay for energy. You need to do that so that like your home can function properly. People still have to pay for it. 
+
+But what that then means is that when you pay for that energy on a higher price, you have less disposable and low-income individuals in order to spend money on things like bread that you need to feed yourself and your family. By contrast, why will prices be fair and reasonable under our side of the house? Because under our side, we enable higher degrees of stability. 
+
+Why? Because absent a windfall tax, you know that there are going to be booms and busts in terms of the sort of like energy demand but also different exogenous effects that are happening around the globe—geopolitical conflicts or natural disasters. There are going to be some instances in which energy prices will be naturally high, other instances in which energy prices will be naturally low. 
+  
+And what that then means is that you can shape your profit model in a way where you can make the prices stable over time, i.e., cross-subsidize so that when they are higher, you can still keep the energy prices relatively low versus under their side of the house where they become significantly higher. And the reason that price stability matters is because it has less of a regressive impact on low-income individuals. 
+
+It's easier for poor families to plan and they're not suddenly hit by sudden prices and their energy bill in the middle of the winter when a conflict is ongoing. But the second broad mechanism under this argument is that they actually ossify market power under their set of cups, i.e., the windfall tax is also likely to have a regressive impact on companies for the reason that larger companies are disproportionately likely to be able to weather this tax in the first place. 
+ 
+Especially given the framing that it gave you about why this tax is likely to be very large. And what this then means is that smaller energy companies are going to struggle taking the hit from this tax. And what this then means is that they risk going out of business, especially if you're a relatively small energy company in a rural area. 
+ 
+What this then means is that in as much as larger companies now have more market power, they get to price fix, i.e., make prices increasingly high. And the reason that this is likely is because larger companies know that they can gain from a significant extent versus under our side of the house when you have a higher degree of sectoral companies. 
+
+And that is when all the benefits that we point out, i.e., not only price stability but also competition between these different companies, take in when smaller companies aren't crowded out to an unnecessary extent under the status quo. Right? And this matters for the reason that this is the most intense impact on this debate. 
+
+Maybe teams can give you really like nebulous economic jargon about what's going to happen in this round, but the clearest impact is always going to be, will you be able to put bread on the table? Will you be able to survive the winter when your government can't do anything for you? Otherwise, and that is why we will take this today. Before I move on, CG, 
+
+<poi>
+Given the tax is on profit, not income, regardless of if the oil is cheap for the company or expensive for the company, we're taxing their profit. So if they can inflate the prices all they want, they'll just get more tax taken off. 
+</poi>
+
+Look, that doesn't apply to our case because still you are likely going to increase energy prices under your side of the house.  
+Like, I don't see how that meaningfully engages. Secondly, windfall taxes slow the transition to renewable energy. There are existing incentives that make a green energy transition likely. The first is that mine are able to make more money under our side of the house i.e., your profit is higher. You're also able to cross-subsidize into clean energy. 
+ 
+And that's where the reason that shareholder activists are able to make specific arguments on corporate boards, i.e., shareholder activists at PP making the persuasive argument that even if you take the short term out right now, in the long term you can invest into renewable or cleaner forms of energy or anyone and engine one going green or similar reasons. 
+ 
+But a windfall tax obviously obviates this goal. Why? Because firstly, windfall taxes cut down energy profits even in primary prices relatively low. Two, you use the spare money you make during the times where you are have relative—you use the spare money that you make under our side of the house in order to reinvest into green energy, but that is much more difficult to do under their side of the house. 
+
+But they're the—it's just harder to make the persuasive argument to adopt things like green energy to the same extent because you know that we will be continuously and continuously taxed. Even if you make more profits, you won't be able to remove the fruits of those profits, and therefore internally on corporate voice to be part of their owners to make the argument that we should invest elsewhere. 
+ 
+And it's more likely that you're just going to have status quo bias and keep the existing green energy models that you have. There was an implicit response that we hear from that speaker is that you can make capital investments on renewable energy to decrease your profits so less of your money is taxed. Number one, lots of investments aren't made instantly. You need to negotiate great plans and convince other shareholders, and this isn't a decision that companies are just going to hastily make. 
+ 
+But two, we explained how we better support renewable energy under our side of the house in as much as now you get direct investment; we're here based upon a speculation about what might happen. And the reason this matters is because this is able to prevent future energy price crises which preclude the debate, i.e., you're able to diversify your supply chains, step in need to raise prices isn't as high in the first place. 
+ 
+But also, it means that long term, we've got a better help for the environment and reduce reliance on corn oil and natural gas supplies. Yeah, thank you. 
+</lo>
+
+<dpm>
+Opening up we know this is a bit off the court's motion, our case doesn't depend on this OPA in upward motion. Rather, I want to explain to you why subsidization for the core and reduced price of the course will only happen on our side for two reasons. 
+ 
+First of all, this policy is likely going to actually, in the real world, end up paying for subsidies for the poor because it is uniquely easy to justify. That is to say, this additional tax is taken directly from companies—companies which the public perceives and blames for having caused the harm of high prices and profiteering during a period of scarcity at the expense of everyone else. 
+
+It is thus very, very logical that politicians have incentives to help people who are struggling by punishing those who are contributing to harm. So, therefore, it's very likely that this money will go towards subsidizing. What I also want to point out, I know it is uniquely likely going to go towards helping the poor. 
+  
+It's a very simple reason. On their side of the house, if they want to have subsidies for the poor, that is when they have to take it from the overall budget. That's when they have to tax everyone more. That's when you have to take money away from other things that the government spends on. You take money away from them to thank you from defense. You have to take the money directly away from healthcare. 
+ 
+The consequence is, it is far, far easier to justify substance for the poor and far more likely that you subsidize the poor at the point when we have this tax compared to when you are cutting healthcare, when you are borrowing more and putting your children's financial future at risk, so on and so forth. The second reason why these subsidies are uniquely effective and likely on our side of the house is the idea of time. 
+ 
+I have characterized these situations for you. They are unique situations, like, for example, geopolitical situations, like, for example, natural disasters which might happen. The fact that they are unique means they require ad public policy to occur to be passed by governments in that time. And on what's on their side of the house, this occurs automatically at the point where, let's say the Department of Energy determines that decision threshold has been reached. 
+ 
+On their side of the house, the government actually has to pass that policy enacting this one-time subsidy. And the point when ultimately Congress and other members are dealing with so, so many dozens of different issues, like, for example, the prices itself, that is why you have gridlock. That's what it is. What it takes weeks and maybe even months to get that subsidy passed. 
+  
+To the end of the day, they are substance uniquely likely and effective because on their side, the poor will be left without energy for weeks. First of all about, oh, I talk about this idea of reducing costs, then I want to talk about the principle, which we don't think they even addressed at all. First of all, on the idea of price, they believe that, first of all, that this will have a regressive impact on price. 
+ 
+I think there are a couple of responses to this, but first of all, I want to point out that as we pointed out in the model, there is a base level of profit that companies can make even if the windfall tax exists. The point is, like, there's a guaranteed level of profit that they are able to generate. The question with this is, until why they feel these companies feel the necessity to increase prices even more, because they are, like, at the very least guaranteed enough to be financially stable. 
+ 
+Second of all, I want to point out that if prices, if companies jack up prices, this means that generally companies' prices are likely to remain higher in the market for a longer period of time. And if prices remain higher, we think that is itself a situation where companies will have to be paying the windfall tax for a longer period of time. Generally, what the windfall taxes go away, they want prices to return to their normal level as soon as possible, far more on our side of the house than on their side of the house. 
+
+And therefore, that is far more likely to look like investments to ensure that people can get more as possible. This is not right. That's responsiveness. The idea here is, what is the best profit-maximizing strategy for you as a company under the windfall tax? On their side of the house, it is to increase prices because that is when you, every additional dollar you increase price, you get that additional dollar of profit. 
+
+But on our side, because energy demand is quite elastic, but on our side of the house, you don't want to increase the price necessarily. That's not the best strategy. By contrast, a much better strategy is to increase demand, that is, to increase capacity to have people consuming more energy instead of the same amount of energy at a higher price. 
+
+In that sense, we massively improve the incentives of companies. On the next point, on the idea of cross-subsidization, so I think broadly what I understood from their argument is that because of this windfall tax, firms lose the ability, especially upon small burns, they lose the ability to cross-subsidize and invest in the long run in terms of things like, for example, green energy. 
+
+I want to point out that we think firms can access the kind of money to spend on both sides of the house. Most energy companies tend to be relatively large and mature companies. They also tend to have a relatively stable revenue because everyone needs energy. This means they tend to have very, very good credit ratings. They're very, very good at borrowing. They can borrow money whenever they need it. 
+
+The idea is what is their incentive to do? And on our side of the house, even though they probably can invest on both sides, they are far more likely to invest on our side of the house in a sense because they do not need to make as much profit during these times. They might engage in things like capital expenditure, which they can deduct against those taxes. 
+
+Finally, on the idea of price checks, look, I want to point out that this is probably a symmetric part. And the very simple reason is that I don't think the energy situation right now is the situation where we have small companies competing against larger ones to provide you with electricity. In most cases, the energy companies have a captive market. Because you need to, like, have a huge appointment of scale to make energy work. 
+ 
+Like, so generally, you only have regions with like one sole provider, maybe even two sole providers, two providers. So, in that sense, I don't think they're gonna have much competition on their side anyway. So, why do we massively reduce costs? We want in three areas. One, we have uniquely effective and likely subsidies for the poor, which substantiate the Starbucks speech. 
+
+Second of all, we incentivize investment in terms of capital, in terms of capital expenditure being more better. And third of all, we increase the incentive for companies to focus on profit by increasing demand, not price. So, at the end of the day, we have more money going to infrastructure and again we have more about a slightly going to be going towards renewables. 
+
+So, finally, on the principle, look, we have to explain to you that companies in nowhere form deserve this money or they don't deserve all of this money. It's too far and we explain. I'm going to explain to you why that is so crucial in my opinion, in our opinion of opening government. The government is only given so much power over the economy because it has the obligation to ensure fair outcomes in terms of who gets who. 
+
+That is why they've never had too much power. It also has a responsibility to ensure fairness. The problem is the government could most certainly boost economic growth and overall outcomes. It could increase, for example, infrastructure and investment by policies which also increase inequality, but governments choose not to do so because they prioritize justice and fairness over maximizing outcomes and output. 
+
+This is why, for example, inheritance tax is so high. It may be the case that having a low inheritance tax means rich people work harder, but overall, it's believed that it's unfair that people get this money that they don't deserve. We've proven that these companies do not deserve all of this additional profit because it wasn't provided by success in the market. Rather, it was either blind luck, but more importantly, profiting and exploiting the vulnerability of others. 
+
+Energy is a necessity, and we believe that makes it unique in the sense that you can't—you simply—it's wrong for you to exploit individuals' need for energy during tough times and make so much money off their backs. So, on that basis, we're very proud to have oppose.
+</dpm>
+
+<dlo>
+I'll talk about three things from the speech: virtually on the principle, secondly on the prices, thirdly on investments and community energies. 
+Firstly, that principle—the gut principle is that lots of these energy companies did not deserve the increase in proxy received due to exogenous factors such as faculty disasters, report and different nation attacks on it. So, there's three responses. This principle doesn't necessarily follow. Why is this true? Because what they're claiming is just that companies did not deserve this amount of profit. 
+ 
+But the extension of this principle is no one deserves anything. Lots of arbitrary talents beyond what is like operating costs. So, obviously, this doesn't make sense in a huge amount of cases. It's more morally wrong how much companies for something that's relatively arbitrary. So, on the flip, it is actually worse that you are actually doing harm to companies to get a dessert like that for you to be like taking away things that they do not deserve. 
+
+So, I'm not on the balance of which side is causing more, like, or more is more likely causing moral injustice. It is their side of the house, but also it is relatively hard to quantify how much a company deserves and does not deserve, and often that classification of their side is highly likely going to be miscalculated. So, we would rather prefer utilitarian outcomes as to whether or not individuals on ground chemistry better prices. 
+
+Whether or not response—yes, fine, yes. It's true that companies should be taxed for things they did not serve. The answer is the solution to this is we already tax companies that make more profits in greater amounts. Not the perfect approximation, but we don't think it's completely—doesn't exist right now. Thirdly, realistically, you even if we can see that this principle that companies did not deserve all the profits they make is true, our argument proof so you—the worst impacts that overrides the principle. 
+ 
+And you should know UID's personal matter. See, first of that depressed fight caused by windfall taxes is worse on their side when companies don't have cross-oxidization abilities due to a greater increase the greater decreasing high stability on their side. Yes, even if the money gets redistributed through taxes in the future, that is a lengthy and an inefficient process compared to just individuals holding on to that disposable income right now when they know what they need to spend that money on right now. 
+
+It's unclear whether governments can properly approximate what the individual needs versus the individual who probably knows what they need better, and therefore within that time gap they actually lose lives when that money doesn't get into the pockets of people, especially when some of these governments are not being clean as standards, relatively corrupt, or in some cases just really bureaucratically full of nonsense. So, that's the issue of the end of the deal on their side. 
+
+No, thank you. Exactly. Then let's talk about increase in prices that explains to you very clearly how energy companies offer when it comes to profit expectation and why they have to adjust on their side of the house. But the issue is often these companies are just for me. Often they've either mis project or they can overcompensate early on in order for them future forms of windfall taxes being implemented. 
+ 
+The biggest department is from CG, which is, no, no, but when you price high, more of that money goes into tax money, so the company will price like in the first place. Otherwise, all that money will get taxed in the future anyway. One, this is like sound logic, but the issue with this claim is that there's an elective action problem among oil packs and companies. 
+
+So, even if it is true that companies like the money, the extra profit they make will get taxed, here's why they still have the cheap prices relatively high because it is unpopular and difficult to massively lower your prices because OPEC probably realizes that it is really hard and difficult to justify in the future while you are going to increase more cheap prices high. 
+ 
+It is also extremely politically unpopular in the future to raise prices than for, you know, set the expectation because the price is relatively high already to deal with it. It’s supposed to be governments are likely to subsidize things like energy buying. Why? Because often people need energy to survive. It’s a major voting issue—CFEU energy crisis. 
+
+So, regardless of what the price is, governments are likely going to be providing this for people, providing subsidies to ensure that people can afford it because people really care about it. But two, even if you buy this claim at its highest, our argument will be that people can better control the use of their disposable income than the government can make decisions and make this a redistribution process over this month. 
+  
+Why? Because you know your needs are probably much better than the government can. Whether you have to put that money into things like food, education, or to save your sick mother. And therefore, it's better if more of that money is kept in your pockets that relied on the government to determine what policy they want to implement and how in what ways and conclude which groups they want to addition to the money. 
+
+Two, but three, if you are booked tax will also can't price hike. So, for example, smaller companies, this feeds into our argument about monopolization. The small companies eventually go out of business because they are both aggressive but also are unable to make these compensations for the companies that remain are often going to be large companies that monopolize and are able to afford it on their side. 
+
+And that's really bad because in a lot of cases some of these small companies are these sole providers in relatively more rural regions where individuals need the energy the most and the individuals are relying on these companies. So that's the issue. Stop that. Stop badgering. And so this is the problem they have to deal with. 
+ 
+But also, by the way, we have received no response from OG. The last thing they say is that this tax also passes the end, but also note this tax taxes the additional demand that people have for the energy. So, we're not sure what the issue is on their assessments. We'll take over it 
+
+<poi>
+if it is the case, and others says that this tax rate is very high. Companies don't benefit at all by raising prices but rather increase revenue by keeping costs low so they can keep more of their profit.
+</poi>
+
+I literally explained to you that there's a need for companies to somehow level keep the prices high because there's a collective action problem amongst my only pets and companies. But also I would think while we get better, we have better investment production 2017.
+
+Moving on to the OG response. The OG response is the tax goes to subsidizing the poor because it is really easy to justify. So, this is the shift from their like fun like finding ass model where like, yeah, this claim first thing due to the history of communism, people generally view things as subsidies. It's overly socialists and therefore it's relatively hard to justify it. 
+ 
+But two, you don't believe it is fine if you're a reason why subsidies for these poor is probably symmetric. Why? Often being able to afford fuel and be able to cook and be warm in the winter is a relatively important voting issue. That’s me. I feel like most individuals probably care about whether or not they're able to live. 
+
+Therefore, it’s highly likely on both sides the governments that do care are going to be putting money to subsidize their energy issues. Becomes that don't care on their side of the house are going to leave these individuals who die. Versus on our side, individuals at least have to be disposable income on their own. Moving on to energy very quickly. All claims that do not have profit you need to make green investments and invest in capital infrastructure so that's what that money gets passed. 
+
+What there's a time issue, you often need a long time to get investments into green energy approved even under a speedy and efficient negotiation process. Why? Companies need to know when you’re putting certain things—what your long-term plans are, development, all of that needs time. But now that this policy is time sensitive, it actually further increases companies' incentives who just price gouge on their existing energy and oil supplies, which actually worsens energy transition on their side. 
+
+Also, it doesn't make sense part of your problems during crisis is also profits you make from people using your renewable energy. So you said it's so hard to make the argument, and you should just follow this money onto their side. Costs compared to our model, your cross-section ID is less uncertainty, it’s less than depending on things like political winds. It's also very personalized, significantly more predictable, which leads to more sustainable developers. 
+</dlo>
+
+<mg>
+problem for opening opposition is there was a world before the government where companies were able to cross subsidize with the problems that they previously had. were able to exist under the same financial strictures that we want to send them back to the strictures of three years ago. and we think that they can do that perfectly fine, and it is unclear why the situation as currently is, which is not one that is characterized by top 500 regards, that in a minute is not one that enables us to move back to a place where look, you can make profits on what you previously were charging with you as you were making profits perfectly fine. 
+
+And that firstly they say that is key things to remind, firstly they said if you charge super high rates—so, we say even if we charge super high rates, and even in the place of opposition model 100, there's literally no incentives to charge more, more mental rates. Opening opposition—opening up, I'm sorry, a sadness. Here’s why. 
+ 
+Look, if I'm selling a unit of things for a hundred and I can make profit on the first thirty dollars of that, or I can sell that unit if they prefer to build and make profit on the thirty dollars of that, I want to sell more of the thing up to that thirty dollars and being able to sell it to the consumer who is the person who is going to be making that website’s a person in there, right? 
+ 
+Whether that is a business is the thing that is going to be determining that and thriving, like the usage rates. And at that point, there’s a business. It literally doesn't matter to me what the additional sort of price I am charging is if that profit isn't something that I can then go on and use if it is something like it. I have to sort of reinvest back into my business. 
+
+We’re going to give you reasons as to why you’re likely to invest that into greener technologies while that is beneficial in a minute. Second thing they talk about cross-subsidizing, like I think, I think, I think that this has literally been fine forever, and energy companies have already been able to do this. 
+
+We are taxing the windfall. We are not technically—we're not increasing this to 100% tax on all profits. It's on the windfall. Previously, these companies have been able to sufficiently cross-subsidize. Shell CEOs have been able to have as many private jets as they like. They've been able to make as many billions of pounds in profit and still exist. 
+
+It is unclear why it is 2023 they need these windfall profits in order to cross-subsidize coming out of opening months of years as opposed to their standard profits that we might otherwise have expected. They don't say governments are going to subsidize in the long run. Firstly, we think this is literally not true. They didn't before. It's also just unclear why this has to be true in the long run. 
+
+Secondly, that is not what we're signing for a proposition. You can say this might subsidize it in the long run. We would rather they didn't. I mean, they won't. On the side opposition, they lastly say that there's a collective action action issue, which means that you need to keep practice fire of your business. 
+
+I think the way to solve that collective action issue is to collectively tackle themselves. Cool, the situation at the minute, panel, is where government support is starting to wind down to people and into businesses because it's costing tens of billions of pounds. It has literally tanked one UK prime minister and is continuing to tank economies more broadly because it's costing too much to support people through the current situation. 
+
+But wholesale oil prices have returned to pre-conflict levels. The point here is that whilst this support is still coming from government, it is effectively subsidizing these large companies, large oil companies, and these large energy companies. Currently, they are selling, or they are buying the oil for a certain price and then selling it on for the price we would like them to sell it on for plus the massive government subsidy that they're already getting. 
+ 
+This comes on specifically to the principal that clash with this debate. So Opening government says it's unexpected and therefore it's not really legitimate. I think the DLA responsiveness is particularly strong. The actual principle we say in closing government is this: throughout the onset of the conflict states massively bailed out energy companies have essentially bankrolled them indirectly through the energy price guarantee both to consumers and to companies who are in order to manage their unit prices. 
+
+The government now has a duty to recoup from this industry what has previously been doled out. The question of the CO is how they want to go about recouping these previously doled out billions and billions of pounds. The assumption so far is getting promoting competition as they actually don't care about routine at all, given the maintenance of high prices forces people into needing public services more because they have to spend more money on energy and therefore needs like that don't have that many expenses on other things. 
+
+That was the multiple quality of institution in London, and that further increases reliance on government services. We think that makes it harder for government to provide these services because we're needing to provide lawn. This is a—we think that we solve it by making energy cheaper, not forcing people towards that, but also by taking literally tens of billions of pounds back across the sector, even just within the UK, more broadly. 
+  
+Environmental side—opening governments say that there’s a marginal price gouging mechanism. We think there are a couple instruments. Firstly, we get new capacitors into the market. Opening government currently say that they're a big oil company. A lot, here’s the comparative on proposition. We think it is easier to be a smaller competitor relatively as a company in the green energy market for three reasons. 
+ 
+One, firstly, we think there's a less mature market. There's less large, for example, already. Secondly, we think there are lots of government incentives for people to enter that market. Thirdly, we think that there's less infrastructure needed to build a windmill than there is to become a massive loan producer. 
+
+Second thing, we also think this incentivizes these companies to create subsidiary companies that they can then invest money into instead where that infrastructure already exists. We think that this is more likely to happen because you're more likely to get this investment into green energy because long green energy is much more finite. 
+  
+But we also think there exists energy transmission and infrastructure, so it's fairly straightforward to literally work in some windmills into the naughty. In opening opposition, they say that this takes time. We say that that we accelerate this status quo for businesses who are currently already in that market—not this particularly good. I'll come on to why this is a good mechanism. 
+
+<poi>
+even if Shell was doing just fine before the crisis. Our point is that the way you get through to conservative shareholders is by saying, "Let's use the windfall now and in the future to invest into renewables versus standard profits would go into energy... 
+</poi>
+
+in the future." I mean, do it right now, and for all companies, I'm really quite unclear why it is that given these two people currently applying energy at a free pre-conflict level, confident, right, they need to be making this particular moment. 
+
+But I think that was particularly proven for the incentive analysis. Why is the mechanism going to shift to green? We think it is easier to bring to bring uh um we think that the reason why shifting degree is particularly impactful is that it massively increases energy securities and energy security. 
+
+You get more companies and more investment within your own national domestic industries. We think at the point where the conflict is over, this means that you do not have to regress back to either pre-conflict energy usage of Russia or other countries where there could be foreseeable energy security issues. But you're able to foster a domestic and green energy market. 
+
+We also think this means that you have a greater ability in the long run to maintain a level of market regulation in case of exactly the kinds of shocks that opening opposition wants to talk about. So if you do then have the energy price—energy prices, you're able to be in a position...
+</mg> 
+
+<mo>
+So, I'm  going to hear about what the motion says because I think that particularly top half of kind of missed what the debate is or should be about. And I'm glad that closing government brought in the current context for what's actually going on in the world. 
+
+But we're just going to flip that and explain why it needs to essentially a bunch of good companies failing. We're gonna actually fill in the links on renewable energy as well to talk about, you know, inequality of investment in various countries. The motion says that we are taxing the windfall of companies that made excess profits in the previous, like, two periods of time. 
+ 
+And we're taxing them now and increasing that. That is the continued, you know, to increase at the taxation of companies that have previously made this profit—not important in the debate, right? So, that's what this debate is about. And secondly, we agree with closing government that, yes, this price are going down now, but you're increasing taxation on these companies and taking more and more of their revenue. 
+
+And the justification is that they made a huge windfall in the previous two periods. So, I want to be very clear about why companies therefore are probably going to be unable to place taxation. There are a few different reasons I want to note here. So first is that oftentimes with this excess taxation, the way it works is that oil companies and energy companies have long-term contracts for oil. 
+
+So what they do is they buy oil two years because it's a resource that doesn't go away, and you want to hedge into the long term. But what that means is that now this is when companies are going to have to renegotiate those contracts because it's one or two years down the line from what it was previously, which means that they're now going to have to pay far higher prices on this world. 
+ 
+So they're going to face extreme high costs at the moment. But secondly, the windfalls that companies had previously have now been invested into things like green energy and renewable technology, which I'll go into my secondary section. So that means they have far less money with which to pay. 
+  
+But thirdly, we would say that in many markets, governments regulate energy prices to link them to global prices, which are falling because, you know, there's a supply chain shift from Russia whereby Europe gets lower energy from the USA, for example. And also, Russia now floods energy to countries that aren't sanctioning it, like, for example, South Africa, India. 
+
+And what that means is that the energy price now has gone down, so again, companies don't have the capacity to pay this. And what that means is that profit is unlikely to be crazy high or abnormal during the period where there's continued windfall tax is implemented. And I'll say, "Oh, we won't tax it because it's a windfall," but it's a support motion. 
+
+The question is how does this likely happen? The light of justification is that, as I'll get into, fortitude and stand up and are like, "Oh, these companies, they've just taken all the money away from people. They're terrible. They have the huge amount of capacity to now pay in the current period," which is wrong for all the reasons I've said. 
+
+I don't want that banging moved. Robots in the whole case, right? So how is this taxation level set? Then governments demonize energy companies as profiteering of the public to push through these taxes. They use things like the populist rhetoric that we heard essentially of opening government, which is that everyone is struggling in these high inpatient periods. 
+
+And so it's easy to demonize all companies resolved. And it's true that companies did make high profits, but as you've explained, those profits have massively reduced and that money has already been reinvested, and so it's therefore impossible for these people to pay. But also, there's a kind of competition that exists here where, as a state, that nationalized energy, it's far easier to justify. 
+
+So essentially what happens is that this gets normalized to a large extent as well over time because governments use it as a tool. It's essentially very easy for them to justify taxing these companies. You say we're going to eat the rich or whatever, we're going to use, you know, close tax loopholes or whatever. And what that means is that these taxes are necessarily, in the light scenario, so at an extremely unsympathetic level unfairly. 
+  
+And they probably will eat into normal profit because the point is they're happening now when companies are making relatively normal profit rather than previously, and this continues beyond the current market conditions in the period it’s, you know, that exists right now and happens in the long term. The impacts, I think, are very clear. 
+ 
+A lot of good companies who are just decent energy providers are obviously like out of business because they have to pay this huge increase cost of the taxes. But I want to link in a second. I want to link this directly to renewable energy and eternalness far more because opening opposition has correct headlines, but I think the reason they give is slightly flawed. 
+
+Which essentially the ESG implies the money goes there. We're going to put out a few burglars. Firstly, why companies do this instead of things like shareholder buybacks. Secondly, why, you know, we're going to deal with the writing off response coming out of opening government. Thirdly, we're going to explain why governments don't invest in renewable technology, which interacts directly with closing government. 
+ 
+And lastly, we're going to explain why you need this level of access profit in order to get this. The opening opposition reason is ESG, essentially, and that's definitely true. It's about ethical investing, and that's definitely true to some extent. But for that case to work, that requires proving that the majority of people within this company on the board are ESG investors. They do care about this. 
+
+We think something different, which is that it is just rational for companies to do this because the way that their share price is determined is by long-term pricing, right? The cumulative present value of the company which exists indefinitely into the future and also the average shareholder has some people like pension funds, for example, who are very long-term incentives because they need to ensure that the people who they're managing money for get a pension like 40 to 50 years. 
+  
+They are extremely long term. They get massively about that long term, regardless of who they're, you know, if they have ethical direct things as well. But also, these like egos of individual CEOs who want to engage in green technology, and I think that's a far stronger set of reasons than just that some of these investors are quite ethical. Before I go on, yeah, yeah, okay, 
+
+<poi>
+if these companies invested older profits into Capex, that's tax deductible, why would these companies make tax for money they don't have?
+</poi?
+
+It's not taxed. But this is like another nuance, right? Taxes action and so on. We actually show this happens in an extremely populous way. And so the way this tax is implemented is super problematic. 
+You can't just say that we get 1,000 like best multiple versions back. You need to engage in the lighting scenario, which we've shown is bad. But responses like tax deductibility, but we say again the tax by the perfect section is going to be certified with which it engaging this. Now, the next thing I want to do is talk about why governments can't do this because that's a closing government push is that governments will invest in green technology instead. 
+
+We think that governments don't this for a few different reasons. The first, they're far more willing to engage in actual dirty energy, right? Because the main thing that Master of Government is, like, a long-term success of that thing in 20 to 30 years is ensuring that energy prices are low at the minute you have an election that's right around the corner. 
+
+And so you don't really care about where that energy is necessarily coming from. Just ensure that it exists at some extent so you can embrace things like LNG if you're Germany because, you know, even though the Green Party is in government at that period of time, because you need that energy to make up a threat. So that's why you embrace that kind of dirty energy as well. 
+
+But also we say that governments are foreign. So what that means is that governments don't invest in real energy, in green energy, but these companies do. And I think they need an excess degree of profit because very obviously that means enables them to engage in far more bets about real energy that are all kind of effective. So you're able to invest in a far greater variety of green tech overall. 
+
+But the last thing is even in that best case reading, this is still problematic because it leads to more inequality because the taxes implemented in countries where these energy companies are based rather than their global subsidiaries. So, this country now gets far more of the revenue whereas companies previously had invest incentive to invest globally because that is where how they're best able to maximize profits. 
+So for all these reasons, very proud to have you, 
+</mo>
+
+<gw>
+Okay, dealing with to dealing our principle of Harvard and OG's principle and then taking LOL two things on this. CO, yes. Okay, and theory maybe oil companies buy two years in advance, one year advance. Don't really care, and I understand the case, which is ultimately they might fail or they might struggle. 
+
+Three things on this. First of all, given most pension funds, banks, and things like that are tied up in oil prices and oil stocks because most pension funds are tied up in what are considered stable monetary income companies or projects, oil and energy traditionally being something that a lot of banks and a lot of pensions have sold their money into, it seems highly unlikely that the government would do what Annika says. 
+
+Like, it is correct that in this moment we have to talk about likelihood of how this policy is going to be implemented. CO's contention is that it will be done in a populist way. I think most governments at the moment who are under a cost of living crisis, who are in a situation that Jack said where we don't have enough money to back into our welfare systems, are highly unlikely to ever push this policy to the point of breaking claims. 
+ 
+Why? So, because at the point where they push these companies to either fail, this books over the pensions, this books over the vines, and it means the next recession or the current recession we're in goes on even longer, even worse hurts all the people that Jack and I don't want to hurt and the government still want to hurt. I'll talk about that a little more. 
+ 
+Or it means that they're even unlikely to push these companies to the point where they're struggling, where it is a realistic risk. So, what I mean there is it's not that they won't push them until they're to breaking point. They won't push them until they don't have sufficient people profits. So, this government is still likely to keep oil companies having a level of profits, i.e., likelihood analysis and justification as to why Jack's perception of the world where we allow these companies to have the amount of profit they used to make, we just don't allow them to absolutely take the piss in the time of a at anything crisis. 
+
+Yes, you said the top sentence which didn't give the analysis. Stop finding the tables. A few things on this, I think. Secondly, another reason it is unlikely to live in the world of CO that these companies are ultimately too big to boss. I really enjoy that I get the perception of these really nice struggling small mom-and-pop shop energy companies. I don't know who the they are. 
+ 
+Like, I don't think it is likely that Xiao is ever likely to get to the point where they are that desperate and that in need of support, right? People that we put up with oil companies, the energy company doing kind of crappy things to the oceans, to their customers and things like that. And ultimately, it is something that the world needs, and they're unlikely—this government policy is unlikely to ever be implemented in a way that completely populist implementation happens. 
+
+Yes, it is a crossover issue, but so too are pensions being able to heat your house, being able to run their car, being able to run your tractor that gets the food to the people, the trucks to get the food to the people. So, in a cost of living crisis, in a world in which a recession is likely to last forever, and I just don't see the likeness analysis that, oh, closing opposition and standing up to the real world. 
+ 
+Okay, let's talk about our principle, right? Black interacting so far as the state has bankrolled ultimately in Industry throughout both to an extent covered but mainly Ukraine crisis and various environmental crises that are flocked over both the supply chain and indeed just where we can, I don't get our oil and energy from. 
+  
+What does this mean? It means that the principle we signed over a proposition and definitely in closing government is that there's a duty to recoup as much of those funds without crippling these companies. What does that mean? It means that the government now is able to use that money regardless of whether it's OG's version of the world where it's 100% of that analysis goes into the poorest people's pockets. It definitely goes into the state's coffers. 
+
+What does that mean? It means that they are able to fight to recoup the deficit they have brought into this industry. Well, I have this industry some sort of a safety net through a heart through a hard time. It is therefore a legitimate opening opposition for us to do this. It is legitimate insofar as they've received a safety net from the government. Their duty is to now allow that safety net to be passed on to someone else. 
+
+What does that mean and why is that likely? It means that either it is passed, it ensures that states are able to tackle the money they lost, and then deficit is not as hard, or it means they're able to support other sectors that have been impacted throughout both the pandemic and just people's inability to travel and things like that, like the hospitality service or just insert any industry that has been massively over in the last three years. 
+ 
+Finally, it means that if everyone in opposition cares so much about, like, your granny's ability to pay her heating bill, and what is more important to your granny is not necessarily whether the oil company is doing all these economic safeguarding's that opening opposition talks about. So, what's more important is that the state is stable enough and able to either, as Jack tells you, fund your welfare and ensure that you're not as reliant, or sorry, ensure that you're not as reliant on state services as you will be if you can't afford the future to feed yourself, feed your home, etc. 
+ 
+I will take you at the end of this point. It is more important to her that the state functions and citizen to recoup in this way. Therefore, I think taxes overall. But I'll do a little bit more. 
+
+<poi>
+So, to be clear, the only country that really engaged in these Southeast—they suddenly you're talking about is the UK because we have trust in competent countries. Europe, for example, engage in a price cap system where they didn't directly fund these companies.
+</poi>
+
+The Irish government did it as part of an EU policy, like I'm sorry, and supported across so many EU countries. It was also done in a lot of Latin American countries. Yes, not to the ridiculous extent your parable government did it, but it still was a level of support. 
+  
+There was equally a level of support. They didn't pay, even if they weren't given direct money from the state's office. They were given essentially money by not having to pay certain forms of taxes or certain points. It's exactly maybe it enhances them as much money as your government did for a like fast claim. I just don't think it would connect. 
+ 
+Okay, next thing. I think that this becomes, when it comes to green energy in the green energy debate, I think this is the way in which we can justify having companies actually invest in green energy themselves rather than forcing the government to have to do it long term. Why is this the case? At the point where you are likely to have to recoup these costs, it becomes that you need to invest in either new forms of energy that become less expensive long term because they are less likely to be taxed high, or you're likely to get benefits. 
+ 
+But technology is that their customers are more willing to engage with them, are more capable of engaging with them in a world where there isn't a massive recession and people are not able to maybe spend a little bit more on implementing solar panels, etc., themselves and engaging with you as a company in that way. Finally, on how this microphone is really annoying—sorry. 
+  
+Finally, on how companies are able to ensure that they get profit on turn, Jack is correct me just to say that if you can only get, say, 30 quid worth of profit, your duty now instead of increasing your profit becomes having a good service and making sure you've got as many customers as possible. Because where we see things like energy companies actually engaging and looking after their customers, maybe not turning off the lights so much, maybe looking after people to keep their custom, I beg you to oppose. 
+</gw>
+
+<ow> 
+What continued is a funny thing because you only need to believe two things. First off, on this debate, number one, that looking at the market as it is now, companies, when you continue to apply a model of windfall taxes, are unlikely to be making the types of profits which would have historically been a basis in justification for those taxes but don't warrant those taxes right now. 
+ 
+You see government accessible continually. But number two, the way that these taxes are likely to be applied—let's either get through in five reasons, which I will repeat because I've responded to—means that you are likely to get an unfair level of taxation which will actually erode into companies' normal profits. And by normal profits, I don't mean the money that they used to make. I mean the money that they need to sustain their businesses in the future. 
+ 
+Given that with the windfall taxes, they did things, as Aniket said, like investment green and the investment supply chain, which means that they now have increased costs because they scaled as a result. Important because, as Anakin proved, there was an incentive invested pressure to do something. If those two things, we win the district that made the two weeks. 
+  
+The first opposition says, whether it's about consolidation or whether it's about green energy tipping point, based on the assumption that these companies are harmed by these taxes, but the natural God responses to say they made profits they didn't expect in the first place. So, what is the tipping point for this investment? We are able to explain why, firstly, the likely comparative is that they would have invested in these good things that we all care about. 
+
+But secondly, the culture which comes as a result of the way that this tax is likely to work means that they are going to be screwed over and lack the capacity to do the things that opening opposition a bit more confusing with Virgin career. So, let's just move into that in terms of how our case works. 
+
+The first thing I'll note is the reason that windfall taxes are likely to harm companies for free fall. The first reason, of course, was that the contracts that companies use, which would allow them to make record profits where they negotiated prices two years before the war in Ukraine and then sold prices relative to current market rates, have expired and therefore they are unlikely to make that spread into the future. 
+ 
+The second reason that they invested in various good things would come with the increased operating costs. And the final thing that these companies—no, thank you—and the final thing that the market rate going down means that there is less scoping countries where the prices are decided by the market rate for them to make that profit. 
+ 
+The reasons that we gave as to why this is likely to be done badly then was separable. The first reason is the demonization which has come from the fact that people are struggling due to higher inflation. The fact that the perception is that these companies did make high profits, and this is objectively true or well-reported. The fact that some states, like what nationalize their energy industries, and therefore mitigate the price increase. 
+ 
+So governments themselves have a pressure to prove that they are increasingly—the fact that governments have high interest rates, increasing tax burdens, and need cash for things like their pensions obligations. The fact that this just becomes normalized as a political tool to promise to fund stuff in the same way that closing tax loopholes was invoked and led to bad tax loopholes being implemented because it's in vogue. 
+ 
+I want to weigh this against the councils that we bought in the government speech. The first thing we hear is that pension funds are invested in, and they've impairedly invest in the world, so governments are unlikely to set the price and the tax in a high way. The problem is this ignores several things. The first is the volume of recognization that we gave you as to widely likely comparative is one where they set things about ways and be president for that. 
+ 
+But the second and more important thing that this ignores is the fact that just that is it—the fact that the investment that these companies have or that these potential funds have does not is not the predominant thing which affects government decision-making. It is how easy it is to sell the narrative. It is how angry people would be if their policy that they have in their head, the obvious easy policy of windfall taxes, are not implemented. 
+ 
+It is the harm of losing the election if you don't implement it. It is the comparisons which constantly occur. Wait, what is the most likely conception of this policy? It is the one that we explain because it is not disruptable consideration, but predominantly thinking  of these politicians and the short term incentives that Aniket tells About are the reasons why they are likely to trend towards this, and the actual impacts can become the next government's problem, and you could demonize them, before I explain what the implication of this is for the round I'll take closing, 
+
+<poi>
+If you list the reasons as to why you think they made a lot of profit and the government's invested, and it is true, and the wording of the motion is true as they made high profit. Do you think your other point is true that somebody's invested so much in green profit, green energy, that they are now at risk at defaulting only half of your case can...
+</poi>
+
+Okay, stop. The same thing about this idea of defaulting so with this debate we don't need to prove that mom and pop shop default. We don't need to prove that that like oil companies go fast. This is about the profit in and of itself, being a good thing, because we demonstrated that structurally, they invested it in good things, and we would like them to continue to use their more normalized to invest in good things. 
+
+So the impact that we're proving in this debate is not that these companies are going bust. It's not as reliant on consolidation as open opposition mechanisms work. It is that they use their fuck off record profits to do good things. We support that they have higher costs into the future as a result of that. That is unfortunate, but we also support that trade off, and it is bad that the culture which is likely to occur on their side of the house will prohibit them from using their future normal profits to be able to invest further in the things that we treat us they are structurally likely to do which are good. 
+
+I think that weighing all of this up is easy to see when doing this debate for a number of reasons. Firstly, competitive, prison. Government's duty to recoup. One thing to say is that most companies didn't just grow money and energy companies. Lisa said, No, this isn't true. One Lisa trust did this. She wasn't a member of the oil lobby too. The USA did nothing because they have other streams of oil revenue and income, so they don't bother to, like, try and fix market prices. Two, Many countries just implemented price caps free, many customers just gave cash directly to individuals, right? Because other costs were going up as well. I just don't get where the duty to recoup exists in every situation, even if they're able to free work in the context that they want to talk about they do. 
+
+But secondly, this seems that you get exactly the same amount back as you tax, but if you believe operant on the culture of taxation and how this is likely to be used in the future. This is not true. So they're not fulfilling the tax obligation that these companies were given via subsidies by taxing them by this wireless mechanism. But finally, as a group, if companies money on objectively good things like investment into green energy, we think that matters more than the duties do, because that's for me, why governments can even shift prove that they do good things versus opening government People need their friends for them we should just have these people 100% I think we proven that this is far more realistic that we be an open opposition...
+</ow>

@@ -1,0 +1,83 @@
+{
+  "rubric_id": "ethics_bowl_appe_60_v1",
+  "title": "APPE Intercollegiate Ethics Bowl official match scoring",
+  "total_points": 60,
+  "criteria": [
+    {
+      "id": "clarity_intelligibility",
+      "name": "Clarity and intelligibility",
+      "max_score": 10,
+      "observable": true,
+      "description": "For the team's answer to the Moderator's question: whether the presentation is clear and systematic, answers the question, and gives a coherent argument clearly and succinctly."
+    },
+    {
+      "id": "central_ethical_dimensions",
+      "name": "Identification and discussion of central ethical dimensions",
+      "max_score": 10,
+      "observable": true,
+      "description": "For the team's answer to the Moderator's question: whether the presentation clearly identifies and thoroughly discusses the central ethical dimensions of the case."
+    },
+    {
+      "id": "deliberative_thoughtfulness",
+      "name": "Deliberative thoughtfulness",
+      "max_score": 10,
+      "observable": true,
+      "description": "For the team's answer to the Moderator's question: whether the presentation shows awareness and thoughtful consideration of different viewpoints, especially those important to people who disagree with the team."
+    },
+    {
+      "id": "opposing_team_commentary",
+      "name": "Opposing-team commentary",
+      "max_score": 10,
+      "observable": false,
+      "description": "Overall score for the team's commentary on the opposing team's presentation, considering the three official evaluation criteria."
+    },
+    {
+      "id": "response_to_commentary",
+      "name": "Response to opposing-team commentary",
+      "max_score": 10,
+      "observable": false,
+      "description": "Overall score for the team's response to the opposing team's commentary, considering the three official evaluation criteria."
+    },
+    {
+      "id": "response_to_judges",
+      "name": "Response to judges' questions",
+      "max_score": 10,
+      "observable": false,
+      "description": "Overall score for the presenting team's response to judges' questions, considering the three official evaluation criteria."
+    }
+  ],
+  "not_observable_from_deck": [
+    "opposing-team commentary",
+    "response to opposing-team commentary",
+    "response to judges' questions",
+    "optional Spirit Points, which do not count toward the official 60-point total"
+  ],
+  "provenance": {
+    "official_urls": [
+      "https://www.appe-ethics.org/cases-rules-guidelines/",
+      "https://growthzonecmsprodeastus.azureedge.net/sites/36/2025/07/2025-APPE-IEB-National-Rules.pdf",
+      "https://growthzonecmsprodeastus.azureedge.net/sites/36/2023/06/IEB-Fillable-Scoring-Sheet_Aug2020.pdf"
+    ],
+    "local_source_paths": [
+      "data/raw/ethics_bowl_appe/2021-regional-case-set.pdf",
+      "data/raw/ethics_bowl_appe/2022-national-case-set.pdf",
+      "data/raw/ethics_bowl_appe/2022-regional-case-set.pdf",
+      "data/raw/ethics_bowl_appe/2023-national-case-set.pdf",
+      "data/raw/ethics_bowl_appe/2023-regional-case-set.pdf",
+      "data/raw/ethics_bowl_appe/2024-national-case-set.pdf",
+      "data/raw/ethics_bowl_appe/2024-regional-case-set.pdf",
+      "data/raw/ethics_bowl_appe/2025-regional-case-set.pdf",
+      "data/raw/ethics_bowl_appe/2026-national-case-set.pdf",
+      "data/benchmarks/ethics_bowl_appe/benchmark.json"
+    ],
+    "applicable_years": [
+      2021,
+      2022,
+      2023,
+      2024,
+      2025,
+      2026
+    ],
+    "notes": "The official APPE score sheet and National Rules use a 60-point total: three separately scored 10-point presentation criteria plus 10 points each for commentary, response to commentary, and response to judges. Spirit Points are feedback only and are excluded. The official materials available on APPE's current resources page and the unchanged 2020/2023/2025 scoring documents support this version across the local 2021-2026 case sets."
+  }
+}

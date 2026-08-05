@@ -1,0 +1,3 @@
+# Trash
+
+Ingrid admitted that this album's line "Ten times out of nine, I know you're trying" is about frustration with her label. "Dear Moon" is one of the poems written by Warsan Shire to accompany this album. In a video from this album, the artist emerges from double doors clad in yellow as water rushes down steps in front of her. In a CMA performance of a song from this album, the featured Dixie Chicks sing the line "with his right hand on his rifle, he swore it on the Bible". In the video for this album's lead single, the singer boasts "I might just be a black Bill Gates in the making" and lies on a sinking police car. For ten points, name this Beyoncé album that includes "Daddy Lessons" and "Formation".

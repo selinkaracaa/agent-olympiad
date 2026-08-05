@@ -1,0 +1,1 @@
+E:/agent_olympiad/agent-olympiad/data/raw/odyssey_of_the_mind/2020/long_term_synopses.md

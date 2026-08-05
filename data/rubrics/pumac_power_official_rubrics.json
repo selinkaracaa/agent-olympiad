@@ -1,0 +1,261 @@
+{
+  "_comment": "Official organizer answer-key/rubric extraction. Coverage is intentionally partial where no official local solution or marking allocation is available.",
+  "_dataset": "pumac_power",
+  "_kind": "official_proof_rubric_mapping",
+  "_provenance_policy": "Only benchmark-linked official organizer problem, solution, answer-key, or marking files were used.",
+  "pumac_power_2007": {
+    "provenance": {
+      "organizer": "PUMaC Power Round",
+      "source_url": "https://jason-shi-f9dm.squarespace.com/archives",
+      "source_file": "data/raw/pumac_power/PUMaC2007_Power.pdf",
+      "solution_file": null
+    },
+    "official_total_points": null,
+    "official_printed_point_values_in_order": null,
+    "grading_note": "Multi-part written proof packet",
+    "coverage": "no_official_solution_file_identified",
+    "allocation_note": "No reliable official point allocation was present in the extracted local source; no weights are assigned."
+  },
+  "pumac_power_2008": {
+    "provenance": {
+      "organizer": "PUMaC Power Round",
+      "source_url": "https://jason-shi-f9dm.squarespace.com/archives",
+      "source_file": "data/raw/pumac_power/PUMaC2008_Power.pdf",
+      "solution_file": null
+    },
+    "official_total_points": null,
+    "official_printed_point_values_in_order": null,
+    "grading_note": "Multi-part written proof packet",
+    "coverage": "no_official_solution_file_identified",
+    "allocation_note": "No reliable official point allocation was present in the extracted local source; no weights are assigned."
+  },
+  "pumac_power_2009": {
+    "provenance": {
+      "organizer": "PUMaC Power Round",
+      "source_url": "https://jason-shi-f9dm.squarespace.com/archives",
+      "source_file": "data/raw/pumac_power/PUMaC2009_PowerA.pdf",
+      "solution_file": "data/raw/pumac_power/PUMaC2009_PowerSol.pdf"
+    },
+    "official_total_points": null,
+    "official_printed_point_values_in_order": null,
+    "grading_note": "Multi-part written proof packet",
+    "coverage": "official_solution_file_present_untranscribed",
+    "allocation_note": "No reliable official point allocation was present in the extracted local source; no weights are assigned."
+  },
+  "pumac_power_2010": {
+    "provenance": {
+      "organizer": "PUMaC Power Round",
+      "source_url": "https://jason-shi-f9dm.squarespace.com/archives",
+      "source_file": "data/raw/pumac_power/PUMaC2010_Power.pdf",
+      "solution_file": "data/raw/pumac_power/PUMaC2010_PowerSol.pdf"
+    },
+    "official_total_points": null,
+    "official_printed_point_values_in_order": null,
+    "grading_note": "Multi-part written proof packet",
+    "coverage": "official_solution_file_present_untranscribed",
+    "allocation_note": "No reliable official point allocation was present in the extracted local source; no weights are assigned."
+  },
+  "pumac_power_2011": {
+    "provenance": {
+      "organizer": "PUMaC Power Round",
+      "source_url": "https://jason-shi-f9dm.squarespace.com/archives",
+      "source_file": "data/raw/pumac_power/PUMaC2011_Power.pdf",
+      "solution_file": "data/raw/pumac_power/PUMaC2011_PowerSol.pdf"
+    },
+    "official_total_points": null,
+    "official_printed_point_values_in_order": null,
+    "grading_note": "Multi-part written proof packet",
+    "coverage": "official_solution_file_present_untranscribed",
+    "allocation_note": "No reliable official point allocation was present in the extracted local source; no weights are assigned."
+  },
+  "pumac_power_2012": {
+    "provenance": {
+      "organizer": "PUMaC Power Round",
+      "source_url": "https://jason-shi-f9dm.squarespace.com/archives",
+      "source_file": "data/raw/pumac_power/PUMaC2012_Power.pdf",
+      "solution_file": "data/raw/pumac_power/PUMaC2012_PowerSol.pdf"
+    },
+    "official_total_points": null,
+    "official_printed_point_values_in_order": null,
+    "grading_note": "Multi-part written proof packet",
+    "coverage": "official_solution_file_present_untranscribed",
+    "allocation_note": "No reliable official point allocation was present in the extracted local source; no weights are assigned."
+  },
+  "pumac_power_2013": {
+    "provenance": {
+      "organizer": "PUMaC Power Round",
+      "source_url": "https://jason-shi-f9dm.squarespace.com/archives",
+      "source_file": "data/raw/pumac_power/PUMaC2013_Power.pdf",
+      "solution_file": "data/raw/pumac_power/PUMaC2013_PowerSol.pdf"
+    },
+    "official_total_points": null,
+    "official_printed_point_values_in_order": null,
+    "grading_note": "Multi-part written proof packet",
+    "coverage": "official_solution_file_present_untranscribed",
+    "allocation_note": "No reliable official point allocation was present in the extracted local source; no weights are assigned."
+  },
+  "pumac_power_2014": {
+    "provenance": {
+      "organizer": "PUMaC Power Round",
+      "source_url": "https://jason-shi-f9dm.squarespace.com/archives",
+      "source_file": "data/raw/pumac_power/PUMaC2014_Power.pdf",
+      "solution_file": null
+    },
+    "official_total_points": null,
+    "official_printed_point_values_in_order": null,
+    "grading_note": "Multi-part written proof packet",
+    "coverage": "no_official_solution_file_identified",
+    "allocation_note": "No reliable official point allocation was present in the extracted local source; no weights are assigned."
+  },
+  "pumac_power_2015": {
+    "provenance": {
+      "organizer": "PUMaC Power Round",
+      "source_url": "https://jason-shi-f9dm.squarespace.com/archives",
+      "source_file": "data/raw/pumac_power/PUMaC2015_Power.pdf",
+      "solution_file": "data/raw/pumac_power/PUMaC2015_PowerwithSol.pdf"
+    },
+    "official_total_points": null,
+    "official_printed_point_values_in_order": [
+      0,
+      1,
+      0,
+      1,
+      1,
+      1,
+      0,
+      1,
+      0,
+      1,
+      0
+    ],
+    "grading_note": "Multi-part written proof packet",
+    "coverage": "official_solution_file_present_untranscribed",
+    "allocation_note": "Point values are copied in document order from bracketed allocations in the official problem text; no synthetic criterion weights are assigned."
+  },
+  "pumac_power_2016": {
+    "provenance": {
+      "organizer": "PUMaC Power Round",
+      "source_url": "https://jason-shi-f9dm.squarespace.com/archives",
+      "source_file": "data/raw/pumac_power/PUMaC2016_Power.pdf",
+      "solution_file": "data/raw/pumac_power/PUMaC2016_PowerSol-n7bg.pdf"
+    },
+    "official_total_points": null,
+    "official_printed_point_values_in_order": null,
+    "grading_note": "Multi-part written proof packet",
+    "coverage": "official_solution_file_present_untranscribed",
+    "allocation_note": "No reliable official point allocation was present in the extracted local source; no weights are assigned."
+  },
+  "pumac_power_2017": {
+    "provenance": {
+      "organizer": "PUMaC Power Round",
+      "source_url": "https://jason-shi-f9dm.squarespace.com/archives",
+      "source_file": "data/raw/pumac_power/PUMaC2017_Power.pdf",
+      "solution_file": "data/raw/pumac_power/PUMaC2017_Power_Solutions.pdf"
+    },
+    "official_total_points": null,
+    "official_printed_point_values_in_order": null,
+    "grading_note": "Multi-part written proof packet",
+    "coverage": "official_solution_file_present_untranscribed",
+    "allocation_note": "No reliable official point allocation was present in the extracted local source; no weights are assigned."
+  },
+  "pumac_power_2018": {
+    "provenance": {
+      "organizer": "PUMaC Power Round",
+      "source_url": "https://jason-shi-f9dm.squarespace.com/archives",
+      "source_file": "data/raw/pumac_power/Power-Round.pdf",
+      "solution_file": "data/raw/pumac_power/Power-Solutions.pdf"
+    },
+    "official_total_points": null,
+    "official_printed_point_values_in_order": null,
+    "grading_note": "Multi-part written proof packet",
+    "coverage": "official_solution_excerpt_included",
+    "official_reference_excerpt": "PUMaC 2018 Power Round Solutions Page 1 PUMaC 2018 Power Round: “Life is a game I lost...” November 18, 2018 “The Game gives you a Purpose. The Real Game is, to Find a Purpose.” — Vineet Raj Kapoor Contents 0 Acknowledgements 2 1 Surreal Numbers (93 points) 2 1.1 Deﬁning the Surreal Numbers (41 points) . . . . . . . . . . . . . . . . . . . 2 1.2 General Statements about Surreal Numbers (56 points) . . . . . . . . . . . 5 2 Introduction to Combinatorial Game Theory (57 points) 9 2.1 Combinatorial Game Deﬁnitions (3 points) . . . . . . . . . . . . . . . . . . 9 2.2 ˜G (16 points) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 9 2.3 G (38 points) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11 3 Nim and the Sprague-Grundy Theorem (92 points) 15 3.1 Nim (18 points) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 15 3.2 Nim Variants (41 points) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16 3.3 Sprague-Grundy (33 points) . . . . . . . . . . . . . . . . . . . . . . . . . . . 17 4 Speciﬁc Games & Questions (240 points) 20 4.1 Toads and Frogs (75 points) . . . . . . . . . . . . . . . . . . . . . . . . . . .?",
+    "allocation_note": "No reliable official point allocation was present in the extracted local source; no weights are assigned."
+  },
+  "pumac_power_2019": {
+    "provenance": {
+      "organizer": "PUMaC Power Round",
+      "source_url": "https://jason-shi-f9dm.squarespace.com/archives",
+      "source_file": "data/raw/pumac_power/2019Power.pdf",
+      "solution_file": "data/raw/pumac_power/2019Power-SOLS.pdf"
+    },
+    "official_total_points": null,
+    "official_printed_point_values_in_order": null,
+    "grading_note": "Multi-part written proof packet",
+    "coverage": "official_solution_file_present_untranscribed",
+    "allocation_note": "No reliable official point allocation was present in the extracted local source; no weights are assigned."
+  },
+  "pumac_power_2020": {
+    "provenance": {
+      "organizer": "PUMaC Power Round",
+      "source_url": "https://jason-shi-f9dm.squarespace.com/archives",
+      "source_file": "data/raw/pumac_power/PUMaC_2020__Power_Round___Problem_Statements-f5gg.pdf",
+      "solution_file": "data/raw/pumac_power/PUMaC_2020__Power_Round___Solutions.pdf"
+    },
+    "official_total_points": null,
+    "official_printed_point_values_in_order": [
+      4
+    ],
+    "grading_note": "Multi-part written proof packet",
+    "coverage": "official_solution_file_present_untranscribed",
+    "allocation_note": "Point values are copied in document order from bracketed allocations in the official problem text; no synthetic criterion weights are assigned."
+  },
+  "pumac_power_2021": {
+    "provenance": {
+      "organizer": "PUMaC Power Round",
+      "source_url": "https://jason-shi-f9dm.squarespace.com/archives",
+      "source_file": "data/raw/pumac_power/pumac2021v20.pdf",
+      "solution_file": "data/raw/pumac_power/pumac2021powersols.pdf"
+    },
+    "official_total_points": null,
+    "official_printed_point_values_in_order": null,
+    "grading_note": "Multi-part written proof packet",
+    "coverage": "official_solution_file_present_untranscribed",
+    "allocation_note": "No reliable official point allocation was present in the extracted local source; no weights are assigned."
+  },
+  "pumac_power_2023": {
+    "provenance": {
+      "organizer": "PUMaC Power Round",
+      "source_url": "https://jason-shi-f9dm.squarespace.com/archives",
+      "source_file": "data/raw/pumac_power/PUMaC2023PowerRoundMarch28Update.pdf",
+      "solution_file": "data/raw/pumac_power/PUMaC_2023_Power_Round_Sol.pdf"
+    },
+    "official_total_points": null,
+    "official_printed_point_values_in_order": null,
+    "grading_note": "Multi-part written proof packet",
+    "coverage": "official_solution_file_present_untranscribed",
+    "allocation_note": "No reliable official point allocation was present in the extracted local source; no weights are assigned."
+  },
+  "pumac_power_2024": {
+    "provenance": {
+      "organizer": "PUMaC Power Round",
+      "source_url": "https://jason-shi-f9dm.squarespace.com/archives",
+      "source_file": "data/raw/pumac_power/Power2024_Updated_1117.pdf",
+      "solution_file": null
+    },
+    "official_total_points": null,
+    "official_printed_point_values_in_order": null,
+    "grading_note": "Multi-part written proof packet",
+    "coverage": "no_official_solution_file_identified",
+    "allocation_note": "No reliable official point allocation was present in the extracted local source; no weights are assigned."
+  },
+  "pumac_power_2025": {
+    "provenance": {
+      "organizer": "PUMaC Power Round",
+      "source_url": "https://jason-shi-f9dm.squarespace.com/archives",
+      "source_file": "data/raw/pumac_power/Power_2025.pdf",
+      "solution_file": null
+    },
+    "official_total_points": null,
+    "official_printed_point_values_in_order": null,
+    "grading_note": "Multi-part written proof packet",
+    "coverage": "no_official_solution_file_identified",
+    "allocation_note": "No reliable official point allocation was present in the extracted local source; no weights are assigned."
+  },
+  "_coverage": {
+    "sessions_with_solution_excerpt": 1,
+    "sessions_with_official_solution_file": 13,
+    "sessions": 18,
+    "partial": true
+  }
+}

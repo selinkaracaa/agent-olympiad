@@ -1,0 +1,38 @@
+{
+  "rubric_id": "debatebench_wudc_speaker_100_v1",
+  "title": "WUDC British Parliamentary individual speaker score",
+  "total_points": 100,
+  "criteria": [
+    {
+      "id": "persuasiveness",
+      "name": "Persuasiveness of the speech",
+      "max_score": 100,
+      "observable": true,
+      "description": "Assign the official WUDC speaker score from 50 to 100 for the speaker's contribution. Judge persuasiveness as an integrated assessment of the plausible reasons showing that arguments are true and important (analysis or matter) and the clarity and rhetorical power with which those reasons are explained (style or manner). The official manual expressly says analysis and style are not separate scoring criteria, so no invented split is used."
+    }
+  ],
+  "not_observable_from_deck": [
+    "vocal delivery not preserved by transcription",
+    "accent-neutral delivery assessment",
+    "timing and nonverbal presentation not preserved by transcription",
+    "points of information that are omitted or ambiguously transcribed"
+  ],
+  "provenance": {
+    "official_urls": [
+      "https://www.worlddebating.org/wudc-manual"
+    ],
+    "local_source_paths": [
+      "data/raw/debatebench/hf_README.md",
+      "data/raw/debatebench/cleaned_speeches/Cleaned Speeches/",
+      "data/benchmarks/debatebench/benchmark.json"
+    ],
+    "applicable_years": [
+      2021,
+      2022,
+      2023,
+      2024,
+      2025
+    ],
+    "notes": "The official WUDC site identifies the WUDC Debating and Judging Manual as authoritative. The manual uses one 50-100 speaker score and explicitly rejects separate analysis/matter and style/manner scores. This rubric is therefore for one speech, not a four-team house ranking. The post-2021 manual was adopted across major BP tournaments, but tournament-specific deviations remain possible; the local 2020 transcript is outside this version's applicable years."
+  }
+}

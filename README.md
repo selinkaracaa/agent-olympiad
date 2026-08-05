@@ -9,9 +9,7 @@ Benchmark **multi-agent AI teams** on olympiad-style **team tasks**. Part of the
 | Doc | Contents |
 |-----|----------|
 | [`docs/DATA_COLLECTION.md`](docs/DATA_COLLECTION.md) | Canonical tracker — 20 source-collected competitions + 33 external benchmark datasets |
-| [`data/benchmarks/index.json`](data/benchmarks/index.json) | Primary session catalog (main) |
-| [`data/benchmarks/index_new.json`](data/benchmarks/index_new.json) | Expanded primary session tracks (index.json + promotions) |
-| [`data/benchmarks/index_aux.json`](data/benchmarks/index_aux.json) | Auxiliary question corpora (辅集) |
+| [`data/benchmarks/index.json`](data/benchmarks/index.json) | Unified mixed-unit catalog (32 session tracks + 5 question/challenge tracks) |
 | [`initial_experiments/`](initial_experiments/) | Archived smoke tests and early multi-agent runs |
 
 ## Repository structure
@@ -21,16 +19,14 @@ Benchmark **multi-agent AI teams** on olympiad-style **team tasks**. Part of the
 │   └── DATA_COLLECTION.md       # Living data tracker
 ├── data/
 │   ├── raw/                     # Source PDFs (committed to git)
-│   │   ├── iol/, ioaa/, arml/, ijso/
-│   │   ├── arml_national/, arml_local/
-│   │   └── business_case/
-│   └── benchmarks/              # Extracted problem JSON per competition
-├── collectors/                  # PDF → benchmark.json scripts (run locally)
+│   ├── benchmarks/              # Extracted problem JSON per competition
+│   └── base/                    # ALE-style agent inputs (generated)
+│       └── tasks/<comp>/<id>/base/{input,software}
+├── collectors/                  # PDF → benchmark.json (+ build_ale_base.py)
 └── initial_experiments/         # Archived experiment code + results
-    ├── src/run.py
-    ├── docs/STATUS.md
-    └── results/
 ```
+
+`data/base/` follows the [Agents Last Exam](https://huggingface.co/datasets/agents-last-exam/agents-last-exam-data) per-task layout (`…/base/input`, optional `software/`). Regenerate with `python collectors/build_ale_base.py --clean`.
 
 ## Refresh benchmarks from PDFs
 

@@ -1,0 +1,3 @@
+# Literature
+
+The author juxtaposes the "Barcan desert" of Libya with "the continuous woods/ where rolls the Oregon" to give the poem a sense of universality. The last stanza, in which the author orders the reader to "go not like the quarry slave at night" but instead to go ahead "sustain'd and sooth'd/ by an unfaltering trust," was added seven years after the poet first completed the work at age seventeen. It opens with a comment that Nature "speaks in various languages" and contains the lines "All that tread/ The globe are but a handful to the tribes/ that slumber beneath in its bosom." FTP name this poem about death written by William Cullen Bryant.

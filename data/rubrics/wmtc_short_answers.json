@@ -1,0 +1,183 @@
+{
+  "_comment": "Official organizer answer-key/rubric extraction. Coverage is intentionally partial where no official local solution or marking allocation is available.",
+  "_dataset": "wmtc",
+  "_kind": "short_answer_mapping",
+  "_provenance_policy": "Only benchmark-linked official organizer problem, solution, answer-key, or marking files were used.",
+  "wmtc_2018_advanced": {
+    "1": {
+      "expected": "10404"
+    },
+    "2": {
+      "expected": "50"
+    },
+    "3": {
+      "expected": "7"
+    },
+    "4": {
+      "expected": "40 cm"
+    },
+    "5": {
+      "expected": "9"
+    },
+    "6": {
+      "expected": "7"
+    },
+    "7": {
+      "expected": "1"
+    },
+    "8": {
+      "expected": "97"
+    },
+    "9": {
+      "expected": "216"
+    },
+    "10": {
+      "expected": "83"
+    },
+    "11": {
+      "expected": "378"
+    },
+    "12": {
+      "expected": "204"
+    },
+    "13": {
+      "expected": "75"
+    },
+    "14": {
+      "expected": "1008"
+    },
+    "_provenance": {
+      "organizer": "World Mathematics Team Championship",
+      "source_url": "https://wmtc.international/problems",
+      "source_file": "data/raw/wmtc/2018/2018_Advanced_Indivi_Relay_Team_Problems.pdf",
+      "solution_file": "data/raw/wmtc/2018/2018_WMTC_Advanced_Solutions.pdf"
+    },
+    "_coverage": {
+      "covered_parts": 14,
+      "expected_parts": 14,
+      "scoring_note": "WMTC Team Round only (14 questions × 5 pts). Source PDF also contains Individual + Relay — those sections are stripped from this record."
+    }
+  },
+  "wmtc_2018_intermediate": {
+    "1": {
+      "expected": "8"
+    },
+    "2": {
+      "expected": "112"
+    },
+    "3": {
+      "expected": "9"
+    },
+    "4": {
+      "expected": "34"
+    },
+    "5": {
+      "expected": "1"
+    },
+    "6": {
+      "expected": "17"
+    },
+    "7": {
+      "expected": "1"
+    },
+    "8": {
+      "expected": "10"
+    },
+    "9": {
+      "expected": "1"
+    },
+    "10": {
+      "expected": "6"
+    },
+    "11": {
+      "expected": "4"
+    },
+    "12": {
+      "expected": "6"
+    },
+    "13": {
+      "expected": "13"
+    },
+    "14": {
+      "expected": "7"
+    },
+    "_provenance": {
+      "organizer": "World Mathematics Team Championship",
+      "source_url": "https://wmtc.international/problems",
+      "source_file": "data/raw/wmtc/2018/2018_Intermediate_Indivi_Relay_Team_Problems.pdf",
+      "solution_file": "data/raw/wmtc/2018/2018_WMTC_Intermediate_Solutions.pdf"
+    },
+    "_coverage": {
+      "covered_parts": 14,
+      "expected_parts": 14,
+      "scoring_note": "WMTC Team Round only (14 questions × 5 pts). Source PDF also contains Individual + Relay — those sections are stripped from this record."
+    }
+  },
+  "wmtc_2018_junior": {
+    "1": {
+      "expected": "15"
+    },
+    "2": {
+      "expected": "4"
+    },
+    "3": {
+      "expected": "12"
+    },
+    "4": {
+      "expected": "5 cm2"
+    },
+    "5": {
+      "expected": "642"
+    },
+    "6": {
+      "expected": "67"
+    },
+    "7": {
+      "expected": "16"
+    },
+    "8": {
+      "expected": "4"
+    },
+    "9": {
+      "expected": "13"
+    },
+    "10": {
+      "expected": "108"
+    },
+    "11": {
+      "expected": "6"
+    },
+    "12": {
+      "expected": "20 cm2"
+    },
+    "13": {
+      "expected": "0"
+    },
+    "14": {
+      "expected": "6"
+    },
+    "_provenance": {
+      "organizer": "World Mathematics Team Championship",
+      "source_url": "https://wmtc.international/problems",
+      "source_file": "data/raw/wmtc/2018/2018_Junior_Indivi_Relay_Team_Problems.pdf",
+      "solution_file": "data/raw/wmtc/2018/2018_WMTC_Junior_Solutions.pdf"
+    },
+    "_coverage": {
+      "covered_parts": 14,
+      "expected_parts": 14,
+      "scoring_note": "WMTC Team Round only (14 questions × 5 pts). Source PDF also contains Individual + Relay — those sections are stripped from this record."
+    }
+  },
+  "_coverage": {
+    "covered_parts": 42,
+    "expected_parts": 42,
+    "sessions": 3
+  },
+  "_quality_audit": {
+    "failure_class": "prompt/OCR heading/worked-fragment stored as expected",
+    "retained_expected_values": 42,
+    "removed_expected_values": 0,
+    "coverage_changed": false,
+    "result": "All 42 expected values checked against the official Answer: lines used to construct the map."
+  }
+}

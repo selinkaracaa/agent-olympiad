@@ -1,0 +1,3 @@
+# Literature
+
+One poem by this man notes, "O dark dark dark. They all go into the dark". This man proclaimed "old men ought to be explorers" and that "the end is my beginning" in a poetry collection which opens, "Time present and time past." This author criticized Shakespeare in the essay Hamlet and His Problems and emphasized the importance of impersonal poetry in (*) Tradition and the Individual Talent. In a more famous poem, he asks, "Do I dare to eat a peach?" before concluding that "I shall wear white flannel trousers, and walk upon the beach." Another of his works ends by repeating "shantih" and declares, "April is the cruelest month." For 10 points, name this British poet who wrote The Wasteland and The Love Song of J. Alfred Prufrock.

@@ -1,80 +1,79 @@
 {
   "schema_version": "2.0",
-  "generated_at_utc": "2026-07-29T19:15:11.880862+00:00",
-  "snapshot_date": "2026-07-28",
-  "taxonomy_version": "2026-07-28.formal-v1",
+  "generated_at_utc": "2026-07-30T04:06:01.946217+00:00",
+  "snapshot_date": "2026-07-29",
+  "taxonomy_version": "2026-07-29.coding-vs-sciences-v2",
   "sources": {
-    "primary": "data/benchmarks/index_new.json",
-    "auxiliary": "data/benchmarks/index_aux.json",
-    "core_subset": "data/benchmarks/index.json"
+    "primary": "data/benchmarks/index.json",
+    "note": "index_new.json and index_aux.json retired; unified catalog lives in index.json"
   },
   "name": "OlympiadMAS",
-  "n_primary_dataset_ids": 34,
-  "n_primary_source_families": 31,
-  "n_auxiliary_corpora": 6,
-  "n_total_catalog_ids": 40,
-  "n_primary_session_records": 914,
-  "n_auxiliary_rows": 175380,
+  "n_primary_dataset_ids": 37,
+  "n_primary_source_families": 34,
+  "n_total_catalog_ids": 37,
+  "n_primary_records": 1664,
+  "n_question_level_tracks": 5,
+  "n_auxiliary_corpora": 0,
+  "n_auxiliary_rows": 0,
   "catalog_evaluator_type_primary": {
-    "test_based": 18,
-    "rubric_based": 16
+    "test_based": 23,
+    "rubric_based": 14
   },
   "catalog_status_primary": {
-    "partial": 11,
+    "partial": 14,
     "pipeline_working": 1,
     "collected": 22
   },
   "record_status_primary": {
     "placeholder": 8,
-    "collected": 843,
-    "partial": 62,
-    "indexed": 1
+    "collected": 1594,
+    "partial": 62
   },
   "catalog_gold_claim_primary": {
-    "partial": 18,
-    "full": 7,
+    "partial": 20,
+    "full": 8,
     "missing": 9
   },
   "primary_payload_rows": {
-    "embedded_expected_answer": 288,
-    "rubric": 870,
+    "embedded_expected_answer": 1123,
+    "rubric": 1620,
     "human_baseline": 24
   },
+  "payload_derived_scoring_mode": {
+    "task_based_exact_match": 1123,
+    "llm_as_judge_on_rubric": 528,
+    "free_form_llm_as_judge": 13,
+    "note": "Mutually exclusive per primary row: expected_answer → exact match; else grading_rubric → LLM-as-judge on rubric; else free-form LLM-as-judge."
+  },
   "coarse_domains_primary_equal_ids": {
-    "Science & engineering": 8,
+    "Math & sciences": 15,
     "Business & economics": 4,
-    "Humanities, language & puzzles": 4,
-    "Math & modeling": 9,
-    "Law, ethics & debate": 5,
-    "Computing & AI": 3,
-    "Cybersecurity": 1
+    "Humanities & society": 11,
+    "Coding": 7
   },
   "coarse_domains_primary_raw_rows": {
-    "Science & engineering": 159,
+    "Math & sciences": 381,
     "Business & economics": 44,
-    "Humanities, language & puzzles": 208,
-    "Math & modeling": 221,
-    "Law, ethics & debate": 67,
-    "Computing & AI": 198,
-    "Cybersecurity": 17
+    "Humanities & society": 772,
+    "Coding": 467
   },
   "task_modes_primary_equal_ids": {
-    "Lab / design": 7,
-    "Research / case": 5,
+    "Lab / design": 6,
+    "Research / case": 4,
     "Timed problem solving": 12,
     "Argument / writing": 6,
     "Programming": 2,
-    "Cyber operations": 1,
-    "Quiz / puzzle": 1
+    "Cyber operations": 3,
+    "Quiz / puzzle": 4
   },
   "task_modes_primary_raw_rows": {
-    "Lab / design": 138,
-    "Research / case": 112,
+    "Lab / design": 87,
+    "Research / case": 44,
     "Timed problem solving": 292,
-    "Argument / writing": 109,
+    "Argument / writing": 105,
     "Programming": 196,
-    "Cyber operations": 17,
-    "Quiz / puzzle": 50
+    "Cyber operations": 249,
+    "Quiz / puzzle": 691
   },
   "year_min": 1978,
   "year_max": 2026,
@@ -94,9 +93,9 @@
   },
   "question_level_observability": {
     "explicit_question_count_dataset_ids": 3,
-    "missing_question_count_dataset_ids": 31,
+    "missing_question_count_dataset_ids": 34,
     "explicit_question_count_session_records": 103,
-    "missing_question_count_session_records": 811,
+    "missing_question_count_session_records": 1561,
     "measured_internal_questions": 3626,
     "measured_internal_questions_by_dataset": {
       "hmmt_guts": 1718,
@@ -104,106 +103,111 @@
       "fyziklani": 858
     },
     "measured_internal_questions_by_coarse_domain": {
-      "Math & modeling": 2768,
-      "Science & engineering": 858
+      "Math & sciences": 3626
     }
   },
   "primary_question_unit_distribution": {
     "counting_rule": "Use positive question_count when stored; otherwise count each primary benchmark row as one question/task unit.",
-    "catalog_visible_question_task_units": 4437,
+    "catalog_visible_question_task_units": 5187,
     "explicit_internal_questions": 3626,
-    "row_level_question_task_units": 811,
+    "row_level_question_task_units": 1561,
     "by_dataset": {
       "hmmt_guts": 1718,
       "purple_comet": 1050,
       "fyziklani": 858,
+      "mystery_hunt": 261,
+      "qanta": 240,
+      "nyu_ctf_bench": 194,
       "icpc": 158,
+      "science_bowl": 140,
       "history_olympiad": 95,
-      "eoes": 79,
-      "modeling_agent": 68,
       "odyssey_of_the_mind": 50,
       "wsc_writing": 42,
+      "cybench": 39,
       "iiot": 38,
+      "eoes": 33,
       "debatebench": 32,
       "ijso_practical": 22,
       "iol_team": 21,
       "wro": 20,
       "cfa_research_challenge": 19,
       "pumac_power": 18,
-      "ccdc": 17,
+      "ccdc": 16,
       "gcch_harvard": 16,
       "arml_power": 15,
       "ethics_bowl_nhseb": 14,
-      "ethics_bowl_appe": 12,
       "arml_national_team": 11,
       "arml_national_power": 11,
       "ioaa_group": 9,
+      "ethics_bowl_appe": 9,
       "ichto": 9,
-      "vis_moot": 8,
+      "vis_moot": 7,
       "arml_local": 6,
       "ieo_business_case": 5,
       "wharton_investment": 4,
-      "envirothon": 4,
       "wmtc": 3,
       "ioai_team": 2,
-      "science_olympiad": 2,
-      "jessup": 1
+      "jessup": 1,
+      "science_olympiad": 1
     },
     "by_coarse_domain": {
-      "Math & modeling": 2900,
-      "Science & engineering": 1003,
-      "Humanities, language & puzzles": 208,
-      "Computing & AI": 198,
-      "Law, ethics & debate": 67,
-      "Business & economics": 44,
-      "Cybersecurity": 17
+      "Math & sciences": 3904,
+      "Humanities & society": 772,
+      "Coding": 467,
+      "Business & economics": 44
     }
   },
   "figures": [
     {
       "png": "01_overview.png",
-      "description": "Current formal-catalog overview"
+      "description": "Overview"
     },
     {
       "png": "02_scale_by_track.png",
-      "description": "Primary session scale and auxiliary row scale"
+      "description": "Scale"
     },
     {
       "png": "03_domain_type_heatmap.png",
-      "description": "Coarse domain by catalog evaluator type"
+      "description": "Domains"
     },
     {
       "png": "04_teamsize_scale_scatter.png",
-      "description": "Configured team size and primary scale"
+      "description": "Teams"
     },
     {
       "png": "05_year_coverage.png",
-      "description": "Exact-year primary archive presence"
+      "description": "Coverage"
     },
     {
       "png": "06_task_types.png",
-      "description": "Coarse task-mode mix under two weighting views"
+      "description": "Tasks"
     },
     {
       "png": "07_storyboard.png",
-      "description": "Multi-dimensional formal-catalog storyboard"
+      "description": "Portrait"
     },
     {
       "png": "08_domains_pie.png",
-      "description": "Coarse-domain composition pie charts"
+      "description": "Composition"
     },
     {
       "png": "09_question_distribution.png",
-      "description": "Current primary question and task-unit distribution"
+      "description": "Questions"
+    },
+    {
+      "png": "11_editions_timeline.png",
+      "description": "Editions"
     }
   ],
   "guardrails": [
-    "Primary session records and auxiliary corpus rows are separate units.",
-    "The primary catalog is index_new.json (index.json core + fork promotions).",
+    "Unified primary catalog only (index_aux retired; question-level tracks promoted).",
+    "The primary catalog is index.json (former index_new merged; index_aux retired).",
     "Catalog gold claims are distinct from embedded expected-answer payload coverage.",
+    "Payload-derived scoring modes partition primary rows by expected_answer then grading_rubric.",
     "Temporal dots show exact nominal archive years and do not imply annual continuity.",
     "Question_count exists only for the three newly promoted archives and is not a portfolio-wide field.",
     "The primary question distribution uses positive question_count where stored; every other primary row contributes one question/task unit.",
-    "Equal dataset-ID weighting is sensitive to track splitting (e.g. four ARML IDs)."
+    "Equal dataset-ID weighting is sensitive to track splitting (e.g. four ARML IDs).",
+    "Edition counts treat year(+season/series) keys as one edition; some tracks force one edition per year."
   ]
 }

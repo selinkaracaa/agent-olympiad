@@ -1,0 +1,64 @@
+{
+  "rubric_id": "science_olympiad_official_scoring_protocol_v1",
+  "dataset": "science_olympiad",
+  "title": "Science Olympiad official tournament scoring protocol",
+  "rubric_type": "official_scoring_protocol",
+  "scoring_levels": {
+    "individual_event": {
+      "raw_score": "Assigned according to the applicable event rules.",
+      "rank": "Assigned using the event-specific high-score or low-score sort direction and tie-breakers.",
+      "medal_ties": "All ties must be broken for medal ranks.",
+      "unbroken_non_medal_ties": "Award each tied team the tied rank and skip the occupied subsequent ranks."
+    },
+    "overall_team": {
+      "event_points": "Event rank equals team points for that event.",
+      "team_score": "Sum event points across the tournament.",
+      "direction": "lower_is_better",
+      "tie_breaker": "Compare number of first places, then second places, and continue by place until resolved."
+    }
+  },
+  "special_status_points": {
+    "N": "number of teams that competed in the tournament division",
+    "participation": "N",
+    "no_show": "N + 1",
+    "disqualification": "N + 2"
+  },
+  "event_enforcement": [
+    "Apply penalties and tiers only as specified by the applicable event rules.",
+    "Teams or devices not meeting requirements must be allowed to compete if possible and, where the event rules specify tiering, ranked below compliant teams.",
+    "Use Participation when an honest attempt cannot be assigned a raw score.",
+    "Use No Show when there is no honest attempt.",
+    "Disqualification is reserved for egregious misconduct or cheating and applies to that event."
+  ],
+  "applicability": {
+    "scope": "Officially sanctioned Science Olympiad tournaments unless explicitly revised by the local Tournament Director.",
+    "national_exception": "The National Tournament is controlled by national officials; other tournament results are determined by local officials and Event Supervisors.",
+    "benchmark_event": "The local benchmark is a 2017–2018 Division B Solar System annotated example exam, not a complete tournament.",
+    "event_specificity": "Raw-score criteria, total points, sort direction, penalties, tiers, and event tie-breakers come from the current event rules."
+  },
+  "provenance": [
+    {
+      "source_type": "official_organizer",
+      "title": "Science Olympiad Scoring Guidelines",
+      "url": "https://www.soinc.org/scoring-guidelines",
+      "supports": ["event ranking", "ties", "tiers", "P/NS/DQ", "overall sum", "team tie-breaker"]
+    },
+    {
+      "source_type": "official_organizer",
+      "title": "Science Olympiad Scoring Guidelines PDF",
+      "url": "https://www.soinc.org/sites/default/files/uploaded_files/SO_ScoringGuidelines_2022.pdf",
+      "supports": ["official protocol in downloadable form"]
+    },
+    {
+      "source_type": "local_benchmark_evidence",
+      "path": "data/benchmarks/science_olympiad/benchmark.json",
+      "supports": ["annotated Solar System sample", "event-author guidance", "50-point answer key", "single-event scope"]
+    }
+  ],
+  "limitations": [
+    "There is no universal content rubric or raw-score maximum across Science Olympiad events.",
+    "The benchmark sample's cover says questions are equally valued, while its answer key is labeled 50/50 for 100 numbered prompts; the extract does not provide a reliable official mapping from every prompt to raw points.",
+    "Do not infer the approximately 23-event tournament program, event weights, or current event rules from the single archived sample.",
+    "Local Tournament Directors may explicitly revise these guidelines."
+  ]
+}

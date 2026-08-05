@@ -1,15 +1,16 @@
 ---
-description: Iron law — never modify the original 12 upstream benchmark tracks
+description: Preserve original upstream benchmark payloads while allowing the unified catalog
 alwaysApply: true
 ---
 
-# Upstream benchmarks are immutable
+# Upstream benchmark payloads are immutable
 
-The original OlympiadMAS catalog tracks from `selinkaracaa/agent-olympiad` `main` are **iron law**. Do not edit, reformat, rewrite paths, add fields, or "sync" them.
+The original OlympiadMAS benchmark payloads from `selinkaracaa/agent-olympiad`
+`main` are **iron law**. Do not edit, reformat, rewrite paths, add fields, or
+"sync" records inside the locked track directories.
 
 ## Locked paths (do not modify)
 
-- `data/benchmarks/index.json`
 - `data/benchmarks/arml_local/`
 - `data/benchmarks/arml_national_power/`
 - `data/benchmarks/arml_national_team/`
@@ -23,14 +24,18 @@ The original OlympiadMAS catalog tracks from `selinkaracaa/agent-olympiad` `main
 - `data/benchmarks/jessup/`
 - `data/benchmarks/wsc_writing/`
 
-Also do not modify the corresponding original raw packs that upstream already shipped under `data/raw/` for those tracks (e.g. existing `arml*`, `icpc`, `iol`, `iiot`, `ijso`, `ioaa`, `jessup`, `business_case`, `wsc_writing` files that were already on `main`), unless the user explicitly asks to change a specific file.
+Also do not modify the corresponding original raw files that upstream already
+shipped, unless the user explicitly asks to change a specific file. New
+`runtime.json` manifests may be added beside those packs when they describe
+availability without altering source material.
 
 ## What you may change
 
 Only **our** additions:
 
 - New tracks under `data/benchmarks/<new_id>/`
-- `data/benchmarks/index_new.json`, `index_aux.json`, and other new indexes
+- `data/benchmarks/index.json` catalog metadata and entries; it is now the
+  unified mixed-unit catalog. Do not use catalog edits to mutate locked payloads.
 - New raw packs under `data/raw/<new_id>/`
 - `from_zhongzheng/`, `data/viz/`, docs we own, extraction tooling outside those locked paths
 
