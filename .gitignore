@@ -3,6 +3,9 @@ __pycache__/
 *.pyc
 .env
 
+# Local Cursor rules — keep on disk, do not push
+.cursor/
+
 # Run logs only (result JSON/MD are kept under initial_experiments/results/)
 initial_experiments/results/logs/
 initial_experiments/results/**/*.log
