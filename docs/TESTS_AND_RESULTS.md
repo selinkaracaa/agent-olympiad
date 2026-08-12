@@ -150,18 +150,46 @@ Fixes applied earlier: IOL missing description → topic fallback; Jessup `team_
 
 ---
 
-## 3. Live smoke — first 12 families (earlier wave)
-
-Before the last eight benchmarks were added, live smokes covered the original 12 families:
+## 3. Live smoke — all 20 contests (current)
 
 ```bash
 export PERPLEXITY_API_KEY=pplx-...
-python3 src/run_smoke_batch.py --live --rounds 2 --schema round_table
+python3 src/run_smoke_batch.py --live --rounds 1 --schema round_table
 ```
 
-- Model: `openai/gpt-5.4-mini`
-- Results: **12/12 ok** (1-turn and 2-turn)
-- Artifacts: `results/smoke_batch/20260812-182401/`, `…/20260812-182846/`
+- Model: `openai/gpt-5.4-mini` · round_table · 1 turn
+- Artifact: `results/smoke_batch/20260812-191248/smoke_batch.json`
+- Result: **20/20 ok**, all submitted
+
+| Competition | Problem | Turns | API | Tokens | Env grade |
+|---|---|---:|---:|---:|---|
+| `arml_local` | `arml_local_2009` | 1 | 7 | 453 | gold_substring_match |
+| `arml_national_team` | `arml_national_team_2009` | 1 | 16 | 1553 | gold_substring_match |
+| `arml_national_power` | `arml_national_power_2009` | 1 | 16 | 2085 | gold_substring_match |
+| `arml_power` | `arml_power_fall_2018` | 1 | 16 | 3778 | gold_substring_match |
+| `icpc` | `icpc_wf_2012_bottles` | 1 | 4 | 531 | judge_sandbox_required |
+| `iiot` | `iiot_2017_01` | 1 | 5 | 1351 | judge_sandbox_required |
+| `ieo_business_case` | `ieo_business_case_2021` | 1 | 6 | 2519 | llm_judge_required |
+| `iol_team` | `iol_team_2003` | 1 | 5 | 307 | llm_judge_required |
+| `ioaa_group` | `ioaa_group_2025` | 1 | 6 | 1201 | gold_substring_match |
+| `ijso_practical` | `ijso_practical_2004_team_practical_2004` | 1 | 4 | 245 | llm_judge_required |
+| `wsc_writing` | `wsc_writing_gq_001` | 1 | 4 | 3069 | llm_judge_required |
+| `jessup` | `jessup_2024` | 1 | 7 | 1672 | llm_judge_required |
+| `iypt` | `iypt_2024` | 1 | 6 | 1370 | llm_judge_required |
+| `hmmt_team` | `hmmt_team_2024` | 1 | 9 | 2393 | llm_judge_required |
+| `hmmt_guts` | `hmmt_guts_2024` | 1 | 9 | 671 | llm_judge_required |
+| `mcm` | `mcm_2024_A` | 1 | 4 | 2906 | llm_judge_required |
+| `icm` | `icm_2024_D` | 1 | 4 | 1795 | llm_judge_required |
+| `fyziklani` | `fyziklani_2024` | 1 | 6 | 382 | llm_judge_required |
+| `purple_comet` | `purple_comet_hs_2024` | 1 | 7 | 976 | llm_judge_required |
+| `itym` | `itym_2024` | 1 | 7 | 2347 | llm_judge_required |
+
+Pipeline stability under a live mini model — not paper scores. ICPC/IIOT still need a programming judge; open-ended contests still need rubric/slide judges for real marks.
+
+### Earlier live wave (first 12 families, 2 turns)
+
+Before the last eight benchmarks were added: **12/12 ok** at 2 turns  
+Artifacts: `results/smoke_batch/20260812-182401/`, `…/20260812-182846/`
 
 | Competition | Turns | API | Tokens | Env grade |
 |---|---:|---:|---:|---|
@@ -177,8 +205,6 @@ python3 src/run_smoke_batch.py --live --rounds 2 --schema round_table
 | IJSO practical | 2 | 7 | 347 | LLM judge required |
 | WSC writing | 2 | 4 | 1911 | LLM judge required |
 | Jessup | 2 | 12 | 3247 | LLM judge required |
-
-Live smoke for the **full 20** (including IYPT/HMMT/MCM/ICM/Fyziklání/Purple Comet/ITYM) is the next live pass: same command now iterates all 20 cases.
 
 ---
 
@@ -233,9 +259,9 @@ Pilot only: small model, 2 turns, diagram problem often unsolved from text.
 
 ## 7. Done vs next
 
-**Done:** dual media; gold/rubric/slide evaluators; turn/API/token parameters; three schemas; **20 contest benchmarks**; offline **20/20** smoke; ARML three-schema pilot.
+**Done:** dual media; gold/rubric/slide evaluators; turn/API/token parameters; three schemas; **20 contest benchmarks**; offline **20/20** smoke; live **20/20** smoke (1 turn, mini model); ARML three-schema pilot.
 
-**Next:** live smoke on all 20; more turns + pressure; rubric judges in the matrix; ICPC/IIOT judge; scale to paper table; integrate additional contests as needed.
+**Next:** more turns + pressure; rubric judges in the matrix; ICPC/IIOT judge; scale to paper table.
 
 ---
 
@@ -253,10 +279,10 @@ python3 src/run_exam.py --all-schemas --rounds 2             # ARML scored
 
 ## Meeting summary
 
-All **20** DATA_COLLECTION contest families are benchmarked and offline-smoke green. Turns are the time clock (≤1 model call per agent per turn, or sleep); API and token caps are separate. Three collaboration baselines remain. ARML Local 2009 pilot scores: round table **4/40**, centralized **14/40**, decentralized **12/40** (GPT-5.4-mini, 2 turns). Next: live 20-way smoke, stronger budgets, programming judges, then scale.
+All **20** DATA_COLLECTION contest families are benchmarked. Offline and live smoke both **20/20** (live: GPT-5.4-mini, 1 turn). Turns are the time clock (≤1 model call per agent per turn, or sleep); API and token caps are separate. Three collaboration baselines remain. ARML Local 2009 pilot scores: round table **4/40**, centralized **14/40**, decentralized **12/40** (GPT-5.4-mini, 2 turns). Next: stronger budgets, programming judges, then scale.
 
 ---
 
 ## One-liner
 
-**20/20 contest families pipeline-ok offline; ARML three-schema pilot 4 / 14 / 12 out of 40; programming judges and paper-scale runs still ahead.**
+**20/20 offline + 20/20 live pipeline smoke; ARML three-schema pilot 4 / 14 / 12 out of 40; programming judges and paper-scale runs still ahead.**
