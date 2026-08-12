@@ -11,11 +11,13 @@ Respond with ONE of these formats:
 Available action types:
 - speak           — broadcast a message to the team
 - write_scratchpad — update the shared working notes
+- sleep           — pass this turn (optional reason in PAYLOAD)
 - submit_final    — submit the team's final answer (only when ready)
 {tool_lines}
 
 Rules:
 - Use only tools listed as allowed for this contest.
+- Each turn you get at most ONE model call: act, or sleep.
 - submit_final must contain the complete team answer.
 - Be substantive; build on prior discussion."""
 

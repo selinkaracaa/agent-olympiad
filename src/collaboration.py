@@ -1,7 +1,9 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Callable, Literal
 
 from actions import apply_agent_response, build_action_instructions, extract_final_answer_from_text, parse_agent_response
+from contest_budget import resolve_contest_budget
+from env import TurnLimitExceededError
 
 SchemaName = Literal["round_table", "centralized", "decentralized"]
 QueryFn = Callable[[str, str], str]
@@ -9,10 +11,46 @@ QueryFn = Callable[[str, str], str]
 
 @dataclass
 class CollabConfig:
-  rounds: int = 2
-  decentralized_events: int = 3
-  synthesize: bool = True
-  progress: Callable[[str], None] | None = None
+    """Collaboration budgets and schema knobs.
+
+    Turns = time constraint (contest clock). Each turn, each eligible agent may
+    make at most one LLM call (or choose to sleep).
+    API calls = cost constraint across the whole run.
+    """
+
+    max_turns: int | None = None
+    max_api_calls: int | None = None
+    max_output_tokens_per_call: int | None = None
+    max_total_tokens: int | None = None
+    # Backward-compatible aliases used by older callers / smoke tests.
+    rounds: int | None = None
+    decentralized_events: int | None = None
+    synthesize: bool = True
+    progress: Callable[[str], None] | None = None
+
+    def resolved_max_turns(self, competition_id: str) -> int:
+        if self.rounds is not None:
+            return self.rounds
+        if self.decentralized_events is not None:
+            return self.decentralized_events
+        if self.max_turns is not None:
+            return self.max_turns
+        return resolve_contest_budget(competition_id).max_turns
+
+
+def _apply_budget_config(env, config: CollabConfig) -> None:
+    budget = resolve_contest_budget(
+        env.competition_id,
+        max_turns=config.resolved_max_turns(env.competition_id),
+        max_api_calls=config.max_api_calls,
+        max_output_tokens_per_call=config.max_output_tokens_per_call,
+        max_total_tokens=config.max_total_tokens,
+    )
+    env.budget = budget
+    env.max_turns = budget.max_turns
+    env.max_api_calls = budget.max_api_calls
+    env.max_output_tokens_per_call = budget.max_output_tokens_per_call
+    env.max_total_tokens = budget.max_total_tokens
 
 
 def _system_prompt(env, role: str) -> str:
@@ -52,9 +90,13 @@ def _agent_user_prompt(env, agent_name: str, schema_note: str, extra: str = "") 
 
 === YOUR TURN ===
 You are {agent_name}.
-Turn budget: {state['turn_status']}
+Turn budget (time): {state['turn_status']}
+API budget (cost): {state['api_call_status']}
+Token budget (team output): {state['token_status']} (cap {state['output_token_cap_per_call']} tokens/call)
 Submitted: {state['submitted']}
 {extra}
+You may act once this turn, or:
+ACTION: sleep | PAYLOAD: <short reason>
 What is your contribution?"""
 
 
@@ -132,6 +174,52 @@ def _synthesis_prompt(env, schema_note: str) -> str:
 {instructions}"""
 
 
+def _budgeted_query(env, query_llm_fn: QueryFn, config: CollabConfig) -> QueryFn:
+    """Wrap the LLM callback so every call counts toward cost + token budgets."""
+    _apply_budget_config(env, config)
+
+    def call(system: str, user: str) -> str:
+        if env.token_budget_exhausted():
+            raise TurnLimitExceededError(
+                f"Token budget reached ({env.max_total_tokens}) for {env.problem_id}"
+            )
+        env.record_api_call()
+        response = query_llm_fn(system, user)
+        return env.apply_output_token_budget(response)
+
+    return call
+
+
+def _should_stop(env) -> bool:
+    return env.submitted or env.api_budget_exhausted() or env.token_budget_exhausted()
+
+
+def _run_agent_once(
+    env,
+    query: QueryFn,
+    agent: str,
+    schema_note: str,
+    extra: str,
+    *,
+    submitters: set[str] | None = None,
+    progress: Callable[[str], None] | None = None,
+) -> None:
+    if _should_stop(env):
+        return
+    if progress:
+        progress(f"Turn {env.current_turn}/{env.max_turns} — {agent} thinking...")
+    try:
+        response = query(
+            _system_prompt(env, agent),
+            _agent_user_prompt(env, agent, schema_note, extra=extra),
+        )
+    except TurnLimitExceededError:
+        if progress:
+            progress("API/turn budget exhausted — stopping agent calls.")
+        return
+    apply_agent_response(env, agent, response, submitters=submitters)
+
+
 def _run_synthesis(
     env,
     query_llm_fn: QueryFn,
@@ -152,6 +240,9 @@ def _run_synthesis(
     best_parts = 0
 
     for attempt in range(2):
+        if env.api_budget_exhausted() or env.token_budget_exhausted():
+            _log("Budget exhausted — skipping further synthesis attempts.")
+            break
         _log(f"{synthesizer} synthesizing final answer (attempt {attempt + 1})...")
         system = _synthesis_system_prompt(env, synthesizer)
         user = _synthesis_prompt(env, schema_note)
@@ -160,7 +251,11 @@ def _run_synthesis(
                 "\n\nREMINDER: Your previous submission was incomplete. "
                 "You MUST include ALL numbered problems (1. through 10.)."
             )
-        response = query_llm_fn(system, user)
+        try:
+            response = query_llm_fn(system, user)
+        except TurnLimitExceededError:
+            _log("API budget exhausted during synthesis.")
+            break
         if env.submitted:
             env.workspace["final_answer"] = ""
             env.submitted = False
@@ -186,30 +281,36 @@ def _run_synthesis(
 
 def run_round_table(env, query_llm_fn: QueryFn, config: CollabConfig | None = None) -> dict:
     """
-    Schema A: Round Table — every agent sees the full conversation, takes turns.
+    Schema A: Round Table — every agent sees the full conversation.
+    Each turn: agents act in order; each agent ≤ 1 LLM call (or sleep).
     """
     config = config or CollabConfig()
-    schema_note = "Round Table: all agents see full history; strict turn order."
+    _apply_budget_config(env, config)
+    query = _budgeted_query(env, query_llm_fn, config)
+    schema_note = (
+        "Round Table: all agents see full history; strict order within each turn. "
+        "At most one LLM call per agent per turn (or sleep)."
+    )
     agents = [f"Agent_{i + 1}" for i in range(env.team_size)]
 
-    for _round in range(config.rounds):
+    while not _should_stop(env):
+        if not env.can_begin_turn():
+            break
+        turn = env.begin_turn()
         for agent in agents:
-            if env.submitted:
-                break
-            if config.progress:
-                config.progress(f"Round {_round + 1}/{config.rounds} — {agent} thinking...")
-            system = _system_prompt(env, agent)
-            user = _agent_user_prompt(
+            _run_agent_once(
                 env,
+                query,
                 agent,
                 schema_note,
-                extra=f"Round {_round + 1} of {config.rounds}.",
+                extra=f"Collaboration turn {turn} of {env.max_turns}.",
+                progress=config.progress,
             )
-            response = query_llm_fn(system, user)
-            apply_agent_response(env, agent, response)
+            if _should_stop(env):
+                break
 
     if config.synthesize:
-        _run_synthesis(env, query_llm_fn, schema_note, "Agent_1", progress=config.progress)
+        _run_synthesis(env, query, schema_note, "Agent_1", progress=config.progress)
 
     return _result(env, "round_table")
 
@@ -217,43 +318,61 @@ def run_round_table(env, query_llm_fn: QueryFn, config: CollabConfig | None = No
 def run_centralized(env, query_llm_fn: QueryFn, config: CollabConfig | None = None) -> dict:
     """
     Schema B: Centralized — coordinator delegates, aggregates, and submits.
+    Turn 1: leader plans. Later turns: workers each get ≤ 1 call (or sleep).
     """
     config = config or CollabConfig()
-    schema_note = "Centralized: Group_Leader delegates; only leader submits final answer."
-    leader = "Group_Leader"
-
-    state = env.get_state()
-    system = _system_prompt(env, leader)
-    user = (
-        f"=== PROBLEM ===\n{state['problem_statement']}\n\n"
-        "You are the Group Leader. Assign sub-tasks to Agent_2 .. "
-        f"Agent_{env.team_size}. Output your delegation plan."
+    _apply_budget_config(env, config)
+    query = _budgeted_query(env, query_llm_fn, config)
+    schema_note = (
+        "Centralized: Group_Leader delegates; only leader submits final answer. "
+        "At most one LLM call per agent per turn (or sleep)."
     )
-    if config.progress:
-        config.progress("Group_Leader planning delegation...")
-    plan = query_llm_fn(system, user)
-    env.execute_action(leader, "speak", f"Delegation plan: {plan}")
+    leader = "Group_Leader"
+    workers = [f"Agent_{i + 1}" for i in range(1, env.team_size)]
 
-    for i in range(1, env.team_size):
-        if env.submitted:
+    plan = ""
+    while not _should_stop(env):
+        if not env.can_begin_turn():
             break
-        peer = f"Agent_{i + 1}"
-        if config.progress:
-            config.progress(f"{peer} working on assigned slice...")
-        system = _system_prompt(env, peer)
-        user = _agent_user_prompt(
-            env,
-            peer,
-            schema_note,
-            extra=f"Leader's plan:\n{plan}\n\nComplete your assigned slice. You may use allowed tools.",
-        )
-        response = query_llm_fn(system, user)
-        apply_agent_response(env, peer, response, submitters=set())
+        turn = env.begin_turn()
+        if turn == 1:
+            if config.progress:
+                config.progress(f"Turn {turn}/{env.max_turns} — Group_Leader planning...")
+            state = env.get_state()
+            system = _system_prompt(env, leader)
+            user = (
+                f"=== PROBLEM ===\n{state['problem_statement']}\n\n"
+                "You are the Group Leader. Assign sub-tasks to Agent_2 .. "
+                f"Agent_{env.team_size}. Output your delegation plan."
+            )
+            try:
+                plan = query(system, user)
+            except TurnLimitExceededError:
+                break
+            env.execute_action(leader, "speak", f"Delegation plan: {plan}")
+            continue
+
+        for peer in workers:
+            _run_agent_once(
+                env,
+                query,
+                peer,
+                schema_note,
+                extra=(
+                    f"Leader's plan:\n{plan}\n\n"
+                    f"Collaboration turn {turn} of {env.max_turns}. "
+                    "Complete your assigned slice. You may use allowed tools or sleep."
+                ),
+                submitters=set(),
+                progress=config.progress,
+            )
+            if _should_stop(env):
+                break
 
     if config.synthesize and not env.submitted:
         _run_synthesis(
             env,
-            query_llm_fn,
+            query,
             schema_note,
             leader,
             submitters={"Group_Leader"},
@@ -266,29 +385,38 @@ def run_centralized(env, query_llm_fn: QueryFn, config: CollabConfig | None = No
 def run_decentralized(env, query_llm_fn: QueryFn, config: CollabConfig | None = None) -> dict:
     """
     Schema C: Decentralized — agents work independently, coordinate via shared state.
+    Each turn: every agent ≤ 1 LLM call (or sleep).
     """
     config = config or CollabConfig()
-    schema_note = "Decentralized: no leader; peers update scratchpad/tools directly."
+    _apply_budget_config(env, config)
+    query = _budgeted_query(env, query_llm_fn, config)
+    schema_note = (
+        "Decentralized: no leader; peers update scratchpad/tools directly. "
+        "At most one LLM call per agent per turn (or sleep)."
+    )
     agents = [f"Agent_{i + 1}" for i in range(env.team_size)]
 
-    for _event in range(config.decentralized_events):
+    while not _should_stop(env):
+        if not env.can_begin_turn():
+            break
+        turn = env.begin_turn()
         for agent in agents:
-            if env.submitted:
-                break
-            if config.progress:
-                config.progress(f"Event {_event + 1}/{config.decentralized_events} — {agent} thinking...")
-            system = _system_prompt(env, agent)
-            user = _agent_user_prompt(
+            _run_agent_once(
                 env,
+                query,
                 agent,
                 schema_note,
-                extra="Coordinate directly with peers. No manager.",
+                extra=(
+                    f"Collaboration turn {turn} of {env.max_turns}. "
+                    "Coordinate directly with peers. No manager. Or sleep."
+                ),
+                progress=config.progress,
             )
-            response = query_llm_fn(system, user)
-            apply_agent_response(env, agent, response)
+            if _should_stop(env):
+                break
 
     if config.synthesize and not env.submitted:
-        _run_synthesis(env, query_llm_fn, schema_note, agents[0], progress=config.progress)
+        _run_synthesis(env, query, schema_note, agents[0], progress=config.progress)
 
     return _result(env, "decentralized")
 
@@ -301,6 +429,13 @@ def _result(env, schema: str) -> dict:
         "submitted": env.submitted,
         "submitted_by": env.submitted_by,
         "turns_used": env.current_turn,
+        "max_turns": env.max_turns,
+        "api_calls": env.api_calls,
+        "max_api_calls": env.max_api_calls,
+        "tokens_used": env.tokens_used,
+        "max_total_tokens": env.max_total_tokens,
+        "max_output_tokens_per_call": env.max_output_tokens_per_call,
+        "action_count": env.action_count,
         "chat_messages": len(env.chat_history),
         "final_answer": env.workspace.get("final_answer", ""),
         "grade": env.grade_submission(),

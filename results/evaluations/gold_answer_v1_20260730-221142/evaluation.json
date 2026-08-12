@@ -1,0 +1,162 @@
+{
+  "packet": {
+    "evaluator_id": "gold_answer_v1",
+    "strategy": "official_gold_multipart",
+    "strategy_kind": "gold",
+    "mode": "competition",
+    "media": "text",
+    "problem_id": "arml_local_2009",
+    "task_type": "team_contest",
+    "evaluation_meta": {
+      "evaluator_id": "gold_answer_v1",
+      "status": "ready",
+      "rubric_path": "data/rubrics/numerical_sheet_reference_40_v1.json",
+      "fallback_evaluator_id": "rubric_llm_v1",
+      "deliverable": "answer_sheet",
+      "short_answer_source": "data/rubrics/arml_local_short_answers.json"
+    }
+  },
+  "evaluation": {
+    "evaluator_id": "gold_answer_v1",
+    "evaluator_version": "1.0.0",
+    "prompt_version": "deterministic_gold_v1",
+    "model": "deterministic",
+    "rubric_id": "gold_multipart",
+    "criteria": [
+      {
+        "id": "1",
+        "score": 4.444444444444445,
+        "max_score": 4.444444444444445,
+        "evidence": [
+          "submitted[1]=(-6, 13)",
+          "expected[1]=(-6, 13)"
+        ],
+        "justification": "Exact/normalized match against gold.",
+        "confidence": 1.0,
+        "observable": true
+      },
+      {
+        "id": "2",
+        "score": 4.444444444444445,
+        "max_score": 4.444444444444445,
+        "evidence": [
+          "submitted[2]=-21",
+          "expected[2]=-21"
+        ],
+        "justification": "Exact/normalized match against gold.",
+        "confidence": 1.0,
+        "observable": true
+      },
+      {
+        "id": "3",
+        "score": 4.444444444444445,
+        "max_score": 4.444444444444445,
+        "evidence": [
+          "submitted[3]=52",
+          "expected[3]=52"
+        ],
+        "justification": "Exact/normalized match against gold.",
+        "confidence": 1.0,
+        "observable": true
+      },
+      {
+        "id": "4",
+        "score": 4.444444444444445,
+        "max_score": 4.444444444444445,
+        "evidence": [
+          "submitted[4]=5\u221a11",
+          "expected[4]=5\u221a11"
+        ],
+        "justification": "Exact/normalized match against gold.",
+        "confidence": 1.0,
+        "observable": true
+      },
+      {
+        "id": "5",
+        "score": 4.444444444444445,
+        "max_score": 4.444444444444445,
+        "evidence": [
+          "submitted[5]=49\u221a3/2",
+          "expected[5]=49\u221a3/2"
+        ],
+        "justification": "Exact/normalized match against gold.",
+        "confidence": 1.0,
+        "observable": true
+      },
+      {
+        "id": "6",
+        "score": 4.444444444444445,
+        "max_score": 4.444444444444445,
+        "evidence": [
+          "submitted[6]=8",
+          "expected[6]=8"
+        ],
+        "justification": "Exact/normalized match against gold.",
+        "confidence": 1.0,
+        "observable": true
+      },
+      {
+        "id": "7",
+        "score": 4.444444444444445,
+        "max_score": 4.444444444444445,
+        "evidence": [
+          "submitted[7]=25/42",
+          "expected[7]=25/42"
+        ],
+        "justification": "Exact/normalized match against gold.",
+        "confidence": 1.0,
+        "observable": true
+      },
+      {
+        "id": "8",
+        "score": 4.444444444444445,
+        "max_score": 4.444444444444445,
+        "evidence": [
+          "submitted[8]=1350",
+          "expected[8]=1350"
+        ],
+        "justification": "Exact/normalized match against gold.",
+        "confidence": 1.0,
+        "observable": true
+      },
+      {
+        "id": "9",
+        "score": 4.444444444444445,
+        "max_score": 4.444444444444445,
+        "evidence": [
+          "submitted[9]=3\u221a3/10",
+          "expected[9]=3\u221a3/10"
+        ],
+        "justification": "Exact/normalized match against gold.",
+        "confidence": 1.0,
+        "observable": true
+      }
+    ],
+    "total_score": 40.0,
+    "max_score": 40.0,
+    "warnings": [
+      "Skipped parts without curated short answers (use rubric_llm_v1): 10"
+    ],
+    "limitations": [
+      "Deterministic string match only; equivalent forms may be marked wrong.",
+      "Only curated short-answer parts are included in this score."
+    ],
+    "artifact_checks": {
+      "parsed_answer_ids": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9"
+      ],
+      "skipped_part_ids": [
+        "10"
+      ]
+    },
+    "usage": {}
+  }
+}

@@ -282,6 +282,7 @@ def mock_agent_llm(system_prompt: str, user_prompt: str) -> str:
 def make_perplexity_caller(
     model: str = "openai/gpt-5.4-mini",
     api: str = "agent",
+    max_output_tokens: int = 16000,
 ) -> QueryFn:
     """Build a real LLM caller using PERPLEXITY_API_KEY. Raises if key missing."""
     api_key = os.environ.get("PERPLEXITY_API_KEY")
@@ -299,7 +300,7 @@ def make_perplexity_caller(
                 resp = requests.post(
                     "https://api.perplexity.ai/v1/agent",
                     headers=headers,
-                    json={"model": model, "input": full_input, "max_output_tokens": 16000},
+                    json={"model": model, "input": full_input, "max_output_tokens": max_output_tokens},
                     timeout=180,
                 )
                 if not resp.ok:

@@ -5,6 +5,13 @@ import os
 import subprocess
 from typing import Any, Optional
 
+from contest_budget import (
+    ContestBudget,
+    estimate_tokens,
+    resolve_contest_budget,
+    truncate_to_token_budget,
+)
+
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DEFAULT_BENCHMARK_PATH = os.path.join(REPO_ROOT, "data", "benchmarks")
 
@@ -56,6 +63,7 @@ ALL_ACTIONS = {
     "speak",
     "write_scratchpad",
     "submit_final",
+    "sleep",
     "use_calculator",
     "execute_code",
     "web_search",
@@ -63,7 +71,7 @@ ALL_ACTIONS = {
     "read_star_chart",
 }
 
-TOOL_ACTIONS = ALL_ACTIONS - {"speak", "write_scratchpad", "submit_final"}
+TOOL_ACTIONS = ALL_ACTIONS - {"speak", "write_scratchpad", "submit_final", "sleep"}
 
 _SAFE_BINOPS = {
     ast.Add: operator.add,
@@ -95,17 +103,35 @@ class OlympiadEnvironment:
         competition_id: str,
         problem_id: str,
         base_path: str = DEFAULT_BENCHMARK_PATH,
-        max_turns: int = 50,
+        max_turns: int | None = None,
+        max_api_calls: int | None = None,
+        max_output_tokens_per_call: int | None = None,
+        max_total_tokens: int | None = None,
     ):
         self.competition_id = competition_id
         self.problem_id = problem_id
         self.base_path = base_path
-        self.max_turns = max_turns
+
+        budget = resolve_contest_budget(
+            competition_id,
+            max_turns=max_turns,
+            max_api_calls=max_api_calls,
+            max_output_tokens_per_call=max_output_tokens_per_call,
+            max_total_tokens=max_total_tokens,
+        )
+        self.budget = budget
+        self.max_turns = budget.max_turns
+        self.max_api_calls = budget.max_api_calls
+        self.max_output_tokens_per_call = budget.max_output_tokens_per_call
+        self.max_total_tokens = budget.max_total_tokens
 
         self.chat_history: list[dict[str, str]] = []
         self.action_log: list[dict[str, Any]] = []
         self.workspace = {"scratchpad": "", "final_answer": ""}
-        self.current_turn = 0
+        self.current_turn = 0  # collaboration turns completed
+        self.action_count = 0  # env actions executed (speak/tools/etc.)
+        self.api_calls = 0  # LLM calls made by collaboration layer
+        self.tokens_used = 0  # estimated output tokens consumed
         self.submitted = False
         self.submitted_by: Optional[str] = None
 
@@ -113,7 +139,35 @@ class OlympiadEnvironment:
         self.problem_data = self._load_problem()
 
         problem_team_size = self.problem_data.get("team_size")
-        self.team_size = int(problem_team_size) if problem_team_size else TEAM_SIZE_MATRIX.get(competition_id, 3)
+        self.team_size = self._resolve_team_size(problem_team_size, competition_id)
+
+    @staticmethod
+    def _resolve_team_size(raw: Any, competition_id: str) -> int:
+        if raw is None:
+            return TEAM_SIZE_MATRIX.get(competition_id, 3)
+        if isinstance(raw, int):
+            return raw
+        text = str(raw).strip()
+        if not text:
+            return TEAM_SIZE_MATRIX.get(competition_id, 3)
+        if "-" in text:
+            # Ranges like "2-5" → use upper bound for agent count.
+            parts = text.split("-", 1)
+            try:
+                return int(parts[1].strip())
+            except ValueError:
+                return TEAM_SIZE_MATRIX.get(competition_id, 3)
+        try:
+            return int(text)
+        except ValueError:
+            return TEAM_SIZE_MATRIX.get(competition_id, 3)
+
+    def _problem_statement(self) -> str:
+        for key in ("problem_description", "description", "prompt", "topic"):
+            value = self.problem_data.get(key)
+            if value and str(value).strip():
+                return str(value).strip()
+        return f"Problem {self.problem_id} ({self.competition_id})"
 
     def _benchmark_file(self) -> str:
         return os.path.join(self.base_path, self.competition_id, "benchmark.json")
@@ -153,23 +207,76 @@ class OlympiadEnvironment:
         }
 
     def get_state(self) -> dict:
+        api_status = (
+            f"{self.api_calls}/{self.max_api_calls}"
+            if self.max_api_calls is not None
+            else f"{self.api_calls}/∞"
+        )
+        token_status = (
+            f"{self.tokens_used}/{self.max_total_tokens}"
+            if self.max_total_tokens is not None
+            else f"{self.tokens_used}/∞"
+        )
+        per_call_cap = (
+            str(self.max_output_tokens_per_call)
+            if self.max_output_tokens_per_call is not None
+            else "∞"
+        )
         return {
             "competition_id": self.competition_id,
             "problem_id": self.problem_id,
             "team_size": self.team_size,
             "allowed_tools": self.get_available_tools(),
-            "problem_statement": self.problem_data["problem_description"],
+            "problem_statement": self._problem_statement(),
             "chat_logs": list(self.chat_history),
             "shared_workspace": dict(self.workspace),
             "turn_status": f"{self.current_turn}/{self.max_turns}",
+            "api_call_status": api_status,
+            "token_status": token_status,
+            "output_token_cap_per_call": per_call_cap,
             "submitted": self.submitted,
         }
 
-    def _check_turn_limit(self) -> None:
-        if self.current_turn >= self.max_turns:
+    def turns_exhausted(self) -> bool:
+        """True when no further collaboration turns may be started."""
+        return self.current_turn >= self.max_turns
+
+    def can_begin_turn(self) -> bool:
+        return self.current_turn < self.max_turns
+
+    def api_budget_exhausted(self) -> bool:
+        return self.max_api_calls is not None and self.api_calls >= self.max_api_calls
+
+    def token_budget_exhausted(self) -> bool:
+        return self.max_total_tokens is not None and self.tokens_used >= self.max_total_tokens
+
+    def apply_output_token_budget(self, text: str) -> str:
+        """Enforce per-call and team-wide output token caps."""
+        capped = text
+        if self.max_output_tokens_per_call is not None:
+            capped = truncate_to_token_budget(capped, self.max_output_tokens_per_call)
+        if self.max_total_tokens is not None:
+            remaining = self.max_total_tokens - self.tokens_used
+            capped = truncate_to_token_budget(capped, remaining)
+        self.tokens_used += estimate_tokens(capped)
+        return capped
+
+    def begin_turn(self) -> int:
+        """Start a collaboration turn (time step). Raises if turn budget is spent."""
+        if not self.can_begin_turn():
             raise TurnLimitExceededError(
                 f"Turn limit reached ({self.max_turns}) for {self.problem_id}"
             )
+        self.current_turn += 1
+        return self.current_turn
+
+    def record_api_call(self) -> None:
+        """Count one LLM call against the cost budget."""
+        if self.api_budget_exhausted():
+            raise TurnLimitExceededError(
+                f"API call budget reached ({self.max_api_calls}) for {self.problem_id}"
+            )
+        self.api_calls += 1
 
     def _log_action(self, agent_name: str, action_type: str, payload: str, result: str) -> None:
         self.action_log.append(
@@ -195,8 +302,7 @@ class OlympiadEnvironment:
         return None
 
     def execute_action(self, agent_name: str, action_type: str, payload: str) -> str:
-        self._check_turn_limit()
-        self.current_turn += 1
+        self.action_count += 1
 
         violation = self.validate_action(action_type)
         if violation:
@@ -209,6 +315,9 @@ class OlympiadEnvironment:
         elif action_type == "write_scratchpad":
             self.workspace["scratchpad"] = payload
             result = "Shared scratchpad updated."
+        elif action_type == "sleep":
+            reason = payload.strip() or "passing this turn"
+            result = f"{agent_name} sleeps ({reason})."
         elif action_type == "submit_final":
             error = self._validate_submission(payload)
             if error:
@@ -352,5 +461,8 @@ class OlympiadEnvironment:
         self.action_log.clear()
         self.workspace = {"scratchpad": "", "final_answer": ""}
         self.current_turn = 0
+        self.action_count = 0
+        self.api_calls = 0
+        self.tokens_used = 0
         self.submitted = False
         self.submitted_by = None
