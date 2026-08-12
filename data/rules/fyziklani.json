@@ -54,6 +54,14 @@
         "Decide when the current batch is good enough to commit.",
         "Keep a running list of which problems are answered and which are open.",
         "Submit only after the format and rule checks pass."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "timeline",
+        "collaboration_protocol",
+        "deliverable_format"
       ]
     },
     {
@@ -63,6 +71,13 @@
       "duties": [
         "Clear the easy problems in the current batch quickly and accurately.",
         "Hand off anything that needs deep work instead of stalling the batch."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "resource_policy",
+        "collaboration_protocol"
       ]
     },
     {
@@ -72,6 +87,13 @@
       "duties": [
         "Clear the easy problems in the current batch quickly and accurately.",
         "Hand off anything that needs deep work instead of stalling the batch."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "resource_policy",
+        "collaboration_protocol"
       ]
     },
     {
@@ -81,6 +103,13 @@
       "duties": [
         "Challenge weak arguments and demand an independent check.",
         "Reject an answer rather than let an unverified one be submitted."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "evaluation_criteria",
+        "deliverable_format"
       ]
     },
     {
@@ -90,6 +119,14 @@
       "duties": [
         "Decide which problems are worth attempting for the points available.",
         "Call the trade-off between accuracy and speed for each batch."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "timeline",
+        "collaboration_protocol",
+        "deliverable_format"
       ]
     }
   ],
@@ -128,7 +165,9 @@
     "adaptations": [
       "max_turns is a safety budget, not necessarily the official wall-clock limit",
       "specialist roles are a research roster overlay",
-      "physical/oral/live opponent fidelity may be incomplete in src/"
+      "physical/oral/live opponent fidelity may be incomplete in src/",
+      "role-specific rule expertise is a benchmark coordination overlay",
+      "limited communication is a benchmark pressure overlay, not an official message cap"
     ],
     "crawl_status": "ok",
     "crawled_excerpts": [
@@ -158,7 +197,62 @@
       "timing": "adapted",
       "tools": "src_tool_surface",
       "scoring": "gold",
-      "environment": "proxy"
+      "environment": "proxy",
+      "communication": "adapted_coordination_budget"
     }
+  },
+  "rule_sections": {
+    "timeline": [
+      "Team size 1–5; 3-hour online contest via official environment.",
+      "Progressive series (Main + Hurry-up); numeric answers with specified sig figs/units; incorrect attempts reduce points and impose 1-minute series lockout; skips available after 90 minutes (≤10 skips, −1 point each).",
+      "About 3 hours online."
+    ],
+    "resource_policy": [
+      "Do not claim tools, internet, or materials that the rule card forbids.",
+      "Online Physics Brawl: internet and literature are allowed; calculators are allowed.",
+      "Note: in-person Fyziklání forbids internet; this benchmark follows the online ruleset.",
+      "Internet and literature allowed; calculators and drafting supplies allowed.",
+      "Banned during the contest: running code and generative AI. Permitted: internet access and calculators. Paper and pencil are always available. Work only from the materials provided with the problem."
+    ],
+    "research_integrity": [
+      "Generative AI is strictly prohibited and is grounds for disqualification.",
+      "Do not contact non-participants for help.",
+      "Generative AI strictly prohibited (ChatGPT-class tools) — disqualification risk."
+    ],
+    "collaboration_protocol": [
+      "Team size 1–5; 3-hour online contest via official environment."
+    ],
+    "deliverable_format": [
+      "Do not look up answer keys or hidden solutions.",
+      "Submit the team's final answers in numbered order, using exact values when required."
+    ],
+    "evaluation_criteria": [
+      "Progressive series (Main + Hurry-up); numeric answers with specified sig figs/units; incorrect attempts reduce points and impose 1-minute series lockout; skips available after 90 minutes (≤10 skips, −1 point each)."
+    ]
+  },
+  "information_policy": {
+    "mode": "role_specialized",
+    "shared": [
+      "problem",
+      "contest_rules",
+      "team_discussion",
+      "scratchpad"
+    ],
+    "coordination_requirement": "All teammates may consult the complete rules, but each role must track and communicate its assigned rule sections."
+  },
+  "communication": {
+    "mode": "limited",
+    "team_message_budget": 20,
+    "per_agent_message_budget": 4,
+    "max_message_chars": 1200,
+    "counted_actions": [
+      "speak",
+      "write_scratchpad",
+      "propose",
+      "challenge",
+      "provide_evidence",
+      "revise",
+      "decide"
+    ]
   }
 }

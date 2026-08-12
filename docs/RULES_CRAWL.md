@@ -40,6 +40,7 @@ python collectors/rewrite_rules_text.py
 python collectors/align_deliverables.py
 python collectors/derive_turn_budgets.py
 python collectors/write_role_duties.py
+python collectors/configure_coordination_rules.py
 python collectors/lint_rule_cards.py
 python src/run_rulebased_demo.py --competition iol_team --problem iol_team_2008
 ```

@@ -55,6 +55,14 @@
         "Decide the procedure and the order of measurements.",
         "State the setup precisely enough for another team to repeat it.",
         "Submit only after the format and rule checks pass."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "timeline",
+        "collaboration_protocol",
+        "deliverable_format"
       ]
     },
     {
@@ -64,6 +72,13 @@
       "duties": [
         "Record every measurement with units and stated uncertainty.",
         "Never adjust a recorded value to fit an expectation."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "resource_policy",
+        "deliverable_format"
       ]
     },
     {
@@ -73,6 +88,13 @@
       "duties": [
         "Turn recorded data into the required quantities, showing the work.",
         "Carry uncertainty through the calculation instead of dropping it."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "resource_policy",
+        "deliverable_format"
       ]
     }
   ],
@@ -113,7 +135,9 @@
     "adaptations": [
       "max_turns is a safety budget, not necessarily the official wall-clock limit",
       "specialist roles are a research roster overlay",
-      "physical/oral/live opponent fidelity may be incomplete in src/"
+      "physical/oral/live opponent fidelity may be incomplete in src/",
+      "role-specific rule expertise is a benchmark coordination overlay",
+      "structured deliberation actions are a benchmark traceability overlay"
     ],
     "crawl_status": "ok",
     "crawled_excerpts": [
@@ -143,7 +167,59 @@
       "timing": "adapted",
       "tools": "src_tool_surface",
       "scoring": "gold",
-      "environment": "proxy"
+      "environment": "proxy",
+      "deliberation": "structured_trace_overlay"
     }
+  },
+  "rule_sections": {
+    "resource_policy": [
+      "Do not claim tools, internet, or materials that the rule card forbids.",
+      "Use only organizer-provided lab equipment and stationery.",
+      "Organizer-provided calculator only; personal calculators may incur penalties.",
+      "No bags, phones, internet, or personal formula sheets in the exam hall.",
+      "Physical wet-lab fidelity may be proxied in software; do not invent instrument readings not provided.",
+      "Banned during the contest: internet access and running code. Permitted: calculators. Conditional: physical lab equipment is not available in this simulation. Paper and pencil are always available. Work only from the materials provided with the problem."
+    ],
+    "research_integrity": [
+      "Leaders/observers may not contact contestants about discussed problems until those exams finish."
+    ],
+    "collaboration_protocol": [
+      "Practical Examination is a team event: each country may field two practical teams of 3 students each (from the up-to-6-student national delegation).",
+      "Practical scoring: 40 points (MCQ 30 + Theory 30 + Practical 40); all members of a practical team receive the same practical points."
+    ],
+    "deliverable_format": [
+      "Do not look up answer keys or hidden solutions.",
+      "Produce a lab report with data, calculations, tables, and graphs.",
+      "Submission: experimental lab report work (data, calculations, tables/graphs) on provided practical materials; marking by Scientific Committee with moderation.",
+      "Submit a lab-style report: data, calculations, tables/graphs description, and conclusions."
+    ],
+    "evaluation_criteria": [
+      "Organizers provide calculators with simple statistical functions; using own calculators is not allowed (point deduction / ban)."
+    ],
+    "timeline": [
+      "About 3–4 hours."
+    ]
+  },
+  "information_policy": {
+    "mode": "role_specialized",
+    "shared": [
+      "problem",
+      "contest_rules",
+      "team_discussion",
+      "scratchpad"
+    ],
+    "coordination_requirement": "All teammates may consult the complete rules, but each role must track and communicate its assigned rule sections."
+  },
+  "deliberation": {
+    "mode": "structured",
+    "min_challenges": 1,
+    "decision_maker": "submitter",
+    "evaluation_dimensions": [
+      "evidence_responsiveness",
+      "revision_after_challenge",
+      "decision_traceability",
+      "authority_bias",
+      "majority_bias"
+    ]
   }
 }

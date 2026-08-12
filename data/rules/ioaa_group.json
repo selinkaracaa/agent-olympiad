@@ -50,45 +50,78 @@
       "title": "captain and synthesizer",
       "may_submit": true,
       "duties": [
-        "Assign unsolved problems and keep the team from crowding one question.",
-        "Hold the shared answer sheet and keep it consistent with the discussion.",
-        "Submit only after the format and rule checks pass."
+        "Allocate the astronomy task and track timing.",
+        "Own the final shared answer."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "timeline",
+        "collaboration_protocol",
+        "deliverable_format"
       ]
     },
     {
       "name": "Agent_2",
-      "title": "algebra / analysis specialist",
+      "title": "observational data analyst",
       "may_submit": false,
       "duties": [
-        "Lead algebra, functions, equations, and inequality problems.",
-        "Recheck each simplification before its answer enters the sheet."
+        "Extract reliable quantities from provided observations.",
+        "Track units and uncertainty."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "resource_policy"
       ]
     },
     {
       "name": "Agent_3",
-      "title": "geometry specialist",
+      "title": "physics and modeling specialist",
       "may_submit": false,
       "duties": [
-        "Lead geometry, trigonometry, and diagram-based reasoning.",
-        "State any assumption a text-only diagram forces you to make."
+        "Build the physical model and assumptions.",
+        "Connect equations to the observed system."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "deliverable_format"
       ]
     },
     {
       "name": "Agent_4",
-      "title": "combinatorics specialist",
+      "title": "numerical verifier",
       "may_submit": false,
       "duties": [
-        "Lead counting, probability, and expected-value problems.",
-        "Give exact fractions in lowest terms unless the problem says otherwise."
+        "Recompute numerical results independently.",
+        "Check scales, units, and significant figures."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "evaluation_criteria",
+        "deliverable_format"
       ]
     },
     {
       "name": "Agent_5",
-      "title": "number theory specialist",
+      "title": "report editor",
       "may_submit": false,
       "duties": [
-        "Lead modular arithmetic, divisibility, and integer constructions.",
-        "Check integer answers for off-by-one and sign mistakes."
+        "Assemble a coherent solution.",
+        "Check required plots, tables, and answer format."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "deliverable_format",
+        "evaluation_criteria"
       ]
     }
   ],
@@ -152,7 +185,10 @@
     "adaptations": [
       "max_turns is a safety budget, not necessarily the official wall-clock limit",
       "specialist roles are a research roster overlay",
-      "physical/oral/live opponent fidelity may be incomplete in src/"
+      "physical/oral/live opponent fidelity may be incomplete in src/",
+      "role-specific rule expertise is a benchmark coordination overlay",
+      "structured deliberation actions are a benchmark traceability overlay",
+      "limited communication is a benchmark pressure overlay, not an official message cap"
     ],
     "crawl_status": "ok",
     "crawled_excerpts": [
@@ -182,7 +218,70 @@
       "timing": "adapted",
       "tools": "src_tool_surface",
       "scoring": "gold",
-      "environment": "partial"
+      "environment": "partial",
+      "communication": "adapted_coordination_budget",
+      "deliberation": "structured_trace_overlay"
     }
+  },
+  "rule_sections": {
+    "timeline": [
+      "2023 Group Competition instructions (representative packet): 5-person random asteroid teams; max 90 minutes; win by shortest total time after time penalties; no communication with other teams.",
+      "National individual theory/practical statutes separately allow drawing materials + non-programmable calculators / host-provided calculators (year-dependent; e.g. IOAA 2026 host provides CASIO fx-82CW only) and ban formula collections — group round uses organizer-provided kit.",
+      "About 90 minutes for the group competition (edition-dependent)."
+    ],
+    "resource_policy": [
+      "Do not claim tools, internet, or materials that the rule card forbids.",
+      "No internet and no participant-brought formula collections.",
+      "Everything needed provided on table: calculator, office supplies, geometrical instruments, paper, constants table (2023 packet).",
+      "Banned during the contest: internet access and running code. Permitted: calculators. Paper and pencil are always available. Work only from the materials provided with the problem."
+    ],
+    "deliverable_format": [
+      "Do not look up answer keys or hidden solutions.",
+      "Dedicated answer sheets; final answers in marked boxes; sealed envelopes opened on START.",
+      "Submit the team's final answers in numbered order, using exact values when required."
+    ],
+    "evaluation_criteria": [
+      "2023 Group Competition instructions (representative packet): 5-person random asteroid teams; max 90 minutes; win by shortest total time after time penalties; no communication with other teams."
+    ],
+    "collaboration_protocol": [
+      "Collaborate only within the team under contest rules."
+    ]
+  },
+  "information_policy": {
+    "mode": "role_specialized",
+    "shared": [
+      "problem",
+      "contest_rules",
+      "team_discussion",
+      "scratchpad"
+    ],
+    "coordination_requirement": "All teammates may consult the complete rules, but each role must track and communicate its assigned rule sections."
+  },
+  "deliberation": {
+    "mode": "structured",
+    "min_challenges": 1,
+    "decision_maker": "submitter",
+    "evaluation_dimensions": [
+      "evidence_responsiveness",
+      "revision_after_challenge",
+      "decision_traceability",
+      "authority_bias",
+      "majority_bias"
+    ]
+  },
+  "communication": {
+    "mode": "limited",
+    "team_message_budget": 16,
+    "per_agent_message_budget": 3,
+    "max_message_chars": 1200,
+    "counted_actions": [
+      "speak",
+      "write_scratchpad",
+      "propose",
+      "challenge",
+      "provide_evidence",
+      "revise",
+      "decide"
+    ]
   }
 }

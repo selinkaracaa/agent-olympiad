@@ -48,6 +48,14 @@
         "Own the spoken case: opening, structure, and closing.",
         "Absorb teammates' research into one line of argument rather than a list.",
         "Submit only after the format and rule checks pass."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "timeline",
+        "collaboration_protocol",
+        "deliverable_format"
       ]
     },
     {
@@ -57,6 +65,13 @@
       "duties": [
         "Find and cite the authorities the argument depends on.",
         "Bring counter-authority to the team before a judge does."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "research_integrity",
+        "resource_policy"
       ]
     },
     {
@@ -66,6 +81,13 @@
       "duties": [
         "Draft the assigned section in full prose, not notes.",
         "Keep the section within its word or time budget."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "deliverable_format",
+        "evaluation_criteria"
       ]
     },
     {
@@ -75,6 +97,13 @@
       "duties": [
         "Argue the other side hard enough to expose weak reasoning.",
         "Prepare answers to the strongest objection the team will face."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "research_integrity",
+        "resource_policy"
       ]
     },
     {
@@ -84,6 +113,13 @@
       "duties": [
         "Anticipate judge questions and prepare short, direct answers.",
         "Flag any claim the team cannot defend under questioning."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "evaluation_criteria",
+        "deliverable_format"
       ]
     }
   ],
@@ -122,7 +158,10 @@
     "adaptations": [
       "max_turns is a safety budget, not necessarily the official wall-clock limit",
       "specialist roles are a research roster overlay",
-      "physical/oral/live opponent fidelity may be incomplete in src/"
+      "physical/oral/live opponent fidelity may be incomplete in src/",
+      "role-specific rule expertise is a benchmark coordination overlay",
+      "structured deliberation actions are a benchmark traceability overlay",
+      "limited communication is a benchmark pressure overlay, not an official message cap"
     ],
     "crawl_status": "ok",
     "crawled_excerpts": [
@@ -154,7 +193,72 @@
       "timing": "adapted",
       "tools": "src_tool_surface",
       "scoring": "rubric",
-      "environment": "proxy"
+      "environment": "proxy",
+      "communication": "adapted_coordination_budget",
+      "deliberation": "structured_trace_overlay"
     }
+  },
+  "rule_sections": {
+    "timeline": [
+      "No outside coaching during the round."
+    ],
+    "resource_policy": [
+      "Do not claim tools, internet, or materials that the rule card forbids.",
+      "Banned during the contest: internet access, calculators and running code. Paper and pencil are always available. Work only from the materials provided with the problem."
+    ],
+    "research_integrity": [
+      "No outside coaching during the round."
+    ],
+    "collaboration_protocol": [
+      "Do not invent a live opposing team unless the protocol provides one.",
+      "Team size commonly up to 5 in community practice."
+    ],
+    "deliverable_format": [
+      "Do not look up answer keys or hidden solutions.",
+      "Format (from official training materials titles): moderated oral rounds with judge questions and scoring sheets — not a written exam.",
+      "Submit the written memorial/case analysis and a concise oral outline."
+    ],
+    "evaluation_criteria": [
+      "Be relevant, clear, and deliberative; anticipate judge questions.",
+      "Official hub hosts current case sets plus Rules/FAQs/Guidelines and judge scoring guides.",
+      "Format (from official training materials titles): moderated oral rounds with judge questions and scoring sheets — not a written exam."
+    ]
+  },
+  "information_policy": {
+    "mode": "role_specialized",
+    "shared": [
+      "problem",
+      "contest_rules",
+      "team_discussion",
+      "scratchpad"
+    ],
+    "coordination_requirement": "All teammates may consult the complete rules, but each role must track and communicate its assigned rule sections."
+  },
+  "deliberation": {
+    "mode": "structured",
+    "min_challenges": 1,
+    "decision_maker": "submitter",
+    "evaluation_dimensions": [
+      "evidence_responsiveness",
+      "revision_after_challenge",
+      "decision_traceability",
+      "authority_bias",
+      "majority_bias"
+    ]
+  },
+  "communication": {
+    "mode": "limited",
+    "team_message_budget": 10,
+    "per_agent_message_budget": 3,
+    "max_message_chars": 1000,
+    "counted_actions": [
+      "speak",
+      "write_scratchpad",
+      "propose",
+      "challenge",
+      "provide_evidence",
+      "revise",
+      "decide"
+    ]
   }
 }

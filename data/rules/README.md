@@ -27,6 +27,7 @@ python collectors/rewrite_rules_text.py           # contestant-facing rules_text
 python collectors/align_deliverables.py           # submission + evaluator contract
 python collectors/derive_turn_budgets.py          # max_turns from official duration
 python collectors/write_role_duties.py            # per-role duties, not boilerplate
+python collectors/configure_coordination_rules.py # expertise + dissent + comm budgets
 python collectors/lint_rule_cards.py              # gate: 0 errors expected
 ```
 
@@ -72,6 +73,14 @@ the older report or it returns on the next replay.
    agent continue independent work without broadcasting or spending a message;
    those notes appear only in that agent's later prompts. Usage and rejected
    messages are included in the run result for coordination-efficiency analysis.
+
+The coordination overlay is curated per mechanism rather than applied as one
+bundle: 30 tracks use role-specialized rule ownership, 25 use structured
+deliberation, and 19 use a limited communication budget. Buzzer phases,
+continuous real-time collaboration, long-term creative work, and cards whose
+rosters combine opposing teams are not given a flat message budget when that
+would distort the source competition. Every enabled mechanism is recorded as a
+benchmark adaptation rather than an official contest constraint.
 
 Every step is idempotent, and `tests/test_rule_card_lint.py` fails the build if a
 card regresses (schema violation, unknown tool, roster/team mismatch, tool that

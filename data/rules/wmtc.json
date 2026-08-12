@@ -47,6 +47,14 @@
       "duties": [
         "Own the final shared answer sheet.",
         "Submit only after completeness and verification checks."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "timeline",
+        "collaboration_protocol",
+        "deliverable_format"
       ]
     },
     {
@@ -55,6 +63,13 @@
       "may_submit": false,
       "duties": [
         "Lead algebraic solutions and identity checks."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "resource_policy",
+        "collaboration_protocol"
       ]
     },
     {
@@ -63,6 +78,13 @@
       "may_submit": false,
       "duties": [
         "Lead geometry and measurement problems."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "resource_policy",
+        "collaboration_protocol"
       ]
     },
     {
@@ -71,6 +93,13 @@
       "may_submit": false,
       "duties": [
         "Lead counting arguments and casework."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "resource_policy",
+        "collaboration_protocol"
       ]
     },
     {
@@ -79,6 +108,13 @@
       "may_submit": false,
       "duties": [
         "Lead integer and modular reasoning."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "resource_policy",
+        "collaboration_protocol"
       ]
     },
     {
@@ -88,6 +124,12 @@
       "duties": [
         "Independently re-derive contested answers.",
         "Block premature submission if any problem is blank."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "deliverable_format"
       ]
     }
   ],
@@ -130,7 +172,10 @@
       }
     ],
     "adaptations": [
-      "benchmark extracts team-round content from mixed publisher PDFs"
+      "benchmark extracts team-round content from mixed publisher PDFs",
+      "role-specific rule expertise is a benchmark coordination overlay",
+      "structured deliberation actions are a benchmark traceability overlay",
+      "limited communication is a benchmark pressure overlay, not an official message cap"
     ],
     "crawl_status": "ok",
     "crawled_excerpts": [
@@ -158,7 +203,73 @@
       "roster": "equivalent",
       "timing": "adapted",
       "tools": "equivalent",
-      "scoring": "gold"
+      "scoring": "gold",
+      "communication": "adapted_coordination_budget",
+      "deliberation": "structured_trace_overlay"
     }
+  },
+  "rule_sections": {
+    "timeline": [
+      "Paper and pencil team round only.",
+      "Team Round changed to require more teammate interaction (details promised on Rules page).",
+      "Team-round session timing (edition-dependent)."
+    ],
+    "resource_policy": [
+      "Do not claim tools, internet, or materials that the rule card forbids.",
+      "Paper and pencil team round only.",
+      "No calculators, phones, or internet.",
+      "Dedicated Rules page fetch returned an embedded ‘WMTC Rules Test’ loader without extractable regulation text — treat detailed calculator/device bans as not retrieved.",
+      "Banned during the contest: internet access, calculators and personal electronics. Paper and pencil are always available. Work only from the materials provided with the problem."
+    ],
+    "research_integrity": [
+      "Ignore individual/relay content if a source PDF mixed sections."
+    ],
+    "collaboration_protocol": [
+      "Paper and pencil team round only.",
+      "Homepage: teams of six historically; Individual + Team + Relay structure; 2026 announcement changes Individual to 2 rounds (20 min MC + 40 min short answer) with team contribution = sum/6 (max 70 from individuals).",
+      "Team Round changed to require more teammate interaction (details promised on Rules page)."
+    ],
+    "deliverable_format": [
+      "Do not look up answer keys or hidden solutions.",
+      "Homepage: teams of six historically; Individual + Team + Relay structure; 2026 announcement changes Individual to 2 rounds (20 min MC + 40 min short answer) with team contribution = sum/6 (max 70 from individuals).",
+      "Numbered team answers matching the team-round problems in order."
+    ]
+  },
+  "information_policy": {
+    "mode": "role_specialized",
+    "shared": [
+      "problem",
+      "contest_rules",
+      "team_discussion",
+      "scratchpad"
+    ],
+    "coordination_requirement": "All teammates may consult the complete rules, but each role must track and communicate its assigned rule sections."
+  },
+  "deliberation": {
+    "mode": "structured",
+    "min_challenges": 1,
+    "decision_maker": "submitter",
+    "evaluation_dimensions": [
+      "evidence_responsiveness",
+      "revision_after_challenge",
+      "decision_traceability",
+      "authority_bias",
+      "majority_bias"
+    ]
+  },
+  "communication": {
+    "mode": "limited",
+    "team_message_budget": 16,
+    "per_agent_message_budget": 3,
+    "max_message_chars": 1200,
+    "counted_actions": [
+      "speak",
+      "write_scratchpad",
+      "propose",
+      "challenge",
+      "provide_evidence",
+      "revise",
+      "decide"
+    ]
   }
 }

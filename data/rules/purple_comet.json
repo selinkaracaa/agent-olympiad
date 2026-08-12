@@ -53,6 +53,14 @@
       "duties": [
         "Maintain the ordered integer answer list.",
         "Submit the final answers only when the sheet is complete."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "timeline",
+        "collaboration_protocol",
+        "deliverable_format"
       ]
     },
     {
@@ -62,6 +70,13 @@
       "duties": [
         "Own algebra, sequences, and functional equations.",
         "Use the calculator only after the method is set."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "resource_policy",
+        "collaboration_protocol"
       ]
     },
     {
@@ -71,6 +86,13 @@
       "duties": [
         "Own geometry and measurement problems.",
         "Convert exact results to the required integer answer form."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "resource_policy",
+        "collaboration_protocol"
       ]
     },
     {
@@ -80,6 +102,13 @@
       "duties": [
         "Own combinatorics and probability.",
         "Reduce fractions and report m+n style answers carefully."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "resource_policy",
+        "collaboration_protocol"
       ]
     },
     {
@@ -89,6 +118,13 @@
       "duties": [
         "Own number theory and digit problems.",
         "Double-check modular and divisibility arguments."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "resource_policy",
+        "collaboration_protocol"
       ]
     },
     {
@@ -98,6 +134,13 @@
       "duties": [
         "Recompute numerical claims with the allowed calculator.",
         "Reject any plan that requires forbidden solution search."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "evaluation_criteria",
+        "deliverable_format"
       ]
     }
   ],
@@ -143,7 +186,10 @@
     ],
     "adaptations": [
       "only the built-in calculator tool is exposed; CAS/Desmos are not separately instrumented",
-      "wall-clock contest windows are represented by a turn budget"
+      "wall-clock contest windows are represented by a turn budget",
+      "role-specific rule expertise is a benchmark coordination overlay",
+      "structured deliberation actions are a benchmark traceability overlay",
+      "limited communication is a benchmark pressure overlay, not an official message cap"
     ],
     "crawl_status": "ok",
     "crawled_excerpts": [
@@ -177,7 +223,76 @@
       "information": "text_extract_proxy",
       "tools": "calculator_subset",
       "submission": "equivalent",
-      "scoring": "gold"
+      "scoring": "gold",
+      "communication": "adapted_coordination_budget",
+      "deliberation": "structured_trace_overlay"
     }
+  },
+  "rule_sections": {
+    "timeline": [
+      "MS: 20 problems / 60 minutes; HS: 30 / 90 minutes within a multi-day window (244 hours stated for 2026).",
+      "HS about 90 minutes / MS about 60 minutes (plus multi-day window historically)."
+    ],
+    "resource_policy": [
+      "Do not claim tools, internet, or materials that the rule card forbids.",
+      "Up to six teammates may share one computer.",
+      "Team size 1–6; adult supervisor required; each team needs its own computer/Internet session (shared computers ⇒ sequential team starts).",
+      "Calculators and computation tools allowed (Desmos, WolframAlpha, Mathematica, GeoGebra, custom code, etc.) for calculations/diagrams only.",
+      "May use local books/notes; may NOT use Internet to find solution methods/definitions instruction; may NOT use generative AI (ChatGPT/Gemini/Copilot/Claude etc.) to produce/explain/verify answers or code.",
+      "Banned during the contest: AI tools and searching for published solution methods. Permitted: calculators. Conditional: internet access is never usable for looking up solutions and computer algebra systems is allowed for calculation only. Paper and pencil are always available."
+    ],
+    "research_integrity": [
+      "No generative AI tools.",
+      "May use local books/notes; may NOT use Internet to find solution methods/definitions instruction; may NOT use generative AI (ChatGPT/Gemini/Copilot/Claude etc.) to produce/explain/verify answers or code."
+    ],
+    "collaboration_protocol": [
+      "Team size 1–6; adult supervisor required; each team needs its own computer/Internet session (shared computers ⇒ sequential team starts)."
+    ],
+    "deliverable_format": [
+      "Do not look up answer keys or hidden solutions.",
+      "No searching for solution methods or answer keys.",
+      "Answers: non-negative integers via web form; last submission per problem counts; remote teammates may communicate.",
+      "Ordered non-negative integers, one per problem:\n1. N\n2. N\n...\nUse the contest's required integer encoding (for example m+n)."
+    ],
+    "evaluation_criteria": [
+      "Calculators and computation tools may evaluate expressions; they must not invent the method."
+    ]
+  },
+  "information_policy": {
+    "mode": "role_specialized",
+    "shared": [
+      "problem",
+      "contest_rules",
+      "team_discussion",
+      "scratchpad"
+    ],
+    "coordination_requirement": "All teammates may consult the complete rules, but each role must track and communicate its assigned rule sections."
+  },
+  "deliberation": {
+    "mode": "structured",
+    "min_challenges": 1,
+    "decision_maker": "submitter",
+    "evaluation_dimensions": [
+      "evidence_responsiveness",
+      "revision_after_challenge",
+      "decision_traceability",
+      "authority_bias",
+      "majority_bias"
+    ]
+  },
+  "communication": {
+    "mode": "limited",
+    "team_message_budget": 18,
+    "per_agent_message_budget": 4,
+    "max_message_chars": 1200,
+    "counted_actions": [
+      "speak",
+      "write_scratchpad",
+      "propose",
+      "challenge",
+      "provide_evidence",
+      "revise",
+      "decide"
+    ]
   }
 }

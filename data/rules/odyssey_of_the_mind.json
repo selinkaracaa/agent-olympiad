@@ -48,6 +48,13 @@
         "Direct who answers and stop teammates from talking over each other.",
         "Give the team's official answer once the group has settled.",
         "Submit only after the format and rule checks pass."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "collaboration_protocol",
+        "deliverable_format"
       ]
     },
     {
@@ -57,6 +64,13 @@
       "duties": [
         "Produce the first full attempt at the problem.",
         "Show the reasoning so a teammate can check it."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "resource_policy",
+        "collaboration_protocol"
       ]
     },
     {
@@ -66,6 +80,13 @@
       "duties": [
         "Attack the problem from a different angle than the primary solver.",
         "Compare results and surface the disagreement early."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "resource_policy",
+        "collaboration_protocol"
       ]
     },
     {
@@ -75,6 +96,12 @@
       "duties": [
         "Challenge weak arguments and demand an independent check.",
         "Reject an answer rather than let an unverified one be submitted."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "deliverable_format"
       ]
     },
     {
@@ -84,6 +111,13 @@
       "duties": [
         "Take the part of the task that matches your stated specialty.",
         "Check a teammate's work once your own part is done."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "resource_policy",
+        "collaboration_protocol"
       ]
     },
     {
@@ -93,6 +127,12 @@
       "duties": [
         "Keep the shared workspace readable and current.",
         "Write answers in the required format as they are settled."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "deliverable_format"
       ]
     },
     {
@@ -102,6 +142,13 @@
       "duties": [
         "Find and cite the authorities the argument depends on.",
         "Bring counter-authority to the team before a judge does."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "research_integrity",
+        "resource_policy"
       ]
     }
   ],
@@ -158,7 +205,9 @@
     "adaptations": [
       "max_turns is a safety budget, not necessarily the official wall-clock limit",
       "specialist roles are a research roster overlay",
-      "physical/oral/live opponent fidelity may be incomplete in src/"
+      "physical/oral/live opponent fidelity may be incomplete in src/",
+      "role-specific rule expertise is a benchmark coordination overlay",
+      "structured deliberation actions are a benchmark traceability overlay"
     ],
     "crawl_status": "fallback_notes",
     "crawled_excerpts": [
@@ -187,7 +236,47 @@
       "timing": "adapted",
       "tools": "src_tool_surface",
       "scoring": "rubric",
-      "environment": "proxy"
+      "environment": "proxy",
+      "deliberation": "structured_trace_overlay"
     }
+  },
+  "rule_sections": {
+    "resource_policy": [
+      "Do not claim tools, internet, or materials that the rule card forbids.",
+      "Banned during the contest: internet access, calculators and running code. Paper and pencil are always available. Work only from the materials provided with the problem."
+    ],
+    "research_integrity": [
+      "No outside assistance producing the solution for the team.",
+      "Outside assistance restrictions are central (coaches may not contribute ideas to the solution — details in Program Guide)."
+    ],
+    "collaboration_protocol": [
+      "No outside assistance producing the solution for the team."
+    ],
+    "deliverable_format": [
+      "Do not look up answer keys or hidden solutions.",
+      "Submit the complete team deliverable requested by the problem statement."
+    ]
+  },
+  "information_policy": {
+    "mode": "role_specialized",
+    "shared": [
+      "problem",
+      "contest_rules",
+      "team_discussion",
+      "scratchpad"
+    ],
+    "coordination_requirement": "All teammates may consult the complete rules, but each role must track and communicate its assigned rule sections."
+  },
+  "deliberation": {
+    "mode": "structured",
+    "min_challenges": 1,
+    "decision_maker": "submitter",
+    "evaluation_dimensions": [
+      "evidence_responsiveness",
+      "revision_after_challenge",
+      "decision_traceability",
+      "authority_bias",
+      "majority_bias"
+    ]
   }
 }

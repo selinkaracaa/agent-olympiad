@@ -50,36 +50,61 @@
       "title": "captain and synthesizer",
       "may_submit": true,
       "duties": [
-        "Assign unsolved problems and keep the team from crowding one question.",
-        "Hold the shared answer sheet and keep it consistent with the discussion.",
-        "Submit only after the format and rule checks pass."
+        "Track timing and submission.",
+        "Synthesize the final linguistic explanation."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "timeline",
+        "collaboration_protocol",
+        "deliverable_format"
       ]
     },
     {
       "name": "Agent_2",
-      "title": "algebra / analysis specialist",
+      "title": "data-pattern analyst",
       "may_submit": false,
       "duties": [
-        "Lead algebra, functions, equations, and inequality problems.",
-        "Recheck each simplification before its answer enters the sheet."
+        "Infer patterns from the language data.",
+        "State candidate mappings explicitly."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "research_integrity"
       ]
     },
     {
       "name": "Agent_3",
-      "title": "geometry specialist",
+      "title": "hypothesis tester",
       "may_submit": false,
       "duties": [
-        "Lead geometry, trigonometry, and diagram-based reasoning.",
-        "State any assumption a text-only diagram forces you to make."
+        "Search for counterexamples to proposed mappings.",
+        "Challenge unsupported generalizations."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "deliverable_format"
       ]
     },
     {
       "name": "Agent_4",
-      "title": "combinatorics specialist",
+      "title": "verifier and explanation editor",
       "may_submit": false,
       "duties": [
-        "Lead counting, probability, and expected-value problems.",
-        "Give exact fractions in lowest terms unless the problem says otherwise."
+        "Check every form against the hypothesis.",
+        "Make the final explanation complete and readable."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "deliverable_format"
       ]
     }
   ],
@@ -126,7 +151,10 @@
     "adaptations": [
       "max_turns is a safety budget, not necessarily the official wall-clock limit",
       "specialist roles are a research roster overlay",
-      "physical/oral/live opponent fidelity may be incomplete in src/"
+      "physical/oral/live opponent fidelity may be incomplete in src/",
+      "role-specific rule expertise is a benchmark coordination overlay",
+      "structured deliberation actions are a benchmark traceability overlay",
+      "limited communication is a benchmark pressure overlay, not an official message cap"
     ],
     "crawl_status": "ok",
     "crawled_excerpts": [
@@ -160,7 +188,76 @@
       "timing": "adapted",
       "tools": "src_tool_surface",
       "scoring": "gold",
-      "environment": "partial"
+      "environment": "partial",
+      "communication": "adapted_coordination_budget",
+      "deliberation": "structured_trace_overlay"
     }
+  },
+  "rule_sections": {
+    "resource_policy": [
+      "Do not claim tools, internet, or materials that the rule card forbids.",
+      "No calculators, phones, internet, or other electronic devices.",
+      "No external dictionaries, notes, or reference materials unless organizers provide them.",
+      "Work only from the official problem packet and blank paper.",
+      "Same material/device bans as individual contest: no printed matter/dictionaries; no own paper; no phones/laptops/tablets/smartwatches or outside-world devices; organizer writing paper only; pens preferred.",
+      "Problems on paper; explanations required unless instructed otherwise; one working language for the team solution.",
+      "Banned during the contest: internet access, calculators and running code. Paper and pencil are always available. Work only from the materials provided with the problem."
+    ],
+    "research_integrity": [
+      "Same material/device bans as individual contest: no printed matter/dictionaries; no own paper; no phones/laptops/tablets/smartwatches or outside-world devices; organizer writing paper only; pens preferred."
+    ],
+    "collaboration_protocol": [
+      "Exactly one shared team answer sheet for the whole team.",
+      "Delegation/team size: ≤4 contestants (+ team leader).",
+      "Team contest: members work jointly on one problem set; normally 4 hours; each member gets a copy; team submits a single solution.",
+      "Free verbal collaboration within the team room.",
+      "Problems on paper; explanations required unless instructed otherwise; one working language for the team solution."
+    ],
+    "deliverable_format": [
+      "Do not look up answer keys or hidden solutions.",
+      "Exactly one shared team answer sheet for the whole team.",
+      "Write complete answers with enough linguistic justification for marking.",
+      "Submit the team's final answers in numbered order, using exact values when required."
+    ],
+    "timeline": [
+      "About 4 hours for the team contest."
+    ]
+  },
+  "information_policy": {
+    "mode": "role_specialized",
+    "shared": [
+      "problem",
+      "contest_rules",
+      "team_discussion",
+      "scratchpad"
+    ],
+    "coordination_requirement": "All teammates may consult the complete rules, but each role must track and communicate its assigned rule sections."
+  },
+  "deliberation": {
+    "mode": "structured",
+    "min_challenges": 1,
+    "decision_maker": "submitter",
+    "evaluation_dimensions": [
+      "evidence_responsiveness",
+      "revision_after_challenge",
+      "decision_traceability",
+      "authority_bias",
+      "majority_bias"
+    ]
+  },
+  "communication": {
+    "mode": "limited",
+    "team_message_budget": 18,
+    "per_agent_message_budget": 4,
+    "max_message_chars": 1200,
+    "counted_actions": [
+      "speak",
+      "write_scratchpad",
+      "propose",
+      "challenge",
+      "provide_evidence",
+      "revise",
+      "decide"
+    ]
   }
 }

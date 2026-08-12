@@ -52,6 +52,14 @@
         "Decide when the current batch is good enough to commit.",
         "Keep a running list of which problems are answered and which are open.",
         "Submit only after the format and rule checks pass."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "timeline",
+        "collaboration_protocol",
+        "deliverable_format"
       ]
     },
     {
@@ -61,6 +69,13 @@
       "duties": [
         "Clear the easy problems in the current batch quickly and accurately.",
         "Hand off anything that needs deep work instead of stalling the batch."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "resource_policy",
+        "collaboration_protocol"
       ]
     },
     {
@@ -70,6 +85,13 @@
       "duties": [
         "Clear the easy problems in the current batch quickly and accurately.",
         "Hand off anything that needs deep work instead of stalling the batch."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "resource_policy",
+        "collaboration_protocol"
       ]
     },
     {
@@ -79,6 +101,13 @@
       "duties": [
         "Challenge weak arguments and demand an independent check.",
         "Reject an answer rather than let an unverified one be submitted."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "evaluation_criteria",
+        "deliverable_format"
       ]
     },
     {
@@ -88,6 +117,14 @@
       "duties": [
         "Decide which problems are worth attempting for the points available.",
         "Call the trade-off between accuracy and speed for each batch."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "timeline",
+        "collaboration_protocol",
+        "deliverable_format"
       ]
     },
     {
@@ -97,6 +134,13 @@
       "duties": [
         "Keep the shared workspace readable and current.",
         "Write answers in the required format as they are settled."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "deliverable_format",
+        "evaluation_criteria"
       ]
     },
     {
@@ -106,6 +150,13 @@
       "duties": [
         "Take the problems nobody has claimed rather than duplicating work.",
         "Say early when a problem is beyond the remaining time."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "resource_policy",
+        "collaboration_protocol"
       ]
     },
     {
@@ -115,6 +166,13 @@
       "duties": [
         "Scan for unanswered problems before the team submits.",
         "Confirm every required part of the deliverable is present."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "evaluation_criteria",
+        "deliverable_format"
       ]
     },
     {
@@ -124,6 +182,13 @@
       "duties": [
         "Scan for unanswered problems before the team submits.",
         "Confirm every required part of the deliverable is present."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "evaluation_criteria",
+        "deliverable_format"
       ]
     },
     {
@@ -133,6 +198,13 @@
       "duties": [
         "Scan for unanswered problems before the team submits.",
         "Confirm every required part of the deliverable is present."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "evaluation_criteria",
+        "deliverable_format"
       ]
     },
     {
@@ -142,6 +214,13 @@
       "duties": [
         "Scan for unanswered problems before the team submits.",
         "Confirm every required part of the deliverable is present."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "evaluation_criteria",
+        "deliverable_format"
       ]
     },
     {
@@ -151,6 +230,13 @@
       "duties": [
         "Scan for unanswered problems before the team submits.",
         "Confirm every required part of the deliverable is present."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "evaluation_criteria",
+        "deliverable_format"
       ]
     }
   ],
@@ -195,7 +281,8 @@
     "adaptations": [
       "max_turns is a safety budget, not necessarily the official wall-clock limit",
       "specialist roles are a research roster overlay",
-      "physical/oral/live opponent fidelity may be incomplete in src/"
+      "physical/oral/live opponent fidelity may be incomplete in src/",
+      "role-specific rule expertise is a benchmark coordination overlay"
     ],
     "crawl_status": "ok",
     "crawled_excerpts": [
@@ -228,5 +315,40 @@
       "scoring": "gold",
       "environment": "proxy"
     }
+  },
+  "rule_sections": {
+    "resource_policy": [
+      "Do not claim tools, internet, or materials that the rule card forbids.",
+      "Internet and ordinary tools are generally allowed for Mystery Hunt solving.",
+      "Heavy within-team coordination; internet/tools generally unrestricted as a community puzzlehunt (not a closed-book exam) — year FAQ does not impose calculator/AI bans.",
+      "Banned during the contest: calculators and help from other teams. Permitted: internet access and running code. Paper and pencil are always available."
+    ],
+    "collaboration_protocol": [
+      "No official maximum team size; 2026 FAQ: finish-oriented teams often need 30+ experienced solvers; designed for varied sizes.",
+      "Heavy within-team coordination; internet/tools generally unrestricted as a community puzzlehunt (not a closed-book exam) — year FAQ does not impose calculator/AI bans."
+    ],
+    "deliverable_format": [
+      "Do not look up answer keys or hidden solutions.",
+      "Respect answer checker / rate-limit norms; do not spam guesses recklessly.",
+      "Submit the canonical puzzle answer string.",
+      "Weekend MLK hunt; kickoff Friday; remote play possible for most content, but in-person runaround required to win; ≥1 current MIT student required to win/write next year.",
+      "Submit the team's final answers in numbered order, using exact values when required."
+    ],
+    "evaluation_criteria": [
+      "Weekend MLK hunt; kickoff Friday; remote play possible for most content, but in-person runaround required to win; ≥1 current MIT student required to win/write next year."
+    ],
+    "timeline": [
+      "Open-ended hunt timing; this row is one puzzle."
+    ]
+  },
+  "information_policy": {
+    "mode": "role_specialized",
+    "shared": [
+      "problem",
+      "contest_rules",
+      "team_discussion",
+      "scratchpad"
+    ],
+    "coordination_requirement": "All teammates may consult the complete rules, but each role must track and communicate its assigned rule sections."
   }
 }

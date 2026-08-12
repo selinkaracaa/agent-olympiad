@@ -48,6 +48,14 @@
         "Assign unsolved problems and keep the team from crowding one question.",
         "Hold the shared answer sheet and keep it consistent with the discussion.",
         "Submit only after the format and rule checks pass."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "timeline",
+        "collaboration_protocol",
+        "deliverable_format"
       ]
     },
     {
@@ -57,6 +65,13 @@
       "duties": [
         "Lead algebra, functions, equations, and inequality problems.",
         "Recheck each simplification before its answer enters the sheet."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "resource_policy",
+        "deliverable_format"
       ]
     },
     {
@@ -66,6 +81,13 @@
       "duties": [
         "Lead geometry, trigonometry, and diagram-based reasoning.",
         "State any assumption a text-only diagram forces you to make."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "resource_policy",
+        "collaboration_protocol"
       ]
     },
     {
@@ -75,6 +97,13 @@
       "duties": [
         "Lead counting, probability, and expected-value problems.",
         "Give exact fractions in lowest terms unless the problem says otherwise."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "resource_policy",
+        "collaboration_protocol"
       ]
     },
     {
@@ -84,6 +113,13 @@
       "duties": [
         "Lead modular arithmetic, divisibility, and integer constructions.",
         "Check integer answers for off-by-one and sign mistakes."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "resource_policy",
+        "collaboration_protocol"
       ]
     },
     {
@@ -93,6 +129,13 @@
       "duties": [
         "Challenge weak arguments and demand an independent check.",
         "Reject an answer rather than let an unverified one be submitted."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "evaluation_criteria",
+        "deliverable_format"
       ]
     },
     {
@@ -102,6 +145,14 @@
       "duties": [
         "Partition the problem set so no two teammates duplicate work.",
         "Reassign problems as soon as someone finishes early."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "timeline",
+        "collaboration_protocol",
+        "deliverable_format"
       ]
     },
     {
@@ -111,6 +162,13 @@
       "duties": [
         "Check that each written answer actually answers the question asked.",
         "Enforce the required answer format before submission."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "evaluation_criteria",
+        "deliverable_format"
       ]
     },
     {
@@ -120,6 +178,13 @@
       "duties": [
         "Scan for unanswered problems before the team submits.",
         "Confirm every required part of the deliverable is present."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "evaluation_criteria",
+        "deliverable_format"
       ]
     },
     {
@@ -129,6 +194,13 @@
       "duties": [
         "Scan for unanswered problems before the team submits.",
         "Confirm every required part of the deliverable is present."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "evaluation_criteria",
+        "deliverable_format"
       ]
     },
     {
@@ -138,6 +210,13 @@
       "duties": [
         "Scan for unanswered problems before the team submits.",
         "Confirm every required part of the deliverable is present."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "evaluation_criteria",
+        "deliverable_format"
       ]
     },
     {
@@ -147,6 +226,13 @@
       "duties": [
         "Scan for unanswered problems before the team submits.",
         "Confirm every required part of the deliverable is present."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "evaluation_criteria",
+        "deliverable_format"
       ]
     },
     {
@@ -156,6 +242,13 @@
       "duties": [
         "Scan for unanswered problems before the team submits.",
         "Confirm every required part of the deliverable is present."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "evaluation_criteria",
+        "deliverable_format"
       ]
     },
     {
@@ -165,6 +258,13 @@
       "duties": [
         "Scan for unanswered problems before the team submits.",
         "Confirm every required part of the deliverable is present."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "evaluation_criteria",
+        "deliverable_format"
       ]
     },
     {
@@ -174,6 +274,13 @@
       "duties": [
         "Scan for unanswered problems before the team submits.",
         "Confirm every required part of the deliverable is present."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "evaluation_criteria",
+        "deliverable_format"
       ]
     }
   ],
@@ -214,7 +321,10 @@
     "adaptations": [
       "max_turns is a safety budget, not necessarily the official wall-clock limit",
       "specialist roles are a research roster overlay",
-      "physical/oral/live opponent fidelity may be incomplete in src/"
+      "physical/oral/live opponent fidelity may be incomplete in src/",
+      "role-specific rule expertise is a benchmark coordination overlay",
+      "structured deliberation actions are a benchmark traceability overlay",
+      "limited communication is a benchmark pressure overlay, not an official message cap"
     ],
     "crawl_status": "ok",
     "crawled_excerpts": [
@@ -244,7 +354,75 @@
       "timing": "adapted",
       "tools": "src_tool_surface",
       "scoring": "gold",
-      "environment": "partial"
+      "environment": "partial",
+      "communication": "adapted_coordination_budget",
+      "deliberation": "structured_trace_overlay"
     }
+  },
+  "rule_sections": {
+    "timeline": [
+      "Write multi-part proofs / justifications for the power round.",
+      "Power Round worth 50 points; exactly one solution packet may be submitted (multiple submissions → lowest score).",
+      "No calculators; electronic devices banned during Team/Power (devices collected before Team, returned after Power).",
+      "About 1 hour."
+    ],
+    "resource_policy": [
+      "Do not claim tools, internet, or materials that the rule card forbids.",
+      "Paper and pencil only; no calculators or electronic devices.",
+      "No internet, phones, or outside help.",
+      "Banned during the contest: internet access, calculators and running code. Paper and pencil are always available. Work only from the materials provided with the problem."
+    ],
+    "research_integrity": [
+      "No internet, phones, or outside help."
+    ],
+    "collaboration_protocol": [
+      "Same 15-person team context as national meet.",
+      "No calculators; electronic devices banned during Team/Power (devices collected before Team, returned after Power)."
+    ],
+    "deliverable_format": [
+      "Do not look up answer keys or hidden solutions.",
+      "Write multi-part proofs / justifications for the power round.",
+      "Submit the team's final answers in numbered order, using exact values when required."
+    ],
+    "evaluation_criteria": [
+      "Power Round worth 50 points; exactly one solution packet may be submitted (multiple submissions → lowest score)."
+    ]
+  },
+  "information_policy": {
+    "mode": "role_specialized",
+    "shared": [
+      "problem",
+      "contest_rules",
+      "team_discussion",
+      "scratchpad"
+    ],
+    "coordination_requirement": "All teammates may consult the complete rules, but each role must track and communicate its assigned rule sections."
+  },
+  "deliberation": {
+    "mode": "structured",
+    "min_challenges": 1,
+    "decision_maker": "submitter",
+    "evaluation_dimensions": [
+      "evidence_responsiveness",
+      "revision_after_challenge",
+      "decision_traceability",
+      "authority_bias",
+      "majority_bias"
+    ]
+  },
+  "communication": {
+    "mode": "limited",
+    "team_message_budget": 30,
+    "per_agent_message_budget": 2,
+    "max_message_chars": 1200,
+    "counted_actions": [
+      "speak",
+      "write_scratchpad",
+      "propose",
+      "challenge",
+      "provide_evidence",
+      "revise",
+      "decide"
+    ]
   }
 }

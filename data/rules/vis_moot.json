@@ -51,6 +51,14 @@
         "Own the spoken case: opening, structure, and closing.",
         "Absorb teammates' research into one line of argument rather than a list.",
         "Submit only after the format and rule checks pass."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "timeline",
+        "collaboration_protocol",
+        "deliverable_format"
       ]
     },
     {
@@ -60,6 +68,13 @@
       "duties": [
         "Find and cite the authorities the argument depends on.",
         "Bring counter-authority to the team before a judge does."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "research_integrity",
+        "resource_policy"
       ]
     },
     {
@@ -69,6 +84,12 @@
       "duties": [
         "Draft the assigned section in full prose, not notes.",
         "Keep the section within its word or time budget."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "deliverable_format"
       ]
     },
     {
@@ -78,6 +99,13 @@
       "duties": [
         "Argue the other side hard enough to expose weak reasoning.",
         "Prepare answers to the strongest objection the team will face."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "research_integrity",
+        "resource_policy"
       ]
     },
     {
@@ -87,6 +115,12 @@
       "duties": [
         "Anticipate judge questions and prepare short, direct answers.",
         "Flag any claim the team cannot defend under questioning."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "deliverable_format"
       ]
     }
   ],
@@ -132,7 +166,10 @@
     "adaptations": [
       "max_turns is a safety budget, not necessarily the official wall-clock limit",
       "specialist roles are a research roster overlay",
-      "physical/oral/live opponent fidelity may be incomplete in src/"
+      "physical/oral/live opponent fidelity may be incomplete in src/",
+      "role-specific rule expertise is a benchmark coordination overlay",
+      "structured deliberation actions are a benchmark traceability overlay",
+      "limited communication is a benchmark pressure overlay, not an official message cap"
     ],
     "crawl_status": "ok",
     "crawled_excerpts": [
@@ -162,7 +199,69 @@
       "timing": "adapted",
       "tools": "src_tool_surface",
       "scoring": "rubric",
-      "environment": "partial"
+      "environment": "partial",
+      "communication": "adapted_coordination_budget",
+      "deliberation": "structured_trace_overlay"
     }
+  },
+  "rule_sections": {
+    "timeline": [
+      "Oral hearings in Vienna (and/or Vis East Hong Kong as separate moot); registration fee and participation expectations after claimant memo."
+    ],
+    "resource_policy": [
+      "Do not claim tools, internet, or materials that the rule card forbids.",
+      "Banned during the contest: calculators and running code. Permitted: internet access. Paper and pencil are always available."
+    ],
+    "research_integrity": [
+      "Legal research is allowed; outside drafting help is not."
+    ],
+    "collaboration_protocol": [
+      "Team: ≥2 students from one institution; no maximum team size (31st Rules §31).",
+      "Memoranda: searchable PDF, single file, typically ≤1 MB upload limit; deadlines via team account (claimant then respondent)."
+    ],
+    "deliverable_format": [
+      "Do not look up answer keys or hidden solutions.",
+      "Write for both advocacy and oral defense.",
+      "Parts: memorandum for claimant, memorandum for respondent, oral hearings.",
+      "Oral hearings in Vienna (and/or Vis East Hong Kong as separate moot); registration fee and participation expectations after claimant memo.",
+      "Submit the written memorial/case analysis and a concise oral outline."
+    ]
+  },
+  "information_policy": {
+    "mode": "role_specialized",
+    "shared": [
+      "problem",
+      "contest_rules",
+      "team_discussion",
+      "scratchpad"
+    ],
+    "coordination_requirement": "All teammates may consult the complete rules, but each role must track and communicate its assigned rule sections."
+  },
+  "deliberation": {
+    "mode": "structured",
+    "min_challenges": 1,
+    "decision_maker": "submitter",
+    "evaluation_dimensions": [
+      "evidence_responsiveness",
+      "revision_after_challenge",
+      "decision_traceability",
+      "authority_bias",
+      "majority_bias"
+    ]
+  },
+  "communication": {
+    "mode": "limited",
+    "team_message_budget": 10,
+    "per_agent_message_budget": 3,
+    "max_message_chars": 1200,
+    "counted_actions": [
+      "speak",
+      "write_scratchpad",
+      "propose",
+      "challenge",
+      "provide_evidence",
+      "revise",
+      "decide"
+    ]
   }
 }

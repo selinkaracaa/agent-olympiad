@@ -137,7 +137,7 @@
       "team_discussion",
       "scratchpad"
     ],
-    "coordination_requirement": "The captain holds the contest-rules packet; the slide designer holds public evaluation guidance. Teammates must communicate material constraints and judging priorities through discussion or the shared scratchpad."
+    "coordination_requirement": "All teammates may consult the complete rules, but each role must track and communicate its assigned rule sections."
   },
   "scoring": {
     "mode": "rubric",
@@ -183,7 +183,10 @@
     "adaptations": [
       "max_turns is a safety budget, not necessarily the official wall-clock limit",
       "specialist roles are a research roster overlay",
-      "physical/oral/live opponent fidelity may be incomplete in src/"
+      "physical/oral/live opponent fidelity may be incomplete in src/",
+      "role-specific rule expertise is a benchmark coordination overlay",
+      "structured deliberation actions are a benchmark traceability overlay",
+      "limited communication is a benchmark pressure overlay, not an official message cap"
     ],
     "crawl_status": "ok",
     "crawled_excerpts": [
@@ -217,7 +220,9 @@
       "timing": "adapted",
       "tools": "src_tool_surface",
       "scoring": "rubric",
-      "environment": "partial"
+      "environment": "partial",
+      "communication": "adapted_coordination_budget",
+      "deliberation": "structured_trace_overlay"
     }
   },
   "deliberation": {

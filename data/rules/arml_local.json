@@ -52,6 +52,14 @@
         "Keep the shared answer sheet coherent and complete.",
         "Assign remaining unsolved problems when discussion stalls.",
         "Submit the final numbered team answers."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "timeline",
+        "collaboration_protocol",
+        "deliverable_format"
       ]
     },
     {
@@ -61,6 +69,13 @@
       "duties": [
         "Lead algebra, functions, equations, and logarithmic problems.",
         "Check algebraic simplifications before answers enter the sheet."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "resource_policy",
+        "collaboration_protocol"
       ]
     },
     {
@@ -70,6 +85,13 @@
       "duties": [
         "Lead geometry, area, trigonometry, and diagram-based reasoning.",
         "State assumptions clearly when a diagram is incomplete in text."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "resource_policy",
+        "collaboration_protocol"
       ]
     },
     {
@@ -79,6 +101,13 @@
       "duties": [
         "Lead counting, probability, and expected-value problems.",
         "Write exact fractions in lowest terms when required."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "resource_policy",
+        "collaboration_protocol"
       ]
     },
     {
@@ -88,6 +117,13 @@
       "duties": [
         "Lead number theory, modular arithmetic, and discrete constructions.",
         "Cross-check integer answers for off-by-one and divisibility mistakes."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "resource_policy",
+        "collaboration_protocol"
       ]
     },
     {
@@ -97,6 +133,13 @@
       "duties": [
         "Challenge weak arguments and demand an independent check.",
         "Scan the answer sheet for missing problems before submission."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "evaluation_criteria",
+        "deliverable_format"
       ]
     }
   ],
@@ -145,7 +188,10 @@
     "adaptations": [
       "wall-clock timing is represented by a turn safety budget",
       "specialist roles are a research roster overlay on the official 6-person team",
-      "benchmark rows carry 10 short answers; the official team round has 15 questions"
+      "benchmark rows carry 10 short answers; the official team round has 15 questions",
+      "role-specific rule expertise is a benchmark coordination overlay",
+      "structured deliberation actions are a benchmark traceability overlay",
+      "limited communication is a benchmark pressure overlay, not an official message cap"
     ],
     "crawl_status": "ok",
     "crawled_excerpts": [
@@ -175,7 +221,76 @@
       "information": "equivalent",
       "tools": "equivalent",
       "submission": "equivalent",
-      "scoring": "gold_proxy"
+      "scoring": "gold_proxy",
+      "communication": "adapted_coordination_budget",
+      "deliberation": "structured_trace_overlay"
     }
+  },
+  "rule_sections": {
+    "timeline": [
+      "Paper and pencil only; calculators are banned on every ARML round.",
+      "Team Round: 45 minutes; set of 15 short-answer questions worked by the entire team together.",
+      "Also Individual (5×10 min pairs) and Relay (6/8/10 min structures) — benchmark track focuses on team round.",
+      "About 45 minutes."
+    ],
+    "resource_policy": [
+      "Do not claim tools, internet, or materials that the rule card forbids.",
+      "Paper and pencil only; calculators are banned on every ARML round.",
+      "No phones, computers, internet, books, or notes.",
+      "National no-calculator / no-electronics bans apply across ARML contests; Local inherits paper/pencil only expectation.",
+      "Banned during the contest: internet access, calculators, personal electronics and books and notes. Paper and pencil are always available. Work only from the materials provided with the problem."
+    ],
+    "collaboration_protocol": [
+      "Collaborate freely within the six-person team.",
+      "Team Round: 45 minutes; set of 15 short-answer questions worked by the entire team together.",
+      "Also Individual (5×10 min pairs) and Relay (6/8/10 min structures) — benchmark track focuses on team round."
+    ],
+    "deliverable_format": [
+      "Do not look up answer keys or hidden solutions.",
+      "Submit one shared short-answer sheet; answers are usually exact values.",
+      "Do not look up contest archives or answer keys.",
+      "Team Round: 45 minutes; set of 15 short-answer questions worked by the entire team together.",
+      "Numbered team answer sheet:\n1. [answer]\n2. [answer]\n...\n10. [answer]\nUse exact values when the problem asks for them."
+    ],
+    "evaluation_criteria": [
+      "Coaches/local coordinators grade and submit scores."
+    ]
+  },
+  "information_policy": {
+    "mode": "role_specialized",
+    "shared": [
+      "problem",
+      "contest_rules",
+      "team_discussion",
+      "scratchpad"
+    ],
+    "coordination_requirement": "All teammates may consult the complete rules, but each role must track and communicate its assigned rule sections."
+  },
+  "deliberation": {
+    "mode": "structured",
+    "min_challenges": 1,
+    "decision_maker": "submitter",
+    "evaluation_dimensions": [
+      "evidence_responsiveness",
+      "revision_after_challenge",
+      "decision_traceability",
+      "authority_bias",
+      "majority_bias"
+    ]
+  },
+  "communication": {
+    "mode": "limited",
+    "team_message_budget": 18,
+    "per_agent_message_budget": 3,
+    "max_message_chars": 1200,
+    "counted_actions": [
+      "speak",
+      "write_scratchpad",
+      "propose",
+      "challenge",
+      "provide_evidence",
+      "revise",
+      "decide"
+    ]
   }
 }

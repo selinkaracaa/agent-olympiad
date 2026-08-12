@@ -6,6 +6,7 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT / "src"))
+sys.path.insert(0, str(REPO_ROOT / "collectors"))
 
 from collaboration import (
     _agent_user_prompt,
@@ -16,6 +17,11 @@ from collaboration import (
 from env import OlympiadEnvironment
 from llm import mock_agent_llm
 from rules import load_rule_card
+from configure_coordination_rules import (
+    COMMUNICATION_BUDGETS,
+    ROLE_SPECIALIZED,
+    STRUCTURED_DELIBERATION,
+)
 
 
 SCIENCE_BOWL_PROBLEM = (
@@ -173,6 +179,52 @@ class CompetitionRuleCardTests(unittest.TestCase):
                 self.assertEqual(
                     card.deliberation.get("mode"), "structured"
                 )
+
+    def test_coordination_overlay_matches_curated_policy_matrix(self):
+        import json
+
+        index = json.loads(
+            (REPO_ROOT / "data" / "benchmarks" / "index.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        for olympiad in index["olympiads"]:
+            competition_id = olympiad["id"]
+            card = load_rule_card(competition_id, required=True)
+            with self.subTest(competition=competition_id):
+                is_specialized = competition_id in ROLE_SPECIALIZED
+                self.assertEqual(
+                    card.information_policy.get("mode") == "role_specialized",
+                    is_specialized,
+                )
+                self.assertEqual(
+                    card.deliberation.get("mode") == "structured",
+                    competition_id in STRUCTURED_DELIBERATION,
+                )
+                self.assertEqual(
+                    card.communication.get("mode") == "limited",
+                    competition_id in COMMUNICATION_BUDGETS,
+                )
+                if is_specialized:
+                    self.assertTrue(card.rule_sections)
+                    for role in card.agent_roles:
+                        self.assertIn("contest_rules", role.information_access)
+                        self.assertTrue(role.rule_expertise)
+                        self.assertTrue(
+                            set(role.rule_expertise).issubset(card.rule_sections)
+                        )
+                if competition_id in COMMUNICATION_BUDGETS:
+                    team, per_agent, max_chars = COMMUNICATION_BUDGETS[
+                        competition_id
+                    ]
+                    self.assertEqual(
+                        (
+                            card.communication["team_message_budget"],
+                            card.communication["per_agent_message_budget"],
+                            card.communication["max_message_chars"],
+                        ),
+                        (team, per_agent, max_chars),
+                    )
 
     def test_disagreement_protocol_records_evidence_revision_and_decision(self):
         env = OlympiadEnvironment("ieo_business_case", IEO_PROBLEM)

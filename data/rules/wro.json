@@ -44,30 +44,48 @@
   "agent_roles": [
     {
       "name": "Agent_1",
-      "title": "captain",
+      "title": "captain and rules lead",
       "may_submit": true,
       "duties": [
-        "Direct who answers and stop teammates from talking over each other.",
-        "Give the team's official answer once the group has settled.",
-        "Submit only after the format and rule checks pass."
+        "Track season, category, timing, and field rules.",
+        "Coordinate the final run strategy."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "collaboration_protocol",
+        "deliverable_format"
       ]
     },
     {
       "name": "Agent_2",
-      "title": "primary solver",
+      "title": "hardware builder",
       "may_submit": false,
       "duties": [
-        "Produce the first full attempt at the problem.",
-        "Show the reasoning so a teammate can check it."
+        "Track construction and materials constraints.",
+        "Own mechanical reliability checks."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "collaboration_protocol"
       ]
     },
     {
       "name": "Agent_3",
-      "title": "secondary solver",
+      "title": "programmer and run analyst",
       "may_submit": false,
       "duties": [
-        "Attack the problem from a different angle than the primary solver.",
-        "Compare results and surface the disagreement early."
+        "Track controller and software rules.",
+        "Analyze test runs and field scoring."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "deliverable_format"
       ]
     }
   ],
@@ -119,7 +137,8 @@
     "adaptations": [
       "max_turns is a safety budget, not necessarily the official wall-clock limit",
       "specialist roles are a research roster overlay",
-      "physical/oral/live opponent fidelity may be incomplete in src/"
+      "physical/oral/live opponent fidelity may be incomplete in src/",
+      "role-specific rule expertise is a benchmark coordination overlay"
     ],
     "crawl_status": "ok",
     "crawled_excerpts": [
@@ -150,5 +169,29 @@
       "scoring": "rubric",
       "environment": "proxy"
     }
+  },
+  "rule_sections": {
+    "resource_policy": [
+      "Do not claim tools, internet, or materials that the rule card forbids.",
+      "Robot construction and run scoring are physical; software is a proxy unless a simulator exists.",
+      "Banned during the contest: internet access, calculators and running code. Paper and pencil are always available. Work only from the materials provided with the problem."
+    ],
+    "collaboration_protocol": [
+      "RoboMission General Rules 2025: team of 2 or 3 students + coach; 1 student + coach is not a team; one category per student/team per season."
+    ],
+    "deliverable_format": [
+      "Do not look up answer keys or hidden solutions.",
+      "Submit the complete team deliverable requested by the problem statement."
+    ]
+  },
+  "information_policy": {
+    "mode": "role_specialized",
+    "shared": [
+      "problem",
+      "contest_rules",
+      "team_discussion",
+      "scratchpad"
+    ],
+    "coordination_requirement": "All teammates may consult the complete rules, but each role must track and communicate its assigned rule sections."
   }
 }
