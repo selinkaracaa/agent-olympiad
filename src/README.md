@@ -84,7 +84,7 @@ env.grade_submission()
 **Grading (`grade_submission()`):**
 1. If a gold `expected_answer` exists → normalized substring match (coarse, good for smoke tests)
 2. If task is programming (ICPC/IIOT) → flags `judge_sandbox_required`
-3. Otherwise → flags `llm_judge_required` (used by `run_exam.py` for partial credit)
+3. Otherwise → flags `llm_judge_required`; live smoke / `apply_registered_judge` then runs `rubric_llm_v1`
 
 Problems load from `data/benchmarks/{competition_id}/benchmark.json`.
 

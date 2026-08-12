@@ -1,6 +1,7 @@
 """Structured, auditable evaluators for team-task submissions."""
 
 from .default_rubrics import ensure_default_rubrics
+from .finalize import apply_registered_judge
 from .gold import GoldAnswerEvaluator, load_gold_parts
 from .modes import (
     EvalMode,
@@ -46,6 +47,7 @@ __all__ = [
     "Rubric",
     "RubricDocumentEvaluator",
     "SlideDeckEvaluator",
+    "apply_registered_judge",
     "build_competition_packet",
     "build_question_packet",
     "build_task_asset",

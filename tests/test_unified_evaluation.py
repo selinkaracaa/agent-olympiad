@@ -14,6 +14,7 @@ sys.path.insert(0, str(REPO_ROOT / "src"))
 
 from artifacts.pdf_ingest import PdfIngestError, parse_pdf, slice_pdf
 from evaluation.default_rubrics import ensure_default_rubrics
+from evaluation.finalize import apply_registered_judge
 from evaluation.gold import GoldAnswerEvaluator, load_gold_parts, parse_numbered_answers
 from evaluation.modes import QuestionSpec, build_competition_packet, build_question_packet
 from evaluation.registry import RegistryError, resolve_evaluator_spec, strategy_kind
@@ -165,6 +166,88 @@ class RubricDocumentTests(unittest.TestCase):
         ).evaluate()
         self.assertEqual(result.total_score, 14)
         self.assertEqual(result.evaluator_id, "rubric_llm_v1")
+
+
+class FinalizeJudgeTests(unittest.TestCase):
+    def test_applies_rubric_when_env_flags_llm_judge(self):
+        ensure_default_rubrics()
+        problem = {
+            "problem_id": "wsc_writing_gq_001",
+            "task_type": "collaborative_writing_discussion",
+            "problem_description": "Write about cooperation.",
+            "evaluation": {
+                "evaluator_id": "rubric_llm_v1",
+                "status": "ready",
+                "rubric_path": "data/rubrics/wsc_writing_28_v1.json",
+                "deliverable": "written_essay",
+            },
+            "gold_label": {"grading_rubric": "Clear thesis."},
+        }
+        rubric = load_rubric(REPO_ROOT / "data/rubrics/wsc_writing_28_v1.json")
+
+        def mock_request(request: LLMRequest) -> LLMResponse:
+            payload = {
+                "criteria": [
+                    {
+                        "id": c.id,
+                        "score": c.max_score,
+                        "max_score": c.max_score,
+                        "evidence": ["line 1"],
+                        "justification": "meets criterion",
+                        "confidence": 0.9,
+                        "observable": True,
+                    }
+                    for c in rubric.criteria
+                ],
+                "total_score": rubric.total_points,
+                "max_score": rubric.total_points,
+                "warnings": [],
+                "limitations": [],
+            }
+            return LLMResponse(text=json.dumps(payload), provider="mock", model="mock")
+
+        quick = {
+            "graded": False,
+            "method": "llm_judge_required",
+            "score": None,
+            "max_score": None,
+            "reason": "No exact gold answer on file; use LLM or human judge.",
+        }
+        graded = apply_registered_judge(
+            problem,
+            "Cooperation enables teams to solve harder problems together.",
+            quick,
+            request_fn=mock_request,
+            work_dir=REPO_ROOT / "results" / "test_finalize_judge",
+            repo_root=REPO_ROOT,
+        )
+        self.assertTrue(graded["graded"])
+        self.assertEqual(graded["method"], "rubric_llm_v1")
+        self.assertEqual(graded["score"], 28)
+        self.assertEqual(graded["max_score"], 28)
+
+    def test_leaves_gold_and_offline_untouched(self):
+        gold_grade = {
+            "graded": True,
+            "method": "gold_substring_match",
+            "score": 1.0,
+            "max_score": 1.0,
+            "correct": True,
+        }
+        self.assertEqual(
+            apply_registered_judge({}, "1. 42", gold_grade, request_fn=None),
+            gold_grade,
+        )
+        pending = {"graded": False, "method": "llm_judge_required", "score": None}
+        self.assertEqual(
+            apply_registered_judge(
+                {"evaluation": {"evaluator_id": "rubric_llm_v1", "status": "ready"}},
+                "essay text",
+                pending,
+                request_fn=None,
+            ),
+            pending,
+        )
 
 
 if __name__ == "__main__":

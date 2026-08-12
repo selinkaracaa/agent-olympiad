@@ -5,6 +5,7 @@ Usage:
   python3 src/run_smoke_batch.py --live
   python3 src/run_smoke_batch.py              # offline mock
   python3 src/run_smoke_batch.py --live --rounds 1 --schema round_table
+  python3 src/run_smoke_batch.py --live --no-judge   # pipeline only, skip rubric LLM
 """
 
 from __future__ import annotations
@@ -22,7 +23,8 @@ sys.path.insert(0, str(REPO_ROOT / "src"))
 
 from collaboration import CollabConfig, run_collaboration, SCHEMAS
 from env import OlympiadEnvironment, ProblemNotFoundError
-from llm import make_perplexity_caller, resolve_query_fn
+from evaluation.finalize import apply_registered_judge
+from llm import make_perplexity_caller, resolve_query_fn, resolve_request_fn
 
 BENCHMARK_ROOT = REPO_ROOT / "data" / "benchmarks"
 
@@ -61,6 +63,9 @@ def run_one(
     *,
     rounds: int,
     synthesize: bool,
+    request_fn=None,
+    judge: bool = False,
+    judge_work_dir: Path | None = None,
 ) -> dict:
     env = OlympiadEnvironment(competition, problem_id, max_turns=rounds)
     evaluation = dict(env.problem_data.get("evaluation") or {})
@@ -72,6 +77,16 @@ def run_one(
     )
     result = run_collaboration(schema, env, query_fn, config)
     grade = result.get("grade") or {}
+    if judge and result.get("submitted"):
+        grade = apply_registered_judge(
+            env.problem_data,
+            result.get("final_answer") or "",
+            grade,
+            request_fn=request_fn,
+            work_dir=(judge_work_dir or Path("results") / "smoke_judge") / problem_id,
+            repo_root=REPO_ROOT,
+        )
+        result["grade"] = grade
     return {
         "competition": competition,
         "problem_id": problem_id,
@@ -88,6 +103,9 @@ def run_one(
         "chat_messages": result.get("chat_messages"),
         "grade_method": grade.get("method"),
         "grade_reason": grade.get("reason"),
+        "grade_score": grade.get("score"),
+        "grade_max_score": grade.get("max_score"),
+        "graded": grade.get("graded"),
         "final_answer_preview": (result.get("final_answer") or "")[:300],
         "status": "ok",
         "error": None,
@@ -101,11 +119,19 @@ def main() -> None:
     parser.add_argument("--schema", default="round_table", choices=list(SCHEMAS.keys()))
     parser.add_argument("--rounds", type=int, default=1, help="Collaboration turns per run")
     parser.add_argument("--no-synthesize", action="store_true")
+    parser.add_argument(
+        "--judge",
+        action=argparse.BooleanOptionalAction,
+        default=None,
+        help="Run registered rubric LLM after submit (default: on for --live, off for mock)",
+    )
     parser.add_argument("--output", type=Path, default=None)
     args = parser.parse_args()
 
     if args.live and not os.environ.get("PERPLEXITY_API_KEY"):
         raise SystemExit("Set PERPLEXITY_API_KEY for --live runs.")
+
+    judge = args.judge if args.judge is not None else bool(args.live)
 
     timestamp = datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S")
     out_dir = args.output or (REPO_ROOT / "results" / "smoke_batch" / timestamp)
@@ -116,10 +142,14 @@ def main() -> None:
         if args.live
         else resolve_query_fn(use_mock=True)
     )
+    request_fn = resolve_request_fn(provider="perplexity", model=args.model) if judge and args.live else None
 
     rows: list[dict] = []
     print(f"Smoke batch: {len(SMOKE_CASES)} competitions | schema={args.schema} | rounds={args.rounds}")
-    print(f"Mode: {'live' if args.live else 'mock'} | model={args.model if args.live else 'mock'}")
+    print(
+        f"Mode: {'live' if args.live else 'mock'} | model={args.model if args.live else 'mock'} | "
+        f"judge={'on' if judge else 'off'}"
+    )
 
     for competition, problem_id in SMOKE_CASES:
         label = f"{competition}/{problem_id}"
@@ -132,10 +162,17 @@ def main() -> None:
                 query_fn,
                 rounds=args.rounds,
                 synthesize=not args.no_synthesize,
+                request_fn=request_fn,
+                judge=judge,
+                judge_work_dir=out_dir / "judge",
             )
+            score_bit = ""
+            if row.get("grade_score") is not None and row.get("grade_max_score") is not None:
+                score_bit = f" score={row['grade_score']:g}/{row['grade_max_score']:g}"
             print(
                 f"  ok submitted={row['submitted']} turns={row['turns_used']} "
-                f"api={row['api_calls']} grade={row['grade_method'] or row['grade_reason']}",
+                f"api={row['api_calls']} grade={row['grade_method'] or row['grade_reason']}"
+                f"{score_bit}",
                 flush=True,
             )
         except ProblemNotFoundError as exc:
@@ -163,17 +200,22 @@ def main() -> None:
         "model": args.model if args.live else "mock",
         "schema": args.schema,
         "rounds": args.rounds,
+        "judge": judge,
         "total": len(rows),
         "ok": sum(1 for r in rows if r.get("status") == "ok"),
         "errors": sum(1 for r in rows if r.get("status") == "error"),
         "submitted": sum(1 for r in rows if r.get("submitted")),
+        "graded": sum(1 for r in rows if r.get("graded")),
         "results": rows,
     }
     out_path = out_dir / "smoke_batch.json"
     out_path.write_text(json.dumps(summary, indent=2), encoding="utf-8")
 
     print("\n" + "=" * 60)
-    print(f"  DONE: {summary['ok']}/{summary['total']} ok | {summary['submitted']} submitted")
+    print(
+        f"  DONE: {summary['ok']}/{summary['total']} ok | "
+        f"{summary['submitted']} submitted | {summary['graded']} graded"
+    )
     print(f"  Saved: {out_path}")
     print("=" * 60)
 
