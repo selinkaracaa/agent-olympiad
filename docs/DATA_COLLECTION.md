@@ -2,7 +2,10 @@
 
 Last updated: 2026-06-29
 
-**Current focus:** raw PDF collection only (`data/raw/`). No benchmark or experiment work for now.
+**Current focus:** all **20** competition families from the tracker now have
+`data/benchmarks/*/benchmark.json` (PDFs were already under `data/raw/`;
+benchmarks for IYPT/HMMT/MCM/ICM/Fyziklání/Purple Comet/ITYM were built
+2026-08-12 via `collectors/build_missing_benchmarks.py`).
 
 Past experiment results: [`initial_experiments/docs/STATUS.md`](../initial_experiments/docs/STATUS.md)
 

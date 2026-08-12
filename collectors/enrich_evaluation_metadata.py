@@ -181,6 +181,39 @@ def plan_for_item(item: dict, rubric_paths: dict[str, Path]) -> dict:
             "parts": [],
         }
 
+    if task_type == "modeling_report":
+        source = item.get("source_file")
+        if source and not item.get("assets"):
+            item["assets"] = [
+                {"path": source, "mime_type": "application/pdf", "role": "agent_visible"}
+            ]
+        return {
+            "evaluation": {
+                "evaluator_id": "rubric_llm_v1",
+                "status": "ready",
+                "rubric_path": rel(rubric_paths["worked_answer_100_v1"]),
+                "deliverable": "modeling_report",
+            },
+            "parts": [],
+        }
+
+    if task_type == "open_research":
+        source = item.get("source_file")
+        if source and not item.get("assets"):
+            item["assets"] = [
+                {"path": source, "mime_type": "application/pdf", "role": "agent_visible"}
+            ]
+        return {
+            "evaluation": {
+                "evaluator_id": "rubric_llm_v1",
+                "status": "ready",
+                "rubric_path": rel(rubric_paths["worked_answer_100_v1"]),
+                "deliverable": "research_presentation",
+                "limitations": ["oral fight / live debate not scored"],
+            },
+            "parts": [],
+        }
+
     if task_type == "collaborative_writing_discussion":
         return {
             "evaluation": {

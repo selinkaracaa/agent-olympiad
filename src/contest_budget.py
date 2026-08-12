@@ -35,6 +35,14 @@ COMPETITION_BUDGET_REGISTRY: dict[str, ContestBudget] = {
     "ijso_practical": ContestBudget(max_turns=50),
     "wsc_writing": ContestBudget(max_turns=50),
     "jessup": ContestBudget(max_turns=50),
+    "iypt": ContestBudget(max_turns=50),
+    "hmmt_team": ContestBudget(max_turns=50),
+    "hmmt_guts": ContestBudget(max_turns=50),
+    "mcm": ContestBudget(max_turns=50),
+    "icm": ContestBudget(max_turns=50),
+    "fyziklani": ContestBudget(max_turns=50),
+    "purple_comet": ContestBudget(max_turns=50),
+    "itym": ContestBudget(max_turns=50),
 }
 
 

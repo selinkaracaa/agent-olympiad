@@ -40,6 +40,14 @@ SMOKE_CASES: list[tuple[str, str]] = [
     ("ijso_practical", "ijso_practical_2004_team_practical_2004"),
     ("wsc_writing", "wsc_writing_gq_001"),
     ("jessup", "jessup_2024"),
+    ("iypt", "iypt_2024"),
+    ("hmmt_team", "hmmt_team_2024"),
+    ("hmmt_guts", "hmmt_guts_2024"),
+    ("mcm", "mcm_2024_A"),
+    ("icm", "icm_2024_D"),
+    ("fyziklani", "fyziklani_2024"),
+    ("purple_comet", "purple_comet_hs_2024"),
+    ("itym", "itym_2024"),
 ]
 
 DEFAULT_MODEL = "openai/gpt-5.4-mini"

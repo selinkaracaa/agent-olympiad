@@ -17,102 +17,80 @@
       "parts": [
         {
           "id": "1",
-          "expected": "(-6, 13)",
-          "points": 4.444444444444445,
+          "expected": "",
+          "points": 4.0,
           "reference": "Team Solutions 1. The other root of this quadratic equation is 3 − 2i. A is−1 times the sum of the roots (6), B is the product of the roots (13), so the ordered pair is ( −6, 13) . 2. As the line is unspeciﬁed, let f(x) = −3x. f(f(x)) = f(−3x) = −3 (−3x) = 9 x and f(f(f(x))) = f(9x) = −3(9x) = −27x. The sum of these three functions is −21x, so the slope is −21 . 3. The expected amount of money earned per throw is $18 (the average of the values on the faces), so the problem reduces to determining the expected number of throws. The game will end in 2 to 4 throws, with 2 throws occurring 1/3 of the time, 3 throws occurring 4/9 of the time (the probability the second throw is diﬀerent than the ﬁrst is 2/3, the probability the third throw is the same as either the ﬁrst or second is 2/3), and 4 throws is 1−1/3−4/9 = 2/9. Thus, the expected number of throws is 2×(1/3)+3×(4/9)+4×(2/9) = 26/9, so the expected winnings is (26/9)× $18 = $52 . 4. 3f(3)+f(9) = 3log3 5+log9 11 = 3log3 5× 3log9 11 = 5× ( 91/2)log9 11 = 5× ( 9log9 11)1/2 = 5 √ 11 . 5. Extend the sides AB, CD, and EF to obtain an equilateral triangle XYZ as shown. If we set DE = u and AF = v, then we have 3 + 3 + v = 3 + 8 +u = u + 5 +v, from which we conclude that u = 1 and v = 6. By subtraction of areas, we get: [ABCDEF ] = [XYZ ]− [AFX ]− [BYC ]− [DZE ] = √ 3 4 ( 122− 62− 32− 12) = 49 √ 3 2 . 264\n\n2009 ARML Local Team Solutions 265 6. Points on the unit circle have coordinates (cos θ, sinθ) for some value of θ, 0≤ θ≤ 2π. So, we can view these points on the plane. |x| +|y| =k describes a square with corners at (±k, 0) and (0,±k). Each edge of this square intersects the unit circle twice, provided 1 < k < √ 2, so there are 8 points of intersection. 7. There are (5+5−1 5−1 ) = 126 arrangements of the red balls, all equally likely. You win if and only if your opponent puts three or more red balls in any single box. For example: [3,1,1,0,0] means that your opponent wins the ﬁrst box and you win the last two. There are ﬁve arrangements with ﬁve balls in one box, twenty arrangements with four in one box and a single ball in the other, and ﬁfty arrangements with three in one box, and either two in one other box or a single ball in two boxes. The probability of winning is 50+20+5 126 = 75 126 = 25 42 . 8. The coeﬃcient of the term xaybzc is 2009! a!b!c!, where we assume a +b +c = 2009. The number of powers of ﬁve in the numerator is ⌊ 2009 5 ⌋ + ⌊ 2009 52 ⌋ + ⌊ 2009 53 ⌋ + ⌊ 2009 54 ⌋ = 401 + 80 + 16 + 3. In order for this to equal the number of powers of ﬁve in the denominator, we need ⌊ a 5k ⌋ + ⌊ b 5k ⌋ +⌊ c 5k ⌋ = ⌊ 2009 5k ⌋ for all k. Note that the ﬂoor function is sub-additive, so we will always have LHS≤RHS . Noting that 2009 10 = 310145, we ﬁrst distribute the three powers of 5 4 among a, b, and c. There are (3+3−1 3−1 ) = 10 ways to place them. After doing this, we have placed 15 of the 16 powers of 53, so we only get to distribute one more, and there are (1+3−1 3−1 ) = 3 places for it to go. After this, all 80 powers of 5 2 have been taken care of, and we have 1 leftover power of 5 to place (3 places for it to go as well). After this, we have coeﬃcients summing to 2005, so we can place the remaining 4 powers anywhere: there are (4+3−1 3−1 ) = 15 places for these. Overall, there are 10×3×1×3×15 = 1350 terms whose coeﬃcients are not multiples of 5.\n\n266 2009 ARML Local Team Solutions 9. The area equals AD·AF· sin ∠DAF 2 = AF· sin ∠CAE 2 . Dropping perpendiculars from E and F to AB at points K and L we get BL = 1 2 and AF AE = AK AL = 3/2 5/2 = 3 5. The area of triangle ADF is: 3 10·AE· sin ∠CAE = 3 10·CE· sin ∠ACE = 3 10· 2· √ 3 2 = 3 √ 3 10 using the Law of Sines on△ACE. 10. The answer is 2 , 1, 4, 2, 2 , and the solved puzzle is shown below. There are many ways to get to the ﬁnal solution. The key thing to note is the unique arrangements of digits in the L-shaped 75×, 16×, and 2× cages immediately give you the lower half of the puzzle, since the 1− cage in the lower right corner is uniquely determined by the other digits in the L-shaped cages.",
-          "match_mode": "normalized",
-          "aliases": [
-            "(-6,13)",
-            "(-6, 13)",
-            "(-6,13)"
-          ]
+          "match_mode": "reference_llm",
+          "aliases": []
         },
         {
           "id": "2",
-          "expected": "-21",
-          "points": 4.444444444444445,
-          "reference": "Official short answer: -21",
-          "match_mode": "normalized",
-          "aliases": [
-            "slope -21",
-            "−21"
-          ]
+          "expected": "",
+          "points": 4.0,
+          "reference": "",
+          "match_mode": "reference_llm",
+          "aliases": []
         },
         {
           "id": "3",
-          "expected": "52",
-          "points": 4.444444444444445,
-          "reference": "Official short answer: 52",
-          "match_mode": "normalized",
-          "aliases": [
-            "$52",
-            "52 dollars"
-          ]
+          "expected": "",
+          "points": 4.0,
+          "reference": "",
+          "match_mode": "reference_llm",
+          "aliases": []
         },
         {
           "id": "4",
-          "expected": "5√11",
-          "points": 4.444444444444445,
-          "reference": "Official short answer: 5√11",
-          "match_mode": "normalized",
-          "aliases": [
-            "5\\sqrt{11}",
-            "5sqrt(11)"
-          ]
+          "expected": "",
+          "points": 4.0,
+          "reference": "",
+          "match_mode": "reference_llm",
+          "aliases": []
         },
         {
           "id": "5",
-          "expected": "49√3/2",
-          "points": 4.444444444444445,
-          "reference": "Official short answer: 49√3/2",
-          "match_mode": "normalized",
-          "aliases": [
-            "\\frac{49\\sqrt{3}}{2}",
-            "49\\sqrt{3}/2"
-          ]
+          "expected": "",
+          "points": 4.0,
+          "reference": "",
+          "match_mode": "reference_llm",
+          "aliases": []
         },
         {
           "id": "6",
-          "expected": "8",
-          "points": 4.444444444444445,
-          "reference": "Official short answer: 8",
-          "match_mode": "normalized",
+          "expected": "",
+          "points": 4.0,
+          "reference": "",
+          "match_mode": "reference_llm",
           "aliases": []
         },
         {
           "id": "7",
-          "expected": "25/42",
-          "points": 4.444444444444445,
-          "reference": "Official short answer: 25/42",
-          "match_mode": "normalized",
-          "aliases": [
-            "\\frac{25}{42}",
-            "75/126"
-          ]
+          "expected": "",
+          "points": 4.0,
+          "reference": "",
+          "match_mode": "reference_llm",
+          "aliases": []
         },
         {
           "id": "8",
-          "expected": "1350",
-          "points": 4.444444444444445,
-          "reference": "Official short answer: 1350",
-          "match_mode": "normalized",
+          "expected": "",
+          "points": 4.0,
+          "reference": "",
+          "match_mode": "reference_llm",
           "aliases": []
         },
         {
           "id": "9",
-          "expected": "3√3/10",
-          "points": 4.444444444444445,
-          "reference": "Official short answer: 3√3/10",
-          "match_mode": "normalized",
-          "aliases": [
-            "\\frac{3\\sqrt{3}}{10}",
-            "3\\sqrt{3}/10"
-          ]
+          "expected": "",
+          "points": 4.0,
+          "reference": "",
+          "match_mode": "reference_llm",
+          "aliases": []
         },
         {
           "id": "10",
           "expected": "",
-          "points": 0.0,
+          "points": 4.0,
           "reference": "",
           "match_mode": "reference_llm",
           "aliases": []
@@ -122,12 +100,11 @@
     "status": "collected",
     "competition_id": "arml_local",
     "evaluation": {
-      "evaluator_id": "gold_answer_v1",
+      "evaluator_id": "rubric_llm_v1",
       "status": "ready",
       "rubric_path": "data/rubrics/numerical_sheet_reference_40_v1.json",
       "fallback_evaluator_id": "rubric_llm_v1",
-      "deliverable": "answer_sheet",
-      "short_answer_source": "data/rubrics/arml_local_short_answers.json"
+      "deliverable": "answer_sheet"
     }
   },
   {
@@ -148,54 +125,48 @@
       "parts": [
         {
           "id": "1",
-          "expected": "48.5",
-          "points": 6.666666666666667,
+          "expected": "",
+          "points": 4.0,
           "reference": "Team Solutions 1. 2010 = 2× 3× 5× 67, so 2010 has 16 factors. Eight of them are going to be multiples of 67, eight are not. The smallest of the former is 67, the largest of the latter is 30. Their average is 97 /2 or 48.5. 2. In any rectangle, the sum of the squares of the distances from an interior point to opposite vertices is invariant, i.e., this sum is the same for both pairs of opposite vertices. Thus, PA 2 +PC 2 =PB 2 +PD 2 and we have 562 +33 2 = 252 +PD 2→ 3136+1089 = 625+ PD 2→ PD 2 = 3600→PD = 60 . Alternate Solution: Suppose the point P were located on the side AB. Then△PBC is a right triangle and, using the Pythagorean Theorem, BC 2 = 464. Now △PAD is also a right triangle. Therefore, PD 2 = 562 + 464 = 3600→ PD = 60. This solution assumes that the solution is invariant for points P located in the interior of the rectangle OR on the rectangle. A nice topic for discussion! 3. The probability distribution on number of ﬁngers per hand is (0 .1, 0.2, 0.4, 0.2, 0.1). By sym- metry, the probability of having 10 + k ﬁngers is equal to the probability of having 10 −k ﬁngers. The probability of having 10 ﬁngers is 0 .12 + 0.22 + 0.42 + 0.22 + 0.12 = 0.26. The probability of having greater than 10 ﬁngers is (1 − 0.26)/2 = 0 .37, so the probability of having at least 10 ﬁngers is 0.26 + 0.37 = 0.63 . Note: We apologize to any nuclear powerplant workers oﬀended by this question. Please don’t come after us. After all, we can see you glowing from a mile away. 4. Let T (n) denote the number of ways a 1 ×n rectangle can be tiled using these tiles. T (n) satisﬁes the recursion relation T (n) =T (n− 1) +T (n− 2) +T (n− 3) for all positive n with the initial condition T (0) = 1, T (n) = 0 for n <0 (consider the size of the rightmost tile of any tiling). The ﬁrst few values of T (n) for non-negative n are 1, 1, 2, 4, 7, 13, 24, 44, 81 . 5. We want the values of x and y to be alternately as close and as far apart as possible, i.e., maximize and minimize |x−y|. Clearly, the maximum occurs when x = 240 and y = 1 (or vice versa). Factoring, 240 = 24× 3× 5 and x = 16 and y = 15. x2−y2 = (x+y)(x−y)→ { x +y = 240 x−y = 1 or { x +y = 16 x−y = 15 , but each of these systems pro- duce non-integer values ofx andy. Clearly, for integer values ofx andy, the parity ofx+y and x−y must be the same. Revising our choices forx andy { x +y = 120 x−y = 2 or { x +y = 20 x−y = 12 → (x,y ) = (61, 59) or (16, 4). 61(59)− 16(4) = (60 + 1)(60− 1)− 64 = 3600− 1− 64 = 3535 . 6. Since angles are preserved upon hitting walls, we can use a series of reﬂections to express the ball’s path as a straight line through a triangular tiling of the plane. In Figure 1 below, 287\n\n288 Team Solutions △ABC is at the top and the triangles below contain the number of walls the ball must pass through (bounce oﬀ of, in the original triangle) in order to enter: Of the vertices in the ‘9-bounce’ row of triangles, all but two of them are impossible to reach (see the dotted lines in Figure 2), since they correspond to paths that pass through at least one corner of△ABC previously. The two vertices that are reachable, P andQ, are both equidistant from A (the solid lines in Figure 2); hence the total distance travelled is AP =AQ = √( 3 √ 3 )2 + 22 = √ 31 . A picture of the ball’s path (in the direction towards P ) is shown below. The path towards Q is its mirror image: 7. The volume of a pyramid is Bh 3 , where B is the area of the base and h is the height. The hexagon has area 6× √ 3 4 , so the volume of the pyramid is √ 3 2 . We can also dissect the pyramid into 7 smaller pyramids whose bases are the 7 faces of the original pyramid, and whose apexes (apices?) are the center of the inscribed sphere. Since the height of each of these pyramids is r, the radius of the sphere, we have √ 3 2 = 1 3×r× ( 6× √ 3 4 + 6L ) , where L is the area of one of the 6 lateral faces of the pyramid. Each of these faces is an isosceles triangle with\n\nTeam Solutions 289 base 1 and leg √ 2. We then have a height of √ 7 2 , and so L = √ 7 4 . Solving for r we get r 3 ( 6· √ 3 4 + 6· √ 7 4 ) = √ 3 2 →r = √ 3√ 3 + √ 7 = √ 21− 3 4 . 8. f(x) = x4 + 3x3− 4x2 x2 + 4x− 4 = x2 (x + 4) (x− 1)( x + (2− 2 √ 2) )( x + ( 2 + 2 √ 2 )). f(x) has zeroes at 0, 1, and −4 and asymptotes at−2− 2 √ 2 and−2 + 2 √ 2 (approximately−4.8 and 0.8). Testing the sign of a single point in the interval between two zeroes or asymptotes give you the sign of the function over the entire interval. The function is negative between −2− 2 √ 2 and−4 as well as between−2 + 2 √ 2 and 1. The sum of the lengths of these intervals is ( 1− ( 2 √ 2− 2 )) +( −4− ( −2 √ 2− 2 )) = 1− 2 √ 2 + 2− 4 + 2 √ 2 + 2 = 1 . 9. Noting that the function f (x,y ) =|x| +|x−y| +|x +y| is symmetric about both the x- and y-axis, it suﬃces to compute value of k for which the area in the ﬁrst quadrant is 5/2. When x≥y,|x| +|x−y| +|x +y| =x +x−y +x +y = 3x. When x≤y,|x| +|x−y| +|x +y| = x +y−x +x +y =x + 2y. For a ﬁxed value of k, this function looks like the graphic below in the ﬁrst quadrant. The area of the region is 1 2 (k 2 + k 3 ) k 3 = 5k2 36 = 5 2→k = 3 √ 2 . 10. E×C and D×C both end in C, and the only non-zero C for which that is possible for two diﬀerent digits is 5. E and D must be odd, so by looking in the thousands column, we conclude that D is 3. From that same column we conclude that D×A =D, so A must be 1. 1B5× 3 = 3E5, and the only distinct non-zero B and odd E that hold are B = 2 and E = 7. 125× 7 =F 75, so F = 8. Therefore, ABCDEF = 125378 . The completed multiplication is given below. 1 2 5 × 3 7 8 7 5 3 7 5 4 6 2 5",
-          "match_mode": "normalized",
-          "aliases": [
-            "97/2",
-            "\\frac{97}{2}"
-          ]
+          "match_mode": "reference_llm",
+          "aliases": []
         },
         {
           "id": "2",
-          "expected": "60",
-          "points": 6.666666666666667,
-          "reference": "Official short answer: 60",
-          "match_mode": "normalized",
+          "expected": "",
+          "points": 4.0,
+          "reference": "",
+          "match_mode": "reference_llm",
           "aliases": []
         },
         {
           "id": "3",
-          "expected": "0.63",
-          "points": 6.666666666666667,
-          "reference": "Official short answer: 0.63",
-          "match_mode": "normalized",
-          "aliases": [
-            "63/100",
-            "\\frac{63}{100}"
-          ]
+          "expected": "",
+          "points": 4.0,
+          "reference": "",
+          "match_mode": "reference_llm",
+          "aliases": []
         },
         {
           "id": "4",
           "expected": "",
-          "points": 0.0,
+          "points": 4.0,
           "reference": "",
           "match_mode": "reference_llm",
           "aliases": []
         },
         {
           "id": "5",
-          "expected": "3535",
-          "points": 6.666666666666667,
-          "reference": "Official short answer: 3535",
-          "match_mode": "normalized",
+          "expected": "",
+          "points": 4.0,
+          "reference": "",
+          "match_mode": "reference_llm",
           "aliases": []
         },
         {
           "id": "6",
           "expected": "",
-          "points": 0.0,
+          "points": 4.0,
           "reference": "",
           "match_mode": "reference_llm",
           "aliases": []
@@ -203,7 +174,7 @@
         {
           "id": "7",
           "expected": "",
-          "points": 0.0,
+          "points": 4.0,
           "reference": "",
           "match_mode": "reference_llm",
           "aliases": []
@@ -211,27 +182,25 @@
         {
           "id": "8",
           "expected": "",
-          "points": 0.0,
+          "points": 4.0,
           "reference": "",
           "match_mode": "reference_llm",
           "aliases": []
         },
         {
           "id": "9",
-          "expected": "3√2",
-          "points": 6.666666666666667,
-          "reference": "Official short answer: 3√2",
-          "match_mode": "normalized",
-          "aliases": [
-            "3\\sqrt{2}"
-          ]
+          "expected": "",
+          "points": 4.0,
+          "reference": "",
+          "match_mode": "reference_llm",
+          "aliases": []
         },
         {
           "id": "10",
-          "expected": "125378",
-          "points": 6.666666666666667,
-          "reference": "Official short answer: 125378",
-          "match_mode": "normalized",
+          "expected": "",
+          "points": 4.0,
+          "reference": "",
+          "match_mode": "reference_llm",
           "aliases": []
         }
       ]
@@ -239,12 +208,11 @@
     "status": "collected",
     "competition_id": "arml_local",
     "evaluation": {
-      "evaluator_id": "gold_answer_v1",
+      "evaluator_id": "rubric_llm_v1",
       "status": "ready",
       "rubric_path": "data/rubrics/numerical_sheet_reference_40_v1.json",
       "fallback_evaluator_id": "rubric_llm_v1",
-      "deliverable": "answer_sheet",
-      "short_answer_source": "data/rubrics/arml_local_short_answers.json"
+      "deliverable": "answer_sheet"
     }
   },
   {
@@ -265,75 +233,64 @@
       "parts": [
         {
           "id": "1",
-          "expected": "31",
-          "points": 5.0,
+          "expected": "",
+          "points": 4.0,
           "reference": "Team Solutions 1. Let x = 1.818181... , then 100x = 181.818181... = 180 +x, so 99x = 180→x = 180 99 = 20 11→ N +D = 31 . 2. There are 90 two digit numbers. Any power of 2, 3, 5, or 7 will result in one of the four logs to be an integer. There are 7 two-digit powers of these numbers: 16, 32, 64, 27, 81, 25, and 49. The answer is 7 /90 . 3. Let R and r be circumradius and inradius of equilateral triangle ABC, respectively, and let M be the midpoint of AB (as well as the point of tangency of AB to the incircle). If O is the center of the circles, then OAM is a 30-60-90 triangle. Accordingly, the circumradius is twice that of the inradius. πR2−πr2 = 27π→ (2r)2−r2 = 27 → 3r2 = 27 → r = 3. AM = 3 √ 3→AB = 6 √ 3, so the area of ABC is (AB2) √ 3 4 = ( 6 √ 3 )2√ 3 4 = 27 √ 3 . 4. Note that in each case the left over pile is four candies short of a full pile. Accordingly, assume Sam was given four additional candies. Then the number of candies he has is a multiple of 6, 9, and 15. The least common multiple of these numbers is 90. Because he has between 100 and 200 candies, Sam must have 180 in his possession. Taking back the 4 additional candies, Sam started with 176 . 5. JAN and JEN are both right triangles, since JN is a diameter of the circle. Accordingly, JA = 14 and JE = 40. The perimeter of the quadrilateral is 48 + 14 + 30 + 40 = 132 . 6. Let p be the probability that HHT appears ﬁrst. The ﬁrst time a heads is ﬂipped, if the next ﬂip is also a heads, then HHT must appear before HTT (as there will be a string of two or more heads terminated by a tails ﬂip, forming HHT). If the next ﬂip is tails, then if the following ﬂip is also tails, HTT appears ﬁrst. If the following ﬂip is heads, then the process repeats itself, and the probability that HHT appears ﬁrst is p. Thus, looking at the two ﬂips after the ﬁrst heads come up, we get p = Pr(H on 2 nd ﬂip) + Pr(T on 2nd ﬂip, H on 3 rd ﬂip). Thusp = 1/2 + (1/4)p→ (3/4)p = 1/2→p = 2/3 . 7. Note that the intersection points (2 , 1) and (8,−1) are two of the four corners of a rectangle whose other corners are the points ( a,b ) and (c,d ). In addition, the slopes of the segments joining the corners of the rectangle all have slope +1 or−1. To ﬁnd the unknown corners, you can solve the two systems{y−1 =x−2,y +1 =−(x−8)} and{y−1 =−(x−2),y +1 = x−8} to get the points (4, 3) and (6,−3). Therefore, a +c = 4 + 6 = 10 . 311\n\n312 Team Solutions 8. By the Angle Bisector Theorem, we have AD = 3 and DC = 4. Now we ﬁnd the length of BD by the Law of Cosines. Since angles ADB and CDB are supplementary, their cosines are additive inverses of each other, so we equate BD 2+9−36 6BD = 64−BD 2−16 8BD and solve to obtain BD = 6. We ﬁnd the inradius of circle C1 by taking advantage of the formula Area = rs, where r is the inradius and s is the semiperimeter of the circumscribed triangle. In the case of triangle ABD, we have 9 √ 15 4 =r1· 15 2 , so r1 = 3 √ 15 10 and the area of C1 is 27π 20 . In the case of triangle CBD , we have 3 √ 15 = r2· 9, so r1 = √ 15 3 and the area of C2 is 15π 9 . The desired sum is 181 π/60 . 9. Note that 1005∑ n=1 1 (2n− 1) (2n + 1) = 1005∑ n=1 1 2 ( 1 (2n− 1)− 1 (2n + 1) ) = 1 2 (1005∑ n=1 1 (2n− 1)− 1005∑ n=1 1 (2n + 1) ) = 1 2 ( 1− 1 2011 ) = 1055 2011 . 10. Note that there must be an even number of terms in the sum, and each term must be at least one. Let T be the number of terms in the sum. Note that by subtracting one from each term in an ordered partition of 10, there is a one-to-one correspondence between ordered partitions of 10 consisting of only odd positive integers and ordered partitions of 10−T that consists only of non-negative even integers (for example: 3+1+5+1 = 10 and 2+0+4+0 = 6). Similarly, there is a 1-to-1 correspondence between ordered partitions of 10 −T that consists of only non-negative even integers and ordered partitions of 10−T 2 that consist of only non-negative integers (for example: 2 + 0 + 4 + 0 = 6 and 1 + 0 + 2 + 0 = 3). This set can be counted easily using “stars-and-bars” or your favorite balls-in-buckets counting technique: there are( 10−T 2 +(T−1) (T−1) ) ways to do this. Therefore, the answer is 5∑ k=1 ( 10−2k 2 + (2k− 1) (2k− 1) ) = 5∑ k=1 (5 +k− 1 (2k− 1) ) = (5 1 ) + (6 3 ) + (7 5 ) + (8 7 ) + (9 9 ) = 5 + 20 + 21 + 8 + 1 = 55. Note: An alternate solution is to show that the number of ordered partitions of n using odd positive integers is the nth Fibonacci number is an exercise left to the reader. (Hint: Split the set of ordered partitions of n into those whose last term is or is not 1.)",
-          "match_mode": "normalized",
-          "aliases": [
-            "N+D=31",
-            "20/11"
-          ]
+          "match_mode": "reference_llm",
+          "aliases": []
         },
         {
           "id": "2",
-          "expected": "7/90",
-          "points": 5.0,
-          "reference": "Official short answer: 7/90",
-          "match_mode": "normalized",
-          "aliases": [
-            "\\frac{7}{90}"
-          ]
+          "expected": "",
+          "points": 4.0,
+          "reference": "",
+          "match_mode": "reference_llm",
+          "aliases": []
         },
         {
           "id": "3",
-          "expected": "27√3",
-          "points": 5.0,
-          "reference": "Official short answer: 27√3",
-          "match_mode": "normalized",
-          "aliases": [
-            "27\\sqrt{3}"
-          ]
+          "expected": "",
+          "points": 4.0,
+          "reference": "",
+          "match_mode": "reference_llm",
+          "aliases": []
         },
         {
           "id": "4",
-          "expected": "176",
-          "points": 5.0,
-          "reference": "Official short answer: 176",
-          "match_mode": "normalized",
+          "expected": "",
+          "points": 4.0,
+          "reference": "",
+          "match_mode": "reference_llm",
           "aliases": []
         },
         {
           "id": "5",
-          "expected": "132",
-          "points": 5.0,
-          "reference": "Official short answer: 132",
-          "match_mode": "normalized",
+          "expected": "",
+          "points": 4.0,
+          "reference": "",
+          "match_mode": "reference_llm",
           "aliases": []
         },
         {
           "id": "6",
-          "expected": "2/3",
-          "points": 5.0,
-          "reference": "Official short answer: 2/3",
-          "match_mode": "normalized",
-          "aliases": [
-            "\\frac{2}{3}"
-          ]
+          "expected": "",
+          "points": 4.0,
+          "reference": "",
+          "match_mode": "reference_llm",
+          "aliases": []
         },
         {
           "id": "7",
-          "expected": "10",
-          "points": 5.0,
-          "reference": "Official short answer: 10",
-          "match_mode": "normalized",
-          "aliases": [
-            "a+c=10"
-          ]
+          "expected": "",
+          "points": 4.0,
+          "reference": "",
+          "match_mode": "reference_llm",
+          "aliases": []
         },
         {
           "id": "8",
           "expected": "",
-          "points": 0.0,
+          "points": 4.0,
           "reference": "",
           "match_mode": "reference_llm",
           "aliases": []
@@ -341,17 +298,17 @@
         {
           "id": "9",
           "expected": "",
-          "points": 0.0,
+          "points": 4.0,
           "reference": "",
           "match_mode": "reference_llm",
           "aliases": []
         },
         {
           "id": "10",
-          "expected": "55",
-          "points": 5.0,
-          "reference": "Official short answer: 55",
-          "match_mode": "normalized",
+          "expected": "",
+          "points": 4.0,
+          "reference": "",
+          "match_mode": "reference_llm",
           "aliases": []
         }
       ]
@@ -359,12 +316,11 @@
     "status": "collected",
     "competition_id": "arml_local",
     "evaluation": {
-      "evaluator_id": "gold_answer_v1",
+      "evaluator_id": "rubric_llm_v1",
       "status": "ready",
       "rubric_path": "data/rubrics/numerical_sheet_reference_40_v1.json",
       "fallback_evaluator_id": "rubric_llm_v1",
-      "deliverable": "answer_sheet",
-      "short_answer_source": "data/rubrics/arml_local_short_answers.json"
+      "deliverable": "answer_sheet"
     }
   },
   {
@@ -385,107 +341,94 @@
       "parts": [
         {
           "id": "1",
-          "expected": "268",
-          "points": 4.444444444444445,
+          "expected": "",
+          "points": 4.0,
           "reference": "Team Solutions 1. The correct answer will have digits in increasing order, so a strategy would be to look for the largest single digit factor of 96 (8) and iterate (left with 12, largest factor is 6, leaving 2). The answer is 268 . 2. Let n = 2a3b5c; then m = 10n = 2a+13b5c+1. Note that n has (a + 1)(b + 1)(c + 1) factors, and m has (a + 2)(b + 1)(c + 2) factors. The diﬀerence is ( b + 1) (a +c + 3) = 21. Arguably, c should be zero to minimize the value of n, so (b + 1)(a + 3) = 21 has non-negative integer solutions of (a,b ) = (18, 0), (4, 2), and (0, 6). The smallest of these is the middle, which is equal to 2 432 = 144 . 3. Let the legs of the triangle be x and y, then xy = 12, so: sin 2A = 2sinA cosA = 2 (x 10 )( y 10 ) = xy 50 = 6 25 . 4. The sum of the elements in T is 4905. The ﬁrst palindrome less than 4905 is 4884, so 21 has been removed from the set. 5. Note that the sum of the pairwise sums is 4 times the sum of the elements in the sequence, so A +B +C +D +E = 59. Note also that A +B = 18 andD +E = 29, soC = 12. The second smallest sum is A +C, so A = 8 and therefore B = 10. By similar reasoning, C +E = 28, so E = 16 and D = 13, so the answer is (8 , 10, 12, 13, 16) . 6. The cross section of this cylindrical region looks like a circle of radius 2 with sectors cut oﬀ by the chords x = 1 and x =−1. Thus we can compute its area by breaking it into 30-60-90 triangles and 60◦ circular wedges. Thus the surface area of the of top and bottom of the solid is 2 √ 3 + 4π 3 . The sides consist of two rectangles of height 8 and width 2 √ 3, and two curved walls of height 8 and width 2π 3 . Thus the surface area is 2 ( 2 √ 3 + 4π 3 ) + 2× 16 √ 3 + 2× 16π 3 = 36 √ 3 + 40π 3 . 7. The only way that none of the four integers can diﬀer by a multiple of 5 is if they all have diﬀerent residues modulo 5, and these residues must sum to a multiple of 5. The only way this is possible is if the residues are 1, 2, 3, and 4. There are 4! = 24 ways to arrange the 329\n\n330 Team Solutions residues, then we are left with 7 “blocks” of ﬁve to be distributed among the four numbers, of which there are C(10, 7) = 120 ways to distribute, so the answer is 2880 . 8. Let A, B, and C be the largest, middle and smallest number rolled. By symmetry, we know that E[A] = 9−E[C] and that E[B] = 4 .5, and the expected value of ABC is 100E[A] + 10E[B] +E[C], so the challenge is to determine the expected value of the largest die roll. This is 9∑ k=0 kP (A =k), where P (A =k) =P (x1≤k)P (x2≤k)P (x3≤k)−P (x1≤k− 1)P (x2≤k− 1)P (x3≤k− 1), which is (k + 1)3−k3 1000 = 3k2 + 3k + 1 1000 . The expected value of A is 6.975, so the expected value of the largest possible three digit number formed is 697.5 + 45 + 2.025 = 744.525. We are looking for the integer portion, which is 744 . 9. log (2a− 7) loga · loga log(a− 2) =−1 2→ log (2a− 7) =−1 2log (a− 2) → 2a− 7 = 1√a− 2 Let x =√a− 2→ 2x2− 3 = 1 x→ 2x3− 3x− 1 = 0 → (x + 1) (2x2− 2x− 1) = 0 → x = 2± √ 12 4 → x = 1 + √ 3 2 →√a− 2 = 1 + √ 3 2 → a = 2 + ( 1 + √ 3 2 )2 → a = 2 + 4 + 2 √ 3 4 → a = 3 + √ 3 2 = 6 + √ 3 2 . 10. Since the left hand side of the equation is between 0 and 1, we know that 7 ≤ x≤ 8, so let x = 7 +y, where y ={x} is between 0 and 1. So y2 = (7 +y)2− 56→ 0 = 49 + 14y− 56→ y = 0.5→x = 7.5 .",
-          "match_mode": "normalized",
+          "match_mode": "reference_llm",
           "aliases": []
         },
         {
           "id": "2",
-          "expected": "144",
-          "points": 4.444444444444445,
-          "reference": "Official short answer: 144",
-          "match_mode": "normalized",
+          "expected": "",
+          "points": 4.0,
+          "reference": "",
+          "match_mode": "reference_llm",
           "aliases": []
         },
         {
           "id": "3",
-          "expected": "6/25",
-          "points": 4.444444444444445,
-          "reference": "Official short answer: 6/25",
-          "match_mode": "normalized",
-          "aliases": [
-            "\\frac{6}{25}"
-          ]
+          "expected": "",
+          "points": 4.0,
+          "reference": "",
+          "match_mode": "reference_llm",
+          "aliases": []
         },
         {
           "id": "4",
-          "expected": "21",
-          "points": 4.444444444444445,
-          "reference": "Official short answer: 21",
-          "match_mode": "normalized",
-          "aliases": [
-            "4884"
-          ]
+          "expected": "",
+          "points": 4.0,
+          "reference": "",
+          "match_mode": "reference_llm",
+          "aliases": []
         },
         {
           "id": "5",
-          "expected": "(8, 10, 12, 13, 16)",
-          "points": 4.444444444444445,
-          "reference": "Official short answer: (8, 10, 12, 13, 16)",
-          "match_mode": "normalized",
-          "aliases": [
-            "(8,10,12,13,16)"
-          ]
+          "expected": "",
+          "points": 4.0,
+          "reference": "",
+          "match_mode": "reference_llm",
+          "aliases": []
         },
         {
           "id": "6",
           "expected": "",
-          "points": 0.0,
+          "points": 4.0,
           "reference": "",
           "match_mode": "reference_llm",
           "aliases": []
         },
         {
           "id": "7",
-          "expected": "2880",
-          "points": 4.444444444444445,
-          "reference": "Official short answer: 2880",
-          "match_mode": "normalized",
+          "expected": "",
+          "points": 4.0,
+          "reference": "",
+          "match_mode": "reference_llm",
           "aliases": []
         },
         {
           "id": "8",
-          "expected": "744",
-          "points": 4.444444444444445,
-          "reference": "Official short answer: 744",
-          "match_mode": "normalized",
+          "expected": "",
+          "points": 4.0,
+          "reference": "",
+          "match_mode": "reference_llm",
           "aliases": []
         },
         {
           "id": "9",
-          "expected": "(6+√3)/2",
-          "points": 4.444444444444445,
-          "reference": "Official short answer: (6+√3)/2",
-          "match_mode": "normalized",
-          "aliases": [
-            "\\frac{6+\\sqrt{3}}{2}",
-            "3+√3/2"
-          ]
+          "expected": "",
+          "points": 4.0,
+          "reference": "",
+          "match_mode": "reference_llm",
+          "aliases": []
         },
         {
           "id": "10",
-          "expected": "7.5",
-          "points": 4.444444444444445,
-          "reference": "Official short answer: 7.5",
-          "match_mode": "normalized",
-          "aliases": [
-            "15/2",
-            "\\frac{15}{2}"
-          ]
+          "expected": "",
+          "points": 4.0,
+          "reference": "",
+          "match_mode": "reference_llm",
+          "aliases": []
         }
       ]
     },
     "status": "collected",
     "competition_id": "arml_local",
     "evaluation": {
-      "evaluator_id": "gold_answer_v1",
+      "evaluator_id": "rubric_llm_v1",
       "status": "ready",
       "rubric_path": "data/rubrics/numerical_sheet_reference_40_v1.json",
       "fallback_evaluator_id": "rubric_llm_v1",
-      "deliverable": "answer_sheet",
-      "short_answer_source": "data/rubrics/arml_local_short_answers.json"
+      "deliverable": "answer_sheet"
     }
   },
   {
@@ -506,57 +449,48 @@
       "parts": [
         {
           "id": "1",
-          "expected": "11",
-          "points": 6.666666666666667,
+          "expected": "",
+          "points": 4.0,
           "reference": "Team Solutions 1. 2 3344556 = 106× 27× 34 = 106× 128× 81≈ 106× 128× 80 = 107× 1024 = 1.024× 1010 which has 11 digits. 2. Look at the graph of y = ⌊x2⌋ and ﬁnd plateaus of the graphs that are separated by a distance of 3, as y = ⌊ (x + 3)2⌋ is simply the same graph left-shifted by three units. The largest distance between two points on the level y = 0 is 2, on the level y = 1 is 2 √ 2, and on the level y = 2 is 2 √ 3. Points in diﬀerent plateaus on higher levels are separated by a distance greater than three, so all solutions occur on the level y = 2. The left interval on the levely = 2 of the graph of y =⌊x2⌋ is (− √ 3,− √ 2], and the right interval on the level y = 2 on the graph of y = ⌊ (x + 3)2⌋ is [ √ 2− 3, √ 3− 3). The intersection between the two intervals is [ √ 2− 3,− √ 2], so the length of the interval is 3 − 2 √ 2 . 3. For the product to be positive, there must be two or four negative terms in the sequence. Having only two negative terms implies that −3 and−27 are the only terms in the sequence not equal to one, and thus the product is less than 1000. Therefore, the last four terms must all be not equal to one. In that case, the product is at least −3×− 27×− 27×− 27> 1000, so it suﬃces for all of the terms to be negative. This occurs with probability 1 2× 2 3× 3 4 = 1 4 . 4. 4 4− 22 = 28− 22 = 22(26− 1) and 88− 44 = 224− 28 = 22(222− 26) = 22 (222− 216 + 216− 210 + 210− 24) + 22 (24− 26) = 22 (26− 1) (216 + 210 + 24) + (26− 28) = 22 (26− 1) (216 + 210 + 24) + (−28 + 26− 22 + 22) = 22 (26− 1) (216 + 210 + 24)− (28− 22) + (26− 22) = 22 (26− 1) (216 + 210 + 24)− 22 (26− 1) + (26− 22). The ﬁrst two terms are multiples of 4 4− 22, so we are only interested in the last term, which is 26− 22 = 64− 4 = 60 , which is less than 4 4− 22. 347\n\n348 Team Solutions 5. We know that A must be even and non-zero. If A is 6, then BC > 0 so there are 9× 10 = 90 choices for B and C. If A is 4, then BC must be even and greater than zero, so there are 4× 9 = 36 choices for B and C (as B must be non-zero and even and C must be non- zero). If A is 2 or 8, then BC must be a multiple of four and greater than zero, so there are 2× 9 + 2× 8 = 34 choices for B andC (conditioning on whether B is 0 or 2 mod 4: if B is a multiple of 4 then C must be non-zero, if B is even but not a multiple of four, then C cannot be 0 or 1). The total is 194, so the probability (as a fraction) is 194 1000 = 97 500 = 0.194 . 6. If b = p×q, with p and q primes and p < q, then b! is divisible by qp (as there are exactly p multiples of q between 1 and pq) but not divisible by qp+1, so (b!)b ends in p zeroes, which won’t work, since 10 is not prime. Therefore, b = p3 for a prime p. Then b! is divisible by pp2+p+1 (as there are p2 multiples of p between 1 and p3, p multiples of p2, and 1 multiple of p3) but not divisible by pp2+p+2, so (b!)b ends in ⌊ p2 +p + 1 3 ⌋ zeroes. Testing values of p quickly gets p = 5, so b = 53 = 125 . 7. Let the apex of the cone be A, the center of its base B, and let P be a point of tangency between the side of the cone and one of the spheres. In the vertical cross-section below we label O,Q, andR as the center, bottom, and top of that sphere, and C the point on the base of the cone such that P is on AC. If we projected the centers of all three spheres onto the table’s surface, B would be the center of an equilateral triangle of side length 2. So BQ = 2√ 3 = 2 √ 3 3 . Note that AP = AR = BQ and BC + CP = BQ, so we know that if the radius of the base of the cone is r, then AP =AR =BC +CQ =r +PC =r +AC−AP→AC = 2×AP−r: 22 +r2 =AC2 = (2×AP−r)2 = ( 4 √ 3 3 −r )2 =r2− 8 √ 3 3 r + 16 3 8 √ 3 3 r = 4 3→r = √ 3 6 . 8. Invert and subtract 1 from both sides, then take the square root to get |tanx| = √ 2 cos2 22◦ 1− sin 46◦ = √ 1 + (2 cos2 22◦− 1) 1− cos 44◦ = √ 1 + cos 44◦ 1− cos 44◦ = cot 22◦. And the smallest positive angle x in degrees that satisﬁes this is x = 68◦ .\n\nTeam Solutions 349 9. Using the property u v + x y = u +x v +y if u v = x y (unless v,y , or v +y = 0): a b + 1 = 3 (b− 7a 3b +a ) + 22 ( a b + 1 ) − 3b +a 4b + 5 = 0 32 + 3a + 18b unless 32 + 3a + 18b = 0. If 32 + 3a + 18b̸= 0, then a = 0, a contradiction to the conditions in the problem. Therefore 32 + 3a + 18b = 0, so a + 6b = −32 3 . 10. Consider the orbit of 1 under repeated applications of f. If f(1) = 1, then the orbit is 1 → 1→ 1→ 1→ 1, but 1 + 1 + 1 + 1< 13. If f(1) = 2, then the next three values must sum to 11, so must be 1 → 2→ 3→ 4→ 4 or 1→ 2→ 4→ 3→ 4 (1→ 2→ 4→ 4→ 3 is impossible, since 4 maps to two diﬀerent numbers). Iff(1) = 3, then the next three values must sum to 10, so must be some arrangement of 4, 4, 2 or 4, 3, 3, leading to two solutions 1 → 3→ 2→ 4→ 4 and 1→ 3→ 4→ 2→ 4. The other possible arrangements lead to contradictions. Iff(1) = 4, then the next three values must sum to 9, so must be some arrangement of 4 , 4, 1 or 4, 3, 2 or 3, 3, 3, leading to three solutions: 1 → 4→ 3→ 3→ 3, 1→ 4→ 2→ 3→ 4, and 1→ 4→ 3→ 2→ 4. The other possible arrangements lead to contradictions. Note that for the ﬁrst orbit, there are four possible functions with this orbit, since f(2) can be anything in S. The answer is 10 .",
-          "match_mode": "normalized",
+          "match_mode": "reference_llm",
           "aliases": []
         },
         {
           "id": "2",
-          "expected": "3-2√2",
-          "points": 6.666666666666667,
-          "reference": "Official short answer: 3-2√2",
-          "match_mode": "normalized",
-          "aliases": [
-            "3-2\\sqrt{2}",
-            "3 − 2√2"
-          ]
+          "expected": "",
+          "points": 4.0,
+          "reference": "",
+          "match_mode": "reference_llm",
+          "aliases": []
         },
         {
           "id": "3",
-          "expected": "1/4",
-          "points": 6.666666666666667,
-          "reference": "Official short answer: 1/4",
-          "match_mode": "normalized",
-          "aliases": [
-            "\\frac{1}{4}"
-          ]
+          "expected": "",
+          "points": 4.0,
+          "reference": "",
+          "match_mode": "reference_llm",
+          "aliases": []
         },
         {
           "id": "4",
-          "expected": "60",
-          "points": 6.666666666666667,
-          "reference": "Official short answer: 60",
-          "match_mode": "normalized",
+          "expected": "",
+          "points": 4.0,
+          "reference": "",
+          "match_mode": "reference_llm",
           "aliases": []
         },
         {
           "id": "5",
-          "expected": "0.194",
-          "points": 6.666666666666667,
-          "reference": "Official short answer: 0.194",
-          "match_mode": "normalized",
-          "aliases": [
-            "97/500",
-            "\\frac{97}{500}",
-            "194/1000"
-          ]
+          "expected": "",
+          "points": 4.0,
+          "reference": "",
+          "match_mode": "reference_llm",
+          "aliases": []
         },
         {
           "id": "6",
           "expected": "",
-          "points": 0.0,
+          "points": 4.0,
           "reference": "",
           "match_mode": "reference_llm",
           "aliases": []
@@ -564,7 +498,7 @@
         {
           "id": "7",
           "expected": "",
-          "points": 0.0,
+          "points": 4.0,
           "reference": "",
           "match_mode": "reference_llm",
           "aliases": []
@@ -572,7 +506,7 @@
         {
           "id": "8",
           "expected": "",
-          "points": 0.0,
+          "points": 4.0,
           "reference": "",
           "match_mode": "reference_llm",
           "aliases": []
@@ -580,17 +514,17 @@
         {
           "id": "9",
           "expected": "",
-          "points": 0.0,
+          "points": 4.0,
           "reference": "",
           "match_mode": "reference_llm",
           "aliases": []
         },
         {
           "id": "10",
-          "expected": "10",
-          "points": 6.666666666666667,
-          "reference": "Official short answer: 10",
-          "match_mode": "normalized",
+          "expected": "",
+          "points": 4.0,
+          "reference": "",
+          "match_mode": "reference_llm",
           "aliases": []
         }
       ]
@@ -598,12 +532,11 @@
     "status": "collected",
     "competition_id": "arml_local",
     "evaluation": {
-      "evaluator_id": "gold_answer_v1",
+      "evaluator_id": "rubric_llm_v1",
       "status": "ready",
       "rubric_path": "data/rubrics/numerical_sheet_reference_40_v1.json",
       "fallback_evaluator_id": "rubric_llm_v1",
-      "deliverable": "answer_sheet",
-      "short_answer_source": "data/rubrics/arml_local_short_answers.json"
+      "deliverable": "answer_sheet"
     }
   },
   {
@@ -623,91 +556,10 @@
       "human_baseline": null,
       "parts": [
         {
-          "id": "1",
-          "expected": "360/11",
-          "points": 10.0,
-          "reference": "Official short answer: 360/11",
-          "match_mode": "normalized",
-          "aliases": [
-            "\\frac{360}{11}",
-            "180/5.5"
-          ]
-        },
-        {
-          "id": "2",
-          "expected": "3",
-          "points": 10.0,
-          "reference": "Official short answer: 3",
-          "match_mode": "normalized",
-          "aliases": [
-            "q=3",
-            "q = 3"
-          ]
-        },
-        {
-          "id": "3",
-          "expected": "5",
-          "points": 10.0,
-          "reference": "Official short answer: 5",
-          "match_mode": "normalized",
-          "aliases": []
-        },
-        {
-          "id": "4",
-          "expected": "2",
-          "points": 10.0,
-          "reference": "Official short answer: 2",
-          "match_mode": "normalized",
-          "aliases": []
-        },
-        {
-          "id": "5",
-          "expected": "125",
-          "points": 10.0,
-          "reference": "Official short answer: 125",
-          "match_mode": "normalized",
-          "aliases": []
-        },
-        {
-          "id": "6",
+          "id": "all",
           "expected": "",
-          "points": 0.0,
-          "reference": "",
-          "match_mode": "reference_llm",
-          "aliases": []
-        },
-        {
-          "id": "7",
-          "expected": "",
-          "points": 0.0,
-          "reference": "",
-          "match_mode": "reference_llm",
-          "aliases": []
-        },
-        {
-          "id": "8",
-          "expected": "",
-          "points": 0.0,
-          "reference": "",
-          "match_mode": "reference_llm",
-          "aliases": []
-        },
-        {
-          "id": "9",
-          "expected": "91/128",
-          "points": 10.0,
-          "reference": "Official short answer: 91/128",
-          "match_mode": "normalized",
-          "aliases": [
-            "\\frac{91}{128}",
-            "182/256"
-          ]
-        },
-        {
-          "id": "10",
-          "expected": "",
-          "points": 0.0,
-          "reference": "",
+          "points": 60.0,
+          "reference": "Team Solutions 1. The minute hand moves at a rate of 360 degrees per hour (or 6 degrees per minute), the hour hand moves at a rate of 30 degrees per hour (or 0.5 degrees per minute). Therefore, the angle between the hour and the minute hand increases by 5.5 degrees per minute. The ﬁrst time the hands are perpendicular, the angle between them is 90 degrees. The second time is when the angle is 270 degrees, which occurs 180/5.5 or 360 /11 minutes later. 2. The product of the roots is 8, and the possible sets of distinct integer roots are {±1,±2,±4}, {±2,±2,±2}, and {±1,±1,±8} where either zero or two of the roots are negative. Of all of the cases listed here, only one has distinct roots in arithmetic progression with two roots negative,{−4,−1, 2}. The corresponding polynomial is (x−2)(x+1)(x+4) = x3+3x2−6x−8, and the answer is q = 3 . 3. n = 77k +24 for some integer value of k. When n is divided by 7, the 77k term divides evenly, so the remainder is the residue of 24 modulo 7, or 3. Similarly when n is divided by 11, the remainder is 2. The answer is 3 + 2 = 5 . 4. 1 x +√x + 1 x−√x = 2x x(x− 1). The domain of the function is all positive x except 1. For x between 0 and 1, the denominator is negative, so the function is negative. For x greater than 1, the function is strictly decreasing. It equals 1 when 2x x(x− 1) = 1→ 2x = x2−x→ x2− 3x = 0→x = 3, so the interval is (1, 3), which has length 2 . 5. Considering that the non-zero digits of N look like binomial coeﬃcients, N is the binomial expansion of (1000 + 1)4. Since 1001 = 7× 11× 13, 1,004,006,004,001 = 74× 114× 134. The prime factorization of any factor of N will have 0 to 4 powers of each of the primes 7, 11, and 13, so the total number of factors is 5 3 = 125 . 6. In order for p(p(n)) = 6, p(n) must be 6, 16, or 32 (no other product of up to three digits k has the property that p(k) = 6). Treat the cases individually. p(n) = 6: If n has one digit, then n = 6. If n has two digits, then n is either 16, 23, 32, or 61. If n has three digits, the digits of n must be some permutation of 116 or 123. There are three of the former (ignoring duplicates) and six of the latter, so there are 14 numbers less than 1000 for which p(n) = 6. p(n) = 16: All digits will be powers of two. There are three two digit numbers: 28, 44, and 82, and (6 4 ) − 3 = 12 three digit numbers (think of the digits as distinct boxes and the four powers of two as identical balls to be distributed in three buckets, but we need to throw out the three cases where all four balls go into one bucket) so there are 15 numbers less than 1000 for which p(n) = 16. p(n) = 32: All digits will be powers of two. There are two two-digit numbers: 48, and 84, and(7 5 ) − 6− 3 = 12 three digit numbers (again, think of the digits as distinct boxes and the ﬁve powers of two as identical balls to be distributed, but we have to remove the six cases where 370\n\nTeam Solutions 371 one box gets 4 balls and the three cases where one box gets 5 balls, so there are 14 numbers less than 1000 for which p(n) = 32. The total is 14 + 15 + 14 = 43 . 7. x = 1 + 1 3+ 1 1+ 1 3+ 1 ... →x = 1 + 1 3+ 1 x →x− 1 = 1 3+ 1 x → 3x + 1− 3− 1 x = 1→ 3x2− 3x− 1 = 0→x = 3± √ 21 6 . The positive root is the value, so A +B +C = 3 + 21 + 6 = 30 . 8. Assume the center is blue. Then 1, 2, 3, or 4 of the corners must be blue. If 1 corner is blue, there are 4 possible corners to choose from and 2 ways to ﬁnish the grid with alternating red and green squares. If 2 corners are blue and the 2 corners are opposite, there are two ways to choose opposing corners and 2 ways to color each of the remaining paths of 3 squares with alternating colors. If 2 corners are blue and the corners are consecutive, there are 4 ways to choose consecutive corners, 2 ways to color the square between the two blue corners, and 2 ways to color the remaining squares. If three of the corners are blue, there are 4 ways to choose three blue corners, 2 choices for the color of each of the squares between 2 blue corners, and 2 ways to color the path of length 3. However, we must discard two of those cases that only contain 1 red or green square in the corner. If 4 corners are blue, there are C(4, 2) = 6 ways to pick the two green (or red) cells. Totaling these cases up we get (4× 2) + (2× 2× 2) + (4× 2× 2) + (4× (2× 2× 2− 2)) + 6 = 62. Since there are three colors to choose for the center square, the answer is 186 . 9. Since AH is a diameter of length 20, we know thatHAM is a right triangle with right angle at M. Let the center of the inscribed circle beN, and let radii of the inscribed circle intersectMA atY andMH atX. Then MYNX is a square of side length r. Further, triangles AYN and AMH are similar; thus YN MH = AY AM→ r 16 = 12−r 12 → 12r = 192− 16r→r = 192 28 = 48 7 .\n\n372 Team Solutions 10. We can factorx3+y3 = (x+y)(x2−xy+y2), so 517832 = 98(x2−xy+y2)→x2−xy+y2 = 5284. In addition, (x +y)2 =x2 + 2xy +y2 = 982 = 9604. Subtracting the ﬁrst equation from the second, we get that 3xy = 4320, so the area of the triangle is xy 2 = 4320 6 = 720 . 11. Let n = 10 +t, then the expression is (10 + t)2 + (10 +t)− 9 =t2 + 21t + 101. For this value to be a multiple of 101, it means that t2 + 21t = t(t + 21) must be a multiple of 101. Since 101 is prime, one of the two factors must be a multiple of 101. Since t can be at most 89, t + 21 = 101→t = 80→n = 90 . 12. A and B must be on diﬀerent branches of the absolute value graph, and the x-coordinates of O, A, and B must be evenly spaced. Let the points be O(0, 0), A(t, 4−t), and B(2t, 2t− 4). Equating OA and AB, we are looking for the solution to √ t2 + (4−t)2 = √ t2 + (3t− 8)2. Squaring both sides and subtracting t2 from each side yields (4−t)2 = (3t− 8)2, yielding two solutions, t = 2, 3. If t = 2, the points are (0, 0), (2, 2), and (4, 0), which are not collinear. If t = 3, the points are (0, 0), (3, 1), and (6, 2), which are collinear, so k = 1/3 . 13. Assume the circle has center ( x,y ) and radius r. The following three equations must be satisﬁed: (x− 9)2 +y2 = r2 (x− 8)2 + (y− 7)2 = r2 x = r. Subtracting the ﬁrst equation from the second, we get 2x−17−14y+49 = 0→ 14y−2x−32 = 0→ x = 7y− 16. Squaring the third equation and subtracting it from the second, we get −16x + 64 + (y− 7)2 = 0. Substituting x = 7y− 16 gives−16(7y− 16) + 64 + (y− 7)2 = 0→y2− 126y + 369 = 0. Therefore, y is either 3 or 123, with corresponding values of x (and radii) of 5 and 845. The sum of the radii is 850 . 14. Let x = GER, y = MAN, then 2(1000x +y) = 5(1000y +x)→ 1995x = 4998y→ x y = 4998 1995 = 238 95 . Since both x and y must be three digit integers with all non-zero digits, we multiply the numerator and denominator by 3 to get x = 714 and y = 285, rearranging the digits to get ENGRAM = 157482 . 15. It is fair to assume that each face of a polyhedron with the maximal number of interior diagonals is a triangle (otherwise some diagonals are on the faces of the polyhedron). If a triangular faced polyhedron P has F faces, E edges, and V vertices, then it has (V 2 ) −E interior diagonals. For a polyhedron with all triangular faces, 3 F = 2E. Using Euler’s formula for polyhedra ( V +F =E + 2), we get V + 2E 3 = E + 2→ E = 3V − 6, so the maximal number of interior diagonals is (V 2 ) − 3(V− 2) = (V−3)(V−4) 2 , which for V = 12 is 36 . A sample polyhedron that has 36 interior diagonals is two convex pyramids that share a common decagon base.\n\nIndividual Problems 1. Compute the area of the region deﬁned by 2 |x−y| +|y|≤ 2. 2. Compute the sum of all integers of the form 2 0 1 4AB 5 that are multiples of 225. 3. Compute the sum of all solutions to log 4x + logx2 1 8 = 1. 4. In triangle COW , CO = OW = 2014, and m ∠O = 2θ. In triangle PIG , PI = IG = 2014, and m∠I =θ. If COW and PIG have the same area, compute θ in degrees. 5. For a positive integer n, let s(n) be the sum of the digits of n. Compute the number of positive integers less than 1000 for which the digits are non-decreasing from left to right and s(s(s(",
           "match_mode": "reference_llm",
           "aliases": []
         }
@@ -716,12 +568,11 @@
     "status": "collected",
     "competition_id": "arml_local",
     "evaluation": {
-      "evaluator_id": "gold_answer_v1",
+      "evaluator_id": "rubric_llm_v1",
       "status": "ready",
       "rubric_path": "data/rubrics/numerical_sheet_reference_40_v1.json",
       "fallback_evaluator_id": "rubric_llm_v1",
-      "deliverable": "answer_sheet",
-      "short_answer_source": "data/rubrics/arml_local_short_answers.json"
+      "deliverable": "answer_sheet"
     }
   }
 ]

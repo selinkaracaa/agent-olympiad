@@ -1,5 +1,5 @@
 {
-  "description": "OlympiadMAS \u2014 4 test-based multi-agent olympiads (+ IEO Business Case rubric-based pilot)",
+  "description": "Agent Olympiad \u2014 multi-agent team contests. 20 competition families with benchmark.json.",
   "target_per_olympiad": 30,
   "note_on_30": "Collect one full published team task per slot (internal sub-parts stay together). Combine across years/contests to reach 30 where history allows; some olympiads have fewer than 30 available.",
   "olympiads": [
@@ -230,6 +230,94 @@
         "notes": "World Finals problem sets and solutions published since 1976 at problems.icpc.io and icpc.kattis.com."
       },
       "collection_strategy": "One World Finals problem set per year; teams of 3 solve algorithmic problems on 1 computer in 5 hours",
+      "status": "collected"
+    },
+    {
+      "id": "iypt",
+      "name": "International Young Physicists' Tournament",
+      "type": "rubric_based",
+      "team_size": 5,
+      "benchmark_path": "data/benchmarks/iypt/benchmark.json",
+      "problems_collected": 39,
+      "target": 39,
+      "source_url": "https://www.iypt.org/",
+      "status": "collected"
+    },
+    {
+      "id": "hmmt_team",
+      "name": "HMMT \u2014 Team Round",
+      "type": "test_based",
+      "team_size": 8,
+      "benchmark_path": "data/benchmarks/hmmt_team/benchmark.json",
+      "problems_collected": 14,
+      "target": 30,
+      "source_url": "https://hmmt.co/",
+      "status": "collected"
+    },
+    {
+      "id": "hmmt_guts",
+      "name": "HMMT \u2014 Guts Round",
+      "type": "test_based",
+      "team_size": 8,
+      "benchmark_path": "data/benchmarks/hmmt_guts/benchmark.json",
+      "problems_collected": 21,
+      "target": 30,
+      "source_url": "https://hmmt.co/",
+      "status": "collected"
+    },
+    {
+      "id": "mcm",
+      "name": "Mathematical Contest in Modeling (MCM)",
+      "type": "rubric_based",
+      "team_size": 3,
+      "benchmark_path": "data/benchmarks/mcm/benchmark.json",
+      "problems_collected": 18,
+      "target": 30,
+      "source_url": "https://www.contest.comap.org/",
+      "status": "collected"
+    },
+    {
+      "id": "icm",
+      "name": "Interdisciplinary Contest in Modeling (ICM)",
+      "type": "rubric_based",
+      "team_size": 3,
+      "benchmark_path": "data/benchmarks/icm/benchmark.json",
+      "problems_collected": 19,
+      "target": 30,
+      "source_url": "https://www.contest.comap.org/",
+      "status": "collected"
+    },
+    {
+      "id": "fyziklani",
+      "name": "Physics Brawl Online (Fyzikl\u00e1n\u00ed)",
+      "type": "test_based",
+      "team_size": 5,
+      "benchmark_path": "data/benchmarks/fyziklani/benchmark.json",
+      "problems_collected": 14,
+      "target": 30,
+      "source_url": "https://physicsbrawl.org/",
+      "status": "collected"
+    },
+    {
+      "id": "purple_comet",
+      "name": "Purple Comet! Math Meet",
+      "type": "test_based",
+      "team_size": 6,
+      "benchmark_path": "data/benchmarks/purple_comet/benchmark.json",
+      "problems_collected": 44,
+      "target": 44,
+      "source_url": "https://purplecomet.org/",
+      "status": "collected"
+    },
+    {
+      "id": "itym",
+      "name": "International Tournament of Young Mathematicians",
+      "type": "rubric_based",
+      "team_size": 6,
+      "benchmark_path": "data/benchmarks/itym/benchmark.json",
+      "problems_collected": 17,
+      "target": 17,
+      "source_url": "https://www.itym.org/",
       "status": "collected"
     }
   ]
