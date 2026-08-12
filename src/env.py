@@ -5,11 +5,14 @@ import os
 import re
 import subprocess
 import sys
+import tempfile
 from html import unescape
 from typing import Any, Optional
 from urllib.parse import parse_qs, quote_plus, urlparse
 from urllib.request import Request, urlopen
 
+from communication import CommunicationBudget
+from deliberation import DELIBERATION_ACTIONS, DeliberationLedger
 from rules import RuleCardError, load_rule_card
 from runtimes import CompetitionRuntime, RuntimeUnavailableError
 
@@ -117,6 +120,7 @@ COMPETITION_TOOL_REGISTRY = {
 ALL_ACTIONS = {
     "speak",
     "write_scratchpad",
+    "write_private_notes",
     "submit_final",
     "query_rules",
     "use_calculator",
@@ -129,9 +133,15 @@ ALL_ACTIONS = {
     "start_environment",
     "execute_environment_command",
     "reset_environment",
-}
+} | DELIBERATION_ACTIONS
 
-TOOL_ACTIONS = ALL_ACTIONS - {"speak", "write_scratchpad", "submit_final"}
+TOOL_ACTIONS = ALL_ACTIONS - {
+    "speak",
+    "write_scratchpad",
+    "write_private_notes",
+    "submit_final",
+    *DELIBERATION_ACTIONS,
+}
 
 _SAFE_BINOPS = {
     ast.Add: operator.add,
@@ -171,6 +181,8 @@ class OlympiadEnvironment:
 
         self.chat_history: list[dict[str, str]] = []
         self.action_log: list[dict[str, Any]] = []
+        self.deliberation = DeliberationLedger()
+        self.private_notes: dict[str, str] = {}
         self.workspace = {"scratchpad": "", "final_answer": ""}
         self.current_turn = 0
         self.submitted = False
@@ -178,6 +190,9 @@ class OlympiadEnvironment:
 
         self.problem_data = self._load_problem()
         self.rule_card = load_rule_card(competition_id)
+        self.communication = CommunicationBudget(
+            self.rule_card.communication if self.rule_card is not None else {}
+        )
         self.max_turns = (
             int(max_turns)
             if max_turns is not None
@@ -282,6 +297,11 @@ class OlympiadEnvironment:
                 "rules_text": self.rule_card.rules_text,
                 "human_constraints": list(self.rule_card.human_constraints),
                 "answer_format": self.rule_card.answer_format,
+                "evaluation_guidance": self.rule_card.evaluation_guidance,
+                "information_policy": self.rule_card.information_policy,
+                "rule_sections": self.rule_card.rule_sections,
+                "deliberation": self.rule_card.deliberation,
+                "communication": self.rule_card.communication,
                 "scoring": self.rule_card.scoring,
                 "submission": self.rule_card.submission,
                 "resources": self.rule_card.resources,
@@ -292,13 +312,15 @@ class OlympiadEnvironment:
                         "title": role.title,
                         "duties": list(role.duties),
                         "may_submit": role.may_submit,
+                        "information_access": list(role.information_access),
+                        "rule_expertise": list(role.rule_expertise),
                     }
                     for role in self.rule_card.roster(self.team_size)
                 ],
             }
         return metadata
 
-    def query_rules(self, query: str = "") -> str:
+    def query_rules(self, query: str = "", *, agent_name: str | None = None) -> str:
         if self.rule_card is None:
             return json.dumps(
                 {
@@ -311,6 +333,59 @@ class OlympiadEnvironment:
                 indent=2,
             )
         card = self.rule_card
+        role_scoped = card.information_policy.get("mode") in {
+            "role_scoped",
+            "role_specialized",
+        }
+        if role_scoped and agent_name:
+            role = card.role_for(agent_name)
+            if role is None:
+                return json.dumps(
+                    {"error": f"No rule-card role found for {agent_name!r}."},
+                    ensure_ascii=False,
+                    indent=2,
+                )
+            payload = {
+                "rule_id": card.rule_id,
+                "competition_id": card.competition_id,
+                "your_role": {
+                    "name": role.name,
+                    "title": role.title,
+                    "duties": list(role.duties),
+                    "may_submit": role.may_submit,
+                    "information_access": list(role.information_access),
+                    "rule_expertise": list(role.rule_expertise),
+                },
+                "allowed_tools": list(card.allowed_tools),
+                "deliberation": card.deliberation,
+                "communication": card.communication,
+            }
+            if card.role_can_access(agent_name, "contest_rules"):
+                payload.update(
+                    {
+                        "profile": card.profile,
+                        "protocol": card.protocol,
+                        "rules_text": card.rules_text,
+                        "human_constraints": list(card.human_constraints),
+                        "answer_format": card.answer_format,
+                        "resources": card.resources,
+                    }
+                )
+            else:
+                payload["contest_rules"] = (
+                    "Not included in your private briefing. Ask a teammate who "
+                    "holds the contest-rules packet to summarize relevant constraints."
+                )
+            if card.role_can_access(agent_name, "evaluation_guidance"):
+                payload["evaluation_guidance"] = card.evaluation_guidance
+            if role.rule_expertise:
+                payload["your_rule_specialties"] = {
+                    category: card.rule_sections.get(category, [])
+                    for category in role.rule_expertise
+                }
+            prefix = f"Rule query: {query}\n" if query.strip() else ""
+            return prefix + json.dumps(payload, ensure_ascii=False, indent=2)
+
         payload = {
             "rule_id": card.rule_id,
             "competition_id": card.competition_id,
@@ -323,6 +398,8 @@ class OlympiadEnvironment:
             "resources": card.resources,
             "scoring": card.scoring,
             "comparability": card.comparability,
+            "deliberation": card.deliberation,
+            "communication": card.communication,
             "agent_roles": [
                 {
                     "name": role.name,
@@ -345,6 +422,8 @@ class OlympiadEnvironment:
             "problem_statement": self.problem_data["problem_description"],
             "chat_logs": list(self.chat_history),
             "shared_workspace": dict(self.workspace),
+            "deliberation": self.deliberation.report(),
+            "communication": self.communication.report(),
             "turn_status": f"{self.current_turn}/{self.max_turns}",
             "submitted": self.submitted,
         }
@@ -374,6 +453,14 @@ class OlympiadEnvironment:
                 f"RULE VIOLATION: Tool '{action_type}' is banned in {self.competition_id}. "
                 f"Allowed tools: {self.allowed_tools or 'none (paper and pencil only)'}"
             )
+        if action_type in DELIBERATION_ACTIONS and not (
+            self.rule_card
+            and self.rule_card.deliberation.get("mode") == "structured"
+        ):
+            return (
+                f"RULE VIOLATION: Structured deliberation action "
+                f"'{action_type}' is not enabled for {self.competition_id}."
+            )
         if action_type == "submit_final" and self.submitted:
             return "Submission already finalized; further submit_final actions are ignored."
         return None
@@ -387,12 +474,46 @@ class OlympiadEnvironment:
             self._log_action(agent_name, action_type, payload, violation)
             return violation
 
+        communication_violation = self.communication.check(
+            agent_name=agent_name,
+            action_type=action_type,
+            payload=payload,
+            turn=self.current_turn,
+        )
+        if communication_violation:
+            self._log_action(
+                agent_name,
+                action_type,
+                payload,
+                communication_violation,
+            )
+            return communication_violation
+
         if action_type == "speak":
             self.chat_history.append({"sender": agent_name, "message": payload})
             result = "Message broadcast to all agents."
         elif action_type == "write_scratchpad":
             self.workspace["scratchpad"] = payload
             result = "Shared scratchpad updated."
+        elif action_type == "write_private_notes":
+            self.private_notes[agent_name] = payload
+            result = "Private notes updated; no communication budget used."
+        elif action_type in DELIBERATION_ACTIONS:
+            role = self.rule_card.role_for(agent_name) if self.rule_card else None
+            result = self.deliberation.record(
+                agent_name=agent_name,
+                action_type=action_type,
+                payload=payload,
+                turn=self.current_turn,
+                may_decide=bool(role and role.may_submit),
+            )
+            if not result.startswith("Deliberation error:"):
+                self.chat_history.append(
+                    {
+                        "sender": agent_name,
+                        "message": f"[DELIBERATION] {result}",
+                    }
+                )
         elif action_type == "submit_final":
             error = self._validate_submission(payload)
             if error:
@@ -403,11 +524,18 @@ class OlympiadEnvironment:
                 self.submitted_by = agent_name
                 result = f"Submission finalized by {agent_name}."
         elif action_type == "query_rules":
-            result = self.query_rules(payload)
+            result = self.query_rules(payload, agent_name=agent_name)
         elif action_type == "use_calculator":
             result = self._run_calculator(payload)
         elif action_type == "execute_code":
-            result = self._run_code(payload)
+            result = self._run_code(
+                payload,
+                isolated=bool(
+                    self.rule_card
+                    and self.rule_card.information_policy.get("mode")
+                    in {"role_scoped", "role_specialized"}
+                ),
+            )
         elif action_type == "web_search":
             result = self._run_web_search(payload)
         elif action_type == "read_official_materials":
@@ -430,8 +558,16 @@ class OlympiadEnvironment:
         else:
             result = f"Operational error: action '{action_type}' not implemented."
 
+        if not result.startswith("Deliberation error:"):
+            self.communication.record(
+                agent_name=agent_name,
+                action_type=action_type,
+            )
         self._log_action(agent_name, action_type, payload, result)
         return result
+
+    def get_private_notes(self, agent_name: str) -> str:
+        return self.private_notes.get(agent_name, "")
 
     def _validate_submission(self, payload: str) -> Optional[str]:
         if not payload or not payload.strip():
@@ -464,15 +600,58 @@ class OlympiadEnvironment:
     def _run_calculator(self, payload: str) -> str:
         return f"Calculator output: {self._safe_calculate(payload)}"
 
-    def _run_code(self, payload: str) -> str:
+    @staticmethod
+    def _validate_isolated_code(payload: str) -> str | None:
+        """Keep role-scoped code execution computational, not a repository reader."""
         try:
-            proc = subprocess.run(
-                [sys.executable, "-I", "-c", payload],
-                capture_output=True,
-                text=True,
-                timeout=5,
-                cwd=REPO_ROOT,
-            )
+            tree = ast.parse(payload, mode="exec")
+        except SyntaxError as exc:
+            return f"Code error: {exc}"
+
+        safe_modules = {
+            "collections",
+            "decimal",
+            "fractions",
+            "functools",
+            "itertools",
+            "json",
+            "math",
+            "random",
+            "statistics",
+        }
+        banned_names = {"open", "exec", "eval", "compile", "__import__", "input"}
+        for node in ast.walk(tree):
+            if isinstance(node, (ast.Import, ast.ImportFrom)):
+                names = (
+                    [alias.name.split(".", 1)[0] for alias in node.names]
+                    if isinstance(node, ast.Import)
+                    else [(node.module or "").split(".", 1)[0]]
+                )
+                if any(name not in safe_modules for name in names):
+                    return (
+                        "Code error: role-scoped execution allows only computational "
+                        f"modules ({', '.join(sorted(safe_modules))})."
+                    )
+            if isinstance(node, ast.Name) and node.id in banned_names:
+                return "Code error: filesystem and dynamic-code access are unavailable."
+            if isinstance(node, ast.Attribute) and node.attr.startswith("__"):
+                return "Code error: dunder attribute access is unavailable."
+        return None
+
+    def _run_code(self, payload: str, *, isolated: bool = False) -> str:
+        if isolated:
+            error = self._validate_isolated_code(payload)
+            if error:
+                return error
+        try:
+            with tempfile.TemporaryDirectory(prefix="agent-olympiad-code-") as workdir:
+                proc = subprocess.run(
+                    [sys.executable, "-I", "-c", payload],
+                    capture_output=True,
+                    text=True,
+                    timeout=5,
+                    cwd=workdir if isolated else REPO_ROOT,
+                )
             if proc.returncode == 0:
                 output = (proc.stdout or "").strip() or "(no stdout)"
                 return f"Code output:\n{output}"
@@ -650,6 +829,9 @@ class OlympiadEnvironment:
     def reset(self) -> None:
         self.chat_history.clear()
         self.action_log.clear()
+        self.deliberation.reset()
+        self.communication.reset()
+        self.private_notes.clear()
         self.workspace = {"scratchpad": "", "final_answer": ""}
         self.current_turn = 0
         self.submitted = False

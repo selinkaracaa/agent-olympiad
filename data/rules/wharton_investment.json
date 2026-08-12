@@ -59,6 +59,13 @@
         "Own the deliverable's structure and cut material that does not earn points.",
         "Resolve disagreements between analysts before they reach the final text.",
         "Submit only after the format and rule checks pass."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "timeline",
+        "deliverable_format"
       ]
     },
     {
@@ -68,6 +75,12 @@
       "duties": [
         "Gather the evidence the recommendation rests on.",
         "Separate what the sources say from what the team infers."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "research_integrity"
       ]
     },
     {
@@ -77,6 +90,12 @@
       "duties": [
         "Build the numbers: valuation, models, and sensitivity checks.",
         "State assumptions explicitly and show which results depend on them."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "resource_policy"
       ]
     },
     {
@@ -86,6 +105,12 @@
       "duties": [
         "Decide which questions the research must answer and in what order.",
         "Kill lines of inquiry that will not change the recommendation."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "research_integrity"
       ]
     },
     {
@@ -95,10 +120,29 @@
       "duties": [
         "Turn analysis into a structure a judge can follow in one pass.",
         "Cut slides and sections that do not carry an argument."
+      ],
+      "information_access": [
+        "contest_rules",
+        "evaluation_guidance"
+      ],
+      "rule_expertise": [
+        "deliverable_format",
+        "evaluation_criteria"
       ]
     }
   ],
   "answer_format": "Submit a structured report or slide outline covering analysis, recommendation, and evidence.",
+  "evaluation_guidance": "Judges prioritize the quality of the investment strategy, fit to the client's objectives and risk tolerance, depth of research and analysis, and clarity of the team's defense—not raw portfolio returns.",
+  "information_policy": {
+    "mode": "role_specialized",
+    "shared": [
+      "problem",
+      "contest_rules",
+      "team_discussion",
+      "scratchpad"
+    ],
+    "coordination_requirement": "The captain holds participation, ethics, trading, and submission rules; the report designer holds the judging brief. Both must communicate what the analysts need without assuming it is already shared."
+  },
   "scoring": {
     "mode": "rubric",
     "unit": "artifact",
@@ -192,5 +236,52 @@
       "scoring": "rubric",
       "environment": "partial"
     }
+  },
+  "deliberation": {
+    "mode": "structured",
+    "min_challenges": 1,
+    "decision_maker": "submitter",
+    "evaluation_dimensions": [
+      "evidence_responsiveness",
+      "revision_after_challenge",
+      "decision_traceability",
+      "authority_bias",
+      "majority_bias"
+    ]
+  },
+  "rule_sections": {
+    "timeline": [
+      "Track trading-activity requirements and every published deliverable deadline.",
+      "The student team leader is the sole competition communication and submission channel."
+    ],
+    "resource_policy": [
+      "All trades use the team’s shared Wharton Investment Simulator account.",
+      "Generative AI may support brainstorming but AI-derived material must be cited."
+    ],
+    "research_integrity": [
+      "Do not contact the client or use paid advisors, consultants, or agents.",
+      "Cite sources; fabricated trades, analysis, or teamwork narratives are disqualifying."
+    ],
+    "deliverable_format": [
+      "Submit an Investment Policy Statement and a Comprehensive Final Report."
+    ],
+    "evaluation_criteria": [
+      "Judging rewards strategy quality, client fit, research depth, analysis, and clarity—not portfolio returns."
+    ]
+  },
+  "communication": {
+    "mode": "limited",
+    "team_message_budget": 12,
+    "per_agent_message_budget": 3,
+    "max_message_chars": 1200,
+    "counted_actions": [
+      "speak",
+      "write_scratchpad",
+      "propose",
+      "challenge",
+      "provide_evidence",
+      "revise",
+      "decide"
+    ]
   }
 }

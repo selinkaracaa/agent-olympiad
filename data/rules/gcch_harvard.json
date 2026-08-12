@@ -53,6 +53,13 @@
         "Own the deliverable's structure and cut material that does not earn points.",
         "Resolve disagreements between analysts before they reach the final text.",
         "Submit only after the format and rule checks pass."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "timeline",
+        "deliverable_format"
       ]
     },
     {
@@ -62,6 +69,14 @@
       "duties": [
         "Gather the evidence the recommendation rests on.",
         "Separate what the sources say from what the team infers."
+      ],
+      "information_access": [
+        "contest_rules",
+        "evaluation_guidance"
+      ],
+      "rule_expertise": [
+        "research_integrity",
+        "evaluation_criteria"
       ]
     },
     {
@@ -71,6 +86,12 @@
       "duties": [
         "Build the numbers: valuation, models, and sensitivity checks.",
         "State assumptions explicitly and show which results depend on them."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "resource_policy"
       ]
     },
     {
@@ -80,10 +101,27 @@
       "duties": [
         "Decide which questions the research must answer and in what order.",
         "Kill lines of inquiry that will not change the recommendation."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "research_integrity"
       ]
     }
   ],
   "answer_format": "Submit a structured report or slide outline covering analysis, recommendation, and evidence.",
+  "evaluation_guidance": "The published round guidance calls for a pitch-book-style finance and M&A analysis. Advancement also depends on a concise video pitch judged for clarity, synthesis, and presentation quality, followed by a live defense of the deck and valuation reasoning.",
+  "information_policy": {
+    "mode": "role_specialized",
+    "shared": [
+      "problem",
+      "contest_rules",
+      "team_discussion",
+      "scratchpad"
+    ],
+    "coordination_requirement": "The captain holds roster, deadline, and round-progression rules; the analyst holds the published presentation guidance. The team must exchange both before locking the deck."
+  },
   "scoring": {
     "mode": "rubric",
     "unit": "artifact",
@@ -166,5 +204,51 @@
       "scoring": "rubric",
       "environment": "partial"
     }
+  },
+  "deliberation": {
+    "mode": "structured",
+    "min_challenges": 1,
+    "decision_maker": "submitter",
+    "evaluation_dimensions": [
+      "evidence_responsiveness",
+      "revision_after_challenge",
+      "decision_traceability",
+      "authority_bias",
+      "majority_bias"
+    ]
+  },
+  "rule_sections": {
+    "timeline": [
+      "Round 1 allows up to three weeks from case release; late submissions are not accepted.",
+      "Top teams advance to a recorded pitch and then live finalist Q&A."
+    ],
+    "resource_policy": [
+      "No official public rule states which software, AI tools, or research sources are permitted; escalate uncertainty to the captain."
+    ],
+    "research_integrity": [
+      "Only registered teammates may prepare the case submission."
+    ],
+    "deliverable_format": [
+      "Round 1 is a pitch-book-style finance and M&A case deck.",
+      "The recorded pitch is 5–10 minutes; finalists face roughly 20 minutes of Q&A."
+    ],
+    "evaluation_criteria": [
+      "Judges weigh the deck, clarity and synthesis of the video pitch, and finalist defense."
+    ]
+  },
+  "communication": {
+    "mode": "limited",
+    "team_message_budget": 10,
+    "per_agent_message_budget": 3,
+    "max_message_chars": 1200,
+    "counted_actions": [
+      "speak",
+      "write_scratchpad",
+      "propose",
+      "challenge",
+      "provide_evidence",
+      "revise",
+      "decide"
+    ]
   }
 }

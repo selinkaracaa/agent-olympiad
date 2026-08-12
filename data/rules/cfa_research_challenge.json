@@ -54,6 +54,13 @@
         "Own the deliverable's structure and cut material that does not earn points.",
         "Resolve disagreements between analysts before they reach the final text.",
         "Submit only after the format and rule checks pass."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "timeline",
+        "deliverable_format"
       ]
     },
     {
@@ -63,6 +70,12 @@
       "duties": [
         "Gather the evidence the recommendation rests on.",
         "Separate what the sources say from what the team infers."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "research_integrity"
       ]
     },
     {
@@ -72,6 +85,12 @@
       "duties": [
         "Build the numbers: valuation, models, and sensitivity checks.",
         "State assumptions explicitly and show which results depend on them."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "resource_policy"
       ]
     },
     {
@@ -81,10 +100,29 @@
       "duties": [
         "Decide which questions the research must answer and in what order.",
         "Kill lines of inquiry that will not change the recommendation."
+      ],
+      "information_access": [
+        "contest_rules",
+        "evaluation_guidance"
+      ],
+      "rule_expertise": [
+        "research_integrity",
+        "evaluation_criteria"
       ]
     }
   ],
   "answer_format": "Submit a structured report or slide outline covering analysis, recommendation, and evidence.",
+  "evaluation_guidance": "The contestant-facing judging brief balances the written equity-research report and oral presentation. Recommendations should be supported by disciplined public-source research, defensible valuation reasoning, clear citations, and a coherent investment thesis.",
+  "information_policy": {
+    "mode": "role_specialized",
+    "shared": [
+      "problem",
+      "contest_rules",
+      "team_discussion",
+      "scratchpad"
+    ],
+    "coordination_requirement": "The captain holds the contest-rules packet; the research lead holds the contestant-facing judging brief. The team must explicitly synchronize compliance constraints and evaluation priorities."
+  },
   "scoring": {
     "mode": "rubric",
     "unit": "artifact",
@@ -164,5 +202,53 @@
       "scoring": "rubric",
       "environment": "partial"
     }
+  },
+  "deliberation": {
+    "mode": "structured",
+    "min_challenges": 1,
+    "decision_maker": "submitter",
+    "evaluation_dimensions": [
+      "evidence_responsiveness",
+      "revision_after_challenge",
+      "decision_traceability",
+      "authority_bias",
+      "majority_bias"
+    ]
+  },
+  "rule_sections": {
+    "timeline": [
+      "Track local kickoff, written-report, and presentation deadlines.",
+      "Faculty and mentor assistance is subject to timed caps."
+    ],
+    "resource_policy": [
+      "Research must use publicly available information only.",
+      "AI use requires responsible disclosure and may not replace the team’s own analysis."
+    ],
+    "research_integrity": [
+      "Only team members may research the company; outsiders may advise only within official limits.",
+      "Cite sources, avoid plagiarism, and respect third-party copyright."
+    ],
+    "deliverable_format": [
+      "Produce a written equity-research report and an oral presentation to judges."
+    ],
+    "evaluation_criteria": [
+      "Local scoring commonly balances the written report and presentation equally.",
+      "Recommendations need evidence and defensible valuation reasoning."
+    ]
+  },
+  "communication": {
+    "mode": "limited",
+    "team_message_budget": 10,
+    "per_agent_message_budget": 3,
+    "max_message_chars": 1200,
+    "counted_actions": [
+      "speak",
+      "write_scratchpad",
+      "propose",
+      "challenge",
+      "provide_evidence",
+      "revise",
+      "decide"
+    ]
   }
 }

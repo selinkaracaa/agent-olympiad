@@ -7,7 +7,12 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT / "src"))
 
-from collaboration import _system_prompt, run_round_table, CollabConfig
+from collaboration import (
+    _agent_user_prompt,
+    _system_prompt,
+    run_round_table,
+    CollabConfig,
+)
 from env import OlympiadEnvironment
 from llm import mock_agent_llm
 from rules import load_rule_card
@@ -17,6 +22,8 @@ SCIENCE_BOWL_PROBLEM = (
     "science_bowl_sample_set_10_10a_hs_reg_2016_bonus_13"
 )
 ARML_PROBLEM = "arml_local_2009"
+IEO_PROBLEM = "ieo_business_case_2021"
+WSC_PROBLEM = "wsc_writing_gq_001"
 
 
 class CompetitionRuleCardTests(unittest.TestCase):
@@ -74,6 +81,203 @@ class CompetitionRuleCardTests(unittest.TestCase):
         )
 
         self.assertEqual(env.max_turns, 7)
+
+    def test_business_case_prompts_share_rules_but_assign_rule_specialties(self):
+        env = OlympiadEnvironment("ieo_business_case", IEO_PROBLEM)
+
+        captain = _system_prompt(env, "Agent_1")
+        analyst = _system_prompt(env, "Agent_2")
+        designer = _system_prompt(env, "Agent_5")
+
+        self.assertIn("No contact with anyone outside the team", captain)
+        self.assertIn("No contact with anyone outside the team", analyst)
+        self.assertIn("No contact with anyone outside the team", designer)
+        self.assertIn("Timeline:", captain)
+        self.assertIn("Research Integrity:", analyst)
+        self.assertIn("Deliverable Format:", designer)
+        self.assertNotIn("PUBLIC EVALUATION GUIDANCE", captain)
+        self.assertNotIn("PUBLIC EVALUATION GUIDANCE", analyst)
+        self.assertIn("PUBLIC EVALUATION GUIDANCE", designer)
+        self.assertIn("feasibility", designer)
+
+    def test_query_rules_shows_common_rules_and_role_specialties(self):
+        env = OlympiadEnvironment("ieo_business_case", IEO_PROBLEM)
+
+        analyst_view = env.execute_action("Agent_2", "query_rules", "all rules")
+        captain_view = env.execute_action("Agent_1", "query_rules", "all rules")
+        designer_view = env.execute_action("Agent_5", "query_rules", "rubric")
+
+        self.assertIn("human_constraints", analyst_view)
+        self.assertNotIn("rubric_path", analyst_view)
+        self.assertIn("human_constraints", captain_view)
+        self.assertNotIn("rubric_path", captain_view)
+        self.assertIn("evaluation_guidance", designer_view)
+        self.assertNotIn("rubric_path", designer_view)
+        self.assertIn("research_integrity", analyst_view)
+        self.assertIn("timeline", captain_view)
+        self.assertIn("deliverable_format", designer_view)
+
+    def test_role_specialized_code_cannot_read_repository_files(self):
+        env = OlympiadEnvironment("ieo_business_case", IEO_PROBLEM)
+
+        blocked = env.execute_action(
+            "Agent_3",
+            "execute_code",
+            "print(open('data/rules/ieo_business_case.json').read())",
+        )
+        computation = env.execute_action(
+            "Agent_3",
+            "execute_code",
+            "import statistics\nprint(statistics.mean([10, 20, 30]))",
+        )
+
+        self.assertIn("filesystem", blocked)
+        self.assertIn("20", computation)
+
+    def test_writing_roles_must_exchange_rules_and_evaluation_guidance(self):
+        env = OlympiadEnvironment("wsc_writing", WSC_PROBLEM)
+
+        planner = _system_prompt(env, "Agent_1")
+        writer = _system_prompt(env, "Agent_2")
+
+        self.assertIn("Stage 1: team plans only", planner)
+        self.assertIn("Stage 1: team plans only", writer)
+        self.assertIn("Timeline:", planner)
+        self.assertIn("Resource Policy:", writer)
+        self.assertNotIn("PUBLIC EVALUATION GUIDANCE", planner)
+        self.assertIn("PUBLIC EVALUATION GUIDANCE", writer)
+
+    def test_selected_coordination_tracks_have_asymmetric_information(self):
+        for competition_id in (
+            "ieo_business_case",
+            "cfa_research_challenge",
+            "wharton_investment",
+            "gcch_harvard",
+            "wsc_writing",
+        ):
+            with self.subTest(competition=competition_id):
+                card = load_rule_card(competition_id, required=True)
+                self.assertEqual(
+                    card.information_policy.get("mode"), "role_specialized"
+                )
+                access_sets = {
+                    role.rule_expertise for role in card.agent_roles
+                }
+                self.assertGreaterEqual(len(access_sets), 2)
+                self.assertTrue(
+                    all(
+                        "contest_rules" in role.information_access
+                        for role in card.agent_roles
+                    )
+                )
+                self.assertEqual(
+                    card.deliberation.get("mode"), "structured"
+                )
+
+    def test_disagreement_protocol_records_evidence_revision_and_decision(self):
+        env = OlympiadEnvironment("ieo_business_case", IEO_PROBLEM)
+
+        proposal = env.execute_action(
+            "Agent_2", "propose", "Prioritize the premium market segment."
+        )
+        challenge = env.execute_action(
+            "Agent_3",
+            "challenge",
+            "P1 | The sample is too small to support premium demand.",
+        )
+        evidence = env.execute_action(
+            "Agent_4",
+            "provide_evidence",
+            "P1 | Survey results show stronger demand in the mid-market segment.",
+        )
+        revision = env.execute_action(
+            "Agent_2",
+            "revise",
+            "P1 | Prioritize the mid-market segment and test premium demand later.",
+        )
+        decision = env.execute_action(
+            "Agent_1",
+            "decide",
+            "P1 | accept | The revised claim fits the cited demand evidence.",
+        )
+
+        self.assertIn("P1 proposed", proposal)
+        self.assertIn("challenge on P1", challenge)
+        self.assertIn("provide_evidence on P1", evidence)
+        self.assertIn("revise on P1", revision)
+        self.assertIn("accept", decision)
+
+        report = env.deliberation.report()
+        self.assertEqual(report["counts"]["challenge"], 1)
+        self.assertEqual(report["counts"]["provide_evidence"], 1)
+        self.assertEqual(report["counts"]["revise"], 1)
+        self.assertEqual(report["counts"]["decide"], 1)
+        self.assertEqual(report["evidence_led_revisions"], 1)
+        self.assertEqual(report["decisions_after_evidence"], 1)
+        self.assertEqual(report["open_proposals"], [])
+
+    def test_disagreement_protocol_enforces_role_responsibilities(self):
+        env = OlympiadEnvironment("ieo_business_case", IEO_PROBLEM)
+        env.execute_action("Agent_2", "propose", "Use a premium strategy.")
+
+        self_challenge = env.execute_action(
+            "Agent_2", "challenge", "P1 | I disagree with myself."
+        )
+        foreign_revision = env.execute_action(
+            "Agent_3", "revise", "P1 | Replace it with a mass-market strategy."
+        )
+        worker_decision = env.execute_action(
+            "Agent_3", "decide", "P1 | reject | My model disagrees."
+        )
+
+        self.assertIn("cannot challenge their own", self_challenge)
+        self.assertIn("only the proposal author", foreign_revision)
+        self.assertIn("only a designated submitter", worker_decision)
+
+    def test_limited_communication_budget_forces_private_work(self):
+        env = OlympiadEnvironment("ieo_business_case", IEO_PROBLEM)
+
+        for index in range(3):
+            result = env.execute_action(
+                "Agent_2", "speak", f"Counted update {index + 1}"
+            )
+            self.assertIn("broadcast", result)
+        rejected = env.execute_action(
+            "Agent_2", "speak", "One update too many"
+        )
+        private = env.execute_action(
+            "Agent_2",
+            "write_private_notes",
+            "Privately compare segment assumptions before sending a conclusion.",
+        )
+
+        self.assertIn("COMMUNICATION LIMIT", rejected)
+        self.assertIn("no communication budget used", private)
+        report = env.communication.report()
+        self.assertEqual(report["by_agent"]["Agent_2"], 3)
+        self.assertEqual(report["team_used"], 3)
+        self.assertEqual(len(report["rejected"]), 1)
+
+    def test_private_notes_are_visible_only_to_their_author(self):
+        env = OlympiadEnvironment("ieo_business_case", IEO_PROBLEM)
+        secret = "Sensitivity analysis favors the mid-market scenario."
+        env.execute_action("Agent_3", "write_private_notes", secret)
+
+        modeler_prompt = _agent_user_prompt(env, "Agent_3", "test")
+        analyst_prompt = _agent_user_prompt(env, "Agent_2", "test")
+
+        self.assertIn(secret, modeler_prompt)
+        self.assertNotIn(secret, analyst_prompt)
+        self.assertNotIn(secret, str(env.chat_history))
+        self.assertEqual(env.communication.report()["team_used"], 0)
+
+    def test_communication_budget_rejects_oversized_messages(self):
+        env = OlympiadEnvironment("wsc_writing", WSC_PROBLEM)
+
+        rejected = env.execute_action("Agent_2", "speak", "x" * 1201)
+
+        self.assertIn("1201 characters", rejected)
+        self.assertEqual(env.communication.report()["team_used"], 0)
 
     def test_ground_truth_rule_cards_exist(self):
         for competition_id in (

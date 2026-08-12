@@ -81,26 +81,106 @@ def _deliverable_line(submission: dict) -> str:
     return line + "\n"
 
 
+def _can_access(env, agent_name: str, category: str) -> bool:
+    card = env.rule_card
+    if card is None or card.information_policy.get("mode") == "shared":
+        return True
+    if (
+        card.information_policy.get("mode") == "role_specialized"
+        and category == "contest_rules"
+    ):
+        return True
+    return card.role_can_access(agent_name, category)
+
+
 def _system_prompt(env, agent_name: str) -> str:
     meta = env.get_metadata()
-    tools = build_action_instructions(env.get_available_tools())
     role = _role_lookup(env, agent_name)
     rule = meta.get("rule") or {}
+    structured_deliberation = (
+        (rule.get("deliberation") or {}).get("mode") == "structured"
+    )
+    limited_communication = (
+        (rule.get("communication") or {}).get("mode") == "limited"
+    )
+    tools = build_action_instructions(
+        env.get_available_tools(),
+        structured_deliberation=structured_deliberation,
+    )
     constraints = rule.get("human_constraints") or []
     answer_format = rule.get("answer_format") or ""
     resources = rule.get("resources") or {}
     rule_header = ""
-    if rule:
+    sees_rules = _can_access(env, agent_name, "contest_rules")
+    if rule and sees_rules:
         rule_header = (
             f"Competition rule profile: {rule['profile']} ({rule['protocol']}).\n"
             f"Official/adapted rules summary: {rule['rules_text']}\n"
         )
+    elif rule:
+        rule_header = (
+            "Private information boundary: the full contest-rules packet is not "
+            "included in your briefing. Ask a teammate to communicate constraints "
+            "that affect your work.\n"
+        )
     resource_prose = describe_resources(resources) if resources else ""
     resource_line = f"Resource rules: {resource_prose}\n" if resource_prose else ""
     answer_line = (
-        f"Required answer format:\n{answer_format}\n" if answer_format else ""
+        f"Required answer format:\n{answer_format}\n"
+        if answer_format and sees_rules
+        else ""
     )
-    deliverable_line = _deliverable_line(rule.get("submission") or {})
+    deliverable_line = (
+        _deliverable_line(rule.get("submission") or {}) if sees_rules else ""
+    )
+    visible_constraints = constraints if sees_rules else []
+    rules_heading = (
+        "HUMAN CONTEST RULES (BINDING)"
+        if sees_rules
+        else "CONTEST RULES AVAILABLE TO YOU"
+    )
+    evaluation_guidance = ""
+    if _can_access(env, agent_name, "evaluation_guidance"):
+        guidance = str(rule.get("evaluation_guidance") or "").strip()
+        if guidance:
+            evaluation_guidance = (
+                f"\n=== PUBLIC EVALUATION GUIDANCE ===\n{guidance}\n"
+            )
+    deliberation_guidance = ""
+    if structured_deliberation:
+        deliberation_guidance = (
+            "\n=== DISAGREEMENT PROTOCOL ===\n"
+            "Do not bury substantive disagreement in generic chat. Open a proposal, "
+            "challenge it with reasons, attach evidence, revise when warranted, and "
+            "leave the designated submitter a traceable decision. Prefer evidence "
+            "over role authority or vote count.\n"
+        )
+    specialty_guidance = ""
+    if role.rule_expertise and env.rule_card is not None:
+        specialty_lines = []
+        for category in role.rule_expertise:
+            rules = env.rule_card.rule_sections.get(category) or []
+            specialty_lines.append(f"{category.replace('_', ' ').title()}:")
+            specialty_lines.extend(f"- {item}" for item in rules)
+        specialty_guidance = (
+            "\n=== YOUR RULE SPECIALTY ===\n"
+            "Every teammate can consult the complete rules. You are primarily "
+            "responsible for tracking and communicating these sections:\n"
+            + "\n".join(specialty_lines)
+            + "\n"
+        )
+    communication_guidance = ""
+    if limited_communication:
+        policy = rule["communication"]
+        communication_guidance = (
+            "\n=== LIMITED COMMUNICATION BUDGET ===\n"
+            f"The team may send {policy['team_message_budget']} counted messages; "
+            f"you may send at most {policy['per_agent_message_budget']}. "
+            f"Each message is capped at {policy['max_message_chars']} characters. "
+            "Broadcast only information that changes another teammate's work. Use "
+            "write_private_notes for independent analysis; private notes are visible "
+            "only to you and cost no communication budget.\n"
+        )
     return (
         f"You are {role.name}, title: {role.title}.\n"
         f"You must behave like a human contestant on a {meta['competition_id']} team "
@@ -110,8 +190,12 @@ def _system_prompt(env, agent_name: str) -> str:
         f"{resource_line}"
         f"{deliverable_line}"
         f"{rule_header}\n"
-        f"=== HUMAN CONTEST RULES (BINDING) ===\n"
-        f"{_format_constraints(constraints)}\n\n"
+        f"=== {rules_heading} ===\n"
+        f"{_format_constraints(visible_constraints)}\n"
+        f"{evaluation_guidance}\n"
+        f"{specialty_guidance}\n"
+        f"{communication_guidance}\n"
+        f"{deliberation_guidance}\n"
         f"=== YOUR ROLE DUTIES ===\n"
         f"{_format_duties(role)}\n"
         f"May submit final answer: {'yes' if role.may_submit else 'no — advise only'}\n\n"
@@ -135,6 +219,7 @@ def _agent_user_prompt(env, agent_name: str, schema_note: str, extra: str = "") 
     state = env.get_state()
     scratchpad = state["shared_workspace"].get("scratchpad") or "(empty)"
     role = _role_lookup(env, agent_name)
+    private_notes = env.get_private_notes(agent_name) or "(empty)"
     return f"""=== SCHEMA ===
 {schema_note}
 
@@ -147,9 +232,13 @@ def _agent_user_prompt(env, agent_name: str, schema_note: str, extra: str = "") 
 === SHARED SCRATCHPAD ===
 {scratchpad}
 
+=== YOUR PRIVATE NOTES ===
+{private_notes}
+
 === YOUR TURN ===
 You are {role.name} ({role.title}).
 Turn budget: {state['turn_status']}
+Communication budget: {env.communication.status_for(agent_name)}
 Submitted: {state['submitted']}
 Obey the binding human contest rules and your role duties.
 {extra}
@@ -167,7 +256,11 @@ def _synthesis_system_prompt(env, synthesizer: str) -> str:
     answer_format = rule.get("answer_format") or (
         "Output ONLY the numbered answer sheet. No ACTION lines, no commentary."
     )
-    constraints = rule.get("human_constraints") or []
+    constraints = (
+        rule.get("human_constraints") or []
+        if _can_access(env, synthesizer, "contest_rules")
+        else []
+    )
     return (
         f"You are {synthesizer}, writing the team's official final answer for "
         f"{meta['competition_id']} ({meta.get('year', 'n/a')}).\n"
@@ -239,6 +332,12 @@ def _synthesis_prompt(env, schema_note: str) -> str:
 
 === SHARED SCRATCHPAD ===
 {state['shared_workspace'].get('scratchpad') or '(empty)'}
+
+=== DELIBERATION LEDGER ===
+{state['deliberation']}
+
+=== COMMUNICATION BUDGET REPORT ===
+{state['communication']}
 
 === FINAL TEAM ANSWER ===
 {instructions}"""
@@ -451,6 +550,8 @@ def _result(env, schema: str) -> dict:
         "chat_messages": len(env.chat_history),
         "final_answer": env.workspace.get("final_answer", ""),
         "grade": env.grade_submission(),
+        "deliberation": env.deliberation.report(),
+        "communication": env.communication.report(),
         "rule": meta.get("rule"),
         "roster": meta.get("rule", {}).get("agent_roles") if meta.get("rule") else [
             {"name": role.name, "title": role.title, "may_submit": role.may_submit}

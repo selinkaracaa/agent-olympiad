@@ -239,6 +239,118 @@ def lint_card(
                 f"{len(boilerplate_roles)} roles still carry generated boilerplate duties; "
                 "run collectors/write_role_duties.py"
             )
+        if card.information_policy.get("mode") == "role_scoped":
+            access_sets = {role.information_access for role in card.agent_roles}
+            if len(access_sets) < 2:
+                report.errors.append(
+                    "role-scoped information policy gives every role the same access"
+                )
+            if not any(
+                "contest_rules" in role.information_access
+                for role in card.agent_roles
+            ):
+                report.errors.append(
+                    "role-scoped information policy has no contest-rules holder"
+                )
+            evaluation_holders = [
+                role.name
+                for role in card.agent_roles
+                if "evaluation_guidance" in role.information_access
+            ]
+            if evaluation_holders and not card.evaluation_guidance:
+                report.errors.append(
+                    "roles can access evaluation_guidance but the card has none"
+                )
+            if not card.information_policy.get("coordination_requirement"):
+                report.errors.append(
+                    "role-scoped information policy needs a coordination_requirement"
+                )
+        if card.information_policy.get("mode") == "role_specialized":
+            if any(
+                "contest_rules" not in role.information_access
+                for role in card.agent_roles
+            ):
+                report.errors.append(
+                    "role-specialized policy must let every role consult contest rules"
+                )
+            expertise_sets = {role.rule_expertise for role in card.agent_roles}
+            if len(expertise_sets) < 2:
+                report.errors.append(
+                    "role-specialized policy gives every role the same rule expertise"
+                )
+            section_names = set(card.rule_sections)
+            unknown_expertise = sorted(
+                {
+                    category
+                    for role in card.agent_roles
+                    for category in role.rule_expertise
+                    if category not in section_names
+                }
+            )
+            if unknown_expertise:
+                report.errors.append(
+                    "rule expertise references missing sections: "
+                    + ", ".join(unknown_expertise)
+                )
+            if not card.information_policy.get("coordination_requirement"):
+                report.errors.append(
+                    "role-specialized information policy needs a "
+                    "coordination_requirement"
+                )
+        if card.deliberation.get("mode") == "structured":
+            if len(card.agent_roles) < 2:
+                report.errors.append(
+                    "structured deliberation requires at least two roles"
+                )
+            if int(card.deliberation.get("min_challenges", 0)) < 1:
+                report.errors.append(
+                    "structured deliberation must require at least one challenge"
+                )
+            if card.deliberation.get("decision_maker") != "submitter":
+                report.errors.append(
+                    "structured deliberation decision_maker must be submitter"
+                )
+            dimensions = set(
+                card.deliberation.get("evaluation_dimensions") or []
+            )
+            if not {
+                "evidence_responsiveness",
+                "decision_traceability",
+            }.issubset(dimensions):
+                report.errors.append(
+                    "structured deliberation must evaluate evidence responsiveness "
+                    "and decision traceability"
+                )
+        if card.communication.get("mode") == "limited":
+            required_budget_fields = {
+                "team_message_budget",
+                "per_agent_message_budget",
+                "max_message_chars",
+                "counted_actions",
+            }
+            missing_budget_fields = sorted(
+                required_budget_fields - set(card.communication)
+            )
+            if missing_budget_fields:
+                report.errors.append(
+                    "limited communication missing fields: "
+                    + ", ".join(missing_budget_fields)
+                )
+            counted = set(card.communication.get("counted_actions") or [])
+            if "speak" not in counted or "write_scratchpad" not in counted:
+                report.errors.append(
+                    "limited communication must count speak and write_scratchpad"
+                )
+            if card.deliberation.get("mode") == "structured" and not {
+                "propose",
+                "challenge",
+                "provide_evidence",
+                "revise",
+                "decide",
+            }.issubset(counted):
+                report.errors.append(
+                    "structured deliberation actions must consume communication budget"
+                )
 
     constraints = list(payload.get("human_constraints") or [])
     deduped, dropped = dedupe_constraints(constraints, ratio_threshold=near_ratio)

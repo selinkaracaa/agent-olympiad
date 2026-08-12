@@ -14,6 +14,11 @@ class AgentRole:
     title: str
     duties: tuple[str, ...]
     may_submit: bool = True
+    information_access: tuple[str, ...] = (
+        "contest_rules",
+        "evaluation_guidance",
+    )
+    rule_expertise: tuple[str, ...] = ()
 
 
 @dataclass(frozen=True)
@@ -32,6 +37,11 @@ class RuleCard:
     human_constraints: tuple[str, ...] = ()
     agent_roles: tuple[AgentRole, ...] = ()
     answer_format: str = ""
+    evaluation_guidance: str = ""
+    information_policy: dict[str, Any] = field(default_factory=dict)
+    rule_sections: dict[str, Any] = field(default_factory=dict)
+    deliberation: dict[str, Any] = field(default_factory=dict)
+    communication: dict[str, Any] = field(default_factory=dict)
     scoring: dict[str, Any] = field(default_factory=dict)
     resources: dict[str, Any] = field(default_factory=dict)
     submission: dict[str, Any] = field(default_factory=dict)
@@ -126,12 +136,40 @@ class RuleCard:
             title = str(item.get("title") or "").strip()
             if not name or not title:
                 raise RuleCardError("Each agent role needs name and title.")
+            information_access = item.get(
+                "information_access",
+                ["contest_rules", "evaluation_guidance"],
+            )
+            if not isinstance(information_access, list) or not all(
+                isinstance(category, str) and category.strip()
+                for category in information_access
+            ):
+                raise RuleCardError(
+                    "agent role information_access must be an array of strings."
+                )
+            valid_categories = {"contest_rules", "evaluation_guidance"}
+            unknown_categories = set(information_access) - valid_categories
+            if unknown_categories:
+                raise RuleCardError(
+                    "Unknown information_access categories: "
+                    + ", ".join(sorted(unknown_categories))
+                )
+            rule_expertise = item.get("rule_expertise", [])
+            if not isinstance(rule_expertise, list) or not all(
+                isinstance(category, str) and category.strip()
+                for category in rule_expertise
+            ):
+                raise RuleCardError(
+                    "agent role rule_expertise must be an array of strings."
+                )
             roles.append(
                 AgentRole(
                     name=name,
                     title=title,
                     duties=tuple(duties),
                     may_submit=bool(item.get("may_submit", True)),
+                    information_access=tuple(information_access),
+                    rule_expertise=tuple(rule_expertise),
                 )
             )
 
@@ -142,11 +180,37 @@ class RuleCard:
             "provenance",
             "comparability",
             "scoring",
+            "information_policy",
+            "rule_sections",
+            "deliberation",
+            "communication",
         ):
             value = raw.get(field_name) or {}
             if not isinstance(value, dict):
                 raise RuleCardError(f"{field_name} must be an object.")
             object_fields[field_name] = dict(value)
+        rule_sections = object_fields["rule_sections"]
+        if not all(
+            isinstance(name, str)
+            and name.strip()
+            and isinstance(items, list)
+            and all(isinstance(item, str) and item.strip() for item in items)
+            for name, items in rule_sections.items()
+        ):
+            raise RuleCardError(
+                "rule_sections must map names to arrays of non-empty strings."
+            )
+        unknown_expertise = {
+            category
+            for role in roles
+            for category in role.rule_expertise
+            if category not in rule_sections
+        }
+        if unknown_expertise:
+            raise RuleCardError(
+                "rule_expertise references missing rule_sections: "
+                + ", ".join(sorted(unknown_expertise))
+            )
 
         return cls(
             schema_version=schema_version,
@@ -163,6 +227,11 @@ class RuleCard:
             human_constraints=tuple(constraints),
             agent_roles=tuple(roles),
             answer_format=str(raw.get("answer_format") or "").strip(),
+            evaluation_guidance=str(raw.get("evaluation_guidance") or "").strip(),
+            information_policy=object_fields["information_policy"],
+            rule_sections=object_fields["rule_sections"],
+            deliberation=object_fields["deliberation"],
+            communication=object_fields["communication"],
             scoring=object_fields["scoring"],
             resources=object_fields["resources"],
             submission=object_fields["submission"],
@@ -176,6 +245,10 @@ class RuleCard:
             if role.name == agent_name:
                 return role
         return None
+
+    def role_can_access(self, agent_name: str, category: str) -> bool:
+        role = self.role_for(agent_name)
+        return role is not None and category in role.information_access
 
     def roster(self, team_size: int) -> list[AgentRole]:
         if self.agent_roles:

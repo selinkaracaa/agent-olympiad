@@ -51,6 +51,14 @@
         "Run the planning stage and fix the outline before writing starts.",
         "Edit for the rubric during the peer-edit stage, not for taste.",
         "Submit only after the format and rule checks pass."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "timeline",
+        "collaboration_protocol",
+        "deliverable_format"
       ]
     },
     {
@@ -60,6 +68,15 @@
       "duties": [
         "Draft the assigned section in full prose, not notes.",
         "Keep the section within its word or time budget."
+      ],
+      "information_access": [
+        "contest_rules",
+        "evaluation_guidance"
+      ],
+      "rule_expertise": [
+        "resource_policy",
+        "deliverable_format",
+        "evaluation_criteria"
       ]
     },
     {
@@ -69,10 +86,30 @@
       "duties": [
         "Draft the assigned section in full prose, not notes.",
         "Keep the section within its word or time budget."
+      ],
+      "information_access": [
+        "contest_rules",
+        "evaluation_guidance"
+      ],
+      "rule_expertise": [
+        "resource_policy",
+        "deliverable_format",
+        "evaluation_criteria"
       ]
     }
   ],
   "answer_format": "Submit three essays or the staged writing portfolio required by the prompt.",
+  "evaluation_guidance": "The contestant-facing evaluation brief emphasizes focus and argumentation, effective use of theme and evidence, style and clarity, and originality and persuasiveness. Writers receive these priorities without the captain's timing and workflow rules.",
+  "information_policy": {
+    "mode": "role_specialized",
+    "shared": [
+      "problem",
+      "contest_rules",
+      "team_discussion",
+      "scratchpad"
+    ],
+    "coordination_requirement": "The planner holds the stage and submission rules while the writers hold public evaluation guidance. They must exchange constraints and quality priorities through discussion or the shared scratchpad."
+  },
   "scoring": {
     "mode": "rubric",
     "unit": "artifact",
@@ -141,5 +178,51 @@
       "scoring": "rubric",
       "environment": "partial"
     }
+  },
+  "deliberation": {
+    "mode": "structured",
+    "min_challenges": 1,
+    "decision_maker": "submitter",
+    "evaluation_dimensions": [
+      "evidence_responsiveness",
+      "revision_after_challenge",
+      "decision_traceability",
+      "authority_bias",
+      "majority_bias"
+    ]
+  },
+  "rule_sections": {
+    "timeline": [
+      "The event runs in fixed planning, individual-writing, and peer-edit stages.",
+      "Use the encoded 75-minute allocation: 20 minutes planning, 40 writing, 15 peer editing."
+    ],
+    "resource_policy": [
+      "No electronic devices; treat the writing as handwritten."
+    ],
+    "collaboration_protocol": [
+      "Plan together before drafting.",
+      "Each teammate writes individually; peer editors may not finish an incomplete essay for its author."
+    ],
+    "deliverable_format": [
+      "Submit three essays or the staged portfolio required by the prompt."
+    ],
+    "evaluation_criteria": [
+      "Prioritize focus and argumentation, theme and evidence, style and clarity, originality and persuasiveness."
+    ]
+  },
+  "communication": {
+    "mode": "limited",
+    "team_message_budget": 8,
+    "per_agent_message_budget": 3,
+    "max_message_chars": 1200,
+    "counted_actions": [
+      "speak",
+      "write_scratchpad",
+      "propose",
+      "challenge",
+      "provide_evidence",
+      "revise",
+      "decide"
+    ]
   }
 }

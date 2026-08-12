@@ -35,7 +35,7 @@ merged the same way; `docs/rules_lowconf_2026-08-12.md` is the second pass. Merg
 additive, so an entry a later pass retracts needs `"superseded_by": "<report path>"` in
 the older report or it returns on the next replay.
 
-## The three contracts a card carries
+## The six contracts a card carries
 
 1. **Behaviour**: `human_constraints` are binding and go into the prompt verbatim.
    Anything addressed to a maintainer belongs in `provenance.research_notes`;
@@ -49,6 +49,29 @@ the older report or it returns on the next replay.
    and the benchmark's answer-part count; `execution.turn_budget_basis` shows the
    arithmetic. Cards whose official duration is unknown record
    `execution.official_minutes: null` and fall back to a roster-based floor.
+4. **Information**: opt-in cards set `information_policy.mode` to
+   `role_specialized`. Every teammate can consult the complete contestant rules,
+   while `rule_sections` and each role's `rule_expertise` assign primary
+   responsibility: planners track timing and workflow, modelers track tool/data
+   limits, researchers track sources and integrity, and writers track format and
+   judging priorities. Prompts and `query_rules` repeat the responsible role's
+   sections so the team knows whom to ask without making basic compliance
+   information artificially secret. Judge-only gold answers and raw rubric files
+   remain unavailable.
+5. **Deliberation**: collaboration-heavy cards may set
+   `deliberation.mode = structured`. Agents then record `propose`, `challenge`,
+   `provide_evidence`, `revise`, and `decide` actions against proposal IDs.
+   Challenges and evidence are broadcast to the team but also retained in a
+   machine-readable ledger, allowing evaluation of evidence responsiveness,
+   traceable decisions, authority bias, and majority bias. Only proposal authors
+   may revise; only designated submitters may decide.
+6. **Communication**: high-pressure team cards may set
+   `communication.mode = limited`, with team-wide and per-agent message budgets
+   plus a per-message character cap. Broadcasts, shared-scratchpad writes, and
+   structured deliberation consume the budget. `write_private_notes` lets an
+   agent continue independent work without broadcasting or spending a message;
+   those notes appear only in that agent's later prompts. Usage and rejected
+   messages are included in the run result for coordination-efficiency analysis.
 
 Every step is idempotent, and `tests/test_rule_card_lint.py` fails the build if a
 card regresses (schema violation, unknown tool, roster/team mismatch, tool that

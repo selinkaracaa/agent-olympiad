@@ -55,6 +55,13 @@
         "Own the deliverable's structure and cut material that does not earn points.",
         "Resolve disagreements between analysts before they reach the final text.",
         "Submit only after the format and rule checks pass."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "timeline",
+        "deliverable_format"
       ]
     },
     {
@@ -64,6 +71,12 @@
       "duties": [
         "Gather the evidence the recommendation rests on.",
         "Separate what the sources say from what the team infers."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "research_integrity"
       ]
     },
     {
@@ -73,6 +86,12 @@
       "duties": [
         "Build the numbers: valuation, models, and sensitivity checks.",
         "State assumptions explicitly and show which results depend on them."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "resource_policy"
       ]
     },
     {
@@ -82,6 +101,12 @@
       "duties": [
         "Decide which questions the research must answer and in what order.",
         "Kill lines of inquiry that will not change the recommendation."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "research_integrity"
       ]
     },
     {
@@ -91,10 +116,29 @@
       "duties": [
         "Turn analysis into a structure a judge can follow in one pass.",
         "Cut slides and sections that do not carry an argument."
+      ],
+      "information_access": [
+        "contest_rules",
+        "evaluation_guidance"
+      ],
+      "rule_expertise": [
+        "deliverable_format",
+        "evaluation_criteria"
       ]
     }
   ],
   "answer_format": "Submit a structured report or slide outline covering analysis, recommendation, and evidence.",
+  "evaluation_guidance": "Judges reward a clear recommendation supported by economic reasoning, credible evidence, quantitative analysis, feasibility, and a coherent slide-supported presentation. This is contestant-facing guidance, not the hidden evaluator rubric.",
+  "information_policy": {
+    "mode": "role_specialized",
+    "shared": [
+      "problem",
+      "contest_rules",
+      "team_discussion",
+      "scratchpad"
+    ],
+    "coordination_requirement": "The captain holds the contest-rules packet; the slide designer holds public evaluation guidance. Teammates must communicate material constraints and judging priorities through discussion or the shared scratchpad."
+  },
   "scoring": {
     "mode": "rubric",
     "unit": "artifact",
@@ -175,5 +219,51 @@
       "scoring": "rubric",
       "environment": "partial"
     }
+  },
+  "deliberation": {
+    "mode": "structured",
+    "min_challenges": 1,
+    "decision_maker": "submitter",
+    "evaluation_dimensions": [
+      "evidence_responsiveness",
+      "revision_after_challenge",
+      "decision_traceability",
+      "authority_bias",
+      "majority_bias"
+    ]
+  },
+  "rule_sections": {
+    "timeline": [
+      "Preparation and presentation span two days.",
+      "Slides must be submitted by the Steering Committee deadline and cannot be changed afterward."
+    ],
+    "resource_policy": [
+      "Online and offline research materials and ordinary software are allowed during preparation.",
+      "Contacting anyone outside the team for help is prohibited."
+    ],
+    "research_integrity": [
+      "Use evidence responsibly and do not obtain hidden solutions or outside authorship."
+    ],
+    "deliverable_format": [
+      "Deliver an English, slide-supported oral business-case presentation."
+    ],
+    "evaluation_criteria": [
+      "Business Case contributes 50 final points; criterion scores use the median of judges."
+    ]
+  },
+  "communication": {
+    "mode": "limited",
+    "team_message_budget": 12,
+    "per_agent_message_budget": 3,
+    "max_message_chars": 1200,
+    "counted_actions": [
+      "speak",
+      "write_scratchpad",
+      "propose",
+      "challenge",
+      "provide_evidence",
+      "revise",
+      "decide"
+    ]
   }
 }

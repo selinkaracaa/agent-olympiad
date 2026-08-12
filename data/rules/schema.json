@@ -131,12 +131,142 @@
           },
           "may_submit": {
             "type": "boolean"
+          },
+          "information_access": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "enum": [
+                "contest_rules",
+                "evaluation_guidance"
+              ]
+            }
+          },
+          "rule_expertise": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
           }
         }
       }
     },
     "answer_format": {
       "type": "string"
+    },
+    "evaluation_guidance": {
+      "type": "string"
+    },
+    "information_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "mode": {
+          "enum": [
+            "shared",
+            "role_scoped",
+            "role_specialized"
+          ]
+        },
+        "shared": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "problem",
+              "contest_rules",
+              "team_discussion",
+              "scratchpad"
+            ]
+          }
+        },
+        "coordination_requirement": {
+          "type": "string"
+        }
+      }
+    },
+    "rule_sections": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "deliberation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "mode": {
+          "enum": [
+            "unstructured",
+            "structured"
+          ]
+        },
+        "min_challenges": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "decision_maker": {
+          "const": "submitter"
+        },
+        "evaluation_dimensions": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "evidence_responsiveness",
+              "revision_after_challenge",
+              "decision_traceability",
+              "authority_bias",
+              "majority_bias"
+            ]
+          }
+        }
+      }
+    },
+    "communication": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "mode": {
+          "enum": [
+            "unlimited",
+            "limited"
+          ]
+        },
+        "team_message_budget": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "per_agent_message_budget": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "max_message_chars": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "counted_actions": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "speak",
+              "write_scratchpad",
+              "propose",
+              "challenge",
+              "provide_evidence",
+              "revise",
+              "decide"
+            ]
+          }
+        }
+      }
     },
     "scoring": {
       "type": "object"

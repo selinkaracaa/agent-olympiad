@@ -11,7 +11,9 @@ Respond with ONE of these formats:
 Available action types:
 - speak           — broadcast a message to the team
 - write_scratchpad — update the shared working notes
+- write_private_notes — save private working notes visible only to you
 - submit_final    — submit the team's final answer (only when ready)
+{deliberation_lines}
 {tool_lines}
 
 Rules:
@@ -32,12 +34,25 @@ ACTION_LINE_RE = re.compile(
 )
 
 
-def build_action_instructions(allowed_tools: list[str]) -> str:
+def build_action_instructions(
+    allowed_tools: list[str], *, structured_deliberation: bool = False
+) -> str:
     if allowed_tools:
         tool_lines = "\n".join(f"- {tool}" for tool in allowed_tools)
     else:
         tool_lines = "(no tools — paper and pencil only)"
-    return ACTION_INSTRUCTIONS.format(tool_lines=tool_lines)
+    deliberation_lines = ""
+    if structured_deliberation:
+        deliberation_lines = """\
+- propose          — open a proposal; the ledger assigns P1, P2, ...
+- challenge        — PAYLOAD: P1 | evidence-based objection
+- provide_evidence — PAYLOAD: P1 | evidence relevant to the choice
+- revise           — proposal author only; PAYLOAD: P1 | revised claim
+- decide           — submitter only; PAYLOAD: P1 | accept/reject/defer | reason"""
+    return ACTION_INSTRUCTIONS.format(
+        deliberation_lines=deliberation_lines,
+        tool_lines=tool_lines,
+    )
 
 
 def parse_agent_response(response: str) -> list[tuple[str, str]]:
