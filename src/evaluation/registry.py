@@ -43,6 +43,10 @@ def load_registry(path: Path | None = None) -> list[EvaluatorSpec]:
     return specs
 
 
+def _is_ready(spec: EvaluatorSpec) -> bool:
+    return not spec.status.startswith("deferred") and "missing" not in spec.status
+
+
 def resolve_evaluator_spec(
     task_type: str,
     *,
@@ -53,13 +57,7 @@ def resolve_evaluator_spec(
     matches = [spec for spec in specs if task_type in spec.task_types]
     if not matches:
         raise RegistryError(f"No evaluator registered for task_type={task_type!r}.")
-    usable = [
-        spec
-        for spec in matches
-        if allow_deferred
-        or not spec.status.startswith("deferred")
-        and "missing" not in spec.status
-    ]
+    usable = [spec for spec in matches if allow_deferred or _is_ready(spec)]
     # Prefer concrete MVP / existing over deferred.
     preferred = usable or matches
     preferred.sort(
@@ -78,6 +76,24 @@ def resolve_evaluator_spec(
             f"(status={chosen.status})."
         )
     return chosen
+
+
+def resolve_evaluator_by_id(
+    evaluator_id: str,
+    *,
+    registry_path: Path | None = None,
+    allow_deferred: bool = False,
+) -> EvaluatorSpec:
+    """Resolve one evaluator by its registry id, refusing deferred ones by default."""
+    for spec in load_registry(registry_path):
+        if spec.id != evaluator_id:
+            continue
+        if not allow_deferred and not _is_ready(spec):
+            raise RegistryError(
+                f"Evaluator {spec.id} is not ready (status={spec.status})."
+            )
+        return spec
+    raise RegistryError(f"No evaluator registered with id={evaluator_id!r}.")
 
 
 def strategy_kind(spec: EvaluatorSpec) -> str:

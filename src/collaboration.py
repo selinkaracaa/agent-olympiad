@@ -1,7 +1,9 @@
 from dataclasses import dataclass
 from typing import Callable, Literal
 
-from actions import apply_agent_response, build_action_instructions, extract_final_answer_from_text, parse_agent_response
+from actions import apply_agent_response, build_action_instructions, parse_agent_response
+from rules.describe import describe_resources
+from rules.models import AgentRole
 
 SchemaName = Literal["round_table", "centralized", "decentralized"]
 QueryFn = Callable[[str, str], str]
@@ -15,13 +17,107 @@ class CollabConfig:
   progress: Callable[[str], None] | None = None
 
 
-def _system_prompt(env, role: str) -> str:
+def _roster(env) -> list[AgentRole]:
+    if getattr(env, "rule_card", None) is not None:
+        return env.rule_card.roster(env.team_size)
+    return [
+        AgentRole(
+            name=f"Agent_{index + 1}",
+            title=(
+                "captain and synthesizer"
+                if index == 0
+                else "primary solver"
+                if index == 1
+                else "independent verifier"
+                if index == 2
+                else "specialist and completeness checker"
+            ),
+            duties=(),
+            may_submit=index == 0,
+        )
+        for index in range(env.team_size)
+    ]
+
+
+def _submitters(env) -> set[str]:
+    return {role.name for role in _roster(env) if role.may_submit} or {"Agent_1"}
+
+
+def _role_lookup(env, agent_name: str) -> AgentRole:
+    for role in _roster(env):
+        if role.name == agent_name:
+            return role
+    return AgentRole(name=agent_name, title=agent_name, duties=(), may_submit=False)
+
+
+def _format_constraints(constraints: list[str]) -> str:
+    if not constraints:
+        return "(no additional human constraints listed)"
+    return "\n".join(f"- {item}" for item in constraints)
+
+
+def _format_duties(role: AgentRole) -> str:
+    if not role.duties:
+        return "- Contribute useful work and respect team process."
+    return "\n".join(f"- {item}" for item in role.duties)
+
+
+def _format_roster(env) -> str:
+    return "\n".join(
+        f"- {role.name}: {role.title}"
+        + (" [may submit]" if role.may_submit else "")
+        for role in _roster(env)
+    )
+
+
+def _deliverable_line(submission: dict) -> str:
+    deliverable = str(submission.get("official_deliverable") or "").strip()
+    if not deliverable:
+        return ""
+    line = f"Official deliverable: {deliverable.replace('_', ' ')}"
+    adaptation = str(submission.get("adaptation") or "").strip()
+    if adaptation:
+        line += f" ({adaptation})"
+    return line + "\n"
+
+
+def _system_prompt(env, agent_name: str) -> str:
     meta = env.get_metadata()
     tools = build_action_instructions(env.get_available_tools())
+    role = _role_lookup(env, agent_name)
+    rule = meta.get("rule") or {}
+    constraints = rule.get("human_constraints") or []
+    answer_format = rule.get("answer_format") or ""
+    resources = rule.get("resources") or {}
+    rule_header = ""
+    if rule:
+        rule_header = (
+            f"Competition rule profile: {rule['profile']} ({rule['protocol']}).\n"
+            f"Official/adapted rules summary: {rule['rules_text']}\n"
+        )
+    resource_prose = describe_resources(resources) if resources else ""
+    resource_line = f"Resource rules: {resource_prose}\n" if resource_prose else ""
+    answer_line = (
+        f"Required answer format:\n{answer_format}\n" if answer_format else ""
+    )
+    deliverable_line = _deliverable_line(rule.get("submission") or {})
     return (
-        f"You are {role} on a {meta['competition_id']} team of {meta['team_size']} agents.\n"
+        f"You are {role.name}, title: {role.title}.\n"
+        f"You must behave like a human contestant on a {meta['competition_id']} team "
+        f"of {meta['team_size']}.\n"
         f"Problem: {meta.get('title') or meta['problem_id']} ({meta.get('year', 'n/a')})\n"
-        f"Allowed tools: {meta['allowed_tools'] or 'none'}\n\n"
+        f"Allowed tools: {meta['allowed_tools'] or 'none'}\n"
+        f"{resource_line}"
+        f"{deliverable_line}"
+        f"{rule_header}\n"
+        f"=== HUMAN CONTEST RULES (BINDING) ===\n"
+        f"{_format_constraints(constraints)}\n\n"
+        f"=== YOUR ROLE DUTIES ===\n"
+        f"{_format_duties(role)}\n"
+        f"May submit final answer: {'yes' if role.may_submit else 'no — advise only'}\n\n"
+        f"=== TEAM ROSTER ===\n"
+        f"{_format_roster(env)}\n\n"
+        f"{answer_line}\n"
         f"{tools}"
     )
 
@@ -38,6 +134,7 @@ def _discussion_history(env) -> str:
 def _agent_user_prompt(env, agent_name: str, schema_note: str, extra: str = "") -> str:
     state = env.get_state()
     scratchpad = state["shared_workspace"].get("scratchpad") or "(empty)"
+    role = _role_lookup(env, agent_name)
     return f"""=== SCHEMA ===
 {schema_note}
 
@@ -51,9 +148,10 @@ def _agent_user_prompt(env, agent_name: str, schema_note: str, extra: str = "") 
 {scratchpad}
 
 === YOUR TURN ===
-You are {agent_name}.
+You are {role.name} ({role.title}).
 Turn budget: {state['turn_status']}
 Submitted: {state['submitted']}
+Obey the binding human contest rules and your role duties.
 {extra}
 What is your contribution?"""
 
@@ -65,14 +163,28 @@ def _count_numbered_parts(text: str) -> int:
 
 def _synthesis_system_prompt(env, synthesizer: str) -> str:
     meta = env.get_metadata()
-    return (
-        f"You are {synthesizer}, writing the team's official final answer sheet for "
-        f"{meta['competition_id']} ({meta.get('year', 'n/a')}).\n"
+    rule = meta.get("rule") or {}
+    answer_format = rule.get("answer_format") or (
         "Output ONLY the numbered answer sheet. No ACTION lines, no commentary."
+    )
+    constraints = rule.get("human_constraints") or []
+    return (
+        f"You are {synthesizer}, writing the team's official final answer for "
+        f"{meta['competition_id']} ({meta.get('year', 'n/a')}).\n"
+        f"Binding constraints:\n{_format_constraints(constraints)}\n\n"
+        f"Answer format:\n{answer_format}\n"
+        "Output only the final answer content. No ACTION lines."
     )
 
 
 def _final_answer_instructions(env) -> str:
+    rule = (env.get_metadata().get("rule") or {})
+    if rule.get("answer_format"):
+        return (
+            "Write the team's COMPLETE final answer using this format:\n"
+            f"{rule['answer_format']}\n"
+            "Compile the best answers from the discussion and scratchpad."
+        )
     task_type = env.problem_data.get("task_type", "")
     total_pts = env.problem_data.get("total_points")
     if task_type in {"team_contest", "team_power", "team_practical"}:
@@ -150,15 +262,22 @@ def _run_synthesis(
 
     best_answer = ""
     best_parts = 0
+    scoring_mode = ((env.get_metadata().get("rule") or {}).get("scoring") or {}).get("mode")
+    target_parts = 5 if scoring_mode != "gold" or env.problem_data.get("task_type") in {
+        "team_contest",
+        "team_power",
+        "team_practical",
+        "guts_round",
+    } else 1
 
     for attempt in range(2):
         _log(f"{synthesizer} synthesizing final answer (attempt {attempt + 1})...")
         system = _synthesis_system_prompt(env, synthesizer)
         user = _synthesis_prompt(env, schema_note)
-        if attempt > 0:
+        if attempt > 0 and target_parts >= 5:
             user += (
                 "\n\nREMINDER: Your previous submission was incomplete. "
-                "You MUST include ALL numbered problems (1. through 10.)."
+                "You MUST include ALL numbered problems."
             )
         response = query_llm_fn(system, user)
         if env.submitted:
@@ -172,7 +291,7 @@ def _run_synthesis(
             best_parts = parts
             best_answer = answer
 
-        if parts >= 5:
+        if parts >= target_parts:
             break
         _log(f"  submission has only {parts} numbered parts — retrying synthesis")
 
@@ -190,26 +309,36 @@ def run_round_table(env, query_llm_fn: QueryFn, config: CollabConfig | None = No
     """
     config = config or CollabConfig()
     schema_note = "Round Table: all agents see full history; strict turn order."
-    agents = [f"Agent_{i + 1}" for i in range(env.team_size)]
+    roster = _roster(env)
+    submitters = _submitters(env)
 
     for _round in range(config.rounds):
-        for agent in agents:
+        for role in roster:
             if env.submitted:
                 break
             if config.progress:
-                config.progress(f"Round {_round + 1}/{config.rounds} — {agent} thinking...")
-            system = _system_prompt(env, agent)
+                config.progress(
+                    f"Round {_round + 1}/{config.rounds} — {role.name} ({role.title}) thinking..."
+                )
+            system = _system_prompt(env, role.name)
             user = _agent_user_prompt(
                 env,
-                agent,
+                role.name,
                 schema_note,
                 extra=f"Round {_round + 1} of {config.rounds}.",
             )
             response = query_llm_fn(system, user)
-            apply_agent_response(env, agent, response)
+            apply_agent_response(env, role.name, response, submitters=submitters)
 
     if config.synthesize:
-        _run_synthesis(env, query_llm_fn, schema_note, "Agent_1", progress=config.progress)
+        _run_synthesis(
+            env,
+            query_llm_fn,
+            schema_note,
+            next(role.name for role in roster if role.may_submit),
+            submitters=submitters,
+            progress=config.progress,
+        )
 
     return _result(env, "round_table")
 
@@ -219,44 +348,49 @@ def run_centralized(env, query_llm_fn: QueryFn, config: CollabConfig | None = No
     Schema B: Centralized — coordinator delegates, aggregates, and submits.
     """
     config = config or CollabConfig()
-    schema_note = "Centralized: Group_Leader delegates; only leader submits final answer."
-    leader = "Group_Leader"
+    roster = _roster(env)
+    leader = next((role for role in roster if role.may_submit), roster[0])
+    workers = [role for role in roster if role.name != leader.name]
+    schema_note = (
+        f"Centralized: {leader.name} ({leader.title}) delegates; "
+        "only the designated submitter finalizes the answer."
+    )
 
     state = env.get_state()
-    system = _system_prompt(env, leader)
+    system = _system_prompt(env, leader.name)
+    worker_names = ", ".join(role.name for role in workers) or "(no workers)"
     user = (
         f"=== PROBLEM ===\n{state['problem_statement']}\n\n"
-        "You are the Group Leader. Assign sub-tasks to Agent_2 .. "
-        f"Agent_{env.team_size}. Output your delegation plan."
+        f"You are the team coordinator ({leader.title}). Assign sub-tasks to {worker_names}. "
+        "Output your delegation plan."
     )
     if config.progress:
-        config.progress("Group_Leader planning delegation...")
+        config.progress(f"{leader.name} planning delegation...")
     plan = query_llm_fn(system, user)
-    env.execute_action(leader, "speak", f"Delegation plan: {plan}")
+    env.execute_action(leader.name, "speak", f"Delegation plan: {plan}")
 
-    for i in range(1, env.team_size):
+    for peer in workers:
         if env.submitted:
             break
-        peer = f"Agent_{i + 1}"
         if config.progress:
-            config.progress(f"{peer} working on assigned slice...")
-        system = _system_prompt(env, peer)
+            config.progress(f"{peer.name} ({peer.title}) working on assigned slice...")
+        system = _system_prompt(env, peer.name)
         user = _agent_user_prompt(
             env,
-            peer,
+            peer.name,
             schema_note,
             extra=f"Leader's plan:\n{plan}\n\nComplete your assigned slice. You may use allowed tools.",
         )
         response = query_llm_fn(system, user)
-        apply_agent_response(env, peer, response, submitters=set())
+        apply_agent_response(env, peer.name, response, submitters=set())
 
     if config.synthesize and not env.submitted:
         _run_synthesis(
             env,
             query_llm_fn,
             schema_note,
-            leader,
-            submitters={"Group_Leader"},
+            leader.name,
+            submitters={leader.name},
             progress=config.progress,
         )
 
@@ -269,31 +403,44 @@ def run_decentralized(env, query_llm_fn: QueryFn, config: CollabConfig | None = 
     """
     config = config or CollabConfig()
     schema_note = "Decentralized: no leader; peers update scratchpad/tools directly."
-    agents = [f"Agent_{i + 1}" for i in range(env.team_size)]
+    roster = _roster(env)
+    submitters = _submitters(env)
 
     for _event in range(config.decentralized_events):
-        for agent in agents:
+        for role in roster:
             if env.submitted:
                 break
             if config.progress:
-                config.progress(f"Event {_event + 1}/{config.decentralized_events} — {agent} thinking...")
-            system = _system_prompt(env, agent)
+                config.progress(
+                    f"Event {_event + 1}/{config.decentralized_events} — "
+                    f"{role.name} ({role.title}) thinking..."
+                )
+            system = _system_prompt(env, role.name)
             user = _agent_user_prompt(
                 env,
-                agent,
+                role.name,
                 schema_note,
                 extra="Coordinate directly with peers. No manager.",
             )
             response = query_llm_fn(system, user)
-            apply_agent_response(env, agent, response)
+            apply_agent_response(env, role.name, response, submitters=submitters)
 
     if config.synthesize and not env.submitted:
-        _run_synthesis(env, query_llm_fn, schema_note, agents[0], progress=config.progress)
+        synthesizer = next(role.name for role in roster if role.may_submit)
+        _run_synthesis(
+            env,
+            query_llm_fn,
+            schema_note,
+            synthesizer,
+            submitters=submitters,
+            progress=config.progress,
+        )
 
     return _result(env, "decentralized")
 
 
 def _result(env, schema: str) -> dict:
+    meta = env.get_metadata()
     return {
         "schema": schema,
         "problem_id": env.problem_id,
@@ -304,6 +451,11 @@ def _result(env, schema: str) -> dict:
         "chat_messages": len(env.chat_history),
         "final_answer": env.workspace.get("final_answer", ""),
         "grade": env.grade_submission(),
+        "rule": meta.get("rule"),
+        "roster": meta.get("rule", {}).get("agent_roles") if meta.get("rule") else [
+            {"name": role.name, "title": role.title, "may_submit": role.may_submit}
+            for role in _roster(env)
+        ],
     }
 
 

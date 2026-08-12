@@ -1,0 +1,17 @@
+{
+  "competition_id": "mystery_hunt",
+  "crawled_at": "2026-08-11T16:08:45.850875+00:00",
+  "sources": [
+    {
+      "title": "MIT Mystery Hunt",
+      "url": "https://puzzles.mit.edu/",
+      "status": "ok",
+      "content_type": "text/html",
+      "bytes": 7875,
+      "raw_file": "data/rules/sources/mystery_hunt/01_puzzles.mit.edu",
+      "text_file": "data/rules/sources/mystery_hunt/01_puzzles.mit.txt",
+      "text_chars": 3631,
+      "text_preview": "MIT Mystery Hunt / Puzzle Club \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n The MIT Mystery Hunt is a puzzlehunt competition that takes place on the MIT campus every year during the Martin Luther King, Jr. Day weekend . The hunt challenges each participating team to solve a large number of puzzles which lead to an object (called a \"coin\") hidden somewhere on campus. The winning team gets to write the subsequent year's hunt.\n\n Mystery Hunt was launched in 1981 and is widely regarded as one of the oldest and most complex puzzlehunts in the world. It attracts more than 2,000 people every year and has inspired similar competitions at universities, companies and cities around the world.\n\n This site serves as a record of the Mystery Hunt's history and an archive of past hunts. We hope that it inspires you to join in on the fun and become a master puzzle solver.\n\n If you are just starting as a puzzle solver, welcome! Check out the \" Resources For Beginners \" to read about the art of puzzle solving and get started with a few hand-selected puzzles, and take a look at \" Puzzle tools and how-tos \" for links to various tools that make the process easier.\n\n If you'd like to receive updates about the MIT Mystery Hunt, you can subscribe to the puzzle-hunters@mit.edu mailing list .\n\n Support the MIT Mystery Hunt \n The Mystery Hunt is an ASA-recognized group (reach the student club at puzzle-club-exec@mit.edu ) which receives some funding from Finboard, the Large Events Fund, and other sources at MIT. The"
+    }
+  ]
+}

@@ -1,0 +1,170 @@
+{
+  "schema_version": "1.0",
+  "rule_id": "gcch_harvard:draft_v1",
+  "competition_id": "gcch_harvard",
+  "profile": "official_equivalent",
+  "protocol": "research_artifact",
+  "team": {
+    "active_min": 2,
+    "active_default": 4,
+    "active_max": 5,
+    "collaboration": "Collaborate only within the team under contest rules."
+  },
+  "execution": {
+    "max_turns": 24,
+    "scheduler": "src_collaboration_draft",
+    "draft": true,
+    "official_minutes": null,
+    "turn_budget_basis": "official clock n/a turns vs floor 13 (4 teammates x 2 turns + 1 answer parts + 4 for synthesis)"
+  },
+  "allowed_tools": [
+    "query_rules",
+    "use_calculator",
+    "execute_code",
+    "web_search"
+  ],
+  "resources": {
+    "internet": "allowed",
+    "calculator": "allowed",
+    "code_execution": "allowed",
+    "paper_pencil": "allowed",
+    "provided_materials_only": false
+  },
+  "human_constraints": [
+    "You must behave like a human teammate under official contest rules.",
+    "Do not claim tools, internet, or materials that the rule card forbids.",
+    "Do not look up answer keys or hidden solutions.",
+    "Solve the business case as a team deliverable.",
+    "Teams are 2 to 5 students from the same university; you may not compete as an individual.",
+    "One person may appear on only one team.",
+    "Round 1 deliverable is a written case deck prepared within a work period of up to 3 weeks from case release, and late registrants get only the days remaining before the deadline.",
+    "Submit by the published Round 1 deadline; late submissions are not accepted.",
+    "The case is a finance and M&A problem requiring industry analysis, company analysis, and financial analysis and valuation, presented pitch-book style.",
+    "Only the top 10 teams continue, delivering a recorded video pitch of 5 to 10 minutes that is judged on clarity, synthesis, and presentation quality.",
+    "Finalists then face a live judge panel for roughly 20 minutes of Q&A on the case, their submitted deck, and general M&A knowledge.",
+    "Winners are chosen by the judges weighing all three of the solution deck, the video pitch, and the finale performance."
+  ],
+  "agent_roles": [
+    {
+      "name": "Agent_1",
+      "title": "captain / editor",
+      "may_submit": true,
+      "duties": [
+        "Own the deliverable's structure and cut material that does not earn points.",
+        "Resolve disagreements between analysts before they reach the final text.",
+        "Submit only after the format and rule checks pass."
+      ]
+    },
+    {
+      "name": "Agent_2",
+      "title": "analyst",
+      "may_submit": false,
+      "duties": [
+        "Gather the evidence the recommendation rests on.",
+        "Separate what the sources say from what the team infers."
+      ]
+    },
+    {
+      "name": "Agent_3",
+      "title": "quant / modeler",
+      "may_submit": false,
+      "duties": [
+        "Build the numbers: valuation, models, and sensitivity checks.",
+        "State assumptions explicitly and show which results depend on them."
+      ]
+    },
+    {
+      "name": "Agent_4",
+      "title": "research lead",
+      "may_submit": false,
+      "duties": [
+        "Decide which questions the research must answer and in what order.",
+        "Kill lines of inquiry that will not change the recommendation."
+      ]
+    }
+  ],
+  "answer_format": "Submit a structured report or slide outline covering analysis, recommendation, and evidence.",
+  "scoring": {
+    "mode": "rubric",
+    "unit": "artifact",
+    "evaluator_id": null,
+    "evaluator_status": "unassigned"
+  },
+  "submission": {
+    "max_count": 1,
+    "shared": true,
+    "mime_types": [
+      "text/plain"
+    ],
+    "task_types": [
+      "business_case"
+    ],
+    "official_deliverable": "slide_deck",
+    "official_mime_types": [
+      "text/html",
+      "application/pdf"
+    ],
+    "adaptation": "Official entries are slide files; the runner submits the deck as structured text."
+  },
+  "rules_text": "Global Case Competition at Harvard. The team of 4 prepares one research deliverable that expert judges score against a rubric. Collaborate only within the team under contest rules. The team files one shared submission. Official wall-clock timing is not encoded for this track; treat the turn budget as your clock and submit before it runs out.",
+  "provenance": {
+    "status": "hand_written_fallback_v1",
+    "sources": [
+      {
+        "title": "https://www.thecasecompetition.org/gcch-2026",
+        "url": "https://www.thecasecompetition.org/gcch-2026",
+        "retrieved_at": "2026-08-12",
+        "local_text": "data/rules/sources/gcch_harvard/01_fallback_notes.txt"
+      },
+      {
+        "title": "https://www.thecasecompetition.org/",
+        "url": "https://www.thecasecompetition.org/",
+        "retrieved_at": "2026-08-12",
+        "from_report": "docs/rules_lowconf_2026-08-12.md"
+      }
+    ],
+    "adaptations": [
+      "max_turns is a safety budget, not necessarily the official wall-clock limit",
+      "specialist roles are a research roster overlay",
+      "physical/oral/live opponent fidelity may be incomplete in src/"
+    ],
+    "crawl_status": "fallback_notes",
+    "crawled_excerpts": [
+      {
+        "url": "https://www.thecasecompetition.org/gcch-2026",
+        "excerpt": "University-level Global Case Competition at Harvard. Teams of 2 to 5 from the same university. Round 1 is a written case deck; top 10 record a video pitch; finalists take live judge Q&A. No official rulebook exists."
+      }
+    ],
+    "enriched_at": "2026-08-12T16:53:55.316886+00:00",
+    "research_confidence": "low",
+    "proxy_limitations": [
+      "A three-week team research project ending in a slide deck cannot be reproduced by a turn-budgeted text run.",
+      "Rounds 2 and 3 are a recorded video pitch and a live oral defense, neither of which is expressible as text output.",
+      "Judging is by business executives and HBS faculty against an unpublished rubric."
+    ],
+    "research_merged_at": "2026-08-12T17:04:21.952512+00:00",
+    "rules_text_source": "composed_from_card_fields_v2",
+    "research_reports": [
+      "docs/rules_crawl_2026-08-11.md",
+      "docs/rules_lowconf_2026-08-12.md"
+    ],
+    "research_notes": [
+      "Every member must be enrolled at a university for the current academic year and must supply proof of enrollment or participation is not confirmed.",
+      "This card refers to the university-level Global Case Competition at Harvard (thecasecompetition.org), not the high-school Harvard Crimson Global Case Competition (casecomp.org); the card's previous source URL pointed at the older gcchatharvard.com domain and should be replaced.",
+      "The organizer publishes no rulebook, terms document, or judging rubric, so there is no verifiable rule on slide or page limits, permitted research sources, software, generative AI, plagiarism, or outside assistance.",
+      "The FAQ page renders answers as collapsed accordions that could not be read, so any detail held only there is unverified.",
+      "The February 22, 2026 Round 1 deadline is edition-specific and will change each year."
+    ],
+    "research_graded_at": "2026-08-12"
+  },
+  "comparability": {
+    "overall": "draft",
+    "dimensions": {
+      "roster": "approximate",
+      "timing": "adapted",
+      "tools": "src_tool_surface",
+      "scoring": "rubric",
+      "environment": "partial"
+    }
+  }
+}

@@ -1,0 +1,181 @@
+{
+  "schema_version": "1.0",
+  "rule_id": "arml_local:official_shared_answer",
+  "competition_id": "arml_local",
+  "profile": "official_equivalent",
+  "protocol": "shared_answer",
+  "team": {
+    "active_min": 6,
+    "active_default": 6,
+    "active_max": 6,
+    "collaboration": "Free discussion among the six teammates. One shared answer sheet."
+  },
+  "execution": {
+    "max_turns": 26,
+    "scheduler": "round_table_or_centralized",
+    "wall_clock_note": "Official ARML Local team round is about 45 minutes; max_turns is a safety budget.",
+    "official_minutes": 45,
+    "turn_budget_basis": "official clock 9 turns vs floor 26 (6 teammates x 2 turns + 10 answer parts + 4 for synthesis)"
+  },
+  "allowed_tools": [
+    "query_rules"
+  ],
+  "resources": {
+    "internet": "forbidden",
+    "calculator": "forbidden",
+    "electronic_devices": "forbidden",
+    "books_notes": "forbidden",
+    "paper_pencil": "allowed",
+    "provided_materials_only": true
+  },
+  "human_constraints": [
+    "You must behave like a human teammate under official contest rules.",
+    "Do not claim tools, internet, or materials that the rule card forbids.",
+    "Do not look up answer keys or hidden solutions.",
+    "Paper and pencil only; calculators are banned on every ARML round.",
+    "No phones, computers, internet, books, or notes.",
+    "Collaborate freely within the six-person team.",
+    "Submit one shared short-answer sheet; answers are usually exact values.",
+    "Do not look up contest archives or answer keys.",
+    "Teams of six students; schools may field multiple teams.",
+    "Team Round: 45 minutes; set of 15 short-answer questions worked by the entire team together.",
+    "Also Individual (5×10 min pairs) and Relay (6/8/10 min structures) — benchmark track focuses on team round.",
+    "National no-calculator / no-electronics bans apply across ARML contests; Local inherits paper/pencil only expectation.",
+    "Coaches/local coordinators grade and submit scores."
+  ],
+  "agent_roles": [
+    {
+      "name": "Agent_1",
+      "title": "captain and answer-sheet synthesizer",
+      "may_submit": true,
+      "duties": [
+        "Keep the shared answer sheet coherent and complete.",
+        "Assign remaining unsolved problems when discussion stalls.",
+        "Submit the final numbered team answers."
+      ]
+    },
+    {
+      "name": "Agent_2",
+      "title": "algebra specialist",
+      "may_submit": false,
+      "duties": [
+        "Lead algebra, functions, equations, and logarithmic problems.",
+        "Check algebraic simplifications before answers enter the sheet."
+      ]
+    },
+    {
+      "name": "Agent_3",
+      "title": "geometry specialist",
+      "may_submit": false,
+      "duties": [
+        "Lead geometry, area, trigonometry, and diagram-based reasoning.",
+        "State assumptions clearly when a diagram is incomplete in text."
+      ]
+    },
+    {
+      "name": "Agent_4",
+      "title": "probability and combinatorics specialist",
+      "may_submit": false,
+      "duties": [
+        "Lead counting, probability, and expected-value problems.",
+        "Write exact fractions in lowest terms when required."
+      ]
+    },
+    {
+      "name": "Agent_5",
+      "title": "number theory and discrete specialist",
+      "may_submit": false,
+      "duties": [
+        "Lead number theory, modular arithmetic, and discrete constructions.",
+        "Cross-check integer answers for off-by-one and divisibility mistakes."
+      ]
+    },
+    {
+      "name": "Agent_6",
+      "title": "independent verifier",
+      "may_submit": false,
+      "duties": [
+        "Challenge weak arguments and demand an independent check.",
+        "Scan the answer sheet for missing problems before submission."
+      ]
+    }
+  ],
+  "answer_format": "Numbered team answer sheet:\n1. [answer]\n2. [answer]\n...\n10. [answer]\nUse exact values when the problem asks for them.",
+  "scoring": {
+    "mode": "gold",
+    "unit": "problem",
+    "notes": "Official team round awards fixed points per correct short answer; local env uses gold matching / LLM judge for partial credit.",
+    "evaluator_id": "gold_answer_v1",
+    "evaluator_status": "ready",
+    "rubric_path": "data/rubrics/numerical_sheet_reference_40_v1.json",
+    "evaluator_strategy": "official_gold_multipart"
+  },
+  "submission": {
+    "max_count": 1,
+    "shared": true,
+    "mime_types": [
+      "text/plain"
+    ],
+    "finality": "irrevocable",
+    "task_types": [
+      "team_contest"
+    ],
+    "official_deliverable": "answer_sheet",
+    "official_mime_types": [
+      "text/plain"
+    ]
+  },
+  "rules_text": "ARML Local Team Round: six students, shared answer sheet, paper and pencil only. No calculators, phones, internet, books, or notes. Collaborate freely, then submit one official set of short answers. Official timing note: About 45 minutes.",
+  "provenance": {
+    "status": "source_enriched_v1",
+    "sources": [
+      {
+        "title": "ARML Competition Rules",
+        "url": "https://arml.com/ARML/arml_2019/page/index.php?page=competition_rules&page_type=public",
+        "retrieved_at": "2026-08-12",
+        "local_text": "data/rules/sources/arml_local/01_index.txt"
+      },
+      {
+        "title": "https://www.arml.com/ARML/arml_2019/page/index.php?page=6&page_type=public&show_page=main_page",
+        "url": "https://www.arml.com/ARML/arml_2019/page/index.php?page=6&page_type=public&show_page=main_page",
+        "retrieved_at": "2026-08-11",
+        "from_report": "docs/rules_crawl_2026-08-11.md"
+      }
+    ],
+    "adaptations": [
+      "wall-clock timing is represented by a turn safety budget",
+      "specialist roles are a research roster overlay on the official 6-person team",
+      "benchmark rows carry 10 short answers; the official team round has 15 questions"
+    ],
+    "crawl_status": "ok",
+    "crawled_excerpts": [
+      {
+        "url": "https://arml.com/ARML/arml_2019/page/index.php?page=competition_rules&page_type=public",
+        "excerpt": "The Official American Regions Mathematics League Web Page --> The Official American Regions Mathematics League Web Page --> --> --> --> Home Supporters Meet Results IRML 40th Anniversary Puzzle Hunt --> Power Contest ARML Local --> ARML. Local ARML Local --> ARML Local --> Awards ARML/IRML Competition Rules A team will consist of 15 members. Coaches are expected to gauge the strength of each of the 15 member teams and place their students on the teams accordingly. The team that consists of the s"
+      }
+    ],
+    "enriched_at": "2026-08-12T16:53:55.310139+00:00",
+    "official_time_note": "About 45 minutes.",
+    "research_confidence": "high",
+    "proxy_limitations": [
+      "Local scoring (4 pts × 15 = 60 in many regional mirrors) is consistent with secondary mirrors but confirm against current ARML Local Google Doc if linked from site.",
+      "45-minute hard stop is the main timing proxy gap."
+    ],
+    "research_merged_at": "2026-08-12T17:04:20.783381+00:00",
+    "research_reports": [
+      "docs/rules_crawl_2026-08-11.md"
+    ],
+    "research_graded_at": "2026-08-11"
+  },
+  "comparability": {
+    "overall": "comparable_with_timing_adaptation",
+    "dimensions": {
+      "roster": "equivalent",
+      "timing": "adapted",
+      "information": "equivalent",
+      "tools": "equivalent",
+      "submission": "equivalent",
+      "scoring": "gold_proxy"
+    }
+  }
+}

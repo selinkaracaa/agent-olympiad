@@ -10,6 +10,7 @@ from typing import Any, Optional
 from urllib.parse import parse_qs, quote_plus, urlparse
 from urllib.request import Request, urlopen
 
+from rules import RuleCardError, load_rule_card
 from runtimes import CompetitionRuntime, RuntimeUnavailableError
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -117,6 +118,7 @@ ALL_ACTIONS = {
     "speak",
     "write_scratchpad",
     "submit_final",
+    "query_rules",
     "use_calculator",
     "execute_code",
     "web_search",
@@ -161,12 +163,11 @@ class OlympiadEnvironment:
         competition_id: str,
         problem_id: str,
         base_path: str = DEFAULT_BENCHMARK_PATH,
-        max_turns: int = 50,
+        max_turns: Optional[int] = None,
     ):
         self.competition_id = competition_id
         self.problem_id = problem_id
         self.base_path = base_path
-        self.max_turns = max_turns
 
         self.chat_history: list[dict[str, str]] = []
         self.action_log: list[dict[str, Any]] = []
@@ -176,20 +177,62 @@ class OlympiadEnvironment:
         self.submitted_by: Optional[str] = None
 
         self.problem_data = self._load_problem()
+        self.rule_card = load_rule_card(competition_id)
+        self.max_turns = (
+            int(max_turns)
+            if max_turns is not None
+            else self.rule_card.max_turns
+            if self.rule_card is not None
+            else 50
+        )
+        if self.max_turns < 1:
+            raise ValueError("max_turns must be positive.")
         self.runtime = CompetitionRuntime(competition_id, self.problem_data)
-        self.allowed_tools = list(COMPETITION_TOOL_REGISTRY.get(competition_id, []))
+        if self.rule_card is not None:
+            unknown_tools = set(self.rule_card.allowed_tools) - TOOL_ACTIONS
+            if unknown_tools:
+                raise RuleCardError(
+                    f"Rule card for {competition_id!r} declares unknown tools: "
+                    + ", ".join(sorted(unknown_tools))
+                )
+            self.allowed_tools = list(self.rule_card.allowed_tools)
+        else:
+            self.allowed_tools = list(COMPETITION_TOOL_REGISTRY.get(competition_id, []))
         if competition_id == "cybench" and self.runtime.allows_open_internet():
             self.allowed_tools.append("web_search")
 
         problem_team_size = self.problem_data.get("team_size")
-        self.team_size = self._coerce_team_size(problem_team_size, competition_id)
+        rule_default = (
+            self.rule_card.team_size_default if self.rule_card is not None else None
+        )
+        self.team_size = self._coerce_team_size(
+            problem_team_size,
+            competition_id,
+            default_size=rule_default,
+        )
+        if self.rule_card is not None and not (
+            self.rule_card.team_size_min
+            <= self.team_size
+            <= self.rule_card.team_size_max
+        ):
+            raise RuleCardError(
+                f"Problem {problem_id!r} team_size={self.team_size} is outside rule-card "
+                f"range {self.rule_card.team_size_min}-{self.rule_card.team_size_max}."
+            )
 
     @staticmethod
-    def _coerce_team_size(raw: Any, competition_id: str) -> int:
+    def _coerce_team_size(
+        raw: Any,
+        competition_id: str,
+        *,
+        default_size: Optional[int] = None,
+    ) -> int:
         if isinstance(raw, int) and raw > 0:
             return raw
         if isinstance(raw, str) and raw.strip().isdigit():
             return int(raw.strip())
+        if default_size is not None:
+            return default_size
         return TEAM_SIZE_MATRIX.get(competition_id, 3)
 
     def _benchmark_file(self) -> str:
@@ -218,7 +261,8 @@ class OlympiadEnvironment:
         return list(self.allowed_tools)
 
     def get_metadata(self) -> dict:
-        return {
+        gold = self.problem_data.get("gold_label") or {}
+        metadata = {
             "competition_id": self.competition_id,
             "problem_id": self.problem_id,
             "title": self.problem_data.get("title"),
@@ -226,8 +270,71 @@ class OlympiadEnvironment:
             "task_type": self.problem_data.get("task_type"),
             "team_size": self.team_size,
             "allowed_tools": self.get_available_tools(),
-            "has_gold_answer": bool(self.problem_data.get("gold_label", {}).get("expected_answer")),
+            "has_gold_answer": bool(
+                gold.get("expected_answer") or gold.get("parts") or gold.get("answers")
+            ),
         }
+        if self.rule_card is not None:
+            metadata["rule"] = {
+                "rule_id": self.rule_card.rule_id,
+                "profile": self.rule_card.profile,
+                "protocol": self.rule_card.protocol,
+                "rules_text": self.rule_card.rules_text,
+                "human_constraints": list(self.rule_card.human_constraints),
+                "answer_format": self.rule_card.answer_format,
+                "scoring": self.rule_card.scoring,
+                "submission": self.rule_card.submission,
+                "resources": self.rule_card.resources,
+                "comparability": self.rule_card.comparability,
+                "agent_roles": [
+                    {
+                        "name": role.name,
+                        "title": role.title,
+                        "duties": list(role.duties),
+                        "may_submit": role.may_submit,
+                    }
+                    for role in self.rule_card.roster(self.team_size)
+                ],
+            }
+        return metadata
+
+    def query_rules(self, query: str = "") -> str:
+        if self.rule_card is None:
+            return json.dumps(
+                {
+                    "competition_id": self.competition_id,
+                    "allowed_tools": self.get_available_tools(),
+                    "team_size": self.team_size,
+                    "note": "No rule card on file; legacy env defaults are in effect.",
+                },
+                ensure_ascii=False,
+                indent=2,
+            )
+        card = self.rule_card
+        payload = {
+            "rule_id": card.rule_id,
+            "competition_id": card.competition_id,
+            "profile": card.profile,
+            "protocol": card.protocol,
+            "rules_text": card.rules_text,
+            "human_constraints": list(card.human_constraints),
+            "answer_format": card.answer_format,
+            "allowed_tools": list(card.allowed_tools),
+            "resources": card.resources,
+            "scoring": card.scoring,
+            "comparability": card.comparability,
+            "agent_roles": [
+                {
+                    "name": role.name,
+                    "title": role.title,
+                    "duties": list(role.duties),
+                    "may_submit": role.may_submit,
+                }
+                for role in card.roster(self.team_size)
+            ],
+        }
+        prefix = f"Rule query: {query}\n" if query.strip() else ""
+        return prefix + json.dumps(payload, ensure_ascii=False, indent=2)
 
     def get_state(self) -> dict:
         return {
@@ -295,6 +402,8 @@ class OlympiadEnvironment:
                 self.submitted = True
                 self.submitted_by = agent_name
                 result = f"Submission finalized by {agent_name}."
+        elif action_type == "query_rules":
+            result = self.query_rules(payload)
         elif action_type == "use_calculator":
             result = self._run_calculator(payload)
         elif action_type == "execute_code":
@@ -344,8 +453,6 @@ class OlympiadEnvironment:
     def _eval_ast(node: ast.AST) -> float:
         if isinstance(node, ast.Constant) and isinstance(node.value, (int, float)):
             return float(node.value)
-        if isinstance(node, ast.Num):
-            return float(node.n)
         if isinstance(node, ast.BinOp) and type(node.op) in _SAFE_BINOPS:
             left = OlympiadEnvironment._eval_ast(node.left)
             right = OlympiadEnvironment._eval_ast(node.right)

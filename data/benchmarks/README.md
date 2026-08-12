@@ -22,7 +22,8 @@ Extracted multi-agent team competition problems for the **Agent Olympiad** resea
 ## Contents
 
 - Per-competition folders with `benchmark.json` (primary eval set)
-- Catalog: `index.json`
+- Catalog: `index.json` — each olympiad lists `benchmark_path` (extracted JSON)
+  and `base_path` (ALE-style inputs under `data/base/tasks/<id>/`)
 
 The catalog is intentionally mixed-unit. Tracks without an explicit `eval_unit`
 are session-level by default (one full published team task per row). Tracks

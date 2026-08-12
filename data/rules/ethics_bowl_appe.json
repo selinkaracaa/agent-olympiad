@@ -1,0 +1,160 @@
+{
+  "schema_version": "1.0",
+  "rule_id": "ethics_bowl_appe:draft_v1",
+  "competition_id": "ethics_bowl_appe",
+  "profile": "proxy",
+  "protocol": "presentation_and_cross_examination",
+  "team": {
+    "active_min": 5,
+    "active_default": 5,
+    "active_max": 5,
+    "collaboration": "Collaborate only within the team under contest rules."
+  },
+  "execution": {
+    "max_turns": 24,
+    "scheduler": "src_collaboration_draft",
+    "draft": true,
+    "official_minutes": null,
+    "turn_budget_basis": "official clock n/a turns vs floor 15 (5 teammates x 2 turns + 1 answer parts + 4 for synthesis)"
+  },
+  "allowed_tools": [
+    "query_rules"
+  ],
+  "resources": {
+    "internet": "forbidden",
+    "calculator": "forbidden",
+    "code_execution": "forbidden",
+    "paper_pencil": "allowed",
+    "provided_materials_only": true
+  },
+  "human_constraints": [
+    "You must behave like a human teammate under official contest rules.",
+    "Do not claim tools, internet, or materials that the rule card forbids.",
+    "Do not look up answer keys or hidden solutions.",
+    "Cases may be studied in advance; answers are judged on reasoning quality.",
+    "Be relevant, clear, and deliberative; anticipate judge questions.",
+    "No outside coaching during the round.",
+    "Do not invent a live opposing team unless the protocol provides one.",
+    "Official hub hosts current case sets plus Rules/FAQs/Guidelines and judge scoring guides.",
+    "Format (from official training materials titles): moderated oral rounds with judge questions and scoring sheets — not a written exam.",
+    "Team size commonly up to 5 in community practice."
+  ],
+  "agent_roles": [
+    {
+      "name": "Agent_1",
+      "title": "captain / oralist",
+      "may_submit": true,
+      "duties": [
+        "Own the spoken case: opening, structure, and closing.",
+        "Absorb teammates' research into one line of argument rather than a list.",
+        "Submit only after the format and rule checks pass."
+      ]
+    },
+    {
+      "name": "Agent_2",
+      "title": "researcher",
+      "may_submit": false,
+      "duties": [
+        "Find and cite the authorities the argument depends on.",
+        "Bring counter-authority to the team before a judge does."
+      ]
+    },
+    {
+      "name": "Agent_3",
+      "title": "writer",
+      "may_submit": false,
+      "duties": [
+        "Draft the assigned section in full prose, not notes.",
+        "Keep the section within its word or time budget."
+      ]
+    },
+    {
+      "name": "Agent_4",
+      "title": "opponent prep",
+      "may_submit": false,
+      "duties": [
+        "Argue the other side hard enough to expose weak reasoning.",
+        "Prepare answers to the strongest objection the team will face."
+      ]
+    },
+    {
+      "name": "Agent_5",
+      "title": "judge-question specialist",
+      "may_submit": false,
+      "duties": [
+        "Anticipate judge questions and prepare short, direct answers.",
+        "Flag any claim the team cannot defend under questioning."
+      ]
+    }
+  ],
+  "answer_format": "Submit the written memorial/case analysis and a concise oral outline.",
+  "scoring": {
+    "mode": "rubric",
+    "unit": "artifact",
+    "evaluator_id": null,
+    "evaluator_status": "unassigned"
+  },
+  "submission": {
+    "max_count": 1,
+    "shared": true,
+    "mime_types": [
+      "text/plain"
+    ],
+    "task_types": [
+      "ethics_case_set"
+    ],
+    "official_deliverable": "oral_case_presentation",
+    "official_mime_types": [
+      "text/plain"
+    ]
+  },
+  "rules_text": "APPE Intercollegiate Ethics Bowl. The team of 5 builds a case, presents it, and defends it under questioning from judges or an opposing team. Collaborate only within the team under contest rules. The team files one shared submission. Official wall-clock timing is not encoded for this track; treat the turn budget as your clock and submit before it runs out. Simulation note: oral rounds are represented as written argument, so make the case and its rebuttals fully explicit in the text.",
+  "provenance": {
+    "status": "source_enriched_v1",
+    "sources": [
+      {
+        "title": "APPE Ethics Bowl",
+        "url": "https://www.appe-ethics.org/cases-rules-guidelines/",
+        "retrieved_at": "2026-08-12",
+        "local_text": "data/rules/sources/ethics_bowl_appe/01_cases-rules-guidelines.txt"
+      }
+    ],
+    "adaptations": [
+      "max_turns is a safety budget, not necessarily the official wall-clock limit",
+      "specialist roles are a research roster overlay",
+      "physical/oral/live opponent fidelity may be incomplete in src/"
+    ],
+    "crawl_status": "ok",
+    "crawled_excerpts": [
+      {
+        "url": "https://www.appe-ethics.org/cases-rules-guidelines/",
+        "excerpt": "Cases, Rules, & Guidelines - Association for Practical and Professional Ethics Skip to content Menu About About Us APPE Leadership Code of Conduct Support Donate APPE Endowment APPE Store Contact Us Members 2026 Board of Directors Election Member Benefits Member Directory Affinity Groups Organizational Members Member Login Signature Programs APPE RISE℠ APPE IEB® National Competition Ethics Center Directors Conference Conference Overview Call for Proposals Register Location Schedule Sponsors, Exh"
+      }
+    ],
+    "enriched_at": "2026-08-12T16:53:55.313397+00:00",
+    "research_confidence": "medium",
+    "proxy_limitations": [
+      "Live oral ethics debate / commentary rounds are rubric-oral; transcript-only proxies lose timing and interruption norms.",
+      "Need the Rules PDF click-through for bans on notes/devices if any."
+    ],
+    "research_merged_at": "2026-08-12T17:04:20.887025+00:00",
+    "rules_text_source": "composed_from_card_fields_v2",
+    "research_reports": [
+      "docs/rules_crawl_2026-08-11.md"
+    ],
+    "research_notes": [
+      "Team size commonly up to 5 in community practice; confirm exact roster limits in the linked Rules PDF on the same page (not fully extracted in this crawl)."
+    ],
+    "research_graded_at": "2026-08-11"
+  },
+  "comparability": {
+    "overall": "draft",
+    "dimensions": {
+      "roster": "approximate",
+      "timing": "adapted",
+      "tools": "src_tool_surface",
+      "scoring": "rubric",
+      "environment": "proxy"
+    }
+  }
+}

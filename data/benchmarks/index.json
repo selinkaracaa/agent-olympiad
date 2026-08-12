@@ -27,7 +27,9 @@
       "collection_strategy": "One full team practical per IJSO year; ~30 editions since 2004",
       "status": "partial",
       "slots_scaffolded": 30,
-      "gold_solutions": 12
+      "gold_solutions": 12,
+      "base_path": "data/base/tasks/ijso_practical",
+      "base_tasks": 22
     },
     {
       "id": "ieo_business_case",
@@ -46,7 +48,9 @@
         "human_baseline_2025_winner": "Canada 92.5/100 overall"
       },
       "collection_strategy": "One full business case per IEO year (2021–2025 available so far)",
-      "status": "pipeline_working"
+      "status": "pipeline_working",
+      "base_path": "data/base/tasks/ieo_business_case",
+      "base_tasks": 5
     },
     {
       "id": "iol_team",
@@ -66,7 +70,9 @@
       "collection_strategy": "One full team contest per year; 2003–2025",
       "status": "collected",
       "slots_scaffolded": 21,
-      "gold_solutions": 15
+      "gold_solutions": 15,
+      "base_path": "data/base/tasks/iol_team",
+      "base_tasks": 21
     },
     {
       "id": "ioaa_group",
@@ -86,7 +92,9 @@
       "collection_strategy": "One full group competition per IOAA edition (2007–2024)",
       "status": "partial",
       "slots_scaffolded": 18,
-      "gold_solutions": 4
+      "gold_solutions": 4,
+      "base_path": "data/base/tasks/ioaa_group",
+      "base_tasks": 9
     },
     {
       "id": "arml_power",
@@ -106,7 +114,9 @@
       "collection_strategy": "One full power round per contest season (~2/year since 1994)",
       "status": "partial",
       "slots_scaffolded": 30,
-      "gold_solutions": 11
+      "gold_solutions": 11,
+      "base_path": "data/base/tasks/arml_power",
+      "base_tasks": 15
     },
     {
       "id": "arml_national_team",
@@ -124,7 +134,9 @@
         "notes": "Solution sections in national meet PDFs and 2009–2014 book."
       },
       "collection_strategy": "One team round per national meet year",
-      "status": "partial"
+      "status": "partial",
+      "base_path": "data/base/tasks/arml_national_team",
+      "base_tasks": 11
     },
     {
       "id": "arml_national_power",
@@ -142,7 +154,9 @@
         "notes": "Solution sections in national meet PDFs and 2009–2014 book."
       },
       "collection_strategy": "One power round per national meet year",
-      "status": "partial"
+      "status": "partial",
+      "base_path": "data/base/tasks/arml_national_power",
+      "base_tasks": 11
     },
     {
       "id": "arml_local",
@@ -160,7 +174,9 @@
         "notes": "Team solutions in 2009–2014 book."
       },
       "collection_strategy": "One local team round per year from ARML book",
-      "status": "partial"
+      "status": "partial",
+      "base_path": "data/base/tasks/arml_local",
+      "base_tasks": 6
     },
     {
       "id": "wsc_writing",
@@ -179,7 +195,9 @@
         "notes": "Published essay prompts and rubrics per annual season. Top team scores available from leaderboards."
       },
       "collection_strategy": "One collaborative writing portfolio (3 essays on shared theme) per annual WSC season",
-      "status": "collected"
+      "status": "collected",
+      "base_path": "data/base/tasks/wsc_writing",
+      "base_tasks": 42
     },
     {
       "id": "jessup",
@@ -198,7 +216,9 @@
         "notes": "Compromis (problem) published annually since 1960. Winning memorials available via Jessup Compendium / HeinOnline."
       },
       "collection_strategy": "One Compromis per year; agents write memorials arguing both Applicant and Respondent sides",
-      "status": "collected"
+      "status": "collected",
+      "base_path": "data/base/tasks/jessup",
+      "base_tasks": 1
     },
     {
       "id": "iiot",
@@ -217,7 +237,9 @@
         "notes": "Task statements and results published at iio.team/competition/tasks. Scoring based on automated judge (accepted / wrong answer)."
       },
       "collection_strategy": "One full contest set per IIOT edition (international round); teams of 4 solve algorithmic problems in 3–4 hours",
-      "status": "collected"
+      "status": "collected",
+      "base_path": "data/base/tasks/iiot",
+      "base_tasks": 38
     },
     {
       "id": "icpc",
@@ -236,7 +258,9 @@
         "notes": "World Finals problem sets and solutions published since 1976 at problems.icpc.io and icpc.kattis.com."
       },
       "collection_strategy": "One World Finals problem set per year; teams of 3 solve algorithmic problems on 1 computer in 5 hours",
-      "status": "collected"
+      "status": "collected",
+      "base_path": "data/base/tasks/icpc",
+      "base_tasks": 158
     },
     {
       "id": "cfa_research_challenge",
@@ -256,7 +280,9 @@
       "collection_strategy": "One equity-research case / champion set per available season",
       "status": "collected",
       "problems_collected": 19,
-      "gold_solutions": 19
+      "gold_solutions": 19,
+      "base_path": "data/base/tasks/cfa_research_challenge",
+      "base_tasks": 19
     },
     {
       "id": "eoes",
@@ -276,7 +302,9 @@
       "collection_strategy": "Task-bearing EOES/EUSO practical packets only; answer forms, marking schemes, appendices, reports, and administration excluded.",
       "status": "collected",
       "problems_collected": 33,
-      "gold_solutions": 0
+      "gold_solutions": 0,
+      "base_path": "data/base/tasks/eoes",
+      "base_tasks": 32
     },
     {
       "id": "ethics_bowl_appe",
@@ -296,7 +324,9 @@
       "collection_strategy": "One APPE Ethics Bowl case set per available season",
       "status": "collected",
       "problems_collected": 9,
-      "gold_solutions": 0
+      "gold_solutions": 0,
+      "base_path": "data/base/tasks/ethics_bowl_appe",
+      "base_tasks": 9
     },
     {
       "id": "ethics_bowl_nhseb",
@@ -316,7 +346,9 @@
       "collection_strategy": "One NHSEB National Case Set PDF per season from nhseb.org/s/ (official National Case Set archive)",
       "status": "collected",
       "problems_collected": 14,
-      "gold_solutions": 0
+      "gold_solutions": 0,
+      "base_path": "data/base/tasks/ethics_bowl_nhseb",
+      "base_tasks": 14
     },
     {
       "id": "ichto",
@@ -336,7 +368,9 @@
       "collection_strategy": "One IChTo problem set per available tournament year",
       "status": "collected",
       "problems_collected": 9,
-      "gold_solutions": 0
+      "gold_solutions": 0,
+      "base_path": "data/base/tasks/ichto",
+      "base_tasks": 9
     },
     {
       "id": "pumac_power",
@@ -356,7 +390,9 @@
       "collection_strategy": "One PUMaC Power Round per year group (+ misc)",
       "status": "collected",
       "problems_collected": 18,
-      "gold_solutions": 1
+      "gold_solutions": 1,
+      "base_path": "data/base/tasks/pumac_power",
+      "base_tasks": 18
     },
     {
       "id": "vis_moot",
@@ -376,7 +412,9 @@
       "collection_strategy": "One Vis Moot problem per available year",
       "status": "collected",
       "problems_collected": 7,
-      "gold_solutions": 0
+      "gold_solutions": 0,
+      "base_path": "data/base/tasks/vis_moot",
+      "base_tasks": 7
     },
     {
       "id": "wharton_investment",
@@ -396,7 +434,9 @@
       "collection_strategy": "One Wharton Investment Competition brief per available season",
       "status": "collected",
       "problems_collected": 4,
-      "gold_solutions": 0
+      "gold_solutions": 0,
+      "base_path": "data/base/tasks/wharton_investment",
+      "base_tasks": 4
     },
     {
       "id": "ccdc",
@@ -416,7 +456,9 @@
       "collection_strategy": "One task-bearing nationals Team Packet or Wildcard scenario per available archive item",
       "status": "partial",
       "problems_collected": 16,
-      "gold_solutions": 0
+      "gold_solutions": 0,
+      "base_path": "data/base/tasks/ccdc",
+      "base_tasks": 16
     },
     {
       "id": "debatebench",
@@ -436,7 +478,9 @@
       "collection_strategy": "One cleaned debate transcript per staging record",
       "status": "collected",
       "problems_collected": 32,
-      "gold_solutions": 0
+      "gold_solutions": 0,
+      "base_path": "data/base/tasks/debatebench",
+      "base_tasks": 32
     },
     {
       "id": "gcch_harvard",
@@ -456,7 +500,9 @@
       "collection_strategy": "One GCCH case / paper packet per available year",
       "status": "collected",
       "problems_collected": 16,
-      "gold_solutions": 0
+      "gold_solutions": 0,
+      "base_path": "data/base/tasks/gcch_harvard",
+      "base_tasks": 16
     },
     {
       "id": "history_olympiad",
@@ -476,7 +522,9 @@
       "collection_strategy": "One History Bowl round/session per open Bowl PDF (IHO + IHBB Asia Varsity/JV; Bee / Middle School excluded)",
       "status": "collected",
       "problems_collected": 95,
-      "gold_solutions": 95
+      "gold_solutions": 95,
+      "base_path": "data/base/tasks/history_olympiad",
+      "base_tasks": 95
     },
     {
       "id": "ioai_team",
@@ -496,7 +544,9 @@
       "collection_strategy": "One Team Challenge / Practical Round packet per available year",
       "status": "collected",
       "problems_collected": 2,
-      "gold_solutions": 0
+      "gold_solutions": 0,
+      "base_path": "data/base/tasks/ioai_team",
+      "base_tasks": 2
     },
     {
       "id": "science_olympiad",
@@ -516,7 +566,9 @@
       "collection_strategy": "Free official sample exam only; rules and logistics manuals excluded.",
       "status": "partial",
       "problems_collected": 1,
-      "gold_solutions": 0
+      "gold_solutions": 0,
+      "base_path": "data/base/tasks/science_olympiad",
+      "base_tasks": 1
     },
     {
       "id": "wro",
@@ -536,7 +588,9 @@
       "collection_strategy": "Future Innovators Mission + RoboMission age-group game rules per season",
       "status": "collected",
       "problems_collected": 20,
-      "gold_solutions": 0
+      "gold_solutions": 0,
+      "base_path": "data/base/tasks/wro",
+      "base_tasks": 20
     },
     {
       "id": "odyssey_of_the_mind",
@@ -556,7 +610,9 @@
       "collection_strategy": "One year of public Long-Term Problem synopses per session",
       "status": "partial",
       "problems_collected": 50,
-      "gold_solutions": 0
+      "gold_solutions": 0,
+      "base_path": "data/base/tasks/odyssey_of_the_mind",
+      "base_tasks": 50
     },
     {
       "id": "wmtc",
@@ -577,7 +633,9 @@
       "status": "collected",
       "problems_collected": 3,
       "gold_solutions": 3,
-      "note": "Team-section-only extract from mixed publisher PDFs"
+      "note": "Team-section-only extract from mixed publisher PDFs",
+      "base_path": "data/base/tasks/wmtc",
+      "base_tasks": 3
     },
     {
       "id": "fyziklani",
@@ -597,7 +655,9 @@
       },
       "collection_strategy": "One Physics Brawl Online session per year with problem-only visual assets",
       "status": "partial",
-      "gold_solutions": 14
+      "gold_solutions": 14,
+      "base_path": "data/base/tasks/fyziklani",
+      "base_tasks": 14
     },
     {
       "id": "hmmt_guts",
@@ -617,7 +677,9 @@
       },
       "collection_strategy": "One complete HMMT Guts Round per season and year",
       "status": "partial",
-      "gold_solutions": 45
+      "gold_solutions": 45,
+      "base_path": "data/base/tasks/hmmt_guts",
+      "base_tasks": 45
     },
     {
       "id": "purple_comet",
@@ -637,7 +699,9 @@
       },
       "collection_strategy": "One Purple Comet division session per year with official numeric answer list",
       "status": "collected",
-      "gold_solutions": 44
+      "gold_solutions": 44,
+      "base_path": "data/base/tasks/purple_comet",
+      "base_tasks": 44
     },
     {
       "id": "qanta",
@@ -769,7 +833,9 @@
           "per_year": 20,
           "n_after": 480
         }
-      }
+      },
+      "base_path": "data/base/tasks/qanta",
+      "base_tasks": 240
     },
     {
       "id": "science_bowl",
@@ -830,7 +896,9 @@
           }
         },
         "level_filter": "HS"
-      }
+      },
+      "base_path": "data/base/tasks/science_bowl",
+      "base_tasks": 140
     },
     {
       "id": "mystery_hunt",
@@ -934,7 +1002,9 @@
             "kept": 17
           }
         }
-      }
+      },
+      "base_path": "data/base/tasks/mystery_hunt",
+      "base_tasks": 261
     },
     {
       "id": "nyu_ctf_bench",
@@ -1010,7 +1080,9 @@
             "kept": 20
           }
         }
-      }
+      },
+      "base_path": "data/base/tasks/nyu_ctf_bench",
+      "base_tasks": 194
     },
     {
       "id": "cybench",
@@ -1054,8 +1126,12 @@
             "kept": 20
           }
         }
-      }
+      },
+      "base_path": "data/base/tasks/cybench",
+      "base_tasks": 39
     }
   ],
-  "auxiliary_note": "Retired. Former index_aux corpora (qanta, science_bowl, mystery_hunt, nyu_ctf_bench, cybench) promoted into olympiads after ≤20/year subsample; codecontests removed. index_aux.json deleted."
+  "auxiliary_note": "Retired. Former index_aux corpora (qanta, science_bowl, mystery_hunt, nyu_ctf_bench, cybench) promoted into olympiads after ≤20/year subsample; codecontests removed. index_aux.json deleted.",
+  "base_root": "data/base",
+  "task_cards_path": "data/base/task_cards.json"
 }

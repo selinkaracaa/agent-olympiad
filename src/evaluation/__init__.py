@@ -21,6 +21,7 @@ from .registry import (
     EvaluatorSpec,
     RegistryError,
     load_registry,
+    resolve_evaluator_by_id,
     resolve_evaluator_spec,
     strategy_kind,
 )
@@ -54,6 +55,7 @@ __all__ = [
     "load_gold_parts",
     "load_registry",
     "load_rubric",
+    "resolve_evaluator_by_id",
     "resolve_evaluator_spec",
     "resolve_problem_task_pdf",
     "strategy_kind",

@@ -14,7 +14,8 @@ and `evaluators/` trees are unchanged.
 ```
 data/base/
   README.md
-  task_cards.json              # catalog (ALE task-card analogue)
+  index.json                   # competition-level catalog
+  task_cards.json              # per-task catalog (ALE task-card analogue)
   tasks/
     <competition_id>/          # e.g. iol_team, ieo_business_case
       <problem_id>/
@@ -43,6 +44,8 @@ Gold / solution pointers remain on each entry in `task_cards.json`
 
 ```bash
 python collectors/build_ale_base.py --clean
+# refresh catalogs only (no restage):
+python collectors/build_ale_base.py --catalog-only
 # smoke:
 python collectors/build_ale_base.py --clean --competitions iol_team ieo_business_case --limit-per-competition 2
 ```
@@ -51,7 +54,7 @@ python collectors/build_ale_base.py --clean --competitions iol_team ieo_business
 
 | Path | Role |
 |---|---|
-| `data/benchmarks/` | Source of truth for extracted problem JSON |
+| `data/benchmarks/` | Source of truth for extracted problem JSON; `index.json` also points at `base_path` |
 | `data/raw/` | Original PDFs / upstream checkouts |
 | `data/rubrics/`, `data/evaluators/` | Scoring assets (not staged into `input/`) |
-| `data/base/` | ALE-shaped **input** packaging for agent runs |
+| `data/base/` | ALE-shaped **input** packaging for agent runs; `index.json` is the competition catalog |

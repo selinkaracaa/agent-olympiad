@@ -243,7 +243,10 @@ def mock_agent_llm(system_prompt: str, user_prompt: str) -> str:
     """Deterministic mock for offline diagnostics."""
     combined = f"{system_prompt}\n{user_prompt}"
 
-    if "synthesize" in combined.lower() or "final team answer" in combined.lower():
+    if (
+        "writing the team's official final answer" in combined.lower()
+        or "=== final team answer ===" in combined.lower()
+    ):
         return (
             "ACTION: submit_final | PAYLOAD: "
             "1. (-6, 13)  2. slope -21  3. $52  4. 5√11  5. 49√3/2"

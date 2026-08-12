@@ -1,0 +1,28 @@
+{
+  "competition_id": "icpc",
+  "crawled_at": "2026-08-11T16:10:40.146886+00:00",
+  "sources": [
+    {
+      "title": "ICPC docs programming environment",
+      "url": "https://docs.icpc.global/worldfinals-programming-environment/",
+      "status": "ok",
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 121626,
+      "raw_file": "data/rules/sources/icpc/01_worldfinals-programming-environment.html",
+      "text_file": "data/rules/sources/icpc/01_worldfinals-programming-environment.txt",
+      "text_chars": 7786,
+      "text_preview": "Programming Environment &#8211; ICPC Documents \n \n \n \n \n \n \n \n \n \n \n \n\n \n\n \n \n \n \n \n \n \n\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n\n \n\n \n \n\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n\n Programming Environment \n\n   \n\n -->\n\n \n Programming Environment \n \n \n This page describes current plans for the Programming Environment which will be available to each World Finals team.  Please note that these plans are subject to change .  See the &#8220;Update History&#8221; list at the bottom of this page for information on the currency of what is shown here. Additional updates will be posted soon.\n\n Each team at the World Finals will be provided with one workstation , shared between team members.  Note that this is the traditional ICPC setup (not the unique setup of some previous World Finals where each team member was provided with a separate workstation).  The configuration of each workstation will be as follows:\n\n Hardware \n\n \n System Unit \n \n To Be Determined \n \n \n External screen :\n \n To Be Determined. \n \n \n External keyboard :\n \n U.S. English layout; model to be determined.\n \n Keyboard Image \n \n \n \n \n External Mouse: \n \n Wired 3-button mouse; model to be determined.\n \n Mouse image . \n \n \n \n \n Webcam: \n \n To Be Determined (the webcam will be used to capture team member images and audio during the entire contest, and may not be redirected or blocked). \n \n \n \n No hardware substitutions will be allowed (that is, teams may not bring their own equipment onto the contest floor).  This "
+    },
+    {
+      "title": "ICPC 2024 Tech Notes PDF",
+      "url": "https://docs.icpc.global/wp-content/uploads/2024/08/2024-TechNotes.pdf",
+      "status": "ok",
+      "content_type": "application/pdf",
+      "bytes": 624517,
+      "raw_file": "data/rules/sources/icpc/02_2024-TechNotes.pdf",
+      "text_file": "data/rules/sources/icpc/02_2024-TechNotes.txt",
+      "text_chars": 9495,
+      "text_preview": " \nV1.1   2024.08.21 ICPC World Finals – Technical Notes Page 1 of 5 \nTECHNICAL NOTES \n \nThis document contains important technical information related to the ICPC World Finals \nenvironment.  It is important that your team read and understand all the information below.  \n \nAll Programs: \n Your program must read its input from “standard input”.  \n Your program should send its output to \"standard output\".  Your program may also send \noutput to \"standard error\", but only output sent to \"standard output\" will be considered during \njudging.  (Note that sending too much output to “standard error” might be harmful, in the \nsense that it can slow your program down.) \n All program source code files and/or test data files which you create must be located in or \nbeneath your “home directory”.  Your home directory will be named “/home/teamX”, where \n“X” is your team number.  You may create subdirectories beneath your home directory. \n If your program exits with a non-zero exit code, it will be judged as a Run Time Error. \n Programs submitted to the judges will be run inside a “sandbox”. \n The sandbox will allow allocation of up to 2GB of memory for your program.  Your entire \nprogram, including its runtime environment, must execute within this memory limit.  For \ninterpreted languages (Java, Kotlin and Python), the “runtime environment” includes the \ninterpreter (that is, the JVM for Java and Kotlin and the Python interpreter for Python). \n The sandbox memory allocation size will b"
+    }
+  ]
+}

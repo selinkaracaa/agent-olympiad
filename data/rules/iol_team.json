@@ -1,0 +1,166 @@
+{
+  "schema_version": "1.0",
+  "rule_id": "iol_team:draft_v1",
+  "competition_id": "iol_team",
+  "profile": "official_equivalent",
+  "protocol": "shared_answer",
+  "team": {
+    "active_min": 2,
+    "active_default": 4,
+    "active_max": 4,
+    "collaboration": "Collaborate only within the team under contest rules."
+  },
+  "execution": {
+    "max_turns": 48,
+    "scheduler": "src_collaboration_draft",
+    "draft": true,
+    "official_minutes": 240,
+    "turn_budget_basis": "official clock 48 turns vs floor 13 (4 teammates x 2 turns + 1 answer parts + 4 for synthesis)"
+  },
+  "allowed_tools": [
+    "query_rules"
+  ],
+  "resources": {
+    "internet": "forbidden",
+    "calculator": "forbidden",
+    "code_execution": "forbidden",
+    "paper_pencil": "allowed",
+    "provided_materials_only": true
+  },
+  "human_constraints": [
+    "You must behave like a human teammate under official contest rules.",
+    "Do not claim tools, internet, or materials that the rule card forbids.",
+    "Do not look up answer keys or hidden solutions.",
+    "Exactly one shared team answer sheet for the whole team.",
+    "Free collaboration among teammates is allowed.",
+    "No calculators, phones, internet, or other electronic devices.",
+    "No external dictionaries, notes, or reference materials unless organizers provide them.",
+    "Work only from the official problem packet and blank paper.",
+    "Write complete answers with enough linguistic justification for marking.",
+    "Delegation/team size: ≤4 contestants (+ team leader).",
+    "Team contest: members work jointly on one problem set; normally 4 hours; each member gets a copy; team submits a single solution.",
+    "Free verbal collaboration within the team room.",
+    "Same material/device bans as individual contest: no printed matter/dictionaries; no own paper; no phones/laptops/tablets/smartwatches or outside-world devices; organizer writing paper only; pens preferred.",
+    "Artificial aids such as pocket calculators should not be brought (regulations).",
+    "Problems on paper; explanations required unless instructed otherwise; one working language for the team solution."
+  ],
+  "agent_roles": [
+    {
+      "name": "Agent_1",
+      "title": "captain and synthesizer",
+      "may_submit": true,
+      "duties": [
+        "Assign unsolved problems and keep the team from crowding one question.",
+        "Hold the shared answer sheet and keep it consistent with the discussion.",
+        "Submit only after the format and rule checks pass."
+      ]
+    },
+    {
+      "name": "Agent_2",
+      "title": "algebra / analysis specialist",
+      "may_submit": false,
+      "duties": [
+        "Lead algebra, functions, equations, and inequality problems.",
+        "Recheck each simplification before its answer enters the sheet."
+      ]
+    },
+    {
+      "name": "Agent_3",
+      "title": "geometry specialist",
+      "may_submit": false,
+      "duties": [
+        "Lead geometry, trigonometry, and diagram-based reasoning.",
+        "State any assumption a text-only diagram forces you to make."
+      ]
+    },
+    {
+      "name": "Agent_4",
+      "title": "combinatorics specialist",
+      "may_submit": false,
+      "duties": [
+        "Lead counting, probability, and expected-value problems.",
+        "Give exact fractions in lowest terms unless the problem says otherwise."
+      ]
+    }
+  ],
+  "answer_format": "Submit the team's final answers in numbered order, using exact values when required.",
+  "scoring": {
+    "mode": "gold",
+    "unit": "problem_or_question",
+    "evaluator_id": "rubric_llm_v1",
+    "evaluator_status": "ready",
+    "rubric_path": "data/rubrics/worked_answer_100_v1.json",
+    "evaluator_strategy": "structured_rubric_llm_judge"
+  },
+  "submission": {
+    "max_count": 1,
+    "shared": true,
+    "mime_types": [
+      "text/plain"
+    ],
+    "task_types": [
+      "team_contest"
+    ],
+    "official_deliverable": "worked_answers",
+    "official_mime_types": [
+      "text/plain"
+    ]
+  },
+  "rules_text": "International Linguistics Olympiad — Team Contest. The active team of 4 works the problem set together and turns in one shared answer sheet. Collaborate only within the team under contest rules. The team files one shared submission. Official timing note: About 4 hours for the team contest.",
+  "provenance": {
+    "status": "source_enriched_v1",
+    "sources": [
+      {
+        "title": "IOL Regulations",
+        "url": "https://ioling.org/rules/rules.pdf",
+        "retrieved_at": "2026-08-12",
+        "local_text": "data/rules/sources/iol_team/01_rules.txt"
+      },
+      {
+        "title": "https://ioling.org/guidelines/en/",
+        "url": "https://ioling.org/guidelines/en/",
+        "retrieved_at": "2026-08-12",
+        "local_text": "data/rules/sources/iol_team/01_rules.txt"
+      }
+    ],
+    "adaptations": [
+      "max_turns is a safety budget, not necessarily the official wall-clock limit",
+      "specialist roles are a research roster overlay",
+      "physical/oral/live opponent fidelity may be incomplete in src/"
+    ],
+    "crawl_status": "ok",
+    "crawled_excerpts": [
+      {
+        "url": "https://ioling.org/rules/rules.pdf",
+        "excerpt": "language Regulations of the International Linguistics Olympiad (IOL) Whereas the faculty of using language is one of the most prominent defining characteristics of the human species and curiosity towards language is natural and universal, and whereas linguistic research is one of the foremost ways of learning about mankind and the language technologies are among the leading industries in a world intent to maintain its diversity in this age of global communication, and whereas the popularisation "
+      },
+      {
+        "url": "https://ioling.org/guidelines/en/",
+        "excerpt": "IOL rules and guidelines for contestants IOL Menu Home Contests Upcoming Past Contests How to Participate Countries Results By year By country Hall of Fame Best Solutions Problems Samples By year Slides Solvers&#39; Choice Average Scores About FAQ History A Tale of Two Trophies Regulations Sponsorship News Sponsors Contact International Linguistics Olympiad IOL rules and guidelines for contestants English Rules for the individual competition The following are rules and guidelines for contestants"
+      }
+    ],
+    "enriched_at": "2026-08-12T16:53:55.307647+00:00",
+    "official_time_note": "About 4 hours for the team contest.",
+    "research_confidence": "high",
+    "proxy_limitations": [
+      "Wall-clock 4h and quiet shared room dynamics map poorly to turn budgets.",
+      "Handwritten diagram/script linguistic answers lose fidelity in plain text."
+    ],
+    "research_merged_at": "2026-08-12T17:04:20.725537+00:00",
+    "rules_text_source": "composed_from_card_fields_v2",
+    "research_reports": [
+      "docs/rules_crawl_2026-08-11.md"
+    ],
+    "research_graded_at": "2026-08-11"
+  },
+  "comparability": {
+    "overall": "draft",
+    "dimensions": {
+      "roster": "approximate",
+      "timing": "adapted",
+      "tools": "src_tool_surface",
+      "scoring": "gold",
+      "environment": "partial"
+    }
+  }
+}

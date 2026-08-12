@@ -1,0 +1,182 @@
+{
+  "schema_version": "1.0",
+  "rule_id": "icpc:draft_v1",
+  "competition_id": "icpc",
+  "profile": "official_equivalent",
+  "protocol": "single_workstation_programming",
+  "team": {
+    "active_min": 3,
+    "active_default": 3,
+    "active_max": 3,
+    "collaboration": "Collaborate only within the team under contest rules."
+  },
+  "execution": {
+    "max_turns": 60,
+    "scheduler": "src_collaboration_draft",
+    "draft": true
+  },
+  "allowed_tools": [
+    "query_rules",
+    "execute_code"
+  ],
+  "resources": {
+    "internet": "judge_only_or_forbidden",
+    "calculator": "forbidden",
+    "code_execution": "allowed",
+    "paper_pencil": "allowed",
+    "provided_materials_only": true,
+    "shared_workstation": true
+  },
+  "human_constraints": [
+    "You must behave like a human teammate under official contest rules.",
+    "Do not claim tools, internet, or materials that the rule card forbids.",
+    "Do not look up answer keys or hidden solutions.",
+    "Team of 3 shares exactly one workstation.",
+    "No public internet on the contest machine; no root/sudo.",
+    "Languages limited to the official environment set (C/C++/Java/Kotlin/Python 3).",
+    "Only permitted printed reference materials (e.g. Team Reference Document rules) apply.",
+    "No phones, extra devices, or outside human help.",
+    "Submit programs to an automated judge; score by solves and time penalty.",
+    "Team of 3 contestants; one shared workstation (World Finals traditional setup).",
+    "Languages: C, C++, Java, Kotlin, Python 3 (WF environment page); EUC 2026 same set; 5-hour contest (EUC rules).",
+    "No additional computers/electronics/calculators/screens in Team Area; no Internet on contest machines (practice images may have net; WF does not).",
+    "Team Reference Document ≤25 single-sided pages (printed only; not on machine); one printed natural-language dictionary per person, unannotated.",
+    "IDE internal AI tools disabled on WF image.",
+    "Scoring: ICPC WF rules — # solved then time penalty; compile errors not penalized (EUC); scoreboard freeze last hour (EUC).",
+    "Communication only among team members (+ staff for clarifications/tech)."
+  ],
+  "agent_roles": [
+    {
+      "name": "Agent_1",
+      "title": "driver / synthesizer",
+      "may_submit": true,
+      "duties": [
+        "Type the code and keep the single workstation productive.",
+        "Refuse to start coding until the navigator's approach is clear.",
+        "Submit only after the format and rule checks pass."
+      ]
+    },
+    {
+      "name": "Agent_2",
+      "title": "navigator / algorithm designer",
+      "may_submit": false,
+      "duties": [
+        "Design the algorithm and justify its complexity before code is written.",
+        "Watch the driver's code for deviations from the agreed approach."
+      ]
+    },
+    {
+      "name": "Agent_3",
+      "title": "tester / edge-case hunter",
+      "may_submit": false,
+      "duties": [
+        "Invent edge cases, degenerate inputs, and overflow risks before submitting.",
+        "Reproduce failures precisely so the fix targets the real cause."
+      ]
+    }
+  ],
+  "answer_format": "Submit source code or the required program output for the programming judge.",
+  "scoring": {
+    "mode": "gold_or_judge",
+    "unit": "problem_or_question",
+    "evaluator_id": "programming_judge",
+    "evaluator_status": "deferred",
+    "evaluator_strategy": "official_tests_in_isolated_sandbox"
+  },
+  "submission": {
+    "max_count": 1,
+    "shared": true,
+    "mime_types": [
+      "text/plain"
+    ],
+    "task_types": [
+      "algorithmic_programming"
+    ],
+    "official_deliverable": "source_code",
+    "official_mime_types": [
+      "text/x-c++src",
+      "text/x-python"
+    ],
+    "adaptation": "Official submissions are compiled and judged; the runner submits source text only."
+  },
+  "rules_text": "ICPC — International Collegiate Programming Contest. The team of 3 shares a single workstation and submits programs to an automated judge that only reports accept or reject. Collaborate only within the team under contest rules. The team files one shared submission. Official timing note: 5 hours.",
+  "provenance": {
+    "status": "source_enriched_v1",
+    "sources": [
+      {
+        "title": "https://docs.icpc.global/worldfinals-programming-environment/",
+        "url": "https://docs.icpc.global/worldfinals-programming-environment/",
+        "retrieved_at": "2026-08-12",
+        "local_text": "data/rules/sources/icpc/01_worldfinals-programming-environment.txt"
+      },
+      {
+        "title": "https://docs.icpc.global/wp-content/uploads/2024/08/2024-TechNotes.pdf",
+        "url": "https://docs.icpc.global/wp-content/uploads/2024/08/2024-TechNotes.pdf",
+        "retrieved_at": "2026-08-12",
+        "local_text": "data/rules/sources/icpc/01_worldfinals-programming-environment.txt"
+      },
+      {
+        "title": "ICPC Programming Environment",
+        "url": "https://icpc.global/worldfinals/programming-environment",
+        "retrieved_at": "2026-08-10"
+      },
+      {
+        "title": "https://docs.icpc.global/worldfinals-programming-environment",
+        "url": "https://docs.icpc.global/worldfinals-programming-environment",
+        "retrieved_at": "2026-08-11",
+        "from_report": "docs/rules_crawl_2026-08-11.md"
+      },
+      {
+        "title": "https://icpc.global/worldfinals/on-site-registration",
+        "url": "https://icpc.global/worldfinals/on-site-registration",
+        "retrieved_at": "2026-08-11",
+        "from_report": "docs/rules_crawl_2026-08-11.md"
+      },
+      {
+        "title": "https://euc.icpc.global/home-2026/rules/",
+        "url": "https://euc.icpc.global/home-2026/rules/",
+        "retrieved_at": "2026-08-11",
+        "from_report": "docs/rules_crawl_2026-08-11.md"
+      }
+    ],
+    "adaptations": [
+      "max_turns is a safety budget, not necessarily the official wall-clock limit",
+      "specialist roles are a research roster overlay",
+      "physical/oral/live opponent fidelity may be incomplete in src/"
+    ],
+    "crawl_status": "ok",
+    "crawled_excerpts": [
+      {
+        "url": "https://docs.icpc.global/worldfinals-programming-environment/",
+        "excerpt": "Programming Environment &#8211; ICPC Documents Programming Environment --> Programming Environment This page describes current plans for the Programming Environment which will be available to each World Finals team. Please note that these plans are subject to change . See the &#8220;Update History&#8221; list at the bottom of this page for information on the currency of what is shown here. Additional updates will be posted soon. Each team at the World Finals will be provided with one workstation"
+      },
+      {
+        "url": "https://docs.icpc.global/wp-content/uploads/2024/08/2024-TechNotes.pdf",
+        "excerpt": "V1.1 2024.08.21 ICPC World Finals – Technical Notes Page 1 of 5 TECHNICAL NOTES This document contains important technical information related to the ICPC World Finals environment. It is important that your team read and understand all the information below. All Programs:  Your program must read its input from “standard input”.  Your program should send its output to \"standard output\". Your program may also send output to \"standard error\", but only output sent to \"standard output\" will be cons"
+      }
+    ],
+    "enriched_at": "2026-08-12T16:53:55.312005+00:00",
+    "official_time_note": "5 hours.",
+    "research_confidence": "high",
+    "proxy_limitations": [
+      "One keyboard / three humans is the dominant constraint; multi-agent parallel coding overstates capability.",
+      "Exact WF duration is in regional/WF contest rules (EUC states 5h; confirm current WF rules PDF for the evaluated year)."
+    ],
+    "research_merged_at": "2026-08-12T17:04:20.856101+00:00",
+    "rules_text_source": "composed_from_card_fields_v2",
+    "research_reports": [
+      "docs/rules_crawl_2026-08-11.md"
+    ],
+    "research_graded_at": "2026-08-11"
+  },
+  "comparability": {
+    "overall": "draft",
+    "dimensions": {
+      "roster": "approximate",
+      "timing": "adapted",
+      "tools": "src_tool_surface",
+      "scoring": "gold_or_judge",
+      "environment": "partial"
+    }
+  }
+}

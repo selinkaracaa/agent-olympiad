@@ -1,0 +1,17 @@
+{
+  "competition_id": "cybench",
+  "crawled_at": "2026-08-11T16:08:54.470909+00:00",
+  "sources": [
+    {
+      "title": "Cybench README",
+      "url": "https://github.com/andyzorigin/cybench",
+      "status": "ok",
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 348859,
+      "raw_file": "data/rules/sources/cybench/01_cybench.html",
+      "text_file": "data/rules/sources/cybench/01_cybench.txt",
+      "text_chars": 12458,
+      "text_preview": "GitHub - andyzorigin/cybench · GitHub \n\n \n \n \n \n\n \n \n\n \n\n \n\n \n \n\n \n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n \n \n\n \n \n \n\n \n\n \n\n \n \n \n \n\n \n\n \n\n \n\n \n\n \n \n\n \n\n \n \n\n \n\n \n\n \n \n\n \n \n \n\n \n \n\n \n\n \n\n \n \n \n \n\n \n Skip to content \n\n \n \n \n \n \n \n \n\n \n \n \n \n \n\n \n\n \n\n \n \n \n \n \n \n \n \n \n \n \n \n\n \n \n \n Navigation Menu Sign in Appearance settings Platform AI CODE CREATION GitHub Copilot Write better code with AI GitHub Copilot app Direct agents from issue to merge MCP Registry Integrate external tools DEVELOPER WORKFLOWS Actions Automate any workflow Codespaces Instant dev environments Issues Plan and track work Code Review Manage code changes Code Quality Enforce quality at merge APPLICATION SECURITY GitHub Advanced Security Find and fix vulnerabilities Code security Secure your code as you build Secret protection Stop leaks before they start EXPLORE Why GitHub Documentation Blog Changelog Marketplace View all features Solutions BY COMPANY SIZE Enterprises Small and medium teams Startups Nonprofits BY USE CASE App Modernization DevSecOps DevOps CI/CD View all use cases BY INDUSTRY Healthcare Financial services Manufacturing Government View all industries View all solutions Resources EXPLORE BY TOPIC AI Software Development DevOps Security View all topics EXPLORE BY TYPE Customer stories Events & webinars Ebooks & reports Business insights GitHub Skills SUPPORT & SERVICES Documentation Customer support Community forum Trust center Partners View all resources Open Source COMMUNITY GitHub Sponsors Fund op"
+    }
+  ]
+}

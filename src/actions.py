@@ -16,6 +16,7 @@ Available action types:
 
 Rules:
 - Use only tools listed as allowed for this contest.
+- Obey the binding human contest rules in your system prompt.
 - submit_final must contain the complete team answer.
 - Be substantive; build on prior discussion."""
 

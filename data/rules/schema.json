@@ -1,0 +1,161 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agent-olympiad.local/schemas/competition-rule-card-v1.json",
+  "title": "Agent Olympiad competition rule card",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "rule_id",
+    "competition_id",
+    "profile",
+    "protocol",
+    "team",
+    "execution",
+    "allowed_tools",
+    "resources",
+    "submission",
+    "rules_text",
+    "provenance",
+    "comparability"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "rule_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "competition_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "profile": {
+      "enum": [
+        "official_equivalent",
+        "benchmark_native",
+        "proxy",
+        "non_comparable"
+      ]
+    },
+    "protocol": {
+      "type": "string",
+      "minLength": 1
+    },
+    "team": {
+      "type": "object",
+      "required": [
+        "active_min",
+        "active_default",
+        "active_max"
+      ],
+      "properties": {
+        "active_min": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "active_default": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "active_max": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "roster_max": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "collaboration": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "execution": {
+      "type": "object",
+      "required": [
+        "max_turns"
+      ],
+      "properties": {
+        "max_turns": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "scheduler": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
+    "allowed_tools": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string"
+      }
+    },
+    "human_constraints": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "agent_roles": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "title",
+          "duties"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1
+          },
+          "duties": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "may_submit": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "answer_format": {
+      "type": "string"
+    },
+    "scoring": {
+      "type": "object"
+    },
+    "resources": {
+      "type": "object"
+    },
+    "submission": {
+      "type": "object"
+    },
+    "rules_text": {
+      "type": "string",
+      "minLength": 1
+    },
+    "provenance": {
+      "type": "object"
+    },
+    "comparability": {
+      "type": "object"
+    }
+  }
+}

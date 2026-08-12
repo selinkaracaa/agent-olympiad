@@ -1,0 +1,161 @@
+{
+  "schema_version": "1.0",
+  "rule_id": "ioai_team:draft_v1",
+  "competition_id": "ioai_team",
+  "profile": "official_equivalent",
+  "protocol": "research_artifact",
+  "team": {
+    "active_min": 4,
+    "active_default": 4,
+    "active_max": 4,
+    "collaboration": "Collaborate only within the team under contest rules."
+  },
+  "execution": {
+    "max_turns": 24,
+    "scheduler": "src_collaboration_draft",
+    "draft": true,
+    "official_minutes": null,
+    "turn_budget_basis": "official clock n/a turns vs floor 13 (4 teammates x 2 turns + 1 answer parts + 4 for synthesis)"
+  },
+  "allowed_tools": [
+    "query_rules",
+    "execute_code",
+    "web_search"
+  ],
+  "resources": {
+    "internet": "allowed",
+    "calculator": "forbidden",
+    "code_execution": "allowed",
+    "paper_pencil": "allowed",
+    "provided_materials_only": false
+  },
+  "human_constraints": [
+    "You must behave like a human teammate under official contest rules.",
+    "Do not claim tools, internet, or materials that the rule card forbids.",
+    "Do not look up answer keys or hidden solutions.",
+    "Solve the team AI challenge from provided materials.",
+    "Code and research tools are allowed only as listed in the rule card.",
+    "Do not exfiltrate hidden tests or private grading data.",
+    "Team Challenge is an official IOAI component; national teams collaborate seated together.",
+    "Style changes yearly (2024: AI creative tools; 2025: humanoid robots; 2026 style TBA at rules time).",
+    "Number of computers and allowed websites/tools are task-specific, announced before the round.",
+    "No communication with people outside the contest hall during Team Challenge.",
+    "Approved/prohibited items similar to Individual Contest (phones/books/storage media generally prohibited in Individual rules).",
+    "Duration: few hours to a full day depending on style; scoring task-specific; English tasks; translation site may be allowed as announced.",
+    "Appeals via Team Leaders within organizer-specified windows."
+  ],
+  "agent_roles": [
+    {
+      "name": "Agent_1",
+      "title": "captain / editor",
+      "may_submit": true,
+      "duties": [
+        "Own the deliverable's structure and cut material that does not earn points.",
+        "Resolve disagreements between analysts before they reach the final text.",
+        "Submit only after the format and rule checks pass."
+      ]
+    },
+    {
+      "name": "Agent_2",
+      "title": "analyst",
+      "may_submit": false,
+      "duties": [
+        "Gather the evidence the recommendation rests on.",
+        "Separate what the sources say from what the team infers."
+      ]
+    },
+    {
+      "name": "Agent_3",
+      "title": "quant / modeler",
+      "may_submit": false,
+      "duties": [
+        "Build the numbers: valuation, models, and sensitivity checks.",
+        "State assumptions explicitly and show which results depend on them."
+      ]
+    },
+    {
+      "name": "Agent_4",
+      "title": "research lead",
+      "may_submit": false,
+      "duties": [
+        "Decide which questions the research must answer and in what order.",
+        "Kill lines of inquiry that will not change the recommendation."
+      ]
+    }
+  ],
+  "answer_format": "Submit a structured report or slide outline covering analysis, recommendation, and evidence.",
+  "scoring": {
+    "mode": "rubric",
+    "unit": "artifact",
+    "evaluator_id": null,
+    "evaluator_status": "unassigned"
+  },
+  "submission": {
+    "max_count": 1,
+    "shared": true,
+    "mime_types": [
+      "text/plain"
+    ],
+    "task_types": [
+      "team_challenge"
+    ],
+    "official_deliverable": "code_and_predictions",
+    "official_mime_types": [
+      "text/x-python",
+      "text/plain"
+    ],
+    "adaptation": "Official entries are notebooks and prediction files; the runner submits code and results as text."
+  },
+  "rules_text": "International Olympiad in Artificial Intelligence — Team Challenge. The team of 4 prepares one research deliverable that expert judges score against a rubric. Collaborate only within the team under contest rules. The team files one shared submission. Official wall-clock timing is not encoded for this track; treat the turn budget as your clock and submit before it runs out.",
+  "provenance": {
+    "status": "source_enriched_v1",
+    "sources": [
+      {
+        "title": "IOAI",
+        "url": "https://ioai-official.org/resources/",
+        "retrieved_at": "2026-08-12",
+        "local_text": "data/rules/sources/ioai_team/01_resources.txt"
+      },
+      {
+        "title": "https://ioai-official.org/wp-content/uploads/2026/06/IOAI2026-Contest-Rules-and-Tehnical-Appendix.pdf",
+        "url": "https://ioai-official.org/wp-content/uploads/2026/06/IOAI2026-Contest-Rules-and-Tehnical-Appendix.pdf",
+        "retrieved_at": "2026-08-11",
+        "from_report": "docs/rules_crawl_2026-08-11.md"
+      }
+    ],
+    "adaptations": [
+      "max_turns is a safety budget, not necessarily the official wall-clock limit",
+      "specialist roles are a research roster overlay",
+      "physical/oral/live opponent fidelity may be incomplete in src/"
+    ],
+    "crawl_status": "ok",
+    "crawled_excerpts": [
+      {
+        "url": "https://ioai-official.org/resources/",
+        "excerpt": "Education Hub &#8211; International Olympiad in AI Skip to content About Accreditation Countries & territories International Board International Scientific Committee Regulations Become an IOAI Host Regional Olympiads in AI Education Hub 2026 Kazakhstan Schedule International Jury and HSC Syllabus Contest Rules Registration Financial Aid 2026 Call for tasks Results 2026 AI Model Track Rules & Format FAQ IOAI GAITE GAITE Registration Sponsors Editions 2024 Bulgaria 2024 Participating teams 2024 Or"
+      }
+    ],
+    "enriched_at": "2026-08-12T16:53:55.317761+00:00",
+    "research_confidence": "high",
+    "proxy_limitations": [
+      "Allowed-tool surface is intentionally year-specific — freeze the year’s task appendix.",
+      "Physical robot tasks (2025-style) are non-comparable to pure software agents."
+    ],
+    "research_merged_at": "2026-08-12T17:04:21.096526+00:00",
+    "rules_text_source": "composed_from_card_fields_v2",
+    "research_reports": [
+      "docs/rules_crawl_2026-08-11.md"
+    ],
+    "research_graded_at": "2026-08-11"
+  },
+  "comparability": {
+    "overall": "draft",
+    "dimensions": {
+      "roster": "approximate",
+      "timing": "adapted",
+      "tools": "src_tool_surface",
+      "scoring": "rubric",
+      "environment": "partial"
+    }
+  }
+}

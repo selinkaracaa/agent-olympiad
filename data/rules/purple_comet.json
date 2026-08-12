@@ -1,0 +1,183 @@
+{
+  "schema_version": "1.0",
+  "rule_id": "purple_comet:official_shared_answer",
+  "competition_id": "purple_comet",
+  "profile": "official_equivalent",
+  "protocol": "shared_answer",
+  "team": {
+    "active_min": 1,
+    "active_default": 6,
+    "active_max": 6,
+    "collaboration": "Up to six teammates share one computer and one answer sheet."
+  },
+  "execution": {
+    "max_turns": 24,
+    "scheduler": "round_table_or_centralized",
+    "wall_clock_note": "HS usually 90 minutes / MS 60 minutes; max_turns is a safety budget.",
+    "official_minutes": 90,
+    "turn_budget_basis": "official clock 18 turns vs floor 17 (6 teammates x 2 turns + 1 answer parts + 4 for synthesis)"
+  },
+  "allowed_tools": [
+    "query_rules",
+    "use_calculator"
+  ],
+  "resources": {
+    "internet": "forbidden_for_solution_search",
+    "calculator": "allowed",
+    "computer_algebra": "allowed_for_calculation_only",
+    "ai_tools": "forbidden",
+    "solution_method_search": "forbidden",
+    "paper_pencil": "allowed"
+  },
+  "human_constraints": [
+    "You must behave like a human teammate under official contest rules.",
+    "Do not claim tools, internet, or materials that the rule card forbids.",
+    "Do not look up answer keys or hidden solutions.",
+    "Up to six teammates may share one computer.",
+    "Calculators and computation tools may evaluate expressions; they must not invent the method.",
+    "No generative AI tools.",
+    "No searching for solution methods or answer keys.",
+    "Final answers must be non-negative integers in contest order.",
+    "Team size 1–6; adult supervisor required; each team needs its own computer/Internet session (shared computers ⇒ sequential team starts).",
+    "MS: 20 problems / 60 minutes; HS: 30 / 90 minutes within a multi-day window (244 hours stated for 2026).",
+    "Teamwork encouraged; no help from non-members.",
+    "Calculators and computation tools allowed (Desmos, WolframAlpha, Mathematica, GeoGebra, custom code, etc.) for calculations/diagrams only.",
+    "May use local books/notes; may NOT use Internet to find solution methods/definitions instruction; may NOT use generative AI (ChatGPT/Gemini/Copilot/Claude etc.) to produce/explain/verify answers or code.",
+    "Answers: non-negative integers via web form; last submission per problem counts; remote teammates may communicate."
+  ],
+  "agent_roles": [
+    {
+      "name": "Agent_1",
+      "title": "captain and answer synthesizer",
+      "may_submit": true,
+      "duties": [
+        "Maintain the ordered integer answer list.",
+        "Submit the final answers only when the sheet is complete."
+      ]
+    },
+    {
+      "name": "Agent_2",
+      "title": "algebra and functions specialist",
+      "may_submit": false,
+      "duties": [
+        "Own algebra, sequences, and functional equations.",
+        "Use the calculator only after the method is set."
+      ]
+    },
+    {
+      "name": "Agent_3",
+      "title": "geometry specialist",
+      "may_submit": false,
+      "duties": [
+        "Own geometry and measurement problems.",
+        "Convert exact results to the required integer answer form."
+      ]
+    },
+    {
+      "name": "Agent_4",
+      "title": "counting and probability specialist",
+      "may_submit": false,
+      "duties": [
+        "Own combinatorics and probability.",
+        "Reduce fractions and report m+n style answers carefully."
+      ]
+    },
+    {
+      "name": "Agent_5",
+      "title": "number theory specialist",
+      "may_submit": false,
+      "duties": [
+        "Own number theory and digit problems.",
+        "Double-check modular and divisibility arguments."
+      ]
+    },
+    {
+      "name": "Agent_6",
+      "title": "verifier and calculator operator",
+      "may_submit": false,
+      "duties": [
+        "Recompute numerical claims with the allowed calculator.",
+        "Reject any plan that requires forbidden solution search."
+      ]
+    }
+  ],
+  "answer_format": "Ordered non-negative integers, one per problem:\n1. N\n2. N\n...\nUse the contest's required integer encoding (for example m+n).",
+  "scoring": {
+    "mode": "gold",
+    "unit": "problem",
+    "notes": "Exact match against the official numeric answer list.",
+    "evaluator_id": null,
+    "evaluator_status": "unassigned"
+  },
+  "submission": {
+    "max_count": 1,
+    "shared": true,
+    "mime_types": [
+      "text/plain"
+    ],
+    "finality": "irrevocable",
+    "task_types": [
+      "team_contest"
+    ],
+    "official_deliverable": "answer_sheet",
+    "official_mime_types": [
+      "text/plain"
+    ]
+  },
+  "rules_text": "Purple Comet! Math Meet team contest: up to 6 students, shared computational tools allowed for calculation only, no AI and no searching for solution methods. Submit non-negative integer answers. Official timing note: HS about 90 minutes / MS about 60 minutes (plus multi-day window historically).",
+  "provenance": {
+    "status": "source_enriched_v1",
+    "sources": [
+      {
+        "title": "Purple Comet Rules",
+        "url": "https://purplecomet.org/rules",
+        "retrieved_at": "2026-08-12",
+        "local_text": "data/rules/sources/purple_comet/01_rules.txt"
+      },
+      {
+        "title": "Purple Comet FAQ",
+        "url": "https://purplecomet.org/faq",
+        "retrieved_at": "2026-08-12",
+        "local_text": "data/rules/sources/purple_comet/01_rules.txt"
+      }
+    ],
+    "adaptations": [
+      "only the built-in calculator tool is exposed; CAS/Desmos are not separately instrumented",
+      "wall-clock contest windows are represented by a turn budget"
+    ],
+    "crawl_status": "ok",
+    "crawled_excerpts": [
+      {
+        "url": "https://purplecomet.org/rules",
+        "excerpt": "PurpleComet Purple Comet ! Math Meet Home Supervisor Login/Registration Team Login Contest Information Donations Acknowledgments Contact Us Home Contest Information Contest Results Old Contest Answers Donations Acknowledgments Contact Us Contest Rules Instructions to Supervisors Quick Start Instructions FAQ Contest Results Old Contest Answers Changes To The 2026 Contest Poster & Flyer List of Teams Contest Rules Official Rules The Purple Comet! Math Meet is a free, annual, international, online,"
+      },
+      {
+        "url": "https://purplecomet.org/faq",
+        "excerpt": "PurpleComet Purple Comet ! Math Meet Home Supervisor Login/Registration Team Login Contest Information Donations Acknowledgments Contact Us Home Contest Information Contest Results Old Contest Answers Donations Acknowledgments Contact Us Contest Rules Instructions to Supervisors Quick Start Instructions FAQ Contest Results Old Contest Answers Changes To The 2026 Contest Poster & Flyer List of Teams Purple Comet! Math Meet Frequently Asked Questions What Is The Purple Comet! Math Meet? The Purple"
+      }
+    ],
+    "enriched_at": "2026-08-12T16:53:55.320935+00:00",
+    "official_time_note": "HS about 90 minutes / MS about 60 minutes (plus multi-day window historically).",
+    "research_confidence": "high",
+    "proxy_limitations": [
+      "Hardest policy to enforce for LLM agents: 'tools compute, humans choose methods' + AI ban.",
+      "Supervisor integrity model has no agent analogue."
+    ],
+    "research_merged_at": "2026-08-12T17:04:21.212303+00:00",
+    "research_reports": [
+      "docs/rules_crawl_2026-08-11.md"
+    ],
+    "research_graded_at": "2026-08-11"
+  },
+  "comparability": {
+    "overall": "comparable_with_tool_surface_adaptation",
+    "dimensions": {
+      "roster": "equivalent",
+      "timing": "adapted",
+      "information": "text_extract_proxy",
+      "tools": "calculator_subset",
+      "submission": "equivalent",
+      "scoring": "gold"
+    }
+  }
+}

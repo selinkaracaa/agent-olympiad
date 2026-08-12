@@ -1,0 +1,17 @@
+{
+  "competition_id": "debatebench",
+  "crawled_at": "2026-08-11T16:07:51.447523+00:00",
+  "sources": [
+    {
+      "title": "DebateBench datasets portal",
+      "url": "https://huggingface.co/datasets",
+      "status": "ok",
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 248273,
+      "raw_file": "data/rules/sources/debatebench/01_datasets.html",
+      "text_file": "data/rules/sources/debatebench/01_datasets.txt",
+      "text_chars": 4859,
+      "text_preview": "Datasets – Hugging Face \n\n \n\n \n\n \n\n \n \n \n \n Hugging Face Models Datasets Spaces Buckets new Docs Enterprise Pricing Website Tasks HuggingChat Collections Languages Organizations Community Blog Posts Daily Papers Hardware Learn Discord Forum GitHub Solutions Team & Enterprise Hugging Face PRO Enterprise Support Inference Providers Inference Endpoints Storage Buckets Log In Sign Up 1T&quot;,&quot;label&quot;:&quot;> 1T&quot;,&quot;type&quot;:&quot;size_categories&quot;}],&quot;format&quot;:[{&quot;id&quot;:&quot;format:json&quot;,&quot;label&quot;:&quot;json&quot;,&quot;type&quot;:&quot;format&quot;},{&quot;id&quot;:&quot;format:csv&quot;,&quot;label&quot;:&quot;csv&quot;,&quot;type&quot;:&quot;format&quot;},{&quot;id&quot;:&quot;format:parquet&quot;,&quot;label&quot;:&quot;parquet&quot;,&quot;type&quot;:&quot;format&quot;},{&quot;id&quot;:&quot;format:optimized-parquet&quot;,&quot;label&quot;:&quot;optimized-parquet&quot;,&quot;type&quot;:&quot;format&quot;},{&quot;id&quot;:&quot;format:agent-traces&quot;,&quot;label&quot;:&quot;Traces&quot;,&quot;type&quot;:&quot;format&quot;},{&quot;id&quot;:&quot;format:imagefolder&quot;,&quot;label&quot;:&quot;imagefolder&quot;,&quot;type&quot;:&quot;format&quot;},{&quot;id&quot;:&quot;format:audiofolder&quot;,&quot;label&quot;:&quot;soundfolder&quot;,&quot;type&quot;:&quot;format&quot;},{&quot;id&quot;:&quot;format:webdataset&quot;,&quot;label&quot;:&quot;webdataset&quot;,&quot;type&quot;:&quot;format&quot;},{&quot;id&quot;:&quot;format:t"
+    }
+  ]
+}

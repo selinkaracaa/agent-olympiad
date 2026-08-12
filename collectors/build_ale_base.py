@@ -5,7 +5,8 @@ Layout (mirrors agents-last-exam-data):
 
   data/base/
     README.md
-    task_cards.json
+    index.json              # competition-level catalog
+    task_cards.json         # per-task catalog
     tasks/
       <competition_id>/
         <problem_id>/
@@ -41,6 +42,87 @@ TASKS_ROOT = BASE_ROOT / "tasks"
 
 def _load_json(path: Path) -> Any:
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def _dump_json(path: Path, payload: Any) -> None:
+    path.write_text(
+        json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
+
+
+def count_base_tasks() -> dict[str, int]:
+    """Count staged problem directories under data/base/tasks/<competition>/."""
+    counts: dict[str, int] = {}
+    if not TASKS_ROOT.exists():
+        return counts
+    for competition_dir in sorted(TASKS_ROOT.iterdir()):
+        if not competition_dir.is_dir():
+            continue
+        counts[competition_dir.name] = sum(
+            1
+            for problem_dir in competition_dir.iterdir()
+            if problem_dir.is_dir() and (problem_dir / "base").exists()
+        )
+    return counts
+
+
+def write_base_catalogs(index: dict[str, Any]) -> dict[str, Any]:
+    """Point benchmarks/index.json at data/base and write data/base/index.json."""
+    counts = count_base_tasks()
+    default_unit = index.get("eval_unit_default", "session")
+    competitions: list[dict[str, Any]] = []
+
+    for olympiad in index.get("olympiads", []):
+        competition_id = olympiad["id"]
+        n_tasks = counts.get(competition_id, 0)
+        base_path = f"data/base/tasks/{competition_id}"
+        olympiad["base_path"] = base_path
+        olympiad["base_tasks"] = n_tasks
+        competitions.append(
+            {
+                "id": competition_id,
+                "name": olympiad.get("name"),
+                "base_path": base_path,
+                "benchmark_path": olympiad.get("benchmark_path"),
+                "n_tasks": n_tasks,
+                "eval_unit": olympiad.get("eval_unit", default_unit),
+            }
+        )
+
+    indexed = {row["id"] for row in competitions}
+    for competition_id, n_tasks in counts.items():
+        if competition_id in indexed:
+            continue
+        competitions.append(
+            {
+                "id": competition_id,
+                "name": competition_id,
+                "base_path": f"data/base/tasks/{competition_id}",
+                "benchmark_path": f"data/benchmarks/{competition_id}/benchmark.json",
+                "n_tasks": n_tasks,
+                "eval_unit": default_unit,
+            }
+        )
+
+    index["base_root"] = "data/base"
+    index["task_cards_path"] = "data/base/task_cards.json"
+    _dump_json(BENCHMARK_ROOT / "index.json", index)
+
+    base_index = {
+        "description": (
+            "Competition-level catalog of ALE-style task inputs under data/base. "
+            "Per-task records live in task_cards.json."
+        ),
+        "layout": "tasks/<competition_id>/<problem_id>/base/{input,software}",
+        "source_benchmarks": "data/benchmarks",
+        "source_index": "data/benchmarks/index.json",
+        "task_cards_path": "data/base/task_cards.json",
+        "n_competitions": len(competitions),
+        "n_tasks": sum(row["n_tasks"] for row in competitions),
+        "competitions": competitions,
+    }
+    _dump_json(BASE_ROOT / "index.json", base_index)
+    return base_index
 
 
 def _load_problems(competition_id: str) -> list[dict[str, Any]]:
@@ -423,9 +505,18 @@ def main() -> None:
         default=None,
         help="Optional cap of problems per competition (for smoke tests)",
     )
+    parser.add_argument(
+        "--catalog-only",
+        action="store_true",
+        help="Refresh data/base/index.json and base_path pointers without restaging tasks",
+    )
     args = parser.parse_args()
 
     index = _load_json(BENCHMARK_ROOT / "index.json")
+    if args.catalog_only:
+        catalog = write_base_catalogs(index)
+        print(json.dumps(catalog, ensure_ascii=False, indent=2))
+        return
     olympiad_ids = [o["id"] for o in index.get("olympiads", [])]
     if args.competitions:
         selected = list(args.competitions)
@@ -489,11 +580,14 @@ def main() -> None:
         encoding="utf-8",
     )
 
+    catalog = write_base_catalogs(_load_json(BENCHMARK_ROOT / "index.json"))
     summary = {
         "n_tasks": len(cards),
         "n_competitions": len({c["category"] for c in cards}),
         "skipped": skipped,
         "base_root": str(BASE_ROOT.relative_to(REPO_ROOT)).replace("\\", "/"),
+        "base_index": "data/base/index.json",
+        "catalog_n_tasks": catalog["n_tasks"],
     }
     print(json.dumps(summary, ensure_ascii=False, indent=2))
 

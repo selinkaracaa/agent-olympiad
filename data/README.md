@@ -21,8 +21,8 @@ Benchmark materials for **multi-agent AI teams** on olympiad-style team tasks (A
 
 | Path | Role |
 |------|------|
-| `base/` | ALE-style agent task inputs (`tasks/<competition>/<id>/base/{input,software}`) + `task_cards.json` |
-| `benchmarks/` | Extracted problem JSON / unified catalog |
+| `base/` | ALE-style agent task inputs (`tasks/<competition>/<id>/base/{input,software}`) + `index.json` / `task_cards.json` |
+| `benchmarks/` | Extracted problem JSON / unified catalog (`index.json` also lists `base_path`) |
 | `raw/` | Source PDFs and upstream checkouts |
 | `rubrics/` | Scoring rubrics |
 | `evaluators/` | Evaluator assets |

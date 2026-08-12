@@ -1,0 +1,166 @@
+{
+  "schema_version": "1.0",
+  "rule_id": "iiot:draft_v1",
+  "competition_id": "iiot",
+  "profile": "official_equivalent",
+  "protocol": "single_workstation_programming",
+  "team": {
+    "active_min": 4,
+    "active_default": 4,
+    "active_max": 4,
+    "collaboration": "Collaborate only within the team under contest rules."
+  },
+  "execution": {
+    "max_turns": 48,
+    "scheduler": "src_collaboration_draft",
+    "draft": true,
+    "official_minutes": 240,
+    "turn_budget_basis": "official clock 48 turns vs floor 13 (4 teammates x 2 turns + 1 answer parts + 4 for synthesis)"
+  },
+  "allowed_tools": [
+    "query_rules",
+    "execute_code"
+  ],
+  "resources": {
+    "internet": "judge_only_or_forbidden",
+    "calculator": "forbidden",
+    "code_execution": "allowed",
+    "paper_pencil": "allowed",
+    "provided_materials_only": true,
+    "shared_workstation": true
+  },
+  "human_constraints": [
+    "You must behave like a human teammate under official contest rules.",
+    "Do not claim tools, internet, or materials that the rule card forbids.",
+    "Do not look up answer keys or hidden solutions.",
+    "Team of 4 shares two contest computers / VMs.",
+    "Network access is restricted to the online judge; no general web browsing.",
+    "Only C++ is accepted.",
+    "USB and personal materials are disabled / forbidden.",
+    "Use organizer-provided language reference only.",
+    "Submit code to an automated judge mindset (AC/WA/TLE/RE).",
+    "Team: 4 students (+2 reserves); same school/region constraints per regulations.",
+    "International Final: 4 hours, ≥7 problems; English problem statements.",
+    "Only organizer-provided computers/software; own mouse/keyboard if approved; USB disabled; Internet only to contest platform.",
+    "Regulations list allowed languages C, C++, Pascal with language docs available; host publishes OS/IDE list ≥1 month ahead.",
+    "IIOT 2026 online participation rules: 2 computers per team; Internet limited to grading system; **only C++ accepted for submissions** (host-year restriction stricter than general regulations).",
+    "National contests: no phones/tablets/personal electronics; no textbooks/translators; no inter-team communication.",
+    "Submission: source programs to automatic evaluator."
+  ],
+  "agent_roles": [
+    {
+      "name": "Agent_1",
+      "title": "driver / synthesizer",
+      "may_submit": true,
+      "duties": [
+        "Type the code and keep the single workstation productive.",
+        "Refuse to start coding until the navigator's approach is clear.",
+        "Submit only after the format and rule checks pass."
+      ]
+    },
+    {
+      "name": "Agent_2",
+      "title": "navigator / algorithm designer",
+      "may_submit": false,
+      "duties": [
+        "Design the algorithm and justify its complexity before code is written.",
+        "Watch the driver's code for deviations from the agreed approach."
+      ]
+    },
+    {
+      "name": "Agent_3",
+      "title": "tester / edge-case hunter",
+      "may_submit": false,
+      "duties": [
+        "Invent edge cases, degenerate inputs, and overflow risks before submitting.",
+        "Reproduce failures precisely so the fix targets the real cause."
+      ]
+    },
+    {
+      "name": "Agent_4",
+      "title": "language reference reader",
+      "may_submit": false,
+      "duties": [
+        "Answer library and syntax questions from permitted references only.",
+        "Flag when a language feature is not in the official environment."
+      ]
+    }
+  ],
+  "answer_format": "Submit source code or the required program output for the programming judge.",
+  "scoring": {
+    "mode": "gold_or_judge",
+    "unit": "problem_or_question",
+    "evaluator_id": "programming_judge",
+    "evaluator_status": "deferred",
+    "evaluator_strategy": "official_tests_in_isolated_sandbox"
+  },
+  "submission": {
+    "max_count": 1,
+    "shared": true,
+    "mime_types": [
+      "text/plain"
+    ],
+    "task_types": [
+      "algorithmic_programming"
+    ],
+    "official_deliverable": "source_code",
+    "official_mime_types": [
+      "text/x-c++src",
+      "text/x-python"
+    ],
+    "adaptation": "Official submissions are compiled and judged; the runner submits source text only."
+  },
+  "rules_text": "International Informatics Olympiad in Teams (IIOT). The team of 4 shares a single workstation and submits programs to an automated judge that only reports accept or reject. Collaborate only within the team under contest rules. The team files one shared submission. Official timing note: About 3–4 hours.",
+  "provenance": {
+    "status": "source_enriched_v1",
+    "sources": [
+      {
+        "title": "IIOT Regulations",
+        "url": "https://iio.team/documents/Regulations.pdf",
+        "retrieved_at": "2026-08-12",
+        "local_text": "data/rules/sources/iiot/01_Regulations.txt"
+      },
+      {
+        "title": "http://iiot2026.cni.nt.edu.ro/online-participation-rules/",
+        "url": "http://iiot2026.cni.nt.edu.ro/online-participation-rules/",
+        "retrieved_at": "2026-08-11",
+        "from_report": "docs/rules_crawl_2026-08-11.md"
+      }
+    ],
+    "adaptations": [
+      "max_turns is a safety budget, not necessarily the official wall-clock limit",
+      "specialist roles are a research roster overlay",
+      "physical/oral/live opponent fidelity may be incomplete in src/"
+    ],
+    "crawl_status": "ok",
+    "crawled_excerpts": [
+      {
+        "url": "https://iio.team/documents/Regulations.pdf",
+        "excerpt": "IIOT regulations ver. 3 Oct 2024 Page 1 of 9 INTERNATIONAL INFORMATICS OLYMPIAD IN TEAMS REGULATIONS Introduction Goals General regulations Teams The International Committee The Scientific Committee Competitions Problems Evaluation Results and prizes Host Country Approved by the International Committee IIOT Egypt, Hungary, Italy, Romania, Syria the 3rd of October 2024 IIOT regulations ver. 3 Oct 2024 Page 2 of 9 INTRODUCTION The Olympiad is organized by an International Committee, which consists"
+      }
+    ],
+    "enriched_at": "2026-08-12T16:53:55.311510+00:00",
+    "official_time_note": "About 3–4 hours.",
+    "research_confidence": "high",
+    "proxy_limitations": [
+      "Prefer year-host environment (2 VMs, C++-only) over older multi-language regulations when simulating recent Finals.",
+      "Shared dual-workstation contention is a core team-programming constraint agents often ignore."
+    ],
+    "research_merged_at": "2026-08-12T17:04:20.833312+00:00",
+    "rules_text_source": "composed_from_card_fields_v2",
+    "research_reports": [
+      "docs/rules_crawl_2026-08-11.md"
+    ],
+    "research_graded_at": "2026-08-11"
+  },
+  "comparability": {
+    "overall": "draft",
+    "dimensions": {
+      "roster": "approximate",
+      "timing": "adapted",
+      "tools": "src_tool_surface",
+      "scoring": "gold_or_judge",
+      "environment": "partial"
+    }
+  }
+}

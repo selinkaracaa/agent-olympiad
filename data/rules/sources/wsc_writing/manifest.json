@@ -1,0 +1,17 @@
+{
+  "competition_id": "wsc_writing",
+  "crawled_at": "2026-08-11T16:07:34.329918+00:00",
+  "sources": [
+    {
+      "title": "World Scholar's Cup Events",
+      "url": "https://scholarscup.org/events/",
+      "status": "ok",
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 38653,
+      "raw_file": "data/rules/sources/wsc_writing/01_events.html",
+      "text_file": "data/rules/sources/wsc_writing/01_events.txt",
+      "text_chars": 9547,
+      "text_preview": "The World Scholar's Cup &middot; Team Events \n \n \n \n \n \n \n \n \n \n\n \n\n \n \n\n \n \n \n \n \n \n \n \n \n\n \n \n\n \n\n \n \n \n\n \n\n \n\n \n \n \n \n \n \n \n \n \n Stay Informed \n \n \n \n \n Sign Up \n Facebook \n \n \n \n Search \n \n \n \n \n \n \n \n \n\n \n \n\n \n \n The World Scholar's Cup \n \n \n \n \n \n The Experience \n \n Welcome Letters \n Team Events \n Community Events \n Themes \n Subjects \n Calendar & Registration \n Videos \n\n \n\n \n\n Global Rounds \n Tournament of Champions \n \n \n \n About Us \n \n Values and Vision \n History \n Results \n Team \n Host Schools \n Partners \n FAQ \n Countries \n Contact Us \n \n \n \n Get Involved \n \n Join the Program \n Find an Event \n Volunteer \n Host a Round \n Become a Sponsor \n Partner with Us \n Explore the Community \n Spread the Word \n \n \n \n \n \n \n\n \n \n\n \n \n \n \n \n \n \n \n \n\n \n \n \n \n\n \n \n \n \n \n \n Team Debate \n Scholar's Cup \n Collaborative Writing \n Scholar's Challenge -->\n \n Scholar&#39;s Bowl \n \n Collaborative Writing \n \n Scholar&#39;s Challenge \n \n Team Debate \n \n \n \n\n \n Team Events \n \n \n\n \n \n \n \n \n Scholar&#39;s Bowl \n \n \n \n Every team in the theater. Every team with a clicker. Every question harder than the one before. Your team will work together to solve analytic questions and multimedia challenges. Click your answers before time runs out, and don’t be surprised if you’re asked to connect a poem you studied to a clip from Brooklyn Nine-Nine .\n\n It’s loud . You might even hear a team shout the wrong answer— hoping you’ll click it.\n\n It's strategic . What will you and your teammates do when you disagree?\n"
+    }
+  ]
+}

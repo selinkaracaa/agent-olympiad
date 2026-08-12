@@ -18,6 +18,17 @@ CHROME_CANDIDATES = (
     Path("/Applications/Chromium.app/Contents/MacOS/Chromium"),
     Path("/usr/bin/google-chrome"),
     Path("/usr/bin/chromium"),
+    Path(r"C:\Program Files\Google\Chrome\Application\chrome.exe"),
+    Path(r"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"),
+    Path(r"C:\Program Files\Microsoft\Edge\Application\msedge.exe"),
+)
+
+CHROME_EXECUTABLES = (
+    "google-chrome",
+    "chromium",
+    "chromium-browser",
+    "chrome",
+    "msedge",
 )
 
 PRINT_CSS = """
@@ -130,11 +141,22 @@ def validate_html_slides(
     )
 
 
-def _chrome_binary() -> Path:
+def find_chrome_binary() -> Path | None:
     for candidate in CHROME_CANDIDATES:
         if candidate.is_file():
             return candidate
-    raise RuntimeError("Chrome/Chromium is required to render HTML slides to PDF.")
+    for executable in CHROME_EXECUTABLES:
+        found = shutil.which(executable)
+        if found:
+            return Path(found)
+    return None
+
+
+def _chrome_binary() -> Path:
+    chrome = find_chrome_binary()
+    if chrome is None:
+        raise RuntimeError("Chrome/Chromium is required to render HTML slides to PDF.")
+    return chrome
 
 
 def _inject_print_contract(html: str) -> str:

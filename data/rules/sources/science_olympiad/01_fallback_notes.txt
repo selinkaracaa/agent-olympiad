@@ -1,0 +1,8 @@
+Science Olympiad (fallback notes from https://www.soinc.org/ public homepage content).
+
+Key public facts usable for agent simulation:
+- Science Olympiad is a national team STEM competition with many event-specific rule PDFs.
+- 2026 Rules are published as free PDFs for members/events; detailed event manuals can be membership-gated.
+- Teams should follow event-specific allowed references and general code of ethics / code of conduct.
+- Do not assume unrestricted internet or open answer keys during an event.
+- This dataset currently includes limited free sample packets; treat unavailable physical/build events as proxy.

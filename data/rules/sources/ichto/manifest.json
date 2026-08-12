@@ -1,0 +1,17 @@
+{
+  "competition_id": "ichto",
+  "crawled_at": "2026-08-11T16:07:44.220018+00:00",
+  "sources": [
+    {
+      "title": "IChTo Problems",
+      "url": "http://ichto.org/en/problems/",
+      "status": "ok",
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 19463,
+      "raw_file": "data/rules/sources/ichto/01_problems.html",
+      "text_file": "data/rules/sources/ichto/01_problems.txt",
+      "text_chars": 1216,
+      "text_preview": "Problems &#8211; International Chemistry Tournament \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n\r\n \n \n \n \n \n \n\n \n \n\n \n \n\n \n \n\n \n\n \n\n \n \n\n \n \n \n \n \n \n \n \n \n \n \n International Chemistry Tournament \n International Chemistry Tournament, 15–19 August 2026, Hoengseong, Republic of Korea \n \n \n \n \n \n \n \n\n \n \n \n\n \n\n \n About \n Problems \n Rules \n Registration \n Organisers \n Search \n \n \n\n \n\n \n\n \n\n \n \n\n \n\n \n \n \n \n Problems \n\n \n \n\n \n\n \n \n\n \n \n\n \n \n \n \n Problem set of IChTo-2026 (Hoengseong, Republic of Korea) \n \n Problems of the past Tounaments \n\n Problems of IChTo-2025 (Bucharest, Romania) \n\n Problems of IChTo-2024 (Guadalajara, Mexico) \n\n Problems of IChTo-2023 (Tbilisi, Georgia) \n\n Problems of IChTo-2022 (Budapest, Hungary) \n\n Problems of IChTo-2020/2021 (online) \n\n Problems of IChTo-2019 (Moscow, Russia) \n\n Problems of IChTo-2018 (Moscow, Russia) \n\n Problems of IChTo-2017 (Moscow, Russia) \n\n \n \n \n \n\n \n \n\n \n \n\n \n \n \n \n \n\n \n\n \n \n\n \n \n\n \n International Chemistry Tournament International Chemistry Tournament, 15–19 August 2026, Hoengseong, Republic of Korea \n \n\n \n \n \n \n \n \n\n \n \n\n \n\n \n\n \n Copyright LLC \"AChK\" - All Rights Reserved \n\n \n \n \n\n \n \n\n \n \n\n \n \n \n \n \n \n \n \n Search \n \n \n \n \n Submit"
+    }
+  ]
+}

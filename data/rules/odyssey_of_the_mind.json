@@ -1,0 +1,193 @@
+{
+  "schema_version": "1.0",
+  "rule_id": "odyssey_of_the_mind:draft_v1",
+  "competition_id": "odyssey_of_the_mind",
+  "profile": "proxy",
+  "protocol": "creative_performance_proxy",
+  "team": {
+    "active_min": 5,
+    "active_default": 7,
+    "active_max": 7,
+    "collaboration": "Collaborate only within the team under contest rules."
+  },
+  "execution": {
+    "max_turns": 24,
+    "scheduler": "src_collaboration_draft",
+    "draft": true,
+    "official_minutes": null,
+    "turn_budget_basis": "official clock n/a turns vs floor 19 (7 teammates x 2 turns + 1 answer parts + 4 for synthesis)"
+  },
+  "allowed_tools": [
+    "query_rules"
+  ],
+  "resources": {
+    "internet": "forbidden",
+    "calculator": "forbidden",
+    "code_execution": "forbidden",
+    "paper_pencil": "allowed",
+    "provided_materials_only": true
+  },
+  "human_constraints": [
+    "You must behave like a human teammate under official contest rules.",
+    "Do not claim tools, internet, or materials that the rule card forbids.",
+    "Do not look up answer keys or hidden solutions.",
+    "Creative long-term / spontaneous problem solving under OM constraints.",
+    "No outside assistance producing the solution for the team.",
+    "Scoring packets may be incomplete in public data; stay faithful to the public synopsis.",
+    "Teams of up to 7 members under an adult coach; recommend ≥5; all who contributed stay on roster.",
+    "Long-Term problems solved over weeks/months; Spontaneous solved on-site; Style scoring component.",
+    "Outside assistance restrictions are central (coaches may not contribute ideas to the solution — details in Program Guide).",
+    "Full scoring packets / long-term specifics often membership-gated; public synopses only for many past problems."
+  ],
+  "agent_roles": [
+    {
+      "name": "Agent_1",
+      "title": "captain",
+      "may_submit": true,
+      "duties": [
+        "Direct who answers and stop teammates from talking over each other.",
+        "Give the team's official answer once the group has settled.",
+        "Submit only after the format and rule checks pass."
+      ]
+    },
+    {
+      "name": "Agent_2",
+      "title": "primary solver",
+      "may_submit": false,
+      "duties": [
+        "Produce the first full attempt at the problem.",
+        "Show the reasoning so a teammate can check it."
+      ]
+    },
+    {
+      "name": "Agent_3",
+      "title": "secondary solver",
+      "may_submit": false,
+      "duties": [
+        "Attack the problem from a different angle than the primary solver.",
+        "Compare results and surface the disagreement early."
+      ]
+    },
+    {
+      "name": "Agent_4",
+      "title": "verifier",
+      "may_submit": false,
+      "duties": [
+        "Challenge weak arguments and demand an independent check.",
+        "Reject an answer rather than let an unverified one be submitted."
+      ]
+    },
+    {
+      "name": "Agent_5",
+      "title": "specialist",
+      "may_submit": false,
+      "duties": [
+        "Take the part of the task that matches your stated specialty.",
+        "Check a teammate's work once your own part is done."
+      ]
+    },
+    {
+      "name": "Agent_6",
+      "title": "scribe",
+      "may_submit": false,
+      "duties": [
+        "Keep the shared workspace readable and current.",
+        "Write answers in the required format as they are settled."
+      ]
+    },
+    {
+      "name": "Agent_7",
+      "title": "researcher",
+      "may_submit": false,
+      "duties": [
+        "Find and cite the authorities the argument depends on.",
+        "Bring counter-authority to the team before a judge does."
+      ]
+    }
+  ],
+  "answer_format": "Submit the complete team deliverable requested by the problem statement.",
+  "scoring": {
+    "mode": "rubric",
+    "unit": "artifact",
+    "evaluator_id": null,
+    "evaluator_status": "unassigned"
+  },
+  "submission": {
+    "max_count": 1,
+    "shared": true,
+    "mime_types": [
+      "text/plain"
+    ],
+    "task_types": [
+      "odyssey_long_term_synopses",
+      "odyssey_spontaneous_practice"
+    ],
+    "official_deliverable": "long_term_performance",
+    "official_mime_types": [
+      "text/plain"
+    ]
+  },
+  "rules_text": "Odyssey of the Mind. The team of 7 solves a long-term problem with its own work only; outside assistance is the one unforgivable violation. Collaborate only within the team under contest rules. The team files one shared submission. Official wall-clock timing is not encoded for this track; treat the turn budget as your clock and submit before it runs out. Simulation note: the hands-on portion is represented in text, so state measurements, setup, and reasoning explicitly instead of demonstrating them.",
+  "provenance": {
+    "status": "hand_written_fallback_v1",
+    "sources": [
+      {
+        "title": "https://www.odysseyofthemind.com/",
+        "url": "https://www.odysseyofthemind.com/",
+        "retrieved_at": "2026-08-12",
+        "local_text": "data/rules/sources/odyssey_of_the_mind/01_fallback_notes.txt"
+      },
+      {
+        "title": "Odyssey of the Mind",
+        "url": "https://odysseyofthemind.com/past-problems/",
+        "retrieved_at": "2026-08-10"
+      },
+      {
+        "title": "https://odysseyofthemind.com/program-guide/",
+        "url": "https://odysseyofthemind.com/program-guide/",
+        "retrieved_at": "2026-08-11",
+        "from_report": "docs/rules_crawl_2026-08-11.md"
+      },
+      {
+        "title": "https://oklahomaom.com/wp-content/uploads/2026/02/2025-26-Program-Guide.pdf",
+        "url": "https://oklahomaom.com/wp-content/uploads/2026/02/2025-26-Program-Guide.pdf",
+        "retrieved_at": "2026-08-11",
+        "from_report": "docs/rules_crawl_2026-08-11.md"
+      }
+    ],
+    "adaptations": [
+      "max_turns is a safety budget, not necessarily the official wall-clock limit",
+      "specialist roles are a research roster overlay",
+      "physical/oral/live opponent fidelity may be incomplete in src/"
+    ],
+    "crawl_status": "fallback_notes",
+    "crawled_excerpts": [
+      {
+        "url": "https://www.odysseyofthemind.com/",
+        "excerpt": "Public synopses available; scoring packets often membership-locked. Creative team problem-solving; no outside-produced solutions; proxy for physical performance judging."
+      }
+    ],
+    "enriched_at": "2026-08-12T16:53:55.319165+00:00",
+    "research_confidence": "high",
+    "proxy_limitations": [
+      "Physical props, vehicles, structures, and live Spontaneous cannot be PDF-synopses-evaluated as equivalent.",
+      "Outside-assistance edge cases need the full Program Guide sections."
+    ],
+    "research_merged_at": "2026-08-12T17:04:21.157543+00:00",
+    "rules_text_source": "composed_from_card_fields_v2",
+    "research_reports": [
+      "docs/rules_crawl_2026-08-11.md"
+    ],
+    "research_graded_at": "2026-08-11"
+  },
+  "comparability": {
+    "overall": "draft",
+    "dimensions": {
+      "roster": "approximate",
+      "timing": "adapted",
+      "tools": "src_tool_surface",
+      "scoring": "rubric",
+      "environment": "proxy"
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "competition_id": "gcch_harvard",
+  "crawled_at": "2026-08-12T00:00:00+00:00",
+  "sources": [
+    {
+      "title": "GCCH fallback notes",
+      "url": "https://www.thecasecompetition.org/gcch-2026",
+      "status": "ok",
+      "text_file": "data/rules/sources/gcch_harvard/01_fallback_notes.txt",
+      "text_preview": "University-level Global Case Competition at Harvard. Teams of 2 to 5 from the same university. Round 1 is a written case deck; top 10 record a video pitch; finalists take live judge Q&A. No official rulebook exists."
+    }
+  ]
+}

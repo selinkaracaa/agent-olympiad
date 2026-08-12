@@ -1,0 +1,221 @@
+{
+  "schema_version": "1.0",
+  "rule_id": "pumac_power:draft_v1",
+  "competition_id": "pumac_power",
+  "profile": "official_equivalent",
+  "protocol": "shared_answer",
+  "team": {
+    "active_min": 8,
+    "active_default": 8,
+    "active_max": 8,
+    "collaboration": "Collaborate only within the team under contest rules."
+  },
+  "execution": {
+    "max_turns": 24,
+    "scheduler": "src_collaboration_draft",
+    "draft": true,
+    "official_minutes": null,
+    "turn_budget_basis": "official clock n/a turns vs floor 21 (8 teammates x 2 turns + 1 answer parts + 4 for synthesis)"
+  },
+  "allowed_tools": [
+    "query_rules",
+    "use_calculator",
+    "execute_code",
+    "web_search"
+  ],
+  "resources": {
+    "internet": "allowed",
+    "calculator": "allowed",
+    "code_execution": "allowed",
+    "paper_pencil": "allowed",
+    "provided_materials_only": false
+  },
+  "human_constraints": [
+    "You must behave like a human teammate under official contest rules.",
+    "Do not claim tools, internet, or materials that the rule card forbids.",
+    "Do not look up answer keys or hidden solutions.",
+    "Power-round style proofs / multi-part math writeups.",
+    "Use only tools explicitly allowed by the rule card.",
+    "No answer-key lookup.",
+    "PUMaC is Princeton Math Club’s annual contest with Individual, Team, and Power rounds; Power is proof-based and weighted in team standings (weighting lowered for 2025+ per site).",
+    "Public site schedule/embed did not expose numeric Power Round duration, calculator policy, or roster size in fetchable HTML.",
+    "A full team is exactly 8 students, and all eight may collaborate freely on the Power Round.",
+    "The Power Round is released online about a week before the competition and is worked on over that week, up to the due time printed on the test.",
+    "Use no outside resources unless the test says otherwise: no books, no internet searches, and no people outside your eight team members.",
+    "Follow the computational-aid policy printed in that year's Power Round instructions, which is the only authority on calculators and similar aids.",
+    "Write full solutions with justification; an answer given without justification earns no credit unless the test states otherwise.",
+    "You may use the result of an earlier part even if you could not prove it, but you must cite it explicitly, for example 'From Part II, Question 1'.",
+    "Solutions may be handwritten or typed but must be printed on one side of the paper only.",
+    "Label every page with your team number and the problem number; your team name must not appear anywhere in the submission.",
+    "Submit exactly once; if multiple sets of solutions arrive, only the first received is graded.",
+    "Where these rules and the instructions printed on the Power Round conflict, follow the Power Round's own instructions."
+  ],
+  "agent_roles": [
+    {
+      "name": "Agent_1",
+      "title": "captain and synthesizer",
+      "may_submit": true,
+      "duties": [
+        "Assign unsolved problems and keep the team from crowding one question.",
+        "Hold the shared answer sheet and keep it consistent with the discussion.",
+        "Submit only after the format and rule checks pass."
+      ]
+    },
+    {
+      "name": "Agent_2",
+      "title": "algebra / analysis specialist",
+      "may_submit": false,
+      "duties": [
+        "Lead algebra, functions, equations, and inequality problems.",
+        "Recheck each simplification before its answer enters the sheet."
+      ]
+    },
+    {
+      "name": "Agent_3",
+      "title": "geometry specialist",
+      "may_submit": false,
+      "duties": [
+        "Lead geometry, trigonometry, and diagram-based reasoning.",
+        "State any assumption a text-only diagram forces you to make."
+      ]
+    },
+    {
+      "name": "Agent_4",
+      "title": "combinatorics specialist",
+      "may_submit": false,
+      "duties": [
+        "Lead counting, probability, and expected-value problems.",
+        "Give exact fractions in lowest terms unless the problem says otherwise."
+      ]
+    },
+    {
+      "name": "Agent_5",
+      "title": "number theory specialist",
+      "may_submit": false,
+      "duties": [
+        "Lead modular arithmetic, divisibility, and integer constructions.",
+        "Check integer answers for off-by-one and sign mistakes."
+      ]
+    },
+    {
+      "name": "Agent_6",
+      "title": "verifier",
+      "may_submit": false,
+      "duties": [
+        "Challenge weak arguments and demand an independent check.",
+        "Reject an answer rather than let an unverified one be submitted."
+      ]
+    },
+    {
+      "name": "Agent_7",
+      "title": "problem splitter",
+      "may_submit": false,
+      "duties": [
+        "Partition the problem set so no two teammates duplicate work.",
+        "Reassign problems as soon as someone finishes early."
+      ]
+    },
+    {
+      "name": "Agent_8",
+      "title": "writeup checker",
+      "may_submit": false,
+      "duties": [
+        "Check that each written answer actually answers the question asked.",
+        "Enforce the required answer format before submission."
+      ]
+    }
+  ],
+  "answer_format": "Submit the team's final answers in numbered order, using exact values when required.",
+  "scoring": {
+    "mode": "gold",
+    "unit": "problem_or_question",
+    "evaluator_id": null,
+    "evaluator_status": "unassigned"
+  },
+  "submission": {
+    "max_count": 1,
+    "shared": true,
+    "mime_types": [
+      "text/plain"
+    ],
+    "task_types": [
+      "proof_packet"
+    ],
+    "official_deliverable": "proof_packet",
+    "official_mime_types": [
+      "text/plain"
+    ]
+  },
+  "rules_text": "PUMaC Power Round. The active team of 8 works the problem set together and turns in one shared answer sheet. Collaborate only within the team under contest rules. The team files one shared submission. Official wall-clock timing is not encoded for this track; treat the turn budget as your clock and submit before it runs out.",
+  "provenance": {
+    "status": "source_enriched_v1",
+    "sources": [
+      {
+        "title": "PUMaC Archives",
+        "url": "https://jason-shi-f9dm.squarespace.com/archives",
+        "retrieved_at": "2026-08-12",
+        "local_text": "data/rules/sources/pumac_power/01_archives.txt"
+      },
+      {
+        "title": "https://pumac.princeton.edu/",
+        "url": "https://pumac.princeton.edu/",
+        "retrieved_at": "2026-08-11",
+        "from_report": "docs/rules_crawl_2026-08-11.md"
+      },
+      {
+        "title": "https://pumac.princeton.edu/competition-rules",
+        "url": "https://pumac.princeton.edu/competition-rules",
+        "retrieved_at": "2026-08-12",
+        "from_report": "docs/rules_lowconf_2026-08-12.md"
+      },
+      {
+        "title": "https://pumac.princeton.edu/registration-info",
+        "url": "https://pumac.princeton.edu/registration-info",
+        "retrieved_at": "2026-08-12",
+        "from_report": "docs/rules_lowconf_2026-08-12.md"
+      }
+    ],
+    "adaptations": [
+      "max_turns is a safety budget, not necessarily the official wall-clock limit",
+      "specialist roles are a research roster overlay",
+      "physical/oral/live opponent fidelity may be incomplete in src/"
+    ],
+    "crawl_status": "ok",
+    "crawled_excerpts": [
+      {
+        "url": "https://jason-shi-f9dm.squarespace.com/archives",
+        "excerpt": "Archive &mdash; PUMaC Registration Power Round Rules FAQ Princeton Archive Login Coach Login Proctor Login Registration Power Round Rules FAQ Princeton Archive Login Coach Login Proctor Login Directory 2025 2024 2023 2022 2021 2020 2019 2018 2017 2016 2015 2014 2013 2012 2011 2010 2009 2008 2007 Directory PUMaC Problem and Result Archive SCROLL DOWN Directory PUMaC Problem and Result Archive Competition Year 2015 2014 2013"
+      }
+    ],
+    "enriched_at": "2026-08-12T16:53:55.314669+00:00",
+    "research_confidence": "high",
+    "proxy_limitations": [
+      "A week-long asynchronous proof-writing effort by eight people maps poorly onto a turn budget.",
+      "Proofs are hand-graded for rigor with partial credit, which a gold-answer matcher cannot reproduce.",
+      "Formatting rules (one-sided pages, page labelling, anonymity) carry real point deductions but have no analogue in a plain-text submission."
+    ],
+    "research_merged_at": "2026-08-12T17:05:14.780001+00:00",
+    "rules_text_source": "composed_from_card_fields_v2",
+    "research_reports": [
+      "docs/rules_crawl_2026-08-11.md",
+      "docs/rules_lowconf_2026-08-12.md"
+    ],
+    "research_notes": [
+      "No calculator claim is recorded because the official page states the computational-aid policy varies year to year and lives in the Power Round instructions, which were not retrieved.",
+      "The no-tools bans published for the Individual and Team Tests are separate rules and do not automatically apply to the Power Round.",
+      "Submission timing changed as of 2023: the round is due at the time specified on the test and submitted online, not handed in on competition day.",
+      "Index uses team_size 8 — treat as provisional until official coach packet / rules sheet for the evaluated year is obtained."
+    ],
+    "research_graded_at": "2026-08-12"
+  },
+  "comparability": {
+    "overall": "draft",
+    "dimensions": {
+      "roster": "approximate",
+      "timing": "adapted",
+      "tools": "src_tool_surface",
+      "scoring": "gold",
+      "environment": "partial"
+    }
+  }
+}

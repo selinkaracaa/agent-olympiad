@@ -1,0 +1,250 @@
+{
+  "schema_version": "1.0",
+  "rule_id": "arml_national_power:draft_v1",
+  "competition_id": "arml_national_power",
+  "profile": "official_equivalent",
+  "protocol": "shared_answer",
+  "team": {
+    "active_min": 15,
+    "active_default": 15,
+    "active_max": 15,
+    "collaboration": "Collaborate only within the team under contest rules."
+  },
+  "execution": {
+    "max_turns": 35,
+    "scheduler": "src_collaboration_draft",
+    "draft": true,
+    "official_minutes": 60,
+    "turn_budget_basis": "official clock 12 turns vs floor 35 (15 teammates x 2 turns + 1 answer parts + 4 for synthesis)"
+  },
+  "allowed_tools": [
+    "query_rules"
+  ],
+  "resources": {
+    "internet": "forbidden",
+    "calculator": "forbidden",
+    "code_execution": "forbidden",
+    "paper_pencil": "allowed",
+    "provided_materials_only": true
+  },
+  "human_constraints": [
+    "You must behave like a human teammate under official contest rules.",
+    "Do not claim tools, internet, or materials that the rule card forbids.",
+    "Do not look up answer keys or hidden solutions.",
+    "Paper and pencil only; no calculators or electronic devices.",
+    "Write multi-part proofs / justifications for the power round.",
+    "No internet, phones, or outside help.",
+    "Same 15-person team context as national meet.",
+    "Power Round worth 50 points; exactly one solution packet may be submitted (multiple submissions → lowest score).",
+    "No calculators; electronic devices banned during Team/Power (devices collected before Team, returned after Power).",
+    "Written proofs / justifications expected for Power problems (contest design; scoring structure on rules page)."
+  ],
+  "agent_roles": [
+    {
+      "name": "Agent_1",
+      "title": "captain and synthesizer",
+      "may_submit": true,
+      "duties": [
+        "Assign unsolved problems and keep the team from crowding one question.",
+        "Hold the shared answer sheet and keep it consistent with the discussion.",
+        "Submit only after the format and rule checks pass."
+      ]
+    },
+    {
+      "name": "Agent_2",
+      "title": "algebra / analysis specialist",
+      "may_submit": false,
+      "duties": [
+        "Lead algebra, functions, equations, and inequality problems.",
+        "Recheck each simplification before its answer enters the sheet."
+      ]
+    },
+    {
+      "name": "Agent_3",
+      "title": "geometry specialist",
+      "may_submit": false,
+      "duties": [
+        "Lead geometry, trigonometry, and diagram-based reasoning.",
+        "State any assumption a text-only diagram forces you to make."
+      ]
+    },
+    {
+      "name": "Agent_4",
+      "title": "combinatorics specialist",
+      "may_submit": false,
+      "duties": [
+        "Lead counting, probability, and expected-value problems.",
+        "Give exact fractions in lowest terms unless the problem says otherwise."
+      ]
+    },
+    {
+      "name": "Agent_5",
+      "title": "number theory specialist",
+      "may_submit": false,
+      "duties": [
+        "Lead modular arithmetic, divisibility, and integer constructions.",
+        "Check integer answers for off-by-one and sign mistakes."
+      ]
+    },
+    {
+      "name": "Agent_6",
+      "title": "verifier",
+      "may_submit": false,
+      "duties": [
+        "Challenge weak arguments and demand an independent check.",
+        "Reject an answer rather than let an unverified one be submitted."
+      ]
+    },
+    {
+      "name": "Agent_7",
+      "title": "problem splitter",
+      "may_submit": false,
+      "duties": [
+        "Partition the problem set so no two teammates duplicate work.",
+        "Reassign problems as soon as someone finishes early."
+      ]
+    },
+    {
+      "name": "Agent_8",
+      "title": "writeup checker",
+      "may_submit": false,
+      "duties": [
+        "Check that each written answer actually answers the question asked.",
+        "Enforce the required answer format before submission."
+      ]
+    },
+    {
+      "name": "Agent_9",
+      "title": "specialist and completeness checker",
+      "may_submit": false,
+      "duties": [
+        "Scan for unanswered problems before the team submits.",
+        "Confirm every required part of the deliverable is present."
+      ]
+    },
+    {
+      "name": "Agent_10",
+      "title": "specialist and completeness checker",
+      "may_submit": false,
+      "duties": [
+        "Scan for unanswered problems before the team submits.",
+        "Confirm every required part of the deliverable is present."
+      ]
+    },
+    {
+      "name": "Agent_11",
+      "title": "specialist and completeness checker",
+      "may_submit": false,
+      "duties": [
+        "Scan for unanswered problems before the team submits.",
+        "Confirm every required part of the deliverable is present."
+      ]
+    },
+    {
+      "name": "Agent_12",
+      "title": "specialist and completeness checker",
+      "may_submit": false,
+      "duties": [
+        "Scan for unanswered problems before the team submits.",
+        "Confirm every required part of the deliverable is present."
+      ]
+    },
+    {
+      "name": "Agent_13",
+      "title": "specialist and completeness checker",
+      "may_submit": false,
+      "duties": [
+        "Scan for unanswered problems before the team submits.",
+        "Confirm every required part of the deliverable is present."
+      ]
+    },
+    {
+      "name": "Agent_14",
+      "title": "specialist and completeness checker",
+      "may_submit": false,
+      "duties": [
+        "Scan for unanswered problems before the team submits.",
+        "Confirm every required part of the deliverable is present."
+      ]
+    },
+    {
+      "name": "Agent_15",
+      "title": "specialist and completeness checker",
+      "may_submit": false,
+      "duties": [
+        "Scan for unanswered problems before the team submits.",
+        "Confirm every required part of the deliverable is present."
+      ]
+    }
+  ],
+  "answer_format": "Submit the team's final answers in numbered order, using exact values when required.",
+  "scoring": {
+    "mode": "gold",
+    "unit": "problem_or_question",
+    "evaluator_id": "rubric_llm_v1",
+    "evaluator_status": "ready",
+    "rubric_path": "data/rubrics/team_power_proof_40_v1.json",
+    "evaluator_strategy": "structured_rubric_llm_judge"
+  },
+  "submission": {
+    "max_count": 1,
+    "shared": true,
+    "mime_types": [
+      "text/plain"
+    ],
+    "task_types": [
+      "team_power"
+    ],
+    "official_deliverable": "proof_packet",
+    "official_mime_types": [
+      "text/plain"
+    ]
+  },
+  "rules_text": "ARML National Meet — Power Round. The active team of 15 works the problem set together and turns in one shared answer sheet. Collaborate only within the team under contest rules. The team files one shared submission. Official timing note: About 1 hour.",
+  "provenance": {
+    "status": "source_enriched_v1",
+    "sources": [
+      {
+        "title": "ARML Rules",
+        "url": "https://arml.com/ARML/arml_2019/page/index.php?page=competition_rules&page_type=public",
+        "retrieved_at": "2026-08-12",
+        "local_text": "data/rules/sources/arml_national_power/01_index.txt"
+      }
+    ],
+    "adaptations": [
+      "max_turns is a safety budget, not necessarily the official wall-clock limit",
+      "specialist roles are a research roster overlay",
+      "physical/oral/live opponent fidelity may be incomplete in src/"
+    ],
+    "crawl_status": "ok",
+    "crawled_excerpts": [
+      {
+        "url": "https://arml.com/ARML/arml_2019/page/index.php?page=competition_rules&page_type=public",
+        "excerpt": "The Official American Regions Mathematics League Web Page --> The Official American Regions Mathematics League Web Page --> --> --> --> Home Supporters Meet Results IRML 40th Anniversary Puzzle Hunt --> Power Contest ARML Local --> ARML. Local ARML Local --> ARML Local --> Awards ARML/IRML Competition Rules A team will consist of 15 members. Coaches are expected to gauge the strength of each of the 15 member teams and place their students on the teams accordingly. The team that consists of the s"
+      }
+    ],
+    "enriched_at": "2026-08-12T16:53:55.309659+00:00",
+    "official_time_note": "About 1 hour.",
+    "research_confidence": "high",
+    "proxy_limitations": [
+      "Wall-clock Power Round duration not on the fetched rules page.",
+      "Single irrevocable packet + handwriting fidelity."
+    ],
+    "research_merged_at": "2026-08-12T17:04:20.770393+00:00",
+    "rules_text_source": "composed_from_card_fields_v2",
+    "research_reports": [
+      "docs/rules_crawl_2026-08-11.md"
+    ],
+    "research_graded_at": "2026-08-11"
+  },
+  "comparability": {
+    "overall": "draft",
+    "dimensions": {
+      "roster": "approximate",
+      "timing": "adapted",
+      "tools": "src_tool_surface",
+      "scoring": "gold",
+      "environment": "partial"
+    }
+  }
+}

@@ -1,0 +1,231 @@
+{
+  "crawled_at": "2026-08-11T16:11:39.822189+00:00",
+  "competitions": {
+    "arml_local": {
+      "status": "ok",
+      "sources": [
+        "ok"
+      ]
+    },
+    "arml_national_power": {
+      "status": "ok",
+      "sources": [
+        "ok"
+      ]
+    },
+    "arml_national_team": {
+      "status": "ok",
+      "sources": [
+        "ok"
+      ]
+    },
+    "arml_power": {
+      "status": "ok",
+      "sources": [
+        "ok"
+      ]
+    },
+    "ccdc": {
+      "status": "ok",
+      "sources": [
+        "ok"
+      ]
+    },
+    "cfa_research_challenge": {
+      "status": "ok",
+      "sources": [
+        "ok"
+      ]
+    },
+    "cybench": {
+      "status": "ok",
+      "sources": [
+        "ok"
+      ]
+    },
+    "debatebench": {
+      "status": "ok",
+      "sources": [
+        "ok"
+      ]
+    },
+    "eoes": {
+      "status": "ok",
+      "sources": [
+        "ok"
+      ]
+    },
+    "ethics_bowl_appe": {
+      "status": "ok",
+      "sources": [
+        "ok"
+      ]
+    },
+    "ethics_bowl_nhseb": {
+      "status": "ok",
+      "sources": [
+        "ok"
+      ]
+    },
+    "fyziklani": {
+      "status": "ok",
+      "sources": [
+        "ok"
+      ]
+    },
+    "gcch_harvard": {
+      "status": "ok",
+      "sources": [
+        "ok"
+      ]
+    },
+    "history_olympiad": {
+      "status": "ok",
+      "sources": [
+        "ok"
+      ]
+    },
+    "hmmt_guts": {
+      "status": "ok",
+      "sources": [
+        "ok"
+      ]
+    },
+    "ichto": {
+      "status": "ok",
+      "sources": [
+        "ok"
+      ]
+    },
+    "icpc": {
+      "status": "ok",
+      "sources": [
+        "ok",
+        "ok"
+      ]
+    },
+    "ieo_business_case": {
+      "status": "ok",
+      "sources": [
+        "ok",
+        "ok"
+      ]
+    },
+    "iiot": {
+      "status": "ok",
+      "sources": [
+        "ok"
+      ]
+    },
+    "ijso_practical": {
+      "status": "ok",
+      "sources": [
+        "ok"
+      ]
+    },
+    "ioaa_group": {
+      "status": "ok",
+      "sources": [
+        "ok"
+      ]
+    },
+    "ioai_team": {
+      "status": "ok",
+      "sources": [
+        "ok"
+      ]
+    },
+    "iol_team": {
+      "status": "ok",
+      "sources": [
+        "ok",
+        "ok"
+      ]
+    },
+    "jessup": {
+      "status": "ok",
+      "sources": [
+        "ok"
+      ]
+    },
+    "mystery_hunt": {
+      "status": "ok",
+      "sources": [
+        "ok"
+      ]
+    },
+    "nyu_ctf_bench": {
+      "status": "ok",
+      "sources": [
+        "ok"
+      ]
+    },
+    "odyssey_of_the_mind": {
+      "status": "ok",
+      "sources": [
+        "ok"
+      ]
+    },
+    "pumac_power": {
+      "status": "ok",
+      "sources": [
+        "ok"
+      ]
+    },
+    "purple_comet": {
+      "status": "ok",
+      "sources": [
+        "ok",
+        "ok"
+      ]
+    },
+    "qanta": {
+      "status": "ok",
+      "sources": [
+        "ok"
+      ]
+    },
+    "science_bowl": {
+      "status": "ok",
+      "sources": [
+        "ok"
+      ]
+    },
+    "science_olympiad": {
+      "status": "ok",
+      "sources": [
+        "ok"
+      ]
+    },
+    "vis_moot": {
+      "status": "ok",
+      "sources": [
+        "ok"
+      ]
+    },
+    "wharton_investment": {
+      "status": "ok",
+      "sources": [
+        "ok"
+      ]
+    },
+    "wmtc": {
+      "status": "ok",
+      "sources": [
+        "ok"
+      ]
+    },
+    "wro": {
+      "status": "ok",
+      "sources": [
+        "ok"
+      ]
+    },
+    "wsc_writing": {
+      "status": "ok",
+      "sources": [
+        "ok"
+      ]
+    }
+  }
+}

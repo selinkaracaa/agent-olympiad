@@ -1,0 +1,13 @@
+{
+  "competition_id": "odyssey_of_the_mind",
+  "crawled_at": "2026-08-11T00:00:00+00:00",
+  "sources": [
+    {
+      "title": "Odyssey of the Mind fallback notes",
+      "url": "https://www.odysseyofthemind.com/",
+      "status": "ok",
+      "text_file": "data/rules/sources/odyssey_of_the_mind/01_fallback_notes.txt",
+      "text_preview": "Public synopses available; scoring packets often membership-locked. Creative team problem-solving; no outside-produced solutions; proxy for physical performance judging."
+    }
+  ]
+}

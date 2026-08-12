@@ -1,0 +1,196 @@
+{
+  "schema_version": "1.0",
+  "rule_id": "wharton_investment:draft_v1",
+  "competition_id": "wharton_investment",
+  "profile": "official_equivalent",
+  "protocol": "research_artifact",
+  "team": {
+    "active_min": 3,
+    "active_default": 5,
+    "active_max": 5,
+    "collaboration": "Collaborate only within the team under contest rules."
+  },
+  "execution": {
+    "max_turns": 24,
+    "scheduler": "src_collaboration_draft",
+    "draft": true,
+    "official_minutes": null,
+    "turn_budget_basis": "official clock n/a turns vs floor 15 (5 teammates x 2 turns + 1 answer parts + 4 for synthesis)"
+  },
+  "allowed_tools": [
+    "query_rules",
+    "use_calculator",
+    "execute_code",
+    "web_search"
+  ],
+  "resources": {
+    "internet": "allowed",
+    "calculator": "allowed",
+    "code_execution": "allowed",
+    "paper_pencil": "allowed",
+    "provided_materials_only": false
+  },
+  "human_constraints": [
+    "You must behave like a human teammate under official contest rules.",
+    "Do not claim tools, internet, or materials that the rule card forbids.",
+    "Do not look up answer keys or hidden solutions.",
+    "Research publicly available market information.",
+    "Produce an investment thesis / portfolio rationale as a team.",
+    "No contact with prohibited outside advisors beyond contest rules.",
+    "Teams are 4 to 6 students including a designated student team leader, all from the same high school or campus; falling below four or exceeding six at any time is disqualifying.",
+    "No student may participate on more than one team.",
+    "The team shares one Wharton Investment Simulator (WInS) account and all trades are placed through it.",
+    "The student team leader is the sole channel for competition communications and submits all deliverables through SurveyMonkey Apply.",
+    "Do not contact the competition client; teams that do are disqualified.",
+    "Your advisor is a teacher or educator at your school who guides and registers the team but may not make decisions for you or take part in trading or strategy.",
+    "Do not engage paid advisors, education consultants, or agents, and do not enroll in any non-Wharton course claiming to teach the competition.",
+    "Produce two graded deliverables: an Investment Policy Statement defining the client's objectives, risk tolerance, and strategy, and a Comprehensive Final Report justifying your strategy, recommendations, and analysis.",
+    "Meet the published trading activity and portfolio management requirements throughout the competition.",
+    "You may use generative AI only to brainstorm; never submit AI-generated work as your own, and cite any AI-derived material like any other source.",
+    "Cite every source you use and do not plagiarize; fabricating analyses, trades, or teamwork narratives is a disqualifying ethics breach.",
+    "You are judged on strategy quality, fit to the client's objectives, depth of research and analysis, and how clearly you defend your recommendations — not on portfolio returns."
+  ],
+  "agent_roles": [
+    {
+      "name": "Agent_1",
+      "title": "captain / editor",
+      "may_submit": true,
+      "duties": [
+        "Own the deliverable's structure and cut material that does not earn points.",
+        "Resolve disagreements between analysts before they reach the final text.",
+        "Submit only after the format and rule checks pass."
+      ]
+    },
+    {
+      "name": "Agent_2",
+      "title": "analyst",
+      "may_submit": false,
+      "duties": [
+        "Gather the evidence the recommendation rests on.",
+        "Separate what the sources say from what the team infers."
+      ]
+    },
+    {
+      "name": "Agent_3",
+      "title": "quant / modeler",
+      "may_submit": false,
+      "duties": [
+        "Build the numbers: valuation, models, and sensitivity checks.",
+        "State assumptions explicitly and show which results depend on them."
+      ]
+    },
+    {
+      "name": "Agent_4",
+      "title": "research lead",
+      "may_submit": false,
+      "duties": [
+        "Decide which questions the research must answer and in what order.",
+        "Kill lines of inquiry that will not change the recommendation."
+      ]
+    },
+    {
+      "name": "Agent_5",
+      "title": "slide / report designer",
+      "may_submit": false,
+      "duties": [
+        "Turn analysis into a structure a judge can follow in one pass.",
+        "Cut slides and sections that do not carry an argument."
+      ]
+    }
+  ],
+  "answer_format": "Submit a structured report or slide outline covering analysis, recommendation, and evidence.",
+  "scoring": {
+    "mode": "rubric",
+    "unit": "artifact",
+    "evaluator_id": null,
+    "evaluator_status": "unassigned"
+  },
+  "submission": {
+    "max_count": 1,
+    "shared": true,
+    "mime_types": [
+      "text/plain"
+    ],
+    "task_types": [
+      "investment_case"
+    ],
+    "official_deliverable": "investment_report",
+    "official_mime_types": [
+      "application/pdf"
+    ],
+    "adaptation": "Official entries are PDF reports; the runner submits the report as text."
+  },
+  "rules_text": "Wharton Global High School Investment Competition. The team of 5 prepares one research deliverable that expert judges score against a rubric. Collaborate only within the team under contest rules. The team files one shared submission. Official wall-clock timing is not encoded for this track; treat the turn budget as your clock and submit before it runs out.",
+  "provenance": {
+    "status": "source_enriched_v1",
+    "sources": [
+      {
+        "title": "Wharton Global Youth",
+        "url": "https://globalyouth.wharton.upenn.edu/",
+        "retrieved_at": "2026-08-12",
+        "local_text": "data/rules/sources/wharton_investment/01_globalyouth.wharton.upenn.txt"
+      },
+      {
+        "title": "https://globalyouth.wharton.upenn.edu/competitions/investment-competition/rules-roles/",
+        "url": "https://globalyouth.wharton.upenn.edu/competitions/investment-competition/rules-roles/",
+        "retrieved_at": "2026-08-12",
+        "from_report": "docs/rules_lowconf_2026-08-12.md"
+      },
+      {
+        "title": "https://globalyouth.wharton.upenn.edu/competitions/investment-competition/",
+        "url": "https://globalyouth.wharton.upenn.edu/competitions/investment-competition/",
+        "retrieved_at": "2026-08-12",
+        "from_report": "docs/rules_lowconf_2026-08-12.md"
+      },
+      {
+        "title": "https://globalyouth.wharton.upenn.edu/competitions/investment-competition/faq/",
+        "url": "https://globalyouth.wharton.upenn.edu/competitions/investment-competition/faq/",
+        "retrieved_at": "2026-08-12",
+        "from_report": "docs/rules_lowconf_2026-08-12.md"
+      }
+    ],
+    "adaptations": [
+      "max_turns is a safety budget, not necessarily the official wall-clock limit",
+      "specialist roles are a research roster overlay",
+      "physical/oral/live opponent fidelity may be incomplete in src/"
+    ],
+    "crawl_status": "ok",
+    "crawled_excerpts": [
+      {
+        "url": "https://globalyouth.wharton.upenn.edu/",
+        "excerpt": "Wharton Global Youth Program Home - Wharton Global Youth Program Skip to content Skip to main menu Faculty Youth Program Undergrad Jacobs MSQF MBA EMBA PhD Exec Ed Wharton Online Search Wharton Mobile menu toggle Wharton Global Youth Program Menu On-Campus Essentials of Finance Essentials of Entrepreneurship Leadership in the Business World Management &#038; Technology Summer Institute The Wharton One-Day High School Experience Moneyball Academy Data Science Academy Product Design Academy Applic"
+      }
+    ],
+    "enriched_at": "2026-08-12T16:53:55.315598+00:00",
+    "research_confidence": "medium",
+    "proxy_limitations": [
+      "The competition runs 10+ weeks against a live market simulator; a turn-budgeted text run cannot reproduce real price movement, trade execution, or portfolio drift.",
+      "Advisor guidance is a real but bounded human input with no analogue in the agent roster.",
+      "Semifinal and finale rounds are live oral defenses before judges."
+    ],
+    "research_merged_at": "2026-08-12T17:05:14.815789+00:00",
+    "rules_text_source": "composed_from_card_fields_v2",
+    "research_reports": [
+      "docs/rules_crawl_2026-08-11.md",
+      "docs/rules_lowconf_2026-08-12.md"
+    ],
+    "research_notes": [
+      "Trading activity minimums, the approved-securities universe, portfolio management guidelines, deliverable deadlines, and the judging rubric are published only to registered teams through SurveyMonkey Apply and could not be verified.",
+      "Season-level dates on the public page (competition begins September 28, 2026) are verified, but per-deliverable deadlines are not.",
+      "A widely circulated advisor-guidelines PDF states a maximum of seven members; the official Rules & Roles page says four to six, and the official page was used.",
+      "Official Global Youth portal hosts the Investment Competition; detailed team size/time/tool rules are in season-specific competition guidelines (not fully extracted from the portal root fetch).",
+      "Index lists team_size 5 — confirm against current season PDF/FAQ before treating as hard."
+    ],
+    "research_graded_at": "2026-08-12"
+  },
+  "comparability": {
+    "overall": "draft",
+    "dimensions": {
+      "roster": "approximate",
+      "timing": "adapted",
+      "tools": "src_tool_surface",
+      "scoring": "rubric",
+      "environment": "partial"
+    }
+  }
+}

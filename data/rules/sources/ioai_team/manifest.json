@@ -1,0 +1,17 @@
+{
+  "competition_id": "ioai_team",
+  "crawled_at": "2026-08-11T16:07:53.222094+00:00",
+  "sources": [
+    {
+      "title": "IOAI Resources",
+      "url": "https://ioai-official.org/resources/",
+      "status": "ok",
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 218457,
+      "raw_file": "data/rules/sources/ioai_team/01_resources.html",
+      "text_file": "data/rules/sources/ioai_team/01_resources.txt",
+      "text_chars": 8890,
+      "text_preview": "Education Hub &#8211; International Olympiad in AI \n \n \n \n \n \n \n \n \n\n \n\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n\n \n \n \n\n \n Skip to content \n\n \n \n \n \n \n \n \n \n \n \n About Accreditation Countries & territories International Board International Scientific Committee Regulations Become an IOAI Host Regional Olympiads in AI Education Hub 2026 Kazakhstan Schedule International Jury and HSC Syllabus Contest Rules Registration Financial Aid 2026 Call for tasks Results 2026 AI Model Track Rules & Format FAQ IOAI GAITE GAITE Registration Sponsors Editions 2024 Bulgaria 2024 Participating teams 2024 Organizers 2024 Speakers 2024 Results & awards 2024 Tasks IOAI 2024 Photos and Videos 2025 China About Beijing Schedule Contest Rules Team Challenge 2025 Participating teams 2025 Participants 2025 Results IOAI 2025 Photos and Videos IOAI 2025 Mascot 2026 Kazakhstan Schedule Contest Rules Financial Aid 2026 International Jury and HSC Results 2026 2027 Singapore The Bulgarian Award News Media kit 2025 Press release #1 2025 Press release #2 2025 Press release #3 2026 Press release #1 2026 Press release #2 \n \n \n \n Contact us \n \n \n \n \n \n \n \n \n \n \n Contact us \n \n \n \n \n \n \n \n \n \n \n \n\n \n\n \n \n \n \n\n \n\n \n\n \n \n \n \n \n \n \n Education Hub \n \n \n \n \n \n \n \n \n \n Freely Available Educational Resources \n \n \n \n A collection of open educational materials, national Olympiad problems, and online courses to help students prepare for the  International Olympiad in Art"
+    }
+  ]
+}

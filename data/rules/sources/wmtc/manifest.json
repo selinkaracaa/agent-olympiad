@@ -1,0 +1,17 @@
+{
+  "competition_id": "wmtc",
+  "crawled_at": "2026-08-11T16:08:06.968289+00:00",
+  "sources": [
+    {
+      "title": "WMTC",
+      "url": "https://wmtc.international/",
+      "status": "ok",
+      "content_type": "text/html",
+      "bytes": 1583,
+      "raw_file": "data/rules/sources/wmtc/01_wmtc.international",
+      "text_file": "data/rules/sources/wmtc/01_wmtc.txt",
+      "text_chars": 59,
+      "text_preview": "자동등록방지를 위해 보안절차를 거치고 있습니다. Please prove that you are human."
+    }
+  ]
+}

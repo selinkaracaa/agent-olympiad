@@ -1,0 +1,178 @@
+{
+  "schema_version": "1.0",
+  "rule_id": "jessup:draft_v1",
+  "competition_id": "jessup",
+  "profile": "official_equivalent",
+  "protocol": "presentation_and_cross_examination",
+  "team": {
+    "active_min": 2,
+    "active_default": 5,
+    "active_max": 5,
+    "collaboration": "Collaborate only within the team under contest rules."
+  },
+  "execution": {
+    "max_turns": 24,
+    "scheduler": "src_collaboration_draft",
+    "draft": true,
+    "official_minutes": null,
+    "turn_budget_basis": "official clock n/a turns vs floor 15 (5 teammates x 2 turns + 1 answer parts + 4 for synthesis)"
+  },
+  "allowed_tools": [
+    "query_rules",
+    "web_search"
+  ],
+  "resources": {
+    "internet": "allowed",
+    "calculator": "forbidden",
+    "code_execution": "forbidden",
+    "paper_pencil": "allowed",
+    "provided_materials_only": false
+  },
+  "human_constraints": [
+    "You must behave like a human teammate under official contest rules.",
+    "Do not claim tools, internet, or materials that the rule card forbids.",
+    "Do not look up answer keys or hidden solutions.",
+    "Legal research on public sources and provided databases is allowed.",
+    "No outside coaching that writes the memorial for the team.",
+    "Prepare Applicant and Respondent written memorials plus oral outlines.",
+    "Arguments must withstand judge questioning.",
+    "Team: 2–5 Team Members; only Team Members may contribute substantive work product.",
+    "Outside assistance tightly limited: research/write/edit of Memorials and oral arguments must be exclusive Team Member work; Advisors limited to general advice (research methods, writing/advocacy technique) not drafting arguments.",
+    "Memorials: Applicant + Respondent; hard submission deadline (disqualification if missing both by schedule time); formatting/content rules in Rule 5.",
+    "Season roughly Compromis in September → memorials ~January → oral Qualifying/International rounds.",
+    "No other-team assistance (notes, memorials, practice moots against competitors, etc.).",
+    "FAQ confirms max five contributors over the competition year."
+  ],
+  "agent_roles": [
+    {
+      "name": "Agent_1",
+      "title": "captain / oralist",
+      "may_submit": true,
+      "duties": [
+        "Own the spoken case: opening, structure, and closing.",
+        "Absorb teammates' research into one line of argument rather than a list.",
+        "Submit only after the format and rule checks pass."
+      ]
+    },
+    {
+      "name": "Agent_2",
+      "title": "researcher",
+      "may_submit": false,
+      "duties": [
+        "Find and cite the authorities the argument depends on.",
+        "Bring counter-authority to the team before a judge does."
+      ]
+    },
+    {
+      "name": "Agent_3",
+      "title": "writer",
+      "may_submit": false,
+      "duties": [
+        "Draft the assigned section in full prose, not notes.",
+        "Keep the section within its word or time budget."
+      ]
+    },
+    {
+      "name": "Agent_4",
+      "title": "opponent prep",
+      "may_submit": false,
+      "duties": [
+        "Argue the other side hard enough to expose weak reasoning.",
+        "Prepare answers to the strongest objection the team will face."
+      ]
+    },
+    {
+      "name": "Agent_5",
+      "title": "judge-question specialist",
+      "may_submit": false,
+      "duties": [
+        "Anticipate judge questions and prepare short, direct answers.",
+        "Flag any claim the team cannot defend under questioning."
+      ]
+    }
+  ],
+  "answer_format": "Submit the written memorial/case analysis and a concise oral outline.",
+  "scoring": {
+    "mode": "rubric",
+    "unit": "artifact",
+    "evaluator_id": "rubric_llm_v1",
+    "evaluator_status": "ready",
+    "rubric_path": "data/rubrics/moot_memorial_100_v1.json",
+    "evaluator_strategy": "structured_rubric_llm_judge"
+  },
+  "submission": {
+    "max_count": 1,
+    "shared": true,
+    "mime_types": [
+      "text/plain"
+    ],
+    "task_types": [
+      "moot_court"
+    ],
+    "official_deliverable": "written_memorial",
+    "official_mime_types": [
+      "application/pdf"
+    ],
+    "adaptation": "Official memorials are filed as PDF; the runner submits the memorial text."
+  },
+  "rules_text": "Philip C. Jessup International Law Moot Court Competition. The team of 5 builds a case, presents it, and defends it under questioning from judges or an opposing team. Collaborate only within the team under contest rules. The team files one shared submission. Official timing note: Multi-month memorial preparation plus oral rounds.",
+  "provenance": {
+    "status": "source_enriched_v1",
+    "sources": [
+      {
+        "title": "Jessup",
+        "url": "https://www.ilsa.org/jessup/",
+        "retrieved_at": "2026-08-12",
+        "local_text": "data/rules/sources/jessup/01_jessup.txt"
+      },
+      {
+        "title": "https://www.ilsa.org/History/Jessup%202027/Jessup%202027%20Official%20Rules.pdf",
+        "url": "https://www.ilsa.org/History/Jessup%202027/Jessup%202027%20Official%20Rules.pdf",
+        "retrieved_at": "2026-08-11",
+        "from_report": "docs/rules_crawl_2026-08-11.md"
+      },
+      {
+        "title": "https://www.ilsa.org/jessup-competitors/jessup-faq/",
+        "url": "https://www.ilsa.org/jessup-competitors/jessup-faq/",
+        "retrieved_at": "2026-08-11",
+        "from_report": "docs/rules_crawl_2026-08-11.md"
+      }
+    ],
+    "adaptations": [
+      "max_turns is a safety budget, not necessarily the official wall-clock limit",
+      "specialist roles are a research roster overlay",
+      "physical/oral/live opponent fidelity may be incomplete in src/"
+    ],
+    "crawl_status": "ok",
+    "crawled_excerpts": [
+      {
+        "url": "https://www.ilsa.org/jessup/",
+        "excerpt": "About the Jessup &#8211; International Law Students Association Skip to content Menu ILSA Latest News About ILSA Board of Directors ILSA Student Directors Student Deak Award Annual International Refugee Law Student Writing Competition Publications Jessup Compendium ILSA Guide to International Law Moot Court Competitions Policies Jessup About the Jessup Jessup 2027 Competition Materials Rules Competition Schedule National and Friendly Rounds White & Case International Rounds King & Spalding Unite"
+      }
+    ],
+    "enriched_at": "2026-08-12T16:53:55.311056+00:00",
+    "official_time_note": "Multi-month memorial preparation plus oral rounds.",
+    "research_confidence": "high",
+    "proxy_limitations": [
+      "Months-long research + proprietary legal databases (ILSA-provided) are not free-web equivalent.",
+      "Oral courtroom advocacy and anonymity rules are out of scope for written-memorial-only agent evals.",
+      "AI policy: not a blanket ban in the sections reviewed; still subordinate to exclusive Team Member work-product rule — do not invent a permission."
+    ],
+    "research_merged_at": "2026-08-12T17:04:20.812394+00:00",
+    "rules_text_source": "composed_from_card_fields_v2",
+    "research_reports": [
+      "docs/rules_crawl_2026-08-11.md"
+    ],
+    "research_graded_at": "2026-08-11"
+  },
+  "comparability": {
+    "overall": "draft",
+    "dimensions": {
+      "roster": "approximate",
+      "timing": "adapted",
+      "tools": "src_tool_surface",
+      "scoring": "rubric",
+      "environment": "partial"
+    }
+  }
+}
