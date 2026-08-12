@@ -52,21 +52,15 @@ python3 src/run_exam.py --competition icpc --problem icpc_wf_2012_bottles  # use
 | `run_exam.py` | Live multi-schema runs + LLM judge |
 | `evaluate_submission.py` | Unified grader entry |
 | `artifacts/pdf_ingest.py` | PDF → text and/or page images |
+| `run_smoke_batch.py` | One sample per contest family (all 20) |
 
-## Budgets (time / API / tokens)
-
-- **Turn** ≈ contest clock. Default trial size: `--rounds 50` (or smaller for smoke).
-- **Per turn:** each eligible agent gets **at most one LLM call**, or chooses `sleep`.
-- **API calls** ≈ money. Optional `--max-api-calls N`. Synthesis also counts.
+**Turn rules:** each eligible agent gets at most one LLM call per turn, or chooses `sleep`. Optional `--max-api-calls N`. Synthesis counts toward the API budget.
 
 ```bash
-# Offline sanity
 python3 src/main.py
-
-# Live baseline table (small model)
+python3 src/run_smoke_batch.py --rounds 1
 export PERPLEXITY_API_KEY=pplx-...
 python3 src/run_exam.py --all-schemas --rounds 2
-# Later: --rounds 50 with a smaller agent model
 ```
 
 ## Adding a new contest
