@@ -1,6 +1,6 @@
-# Software design (for Sean / integrators)
+# Software design
 
-Short map of how contests, agents, and graders fit together.
+Map of how contests, agents, and graders fit together.
 
 ## Data flow
 
@@ -53,7 +53,7 @@ python3 src/run_exam.py --competition icpc --problem icpc_wf_2012_bottles  # use
 | `evaluate_submission.py` | Unified grader entry |
 | `artifacts/pdf_ingest.py` | PDF → text and/or page images |
 
-## Budgets (Yusen 2026-08-05)
+## Budgets (time / API / tokens)
 
 - **Turn** ≈ contest clock. Default trial size: `--rounds 50` (or smaller for smoke).
 - **Per turn:** each eligible agent gets **at most one LLM call**, or chooses `sleep`.
@@ -69,7 +69,7 @@ python3 src/run_exam.py --all-schemas --rounds 2
 # Later: --rounds 50 with a smaller agent model
 ```
 
-## Adding Sean’s contest
+## Adding a new contest
 
 1. Put PDFs under `data/raw/<your_contest>/`.
 2. Add/extend a collector → `data/benchmarks/<your_contest>/benchmark.json`.
