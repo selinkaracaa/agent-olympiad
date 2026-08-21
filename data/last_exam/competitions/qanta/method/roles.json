@@ -1,0 +1,40 @@
+{
+  "source": "data/rules/qanta/collaboration.json#agent_roles",
+  "information_policy": "shared",
+  "roles": [
+    {
+      "name": "Agent_1",
+      "title": "captain",
+      "may_submit": true,
+      "duties": [
+        "State the final short answer.",
+        "Resolve disagreements quickly."
+      ]
+    },
+    {
+      "name": "Agent_2",
+      "title": "literature and arts specialist",
+      "may_submit": false,
+      "duties": [
+        "Track literary, arts, and culture clues."
+      ]
+    },
+    {
+      "name": "Agent_3",
+      "title": "history and social science specialist",
+      "may_submit": false,
+      "duties": [
+        "Track history, politics, and social-science clues."
+      ]
+    },
+    {
+      "name": "Agent_4",
+      "title": "science and misc specialist",
+      "may_submit": false,
+      "duties": [
+        "Track science, geography, and miscellaneous clues.",
+        "Challenge unsupported guesses."
+      ]
+    }
+  ]
+}

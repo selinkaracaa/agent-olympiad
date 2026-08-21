@@ -1,0 +1,3 @@
+# Science
+
+Called ‘the greatest experimental spectroscopist of his time', his doctoral thesis, which is now a law  named for him, states that the sparking potential between two electrodes in a gas is a function of the gas  density and the separation distance between the plates. During WWI, he was able to remain totally aloof,  but in 1933, he was removed from his post as President of the Deutsche Physikalische Gesellschaft by the  pro-Nazi Johannes Stark and in 1943, everything he owned was destroyed in a bombing raid. For ten  points name this Germany physicist after whom the third set of hydrogen spectral lines are named.

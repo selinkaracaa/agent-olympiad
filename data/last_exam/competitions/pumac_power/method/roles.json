@@ -1,0 +1,86 @@
+{
+  "source": "data/rules/pumac_power/collaboration.json#agent_roles",
+  "information_policy": "shared",
+  "roles": [
+    {
+      "name": "Agent_1",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit an eligible high-school PUMaC Power contestant identity on a fixed eight-person team.",
+        "Prove, write, cite earlier parts, review justifications, and merge consistent arguments into the shared packet as team needs require.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ]
+    },
+    {
+      "name": "Agent_2",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit an eligible high-school PUMaC Power contestant identity on a fixed eight-person team.",
+        "Prove, write, cite earlier parts, review justifications, and merge consistent arguments into the shared packet as team needs require.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ]
+    },
+    {
+      "name": "Agent_3",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit an eligible high-school PUMaC Power contestant identity on a fixed eight-person team.",
+        "Prove, write, cite earlier parts, review justifications, and merge consistent arguments into the shared packet as team needs require.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ]
+    },
+    {
+      "name": "Agent_4",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit an eligible high-school PUMaC Power contestant identity on a fixed eight-person team.",
+        "Prove, write, cite earlier parts, review justifications, and merge consistent arguments into the shared packet as team needs require.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ]
+    },
+    {
+      "name": "Agent_5",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit an eligible high-school PUMaC Power contestant identity on a fixed eight-person team.",
+        "Prove, write, cite earlier parts, review justifications, and merge consistent arguments into the shared packet as team needs require.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ]
+    },
+    {
+      "name": "Agent_6",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit an eligible high-school PUMaC Power contestant identity on a fixed eight-person team.",
+        "Prove, write, cite earlier parts, review justifications, and merge consistent arguments into the shared packet as team needs require.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ]
+    },
+    {
+      "name": "Agent_7",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit an eligible high-school PUMaC Power contestant identity on a fixed eight-person team.",
+        "Prove, write, cite earlier parts, review justifications, and merge consistent arguments into the shared packet as team needs require.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ]
+    },
+    {
+      "name": "Agent_8",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit an eligible high-school PUMaC Power contestant identity on a fixed eight-person team.",
+        "Prove, write, cite earlier parts, review justifications, and merge consistent arguments into the shared packet as team needs require.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ]
+    }
+  ]
+}

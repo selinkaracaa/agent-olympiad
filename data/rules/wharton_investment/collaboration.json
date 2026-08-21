@@ -1,0 +1,218 @@
+{
+  "agent_roles": [
+    {
+      "name": "Agent_1",
+      "title": "captain / editor",
+      "may_submit": true,
+      "duties": [
+        "Own the deliverable's structure and cut material that does not earn points.",
+        "Resolve disagreements between analysts before they reach the final text.",
+        "Submit only after the format and rule checks pass."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "timeline",
+        "collaboration_protocol",
+        "deliverable_format"
+      ]
+    },
+    {
+      "name": "Agent_2",
+      "title": "analyst",
+      "may_submit": false,
+      "duties": [
+        "Gather the evidence the recommendation rests on.",
+        "Separate what the sources say from what the team infers."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "integrity_and_compliance",
+        "evaluation_criteria"
+      ]
+    },
+    {
+      "name": "Agent_3",
+      "title": "quant / modeler",
+      "may_submit": false,
+      "duties": [
+        "Build the numbers: valuation, models, and sensitivity checks.",
+        "State assumptions explicitly and show which results depend on them."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "resource_policy",
+        "deliverable_format"
+      ]
+    },
+    {
+      "name": "Agent_4",
+      "title": "research lead",
+      "may_submit": false,
+      "duties": [
+        "Decide which questions the research must answer and in what order.",
+        "Kill lines of inquiry that will not change the recommendation."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "timeline",
+        "collaboration_protocol",
+        "deliverable_format"
+      ]
+    },
+    {
+      "name": "Agent_5",
+      "title": "slide / report designer",
+      "may_submit": false,
+      "duties": [
+        "Turn analysis into a structure a judge can follow in one pass.",
+        "Cut slides and sections that do not carry an argument."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "deliverable_format",
+        "evaluation_criteria"
+      ]
+    }
+  ],
+  "information_policy": {
+    "mode": "role_specialized",
+    "shared": [
+      "problem",
+      "contest_rules",
+      "team_discussion",
+      "scratchpad"
+    ],
+    "coordination_requirement": "All teammates may consult the complete public contest rules. Private reasoning becomes shared state only when communicated; assigned rule expertise creates tracking responsibility, not exclusive access."
+  },
+  "deliberation": {
+    "mode": "structured",
+    "min_challenges": 1,
+    "decision_maker": "submitter",
+    "evaluation_dimensions": [
+      "evidence_responsiveness",
+      "revision_after_challenge",
+      "decision_traceability",
+      "authority_bias",
+      "majority_bias"
+    ]
+  },
+  "rule_sections": {
+    "competition_format": [
+      "Competition model: The team researches, authors, and defends a judged artifact.",
+      "The source-recorded active team may have 4 to 6 members; the runner default is 5.",
+      "Source-recorded competition rule: Research publicly available market information.",
+      "Source-recorded competition rule: Do not contact the competition client; teams that do are disqualified.",
+      "Source-recorded competition rule: Do not engage paid advisors, education consultants, or agents, and do not enroll in any non-Wharton course claiming to teach the competition.",
+      "Source-recorded competition rule: Meet the published trading activity and portfolio management requirements throughout the competition.",
+      "Source-recorded competition rule: You are judged on strategy quality, fit to the client's objectives, depth of research and analysis, and how clearly you defend your recommendations — not on portfolio returns.",
+      "Research publicly available market information.",
+      "Do not contact the competition client; teams that do are disqualified.",
+      "Do not engage paid advisors, education consultants, or agents, and do not enroll in any non-Wharton course claiming to teach the competition.",
+      "Meet the published trading activity and portfolio management requirements throughout the competition.",
+      "You are judged on strategy quality, fit to the client's objectives, depth of research and analysis, and how clearly you defend your recommendations — not on portfolio returns."
+    ],
+    "timeline": [
+      "Benchmark adaptation: no official numeric duration is encoded in the available primary-source record; simulation.max_turns is only a runner safety budget.",
+      "Source-recorded competition rule: Teams are 4 to 6 students including a designated student team leader, all from the same high school or campus; falling below four or exceeding six at any time is disqualifying.",
+      "Teams are 4 to 6 students including a designated student team leader, all from the same high school or campus; falling below four or exceeding six at any time is disqualifying.",
+      "Track trading-activity requirements and every published deliverable deadline.",
+      "The student team leader is the sole competition communication and submission channel."
+    ],
+    "resource_policy": [
+      "Source-recorded resource policy: Permitted: internet access, calculators and running code. Conditional: generative AI is limited to cited brainstorming and live market simulator is unavailable in runner. Paper and pencil are always available.",
+      "Source-recorded competition rule: You may use generative AI only to brainstorm; never submit AI-generated work as your own, and cite any AI-derived material like any other source.",
+      "You may use generative AI only to brainstorm; never submit AI-generated work as your own, and cite any AI-derived material like any other source.",
+      "Do not claim tools, internet, or materials that the rule card forbids.",
+      "All trades use the team’s shared Wharton Investment Simulator account.",
+      "Generative AI may support brainstorming but AI-derived material must be cited."
+    ],
+    "collaboration_protocol": [
+      "Source-recorded collaboration rule: Collaborate only within the team under contest rules.",
+      "Source-recorded competition rule: Produce an investment thesis / portfolio rationale as a team.",
+      "Source-recorded competition rule: Teams are 4 to 6 students including a designated student team leader, all from the same high school or campus; falling below four or exceeding six at any time is disqualifying.",
+      "Source-recorded competition rule: No student may participate on more than one team.",
+      "Source-recorded competition rule: The team shares one Wharton Investment Simulator (WInS) account and all trades are placed through it.",
+      "Source-recorded competition rule: The student team leader is the sole channel for competition communications and submits all deliverables through SurveyMonkey Apply.",
+      "Source-recorded competition rule: Your advisor is a teacher or educator at your school who guides and registers the team but may not make decisions for you or take part in trading or strategy.",
+      "Produce an investment thesis / portfolio rationale as a team.",
+      "Teams are 4 to 6 students including a designated student team leader, all from the same high school or campus; falling below four or exceeding six at any time is disqualifying.",
+      "No student may participate on more than one team.",
+      "The team shares one Wharton Investment Simulator (WInS) account and all trades are placed through it.",
+      "The student team leader is the sole channel for competition communications and submits all deliverables through SurveyMonkey Apply.",
+      "Your advisor is a teacher or educator at your school who guides and registers the team but may not make decisions for you or take part in trading or strategy.",
+      "You must behave like a human teammate under official contest rules."
+    ],
+    "integrity_and_compliance": [
+      "Benchmark safety rule: do not use hidden solutions, evaluator internals, unauthorized outside assistance, or resources forbidden by this competition.",
+      "Source-recorded competition rule: No contact with prohibited outside advisors beyond contest rules.",
+      "Source-recorded competition rule: Your advisor is a teacher or educator at your school who guides and registers the team but may not make decisions for you or take part in trading or strategy.",
+      "Source-recorded competition rule: You may use generative AI only to brainstorm; never submit AI-generated work as your own, and cite any AI-derived material like any other source.",
+      "Source-recorded competition rule: Cite every source you use and do not plagiarize; fabricating analyses, trades, or teamwork narratives is a disqualifying ethics breach.",
+      "No contact with prohibited outside advisors beyond contest rules.",
+      "Your advisor is a teacher or educator at your school who guides and registers the team but may not make decisions for you or take part in trading or strategy.",
+      "You may use generative AI only to brainstorm; never submit AI-generated work as your own, and cite any AI-derived material like any other source.",
+      "Cite every source you use and do not plagiarize; fabricating analyses, trades, or teamwork narratives is a disqualifying ethics breach.",
+      "Do not contact the client or use paid advisors, consultants, or agents.",
+      "Cite sources; fabricated trades, analysis, or teamwork narratives are disqualifying."
+    ],
+    "deliverable_format": [
+      "Runner answer contract: Submit clearly separated Investment Policy Statement and Comprehensive Final Report sections covering client objectives, risk tolerance, strategy, evidence, portfolio decisions, and citations.",
+      "Official deliverable: investment policy statement and final report.",
+      "Benchmark adaptation: The two official PDF deliverables are serialized as two labeled sections in one text submission.",
+      "Source-recorded competition rule: Produce two graded deliverables: an Investment Policy Statement defining the client's objectives, risk tolerance, and strategy, and a Comprehensive Final Report justifying your strategy, recommendations, and analysis.",
+      "Produce two graded deliverables: an Investment Policy Statement defining the client's objectives, risk tolerance, and strategy, and a Comprehensive Final Report justifying your strategy, recommendations, and analysis.",
+      "Do not look up answer keys or hidden solutions.",
+      "Submit an Investment Policy Statement and a Comprehensive Final Report."
+    ],
+    "evaluation_criteria": [
+      "Repository evaluation status: Task performance is specified per artifact in rubric mode, but the repository evaluator is deferred; do not invent a completed score.",
+      "Judging rewards strategy quality, client fit, research depth, analysis, and clarity—not portfolio returns."
+    ],
+    "runtime_limitations": [
+      "Runtime limitation: The competition runs 10+ weeks against a live market simulator; a turn-budgeted text run cannot reproduce real price movement, trade execution, or portfolio drift.",
+      "Runtime limitation: Advisor guidance is a real but bounded human input with no analogue in the agent roster.",
+      "Runtime limitation: Semifinal and finale rounds are live oral defenses before judges."
+    ]
+  },
+  "communication": {
+    "mode": "limited",
+    "team_message_budget": 12,
+    "per_agent_message_budget": 3,
+    "max_message_chars": 1200,
+    "counted_actions": [
+      "speak",
+      "write_scratchpad",
+      "propose",
+      "challenge",
+      "provide_evidence",
+      "revise",
+      "decide"
+    ]
+  },
+  "agent_constraints": [
+    "Apply this competition's own roster, timing, tool, collaboration, submission, and scoring rules; do not import rules from another contest.",
+    "Collaborate only within the team under contest rules.",
+    "Permitted: internet access, calculators and running code. Conditional: generative AI is limited to cited brainstorming and live market simulator is unavailable in runner. Paper and pencil are always available.",
+    "Treat private reasoning and notes as unknown to teammates until you communicate the decision-relevant content.",
+    "Do not access hidden solutions, answer keys, evaluator internals, or unauthorized outside problem-solving help.",
+    "Keep sourced evidence, analysis, recommendations, and presentation claims distinct, then reconcile them into one internally consistent artifact.",
+    "Do not cite a source, experiment, market action, or judge interaction unless it was actually available and observed in the task environment.",
+    "Only designated submitters may make the shared submission: Agent_1.",
+    "Use only the official mechanisms that the current task actually exposes; do not claim physical, oral, live-opponent, judge, or environment actions that were not observed."
+  ],
+  "simulation": {
+    "max_turns": 24,
+    "scheduler": "src_collaboration_draft",
+    "turn_budget_basis": "official clock n/a turns vs floor 15 (5 teammates x 2 turns + 1 answer parts + 4 for synthesis)"
+  }
+}

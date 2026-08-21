@@ -70,15 +70,11 @@ def _format_roster(env) -> str:
     )
 
 
-def _deliverable_line(submission: dict) -> str:
-    deliverable = str(submission.get("official_deliverable") or "").strip()
-    if not deliverable:
+def _deliverable_line(deliverable: dict) -> str:
+    name = str(deliverable.get("official_deliverable") or "").strip()
+    if not name:
         return ""
-    line = f"Official deliverable: {deliverable.replace('_', ' ')}"
-    adaptation = str(submission.get("adaptation") or "").strip()
-    if adaptation:
-        line += f" ({adaptation})"
-    return line + "\n"
+    return f"Official deliverable: {name.replace('_', ' ')}\n"
 
 
 def _can_access(env, agent_name: str, category: str) -> bool:
@@ -108,6 +104,7 @@ def _system_prompt(env, agent_name: str) -> str:
         structured_deliberation=structured_deliberation,
     )
     constraints = rule.get("human_constraints") or []
+    agent_constraints = rule.get("agent_constraints") or []
     answer_format = rule.get("answer_format") or ""
     resources = rule.get("resources") or {}
     rule_header = ""
@@ -131,7 +128,7 @@ def _system_prompt(env, agent_name: str) -> str:
         else ""
     )
     deliverable_line = (
-        _deliverable_line(rule.get("submission") or {}) if sees_rules else ""
+        _deliverable_line(rule.get("deliverable") or {}) if sees_rules else ""
     )
     visible_constraints = constraints if sees_rules else []
     rules_heading = (
@@ -139,13 +136,6 @@ def _system_prompt(env, agent_name: str) -> str:
         if sees_rules
         else "CONTEST RULES AVAILABLE TO YOU"
     )
-    evaluation_guidance = ""
-    if _can_access(env, agent_name, "evaluation_guidance"):
-        guidance = str(rule.get("evaluation_guidance") or "").strip()
-        if guidance:
-            evaluation_guidance = (
-                f"\n=== PUBLIC EVALUATION GUIDANCE ===\n{guidance}\n"
-            )
     deliberation_guidance = ""
     if structured_deliberation:
         deliberation_guidance = (
@@ -192,7 +182,8 @@ def _system_prompt(env, agent_name: str) -> str:
         f"{rule_header}\n"
         f"=== {rules_heading} ===\n"
         f"{_format_constraints(visible_constraints)}\n"
-        f"{evaluation_guidance}\n"
+        f"\n=== AGENT COLLABORATION RULES ===\n"
+        f"{_format_constraints(agent_constraints)}\n"
         f"{specialty_guidance}\n"
         f"{communication_guidance}\n"
         f"{deliberation_guidance}\n"
@@ -261,10 +252,13 @@ def _synthesis_system_prompt(env, synthesizer: str) -> str:
         if _can_access(env, synthesizer, "contest_rules")
         else []
     )
+    agent_constraints = rule.get("agent_constraints") or []
     return (
         f"You are {synthesizer}, writing the team's official final answer for "
         f"{meta['competition_id']} ({meta.get('year', 'n/a')}).\n"
         f"Binding constraints:\n{_format_constraints(constraints)}\n\n"
+        f"Agent collaboration rules:\n"
+        f"{_format_constraints(agent_constraints)}\n\n"
         f"Answer format:\n{answer_format}\n"
         "Output only the final answer content. No ACTION lines."
     )
@@ -361,7 +355,11 @@ def _run_synthesis(
 
     best_answer = ""
     best_parts = 0
-    scoring_mode = ((env.get_metadata().get("rule") or {}).get("scoring") or {}).get("mode")
+    scoring_mode = ""
+    if getattr(env, "rule_card", None) is not None:
+        from rules.views import grader_view
+
+        scoring_mode = (grader_view(env.rule_card).get("scoring") or {}).get("mode")
     target_parts = 5 if scoring_mode != "gold" or env.problem_data.get("task_type") in {
         "team_contest",
         "team_power",
@@ -540,6 +538,13 @@ def run_decentralized(env, query_llm_fn: QueryFn, config: CollabConfig | None = 
 
 def _result(env, schema: str) -> dict:
     meta = env.get_metadata()
+    evaluation = None
+    if getattr(env, "rule_card", None) is not None:
+        from rules.views import grader_view
+
+        evaluation = {
+            "scoring": grader_view(env.rule_card).get("scoring") or {},
+        }
     return {
         "schema": schema,
         "problem_id": env.problem_id,
@@ -553,6 +558,7 @@ def _result(env, schema: str) -> dict:
         "deliberation": env.deliberation.report(),
         "communication": env.communication.report(),
         "rule": meta.get("rule"),
+        "evaluation": evaluation,
         "roster": meta.get("rule", {}).get("agent_roles") if meta.get("rule") else [
             {"name": role.name, "title": role.title, "may_submit": role.may_submit}
             for role in _roster(env)

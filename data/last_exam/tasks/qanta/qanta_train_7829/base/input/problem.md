@@ -1,0 +1,3 @@
+# Science
+
+The Rodionov and Fedorova, or "crossed" version of this reaction utilizes formaldehyde as a reducing agent. This reaction cannot occur with hydrogen present on the alpha carbon of the carbonyl since compounds that can form an enolate will instead undergo an aldol condensation. Unusual in that it forms a tetrahedral intermediate that can expel a leaving group, a hydride ion, it has limited utility in synthesis other than for converting alpha-keto aldehydes into alpha-hydroxyacids. Discovered with benzaldehyde and generally conducted in potassium hydroxide, FTP, identify this reaction, the base-catalyzed disproportionation of an aldehyde into carboxylic acids and alcohols.

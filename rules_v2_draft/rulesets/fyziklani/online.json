@@ -1,0 +1,177 @@
+{
+  "$schema": "../../schemas/ruleset.schema.json",
+  "schema_version": "2.0-draft",
+  "ruleset_id": "fyziklani:online:v2-draft",
+  "competition_id": "fyziklani",
+  "title": "Physics Brawl Online — AI-participant non-comparable draft",
+  "profile": "non_comparable",
+  "applicability": {
+    "selector": {},
+    "eval_unit": "session",
+    "effective_years": {"from": 2025, "through": 2025},
+    "notes": "This is the online ruleset, not the in-person Fyziklání ruleset."
+  },
+  "team": {
+    "active_min": 1,
+    "active_default": 5,
+    "active_max": 5,
+    "topology": "single_cooperative_team",
+    "required_roles": [
+      {
+        "role_id": "captain_solver",
+        "title": "captain and solver",
+        "duties": ["Allocate problems, monitor scoring risk, and submit the team's numerical answers."],
+        "may_submit": true
+      }
+    ],
+    "fill_role": {
+      "role_id": "physics_solver",
+      "title": "physics solver",
+      "duties": ["Solve assigned problems, include units and significant figures, and share checks with the team."],
+      "may_submit": false
+    }
+  },
+  "execution": {
+    "official_minutes": 180,
+    "turn_budget": {
+      "mode": "wall_clock_proxy",
+      "max_turns": 36,
+      "derivation": "The three-hour online contest is represented by a bounded agent-turn budget."
+    },
+    "state_requirements": [
+      {
+        "id": "progressive_problem_series",
+        "description": "Main and Hurry-up problem series unlock progressively through the official environment.",
+        "status": "unavailable",
+        "required_for_official_equivalence": true
+      },
+      {
+        "id": "attempt_penalties_and_lockout",
+        "description": "Incorrect attempts reduce points and impose a one-minute series lockout.",
+        "status": "unavailable",
+        "required_for_official_equivalence": true
+      },
+      {
+        "id": "scoreboard_freeze",
+        "description": "The live scoreboard hides information near the end of the contest.",
+        "status": "unavailable",
+        "required_for_official_equivalence": true
+      }
+    ]
+  },
+  "resource_policy": {
+    "internet": {
+      "access": "allowed",
+      "conditions": "Internet and literature are allowed under the online rules; contacting outsiders for help remains forbidden.",
+      "enforced_by": "prompt_only",
+      "source_refs": ["fyziklani-online-rules-2025"]
+    },
+    "literature": {
+      "access": "allowed",
+      "enforced_by": "manual",
+      "source_refs": ["fyziklani-online-rules-2025"]
+    },
+    "calculator": {
+      "access": "allowed",
+      "enforced_by": "environment",
+      "source_refs": ["fyziklani-online-rules-2025"]
+    },
+    "code_execution": {
+      "access": "forbidden",
+      "enforced_by": "tool_policy",
+      "source_refs": ["fyziklani-online-rules-2025"]
+    },
+    "generative_ai": {
+      "access": "forbidden",
+      "enforced_by": "not_enforceable",
+      "source_refs": ["fyziklani-online-rules-2025"]
+    }
+  },
+  "constraints": [
+    {
+      "id": "fyziklani.team_size",
+      "authority": "official",
+      "statement": "An online team contains one to five contestants.",
+      "source_refs": ["fyziklani-online-rules-2025"],
+      "enforcement": {"mode": "runtime", "status": "enforced"}
+    },
+    {
+      "id": "fyziklani.ai_ban",
+      "authority": "official",
+      "statement": "Generative AI is strictly prohibited and can cause disqualification.",
+      "source_refs": ["fyziklani-online-rules-2025"],
+      "enforcement": {"mode": "manual", "status": "unavailable"},
+      "waived_for_agents": true,
+      "waiver_reason": "The benchmark participants are LLM agents."
+    },
+    {
+      "id": "fyziklani.no_outside_people",
+      "authority": "official",
+      "statement": "Contestants may not contact teachers, other teams, or other outsiders for problem-solving help.",
+      "source_refs": ["fyziklani-online-rules-2025"],
+      "enforcement": {"mode": "prompt", "status": "specified_only"}
+    }
+  ],
+  "collaboration": {
+    "topology": "single_cooperative_team",
+    "opponent_model": "none",
+    "dynamic_role_rotation": true,
+    "coalitions": [],
+    "notes": "The roster generator supports every official size from one to five."
+  },
+  "submission": {
+    "official_deliverable": "numerical answers entered in the online platform",
+    "runner_deliverable": "numbered plain-text numerical answers",
+    "official_mime_types": ["text/plain"],
+    "runner_mime_types": ["text/plain"],
+    "adaptation": "The progressive online interface and attempt lifecycle are not reproduced.",
+    "max_count": 1
+  },
+  "evaluation": {
+    "status": "ready",
+    "evaluator_id": "gold_answer_v1",
+    "rubric_path": "data/rubrics/numerical_sheet_reference_40_v1.json",
+    "gold_available": true,
+    "notes": "Gold answers are available, but official attempt penalties and time-dependent scoring remain unsupported."
+  },
+  "comparability": {
+    "overall": "non_comparable",
+    "dimensions": {
+      "roster": "equivalent",
+      "timing": "adapted",
+      "resources": "proxy",
+      "collaboration": "proxy",
+      "submission": "proxy",
+      "scoring": "proxy",
+      "participant_identity": "unavailable"
+    },
+    "waivers": [
+      {
+        "id": "fyziklani.ai_participant_waiver",
+        "official_rule": "Generative AI is prohibited and disqualifying.",
+        "benchmark_treatment": "Generative AI agents solve the contest tasks.",
+        "impact": "fundamental"
+      }
+    ],
+    "unsupported_mechanisms": ["progressive series", "attempt penalties", "series lockout", "scoreboard freeze", "post-contest verification call"]
+  },
+  "provenance": {
+    "sources": [
+      {
+        "source_id": "fyziklani-online-rules-2025",
+        "title": "Physics Brawl Online Rules",
+        "url": "https://physicsbrawl.org/download/2025/rules-en-250901.pdf",
+        "authority": "official",
+        "retrieved_at": "2026-08-12",
+        "effective_year": 2025,
+        "local_path": "data/rules/sources/fyziklani/01_rules-en-250901.pdf",
+        "sha256": "988b5c700274c94d8e5fd7b7db605922c04dd875803ffcd63458cd4c8c908fe8",
+        "locator": "Team size, permitted resources, AI prohibition, scoring, and verification",
+        "snapshot_status": "archived"
+      }
+    ],
+    "generated_at": "2026-08-16T18:00:00Z",
+    "research_confidence": "high",
+    "notes": "The old provided_materials_only flag is removed because the online rules explicitly allow Internet and literature."
+  }
+}

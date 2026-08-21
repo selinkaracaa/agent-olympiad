@@ -1,0 +1,3 @@
+# History
+
+The son of Otto the Illustrious, this man became duke of Saxony in 912 and launched into a war with Conrad I of Franconia, who nevertheless left him the throne of Germany in 918. His exploits include subduing Arnulf of Bavaria and defeating Giselbert, king of Lotharingia, which was then was brought back under German control, as well as crushing the Magyars and adding Shleswig to the German state. FTP name this founder of the Saxon dynasty, the father of St. Bruno, who received his nickname because, according to legend, he was laying bird snares when informed of his election as king.

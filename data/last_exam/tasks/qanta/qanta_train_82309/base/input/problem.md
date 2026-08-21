@@ -1,0 +1,3 @@
+# Literature
+
+One of the props in this play is a gun that shoots a parasol, though only the man pulling the trigger knows this and everyone else on stage thinks the gun is real.  During a scuffle another character shouts "Violence! Violence!"; that character is later found to have been tearing the label off a bottle of alcohol while in the bathroom.  Among the drunken revelations in this play is that one if not both of the New Carthage professors present at the party are impotent.  For 10 points, name this play in which Nick and Honey are witness to the dysfunctional couple George and Martha, written by Edward Albee.

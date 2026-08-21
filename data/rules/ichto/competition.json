@@ -1,0 +1,179 @@
+{
+  "schema_version": "1.0",
+  "rule_id": "ichto:draft_v1",
+  "competition_id": "ichto",
+  "profile": "proxy",
+  "protocol": "presentation_and_cross_examination",
+  "team": {
+    "active_min": 4,
+    "active_default": 4,
+    "active_max": 6,
+    "collaboration": "Collaborate within one national team. Reporter, Opponent, Reviewer, and Observer are assignments held by different teams in a fight, not teammate roles.",
+    "range_basis": "source_record"
+  },
+  "execution": {
+    "official_minutes": null,
+    "external_opponents": "specified_only",
+    "oral_segment_clock": "specified_only"
+  },
+  "allowed_tools": [
+    "query_rules",
+    "use_calculator"
+  ],
+  "resources": {
+    "internet": "forbidden",
+    "calculator": "allowed",
+    "code_execution": "forbidden",
+    "paper_pencil": "allowed",
+    "provided_materials_only": false,
+    "presentation_device": "one_laptop_or_tablet_single_slideshow_only"
+  },
+  "human_constraints": [
+    "Prepare chemistry tournament reports/arguments for presentation and opposition.",
+    "Cite reasoning clearly; be ready for opponent and jury questioning.",
+    "Do not fabricate experimental results not supported by materials.",
+    "Official problems page publishes annual problem sets for a chemistry tournament (oral fight / reporting style historically).",
+    "Teams of 4 to 6 high-school students representing one country; the working language is English.",
+    "In each round your team acts as Reporter, Opponent, Reviewer, or (in four-team sections) Observer, and roles rotate every round until every team has held every role.",
+    "The Captain nominates which single team member serves as Reporter, Opponent, or Reviewer for a round, and only that person speaks for the team.",
+    "Keep to the round clock: report 8 minutes, opposition 5, reporter's response 4, academic discussion 5, review 3, jury questions 5, general discussion 5; all monologues are strictly monologues.",
+    "Use no electronic devices except calculators and one laptop or tablet per team for slides; using the Internet is strictly prohibited and costs 30% of the round's technical points after a warning.",
+    "The Reporter may open only a single slideshow file and no other files or windows.",
+    "Once you begin an active role you may not communicate with your team until the round ends, except during a time-out.",
+    "A Captain may call one 60-second time-out per stage, only before the jury's questions and only between parts of the round or during the reporter-opponent discussion.",
+    "Take each of Reporter, Opponent, and Reviewer at most once during the semi-finals; extra roles are scored at half technical points.",
+    "Your team may reject two challenges per round for free; from the third rejection onward the round's Reporter points are multiplied by 0.8, 0.7, 0.6, 0.5, or 0.4.",
+    "Strategic refusals are limited to one per stage and two across all semi-final stages; all other refusals are tactical and apply only to the current round.",
+    "In the general discussion each active team may ask exactly one question before observers, jury, and audience may ask."
+  ],
+  "rules_text": "International Chemistry Tournament (IChTo). The team prepares a case, presents it, and responds to judges or opponents. The source-recorded active team may have 4 to 6 members; the runner default is 4. Collaborate within one national team. Reporter, Opponent, Reviewer, and Observer are assignments held by different teams in a fight, not teammate roles. Banned during the contest: internet access and running code. Permitted: calculators. Conditional: presentation devices are limited to one laptop or tablet showing a single slideshow. Paper and pencil are always available. Submit one shared oral report and opposition; Submit a written chemistry report plus a concise opposition-preparation and jury-question outline. This is a text proxy for the live multi-team fight. Treat unexposed physical, oral, live-opponent, judge, timing, or environment mechanisms as unavailable rather than simulated facts.",
+  "provenance": {
+    "status": "source_enriched_v1",
+    "sources": [
+      {
+        "title": "IChTo",
+        "url": "http://ichto.org/en/problems/",
+        "retrieved_at": "2026-08-12",
+        "local_text": "data/rules/sources/ichto/01_problems.txt",
+        "authority": "unclassified",
+        "edition": "not_frozen",
+        "sections": [],
+        "archive_status": "local_capture_available"
+      },
+      {
+        "title": "http://ichto.org/media/uploads/2025/04/IChTo-2025-rule-book.pdf",
+        "url": "http://ichto.org/media/uploads/2025/04/IChTo-2025-rule-book.pdf",
+        "retrieved_at": "2026-08-12",
+        "from_report": "docs/rules_lowconf_2026-08-12.md",
+        "authority": "unclassified",
+        "edition": "not_frozen",
+        "sections": [],
+        "archive_status": "locator_only_from_prior_report"
+      },
+      {
+        "title": "http://ichto.org/en/rules/",
+        "url": "http://ichto.org/en/rules/",
+        "retrieved_at": "2026-08-12",
+        "from_report": "docs/rules_lowconf_2026-08-12.md",
+        "authority": "unclassified",
+        "edition": "not_frozen",
+        "sections": [],
+        "archive_status": "locator_only_from_prior_report"
+      },
+      {
+        "title": "http://ichto.org/en/about/",
+        "url": "http://ichto.org/en/about/",
+        "retrieved_at": "2026-08-12",
+        "from_report": "docs/rules_lowconf_2026-08-12.md",
+        "authority": "unclassified",
+        "edition": "not_frozen",
+        "sections": [],
+        "archive_status": "locator_only_from_prior_report"
+      }
+    ],
+    "adaptations": [
+      "max_turns is a safety budget, not necessarily the official wall-clock limit",
+      "specialist roles are a research roster overlay",
+      "physical/oral/live opponent fidelity may be incomplete in src/",
+      "role-specific rule expertise is a benchmark coordination overlay",
+      "structured deliberation actions are a benchmark traceability overlay"
+    ],
+    "crawl_status": "ok",
+    "crawled_excerpts": [
+      {
+        "url": "http://ichto.org/en/problems/",
+        "excerpt": "Problems &#8211; International Chemistry Tournament International Chemistry Tournament International Chemistry Tournament, 15–19 August 2026, Hoengseong, Republic of Korea About Problems Rules Registration Organisers Search Problems Problem set of IChTo-2026 (Hoengseong, Republic of Korea) Problems of the past Tounaments Problems of IChTo-2025 (Bucharest, Romania) Problems of IChTo-2024 (Guadalajara, Mexico) Problems of IChTo-2023 (Tbilisi, Georgia) Problems of IChTo-2022 (Budapest, Hungary) Pro"
+      }
+    ],
+    "enriched_at": "2026-08-12T16:53:55.314240+00:00",
+    "research_confidence": "high",
+    "proxy_limitations": [
+      "The event is a live oral debate with jury scorecards; monologue timing, oratory, and slide quality carry real marks that text-only simulation cannot reproduce.",
+      "Grades are given by at least five human jurors with the highest and lowest discarded, which no gold-answer or single-judge proxy reproduces.",
+      "Cross-team dynamics (challenge selection, strategic refusals, section grouping by rank) require three or four competing teams running simultaneously."
+    ],
+    "research_merged_at": "2026-08-12T17:05:14.754516+00:00",
+    "rules_text_source": "composed_from_card_fields_v2",
+    "research_reports": [
+      "docs/rules_crawl_2026-08-11.md",
+      "docs/rules_lowconf_2026-08-12.md"
+    ],
+    "research_notes": [
+      "Constraints are from the 8th edition (Bucharest 2025) rulebook, which is the document currently linked from ichto.org/en/rules; the 2026 Hoengseong edition may amend them and rule 8.2 explicitly allows changes.",
+      "Appendix 2 sub-criterion scoring sheets were garbled in PDF text extraction, so the exact score-to-grade conversion table is not recorded.",
+      "The nine benchmark rows were migrated from the old three-person modeling value to a four-person default within the sourced official range of four to six.",
+      "You must behave like a human teammate under official contest rules.",
+      "Do not claim tools, internet, or materials that the rule card forbids.",
+      "Do not look up answer keys or hidden solutions."
+    ],
+    "research_graded_at": "2026-08-12",
+    "content_standard": {
+      "name": "icpc_three_component_content_standard",
+      "version": "1.1",
+      "applied_at": "2026-08-17",
+      "reference_card": "data/rules/icpc",
+      "official_facts_policy": "competition_specific_primary_sources_only",
+      "scope": [
+        "competition_constraints",
+        "collaboration_operations",
+        "evaluation_and_compliance",
+        "runtime_fidelity"
+      ]
+    },
+    "source_review": {
+      "reviewed_at": "2026-08-17",
+      "audit_report": "docs/rule_card_icpc_standard_gap_audit_2026-08-17.md",
+      "coverage_grade": "B",
+      "completion_status": "primary_rules_partial_or_variant_selector_required",
+      "claim_policy": "unknown_official_values_remain_null_or_explicitly_unresolved",
+      "known_gaps": []
+    }
+  },
+  "comparability": {
+    "overall": "proxy",
+    "dimensions": {
+      "roster": "equivalent_4_to_6",
+      "timing": "adapted",
+      "tools": "equivalent_with_presentation_device_proxy",
+      "scoring": "deferred_multi_juror_oral",
+      "environment": "single_team_only",
+      "deliberation": "structured_trace_overlay",
+      "information": "role_specialized_tracking_overlay",
+      "communication": "unlimited_runner_channel"
+    }
+  },
+  "deliverable": {
+    "answer_format": "Submit a written chemistry report plus a concise opposition-preparation and jury-question outline. This is a text proxy for the live multi-team fight.",
+    "shared": true,
+    "mime_types": [
+      "text/plain"
+    ],
+    "task_types": [
+      "chemistry_tournament_problem_set"
+    ],
+    "official_deliverable": "oral_report_and_opposition",
+    "official_mime_types": [
+      "text/plain"
+    ]
+  }
+}

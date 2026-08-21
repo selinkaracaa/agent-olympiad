@@ -1,0 +1,79 @@
+{
+  "$schema": "schemas/catalog.schema.json",
+  "schema_version": "2.0-draft",
+  "draft_scope": [
+    "hmmt_guts",
+    "ichto",
+    "iiot",
+    "wharton_investment",
+    "wsc_writing",
+    "purple_comet",
+    "fyziklani",
+    "debatebench"
+  ],
+  "entries": [
+    {
+      "ruleset_id": "hmmt_guts:feb:v2-draft",
+      "competition_id": "hmmt_guts",
+      "path": "rulesets/hmmt_guts/feb.json",
+      "selector": {"season": "feb"},
+      "status": "draft"
+    },
+    {
+      "ruleset_id": "hmmt_guts:nov:v2-draft",
+      "competition_id": "hmmt_guts",
+      "path": "rulesets/hmmt_guts/nov.json",
+      "selector": {"season": "nov"},
+      "status": "draft"
+    },
+    {
+      "ruleset_id": "ichto:team:v2-draft",
+      "competition_id": "ichto",
+      "path": "rulesets/ichto/team.json",
+      "selector": {},
+      "status": "draft"
+    },
+    {
+      "ruleset_id": "iiot:team:v2-draft",
+      "competition_id": "iiot",
+      "path": "rulesets/iiot/team.json",
+      "selector": {},
+      "status": "draft"
+    },
+    {
+      "ruleset_id": "wharton_investment:team:v2-draft",
+      "competition_id": "wharton_investment",
+      "path": "rulesets/wharton_investment/team.json",
+      "selector": {},
+      "status": "draft"
+    },
+    {
+      "ruleset_id": "wsc_writing:collaborative:v2-draft",
+      "competition_id": "wsc_writing",
+      "path": "rulesets/wsc_writing/collaborative.json",
+      "selector": {},
+      "status": "draft"
+    },
+    {
+      "ruleset_id": "purple_comet:team:v2-draft",
+      "competition_id": "purple_comet",
+      "path": "rulesets/purple_comet/team.json",
+      "selector": {},
+      "status": "draft"
+    },
+    {
+      "ruleset_id": "fyziklani:online:v2-draft",
+      "competition_id": "fyziklani",
+      "path": "rulesets/fyziklani/online.json",
+      "selector": {},
+      "status": "draft"
+    },
+    {
+      "ruleset_id": "debatebench:bp:v2-draft",
+      "competition_id": "debatebench",
+      "path": "rulesets/debatebench/bp.json",
+      "selector": {},
+      "status": "draft"
+    }
+  ]
+}

@@ -19,8 +19,13 @@
     "competition_id": "icpc",
     "evaluation": {
       "evaluator_id": "programming_judge",
-      "status": "deferred",
-      "reason": "Needs official tests and isolated sandbox."
+      "status": "pilot",
+      "problem_package": "data/private/icpc/icpc_wf_2012_bottles",
+      "test_provenance": "benchmark_native_deterministic_v1",
+      "limitations": [
+        "Pilot package uses benchmark-native tests rather than official ICPC judge data.",
+        "Pilot sandbox currently supports Python 3 submissions only."
+      ]
     }
   },
   {

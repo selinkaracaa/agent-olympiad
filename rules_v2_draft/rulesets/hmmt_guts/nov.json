@@ -1,0 +1,175 @@
+{
+  "$schema": "../../schemas/ruleset.schema.json",
+  "schema_version": "2.0-draft",
+  "ruleset_id": "hmmt_guts:nov:v2-draft",
+  "competition_id": "hmmt_guts",
+  "title": "HMMT November Guts Round — six-person proxy",
+  "profile": "proxy",
+  "applicability": {
+    "selector": {"season": "nov"},
+    "eval_unit": "session",
+    "effective_years": {"from": 2008, "through": null},
+    "notes": "The benchmark row must carry season=nov; this resolves the six-versus-eight roster failure in the current flat card."
+  },
+  "team": {
+    "active_min": 6,
+    "active_default": 6,
+    "active_max": 6,
+    "topology": "single_cooperative_team",
+    "required_roles": [
+      {
+        "role_id": "captain",
+        "title": "captain and batch submitter",
+        "duties": ["Prioritize the current batch and authorize the shared answer submission."],
+        "may_submit": true
+      },
+      {
+        "role_id": "verifier",
+        "title": "independent verifier",
+        "duties": ["Check proposed answers independently before the batch is submitted."],
+        "may_submit": false
+      },
+      {
+        "role_id": "scribe",
+        "title": "answer-sheet scribe",
+        "duties": ["Maintain the numbered answer sheet and record unresolved items."],
+        "may_submit": false
+      }
+    ],
+    "fill_role": {
+      "role_id": "solver",
+      "title": "problem solver",
+      "duties": ["Solve assigned problems and communicate concise derivations for verification."],
+      "may_submit": false
+    }
+  },
+  "execution": {
+    "official_minutes": 80,
+    "turn_budget": {
+      "mode": "wall_clock_proxy",
+      "max_turns": 24,
+      "derivation": "Six agents receive a bounded coordination budget; this is not an official clock equivalent."
+    },
+    "state_requirements": [
+      {
+        "id": "progressive_batch_release",
+        "description": "Problems arrive in sequential batches and later batches remain hidden until the current batch is committed.",
+        "status": "specified_only",
+        "required_for_official_equivalence": true
+      },
+      {
+        "id": "batch_finality",
+        "description": "A submitted batch cannot be revised.",
+        "status": "specified_only",
+        "required_for_official_equivalence": true
+      }
+    ]
+  },
+  "resource_policy": {
+    "internet": {
+      "access": "forbidden",
+      "enforced_by": "tool_policy",
+      "source_refs": ["hmmt-testing-2026"]
+    },
+    "calculator": {
+      "access": "forbidden",
+      "enforced_by": "tool_policy",
+      "source_refs": ["hmmt-testing-2026"]
+    },
+    "code_execution": {
+      "access": "forbidden",
+      "enforced_by": "tool_policy",
+      "source_refs": ["hmmt-testing-2026"]
+    },
+    "paper_pencil": {
+      "access": "allowed",
+      "enforced_by": "manual",
+      "source_refs": ["hmmt-testing-2026"]
+    }
+  },
+  "constraints": [
+    {
+      "id": "hmmt.nov.roster",
+      "authority": "official",
+      "statement": "The November Guts roster used by these benchmark rows has six active teammates.",
+      "source_refs": ["hmmt-testing-2026"],
+      "enforcement": {"mode": "runtime", "status": "enforced"}
+    },
+    {
+      "id": "hmmt.batch_order",
+      "authority": "official",
+      "statement": "Work only on the released batch and commit the shared answers before receiving the next batch.",
+      "source_refs": ["hmmt-testing-2026"],
+      "enforcement": {"mode": "runtime", "status": "specified_only"}
+    },
+    {
+      "id": "hmmt.turn_budget",
+      "authority": "benchmark_adaptation",
+      "statement": "The runner uses turns as a safety budget instead of reproducing the official wall clock.",
+      "source_refs": [],
+      "enforcement": {"mode": "runtime", "status": "enforced"}
+    }
+  ],
+  "collaboration": {
+    "topology": "single_cooperative_team",
+    "opponent_model": "none",
+    "dynamic_role_rotation": true,
+    "coalitions": [],
+    "notes": "Required roles remain stable, while solver assignments may change by batch."
+  },
+  "submission": {
+    "official_deliverable": "shared batch answer sheet",
+    "runner_deliverable": "numbered plain-text answers",
+    "official_mime_types": ["text/plain"],
+    "runner_mime_types": ["text/plain"],
+    "adaptation": "The physical batch sheet is serialized as text.",
+    "max_count": 1
+  },
+  "evaluation": {
+    "status": "ready",
+    "evaluator_id": "gold_answer_v1",
+    "rubric_path": "data/rubrics/numerical_sheet_reference_40_v1.json",
+    "gold_available": true,
+    "notes": "Use official multipart answers; score batch protocol compliance separately."
+  },
+  "comparability": {
+    "overall": "proxy",
+    "dimensions": {
+      "roster": "equivalent",
+      "timing": "adapted",
+      "resources": "equivalent",
+      "collaboration": "proxy",
+      "submission": "adapted",
+      "scoring": "equivalent",
+      "participant_identity": "proxy"
+    },
+    "waivers": [
+      {
+        "id": "hmmt.ai_participants",
+        "official_rule": "The official contest is played by human students.",
+        "benchmark_treatment": "LLM agents simulate the student team.",
+        "impact": "fundamental"
+      }
+    ],
+    "unsupported_mechanisms": ["progressive batch release", "irrevocable batch submission"]
+  },
+  "provenance": {
+    "sources": [
+      {
+        "source_id": "hmmt-testing-2026",
+        "title": "HMMT tournament testing information",
+        "url": "https://www.hmmt.org/www/tournaments/testing",
+        "authority": "official",
+        "retrieved_at": "2026-08-12",
+        "effective_year": 2026,
+        "local_path": "data/rules/sources/hmmt_guts/01_testing.html",
+        "sha256": "e2d81f2af035d18b63c1aa63b2c7aa220e790a0a903b1d9a1ec029977cb5db29",
+        "locator": "Guts round format and tournament instructions",
+        "snapshot_status": "archived"
+      }
+    ],
+    "generated_at": "2026-08-16T18:00:00Z",
+    "research_confidence": "high",
+    "notes": "The six-person November roster is explicit in this ruleset instead of being forced through an eight-role template."
+  }
+}

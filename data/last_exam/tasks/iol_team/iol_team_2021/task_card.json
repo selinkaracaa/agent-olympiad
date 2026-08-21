@@ -1,0 +1,33 @@
+{
+  "task_id": "iol_team/iol_team_2021",
+  "competition_id": "iol_team",
+  "problem_id": "iol_team_2021",
+  "title": "Team Contest — Garífuna, Lokono and Kari'ña",
+  "year": 2021,
+  "team_size": 4,
+  "source_url": "https://ioling.org/problems/2021/",
+  "inherits_competition_pack": "competitions/iol_team",
+  "rule_card": "data/rules/iol_team",
+  "input": {
+    "visibility": "agent_at_start",
+    "files": [
+      {
+        "name": "problem.md",
+        "path": "base/input/problem.md"
+      },
+      {
+        "name": "iol-2021-team-prob.en.pdf.path",
+        "path": "base/input/iol-2021-team-prob.en.pdf.path"
+      }
+    ]
+  },
+  "method": {
+    "visibility": "agent_at_start",
+    "path": "competitions/iol_team/method"
+  },
+  "eval": {
+    "visibility": "hidden_until_grade",
+    "path": "eval/reference.json",
+    "competition_eval": "competitions/iol_team/eval"
+  }
+}

@@ -1,0 +1,181 @@
+{
+  "$schema": "../../schemas/ruleset.schema.json",
+  "schema_version": "2.0-draft",
+  "ruleset_id": "debatebench:bp:v2-draft",
+  "competition_id": "debatebench",
+  "title": "British Parliamentary debate — four-coalition non-comparable draft",
+  "profile": "non_comparable",
+  "applicability": {
+    "selector": {},
+    "eval_unit": "session",
+    "notes": "This models the four-team chamber topology. A separate single-team benchmark would instead use two agents and scripted opponents."
+  },
+  "team": {
+    "active_min": 8,
+    "active_default": 8,
+    "active_max": 8,
+    "topology": "multi_coalition",
+    "required_roles": [
+      {"role_id": "og_pm", "title": "Opening Government prime minister", "duties": ["Define the motion and deliver the opening government case."], "may_submit": true},
+      {"role_id": "og_dpm", "title": "Opening Government deputy", "duties": ["Defend and extend the opening government case."], "may_submit": true},
+      {"role_id": "oo_lo", "title": "Opening Opposition leader", "duties": ["Oppose the motion and answer the opening government case."], "may_submit": true},
+      {"role_id": "oo_dlo", "title": "Opening Opposition deputy", "duties": ["Defend and extend the opening opposition case."], "may_submit": true},
+      {"role_id": "cg_mg", "title": "Closing Government member", "duties": ["Provide a distinct government extension without contradicting the opening team."], "may_submit": true},
+      {"role_id": "cg_gw", "title": "Closing Government whip", "duties": ["Compare the debate and crystallize the government bench's winning material."], "may_submit": true},
+      {"role_id": "co_mo", "title": "Closing Opposition member", "duties": ["Provide a distinct opposition extension without contradicting the opening team."], "may_submit": true},
+      {"role_id": "co_ow", "title": "Closing Opposition whip", "duties": ["Compare the debate and crystallize the opposition bench's winning material."], "may_submit": true}
+    ]
+  },
+  "execution": {
+    "official_minutes": null,
+    "turn_budget": {
+      "mode": "wall_clock_proxy",
+      "max_turns": 32,
+      "derivation": "Speech order and preparation are represented by turns; official speech and protected-time clocks are not reproduced."
+    },
+    "state_requirements": [
+      {
+        "id": "ordered_speeches",
+        "description": "Eight speeches occur in official BP order with separate speaking clocks.",
+        "status": "specified_only",
+        "required_for_official_equivalence": true
+      },
+      {
+        "id": "points_of_information",
+        "description": "Opposing speakers may offer points of information during unprotected time.",
+        "status": "unavailable",
+        "required_for_official_equivalence": true
+      },
+      {
+        "id": "panel_adjudication",
+        "description": "Judges rank all four teams first through fourth without ties.",
+        "status": "unavailable",
+        "required_for_official_equivalence": true
+      }
+    ]
+  },
+  "resource_policy": {
+    "internet": {
+      "access": "forbidden",
+      "enforced_by": "tool_policy",
+      "source_refs": ["wudc-manual-2025"]
+    },
+    "generative_ai": {
+      "access": "forbidden",
+      "enforced_by": "not_enforceable",
+      "source_refs": ["wudc-manual-2025"]
+    },
+    "prepared_materials": {
+      "access": "forbidden",
+      "enforced_by": "prompt_only",
+      "source_refs": ["wudc-manual-2025"]
+    },
+    "blank_paper": {
+      "access": "allowed",
+      "enforced_by": "manual",
+      "source_refs": ["wudc-manual-2025"]
+    }
+  },
+  "constraints": [
+    {
+      "id": "bp.four_teams",
+      "authority": "official",
+      "statement": "A British Parliamentary debate contains four separate teams of two speakers.",
+      "source_refs": ["wudc-manual-2025"],
+      "enforcement": {"mode": "runtime", "status": "specified_only"}
+    },
+    {
+      "id": "bp.private_team_prep",
+      "authority": "official",
+      "statement": "Each two-person team prepares privately and may not collaborate with the other three teams.",
+      "source_refs": ["wudc-manual-2025"],
+      "enforcement": {"mode": "runtime", "status": "specified_only"}
+    },
+    {
+      "id": "bp.ai_ban",
+      "authority": "official",
+      "statement": "Generative AI may not be used during preparation or debate.",
+      "source_refs": ["wudc-manual-2025"],
+      "enforcement": {"mode": "manual", "status": "unavailable"},
+      "waived_for_agents": true,
+      "waiver_reason": "All eight simulated speakers are LLM agents."
+    }
+  ],
+  "collaboration": {
+    "topology": "multi_coalition",
+    "opponent_model": "separate_coalitions",
+    "dynamic_role_rotation": false,
+    "coalitions": [
+      {"coalition_id": "opening_government", "member_role_ids": ["og_pm", "og_dpm"], "private_channel": true},
+      {"coalition_id": "opening_opposition", "member_role_ids": ["oo_lo", "oo_dlo"], "private_channel": true},
+      {"coalition_id": "closing_government", "member_role_ids": ["cg_mg", "cg_gw"], "private_channel": true},
+      {"coalition_id": "closing_opposition", "member_role_ids": ["co_mo", "co_ow"], "private_channel": true}
+    ],
+    "notes": "Only partners share private preparation; speeches become public chamber information in official order."
+  },
+  "submission": {
+    "official_deliverable": "eight live ordered speeches",
+    "runner_deliverable": "labeled multi-speaker debate transcript",
+    "official_mime_types": ["audio/mpeg"],
+    "runner_mime_types": ["text/plain"],
+    "adaptation": "Oratory, POIs, protected time, and live delivery are flattened into text.",
+    "max_count": 1
+  },
+  "evaluation": {
+    "status": "deferred",
+    "evaluator_id": "oral_performance_judge",
+    "rubric_path": null,
+    "gold_available": false,
+    "notes": "A valid evaluator must rank four teams and account for role fulfillment, extensions, engagement, and delivery."
+  },
+  "comparability": {
+    "overall": "non_comparable",
+    "dimensions": {
+      "roster": "equivalent",
+      "timing": "proxy",
+      "resources": "proxy",
+      "collaboration": "proxy",
+      "submission": "proxy",
+      "scoring": "unavailable",
+      "participant_identity": "unavailable"
+    },
+    "waivers": [
+      {
+        "id": "bp.ai_participant_waiver",
+        "official_rule": "Generative AI is forbidden.",
+        "benchmark_treatment": "All speakers are generative AI agents.",
+        "impact": "fundamental"
+      }
+    ],
+    "unsupported_mechanisms": ["live speech delivery", "points of information", "protected time", "panel adjudication"]
+  },
+  "provenance": {
+    "sources": [
+      {
+        "source_id": "wudc-manual-2025",
+        "title": "WUDC Manual 2025",
+        "url": "https://www.nwforensics.org/su-debate/WUDC%20Manual%20Oct%2017%202025.pdf",
+        "authority": "organizer",
+        "retrieved_at": "2026-08-12",
+        "effective_year": 2025,
+        "locator": "Team structure, preparation, speaker order, POIs, and adjudication",
+        "snapshot_status": "linked_only"
+      },
+      {
+        "source_id": "debatebench-dataset-page",
+        "title": "DebateBench source dataset page",
+        "url": "https://huggingface.co/datasets",
+        "authority": "benchmark",
+        "retrieved_at": "2026-08-12",
+        "effective_year": null,
+        "local_path": "data/rules/sources/debatebench/01_datasets.html",
+        "sha256": "1b4c446a67bffb612640bb03960a537d4123a23c569723362c59302fe320ced3",
+        "locator": "Benchmark source snapshot",
+        "snapshot_status": "archived"
+      }
+    ],
+    "generated_at": "2026-08-16T18:00:00Z",
+    "research_confidence": "high",
+    "notes": "This corrects the current card's treatment of eight opponents as one cooperative team."
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "description": "Last Exam layout: shared competition packs plus thin problem tasks. data/rules remains canonical. data/base is a previous generator output.",
+  "status": "generated_from_data_rules",
+  "source_rules": "data/rules",
+  "source_benchmarks": "data/benchmarks",
+  "generate": "python collectors/build_last_exam_from_rules.py",
+  "n_competitions": 37,
+  "n_tasks": 1664,
+  "competitions_index": "competitions/index.json",
+  "visibility": {
+    "agent_at_start": [
+      "competitions/<cid>/input",
+      "competitions/<cid>/method",
+      "tasks/<cid>/<pid>/base/input"
+    ],
+    "hidden_until_grade": [
+      "competitions/<cid>/eval",
+      "tasks/<cid>/<pid>/eval"
+    ]
+  }
+}

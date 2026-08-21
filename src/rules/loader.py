@@ -1,9 +1,9 @@
 from __future__ import annotations
 
-import json
 from pathlib import Path
 
-from .models import RuleCard, RuleCardError
+from .models import RuleCard
+from .storage import load_rule_card_payload
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
@@ -18,16 +18,11 @@ def load_rule_card(
 ) -> RuleCard | None:
     """Load one competition rule card without letting the model choose it."""
     root = Path(rules_root) if rules_root is not None else DEFAULT_RULES_ROOT
-    path = root / f"{competition_id}.json"
-    if not path.is_file():
-        if required:
-            raise FileNotFoundError(
-                f"No rule card for competition {competition_id!r}: {path}"
-            )
+    payload = load_rule_card_payload(
+        competition_id,
+        rules_root=root,
+        required=required,
+    )
+    if payload is None:
         return None
-
-    try:
-        payload = json.loads(path.read_text(encoding="utf-8"))
-    except json.JSONDecodeError as exc:
-        raise RuleCardError(f"Invalid JSON in rule card {path}: {exc}") from exc
     return RuleCard.from_dict(payload, competition_id=competition_id)

@@ -1,0 +1,3 @@
+# Science
+
+The Uehling effect, a small energy shift due to vacuum polarization, goes as one over the cube of this quantity. It arises due to the termination requirement on the series expansion in associated Laguerre polynomials for the radial portion of the Schrödinger equation for the hydrogen atom. In general, matrix elements have nonvanishing radial integrals, so it is not subject to any selection rule. The labels L and K correspond to values of 2 and 1 for this quantity, which uniquely identifies the electron shell. Hydrogen energy levels go as one over the square of, FTP, what quantum number which can take on any positive integer value?

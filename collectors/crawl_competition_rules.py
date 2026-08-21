@@ -11,6 +11,7 @@ from __future__ import annotations
 import argparse
 import json
 import re
+import sys
 import time
 from datetime import datetime, timezone
 from pathlib import Path
@@ -20,6 +21,9 @@ from urllib.request import Request, urlopen
 REPO = Path(__file__).resolve().parents[1]
 OUT_ROOT = REPO / "data" / "rules" / "sources"
 INDEX = REPO / "data" / "benchmarks" / "index.json"
+sys.path.insert(0, str(REPO / "src"))
+
+from rules import load_rule_card_payload  # noqa: E402
 
 # Prefer official regulations / contestant guidelines over landing pages.
 SOURCE_MAP: dict[str, list[dict[str, str]]] = {
@@ -297,10 +301,12 @@ def main() -> None:
         sources = SOURCE_MAP.get(cid)
         if not sources:
             # fall back to rule card provenance or index source_url
-            rule_path = REPO / "data" / "rules" / f"{cid}.json"
             sources = []
-            if rule_path.exists():
-                card = json.loads(rule_path.read_text(encoding="utf-8"))
+            card = load_rule_card_payload(
+                cid,
+                rules_root=REPO / "data" / "rules",
+            )
+            if card is not None:
                 for item in (card.get("provenance") or {}).get("sources") or []:
                     if item.get("url"):
                         sources.append(

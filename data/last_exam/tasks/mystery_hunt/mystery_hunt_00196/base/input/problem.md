@@ -1,0 +1,3 @@
+# 2002/darkblue/A/Puzzle.html
+
+Mystery Hunt 2002, Dark Blue, House Puzzle A Dark Blue 2002 MIT Mystery Hunt TERRESTRIAL PLANETS "I can't believe that low-rent punk Tito beat me into space." Earth's "no parking" hours, less seven, per week For Neptune, the number of moons you should seek Between Mars and the second, the number of floors On Saturday, hour that Uranus locks doors Venus diameter (round to the inch) For Pluto, the price to see it (in a pinch) Colors of floor tiles by Jupiter, plus one Double the telephones nearby the sun Number of posts holding up Saturn's rings Blocks of marble by Mercury (not other things) Look in towards the center; therein is revealed A topical volume that I have concealed.

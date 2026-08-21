@@ -1,0 +1,18 @@
+{
+  "schema_version": "ao.icpc-package/v1",
+  "problem_id": "icpc_wf_2012_bottles",
+  "provenance": "benchmark_native_deterministic_v1",
+  "time_limit_ms": 3000,
+  "memory_limit_mb": 512,
+  "output_limit_kb": 1024,
+  "image": "python:3.12-slim",
+  "languages": [
+    "python3"
+  ],
+  "checker": {
+    "type": "float",
+    "absolute_tolerance": 0.005,
+    "relative_tolerance": 0.000001
+  },
+  "tests": "tests"
+}

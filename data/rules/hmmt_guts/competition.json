@@ -1,0 +1,189 @@
+{
+  "schema_version": "1.0",
+  "rule_id": "hmmt_guts:draft_v1",
+  "competition_id": "hmmt_guts",
+  "profile": "proxy",
+  "protocol": "progressive_release",
+  "team": {
+    "active_min": 6,
+    "active_default": 8,
+    "active_max": 8,
+    "roster_max": 8,
+    "range_basis": "mixed_or_unresolved",
+    "official_roster_note": "Official November Guts teams are 4–6 high-school students; official February Guts teams are 6–8. This card keeps active_min 6, active_default 8, and active_max 8, with season_variants nov.team_size 6 and feb.team_size 8. Select season from the benchmark row; do not treat a November row as an eight-person February team, and do not invent teammates beyond the selected-season roster.",
+    "collaboration": "All members of the selected-season Guts roster work together on the current released set; only teammates may discuss the problems."
+  },
+  "execution": {
+    "official_minutes": 80,
+    "required_selectors": [
+      "season"
+    ],
+    "season_variants": {
+      "feb": {
+        "team_size": 8,
+        "batch_size": 4,
+        "official_minutes": 80
+      },
+      "nov": {
+        "team_size": 6,
+        "batch_size": 3,
+        "official_minutes": 80
+      }
+    },
+    "progressive_batch_release": "specified_only",
+    "batch_finality": "specified_only",
+    "live_scoreboard": "official_during_contest_specified_not_enforced",
+    "appeals": "specified_only",
+    "sweepstakes_scope": "guts_component_only"
+  },
+  "allowed_tools": [
+    "query_rules"
+  ],
+  "resources": {
+    "internet": "forbidden",
+    "calculator": "forbidden",
+    "code_execution": "forbidden",
+    "paper_pencil": "allowed",
+    "provided_materials_only": true,
+    "books_and_notes": "forbidden",
+    "computational_aids": "forbidden",
+    "drawing_aids": "forbidden",
+    "personal_electronic_devices": "forbidden",
+    "outside_communication": "forbidden"
+  },
+  "human_constraints": [
+    "Treat yourself as an eligible high-school HMMT contestant on one Guts team for the season named by the current benchmark row.",
+    "Do not invent extra teammates or a second team. For a November row inhabit a six-person Guts roster drawn from the official 4–6 range; for a February row inhabit an eight-person roster drawn from the official 6–8 range.",
+    "This session is the Guts Round only; do not treat Individual tests, the Team Round, or Sweepstakes as problems you are solving here.",
+    "November and February are different tournaments: apply that row's batch size and roster, and do not import the other season's format onto the current set.",
+    "The Guts Round lasts 80 minutes unless the organizers announce otherwise on contest day.",
+    "Guts poses 36 short-answer questions of mixed subjects, difficulty, and printed point weights.",
+    "Problems arrive in sets of 3 in November or 4 in February; the team receives only the current set until that set is handed in.",
+    "At the starting signal a runner collects the first set from the assigned problem station for every teammate.",
+    "As soon as the team has answers for the current set, the runner may take that answer sheet to the problem station and pick up the next set.",
+    "Do not claim later sets, later answers, or later point values before the current set has been submitted.",
+    "It is not expected that a team will finish every problem.",
+    "Grading is immediate and scores are posted in real time.",
+    "You may not use books, notes, calculators, pocket organizers, slide-rules, abaci, or any other computational aids.",
+    "You may not use graph paper, rulers, protractors, compasses, architectural tools, or any other drawing aids.",
+    "Laptops, PDAs, cell phones, and other communication devices are prohibited.",
+    "Paper and organizer-provided scratch paper are allowed; write short answers that follow the official acceptable-answer description.",
+    "Collaborate only with your teammates; do not receive problem-solving help from coaches, other teams, or anyone outside the roster.",
+    "If you believe an answer key entry is wrong, go to the designated Appeals Room and submit a written appeal by the contest-day deadline; HMMT coordinators' decisions are final.",
+    "Sweepstakes adds a scaled Individual Total worth 800, a scaled Guts component worth 400, and a scaled Team component worth 400, each scaled so the top raw score in that component becomes that component's points; you are competing only on Guts problem weights in this session."
+  ],
+  "rules_text": "You are an eligible high-school contestant on one HMMT Guts team for the season named by this row. November teams are 4–6 students with 3-problem sets; February teams are 6–8 students with 4-problem sets. November rows use six contestants; February rows use eight. Do not invent extra members or treat a November row as an eight-person February team. Guts is an 80-minute team event with 36 short-answer questions of printed point weights. All teammates gather and send a runner for the first set; after you hand in the current set, the runner may collect the next. Later sets are not visible early, and handed-in answers are final for that set. Grading is immediate and a live scoreboard posts scores. Books, notes, calculators, other computational aids, drawing aids, laptops, PDAs, and phones are forbidden; scratch paper is allowed. Short answers must follow the official acceptable-answer description. Appeals are written in the Appeals Room; coordinators' decisions are final. This session is Guts only. Sweepstakes separately scales Individual 800 + Guts 400 + Team 400 so each component's top raw score becomes that component's points. Treat unexposed physical, oral, live-opponent, judge, timing, or environment mechanisms as unavailable rather than simulated facts.",
+  "provenance": {
+    "status": "source_grounded",
+    "sources": [
+      {
+        "title": "HMMT Testing Information",
+        "url": "https://www.hmmt.co/www/tournaments/testing",
+        "authority": "official",
+        "edition": "current published Testing Information page",
+        "archive_status": "local_text_capture_available",
+        "local_text": "data/rules/sources/hmmt_guts/01_testing.txt",
+        "sections": [
+          "Testing Rules",
+          "Calculators and Other Computational Aids",
+          "Answer Format",
+          "Protests",
+          "Guts Round",
+          "Sweepstakes"
+        ]
+      },
+      {
+        "title": "HMMT November vs February",
+        "url": "https://www.hmmt.co/www/tournaments/novfeb",
+        "authority": "official",
+        "edition": "current published November vs February comparison",
+        "archive_status": "official_url_verified_not_locally_archived",
+        "sections": [
+          "Which tournament should you attend?",
+          "Team Size",
+          "Guts Round",
+          "Eligibility"
+        ]
+      }
+    ],
+    "adaptations": [
+      "max_turns is a safety budget rather than the official 80-minute clock",
+      "The card's active range is 6–8; official November teams may be as small as 4, which this runner does not activate",
+      "season must be read from the benchmark row; November batch size 3 and February batch size 4 are official and are not interchangeable",
+      "Progressive runner pickup, batch unlocking, irreversible hand-in, live standings, and the Appeals Room are specified but not enforced by src",
+      "Limited communication is a benchmark pressure overlay, not an official message cap",
+      "This card scores Guts problem weights only; Sweepstakes component scaling is documented for role immersion and is not computed here"
+    ],
+    "official_time_note": "80 minutes.",
+    "research_confidence": "high",
+    "research_notes": [
+      "Select season per benchmark row (nov or feb). Do not collapse November into an eight-person February roster.",
+      "Official November team size is 4–6; the card keeps active_min 6 and season_variants.nov.team_size 6.",
+      "Guts point weights are printed on the exam; Sweepstakes then scales the top raw Guts score to 400.",
+      "Acceptable-answer conventions live in the official Testing Information PDF linked from the Testing page.",
+      "Eligibility, Appeals Room logistics, and live lecture-hall scoreboard posting are conscience/role text, not executable state machines."
+    ],
+    "proxy_limitations": [
+      "The runtime does not release later Guts sets after a runner hand-in.",
+      "Batch answers are not locked as official irreversible hand-ins.",
+      "Immediate grading and the live scoreboard are not published to the team.",
+      "The Appeals Room and coordinator rulings are not simulated.",
+      "Sweepstakes scaling across Individual, Guts, and Team is not computed.",
+      "November rosters of 4 or 5 are official but outside this card's active range."
+    ],
+    "content_standard": {
+      "name": "icpc_three_component_content_standard",
+      "version": "1.1",
+      "applied_at": "2026-08-17",
+      "reference_card": "data/rules/icpc",
+      "official_facts_policy": "competition_specific_primary_sources_only",
+      "scope": [
+        "competition_constraints",
+        "collaboration_operations",
+        "evaluation_and_compliance",
+        "runtime_fidelity"
+      ]
+    },
+    "source_review": {
+      "reviewed_at": "2026-08-17",
+      "audit_report": "docs/rule_card_icpc_standard_gap_audit_2026-08-17.md",
+      "coverage_grade": "B",
+      "completion_status": "primary_rules_partial_or_variant_selector_required",
+      "claim_policy": "unknown_official_values_remain_null_or_explicitly_unresolved",
+      "known_gaps": [
+        "Season must be selected per benchmark row; one 6–8 roster does not cover official November 4–6.",
+        "Runner pickup, batch unlocking, irreversible hand-in, and live standings remain official state that is currently unavailable.",
+        "The acceptable-answer PDF linked from Testing Information is not locally archived."
+      ]
+    }
+  },
+  "comparability": {
+    "overall": "proxy",
+    "dimensions": {
+      "roster": "season_specific_6_or_8",
+      "timing": "adapted_turn_budget",
+      "tools": "src_tool_surface",
+      "scoring": "specified_but_deferred",
+      "environment": "batch_state_specified_only",
+      "communication": "adapted_coordination_budget",
+      "information": "shared_equal_contestants",
+      "deliberation": "unstructured_observation",
+      "live_scoreboard": "official_specified_not_enforced",
+      "eligibility_and_logistics": "role_immersion_text_only"
+    }
+  },
+  "deliverable": {
+    "answer_format": "Submit the team's final answers in numbered order, using exact values when required.",
+    "shared": true,
+    "mime_types": [
+      "text/plain"
+    ],
+    "task_types": [
+      "guts_round"
+    ],
+    "official_deliverable": "answer_sheet",
+    "official_mime_types": [
+      "text/plain"
+    ]
+  }
+}

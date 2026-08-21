@@ -12,7 +12,18 @@
     "protocol",
     "team",
     "execution",
+    "simulation",
     "allowed_tools",
+    "human_constraints",
+    "agent_constraints",
+    "agent_roles",
+    "deliverable",
+    "evaluation_guidance",
+    "information_policy",
+    "rule_sections",
+    "deliberation",
+    "communication",
+    "scoring",
     "resources",
     "submission",
     "rules_text",
@@ -48,7 +59,8 @@
       "required": [
         "active_min",
         "active_default",
-        "active_max"
+        "active_max",
+        "collaboration"
       ],
       "properties": {
         "active_min": {
@@ -67,13 +79,30 @@
           "type": "integer",
           "minimum": 1
         },
+        "range_basis": {
+          "type": "string",
+          "enum": [
+            "source_record",
+            "benchmark_adaptation",
+            "mixed_or_unresolved"
+          ]
+        },
+        "official_roster_note": {
+          "type": "string",
+          "minLength": 1
+        },
         "collaboration": {
-          "type": "string"
+          "type": "string",
+          "minLength": 1
         }
       },
-      "additionalProperties": false
+      "additionalProperties": true
     },
     "execution": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "simulation": {
       "type": "object",
       "required": [
         "max_turns"
@@ -84,6 +113,20 @@
           "minimum": 1
         },
         "scheduler": {
+          "type": "string"
+        },
+        "turn_budget_basis": {
+          "type": "string"
+        },
+        "exclusive_workstation_lease": {},
+        "run_judging_latency_turns": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "run_judging_latency_basis": {
+          "type": "string"
+        },
+        "pending_run_policy": {
           "type": "string"
         }
       },
@@ -98,6 +141,15 @@
     },
     "human_constraints": {
       "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "agent_constraints": {
+      "type": "array",
+      "minItems": 1,
       "items": {
         "type": "string",
         "minLength": 1
@@ -105,12 +157,16 @@
     },
     "agent_roles": {
       "type": "array",
+      "minItems": 1,
       "items": {
         "type": "object",
         "required": [
           "name",
           "title",
-          "duties"
+          "duties",
+          "may_submit",
+          "information_access",
+          "rule_expertise"
         ],
         "additionalProperties": false,
         "properties": {
@@ -124,6 +180,7 @@
           },
           "duties": {
             "type": "array",
+            "minItems": 1,
             "items": {
               "type": "string",
               "minLength": 1
@@ -134,11 +191,11 @@
           },
           "information_access": {
             "type": "array",
+            "minItems": 1,
             "uniqueItems": true,
             "items": {
               "enum": [
-                "contest_rules",
-                "evaluation_guidance"
+                "contest_rules"
               ]
             }
           },
@@ -153,15 +210,31 @@
         }
       }
     },
-    "answer_format": {
-      "type": "string"
+    "deliverable": {
+      "type": "object",
+      "required": [
+        "answer_format"
+      ],
+      "properties": {
+        "answer_format": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": true
     },
     "evaluation_guidance": {
-      "type": "string"
+      "type": "string",
+      "minLength": 1
     },
     "information_policy": {
       "type": "object",
       "additionalProperties": false,
+      "required": [
+        "mode",
+        "shared",
+        "coordination_requirement"
+      ],
       "properties": {
         "mode": {
           "enum": [
@@ -172,6 +245,7 @@
         },
         "shared": {
           "type": "array",
+          "minItems": 1,
           "uniqueItems": true,
           "items": {
             "enum": [
@@ -183,12 +257,14 @@
           }
         },
         "coordination_requirement": {
-          "type": "string"
+          "type": "string",
+          "minLength": 1
         }
       }
     },
     "rule_sections": {
       "type": "object",
+      "minProperties": 8,
       "additionalProperties": {
         "type": "array",
         "items": {
@@ -200,6 +276,11 @@
     "deliberation": {
       "type": "object",
       "additionalProperties": false,
+      "required": [
+        "mode",
+        "min_challenges",
+        "evaluation_dimensions"
+      ],
       "properties": {
         "mode": {
           "enum": [
@@ -216,6 +297,7 @@
         },
         "evaluation_dimensions": {
           "type": "array",
+          "minItems": 2,
           "uniqueItems": true,
           "items": {
             "enum": [
@@ -232,6 +314,9 @@
     "communication": {
       "type": "object",
       "additionalProperties": false,
+      "required": [
+        "mode"
+      ],
       "properties": {
         "mode": {
           "enum": [

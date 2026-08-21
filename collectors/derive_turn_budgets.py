@@ -10,7 +10,8 @@ budget from facts the card and the benchmark already carry:
 
 The floor keeps every teammate able to speak twice even in short rounds, and the
 clock term is what makes a five-hour contest cost more turns than a 20-minute one.
-Every card records the inputs in `execution` so the number can be audited.
+Every card records the official clock in `execution` and the runner budget in
+`simulation` so the number can be audited without presenting it as a contest rule.
 
 Usage:
     python collectors/derive_turn_budgets.py --dry-run
@@ -24,11 +25,19 @@ import json
 import math
 import re
 import statistics
+import sys
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
 RULES = REPO / "data" / "rules"
 BENCHMARKS = REPO / "data" / "benchmarks"
+sys.path.insert(0, str(REPO / "src"))
+
+from rules import (  # noqa: E402
+    iter_rule_card_ids,
+    load_rule_card_payload,
+    write_rule_card_payload,
+)
 
 # One agent action stands in for roughly five minutes of human contest work.
 MINUTES_PER_TURN = 5
@@ -86,10 +95,10 @@ def main() -> int:
     args = parser.parse_args()
 
     changed = 0
-    for path in sorted(RULES.glob("*.json")):
-        if path.name == "schema.json":
-            continue
-        card = json.loads(path.read_text(encoding="utf-8"))
+    for competition_id in iter_rule_card_ids(RULES):
+        card = load_rule_card_payload(
+            competition_id, rules_root=RULES, required=True
+        )
         team_size = int(card["team"]["active_default"])
         note = (card.get("provenance") or {}).get("official_time_note")
         minutes = official_minutes(note)
@@ -97,15 +106,17 @@ def main() -> int:
         budget, from_clock, floor = turn_budget(team_size, minutes, parts)
 
         execution = dict(card.get("execution") or {})
-        previous = execution.get("max_turns")
-        execution["max_turns"] = budget
+        simulation = dict(card.get("simulation") or {})
+        previous = simulation.get("max_turns")
         execution["official_minutes"] = minutes
-        execution["turn_budget_basis"] = (
+        simulation["max_turns"] = budget
+        simulation["turn_budget_basis"] = (
             f"official clock {from_clock or 'n/a'} turns vs floor {floor} "
             f"({team_size} teammates x {SPEAKING_TURNS_PER_TEAMMATE} turns "
             f"+ {parts} answer parts + {SYNTHESIS_HEADROOM} for synthesis)"
         )
         card["execution"] = execution
+        card["simulation"] = simulation
 
         if previous == budget and not args.dry_run:
             continue
@@ -115,8 +126,10 @@ def main() -> int:
             f"(minutes={minutes}, clock={from_clock}, floor={floor}, team={team_size})"
         )
         if not args.dry_run:
-            path.write_text(
-                json.dumps(card, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+            write_rule_card_payload(
+                competition_id,
+                card,
+                rules_root=RULES,
             )
 
     print(f"\n{changed} budgets changed" + (" (dry run)" if args.dry_run else ""))

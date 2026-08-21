@@ -30,10 +30,44 @@ from constraint_hygiene import clean_constraints, is_maintainer_text  # noqa: E4
 from write_role_duties import BOILERPLATE as BOILERPLATE_DUTIES  # noqa: E402
 from env import TOOL_ACTIONS  # noqa: E402
 from evaluation.registry import load_registry  # noqa: E402
-from rules import RuleCard, RuleCardError  # noqa: E402
+from rules import (  # noqa: E402
+    SIMULATION_OWNED_KEYS,
+    RuleCard,
+    RuleCardError,
+    RuleCardStorageError,
+    iter_rule_card_ids,
+    load_rule_card_payload,
+    write_rule_card_payload,
+)
 
 NEAR_DUPLICATE_RATIO = 0.86
 MIN_CONSTRAINTS = 6
+CONTENT_STANDARD_NAME = "icpc_three_component_content_standard"
+CONTENT_STANDARD_SECTIONS = {
+    "competition_format",
+    "timeline",
+    "resource_policy",
+    "collaboration_protocol",
+    "integrity_and_compliance",
+    "deliverable_format",
+    "evaluation_criteria",
+    "runtime_limitations",
+}
+CONTENT_STANDARD_SCORING = {
+    "official_performance",
+    "rule_compliance",
+    "collaboration_quality",
+    "current_repository_availability",
+}
+SOURCE_COVERAGE_GRADES = {"A", "B", "C", "D"}
+SOURCE_METADATA_FIELDS = {
+    "title",
+    "url",
+    "authority",
+    "edition",
+    "sections",
+    "archive_status",
+}
 
 REGISTRY = {spec.id: spec for spec in load_registry()}
 
@@ -130,12 +164,13 @@ def check_deliverable_contract(card: RuleCard, report: CardReport) -> None:
         report.warnings.append("no benchmark rows found for this competition")
         return
 
-    submission = card.raw.get("submission") or {}
-    card_tasks = sorted(str(item) for item in submission.get("task_types") or [])
+    deliverable = card.deliverable
+    submission = card.submission
+    card_tasks = sorted(str(item) for item in deliverable.get("task_types") or [])
     benchmark_tasks = sorted(facts.get("task_types") or [])
     if card_tasks != benchmark_tasks:
         report.errors.append(
-            f"submission.task_types {card_tasks} != benchmark task types "
+            f"deliverable.task_types {card_tasks} != benchmark task types "
             f"{benchmark_tasks}; run collectors/align_deliverables.py"
         )
 
@@ -160,11 +195,11 @@ def check_deliverable_contract(card: RuleCard, report: CardReport) -> None:
     if rubric_path and not (REPO_ROOT / rubric_path).is_file():
         report.errors.append(f"scoring.rubric_path does not exist: {rubric_path}")
 
-    if not submission.get("official_deliverable"):
-        report.errors.append("submission.official_deliverable is missing")
+    if not deliverable.get("official_deliverable"):
+        report.errors.append("deliverable.official_deliverable is missing")
 
-    official_mimes = set(submission.get("official_mime_types") or [])
-    runner_mimes = set(submission.get("mime_types") or [])
+    official_mimes = set(deliverable.get("official_mime_types") or [])
+    runner_mimes = set(deliverable.get("mime_types") or [])
     if official_mimes - runner_mimes and not submission.get("adaptation"):
         report.warnings.append(
             "official deliverable is not plain text but no submission.adaptation is recorded"
@@ -179,20 +214,23 @@ def check_deliverable_contract(card: RuleCard, report: CardReport) -> None:
 
 
 def lint_card(
-    path: Path,
+    competition_id: str,
     allowed_keys: set[str],
     required_keys: set[str],
     *,
     fix: bool,
     near_ratio: float = NEAR_DUPLICATE_RATIO,
 ) -> CardReport:
-    competition_id = path.stem
     report = CardReport(competition_id=competition_id)
 
     try:
-        payload = json.loads(path.read_text(encoding="utf-8"))
-    except json.JSONDecodeError as exc:
-        report.errors.append(f"invalid JSON: {exc}")
+        payload = load_rule_card_payload(
+            competition_id,
+            rules_root=RULES_ROOT,
+            required=True,
+        )
+    except (FileNotFoundError, RuleCardStorageError) as exc:
+        report.errors.append(str(exc))
         return report
 
     unknown_keys = sorted(set(payload) - allowed_keys)
@@ -207,6 +245,66 @@ def lint_card(
     except RuleCardError as exc:
         report.errors.append(f"rejected by RuleCard.from_dict: {exc}")
         return report
+
+    if not card.agent_constraints:
+        report.errors.append("agent_constraints is empty")
+    if not card.evaluation_guidance:
+        report.errors.append("evaluation_guidance is empty")
+    execution_keys = set((payload.get("execution") or {}))
+    leaked_simulation = sorted(execution_keys & SIMULATION_OWNED_KEYS)
+    if leaked_simulation:
+        report.errors.append(
+            "competition.execution still owns simulation fields: "
+            + ", ".join(leaked_simulation)
+        )
+    if "max_turns" not in (payload.get("simulation") or {}):
+        report.errors.append("collaboration.simulation.max_turns is missing")
+    visible_text = " ".join(
+        [
+            card.rules_text,
+            *card.human_constraints,
+            str((card.information_policy or {}).get("coordination_requirement") or ""),
+        ]
+    ).lower()
+    for needle in (
+        "evaluation_guidance",
+        "rubric_path",
+        "evaluator_id",
+        "evaluator_status",
+    ):
+        if needle in visible_text:
+            report.errors.append(
+                f"agent-visible contest text mentions hidden eval field {needle}"
+            )
+    missing_scoring = sorted(CONTENT_STANDARD_SCORING - set(card.scoring))
+    if missing_scoring:
+        report.errors.append(
+            "scoring is missing content-standard sections: "
+            + ", ".join(missing_scoring)
+        )
+    if competition_id != "icpc":
+        missing_sections = sorted(CONTENT_STANDARD_SECTIONS - set(card.rule_sections))
+        if missing_sections:
+            report.errors.append(
+                "rule_sections is missing content-standard sections: "
+                + ", ".join(missing_sections)
+            )
+        standard = card.provenance.get("content_standard") or {}
+        if standard.get("name") != CONTENT_STANDARD_NAME:
+            report.errors.append(
+                "provenance.content_standard does not declare the ICPC-level contract"
+            )
+        source_review = card.provenance.get("source_review") or {}
+        if source_review.get("coverage_grade") not in SOURCE_COVERAGE_GRADES:
+            report.errors.append(
+                "provenance.source_review is missing a valid A-D coverage grade"
+            )
+        if not source_review.get("completion_status"):
+            report.errors.append(
+                "provenance.source_review.completion_status is missing"
+            )
+        if not source_review.get("audit_report"):
+            report.errors.append("provenance.source_review.audit_report is missing")
 
     unknown_tools = sorted(set(card.allowed_tools) - TOOL_ACTIONS)
     if unknown_tools:
@@ -231,6 +329,16 @@ def lint_card(
             report.errors.append("no agent role may submit")
         if not any(role.duties for role in card.agent_roles):
             report.warnings.append("no role declares duties")
+        incomplete_access = [
+            role.name
+            for role in card.agent_roles
+            if set(role.information_access) != {"contest_rules"}
+        ]
+        if incomplete_access:
+            report.errors.append(
+                "roles lack the complete public contest view: "
+                + ", ".join(incomplete_access)
+            )
         boilerplate_roles = [
             role.name for role in card.agent_roles if tuple(role.duties) in BOILERPLATE_DUTIES
         ]
@@ -251,15 +359,6 @@ def lint_card(
             ):
                 report.errors.append(
                     "role-scoped information policy has no contest-rules holder"
-                )
-            evaluation_holders = [
-                role.name
-                for role in card.agent_roles
-                if "evaluation_guidance" in role.information_access
-            ]
-            if evaluation_holders and not card.evaluation_guidance:
-                report.errors.append(
-                    "roles can access evaluation_guidance but the card has none"
                 )
             if not card.information_policy.get("coordination_requirement"):
                 report.errors.append(
@@ -399,15 +498,68 @@ def lint_card(
 
     check_deliverable_contract(card, report)
 
-    sources = card.provenance.get("sources") or []
+    manifest_ref = str(card.provenance.get("manifest") or "").strip()
+    manifest: dict = {}
+    if manifest_ref:
+        manifest_path = REPO_ROOT / manifest_ref
+        if not manifest_path.is_file():
+            report.errors.append(
+                f"provenance.manifest does not exist: {manifest_ref}"
+            )
+        else:
+            try:
+                manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+            except json.JSONDecodeError as exc:
+                report.errors.append(
+                    f"provenance.manifest is invalid JSON: {exc}"
+                )
+    sources = (
+        manifest.get("sources") or []
+        if manifest_ref
+        else card.provenance.get("sources") or []
+    )
     if not sources:
         report.warnings.append("no provenance sources")
     else:
         without_url = [item for item in sources if not str(item.get("url") or "").startswith("http")]
         if without_url:
             report.warnings.append(f"{len(without_url)} provenance sources without an http url")
+        incomplete_metadata = [
+            (index, sorted(SOURCE_METADATA_FIELDS - set(item)))
+            for index, item in enumerate(sources)
+            if SOURCE_METADATA_FIELDS - set(item)
+        ]
+        if incomplete_metadata:
+            details = "; ".join(
+                f"source[{index}] missing {','.join(missing)}"
+                for index, missing in incomplete_metadata[:3]
+            )
+            report.errors.append("incomplete source metadata: " + details)
+        unresolved_authority = sum(
+            1 for item in sources if item.get("authority") == "unclassified"
+        )
+        unresolved_editions = sum(
+            1 for item in sources if item.get("edition") == "not_frozen"
+        )
+        without_sections = sum(
+            1 for item in sources if not item.get("sections")
+        )
+        if unresolved_authority:
+            report.warnings.append(
+                f"{unresolved_authority} provenance source authorities remain unclassified"
+            )
+        if unresolved_editions:
+            report.warnings.append(
+                f"{unresolved_editions} provenance source editions remain unfrozen"
+            )
+        if without_sections:
+            report.warnings.append(
+                f"{without_sections} provenance sources still lack section/page locators"
+            )
 
-    confidence = card.provenance.get("research_confidence")
+    confidence = card.provenance.get("research_confidence") or (
+        manifest.get("research") or {}
+    ).get("confidence")
     if confidence not in {"high", "medium", "low"}:
         report.warnings.append(f"research_confidence missing or invalid: {confidence!r}")
 
@@ -415,7 +567,11 @@ def lint_card(
         report.warnings.append("profile is proxy but proxy_limitations is empty")
 
     if fix and report.fixes:
-        path.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+        write_rule_card_payload(
+            competition_id,
+            payload,
+            rules_root=RULES_ROOT,
+        )
 
     return report
 
@@ -435,9 +591,14 @@ def main() -> int:
 
     allowed_keys, required_keys = schema_keys()
     reports = [
-        lint_card(path, allowed_keys, required_keys, fix=args.fix, near_ratio=args.near_ratio)
-        for path in sorted(RULES_ROOT.glob("*.json"))
-        if path.name != "schema.json"
+        lint_card(
+            competition_id,
+            allowed_keys,
+            required_keys,
+            fix=args.fix,
+            near_ratio=args.near_ratio,
+        )
+        for competition_id in iter_rule_card_ids(RULES_ROOT)
     ]
 
     if args.json:

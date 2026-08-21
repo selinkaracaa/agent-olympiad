@@ -54,16 +54,20 @@ class CompetitionRuleCardTests(unittest.TestCase):
         self.assertEqual(metadata["rule"]["rule_id"], "science_bowl:2026:question_proxy")
         self.assertEqual(metadata["rule"]["comparability"]["overall"], "non_comparable")
         self.assertIn("RULE VIOLATION", env.execute_action("Agent_1", "use_calculator", "2+2"))
-        self.assertIn("human_constraints", env.query_rules("what are the rules"))
+        rules = env.query_rules("what are the rules")
+        self.assertIn("human_constraints", rules)
+        self.assertNotIn("evaluation_guidance", rules)
+        self.assertNotIn("rubric_path", rules)
+        self.assertNotIn('"scoring"', rules)
 
     def test_arml_local_injects_role_and_human_rules_into_agent_prompt(self):
         env = OlympiadEnvironment("arml_local", ARML_PROBLEM)
         prompt = _system_prompt(env, "Agent_3")
 
-        self.assertIn("Paper and pencil only; calculators are banned on every ARML round.", prompt)
+        self.assertIn("Calculators are not allowed on any ARML part", prompt)
         self.assertIn("HUMAN CONTEST RULES (BINDING)", prompt)
-        self.assertIn("geometry specialist", prompt)
-        self.assertIn("May submit final answer: no", prompt)
+        self.assertIn("contestant", prompt)
+        self.assertIn("May submit final answer: yes", prompt)
         self.assertEqual(env.get_available_tools(), ["query_rules"])
 
     def test_arml_local_mock_round_table_runs_with_gold_scoring_path(self):
@@ -75,7 +79,7 @@ class CompetitionRuleCardTests(unittest.TestCase):
         )
 
         self.assertTrue(result["submitted"])
-        self.assertEqual(result["rule"]["scoring"]["mode"], "gold")
+        self.assertEqual(result["evaluation"]["scoring"]["mode"], "gold")
         self.assertEqual(len(result["roster"]), 6)
         self.assertEqual(result["submitted_by"], "Agent_1")
 
@@ -99,12 +103,14 @@ class CompetitionRuleCardTests(unittest.TestCase):
         self.assertIn("No contact with anyone outside the team", analyst)
         self.assertIn("No contact with anyone outside the team", designer)
         self.assertIn("Timeline:", captain)
-        self.assertIn("Research Integrity:", analyst)
+        self.assertIn("Integrity And Compliance:", analyst)
         self.assertIn("Deliverable Format:", designer)
         self.assertNotIn("PUBLIC EVALUATION GUIDANCE", captain)
         self.assertNotIn("PUBLIC EVALUATION GUIDANCE", analyst)
-        self.assertIn("PUBLIC EVALUATION GUIDANCE", designer)
-        self.assertIn("feasibility", designer)
+        self.assertNotIn("PUBLIC EVALUATION GUIDANCE", designer)
+        self.assertNotIn("evaluation_guidance", captain)
+        self.assertNotIn("rubric_path", analyst)
+        self.assertIn("slide", designer)
 
     def test_query_rules_shows_common_rules_and_role_specialties(self):
         env = OlympiadEnvironment("ieo_business_case", IEO_PROBLEM)
@@ -117,9 +123,10 @@ class CompetitionRuleCardTests(unittest.TestCase):
         self.assertNotIn("rubric_path", analyst_view)
         self.assertIn("human_constraints", captain_view)
         self.assertNotIn("rubric_path", captain_view)
-        self.assertIn("evaluation_guidance", designer_view)
+        self.assertNotIn("evaluation_guidance", designer_view)
         self.assertNotIn("rubric_path", designer_view)
-        self.assertIn("research_integrity", analyst_view)
+        self.assertNotIn("evaluator_id", designer_view)
+        self.assertIn("integrity_and_compliance", analyst_view)
         self.assertIn("timeline", captain_view)
         self.assertIn("deliverable_format", designer_view)
 
@@ -146,12 +153,13 @@ class CompetitionRuleCardTests(unittest.TestCase):
         planner = _system_prompt(env, "Agent_1")
         writer = _system_prompt(env, "Agent_2")
 
-        self.assertIn("Stage 1: team plans only", planner)
-        self.assertIn("Stage 1: team plans only", writer)
+        self.assertIn("The team receives three to four prompts", planner)
+        self.assertIn("The team receives three to four prompts", writer)
+        self.assertIn("AGENT COLLABORATION RULES", planner)
         self.assertIn("Timeline:", planner)
         self.assertIn("Resource Policy:", writer)
         self.assertNotIn("PUBLIC EVALUATION GUIDANCE", planner)
-        self.assertIn("PUBLIC EVALUATION GUIDANCE", writer)
+        self.assertNotIn("PUBLIC EVALUATION GUIDANCE", writer)
 
     def test_selected_coordination_tracks_have_asymmetric_information(self):
         for competition_id in (

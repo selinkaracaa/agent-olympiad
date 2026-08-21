@@ -1,0 +1,3 @@
+# Mythology
+
+The width and lifespan of the branches of a tree sacred to this figure predicted the fates of Vespasian's children. The Regia, built by Numa, contained objects sacred to this figure; those objects' shakings predicted the death of Julius Caesar. After this husband of Neriene performed an action which caused Hersilia to weep, Iris brought Hersilia to a hill where she was deified as Hora. That action was the deification of Quirinus. This god also impregnated a woman who had been made a Vestal Virgin by her uncle Amulius. For 10 points, Rhea Silvia bore Romulus and Remus to what Roman god of war?

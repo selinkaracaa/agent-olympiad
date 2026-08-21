@@ -1,0 +1,3 @@
+# Literature
+
+In this novel, Pietro Crespi courts Amaranta, who rejects him and causes him to kill himself with his "wrists cut by a razor and his hands thrust into a basin of benzoin." Crespi began his ill-fated courting of her after Rebeca married Jose Arcadio instead. Fernanda does not allow Petra Cotes to put leather shoes on the corpse of Aureliano Segundo, whose coffin was accidentally switched with his twin‘s, Jose Arcadio Segundo. Featuring characters such as Ursula and Colonel Aureliano Buendia, FTP, name this work which follows generations of Buendias in Macondo, a novel by Gabriel Garcia Marquez.

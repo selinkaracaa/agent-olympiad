@@ -1,0 +1,3 @@
+# Literature
+
+In this play, a janitor predicts the coming murder of the milk-company collector, Sankey. A manager at the real estate office, Harry Easter, tries to set up the main character in an apartment outside the tenement, but she refuses. Abe spends his days and nights reading the newspaper and arguing politics. His daughter, Shirley, worries about her brother Sam Kaplan's interest in the heroine, who just wants to leave the city. In the end, Frank catches his wife Anna in bed with Sankey, and kills them both, enabling Rose, their daughter and heroine, to get out of the slums. For 10 points, identify this play about the Maurrant family, the most famous of Elmer Rice.

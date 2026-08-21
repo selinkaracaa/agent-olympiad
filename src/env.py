@@ -290,34 +290,9 @@ class OlympiadEnvironment:
             ),
         }
         if self.rule_card is not None:
-            metadata["rule"] = {
-                "rule_id": self.rule_card.rule_id,
-                "profile": self.rule_card.profile,
-                "protocol": self.rule_card.protocol,
-                "rules_text": self.rule_card.rules_text,
-                "human_constraints": list(self.rule_card.human_constraints),
-                "answer_format": self.rule_card.answer_format,
-                "evaluation_guidance": self.rule_card.evaluation_guidance,
-                "information_policy": self.rule_card.information_policy,
-                "rule_sections": self.rule_card.rule_sections,
-                "deliberation": self.rule_card.deliberation,
-                "communication": self.rule_card.communication,
-                "scoring": self.rule_card.scoring,
-                "submission": self.rule_card.submission,
-                "resources": self.rule_card.resources,
-                "comparability": self.rule_card.comparability,
-                "agent_roles": [
-                    {
-                        "name": role.name,
-                        "title": role.title,
-                        "duties": list(role.duties),
-                        "may_submit": role.may_submit,
-                        "information_access": list(role.information_access),
-                        "rule_expertise": list(role.rule_expertise),
-                    }
-                    for role in self.rule_card.roster(self.team_size)
-                ],
-            }
+            from rules.views import agent_view
+
+            metadata["rule"] = agent_view(self.rule_card, team_size=self.team_size)
         return metadata
 
     def query_rules(self, query: str = "", *, agent_name: str | None = None) -> str:
@@ -357,6 +332,7 @@ class OlympiadEnvironment:
                     "rule_expertise": list(role.rule_expertise),
                 },
                 "allowed_tools": list(card.allowed_tools),
+                "agent_constraints": list(card.agent_constraints),
                 "deliberation": card.deliberation,
                 "communication": card.communication,
             }
@@ -376,8 +352,6 @@ class OlympiadEnvironment:
                     "Not included in your private briefing. Ask a teammate who "
                     "holds the contest-rules packet to summarize relevant constraints."
                 )
-            if card.role_can_access(agent_name, "evaluation_guidance"):
-                payload["evaluation_guidance"] = card.evaluation_guidance
             if role.rule_expertise:
                 payload["your_rule_specialties"] = {
                     category: card.rule_sections.get(category, [])
@@ -393,11 +367,10 @@ class OlympiadEnvironment:
             "protocol": card.protocol,
             "rules_text": card.rules_text,
             "human_constraints": list(card.human_constraints),
+            "agent_constraints": list(card.agent_constraints),
             "answer_format": card.answer_format,
             "allowed_tools": list(card.allowed_tools),
             "resources": card.resources,
-            "scoring": card.scoring,
-            "comparability": card.comparability,
             "deliberation": card.deliberation,
             "communication": card.communication,
             "agent_roles": [
@@ -601,7 +574,10 @@ class OlympiadEnvironment:
         return f"Calculator output: {self._safe_calculate(payload)}"
 
     @staticmethod
-    def _validate_isolated_code(payload: str) -> str | None:
+    def _validate_isolated_code(
+        payload: str,
+        extra_modules: frozenset[str] = frozenset(),
+    ) -> str | None:
         """Keep role-scoped code execution computational, not a repository reader."""
         try:
             tree = ast.parse(payload, mode="exec")
@@ -618,6 +594,7 @@ class OlympiadEnvironment:
             "math",
             "random",
             "statistics",
+            *extra_modules,
         }
         banned_names = {"open", "exec", "eval", "compile", "__import__", "input"}
         for node in ast.walk(tree):
@@ -638,15 +615,23 @@ class OlympiadEnvironment:
                 return "Code error: dunder attribute access is unavailable."
         return None
 
-    def _run_code(self, payload: str, *, isolated: bool = False) -> str:
+    def _run_code(
+        self,
+        payload: str,
+        *,
+        isolated: bool = False,
+        stdin: str | None = None,
+        extra_modules: frozenset[str] = frozenset(),
+    ) -> str:
         if isolated:
-            error = self._validate_isolated_code(payload)
+            error = self._validate_isolated_code(payload, extra_modules=extra_modules)
             if error:
                 return error
         try:
             with tempfile.TemporaryDirectory(prefix="agent-olympiad-code-") as workdir:
                 proc = subprocess.run(
                     [sys.executable, "-I", "-c", payload],
+                    input=stdin,
                     capture_output=True,
                     text=True,
                     timeout=5,

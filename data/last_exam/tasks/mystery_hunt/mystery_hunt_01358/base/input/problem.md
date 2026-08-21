@@ -1,0 +1,3 @@
+# 2010/puzzles/2010/confirmed_machine_925/
+
+Confirmed Machine 925 Confirmed Machine 925 You awake after a long night of celebration to find yourself in an unfamiliar, many-roomed house. As you walk around trying to get your bearings, you can't help but observe the massive, and unusually numbered, compositions hanging on the white marble walls. Rather than run, you elect to see if you can make sense of all this, in the hope it will be your ticket home. (You probably won't need to look anything up, but if you want to, it's best to visit a page from the website you might expect to be most official about these matters, though you'd get mostly the same information from Wikipedia.)

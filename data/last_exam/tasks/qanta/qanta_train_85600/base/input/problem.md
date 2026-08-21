@@ -1,0 +1,3 @@
+# Geography
+
+Isla Martin Garcia lies near the coast in this body of water, and cities on its shore include Colonia del Sacramento and Juan L. Lacaze. One bay in this body's western bank receives a namesake river, as well as the Salado River. That bay, which stretches from Point Piedras to the north point of Cape San Antonio, is Samborombon Bay. The Paraguay River drains into a larger one near this body of water, while another river that leads to this body rises in Santa Catarina state in Brazil, and is the namesake of one of the countries that borders this body. Montevideo and Buenos Aires are on the shores of, for 10 points, what estuary where the Paraná and Uruguay Rivers meet the Atlantic Ocean named for silver?

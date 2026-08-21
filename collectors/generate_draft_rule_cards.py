@@ -1,8 +1,9 @@
-"""Generate first-draft rule cards for competitions missing data/rules/*.json."""
+"""Generate first-draft cards for competitions missing from the rule-card store."""
 
 from __future__ import annotations
 
 import json
+import sys
 from pathlib import Path
 
 from write_role_duties import duties_for
@@ -10,6 +11,9 @@ from write_role_duties import duties_for
 REPO = Path(__file__).resolve().parents[1]
 RULES = REPO / "data" / "rules"
 INDEX = REPO / "data" / "benchmarks" / "index.json"
+sys.path.insert(0, str(REPO / "src"))
+
+from rules import iter_rule_card_ids, write_rule_card_payload  # noqa: E402
 
 TOOL_REGISTRY = {
     "purple_comet": ["use_calculator"],
@@ -431,21 +435,23 @@ def build_card(olympiad: dict, goldish: bool) -> dict:
             "active_max": amax,
             "collaboration": "Collaborate only within the team under contest rules.",
         },
-        "execution": {
+        "execution": {},
+        "simulation": {
             "max_turns": 40 if eval_unit == "question" else 80 if adef >= 8 else 60,
             "scheduler": "src_collaboration_draft",
-            "draft": True,
         },
         "allowed_tools": tools,
         "resources": resources_for(cid, tools),
         "human_constraints": constraints_for(cid, name, tools, protocol, eval_unit),
         "agent_roles": roles_for(adef, titles, protocol),
-        "answer_format": answer_format_for(protocol, ctype),
+        "deliverable": {
+            "answer_format": answer_format_for(protocol, ctype),
+            "shared": True,
+            "mime_types": ["text/plain"],
+        },
         "scoring": scoring_for(ctype, goldish),
         "submission": {
             "max_count": 1,
-            "shared": True,
-            "mime_types": ["text/plain"],
         },
         "rules_text": (
             f"Draft rule card for {name}. Team size default {adef}. "
@@ -491,7 +497,7 @@ def goldish_for(cid: str) -> bool:
 
 def main() -> None:
     index = json.loads(INDEX.read_text(encoding="utf-8"))
-    existing = {p.stem for p in RULES.glob("*.json") if p.name != "schema.json"}
+    existing = set(iter_rule_card_ids(RULES))
     written = []
     for olympiad in index["olympiads"]:
         cid = olympiad["id"]
@@ -500,8 +506,7 @@ def main() -> None:
         if cid not in TEAM:
             raise SystemExit(f"Missing TEAM range for {cid}")
         card = build_card(olympiad, goldish_for(cid))
-        path = RULES / f"{cid}.json"
-        path.write_text(json.dumps(card, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        write_rule_card_payload(cid, card, rules_root=RULES)
         written.append(cid)
     print(f"Wrote {len(written)} draft rule cards")
     for cid in written:

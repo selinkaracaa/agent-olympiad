@@ -6,13 +6,51 @@ Rule cards control how `src/` runs a competition. They are separate from:
 - `data/rubrics/`: judge-side scoring criteria;
 - `data/evaluators/`: evaluator selection and implementation metadata.
 
-`src/rules/loader.py` selects `{competition_id}.json` deterministically. Agents may
-read the selected rule summary via `query_rules`, but they do not choose their own
-rule card.
+`src/rules/loader.py` selects a competition deterministically. Every production
+rule card is stored under its competition ID using three canonical files:
+
+```text
+data/rules/{competition_id}/
+  competition.json   # official/public contest input
+  collaboration.json # method, including simulation.max_turns
+  evaluation.json    # hidden judge/eval configuration
+```
+
+`src/rules/storage.py` composes those components into one `RuleCard`. It retains
+legacy `{competition_id}.json` support for compatibility, while rejecting missing
+components, misplaced/duplicate fields, and simultaneous flat and bundled
+representations. `data/rules/schema.json` and the linter validate the assembled
+card. Agents may read the selected rule summary via `query_rules`, but they do not
+choose their own rule card.
 
 ## Status
 
-Every track in `data/benchmarks/index.json` now has a rule card.
+Every track in `data/benchmarks/index.json` has a three-component rule-card
+bundle. The 36 non-ICPC bundles also carry the same content contract as ICPC:
+explicit contestant constraints, agent operations, labeled official/adapted
+rule sections, and four separate evaluation layers (`official_performance`,
+`rule_compliance`, `collaboration_quality`, and
+`current_repository_availability`).
+
+The 2026-08-17 source audit is recorded in every non-ICPC card as
+`provenance.source_review`. Its A-D coverage grade is a source-coverage status,
+not a claim that the runner reproduces the competition. A structurally complete
+card may therefore still be `proxy` or `non_comparable`, have null official
+values, require a season/division/event selector, or retain a deferred evaluator.
+See [`docs/rule_card_icpc_standard_gap_audit_2026-08-17.md`](../../docs/rule_card_icpc_standard_gap_audit_2026-08-17.md).
+
+Source-audited corrections now include APPE's maximum of six active participants,
+NHSEB's 3-7 roster and maximum five seated, the 2025 History Bowl four-quarter
+rules and no incorrect-answer deductions, Mystery Hunt's lack of an official
+8-12 cap, IOAI Team Challenge default-deny web policy, event-specific Science
+Olympiad selectors, 2026 WRO RoboMission scope, and removal of unsupported exact
+ARML/IEO/IIOT/IJSO/IOAA durations. Variable-size cards resolve rosters at their
+declared minimum, default, and maximum sizes.
+
+When deterministic grading is appropriate but benchmark rows do not yet declare
+an evaluator, `scoring.recommended_evaluator_id` records the intended evaluator
+without falsely marking the integration ready. The linter continues to warn until
+the benchmark metadata and evaluator are migrated together.
 
 Official sources were crawled into `data/rules/sources/` and used to enrich
 `human_constraints` / provenance. See [`docs/RULES_CRAWL.md`](../../docs/RULES_CRAWL.md).
@@ -25,9 +63,11 @@ python collectors/enrich_rules_from_sources.py    # constraints + provenance
 python collectors/merge_rules_crawl_report.py     # research report hard constraints
 python collectors/rewrite_rules_text.py           # contestant-facing rules_text
 python collectors/align_deliverables.py           # submission + evaluator contract
-python collectors/derive_turn_budgets.py          # max_turns from official duration
 python collectors/write_role_duties.py            # per-role duties, not boilerplate
 python collectors/configure_coordination_rules.py # expertise + dissent + comm budgets
+python collectors/apply_source_review_corrections.py # reviewed facts + explicit unknowns
+python collectors/derive_turn_budgets.py           # max_turns from reviewed duration
+python collectors/standardize_rule_card_content.py # ICPC-level content contract
 python collectors/lint_rule_cards.py              # gate: 0 errors expected
 ```
 
@@ -36,7 +76,21 @@ merged the same way; `docs/rules_lowconf_2026-08-12.md` is the second pass. Merg
 additive, so an entry a later pass retracts needs `"superseded_by": "<report path>"` in
 the older report or it returns on the next replay.
 
-## The six contracts a card carries
+## Three rule layers and six runtime contracts
+
+The three files separate distinct kinds of rules:
+
+1. **Competition rules** define what the contest permits and requires: roster,
+   official clocks, tools, resources, official `human_constraints`, public
+   deliverable, and fidelity/provenance.
+2. **Collaboration rules** define `agent_constraints`, roles, information
+   sharing, deliberation, communication, and `simulation` (runner method such as
+   `max_turns` and pending-run latency).
+3. **Evaluation rules** are hidden until grade: evaluator/rubric pointers,
+   official-performance reporting, compliance, collaboration diagnostics, and
+   runner adaptations. Judge-side rubric content remains in `data/rubrics/`.
+
+Together those layers carry six runtime contracts:
 
 1. **Behaviour**: `human_constraints` are binding and go into the prompt verbatim.
    Anything addressed to a maintainer belongs in `provenance.research_notes`;
@@ -46,10 +100,12 @@ the older report or it returns on the next replay.
    accepts today, and `submission.adaptation` records the gap. `scoring.evaluator_id`
    and `scoring.rubric_path` must match what `data/benchmarks/{cid}/benchmark.json`
    declares — the linter fails on disagreement.
-3. **Budget**: `execution.max_turns` is derived from `provenance.official_time_note`
-   and the benchmark's answer-part count; `execution.turn_budget_basis` shows the
-   arithmetic. Cards whose official duration is unknown record
-   `execution.official_minutes: null` and fall back to a roster-based floor.
+3. **Budget**: `simulation.max_turns` is derived from
+   `provenance.official_time_note` and the benchmark's answer-part count;
+   `simulation.turn_budget_basis` shows the arithmetic. Cards whose official
+   duration is unknown record `execution.official_minutes: null` and fall back
+   to a roster-based floor. Agents never receive evaluator IDs, rubric paths,
+   gold pointers, or `evaluation_guidance`.
 4. **Information**: opt-in cards set `information_policy.mode` to
    `role_specialized`. Every teammate can consult the complete contestant rules,
    while `rule_sections` and each role's `rule_expertise` assign primary
@@ -82,9 +138,13 @@ rosters combine opposing teams are not given a flat message budget when that
 would distort the source competition. Every enabled mechanism is recorded as a
 benchmark adaptation rather than an official contest constraint.
 
-Every step is idempotent, and `tests/test_rule_card_lint.py` fails the build if a
-card regresses (schema violation, unknown tool, roster/team mismatch, tool that
-contradicts a resource ban, or `rules_text` that leaks pipeline metadata).
+The source-correction and content-standard passes are idempotent. The linter and
+`tests/test_rule_card_lint.py` fail the build if a card regresses through a schema
+violation, missing source-review state, incomplete citation metadata, unknown
+tool, roster/team mismatch, tool/resource contradiction, or pipeline text in the
+contest briefing. Unclassified authority, unfrozen edition, missing source
+locator, and unassigned evaluator remain visible warnings rather than invented
+facts.
 
 `rules_text` is injected verbatim into the agent system prompt, so it must read
 like a contest briefing. Cards marked
@@ -93,17 +153,9 @@ the card's own fields by `rewrite_rules_text.py`; hand-written briefings are lef
 alone unless you pass `--all`. Resource policy is rendered separately from
 `resources` by `src/rules/describe.py`, so briefings should not repeat it.
 
-Hand-tuned first pass (roles + tools):
-
-- `arml_local.json`
-- `purple_comet.json`
-- `wmtc.json`
-- `qanta.json`
-- `science_bowl.json`
-
-Remaining cards started as draft v1 and were source-enriched. Physical / buzzer /
-oral-heavy contests may still be marked `proxy` because `src/` cannot fully
-execute those mechanisms yet.
+Physical, buzzer, oral, market, network, long-horizon, and robotics contests may
+remain `proxy` or `non_comparable` because a complete text card does not create
+the missing live environment, opponent, judge, apparatus, or state machine.
 
 ## Card requirements
 

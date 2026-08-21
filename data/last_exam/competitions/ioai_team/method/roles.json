@@ -1,0 +1,42 @@
+{
+  "source": "data/rules/ioai_team/collaboration.json#agent_roles",
+  "information_policy": "role_specialized",
+  "roles": [
+    {
+      "name": "Agent_1",
+      "title": "captain and submission lead",
+      "may_submit": true,
+      "duties": [
+        "Track task-specific rules and submission requirements.",
+        "Resolve model-selection disagreements."
+      ]
+    },
+    {
+      "name": "Agent_2",
+      "title": "data and modeling specialist",
+      "may_submit": false,
+      "duties": [
+        "Prepare data and candidate models.",
+        "State modeling assumptions."
+      ]
+    },
+    {
+      "name": "Agent_3",
+      "title": "experiment and evaluation specialist",
+      "may_submit": false,
+      "duties": [
+        "Design comparisons and inspect metrics.",
+        "Guard hidden-test integrity."
+      ]
+    },
+    {
+      "name": "Agent_4",
+      "title": "tool and provenance lead",
+      "may_submit": false,
+      "duties": [
+        "Track allowed tools and websites.",
+        "Record sources and reproducibility details."
+      ]
+    }
+  ]
+}

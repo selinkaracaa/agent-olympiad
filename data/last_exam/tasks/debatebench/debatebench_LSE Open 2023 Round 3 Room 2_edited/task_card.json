@@ -1,0 +1,33 @@
+{
+  "task_id": "debatebench/debatebench_LSE Open 2023 Round 3 Room 2_edited",
+  "competition_id": "debatebench",
+  "problem_id": "debatebench_LSE Open 2023 Round 3 Room 2_edited",
+  "title": "LSE Open 2023 Round 3 Room 2_edited",
+  "year": 2023,
+  "team_size": 8,
+  "source_url": null,
+  "inherits_competition_pack": "competitions/debatebench",
+  "rule_card": "data/rules/debatebench",
+  "input": {
+    "visibility": "agent_at_start",
+    "files": [
+      {
+        "name": "problem.md",
+        "path": "base/input/problem.md"
+      },
+      {
+        "name": "LSE Open 2023 Round 3 Room 2_edited.txt.path",
+        "path": "base/input/LSE Open 2023 Round 3 Room 2_edited.txt.path"
+      }
+    ]
+  },
+  "method": {
+    "visibility": "agent_at_start",
+    "path": "competitions/debatebench/method"
+  },
+  "eval": {
+    "visibility": "hidden_until_grade",
+    "path": "eval/reference.json",
+    "competition_eval": "competitions/debatebench/eval"
+  }
+}

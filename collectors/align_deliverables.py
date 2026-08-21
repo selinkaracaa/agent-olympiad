@@ -5,7 +5,7 @@ Three places describe what a team hands in, and they used to disagree:
 - `data/benchmarks/{cid}/benchmark.json` carries `task_type` and, for some tracks,
   an `evaluation` block naming the evaluator and rubric;
 - `data/evaluators/registry.json` says which mime types each evaluator accepts;
-- `data/rules/{cid}.json` told the agent to submit plain text regardless.
+- the assembled rule card told the agent to submit plain text regardless.
 
 This script makes the rule card state the official deliverable, the mime types the
 official contest expects, the mime types the `src/` runner can actually accept
@@ -31,6 +31,11 @@ BENCHMARKS = REPO / "data" / "benchmarks"
 sys.path.insert(0, str(REPO / "src"))
 
 from evaluation.registry import load_registry  # noqa: E402
+from rules import (  # noqa: E402
+    iter_rule_card_ids,
+    load_rule_card_payload,
+    write_rule_card_payload,
+)
 
 # What the official contest actually collects from a team.
 OFFICIAL_DELIVERABLES: dict[str, tuple[str, tuple[str, ...]]] = {
@@ -129,21 +134,21 @@ def main() -> int:
 
     registry = {spec.id: spec for spec in load_registry()}
     changed = 0
-    for path in sorted(RULES.glob("*.json")):
-        if path.name == "schema.json":
-            continue
-        competition_id = path.stem
-        card = json.loads(path.read_text(encoding="utf-8"))
+    for competition_id in iter_rule_card_ids(RULES):
+        card = load_rule_card_payload(
+            competition_id, rules_root=RULES, required=True
+        )
         facts = benchmark_facts(competition_id)
         deliverable, official_mimes = OFFICIAL_DELIVERABLES.get(
             competition_id, ("document", ("text/plain",))
         )
 
+        public_deliverable = dict(card.get("deliverable") or {})
         submission = dict(card.get("submission") or {})
-        submission["task_types"] = facts.get("task_types") or []
-        submission["official_deliverable"] = deliverable
-        submission["official_mime_types"] = list(official_mimes)
-        submission["mime_types"] = list(RUNNER_MIME_TYPES)
+        public_deliverable["task_types"] = facts.get("task_types") or []
+        public_deliverable["official_deliverable"] = deliverable
+        public_deliverable["official_mime_types"] = list(official_mimes)
+        public_deliverable["mime_types"] = list(RUNNER_MIME_TYPES)
         if set(official_mimes) - set(RUNNER_MIME_TYPES):
             submission["adaptation"] = ADAPTATION_NOTES.get(
                 deliverable,
@@ -172,6 +177,7 @@ def main() -> int:
             scoring.pop("rubric_path", None)
 
         updated = dict(card)
+        updated["deliverable"] = public_deliverable
         updated["submission"] = submission
         updated["scoring"] = scoring
         if updated == card:
@@ -182,8 +188,10 @@ def main() -> int:
             f"evaluator={scoring['evaluator_id']} status={scoring['evaluator_status']}"
         )
         if not args.dry_run:
-            path.write_text(
-                json.dumps(updated, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+            write_rule_card_payload(
+                competition_id,
+                updated,
+                rules_root=RULES,
             )
 
     print(f"\n{changed} cards updated" + (" (dry run)" if args.dry_run else ""))

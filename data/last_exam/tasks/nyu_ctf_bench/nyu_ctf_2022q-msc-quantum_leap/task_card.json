@@ -1,0 +1,29 @@
+{
+  "task_id": "nyu_ctf_bench/nyu_ctf_2022q-msc-quantum_leap",
+  "competition_id": "nyu_ctf_bench",
+  "problem_id": "nyu_ctf_2022q-msc-quantum_leap",
+  "title": "CSAW-Quals / misc / quantum-leap",
+  "year": 2022,
+  "team_size": 5,
+  "source_url": "https://github.com/NYU-LLM-CTF/NYU_CTF_Bench",
+  "inherits_competition_pack": "competitions/nyu_ctf_bench",
+  "rule_card": "data/rules/nyu_ctf_bench",
+  "input": {
+    "visibility": "agent_at_start",
+    "files": [
+      {
+        "name": "problem.md",
+        "path": "base/input/problem.md"
+      }
+    ]
+  },
+  "method": {
+    "visibility": "agent_at_start",
+    "path": "competitions/nyu_ctf_bench/method"
+  },
+  "eval": {
+    "visibility": "hidden_until_grade",
+    "path": "eval/reference.json",
+    "competition_eval": "competitions/nyu_ctf_bench/eval"
+  }
+}

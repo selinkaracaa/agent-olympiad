@@ -1,0 +1,3 @@
+# Mythology
+
+This man once led a king to two dragons that while fighting underground kept destroying his tower, and in doing so saved his own life. This man, in the form of a stag, attempted to advise Julius Caesar. This man was imprisoned in a rock, a cave, a tree, or an invisible tower depending on the narrative, by the (*) Lady of the Lake. This man's prophetic role was gradually supplanted by his more modern role in later myth. This man designed the Round Table with one seat to be left empty, and he crowned the son of Uther after that man pulled a sword from a stone. For 10 points, name this mythological wizard.

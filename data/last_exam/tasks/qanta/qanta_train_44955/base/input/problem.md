@@ -1,0 +1,3 @@
+# Literature
+
+This work's narrator tells his wife "I'd like to destroy you a few times in bed," a statement that is referred to later as "good destruction." Its protagonist recalls seeing Tristan Tzara dining with a potato-faced writer while in Paris. He later recalls his friendship with the writer Julian, who became disillusioned with the lifestyles of rich people. Its minor characters include the servant (*) Molo, who gives the main character whiskey-soda. This story opens by mentioning a dried and frozen leopard carcass, which foreshadows the death of the protagonist, who blames his wife Helen for holding him back in fulfilling his career as a writer. For 10 points, name this story by Hemingway in which Harry imagines a plane taking him to the title mountain.

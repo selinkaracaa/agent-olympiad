@@ -97,11 +97,13 @@ def resolve_evaluator_by_id(
 
 
 def strategy_kind(spec: EvaluatorSpec) -> str:
-    """Map registry strategy strings to coarse kinds: gold | llm_judge | deferred."""
+    """Map registry strategy strings to a coarse evaluator implementation kind."""
     strategy = spec.strategy.lower()
     if "official_gold" in strategy or strategy.startswith("gold"):
         return "gold"
-    if "deferred" in spec.status or "sandbox" in strategy or "physical" in strategy:
+    if "sandbox" in strategy and not spec.status.startswith("deferred"):
+        return "programming"
+    if "deferred" in spec.status or "physical" in strategy:
         return "deferred"
     if "rubric" in strategy or "multimodal" in strategy or "llm" in strategy:
         return "llm_judge"

@@ -1,0 +1,3 @@
+# Fine Arts
+
+This opera's Act III prelude is followed by a long English horn solo depicting a shepherd's pipe. The premiere of this opera supposedly killed the Heldentenor Ludwig Schnorr. In Act II of this opera, the main characters decide that death, the night, and love are all basically the same thing. In this opera's final act, (*) Kurwenal attacks Melot. The unusual spelling "F, B, D-sharp, G-sharp" forms this opera's namesake chord. It ends with the second title character singing "Mild und leise," her "Liebestod." In this opera, Brangäne gives a love potion to the title characters, one of whom is killed by King Mark. For 10 points, name this opera by Richard Wagner about a pair of lovers.

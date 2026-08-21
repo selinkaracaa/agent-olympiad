@@ -355,7 +355,7 @@
       "name": "International Chemistry Tournament (IChTo)",
       "domain": "Chemistry",
       "type": "rubric_based",
-      "team_size": 3,
+      "team_size": 4,
       "benchmark_path": "data/benchmarks/ichto/benchmark.json",
       "target": 30,
       "human_score_out_of": "tournament ranking",

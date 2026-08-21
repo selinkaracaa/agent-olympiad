@@ -28,6 +28,12 @@ INDEX = REPO / "data" / "benchmarks" / "index.json"
 
 sys.path.insert(0, str(REPO / "src"))
 
+from rules import (  # noqa: E402
+    iter_rule_card_ids,
+    load_rule_card_payload,
+    write_rule_card_payload,
+)
+
 from rules import describe_resources  # noqa: E402
 
 PROTOCOL_FORMAT = {
@@ -200,10 +206,10 @@ def main() -> int:
 
     names = display_names()
     rewritten = 0
-    for path in sorted(RULES.glob("*.json")):
-        if path.name == "schema.json":
-            continue
-        card = json.loads(path.read_text(encoding="utf-8"))
+    for competition_id in iter_rule_card_ids(RULES):
+        card = load_rule_card_payload(
+            competition_id, rules_root=RULES, required=True
+        )
         current = strip_meta_sentences(str(card.get("rules_text") or ""))
         previously_composed = str(
             (card.get("provenance") or {}).get("rules_text_source") or ""
@@ -213,15 +219,16 @@ def main() -> int:
             if current != card.get("rules_text"):
                 card["rules_text"] = current
                 if not args.dry_run:
-                    path.write_text(
-                        json.dumps(card, ensure_ascii=False, indent=2) + "\n",
-                        encoding="utf-8",
+                    write_rule_card_payload(
+                        competition_id,
+                        card,
+                        rules_root=RULES,
                     )
                 rewritten += 1
-                print(f"{path.stem}: cleaned metadata only")
+                print(f"{competition_id}: cleaned metadata only")
             continue
 
-        name = names.get(path.stem, path.stem)
+        name = names.get(competition_id, competition_id)
         composed = compose(card, name)
         if composed == card.get("rules_text") and previously_composed:
             continue
@@ -230,11 +237,13 @@ def main() -> int:
         provenance["rules_text_source"] = f"{COMPOSED_MARKER}_v2"
         card["provenance"] = provenance
         if not args.dry_run:
-            path.write_text(
-                json.dumps(card, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+            write_rule_card_payload(
+                competition_id,
+                card,
+                rules_root=RULES,
             )
         rewritten += 1
-        print(f"{path.stem}: {card['rules_text']}")
+        print(f"{competition_id}: {card['rules_text']}")
 
     print(f"\nrewrote {rewritten} cards" + (" (dry run)" if args.dry_run else ""))
     return 0

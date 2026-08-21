@@ -1,0 +1,33 @@
+{
+  "task_id": "vis_moot/vis_moot_32nd-2025-problem-incl-PO2",
+  "competition_id": "vis_moot",
+  "problem_id": "vis_moot_32nd-2025-problem-incl-PO2",
+  "title": "32nd-2025-problem-incl-PO2",
+  "year": 2025,
+  "team_size": 5,
+  "source_url": "https://www.vismoot.org/",
+  "inherits_competition_pack": "competitions/vis_moot",
+  "rule_card": "data/rules/vis_moot",
+  "input": {
+    "visibility": "agent_at_start",
+    "files": [
+      {
+        "name": "problem.md",
+        "path": "base/input/problem.md"
+      },
+      {
+        "name": "32nd-2025-problem-incl-PO2.pdf.path",
+        "path": "base/input/32nd-2025-problem-incl-PO2.pdf.path"
+      }
+    ]
+  },
+  "method": {
+    "visibility": "agent_at_start",
+    "path": "competitions/vis_moot/method"
+  },
+  "eval": {
+    "visibility": "hidden_until_grade",
+    "path": "eval/reference.json",
+    "competition_eval": "competitions/vis_moot/eval"
+  }
+}

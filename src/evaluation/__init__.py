@@ -17,6 +17,13 @@ from .models import (
     Rubric,
     load_rubric,
 )
+from .programming import (
+    DockerProgrammingJudge,
+    ProblemPackage,
+    ProgrammingJudgeError,
+    ProgrammingJudgeResult,
+    load_problem_package,
+)
 from .registry import (
     EvaluatorSpec,
     RegistryError,
@@ -41,7 +48,11 @@ __all__ = [
     "EvaluationError",
     "EvaluationResult",
     "EvaluatorSpec",
+    "DockerProgrammingJudge",
     "GoldAnswerEvaluator",
+    "ProblemPackage",
+    "ProgrammingJudgeError",
+    "ProgrammingJudgeResult",
     "QuestionSpec",
     "RegistryError",
     "Rubric",
@@ -53,6 +64,7 @@ __all__ = [
     "ensure_default_rubrics",
     "evaluate_slide_deck",
     "load_gold_parts",
+    "load_problem_package",
     "load_registry",
     "load_rubric",
     "resolve_evaluator_by_id",

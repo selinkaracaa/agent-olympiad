@@ -1,0 +1,33 @@
+{
+  "task_id": "arml_power/arml_power_fall_2021",
+  "competition_id": "arml_power",
+  "problem_id": "arml_power_fall_2021",
+  "title": "Power Round — Fall 2021",
+  "year": 2021,
+  "team_size": null,
+  "source_url": "https://www.arml.com/ARML/arml_2019/public_power_contest/contest_archive/Fall_2021/ARMLPower_Fall_2021.pdf",
+  "inherits_competition_pack": "competitions/arml_power",
+  "rule_card": "data/rules/arml_power",
+  "input": {
+    "visibility": "agent_at_start",
+    "files": [
+      {
+        "name": "problem.md",
+        "path": "base/input/problem.md"
+      },
+      {
+        "name": "ARMLPower_Fall_2021.pdf.path",
+        "path": "base/input/ARMLPower_Fall_2021.pdf.path"
+      }
+    ]
+  },
+  "method": {
+    "visibility": "agent_at_start",
+    "path": "competitions/arml_power/method"
+  },
+  "eval": {
+    "visibility": "hidden_until_grade",
+    "path": "eval/reference.json",
+    "competition_eval": "competitions/arml_power/eval"
+  }
+}

@@ -1,0 +1,181 @@
+{
+  "$schema": "../../schemas/ruleset.schema.json",
+  "schema_version": "2.0-draft",
+  "ruleset_id": "wsc_writing:collaborative:v2-draft",
+  "competition_id": "wsc_writing",
+  "title": "World Scholar's Cup Collaborative Writing — three-writer proxy",
+  "profile": "proxy",
+  "applicability": {
+    "selector": {},
+    "eval_unit": "artifact",
+    "notes": "The available official sources do not provide a stable numeric schedule for the preparation, writing, and review stages."
+  },
+  "team": {
+    "active_min": 3,
+    "active_default": 3,
+    "active_max": 3,
+    "topology": "individual_shared_output",
+    "required_roles": [
+      {
+        "role_id": "lead_writer",
+        "title": "team planner, writer, and submitter",
+        "duties": ["Help plan all three responses, write one complete response to a distinct prompt, and submit the final portfolio."],
+        "may_submit": true
+      },
+      {
+        "role_id": "evidence_writer",
+        "title": "evidence-focused writer",
+        "duties": ["Write one complete response to a distinct prompt and review another response for relevance and support."],
+        "may_submit": false
+      },
+      {
+        "role_id": "voice_writer",
+        "title": "voice-focused writer",
+        "duties": ["Write one complete response to a distinct prompt and review another response for clarity, voice, and mechanics."],
+        "may_submit": false
+      }
+    ]
+  },
+  "execution": {
+    "official_minutes": null,
+    "turn_budget": {
+      "mode": "wall_clock_proxy",
+      "max_turns": 24,
+      "derivation": "The draft preserves stage order but does not invent a numeric official schedule."
+    },
+    "state_requirements": [
+      {
+        "id": "team_preparation_stage",
+        "description": "All teammates plan together before individual writing begins.",
+        "status": "specified_only",
+        "required_for_official_equivalence": true
+      },
+      {
+        "id": "individual_writing_stage",
+        "description": "Each teammate writes a different response independently.",
+        "status": "specified_only",
+        "required_for_official_equivalence": true
+      },
+      {
+        "id": "peer_review_stage",
+        "description": "Teammates review one another's work after individual writing.",
+        "status": "specified_only",
+        "required_for_official_equivalence": true
+      }
+    ]
+  },
+  "resource_policy": {
+    "internet": {
+      "access": "forbidden",
+      "enforced_by": "tool_policy",
+      "source_refs": ["wsc-events"]
+    },
+    "electronic_devices": {
+      "access": "forbidden",
+      "enforced_by": "tool_policy",
+      "source_refs": ["wsc-events"]
+    },
+    "paper_pencil": {
+      "access": "allowed",
+      "enforced_by": "manual",
+      "source_refs": ["wsc-events"]
+    }
+  },
+  "constraints": [
+    {
+      "id": "wsc.three_responses",
+      "authority": "official",
+      "statement": "The team submits exactly three responses to different prompts, with one response written by each teammate.",
+      "source_refs": ["wsc-events"],
+      "enforcement": {"mode": "evaluator", "status": "enforced"}
+    },
+    {
+      "id": "wsc.stage_order",
+      "authority": "official",
+      "statement": "Team preparation precedes individual writing, which is followed by peer review.",
+      "source_refs": ["wsc-events"],
+      "enforcement": {"mode": "runtime", "status": "specified_only"}
+    },
+    {
+      "id": "wsc.text_runner",
+      "authority": "benchmark_adaptation",
+      "statement": "Handwritten responses are represented as a plain-text portfolio.",
+      "source_refs": [],
+      "enforcement": {"mode": "runtime", "status": "enforced"}
+    }
+  ],
+  "collaboration": {
+    "topology": "individual_shared_output",
+    "opponent_model": "none",
+    "dynamic_role_rotation": false,
+    "coalitions": [],
+    "notes": "All three agents are writers; planning and peer review are shared, but each response has one primary author."
+  },
+  "submission": {
+    "official_deliverable": "three handwritten responses",
+    "runner_deliverable": "three labeled plain-text responses",
+    "official_mime_types": ["text/plain"],
+    "runner_mime_types": ["text/plain"],
+    "adaptation": "Handwriting and physical exchange are not reproduced.",
+    "max_count": 1
+  },
+  "evaluation": {
+    "status": "ready",
+    "evaluator_id": "rubric_llm_v1",
+    "rubric_path": "data/rubrics/wsc_writing_28_v1.json",
+    "gold_available": false,
+    "notes": "The benchmark rubric numerically adapts qualitative questions from the official rubric."
+  },
+  "comparability": {
+    "overall": "proxy",
+    "dimensions": {
+      "roster": "equivalent",
+      "timing": "unavailable",
+      "resources": "adapted",
+      "collaboration": "proxy",
+      "submission": "adapted",
+      "scoring": "adapted",
+      "participant_identity": "proxy"
+    },
+    "waivers": [
+      {
+        "id": "wsc.agent_authors",
+        "official_rule": "Human students handwrite the three responses.",
+        "benchmark_treatment": "LLM agents produce plain-text responses.",
+        "impact": "fundamental"
+      }
+    ],
+    "unsupported_mechanisms": ["verified stage isolation", "handwriting", "official numeric stage clock"]
+  },
+  "provenance": {
+    "sources": [
+      {
+        "source_id": "wsc-events",
+        "title": "World Scholar's Cup team events",
+        "url": "https://scholarscup.org/events/",
+        "authority": "official",
+        "retrieved_at": "2026-08-11",
+        "effective_year": 2026,
+        "local_path": "data/rules/sources/wsc_writing/01_events.html",
+        "sha256": "014febfc7839f39d60b78eb2f37f6ca56b8bb6abe6f2b9b7a96c3442b47762e6",
+        "locator": "Collaborative Writing event description",
+        "snapshot_status": "archived"
+      },
+      {
+        "source_id": "wsc-rubric",
+        "title": "World Scholar's Cup Collaborative Writing Rubric",
+        "url": "https://www.dropbox.com/scl/fi/5cxl9ri1lziscxvnufxnv/Collaborative-Writing-Rubric.pdf?rlkey=5hs28p3rlk6jdlvrgneioueka&dl=1",
+        "authority": "official",
+        "retrieved_at": "2026-08-11",
+        "effective_year": 2026,
+        "local_path": "data/raw/wsc_writing/rubric/wsc_writing_rubric.pdf",
+        "sha256": "1084f231ad3a7cfea338e828c0ace1eaceb73621e551011fa664d7a88c3b6cba",
+        "locator": "Qualitative writing evaluation questions",
+        "snapshot_status": "archived"
+      }
+    ],
+    "generated_at": "2026-08-16T18:00:00Z",
+    "research_confidence": "medium",
+    "notes": "The draft fixes the current two-writer/three-response role mismatch."
+  }
+}

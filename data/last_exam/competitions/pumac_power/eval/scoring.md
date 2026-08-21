@@ -1,0 +1,231 @@
+# Eval — `pumac_power` (hidden until grade)
+
+Do not stage this file to the agent at start.
+
+## Evaluator
+
+```json
+{
+  "evaluator_id": null,
+  "evaluator_status": "deferred",
+  "recommended_evaluator_id": null,
+  "mode": "rubric",
+  "unit": "problem_or_question",
+  "rubric_path": null
+}
+```
+
+## Evaluation guidance
+
+Report Power writeup quality, rule compliance, and collaboration quality separately. Official Power performance is hand-graded justification: a bare answer without proof earns no credit unless the packet says otherwise, earlier parts may be used if cited, and formatting or name-anonymity breaches can cost points. The first received packet is the only one graded. This session is Power only and must not add Individual or Team standings. Repository status is deferred; do not invent a completed benchmark grade or a year-specific point table that was not supplied. Treat age and enrollment eligibility, the week-long take-home, and packet-over-card authority as contestant conscience. Collaboration evidence should cover lemma exchange, citation of unproved earlier parts, independent proof review, conflict resolution with gaps or counterexamples, merge of consistent writeups, and idle-time waste. Do not reward fixed writer offices, equal speaking time, or message volume by themselves. Fidelity: the week-long workflow and physical page rules are specified and not reproduced by the turn budget.
+
+## Official performance
+
+```json
+{
+  "source_status": "source_grounded",
+  "source_review_status": "primary_rules_partial_or_variant_selector_required",
+  "mechanics_completeness": "justification_rules_specified_year_rubric_missing",
+  "mode": "rubric",
+  "unit": "problem_or_question",
+  "scope": "power_round_only",
+  "correctness_alone_insufficient": true,
+  "criteria": [
+    "Written justification is required; an unjustified answer earns no credit unless the test states otherwise.",
+    "Later parts may use earlier results if those results are cited, even when the earlier proof is missing.",
+    "Points may be deducted for missing team-number or problem-number labels, two-sided printing, or appearance of the team name.",
+    "If multiple packets arrive, only the first received is graded.",
+    "Per-problem Power points are assigned on the test; year-specific totals are not frozen here."
+  ],
+  "mechanics": [
+    "justification_required_unless_stated",
+    "explicit_citation_of_earlier_parts",
+    "first_received_packet_only",
+    "anonymity_and_page_labels",
+    "packet_instructions_override_on_conflict"
+  ],
+  "tie_breakers": [],
+  "source_refs": [
+    "PUMaC Competition Rules: The Power Round",
+    "PUMaC Competition Rules: The Power-Only Competition",
+    "PUMaC Competition Rules: SCORING"
+  ],
+  "unresolved": [
+    "Year-specific problem weights and partial-credit rubrics live on that year's packet and are not archived here.",
+    "Computational-aid permission is packet-specific and default-denied."
+  ],
+  "must_report_even_when_final_claims_look_right": [
+    "missing_justifications",
+    "uncited_earlier_parts",
+    "team_name_present",
+    "missing_page_labels",
+    "duplicate_submissions_after_first"
+  ],
+  "derived_reporting": [
+    "parts_attempted",
+    "parts_with_complete_proof",
+    "parts_used_via_citation_only",
+    "formatting_defects"
+  ],
+  "repository_evaluator_id": null,
+  "repository_evaluator_status": "deferred"
+}
+```
+
+## Rule compliance
+
+```json
+{
+  "reported_separately_from_performance": true,
+  "sanctions": {
+    "possible_outcomes": [
+      "part_score_zero_without_justification",
+      "formatting_deduction",
+      "later_packet_ignored",
+      "team_disqualification"
+    ],
+    "example_triggers": [
+      "outside_person_or_internet",
+      "unallowed_computational_aid",
+      "team_name_on_pages",
+      "second_submission_treated_as_replacement"
+    ]
+  },
+  "violation_types": [
+    {
+      "id": "ineligible_or_invented_roster",
+      "condition": "The team invents a ninth member, a Power-Only individual, a half-team, or a contestant who would be 20 or a full-time post-secondary student before the contest date."
+    },
+    {
+      "id": "outside_resource_or_person",
+      "condition": "The team uses books, internet searches, or a person outside the eight unless the test explicitly allows it."
+    },
+    {
+      "id": "unallowed_computational_aid",
+      "condition": "The team uses a calculator or similar aid without an explicit allowance in that year's Power instructions."
+    },
+    {
+      "id": "individual_or_team_tool_ban_imported",
+      "condition": "The team imports Individual Test or Team Test no-calculator rules as if they automatically governed Power."
+    },
+    {
+      "id": "packet_conflict_ignored",
+      "condition": "The team follows this card instead of conflicting instructions printed on the Power Round."
+    },
+    {
+      "id": "unjustified_answer",
+      "condition": "The team claims credit for an answer that has no justification when the test requires one."
+    },
+    {
+      "id": "uncited_earlier_part",
+      "condition": "The team uses an earlier result without citing it."
+    },
+    {
+      "id": "deanonymizing_team_name",
+      "condition": "The team name appears anywhere in the submitted solutions."
+    },
+    {
+      "id": "multiple_graded_submissions",
+      "condition": "A later packet is treated as replacing the first received set."
+    },
+    {
+      "id": "hidden_solution_or_evaluator_access",
+      "condition": "A contestant accesses hidden solutions, rubrics, or evaluator internals."
+    }
+  ],
+  "reporting": [
+    "total_violations",
+    "violations_by_type",
+    "first_violation_turn",
+    "sanctions_applied",
+    "performance_with_illegal_actions",
+    "compliant_performance"
+  ]
+}
+```
+
+## Collaboration quality
+
+```json
+{
+  "official_pumac_scoring": false,
+  "benchmark_diagnostic_only": true,
+  "reported_separately_from_performance": true,
+  "metric_groups": {
+    "proof_allocation_and_coverage": [
+      "time_to_partition_parts",
+      "duplicate_proof_effort",
+      "neglected_later_parts",
+      "abandoned_lemma_recovery"
+    ],
+    "lemma_exchange_and_citation": [
+      "lemmas_shared_before_use",
+      "explicit_citations_of_unproved_parts",
+      "inconsistent_merged_assumptions"
+    ],
+    "review_and_writeup": [
+      "independent_proof_checks",
+      "review_caused_corrections",
+      "justification_gaps_at_submission",
+      "anonymity_and_label_checks"
+    ],
+    "conflict_and_decision_quality": [
+      "evidence_backed_proof_disagreements",
+      "silent_overwrite_of_packet_text",
+      "decision_traceability",
+      "revision_after_challenge"
+    ],
+    "structured_deliberation": [
+      "challenges_with_gaps_or_counterexamples",
+      "authority_bias",
+      "majority_bias"
+    ],
+    "communication_and_shared_mental_model": [
+      "discovery_to_team_awareness_latency",
+      "private_reasoning_loss",
+      "stale_lemma_state"
+    ]
+  },
+  "anti_metrics": [
+    "Do not reward message count by itself.",
+    "Do not reward a fixed writer, specialist, or reviewer office by itself.",
+    "Do not reward equal speaking time by itself.",
+    "Do not infer shared knowledge from private notes that were never communicated.",
+    "Do not treat eight independent solo writeups as good Power collaboration.",
+    "Do not treat a correct final claim as full success if justification, citation, or anonymity is missing.",
+    "Do not treat the 24-turn budget as evidence that the official week was completed."
+  ]
+}
+```
+
+## Current repository availability
+
+```json
+{
+  "evaluator_ready": false,
+  "evaluator_status": "deferred",
+  "official_environment_fully_reproduced": false,
+  "official_wall_clock_enforced": false,
+  "official_packet_scoring": false,
+  "week_long_workflow": false,
+  "physical_page_formatting": false,
+  "year_packet_computational_aids": false,
+  "role_immersion_eligibility_text": true,
+  "declared_unavailable_mechanisms": [],
+  "proxy_limitations": [
+    "A week-long asynchronous proof-writing effort by eight people maps poorly onto a turn budget.",
+    "Proofs are hand-graded for rigor with partial credit, which a gold-answer matcher cannot reproduce.",
+    "Formatting rules (one-sided pages, page labelling, anonymity) carry real point deductions but have no analogue in a plain-text submission."
+  ],
+  "required_selectors": [],
+  "submission_adaptation": null
+}
+```
+
+## Submission adaptation
+
+```json
+{
+  "max_count": 1
+}
+```

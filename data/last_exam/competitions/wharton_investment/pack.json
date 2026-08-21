@@ -1,0 +1,15 @@
+{
+  "competition_id": "wharton_investment",
+  "rule_id": "wharton_investment:draft_v1",
+  "profile": "non_comparable",
+  "protocol": "research_artifact",
+  "visibility": {
+    "agent_at_start": [
+      "input",
+      "method"
+    ],
+    "hidden_until_grade": [
+      "eval"
+    ]
+  }
+}

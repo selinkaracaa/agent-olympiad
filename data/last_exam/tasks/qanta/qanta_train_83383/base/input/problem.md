@@ -1,0 +1,3 @@
+# Science
+
+It isn't labor, but prostaglandin E2 can start this process as a product of COX2 and the arachidonic acid cascade. A cyclic form of this process occurs over either two or three days in patients suffering from malaria, while Salmonella enterica can cause a four week version of this process. It's not inflammation, but ibuprofen and acetaminophin both counteract this process. This process begins when the hypothalamus increases the set-point, causing vasoconstriction, shivering, an increase in thermogenin activity, all in the hopes that pathogens are inhibited by the change in condition. For 10 points, name this process by which the body's temperature rises to fight infection.

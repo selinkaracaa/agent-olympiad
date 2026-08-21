@@ -1,0 +1,153 @@
+{
+  "schema_version": "1.0",
+  "rule_id": "science_bowl:2026:question_proxy",
+  "competition_id": "science_bowl",
+  "profile": "proxy",
+  "protocol": "buzzer_match_question_proxy",
+  "team": {
+    "active_min": 4,
+    "active_default": 4,
+    "active_max": 4,
+    "roster_max": 5,
+    "collaboration": "Only bonus questions permit team consultation in the official event.",
+    "range_basis": "source_record"
+  },
+  "execution": {
+    "rules_edition": "2026_01_29",
+    "official_minutes": null
+  },
+  "allowed_tools": [
+    "query_rules"
+  ],
+  "resources": {
+    "internet": "forbidden",
+    "calculator": "forbidden",
+    "electronic_reference": "forbidden",
+    "provided_materials_only": true
+  },
+  "human_constraints": [
+    "A team has four or five student members, with only four playing at one time.",
+    "On tossups, quiet non-verbal communication is allowed, but verbal communication disqualifies the team from that tossup.",
+    "Only the contestant recognized after buzzing may answer a tossup, and the first response is the only response counted.",
+    "A correct tossup is worth four points and earns that team a bonus question worth ten points.",
+    "The team may consult verbally on a bonus, and the captain gives the final bonus answer unless another member is explicitly designated under the rules.",
+    "An incorrect interrupt adds four points to the opposing team's score and may leave the opposing team eligible to hear the full tossup.",
+    "Challenges must be made by an active contestant within the official challenge window before the next question begins.",
+    "The fifth student, coach, and spectators may not communicate with the four active contestants during a match."
+  ],
+  "rules_text": "DOE Science Bowl. The task represents a quiz-bowl question without a complete live buzzer match. The source-recorded active team has 4 members. Only bonus questions permit team consultation in the official event. Banned during the contest: internet access, calculators and electronic references. Work only from the materials provided with the problem. Submit one shared spoken answer; For multiple choice: the letter and option text. For short answer: the concise official-style answer only. Official toss-up/bonus timing windows; this benchmark is question-level. Treat unexposed physical, oral, live-opponent, judge, timing, or environment mechanisms as unavailable rather than simulated facts.",
+  "provenance": {
+    "status": "source_enriched_v1",
+    "sources": [
+      {
+        "title": "2026 National Science Bowl Official Academic Competition Rules",
+        "url": "https://science.osti.gov/-/media/wdts/nsb/pdf/NSB-Resources/Rules2026.pdf",
+        "authority": "official",
+        "edition": "2026, revised 2026-01-29",
+        "retrieved_at": "2026-08-17",
+        "sections": [
+          "pp. 1-2 eligibility and roster",
+          "pp. 3-9 gameplay, communication, scoring, and challenges",
+          "pp. 10-13 tournament end rules"
+        ],
+        "archive_status": "archived",
+        "local_file": "data/rules/sources/science_bowl/2026_National_Science_Bowl_Academic_Rules.pdf"
+      }
+    ],
+    "adaptations": [
+      "simulation.max_turns is a safety budget, not an official time limit",
+      "one benchmark row is evaluated independently",
+      "the existing multi-agent collaboration scheduler is used"
+    ],
+    "crawl_status": "ok",
+    "crawled_excerpts": [
+      {
+        "url": "https://science.osti.gov/wdts/nsb/Regional-Competitions/Resources",
+        "excerpt": "﻿ NSB Rules, Forms, and Resources | U.S. DOE Office of Science (SC) Javascript is currently disabled in your browser. Please enable Javascript, or use an alternative browser. An official website of the United States government Here’s how you know Here’s how you know Official websites use .gov A .gov website belongs to an official government organization in the United States. Secure .gov websites use HTTPS A lock ( Lock Locked padlock icon ) or https:// means you’ve safely connected to the .gov w"
+      }
+    ],
+    "enriched_at": "2026-08-12T16:53:55.321799+00:00",
+    "official_time_note": "Official toss-up/bonus timing windows; this benchmark is question-level.",
+    "research_confidence": "high",
+    "proxy_limitations": [
+      "Interrupt timing, blurt penalties, and double-interrupt scoring need an event engine.",
+      "Question-level eval omits match strategy.",
+      "Question-level benchmark rows omit the opponent, buzzer recognition, interrupt and blurt state, bonus eligibility, match clock, moderator, and challenge process."
+    ],
+    "research_merged_at": "2026-08-12T17:04:21.269988+00:00",
+    "research_reports": [
+      "docs/rules_crawl_2026-08-11.md"
+    ],
+    "research_graded_at": "2026-08-11",
+    "content_standard": {
+      "name": "icpc_three_component_content_standard",
+      "version": "1.1",
+      "applied_at": "2026-08-17",
+      "reference_card": "data/rules/icpc",
+      "official_facts_policy": "competition_specific_primary_sources_only",
+      "scope": [
+        "competition_constraints",
+        "collaboration_operations",
+        "evaluation_and_compliance",
+        "runtime_fidelity"
+      ]
+    },
+    "research_notes": [
+      "You must behave like a human teammate under official contest rules.",
+      "Do not claim tools, internet, or materials that the rule card forbids.",
+      "Do not look up answer keys or hidden solutions.",
+      "Benchmark is HS question-level subsample, not full timed matches."
+    ],
+    "source_review": {
+      "reviewed_at": "2026-08-17",
+      "audit_report": "docs/rule_card_icpc_standard_gap_audit_2026-08-17.md",
+      "coverage_grade": "A",
+      "completion_status": "primary_rules_available_exact_scoring_may_still_need_runtime_support",
+      "claim_policy": "unknown_official_values_remain_null_or_explicitly_unresolved",
+      "known_gaps": []
+    },
+    "discovery_sources": [
+      {
+        "title": "National Science Bowl Competition Resources",
+        "url": "https://science.osti.gov/wdts/nsb/Regional-Competitions/Resources",
+        "retrieved_at": "2026-08-12",
+        "local_text": "data/rules/sources/science_bowl/01_Resources.txt"
+      },
+      {
+        "title": "2026 National Science Bowl Official Academic Competition Rules",
+        "url": "https://science.osti.gov/-/media/wdts/nsb/pdf/NSB-Resources/Rules2026.pdf",
+        "retrieved_at": "2026-08-10"
+      }
+    ],
+    "discard_pre_source_review_rule_sections": true,
+    "source_correction_revision": "2026-08-17-v1"
+  },
+  "comparability": {
+    "overall": "non_comparable",
+    "dimensions": {
+      "roster": "proxy",
+      "timing": "not_simulated",
+      "information": "shared_public_rules",
+      "tools": "equivalent",
+      "opponent": "not_simulated",
+      "buzzer": "not_simulated",
+      "scoring": "answer_correctness_proxy",
+      "deliberation": "unstructured_observation",
+      "communication": "unlimited_runner_channel"
+    }
+  },
+  "deliverable": {
+    "answer_format": "For multiple choice: the letter and option text. For short answer: the concise official-style answer only.",
+    "shared": true,
+    "mime_types": [
+      "text/plain"
+    ],
+    "task_types": [
+      "science_bowl"
+    ],
+    "official_deliverable": "spoken_answer",
+    "official_mime_types": [
+      "text/plain"
+    ]
+  }
+}

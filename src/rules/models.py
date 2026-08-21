@@ -3,6 +3,8 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Any
 
+from .ownership import SIMULATION_OWNED_KEYS
+
 
 class RuleCardError(ValueError):
     """Raised when a competition rule card is malformed."""
@@ -14,10 +16,7 @@ class AgentRole:
     title: str
     duties: tuple[str, ...]
     may_submit: bool = True
-    information_access: tuple[str, ...] = (
-        "contest_rules",
-        "evaluation_guidance",
-    )
+    information_access: tuple[str, ...] = ("contest_rules",)
     rule_expertise: tuple[str, ...] = ()
 
 
@@ -35,6 +34,7 @@ class RuleCard:
     allowed_tools: tuple[str, ...]
     rules_text: str
     human_constraints: tuple[str, ...] = ()
+    agent_constraints: tuple[str, ...] = ()
     agent_roles: tuple[AgentRole, ...] = ()
     answer_format: str = ""
     evaluation_guidance: str = ""
@@ -44,6 +44,8 @@ class RuleCard:
     communication: dict[str, Any] = field(default_factory=dict)
     scoring: dict[str, Any] = field(default_factory=dict)
     resources: dict[str, Any] = field(default_factory=dict)
+    deliverable: dict[str, Any] = field(default_factory=dict)
+    simulation: dict[str, Any] = field(default_factory=dict)
     submission: dict[str, Any] = field(default_factory=dict)
     provenance: dict[str, Any] = field(default_factory=dict)
     comparability: dict[str, Any] = field(default_factory=dict)
@@ -89,12 +91,37 @@ class RuleCard:
         execution = raw.get("execution") or {}
         if not isinstance(execution, dict):
             raise RuleCardError("execution must be an object.")
+        simulation = raw.get("simulation") or {}
+        if not isinstance(simulation, dict):
+            raise RuleCardError("simulation must be an object.")
+        misplaced = sorted(set(execution) & SIMULATION_OWNED_KEYS)
+        if misplaced and simulation:
+            raise RuleCardError(
+                "simulation fields still present in execution: "
+                + ", ".join(misplaced)
+            )
+        legacy_max_turns = execution.get("max_turns")
+        simulation_max_turns = simulation.get("max_turns")
+        if (
+            legacy_max_turns is not None
+            and simulation_max_turns is not None
+            and legacy_max_turns != simulation_max_turns
+        ):
+            raise RuleCardError(
+                "execution.max_turns conflicts with simulation.max_turns."
+            )
         try:
-            max_turns = int(execution.get("max_turns", 50))
+            max_turns = int(
+                simulation_max_turns
+                if simulation_max_turns is not None
+                else legacy_max_turns
+                if legacy_max_turns is not None
+                else 50
+            )
         except (TypeError, ValueError) as exc:
-            raise RuleCardError("execution.max_turns must be an integer.") from exc
+            raise RuleCardError("simulation.max_turns must be an integer.") from exc
         if max_turns < 1:
-            raise RuleCardError("execution.max_turns must be positive.")
+            raise RuleCardError("simulation.max_turns must be positive.")
 
         tools = raw.get("allowed_tools", [])
         if not isinstance(tools, list) or not all(isinstance(item, str) for item in tools):
@@ -119,6 +146,13 @@ class RuleCard:
             isinstance(item, str) and item.strip() for item in constraints
         ):
             raise RuleCardError("human_constraints must be an array of non-empty strings.")
+        agent_constraints = raw.get("agent_constraints") or []
+        if not isinstance(agent_constraints, list) or not all(
+            isinstance(item, str) and item.strip() for item in agent_constraints
+        ):
+            raise RuleCardError(
+                "agent_constraints must be an array of non-empty strings."
+            )
 
         roles_raw = raw.get("agent_roles") or []
         if not isinstance(roles_raw, list):
@@ -138,7 +172,7 @@ class RuleCard:
                 raise RuleCardError("Each agent role needs name and title.")
             information_access = item.get(
                 "information_access",
-                ["contest_rules", "evaluation_guidance"],
+                ["contest_rules"],
             )
             if not isinstance(information_access, list) or not all(
                 isinstance(category, str) and category.strip()
@@ -147,7 +181,7 @@ class RuleCard:
                 raise RuleCardError(
                     "agent role information_access must be an array of strings."
                 )
-            valid_categories = {"contest_rules", "evaluation_guidance"}
+            valid_categories = {"contest_rules"}
             unknown_categories = set(information_access) - valid_categories
             if unknown_categories:
                 raise RuleCardError(
@@ -176,6 +210,8 @@ class RuleCard:
         object_fields: dict[str, dict[str, Any]] = {}
         for field_name in (
             "resources",
+            "deliverable",
+            "simulation",
             "submission",
             "provenance",
             "comparability",
@@ -225,8 +261,11 @@ class RuleCard:
             allowed_tools=tuple(tools),
             rules_text=rules_text,
             human_constraints=tuple(constraints),
+            agent_constraints=tuple(agent_constraints),
             agent_roles=tuple(roles),
-            answer_format=str(raw.get("answer_format") or "").strip(),
+            answer_format=str(
+                (object_fields["deliverable"].get("answer_format") or "")
+            ).strip(),
             evaluation_guidance=str(raw.get("evaluation_guidance") or "").strip(),
             information_policy=object_fields["information_policy"],
             rule_sections=object_fields["rule_sections"],
@@ -234,6 +273,8 @@ class RuleCard:
             communication=object_fields["communication"],
             scoring=object_fields["scoring"],
             resources=object_fields["resources"],
+            deliverable=object_fields["deliverable"],
+            simulation=object_fields["simulation"],
             submission=object_fields["submission"],
             provenance=object_fields["provenance"],
             comparability=object_fields["comparability"],
@@ -251,12 +292,40 @@ class RuleCard:
         return role is not None and category in role.information_access
 
     def roster(self, team_size: int) -> list[AgentRole]:
+        if not self.team_size_min <= team_size <= self.team_size_max:
+            raise RuleCardError(
+                f"team_size={team_size} is outside rule-card range "
+                f"{self.team_size_min}-{self.team_size_max}."
+            )
         if self.agent_roles:
-            if len(self.agent_roles) != team_size:
-                raise RuleCardError(
-                    f"Rule card defines {len(self.agent_roles)} roles but team_size={team_size}."
+            roles = list(self.agent_roles)
+            if len(roles) >= team_size:
+                selected = roles[:team_size]
+                if not any(role.may_submit for role in selected):
+                    submitter = next(
+                        (role for role in roles if role.may_submit),
+                        None,
+                    )
+                    if submitter is not None:
+                        selected[-1] = submitter
+                return selected
+
+            for index in range(len(roles), team_size):
+                roles.append(
+                    AgentRole(
+                        name=f"Agent_{index + 1}",
+                        title="team specialist",
+                        duties=(
+                            "Contribute analysis for the current task and communicate "
+                            "evidence needed by the team.",
+                            "Check completeness and follow the same resource and "
+                            "submission rules as the named roles.",
+                        ),
+                        may_submit=False,
+                        information_access=("contest_rules",),
+                    )
                 )
-            return list(self.agent_roles)
+            return roles
         defaults = [
             ("Agent_1", "captain and synthesizer"),
             ("Agent_2", "primary solver"),

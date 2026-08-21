@@ -17,7 +17,12 @@ REPO = Path(__file__).resolve().parents[1]
 RULES = REPO / "data" / "rules"
 sys.path.insert(0, str(REPO / "src"))
 
-from rules import describe_resources  # noqa: E402
+from rules import (  # noqa: E402
+    describe_resources,
+    iter_rule_card_ids,
+    load_rule_card_payload,
+    write_rule_card_payload,
+)
 
 
 FIRST_WAVE = {
@@ -27,31 +32,33 @@ FIRST_WAVE = {
     "wharton_investment",
     "wsc_writing",
 }
-ROLE_SPECIALIZED = FIRST_WAVE | {
+DYNAMIC_SHARED = {
+    "icpc",
     "arml_local",
     "arml_national_power",
     "arml_national_team",
     "arml_power",
+    "fyziklani",
+    "hmmt_guts",
+    "iiot",
+    "ioaa_group",
+    "iol_team",
+    "pumac_power",
+    "purple_comet",
+    "wmtc",
+}
+ROLE_SPECIALIZED = FIRST_WAVE | {
     "ccdc",
     "eoes",
     "ethics_bowl_appe",
     "ethics_bowl_nhseb",
-    "fyziklani",
-    "hmmt_guts",
     "ichto",
-    "icpc",
-    "iiot",
     "ijso_practical",
-    "ioaa_group",
     "ioai_team",
-    "iol_team",
     "jessup",
     "mystery_hunt",
     "odyssey_of_the_mind",
-    "pumac_power",
-    "purple_comet",
     "vis_moot",
-    "wmtc",
     "wro",
 }
 STRUCTURED_DELIBERATION = FIRST_WAVE | {
@@ -63,7 +70,6 @@ STRUCTURED_DELIBERATION = FIRST_WAVE | {
     "ethics_bowl_appe",
     "ethics_bowl_nhseb",
     "ichto",
-    "icpc",
     "iiot",
     "ijso_practical",
     "ioaa_group",
@@ -206,7 +212,9 @@ def build_rule_sections(card: dict[str, Any]) -> dict[str, list[str]]:
             sections.get("resource_policy", []), [resources]
         )
 
-    answer_format = str(card.get("answer_format") or "").strip()
+    answer_format = str(
+        (card.get("deliverable") or {}).get("answer_format") or ""
+    ).strip()
     if answer_format:
         sections["deliverable_format"] = append_unique(
             sections.get("deliverable_format", []), [answer_format]
@@ -324,12 +332,48 @@ def configure(card: dict[str, Any]) -> dict[str, Any]:
         provenance["adaptations"] = append_unique(
             list(provenance.get("adaptations") or []), [ROLE_NOTE]
         )
-    else:
-        card.pop("information_policy", None)
-        card.pop("rule_sections", None)
+    elif competition_id in DYNAMIC_SHARED:
+        card["information_policy"] = {
+            "mode": "shared",
+            "shared": [
+                "problem",
+                "contest_rules",
+                "team_discussion",
+                "scratchpad",
+            ],
+            "coordination_requirement": (
+                "Contestants receive equal baseline information access, but "
+                "private reasoning is not silently copied between them; they "
+                "must communicate discoveries needed by teammates."
+            ),
+        }
         for role in card.get("agent_roles") or []:
-            role.pop("information_access", None)
-            role.pop("rule_expertise", None)
+            role["information_access"] = [
+                "contest_rules",
+            ]
+            role["rule_expertise"] = []
+        remove_overlay_note(provenance, ROLE_NOTE)
+    else:
+        sections = build_rule_sections(card)
+        card["rule_sections"] = sections
+        card["information_policy"] = {
+            "mode": "shared",
+            "shared": [
+                "problem",
+                "contest_rules",
+                "team_discussion",
+                "scratchpad",
+            ],
+            "coordination_requirement": (
+                "All teammates may consult the complete public contest rules, "
+                "but private reasoning becomes shared state only when communicated."
+            ),
+        }
+        for role in card.get("agent_roles") or []:
+            role["information_access"] = [
+                "contest_rules",
+            ]
+            role["rule_expertise"] = []
         remove_overlay_note(provenance, ROLE_NOTE)
 
     if competition_id in STRUCTURED_DELIBERATION:
@@ -349,8 +393,26 @@ def configure(card: dict[str, Any]) -> dict[str, Any]:
             list(provenance.get("adaptations") or []), [DELIBERATION_NOTE]
         )
         dimensions["deliberation"] = "structured_trace_overlay"
+    elif competition_id in DYNAMIC_SHARED:
+        card["deliberation"] = {
+            "mode": "unstructured",
+            "min_challenges": 0,
+            "evaluation_dimensions": [
+                "evidence_responsiveness",
+                "decision_traceability",
+            ],
+        }
+        remove_overlay_note(provenance, DELIBERATION_NOTE)
+        dimensions.pop("deliberation", None)
     else:
-        card.pop("deliberation", None)
+        card["deliberation"] = {
+            "mode": "unstructured",
+            "min_challenges": 0,
+            "evaluation_dimensions": [
+                "evidence_responsiveness",
+                "decision_traceability",
+            ],
+        }
         remove_overlay_note(provenance, DELIBERATION_NOTE)
         dimensions.pop("deliberation", None)
 
@@ -369,8 +431,12 @@ def configure(card: dict[str, Any]) -> dict[str, Any]:
             list(provenance.get("adaptations") or []), [COMMUNICATION_NOTE]
         )
         dimensions["communication"] = "adapted_coordination_budget"
+    elif competition_id in DYNAMIC_SHARED:
+        card["communication"] = {"mode": "unlimited"}
+        remove_overlay_note(provenance, COMMUNICATION_NOTE)
+        dimensions.pop("communication", None)
     else:
-        card.pop("communication", None)
+        card["communication"] = {"mode": "unlimited"}
         remove_overlay_note(provenance, COMMUNICATION_NOTE)
         dimensions.pop("communication", None)
 
@@ -382,18 +448,19 @@ def configure(card: dict[str, Any]) -> dict[str, Any]:
 
 def main() -> int:
     changed = 0
-    for path in sorted(RULES.glob("*.json")):
-        if path.name == "schema.json":
-            continue
-        card = json.loads(path.read_text(encoding="utf-8"))
+    for competition_id in iter_rule_card_ids(RULES):
+        card = load_rule_card_payload(
+            competition_id, rules_root=RULES, required=True
+        )
         before = json.dumps(card, ensure_ascii=False, sort_keys=True)
         configure(card)
         after = json.dumps(card, ensure_ascii=False, sort_keys=True)
         if before == after:
             continue
-        path.write_text(
-            json.dumps(card, ensure_ascii=False, indent=2) + "\n",
-            encoding="utf-8",
+        write_rule_card_payload(
+            competition_id,
+            card,
+            rules_root=RULES,
         )
         changed += 1
         print(card["competition_id"])

@@ -1,0 +1,185 @@
+{
+  "schema_version": "1.0",
+  "rule_id": "history_olympiad:draft_v1",
+  "competition_id": "history_olympiad",
+  "profile": "non_comparable",
+  "protocol": "buzzer_match_session_proxy",
+  "team": {
+    "active_min": 1,
+    "active_default": 3,
+    "active_max": 4,
+    "range_basis": "mixed_or_unresolved",
+    "official_roster_note": "The 2025 World Championship uses teams of two or three, with one allowed to play if teammates are absent; historical benchmark rows still record four and require edition review.",
+    "collaboration": "No verbal or written conferral is allowed while a tossup is being read; official bonus and third-quarter category phases permit team conferral."
+  },
+  "execution": {
+    "official_minutes": null,
+    "rules_edition": "2025_world_championship",
+    "required_selectors": [
+      "rules_edition",
+      "division"
+    ],
+    "official_quarters": [
+      {
+        "quarter": 1,
+        "format": "10_tossups_or_8_for_intermediate_elementary",
+        "points_each": 10
+      },
+      {
+        "quarter": 2,
+        "format": "8_tossups_with_non_bounceback_bonus",
+        "points_each": 10
+      },
+      {
+        "quarter": 3,
+        "format": "category_round",
+        "seconds_per_team": 60,
+        "conferral": true
+      },
+      {
+        "quarter": 4,
+        "format": "8_progressive_tossups",
+        "point_values": [
+          30,
+          20,
+          10
+        ]
+      }
+    ]
+  },
+  "allowed_tools": [
+    "query_rules"
+  ],
+  "resources": {
+    "internet": "forbidden",
+    "calculator": "forbidden",
+    "code_execution": "forbidden",
+    "paper_pencil": "blank_paper_only",
+    "provided_materials_only": true
+  },
+  "human_constraints": [
+    "Under the 2025 World Championship rules, a team plays with two or three students; one student may still compete if teammates are absent.",
+    "Incorrect responses never deduct points, although an incorrect tossup response makes that team ineligible to buzz again on that question.",
+    "A contestant must buzz before answering a tossup, and only the contestant who buzzed may give the answer.",
+    "Teammates may not confer verbally or in writing during tossups, and no notes may be written while a tossup is being read.",
+    "A contestant who buzzes has three seconds to begin an answer, subject to the moderator's non-protestable timing judgment.",
+    "Second-quarter bonuses allow conferral, are worth ten points, and do not bounce back after an incorrect answer.",
+    "The third-quarter category round gives each team sixty seconds, permits conferral, allows passes without return, and may award a twenty-point sweep bonus.",
+    "Fourth-quarter tossups are worth thirty, twenty, or ten points depending on where the answer is given.",
+    "A tied first or second place is broken by zero-point tossup questions until one team answers correctly.",
+    "No pre-existing resources are allowed; a writing utensil and blank paper may be used to take notes where the phase permits."
+  ],
+  "rules_text": "International History Olympiad / IHBB — History Bowl. The task represents a buzzer round or match packet. Mixed or unresolved rulesets: the runner permits 1 to 4 active agents and defaults to 3; source boundary: The 2025 World Championship uses teams of two or three, with one allowed to play if teammates are absent; historical benchmark rows still record four and require edition review. No verbal or written conferral is allowed while a tossup is being read; official bonus and third-quarter category phases permit team conferral. Banned during the contest: internet access, calculators and running code. Conditional: paper and pencil is blank paper only. Work only from the materials provided with the problem. Submit one shared live four quarter buzzer match responses; Return numbered answers for the exposed questions and identify the quarter or phase; do not claim a live buzz, opponent outcome, or moderator ruling. Bowl round / packet timing. Treat unexposed physical, oral, live-opponent, judge, timing, or environment mechanisms as unavailable rather than simulated facts.",
+  "provenance": {
+    "status": "source_enriched_v1",
+    "sources": [
+      {
+        "title": "International History Bowl World Championships Official Rules Summary",
+        "url": "https://www.historyolympiad.com/wp-content/uploads/2025/07/International-History-Bowl-World-Championships-Official-Rules.pdf",
+        "authority": "official",
+        "edition": "2025 World Championships",
+        "retrieved_at": "2026-08-17",
+        "sections": [
+          "pp. 1-3 four-quarter gameplay",
+          "pp. 4-5 protests, resources, conduct, and supremacy"
+        ],
+        "archive_status": "archived",
+        "local_file": "data/rules/sources/history_olympiad/2025_International_History_Bowl_World_Championships_Rules.pdf"
+      }
+    ],
+    "adaptations": [
+      "max_turns is a safety budget, not necessarily the official wall-clock limit",
+      "specialist roles are a research roster overlay",
+      "physical/oral/live opponent fidelity may be incomplete in src/"
+    ],
+    "crawl_status": "ok",
+    "crawled_excerpts": [
+      {
+        "url": "https://www.historyolympiad.com/resources/",
+        "excerpt": "Past Questions &#8211; International History Olympiad Skip to content Presented by: Search for: Results About List of Registered Students Affiliation FAQs / What’s New for 2025 What Parents &#038; Students Say News Articles on the Olympiad Photos &#038; Slideshow Meet the Staff Staff Application Contact Qualify How to Qualify? Prepare for the Olympiad Qualifying Exam Take the Olympiad Qualifying Exam Register Register for the Olympiad Costs Suggested Hotels Schedule Events Buzzer-Based Quiz Comp"
+      }
+    ],
+    "enriched_at": "2026-08-12T16:53:55.317330+00:00",
+    "official_time_note": "Bowl round / packet timing.",
+    "research_confidence": "medium",
+    "proxy_limitations": [
+      "Buzzer interrupt timing and neg penalties are central and hard to simulate from static packets.",
+      "Bee vs Bowl formats differ — benchmark excludes Bee/MS per collection notes.",
+      "Historical benchmark packets do not declare the governing rules edition, so the 2025 roster and gameplay rules cannot be silently applied to every row.",
+      "The runner lacks live opponents, buzzer lockout, moderator answer acceptance, phase clocks, protests, bouncebacks, and category selection state."
+    ],
+    "research_merged_at": "2026-08-12T17:04:21.079868+00:00",
+    "rules_text_source": "composed_from_card_fields_v2",
+    "research_reports": [
+      "docs/rules_crawl_2026-08-11.md"
+    ],
+    "research_notes": [
+      "History Bowl: timed buzzer competition; team collaboration norms and roster sizes are in IHBB/IHO rules documents (not fully extracted here).",
+      "Index team_size 4 matches common bowl roster practice but confirm in official rules PDF.",
+      "You must behave like a human teammate under official contest rules.",
+      "Do not claim tools, internet, or materials that the rule card forbids.",
+      "Do not look up answer keys or hidden solutions."
+    ],
+    "research_graded_at": "2026-08-11",
+    "content_standard": {
+      "name": "icpc_three_component_content_standard",
+      "version": "1.1",
+      "applied_at": "2026-08-17",
+      "reference_card": "data/rules/icpc",
+      "official_facts_policy": "competition_specific_primary_sources_only",
+      "scope": [
+        "competition_constraints",
+        "collaboration_operations",
+        "evaluation_and_compliance",
+        "runtime_fidelity"
+      ]
+    },
+    "source_review": {
+      "reviewed_at": "2026-08-17",
+      "audit_report": "docs/rule_card_icpc_standard_gap_audit_2026-08-17.md",
+      "coverage_grade": "A",
+      "completion_status": "primary_rules_available_exact_scoring_may_still_need_runtime_support",
+      "claim_policy": "unknown_official_values_remain_null_or_explicitly_unresolved",
+      "known_gaps": [
+        "The archived 2025 World Championship rules do not automatically govern historical benchmark packets; rules edition and division selectors are required."
+      ]
+    },
+    "discovery_sources": [
+      {
+        "title": "History Olympiad",
+        "url": "https://www.historyolympiad.com/resources/",
+        "retrieved_at": "2026-08-12",
+        "local_text": "data/rules/sources/history_olympiad/01_resources.txt"
+      }
+    ],
+    "discard_pre_source_review_rule_sections": true,
+    "source_correction_revision": "2026-08-17-v1"
+  },
+  "comparability": {
+    "overall": "non_comparable",
+    "dimensions": {
+      "roster": "approximate",
+      "timing": "adapted",
+      "tools": "src_tool_surface",
+      "scoring": "gold",
+      "environment": "proxy",
+      "information": "shared_public_rules",
+      "deliberation": "unstructured_observation",
+      "communication": "unlimited_runner_channel"
+    }
+  },
+  "deliverable": {
+    "answer_format": "Return numbered answers for the exposed questions and identify the quarter or phase; do not claim a live buzz, opponent outcome, or moderator ruling.",
+    "shared": true,
+    "mime_types": [
+      "text/plain"
+    ],
+    "task_types": [
+      "history_bowl_session"
+    ],
+    "official_deliverable": "live_four_quarter_buzzer_match_responses",
+    "official_mime_types": [
+      "application/x-live-buzzer-match"
+    ]
+  }
+}

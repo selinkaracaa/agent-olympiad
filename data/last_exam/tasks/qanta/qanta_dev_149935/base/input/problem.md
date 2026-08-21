@@ -1,0 +1,3 @@
+# Fine Arts
+
+This composer wrote a ballet whose finale begins with a lyrical horn solo in 3/2 ["three two"] time. The title character is captured while plucking some golden apples in this composer's ballet featuring a sorcerer who is put to sleep by a solo bassoon-introduced lullaby shortly after he and his subjects are lulled into a frenzied "Infernal Dance." In another of his ballets, Part I, titled "The Adoration of the Earth," begins with an unusually high-pitched unaccompanied bassoon solo. A young girl is sacrificed at the end of that ballet, which sparked a riot at its 1913 premiere. For 10 points, name this composer of The Firebird and The Rite of Spring.

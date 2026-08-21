@@ -1,0 +1,33 @@
+{
+  "task_id": "hmmt_guts/hmmt_guts_nov_2014",
+  "competition_id": "hmmt_guts",
+  "problem_id": "hmmt_guts_nov_2014",
+  "title": "HMMT November 2014 — Guts Round",
+  "year": 2014,
+  "team_size": 6,
+  "source_url": "https://hmmt-archive.s3.amazonaws.com/tournaments/2014/nov/guts/problems.pdf",
+  "inherits_competition_pack": "competitions/hmmt_guts",
+  "rule_card": "data/rules/hmmt_guts",
+  "input": {
+    "visibility": "agent_at_start",
+    "files": [
+      {
+        "name": "problem.md",
+        "path": "base/input/problem.md"
+      },
+      {
+        "name": "problems.pdf.path",
+        "path": "base/input/problems.pdf.path"
+      }
+    ]
+  },
+  "method": {
+    "visibility": "agent_at_start",
+    "path": "competitions/hmmt_guts/method"
+  },
+  "eval": {
+    "visibility": "hidden_until_grade",
+    "path": "eval/reference.json",
+    "competition_eval": "competitions/hmmt_guts/eval"
+  }
+}

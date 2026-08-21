@@ -1,0 +1,3 @@
+# Science
+
+This word describes galaxies that are classified by the Fanaroff–Riley system based on their luminosity distribution and include Centaurus A and Cygnus A. Signals in this region of the electromagnetic spectrum are combined in a method developed by Martin Ryle called aperture synthesis. Astronomers use the "Very Large Array" to study this type of radiation. In 1932, Karl Jansky ("JAN-skee") first detected emissions in this region of the electromagnetic spectrum from the Milky Way. Supermassive black holes surrounded by accretion disks are known as "quasi-stellar" sources of this radiation. For 10 points, name this form of electromagnetic radiation with the longest wavelength.

@@ -6,7 +6,7 @@ A deeper primary-source pass with per-competition hard constraints and confidenc
 labels is in [`docs/rules_crawl_2026-08-11.md`](rules_crawl_2026-08-11.md). A follow-up
 pass over the seven cards that pass left at low confidence is in
 [`docs/rules_lowconf_2026-08-12.md`](rules_lowconf_2026-08-12.md). Both are merged into
-`data/rules/*.json` via:
+the `data/rules` rule-card store via:
 
 ```bash
 python collectors/merge_rules_crawl_report.py
@@ -21,7 +21,7 @@ entry cited a retired domain and the wrong event — mark that entry with
 ## What we did
 
 1. Crawled official rule pages/PDFs into `data/rules/sources/{competition_id}/`.
-2. Enriched every `data/rules/{competition_id}.json` with:
+2. Enriched every assembled rule card with:
    - contestant-facing `human_constraints` grounded in official sources / simulator matrix
    - provenance URLs, crawl status, and short crawled excerpts
 3. Merged the research report's hard constraints + confidence into the same rule cards.
@@ -29,6 +29,12 @@ entry cited a retired domain and the wrong event — mark that entry with
    composed from the card's own fields (format, roster, submission, official timing,
    simulation caveats), so the agent prompt no longer carries pipeline debug strings.
 5. Agents receive these constraints through `src/collaboration.py` system prompts and may call `query_rules`.
+
+Most competitions use `data/rules/{competition_id}.json`. The WSC Writing pilot
+stores three canonical components under `data/rules/wsc_writing/`:
+`competition.json`, `collaboration.json`, and `evaluation.json`.
+`src/rules/storage.py` composes them before normal `RuleCard` validation, and all
+collectors use the same storage interface when writing fields back to their owner.
 
 ## Commands
 

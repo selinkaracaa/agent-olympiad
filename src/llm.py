@@ -285,8 +285,13 @@ def mock_agent_llm(system_prompt: str, user_prompt: str) -> str:
 def make_perplexity_caller(
     model: str = "openai/gpt-5.4-mini",
     api: str = "agent",
+    max_output_tokens: int | None = 16000,
 ) -> QueryFn:
-    """Build a real LLM caller using PERPLEXITY_API_KEY. Raises if key missing."""
+    """Build a real LLM caller using PERPLEXITY_API_KEY.
+
+    Pass ``max_output_tokens=None`` to omit an application-level output cap and
+    defer to the selected model/provider's own limits.
+    """
     api_key = os.environ.get("PERPLEXITY_API_KEY")
     if not api_key:
         raise ValueError("Set PERPLEXITY_API_KEY to use a live LLM caller.")
@@ -299,10 +304,13 @@ def make_perplexity_caller(
         full_input = f"{system_prompt}\n\n{user_prompt}"
         for attempt in range(max_retries):
             try:
+                payload = {"model": model, "input": full_input}
+                if max_output_tokens is not None:
+                    payload["max_output_tokens"] = int(max_output_tokens)
                 resp = requests.post(
                     "https://api.perplexity.ai/v1/agent",
                     headers=headers,
-                    json={"model": model, "input": full_input, "max_output_tokens": 16000},
+                    json=payload,
                     timeout=180,
                 )
                 if not resp.ok:
@@ -346,6 +354,72 @@ def make_perplexity_caller(
     if api == "agent":
         return call_agent
     return call_sonar
+
+
+def make_tinker_caller(
+    model: str = "openai/gpt-oss-20b",
+    *,
+    max_tokens: int = 2048,
+    temperature: float = 0.2,
+    base_url: str = "https://tinker.thinkingmachines.dev/services/tinker-prod/oai/api/v1",
+) -> QueryFn:
+    """Build an OpenAI-compatible caller against Thinking Machines Tinker.
+
+    Requires ``TINKER_API_KEY``. Prefer cheap sampler models such as
+    ``openai/gpt-oss-20b`` for smoke tests.
+    """
+    api_key = os.environ.get("TINKER_API_KEY")
+    if not api_key:
+        raise ValueError("Set TINKER_API_KEY to use a Tinker LLM caller.")
+
+    from openai import OpenAI
+
+    client = OpenAI(
+        api_key=api_key,
+        base_url=base_url,
+        timeout=180,
+        max_retries=1,
+    )
+
+    def _message_text(message: Any) -> str:
+        content = getattr(message, "content", None)
+        if isinstance(content, str) and content.strip():
+            return content
+        # Some Tinker sampler models put the answer in reasoning_content when
+        # output tokens are spent on chain-of-thought first.
+        reasoning = getattr(message, "reasoning_content", None)
+        if isinstance(reasoning, str) and reasoning.strip():
+            return reasoning
+        if content is None:
+            return ""
+        return str(content)
+
+    def call(system_prompt: str, user_prompt: str, max_retries: int = 3) -> str:
+        last_error: Exception | None = None
+        for attempt in range(max_retries):
+            try:
+                response = client.chat.completions.create(
+                    model=model,
+                    messages=[
+                        {"role": "system", "content": system_prompt},
+                        {"role": "user", "content": user_prompt},
+                    ],
+                    max_tokens=int(max_tokens),
+                    temperature=float(temperature),
+                )
+                text = _message_text(response.choices[0].message)
+                if not str(text).strip():
+                    raise RuntimeError("Tinker returned an empty message content.")
+                return str(text)
+            except Exception as exc:  # noqa: BLE001 - surface provider errors after retries
+                last_error = exc
+                if attempt < max_retries - 1:
+                    time.sleep(8 * (attempt + 1))
+                else:
+                    break
+        raise RuntimeError(f"Tinker call failed: {last_error}")
+
+    return call
 
 
 def resolve_query_fn(

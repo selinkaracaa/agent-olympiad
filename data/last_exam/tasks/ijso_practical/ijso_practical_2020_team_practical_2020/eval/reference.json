@@ -1,0 +1,10 @@
+{
+  "visibility": "hidden_until_grade",
+  "gold_pointer": "data/benchmarks/ijso_practical/benchmark.json#ijso_practical_2020_team_practical_2020.gold_label",
+  "has_gold_answer": false,
+  "evaluator_id": "rubric_llm_v1",
+  "evaluator_status": "ready_with_limitations",
+  "rubric_path": "data/rubrics/practical_report_40_v1.json",
+  "deliverable": "written_report",
+  "solution_file": null
+}

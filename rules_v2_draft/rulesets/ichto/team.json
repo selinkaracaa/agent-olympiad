@@ -1,0 +1,206 @@
+{
+  "$schema": "../../schemas/ruleset.schema.json",
+  "schema_version": "2.0-draft",
+  "ruleset_id": "ichto:team:v2-draft",
+  "competition_id": "ichto",
+  "title": "International Chemistry Tournament — one national team",
+  "profile": "proxy",
+  "applicability": {
+    "selector": {},
+    "eval_unit": "session",
+    "effective_years": {"from": 2025, "through": 2025},
+    "notes": "This ruleset models one 4–6 person national team. Reporter, Opponent, and Reviewer are round assignments held by different teams, not three teammates."
+  },
+  "team": {
+    "active_min": 4,
+    "active_default": 4,
+    "active_max": 6,
+    "topology": "single_cooperative_team",
+    "required_roles": [
+      {
+        "role_id": "captain",
+        "title": "captain and round coordinator",
+        "duties": ["Nominate the active speaker and manage challenges, refusals, and the permitted timeout."],
+        "may_submit": true
+      },
+      {
+        "role_id": "scientific_lead",
+        "title": "scientific lead",
+        "duties": ["Develop the chemical argument and verify experimental claims against available evidence."],
+        "may_submit": false
+      },
+      {
+        "role_id": "evidence_reviewer",
+        "title": "evidence and integrity reviewer",
+        "duties": ["Check that claims, calculations, and cited evidence are defensible before presentation."],
+        "may_submit": false
+      },
+      {
+        "role_id": "opposition_strategist",
+        "title": "opposition-preparation strategist",
+        "duties": ["Prepare the team for likely opposition without impersonating the external opposing team."],
+        "may_submit": false
+      }
+    ],
+    "fill_role": {
+      "role_id": "team_scientist",
+      "title": "team scientist",
+      "duties": ["Contribute analysis, slide evidence, and answers for jury questioning."],
+      "may_submit": false
+    }
+  },
+  "execution": {
+    "official_minutes": 35,
+    "turn_budget": {
+      "mode": "wall_clock_proxy",
+      "max_turns": 28,
+      "derivation": "The seven timed oral segments total roughly 35 minutes; turns do not reproduce speech clocks."
+    },
+    "state_requirements": [
+      {
+        "id": "external_competing_teams",
+        "description": "Reporter, Opponent, Reviewer, and optional Observer are different teams in the same fight.",
+        "status": "unavailable",
+        "required_for_official_equivalence": true
+      },
+      {
+        "id": "speaker_isolation",
+        "description": "The active speaker cannot communicate with teammates except during the permitted timeout.",
+        "status": "specified_only",
+        "required_for_official_equivalence": true
+      },
+      {
+        "id": "oral_segment_clock",
+        "description": "Monologues, discussions, jury questions, and general discussion have separate clocks.",
+        "status": "unavailable",
+        "required_for_official_equivalence": true
+      }
+    ]
+  },
+  "resource_policy": {
+    "internet": {
+      "access": "forbidden",
+      "enforced_by": "tool_policy",
+      "source_refs": ["ichto-rulebook-2025"]
+    },
+    "calculator": {
+      "access": "allowed",
+      "enforced_by": "manual",
+      "source_refs": ["ichto-rulebook-2025"]
+    },
+    "code_execution": {
+      "access": "forbidden",
+      "enforced_by": "tool_policy",
+      "source_refs": ["ichto-rulebook-2025"]
+    },
+    "presentation_device": {
+      "access": "shared_capacity",
+      "conditions": "One laptop or tablet may display a single slideshow file; no other files or windows may be opened.",
+      "capacity": 1,
+      "enforced_by": "prompt_only",
+      "source_refs": ["ichto-rulebook-2025"]
+    }
+  },
+  "constraints": [
+    {
+      "id": "ichto.team_size",
+      "authority": "official",
+      "statement": "A national team contains four to six high-school students.",
+      "source_refs": ["ichto-rulebook-2025"],
+      "enforcement": {"mode": "runtime", "status": "enforced"}
+    },
+    {
+      "id": "ichto.round_roles",
+      "authority": "official",
+      "statement": "Teams rotate through Reporter, Opponent, Reviewer, and sometimes Observer assignments across rounds.",
+      "source_refs": ["ichto-rulebook-2025"],
+      "enforcement": {"mode": "runtime", "status": "unavailable"}
+    },
+    {
+      "id": "ichto.active_speaker",
+      "authority": "official",
+      "statement": "Only the captain-nominated active speaker speaks for the team and normally cannot consult teammates during the round.",
+      "source_refs": ["ichto-rulebook-2025"],
+      "enforcement": {"mode": "runtime", "status": "specified_only"}
+    },
+    {
+      "id": "ichto.text_proxy",
+      "authority": "benchmark_adaptation",
+      "statement": "The runner records a written report and opposition-preparation artifact instead of conducting a multi-team oral fight.",
+      "source_refs": [],
+      "enforcement": {"mode": "runtime", "status": "enforced"}
+    }
+  ],
+  "collaboration": {
+    "topology": "single_cooperative_team",
+    "opponent_model": "external_scripted",
+    "dynamic_role_rotation": true,
+    "coalitions": [],
+    "notes": "Internal opposition preparation is allowed, but the official Opponent and Reviewer remain external teams."
+  },
+  "submission": {
+    "official_deliverable": "live oral report, opposition, review, slides, and jury answers",
+    "runner_deliverable": "written report and opposition-preparation transcript",
+    "official_mime_types": ["audio/mpeg", "application/pdf"],
+    "runner_mime_types": ["text/plain"],
+    "adaptation": "Live multi-team oral performance and slide delivery are flattened into text.",
+    "max_count": 1
+  },
+  "evaluation": {
+    "status": "deferred",
+    "evaluator_id": "oral_performance_judge",
+    "rubric_path": null,
+    "gold_available": false,
+    "notes": "A valid evaluator needs multiple jurors, oral timing, slides, and cross-team interaction."
+  },
+  "comparability": {
+    "overall": "proxy",
+    "dimensions": {
+      "roster": "adapted",
+      "timing": "proxy",
+      "resources": "adapted",
+      "collaboration": "unavailable",
+      "submission": "proxy",
+      "scoring": "unavailable",
+      "participant_identity": "proxy"
+    },
+    "waivers": [
+      {
+        "id": "ichto.single_team",
+        "official_rule": "A fight contains three or four distinct teams with adversarial round roles.",
+        "benchmark_treatment": "The draft resolves one national team and treats opponents as external.",
+        "impact": "fundamental"
+      }
+    ],
+    "unsupported_mechanisms": ["multi-team fight", "oral segment clocks", "jury panel aggregation", "speaker isolation"]
+  },
+  "provenance": {
+    "sources": [
+      {
+        "source_id": "ichto-rulebook-2025",
+        "title": "IChTo 2025 Rule Book",
+        "url": "http://ichto.org/media/uploads/2025/04/IChTo-2025-rule-book.pdf",
+        "authority": "official",
+        "retrieved_at": "2026-08-12",
+        "effective_year": 2025,
+        "locator": "Team composition, fight roles, timing, devices, and Internet rules",
+        "snapshot_status": "linked_only"
+      },
+      {
+        "source_id": "rules-research-2026-08-12",
+        "title": "Agent Olympiad low-confidence rules research pass",
+        "url": "urn:agent-olympiad:local:docs:rules-lowconf-2026-08-12",
+        "authority": "research_report",
+        "retrieved_at": "2026-08-12",
+        "effective_year": 2025,
+        "local_path": "docs/rules_lowconf_2026-08-12.md",
+        "sha256": "acef6bb3d4fdd070e89b9cb0741e5a88e87c22798a16d4282adafc25aea680bf",
+        "locator": "IChTo section",
+        "snapshot_status": "archived"
+      }
+    ],
+    "generated_at": "2026-08-16T18:00:00Z",
+    "research_confidence": "high",
+    "notes": "The existing benchmark team_size=3 must be migrated before this draft can replace the current card."
+  }
+}

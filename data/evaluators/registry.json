@@ -41,8 +41,10 @@
       "id": "programming_judge",
       "task_types": ["algorithmic_programming", "programming"],
       "submission_mime_types": ["text/x-c++src", "text/x-python"],
-      "strategy": "official_tests_in_isolated_sandbox",
-      "status": "deferred_missing_tests_and_sandbox"
+      "strategy": "hidden_problem_package_tests_in_isolated_sandbox",
+      "status": "pilot",
+      "languages": ["python3"],
+      "notes": "Runnable only for problems whose evaluation metadata declares a checked hidden problem_package."
     },
     {
       "id": "physical_lab_judge",

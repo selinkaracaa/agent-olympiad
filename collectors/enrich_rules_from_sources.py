@@ -1,5 +1,5 @@
 """
-Enrich data/rules/*.json using crawled official sources + curated simulator matrix.
+ Enrich the rule-card store using crawled sources + curated simulator matrix.
 
 Usage:
   python collectors/enrich_rules_from_sources.py
@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import json
 import re
+import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -18,6 +19,9 @@ REPO = Path(__file__).resolve().parents[1]
 RULES = REPO / "data" / "rules"
 SOURCES = RULES / "sources"
 INDEX = REPO / "data" / "benchmarks" / "index.json"
+sys.path.insert(0, str(REPO / "src"))
+
+from rules import load_rule_card_payload, write_rule_card_payload  # noqa: E402
 
 # Curated from docs/DATA_COLLECTION.md Simulator Matrix + official pages.
 # These are contestant-facing hard constraints, not model guesses.
@@ -129,13 +133,13 @@ CURATED: dict[str, dict] = {
         ],
     },
     "wsc_writing": {
-        "time": "75 minutes total: 20 plan + 40 write + 15 peer edit.",
         "constraints": [
-            "No electronic devices at any stage; treat writing as handwritten.",
-            "Stage 1: team plans only, no drafting the essays yet.",
-            "Stage 2: each teammate writes one essay individually.",
-            "Stage 3: peer edit is allowed, but you may not finish a teammate's unfinished essay.",
-            "Submit three essays, one per teammate.",
+            "The team receives three to four prompts drawn from the six World Scholar's Cup subject areas.",
+            "The team answers exactly three prompts.",
+            "Each of the three teammates answers a different prompt.",
+            "First prepare with teammates without using devices, then write independently, then review one another's work at the end.",
+            "Write the response with pen or pencil.",
+            "Responses may use a form appropriate to the prompt, including creative pieces, persuasive arguments, poems, or essays.",
         ],
     },
     "jessup": {
@@ -409,11 +413,18 @@ def enrich_card(cid: str, card: dict, crawl: dict) -> dict:
         "Do not claim tools, internet, or materials that the rule card forbids.",
         "Do not look up answer keys or hidden solutions.",
     ]
+    if "agent_constraints" in card:
+        card["agent_constraints"] = mandatory
+        candidates = constraints
+    else:
+        candidates = mandatory + constraints
     merged = []
-    for item in mandatory + constraints:
+    for item in candidates:
         if item not in merged:
             merged.append(item)
 
+    provenance = dict(card.get("provenance") or {})
+    external_manifest = bool(provenance.get("manifest"))
     time_note = curated.get("time")
     base_rules = str(card.get("rules_text") or "").strip()
     # Avoid duplicating enrichment suffixes on repeated runs.
@@ -422,52 +433,55 @@ def enrich_card(cid: str, card: dict, crawl: dict) -> dict:
     rules_bits = [base_rules]
     if time_note:
         rules_bits.append(f"Official timing note: {time_note}")
-    if crawl.get("quotes"):
+    if crawl.get("quotes") and not external_manifest:
         rules_bits.append(
             "Grounded from crawled official source excerpt(s); see provenance.crawled_excerpts."
         )
     rules_text = " ".join(bit for bit in rules_bits if bit).strip()
 
-    provenance = dict(card.get("provenance") or {})
-    sources = list(provenance.get("sources") or [])
-    # refresh retrieved_at and attach local archives when crawl succeeded
-    refreshed = []
-    seen = set()
-    for url in crawl.get("urls") or []:
-        if url in seen:
-            continue
-        seen.add(url)
-        refreshed.append(
-            {
-                "title": next((s.get("title") for s in sources if s.get("url") == url), url),
-                "url": url,
-                "retrieved_at": datetime.now(timezone.utc).date().isoformat(),
-                "local_text": next(
-                    (
-                        f
-                        for f in crawl.get("source_files") or []
-                        if f and Path(f).name.startswith(Path(url).name[:20])
-                    ),
-                    (crawl.get("source_files") or [None])[0],
-                ),
-            }
-        )
-    for src in sources:
-        url = src.get("url")
-        if url and url not in seen:
-            refreshed.append(src)
+    if not external_manifest:
+        sources = list(provenance.get("sources") or [])
+        # refresh retrieved_at and attach local archives when crawl succeeded
+        refreshed = []
+        seen = set()
+        for url in crawl.get("urls") or []:
+            if url in seen:
+                continue
             seen.add(url)
-    provenance["sources"] = refreshed or sources
-    provenance["crawl_status"] = crawl.get("status")
-    provenance["crawled_excerpts"] = crawl.get("quotes") or []
-    provenance["enriched_at"] = datetime.now(timezone.utc).isoformat()
-    provenance["status"] = {
-        "ok": "source_enriched_v1",
-        "partial": "source_enriched_partial_v1",
-        "fallback_notes": "hand_written_fallback_v1",
-    }.get(str(crawl.get("status")), "draft_v1_unenriched_crawl")
-    if time_note:
-        provenance["official_time_note"] = time_note
+            refreshed.append(
+                {
+                    "title": next(
+                        (s.get("title") for s in sources if s.get("url") == url),
+                        url,
+                    ),
+                    "url": url,
+                    "retrieved_at": datetime.now(timezone.utc).date().isoformat(),
+                    "local_text": next(
+                        (
+                            f
+                            for f in crawl.get("source_files") or []
+                            if f and Path(f).name.startswith(Path(url).name[:20])
+                        ),
+                        (crawl.get("source_files") or [None])[0],
+                    ),
+                }
+            )
+        for src in sources:
+            url = src.get("url")
+            if url and url not in seen:
+                refreshed.append(src)
+                seen.add(url)
+        provenance["sources"] = refreshed or sources
+        provenance["crawl_status"] = crawl.get("status")
+        provenance["crawled_excerpts"] = crawl.get("quotes") or []
+        provenance["enriched_at"] = datetime.now(timezone.utc).isoformat()
+        provenance["status"] = {
+            "ok": "source_enriched_v1",
+            "partial": "source_enriched_partial_v1",
+            "fallback_notes": "hand_written_fallback_v1",
+        }.get(str(crawl.get("status")), "draft_v1_unenriched_crawl")
+        if time_note:
+            provenance["official_time_note"] = time_note
 
     contestant_rules, research_notes = clean_constraints(merged)
     if research_notes:
@@ -479,21 +493,23 @@ def enrich_card(cid: str, card: dict, crawl: dict) -> dict:
     card["rules_text"] = rules_text
     card["provenance"] = provenance
 
-    # Keep answer_format helpful for agents.
-    if not card.get("answer_format"):
+    deliverable = dict(card.get("deliverable") or {})
+    if not deliverable.get("answer_format"):
         protocol = card.get("protocol") or ""
         if protocol == "shared_answer":
-            card["answer_format"] = (
+            deliverable["answer_format"] = (
                 "Submit one shared numbered answer sheet with exact values where required."
             )
         elif protocol == "progressive_release":
-            card["answer_format"] = (
+            deliverable["answer_format"] = (
                 "Submit answers for the currently released batch only, in order."
             )
         elif protocol == "single_workstation_programming":
-            card["answer_format"] = "Submit source code for the automated judge."
+            deliverable["answer_format"] = "Submit source code for the automated judge."
         elif protocol == "ctf_sandbox":
-            card["answer_format"] = "Submit recovered flag(s) clearly labeled."
+            deliverable["answer_format"] = "Submit recovered flag(s) clearly labeled."
+        if deliverable.get("answer_format"):
+            card["deliverable"] = deliverable
 
     return card
 
@@ -503,11 +519,10 @@ def main() -> None:
     updated = []
     for olympiad in index["olympiads"]:
         cid = olympiad["id"]
-        path = RULES / f"{cid}.json"
-        card = json.loads(path.read_text(encoding="utf-8"))
+        card = load_rule_card_payload(cid, rules_root=RULES, required=True)
         crawl = load_crawl_bits(cid)
         enriched = enrich_card(cid, card, crawl)
-        path.write_text(json.dumps(enriched, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        write_rule_card_payload(cid, enriched, rules_root=RULES)
         updated.append((cid, crawl.get("status"), len(enriched["human_constraints"])))
     print(f"enriched {len(updated)} rule cards")
     for cid, status, n in updated:

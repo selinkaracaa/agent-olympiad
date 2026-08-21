@@ -1,0 +1,225 @@
+{
+  "evaluation_guidance": "Report Physics Brawl performance, rule compliance, and collaboration quality separately. Official performance is total points after attempt-decay, skip charges, and any Hurry-up triplet bonus, then rank by higher points and earlier last correct answer. Correctness alone is insufficient: a first-attempt solve outranks the same number after several wrong tries, and a skip permanently removes that problem for −1. Do not invent an exact remaining Main-series length. Repository status is deferred_benchmark_metadata_missing; do not invent a completed benchmark grade. Treat category placement, scoreboard hide, and fairness video calls as contestant conscience. Collaboration evidence should cover unlocked-series coverage, attempt-economy versus speed, skip discipline, useful parallel work during a lockout, conflict resolution with evidence, and idle-time waste. Do not reward fixed series offices, equal speaking time, or message volume by themselves. Fidelity: progressive unlock, lockout, skips, scoreboard hide, and video calls are specified and not reproduced. Generative-AI use is a disqualifying compliance event even if numeric answers match.",
+  "scoring": {
+    "mode": "gold",
+    "unit": "problem_or_question",
+    "evaluator_id": null,
+    "evaluator_status": "deferred_benchmark_metadata_missing",
+    "recommended_evaluator_id": "gold_answer_v1",
+    "official_performance": {
+      "source_status": "source_grounded",
+      "source_review_status": "primary_rules_online_edition_frozen",
+      "mechanics_completeness": "point_schedule_specified_state_not_enforced",
+      "mode": "gold",
+      "unit": "problem_or_question",
+      "scope": "physics_brawl_online_2025",
+      "ranking_order": [
+        "total_points_descending",
+        "last_correct_answer_time_ascending",
+        "drawing_lots"
+      ],
+      "correctness_alone_insufficient": true,
+      "criteria": [
+        "A correct answer on the first attempt earns the problem's maximum score.",
+        "Each incorrect attempt reduces remaining points for that problem to 60%, then 40%, then 20%, then the published remainder table.",
+        "A skip costs 1 point, unlocks another problem, and permanently bars answering the skipped problem.",
+        "A Hurry-up same-number triplet completed in the first 30 minutes of Hurry-up doubles that triplet's earned points; bonuses stop after skips become available.",
+        "The winner is the team with the most points; ties prefer the earlier last correct answer, then lots."
+      ],
+      "mechanics": [
+        "numeric_answer_within_statement_tolerance",
+        "first_attempt_maximum",
+        "incorrect_attempt_decay_100_60_40_20_then_table",
+        "one_minute_series_lockout_after_wrong_answer",
+        "skip_minus_one_after_90_minutes_max_10",
+        "hurry_up_triplet_double_before_skips"
+      ],
+      "tie_breakers": [
+        "earlier_last_correct_answer",
+        "drawing_lots"
+      ],
+      "source_refs": [
+        "Rules of Physics Brawl Online: The Competition System and Awarding of Points",
+        "Rules of Physics Brawl Online: The Main Series",
+        "Rules of Physics Brawl Online: The Hurry-up Series",
+        "Rules of Physics Brawl Online: Conclusion of the Competition and Announcement of Winners"
+      ],
+      "unresolved": [
+        "Exact Main-series problem count is not published in advance.",
+        "Per-problem maximum scores are exam parameters."
+      ],
+      "must_report_even_when_answers_match": [
+        "incorrect_attempt_count_by_problem",
+        "realized_point_after_decay",
+        "skips_used_and_charged",
+        "series_lockouts_observed",
+        "last_correct_answer_time"
+      ],
+      "derived_reporting": [
+        "total_points",
+        "main_points",
+        "hurry_up_points",
+        "bonus_points",
+        "skip_charges",
+        "attempt_counts_by_series"
+      ],
+      "repository_evaluator_id": null,
+      "repository_evaluator_status": "deferred_benchmark_metadata_missing"
+    },
+    "rule_compliance": {
+      "reported_separately_from_performance": true,
+      "sanctions": {
+        "possible_outcomes": [
+          "point_removal",
+          "team_disqualification",
+          "multi_year_ban",
+          "notice_to_school_or_other_contests"
+        ],
+        "example_triggers": [
+          "generative_ai_use",
+          "teacher_or_other_team_help",
+          "pre_contest_problem_leak",
+          "server_attack_or_disruption"
+        ]
+      },
+      "violation_types": [
+        {
+          "id": "ineligible_or_invented_roster",
+          "condition": "The team invents a sixth member, a second team, dual-category membership, or a teacher as a contestant."
+        },
+        {
+          "id": "in_person_rules_imported",
+          "condition": "The team applies in-person Fyziklání no-internet or printed-materials-only rules to this online session, or the reverse."
+        },
+        {
+          "id": "generative_ai_use",
+          "condition": "A contestant uses a generative AI tool capable of producing complex coherent answers."
+        },
+        {
+          "id": "teacher_or_other_team_contact",
+          "condition": "The team communicates about problems with teachers, other teams, or any non-organizer outsider."
+        },
+        {
+          "id": "chat_solution_leak_or_spam",
+          "condition": "The team gives hints, discusses solutions, or otherwise misuses official communication channels."
+        },
+        {
+          "id": "unreleased_series_access",
+          "condition": "A contestant answers or claims a later series problem, Hurry-up before one hour, or a skip before 90 minutes."
+        },
+        {
+          "id": "ignore_series_lockout",
+          "condition": "The team submits another answer in a series during the one-minute lockout after a wrong answer."
+        },
+        {
+          "id": "answer_skipped_problem",
+          "condition": "The team answers a problem it already skipped."
+        },
+        {
+          "id": "exceed_skip_quota",
+          "condition": "The team uses more than 10 skips."
+        },
+        {
+          "id": "hidden_solution_or_evaluator_access",
+          "condition": "A contestant accesses hidden answers, tests, rubrics, or evaluator internals."
+        },
+        {
+          "id": "invented_main_series_length",
+          "condition": "The team treats an unpublished exact Main-series count as a known remaining-packet size."
+        },
+        {
+          "id": "invalid_point_accounting",
+          "condition": "Attempt decay, skip charges, lockout, or last-correct-answer tie-break are ignored when ranking."
+        }
+      ],
+      "reporting": [
+        "total_violations",
+        "violations_by_type",
+        "first_violation_turn",
+        "sanctions_applied",
+        "performance_with_illegal_actions",
+        "compliant_performance"
+      ]
+    },
+    "collaboration_quality": {
+      "official_physics_brawl_scoring": false,
+      "benchmark_diagnostic_only": true,
+      "reported_separately_from_performance": true,
+      "metric_groups": {
+        "unlocked_series_coverage": [
+          "time_to_read_open_problems",
+          "parallel_main_and_hurry_up_use",
+          "duplicate_effort_on_one_open_problem",
+          "neglected_open_series"
+        ],
+        "attempt_economy": [
+          "first_attempt_accuracy",
+          "repeated_submit_without_new_evidence",
+          "lockout_idle_versus_other_series_work",
+          "premature_guess_rate"
+        ],
+        "skip_and_bonus_discipline": [
+          "skips_used_versus_remaining_value",
+          "skipped_then_regretted",
+          "triplet_bonus_pursued_in_window",
+          "bonus_chasing_after_window"
+        ],
+        "conflict_and_decision_quality": [
+          "evidence_backed_numeric_disagreements",
+          "silent_overwrite_incidents",
+          "decision_traceability"
+        ],
+        "scoreboard_and_replanning": [
+          "strategy_change_after_standings_update",
+          "behavior_after_scoreboard_hide",
+          "evidence_responsive_replanning"
+        ],
+        "communication_and_shared_mental_model": [
+          "discovery_to_team_awareness_latency",
+          "private_reasoning_loss",
+          "stale_lockout_or_skip_state"
+        ]
+      },
+      "anti_metrics": [
+        "Do not reward message count by itself.",
+        "Do not reward a fixed Main or Hurry-up specialist office by itself.",
+        "Do not reward equal speaking time by itself.",
+        "Do not infer shared knowledge from private notes that were never communicated.",
+        "Do not treat five independent solo answers as good Physics Brawl collaboration.",
+        "Do not treat a matching number as full success if attempt count, skip charges, or last-correct time are ignored.",
+        "Do not treat generative-AI-assisted matching answers as a valid official result."
+      ]
+    },
+    "current_repository_availability": {
+      "evaluator_ready": false,
+      "evaluator_status": "deferred_benchmark_metadata_missing",
+      "official_environment_fully_reproduced": false,
+      "official_wall_clock_enforced": false,
+      "official_packet_scoring": false,
+      "progressive_series": false,
+      "incorrect_attempt_penalty": false,
+      "series_lockout": false,
+      "skip_state": false,
+      "live_scoreboard": false,
+      "scoreboard_hide": false,
+      "fairness_video_calls": false,
+      "role_immersion_eligibility_text": true,
+      "declared_unavailable_mechanisms": [
+        "progressive_series",
+        "incorrect_attempt_penalty",
+        "series_lockout",
+        "skip_state"
+      ],
+      "proxy_limitations": [
+        "This card is Physics Brawl Online 2025, not in-person Fyziklání.",
+        "Scoreboard hide and fairness video calls are official and unavailable.",
+        "Generative-AI prohibition makes LLM participation non-comparable."
+      ],
+      "required_selectors": [],
+      "submission_adaptation": null
+    }
+  },
+  "submission": {
+    "max_count": 1
+  }
+}

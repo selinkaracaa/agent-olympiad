@@ -1,0 +1,234 @@
+{
+  "agent_constraints": [
+    "Inhabit an eligible high-school PUMaC Power contestant identity on a fixed eight-person team; do not invent a ninth member, a Power-Only individual, or an outside collaborator.",
+    "Begin with the same contestant permissions as every teammate; do not assume a permanent writer, algebraist, or reviewer office.",
+    "Treat private reasoning and notes as unknown to teammates until you communicate them; lemmas and counterexamples needed by teammates must be reported explicitly.",
+    "Assign proof obligations, exchange arguments, verify every cited dependency, and merge only mutually consistent writeups into the shared packet.",
+    "When teammates disagree on a proof, surface the conflict with a gap, counterexample, or missing citation before replacing packet text.",
+    "Any contestant may assemble or submit the shared packet; there is no exclusive designated submitter, and the first received set is the one that counts.",
+    "Follow the evaluated year's Power packet if it conflicts with this briefing, including any computational-aid sentence printed there.",
+    "Do not use books, internet searches, people outside the eight, hidden solutions, or a calculator or other aid unless that year's packet explicitly allows it.",
+    "Treat the turn budget as a session limit that does not recreate the official week-long take-home."
+  ],
+  "agent_roles": [
+    {
+      "name": "Agent_1",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit an eligible high-school PUMaC Power contestant identity on a fixed eight-person team.",
+        "Prove, write, cite earlier parts, review justifications, and merge consistent arguments into the shared packet as team needs require.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": []
+    },
+    {
+      "name": "Agent_2",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit an eligible high-school PUMaC Power contestant identity on a fixed eight-person team.",
+        "Prove, write, cite earlier parts, review justifications, and merge consistent arguments into the shared packet as team needs require.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": []
+    },
+    {
+      "name": "Agent_3",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit an eligible high-school PUMaC Power contestant identity on a fixed eight-person team.",
+        "Prove, write, cite earlier parts, review justifications, and merge consistent arguments into the shared packet as team needs require.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": []
+    },
+    {
+      "name": "Agent_4",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit an eligible high-school PUMaC Power contestant identity on a fixed eight-person team.",
+        "Prove, write, cite earlier parts, review justifications, and merge consistent arguments into the shared packet as team needs require.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": []
+    },
+    {
+      "name": "Agent_5",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit an eligible high-school PUMaC Power contestant identity on a fixed eight-person team.",
+        "Prove, write, cite earlier parts, review justifications, and merge consistent arguments into the shared packet as team needs require.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": []
+    },
+    {
+      "name": "Agent_6",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit an eligible high-school PUMaC Power contestant identity on a fixed eight-person team.",
+        "Prove, write, cite earlier parts, review justifications, and merge consistent arguments into the shared packet as team needs require.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": []
+    },
+    {
+      "name": "Agent_7",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit an eligible high-school PUMaC Power contestant identity on a fixed eight-person team.",
+        "Prove, write, cite earlier parts, review justifications, and merge consistent arguments into the shared packet as team needs require.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": []
+    },
+    {
+      "name": "Agent_8",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit an eligible high-school PUMaC Power contestant identity on a fixed eight-person team.",
+        "Prove, write, cite earlier parts, review justifications, and merge consistent arguments into the shared packet as team needs require.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": []
+    }
+  ],
+  "information_policy": {
+    "mode": "shared",
+    "shared": [
+      "problem",
+      "contest_rules",
+      "team_discussion",
+      "scratchpad"
+    ],
+    "coordination_requirement": "Contestants receive equal baseline information access, but private reasoning is not silently copied between them; they must communicate lemmas, gaps, and citations needed by teammates before those claims enter the shared packet."
+  },
+  "rule_sections": {
+    "competition_format": [
+      "Official: PUMaC includes Individual, Team, and Power assessments; this session is the Power Round only.",
+      "Official: the Power Round is a proof-based test released online about a week before the competition.",
+      "Official: all eight students comprising a single team may collaborate on this test.",
+      "Official: Power-Only teams take only the Power Round under the same test rules.",
+      "Official: the Power and Team rounds are identical across A and B divisions.",
+      "Simulation choice: the runner loads one Power packet rather than a live Main Competition day."
+    ],
+    "timeline": [
+      "Official: the team has approximately a week to work on the exam, up to the due time printed on the test.",
+      "Official: as of 2023, the Power Round is submitted at the time specified on the test, not on competition day, and all submissions are online.",
+      "Official: no numeric minute duration is published as a universal Power clock.",
+      "Simulation choice: execution.official_minutes is null; max_turns is only a runner safety budget.",
+      "Simulation choice: the week-long asynchronous workflow is not reproduced by the turn budget."
+    ],
+    "resource_policy": [
+      "Official: unless otherwise stated, no outside resources may be used during the Power Round, including books, internet searches, or individuals outside the team.",
+      "Official: rules regarding computational aids vary from year to year and are specified in the Power Round's instructions.",
+      "Official: Individual Test and Team Test bans on calculators, books, protractors, compasses, rulers, and graph paper do not automatically apply to Power.",
+      "Simulation choice: internet, calculator, and code execution stay default-deny unless the evaluated year's packet explicitly allows them.",
+      "Simulation choice: the only machine tool exposed is query_rules."
+    ],
+    "collaboration_protocol": [
+      "Official: the eight students on one team may collaborate freely on the Power Round.",
+      "Official: people outside those eight may not help.",
+      "Official: Power-Only does not accept individual applicants.",
+      "Simulation choice: every contestant starts with equal permissions; writer or reviewer jobs may rotate and are never exclusive offices.",
+      "Simulation choice: private notes are unknown to teammates until communicated."
+    ],
+    "integrity_and_compliance": [
+      "Official: outside books, internet searches, and non-team individuals are forbidden unless the test says otherwise.",
+      "Official: if these rules and the Power Round instructions conflict, the Power Round instructions control.",
+      "Official: teams may submit solutions only once; the first set received is graded.",
+      "Official: the team name must not appear in the submitted solutions.",
+      "Simulation choice: do not access hidden solutions, evaluator internals, or a computational aid that the packet did not grant.",
+      "Simulation choice: inventing a ninth member or an outside collaborator is a compliance violation."
+    ],
+    "deliverable_format": [
+      "Official: students must submit written solutions with justification.",
+      "Official: answers given without justification receive no credit unless stated otherwise.",
+      "Official: earlier parts may be assumed in later parts if cited, even when unproved.",
+      "Official: solutions may be handwritten or typed, printed on one side only, with team number and problem number on each page.",
+      "Official: points may be deducted for not following these and other submission guidelines on the Power Round instructions.",
+      "Simulation choice: the runner accepts one shared numbered proof packet as plain text.",
+      "Simulation choice: any contestant may file that packet, and a second submission must not replace the first for grading."
+    ],
+    "evaluation_criteria": [
+      "Official: the Power Round assigns points to individual problems and is hand-graded for written justification.",
+      "Official: overall team rankings use Power, Individual, and Team tests; this session reports Power writeup quality only.",
+      "Official: Individual Finals scores have no bearing on a team's final score.",
+      "Simulation choice: repository evaluation is rubric scoring per problem_or_question and is deferred; do not invent a completed official grade.",
+      "Simulation choice: report justification completeness, citations, and anonymity separately from a guessed numeric total."
+    ],
+    "runtime_limitations": [
+      "Official: the Power Round is a roughly week-long take-home with a due time printed on the test.",
+      "Simulation choice: the week-long workflow is not reproduced by the 24-turn budget.",
+      "Official: formatting and anonymity rules can cost points.",
+      "Simulation choice: one-sided paper, page labels, and physical anonymity have no analogue in a plain-text box.",
+      "Official: computational aids are packet-specific.",
+      "Simulation choice: no calculator or code tool is exposed unless a future packet integration turns that default-deny off.",
+      "Simulation choice: structured deliberation is a benchmark overlay for proof-challenge traceability."
+    ],
+    "official_eligibility": [
+      "Official: a team member must not have reached age 20 before the PUMaC competition date.",
+      "Official: a team member must not have been enrolled full-time in a post-secondary institution before that date.",
+      "Official: beginning in 2017 only full teams and Main Competition individuals may apply; Power-Only is full teams only.",
+      "Simulation choice: age, enrollment, Director division rulings, and payment or attendance sanctions are carried as contestant conscience, not as registration state machines."
+    ],
+    "packet_authority": [
+      "Official: more detailed instructions are given on the Power Round itself.",
+      "Official: if instructions here and on the Power Round conflict, follow the Power Round.",
+      "Official: the Power Test states which theorems may be assumed; ask organizers when unsure about stating a major fact without proof.",
+      "Simulation choice: when the evaluated year's packet is not attached, keep computational aids forbidden and follow the general Power rules above."
+    ]
+  },
+  "deliberation": {
+    "mode": "structured",
+    "min_challenges": 1,
+    "decision_maker": "submitter",
+    "evaluation_dimensions": [
+      "evidence_responsiveness",
+      "revision_after_challenge",
+      "decision_traceability",
+      "authority_bias",
+      "majority_bias"
+    ]
+  },
+  "communication": {
+    "mode": "unlimited"
+  },
+  "simulation": {
+    "max_turns": 24,
+    "scheduler": "src_collaboration_draft",
+    "turn_budget_basis": "official clock n/a turns vs floor 21 (8 teammates x 2 turns + 1 answer parts + 4 for synthesis)",
+    "eligibility_and_logistics_state": "specified_for_role_immersion_not_enforced"
+  }
+}

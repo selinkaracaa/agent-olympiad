@@ -1,0 +1,15 @@
+{
+  "competition_id": "icpc",
+  "rule_id": "icpc:world_finals_2026_v1",
+  "profile": "proxy",
+  "protocol": "human_team_shared_workstation_programming",
+  "visibility": {
+    "agent_at_start": [
+      "input",
+      "method"
+    ],
+    "hidden_until_grade": [
+      "eval"
+    ]
+  }
+}

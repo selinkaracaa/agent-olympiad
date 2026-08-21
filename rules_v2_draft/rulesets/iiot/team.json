@@ -1,0 +1,177 @@
+{
+  "$schema": "../../schemas/ruleset.schema.json",
+  "schema_version": "2.0-draft",
+  "ruleset_id": "iiot:team:v2-draft",
+  "competition_id": "iiot",
+  "title": "International Informatics Olympiad in Teams — two-machine proxy",
+  "profile": "proxy",
+  "applicability": {
+    "selector": {},
+    "eval_unit": "session",
+    "notes": "Edition-specific language and machine details should become selectors once benchmark rows carry them."
+  },
+  "team": {
+    "active_min": 4,
+    "active_default": 4,
+    "active_max": 4,
+    "topology": "single_cooperative_team",
+    "required_roles": [
+      {
+        "role_id": "coordinator",
+        "title": "contest coordinator",
+        "duties": ["Track problem priorities, machine occupancy, submissions, and unresolved failures."],
+        "may_submit": true
+      },
+      {
+        "role_id": "algorithmist",
+        "title": "algorithm designer",
+        "duties": ["Develop and justify algorithms before they consume a machine slot."],
+        "may_submit": false
+      },
+      {
+        "role_id": "implementer",
+        "title": "implementation lead",
+        "duties": ["Implement on an acquired contest-machine lease and document source state for handoff."],
+        "may_submit": true
+      },
+      {
+        "role_id": "tester",
+        "title": "tester and debugger",
+        "duties": ["Construct edge cases, review code, and form evidence-based failure hypotheses."],
+        "may_submit": false
+      }
+    ]
+  },
+  "execution": {
+    "official_minutes": 240,
+    "turn_budget": {
+      "mode": "wall_clock_proxy",
+      "max_turns": 48,
+      "derivation": "Four hours is represented by a bounded agent-turn budget."
+    },
+    "state_requirements": [
+      {
+        "id": "two_machine_leases",
+        "description": "At most two contestants may perform machine actions concurrently.",
+        "status": "specified_only",
+        "required_for_official_equivalence": true
+      },
+      {
+        "id": "programming_judge",
+        "description": "Source submissions receive isolated hidden-test verdicts and may be corrected and resubmitted.",
+        "status": "unavailable",
+        "required_for_official_equivalence": true
+      }
+    ]
+  },
+  "resource_policy": {
+    "internet": {
+      "access": "conditional",
+      "conditions": "Only the contest judge and organizer-approved endpoints may be used.",
+      "enforced_by": "tool_policy",
+      "source_refs": ["iiot-regulations"]
+    },
+    "calculator": {
+      "access": "forbidden",
+      "enforced_by": "tool_policy",
+      "source_refs": ["iiot-regulations"]
+    },
+    "code_execution": {
+      "access": "shared_capacity",
+      "conditions": "Exactly two contest computers or virtual machines are shared by the four-person team.",
+      "capacity": 2,
+      "enforced_by": "not_enforceable",
+      "source_refs": ["iiot-regulations"]
+    },
+    "paper_pencil": {
+      "access": "allowed",
+      "enforced_by": "manual",
+      "source_refs": ["iiot-regulations"]
+    }
+  },
+  "constraints": [
+    {
+      "id": "iiot.team_size",
+      "authority": "official",
+      "statement": "The team contains exactly four contestants.",
+      "source_refs": ["iiot-regulations"],
+      "enforcement": {"mode": "runtime", "status": "enforced"}
+    },
+    {
+      "id": "iiot.machine_capacity",
+      "authority": "official",
+      "statement": "The four-person team shares two contest computers or virtual machines.",
+      "source_refs": ["iiot-regulations"],
+      "enforcement": {"mode": "runtime", "status": "specified_only"}
+    },
+    {
+      "id": "iiot.source_text_proxy",
+      "authority": "benchmark_adaptation",
+      "statement": "The current runner stores source text but does not execute the official hidden-test judge.",
+      "source_refs": [],
+      "enforcement": {"mode": "runtime", "status": "enforced"}
+    }
+  ],
+  "collaboration": {
+    "topology": "single_cooperative_team",
+    "opponent_model": "none",
+    "dynamic_role_rotation": true,
+    "coalitions": [],
+    "notes": "Machine leases should rotate dynamically; role titles are responsibilities, not exclusive permissions."
+  },
+  "submission": {
+    "official_deliverable": "source code submitted to the contest judge",
+    "runner_deliverable": "plain-text source code",
+    "official_mime_types": ["text/x-c++src", "text/x-python"],
+    "runner_mime_types": ["text/plain"],
+    "adaptation": "The draft does not yet compile or execute official tests.",
+    "max_count": 1
+  },
+  "evaluation": {
+    "status": "deferred",
+    "evaluator_id": "programming_judge",
+    "rubric_path": null,
+    "gold_available": true,
+    "notes": "Blocked on official tests and isolated sandbox execution."
+  },
+  "comparability": {
+    "overall": "proxy",
+    "dimensions": {
+      "roster": "equivalent",
+      "timing": "adapted",
+      "resources": "proxy",
+      "collaboration": "proxy",
+      "submission": "proxy",
+      "scoring": "unavailable",
+      "participant_identity": "proxy"
+    },
+    "waivers": [
+      {
+        "id": "iiot.unenforced_machine_capacity",
+        "official_rule": "Four teammates share two contest computers or VMs.",
+        "benchmark_treatment": "The intended capacity is encoded, but current runtime leases are not implemented.",
+        "impact": "material"
+      }
+    ],
+    "unsupported_mechanisms": ["two concurrent machine leases", "official programming judge", "repeat verdict history"]
+  },
+  "provenance": {
+    "sources": [
+      {
+        "source_id": "iiot-regulations",
+        "title": "IIOT Regulations",
+        "url": "https://iio.team/documents/Regulations.pdf",
+        "authority": "official",
+        "retrieved_at": "2026-08-12",
+        "effective_year": null,
+        "local_path": "data/rules/sources/iiot/01_Regulations.pdf",
+        "sha256": "9125a9290057687eca495c97f7b53f04e9ab714d3ad41ca819628420766f1948",
+        "locator": "Team composition, contest machines, permitted resources, and judging",
+        "snapshot_status": "archived"
+      }
+    ],
+    "generated_at": "2026-08-16T18:00:00Z",
+    "research_confidence": "high",
+    "notes": "This intentionally corrects the current card's single-workstation prose."
+  }
+}

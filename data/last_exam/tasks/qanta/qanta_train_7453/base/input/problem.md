@@ -1,0 +1,3 @@
+# Mythology
+
+His nemesis was an eagle whose constant companion was a hawk named Vedrfolnir.  Among those who shared in his work were Moin, Goin, Grafvolluth, and Graback, while the business was also furthered by Dain, Duneyr, Durathror, and Dvalin.  On those rare occasions when he wasn't going about his main task, he lounged about in Nastrond feasting on dead bodies, which is why he was given a name meaning "Tearer of Corpses."  Although he did a lot of damage, his task would be accomplished at one fell swoop by Surt at Ragnarok.  A buddy of Ratatosk who lived by Hvergelmir, FTP, name this resident of Niflheim, a serpent who spent a long time gnawing on the roots of Yggdrasil.

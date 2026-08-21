@@ -1,0 +1,178 @@
+{
+  "schema_version": "1.0",
+  "rule_id": "arml_national_power:draft_v1",
+  "competition_id": "arml_national_power",
+  "profile": "proxy",
+  "protocol": "shared_answer",
+  "team": {
+    "active_min": 15,
+    "active_default": 15,
+    "active_max": 15,
+    "roster_max": 15,
+    "range_basis": "source_record",
+    "official_roster_note": "The Power Round is worked by the same national ARML/IRML team of 15 (or the short-handed team that arrived). The roster is frozen once the Team Round has started.",
+    "collaboration": "The entire team produces exactly one Power solution packet."
+  },
+  "execution": {
+    "official_minutes": null,
+    "session_track": "power_round_only"
+  },
+  "allowed_tools": [
+    "query_rules"
+  ],
+  "resources": {
+    "internet": "forbidden",
+    "calculator": "forbidden",
+    "code_execution": "forbidden",
+    "electronic_devices": "forbidden",
+    "paper_pencil": "allowed",
+    "paper_dictionary": "non_native_english_speakers_book_form_only",
+    "electronic_translators": "forbidden",
+    "provided_materials_only": true,
+    "outside_communication": "forbidden"
+  },
+  "human_constraints": [
+    "Treat yourself as an eligible national ARML/IRML contestant on the same coach-seeded 15-person regional team that sat Team Round; the roster cannot be substituted after Team Round has started.",
+    "Do not invent a borrowed student, a second institutional team, or an ineligible graduate identity.",
+    "This sitting is the Power Round: 50 points, exactly one solution packet. If additional solutions are submitted, all are scored and the team receives the lowest score.",
+    "Write the justifications the verbs require: list or compute need not justify; determine, find, or show need work or reasoning; justify or prove need a rigorous proof.",
+    "Earlier numbered items may be used later even if not proved; later items may not be used earlier.",
+    "Typical official packet instructions require a legible, orderly, clear, concise presentation; one-sided pages numbered in consecutive order; TEAM NUMBER, not team name, on the cover; no other team identification.",
+    "Calculators are not allowed on any ARML part.",
+    "Electronic devices are banned; if one is discovered during Team or Power the team is disqualified from that round. Devices are collected before Team and returned after Power.",
+    "A paper dictionary is allowed only for participants whose first language is not English; electronic translators are not allowed.",
+    "Do not use internet, phones, outside help, or hidden solutions."
+  ],
+  "rules_text": "You are an eligible national ARML/IRML contestant on the coach-seeded 15-person team already frozen once Team Round started. This sitting is the Power Round: 50 points, exactly one solution packet; extra packets are all scored and the lowest is kept. Follow the packet verbs: list/compute need not justify; determine/find/show need work; justify/prove need rigorous proof. Earlier parts may be used later. Write on one side, number pages, and put the team NUMBER—not the team name—on the cover. Calculators are banned on every ARML part. Electronic devices are banned; discovery during Team or Power disqualifies that round. A paper dictionary is allowed only if English is not your first language. No internet, phones, or outside help. The official rules page does not give a Power Round clock; do not invent one. Treat unexposed physical, oral, live-opponent, judge, timing, or environment mechanisms as unavailable rather than simulated facts.",
+  "provenance": {
+    "status": "source_grounded",
+    "sources": [
+      {
+        "title": "ARML/IRML Competition Rules",
+        "url": "https://arml.com/ARML/arml_2019/page/index.php?page=competition_rules&page_type=public",
+        "authority": "official",
+        "edition": "ARML/IRML Competition Rules as published on the official ARML 2019 site; team-seeding and division clauses revised April 2017",
+        "archive_status": "local_text_capture_available",
+        "sections": [
+          "team of 15 and coach seeding A1/A2 or B1/B2",
+          "age and graduation eligibility",
+          "contiguous non-intersecting regions",
+          "calculator ban on every ARML part",
+          "Individual, Team, Power, and Relay scoring",
+          "team-score tie-break order",
+          "no substitutions after Team Round starts",
+          "short-handed Relay handling",
+          "paper dictionary for non-native English speakers",
+          "electronic-device ban and Team/Power collection",
+          "exactly one Power solution packet",
+          "cheating and property sanctions"
+        ],
+        "local_text": "data/rules/sources/arml_national_power/01_index.txt"
+      },
+      {
+        "title": "ARML/IRML Competition Rules (arml2.com official mirror)",
+        "url": "https://arml2.com/ARML/arml_2019/page/index.php?page=competition_rules&page_type=public",
+        "authority": "official",
+        "edition": "ARML/IRML Competition Rules as published on the official ARML 2019 site; team-seeding and division clauses revised April 2017",
+        "archive_status": "official_url_verified_not_locally_archived",
+        "sections": [
+          "team of 15 and coach seeding A1/A2 or B1/B2",
+          "age and graduation eligibility",
+          "contiguous non-intersecting regions",
+          "calculator ban on every ARML part",
+          "Individual, Team, Power, and Relay scoring",
+          "team-score tie-break order",
+          "no substitutions after Team Round starts",
+          "short-handed Relay handling",
+          "paper dictionary for non-native English speakers",
+          "electronic-device ban and Team/Power collection",
+          "exactly one Power solution packet",
+          "cheating and property sanctions"
+        ]
+      },
+      {
+        "title": "ARML Competition 2025 contest packet",
+        "url": "https://arml3.com/wp-content/uploads/2026/03/ARML-2025-Contest.pdf",
+        "authority": "official",
+        "edition": "ARML Competition 2025, May 30–31, 2025",
+        "archive_status": "official_url_verified_not_locally_archived",
+        "sections": [
+          "Power Round 2025 instructions",
+          "Team Round"
+        ]
+      }
+    ],
+    "adaptations": [
+      "max_turns is a safety budget; the official rules page does not establish a Power Round wall-clock",
+      "structured deliberation actions are a benchmark traceability overlay",
+      "limited communication is a benchmark pressure overlay, not an official message cap",
+      "The 2025 packet instructions are typical official Power presentation rules used for role immersion; a given year packet may restate them",
+      "Handwriting, one-sided paper, cover-sheet team-number anonymity, and device collection are specified but not physically enforced",
+      "Age, region, seeding, and frozen-roster obligations are contestant-facing role-immersion text, not runtime state machines"
+    ],
+    "official_time_note": "The archived ARML competition-rules page does not establish a 60-minute Power Round clock; no exact official duration is encoded.",
+    "research_confidence": "high",
+    "research_notes": [
+      "Do not encode a 60-minute Power Round clock; secondary mirrors are not official for this card.",
+      "This card is the national-meet Power Round, not the separate mail/in-school Power Contest."
+    ],
+    "proxy_limitations": [
+      "No official Power Round duration is encoded, so there is no live countdown.",
+      "Physical handwriting, one-sided pages, and proctor device collection are not reproduced.",
+      "Multiple-packet lowest-score assessment is specified; the runner currently accepts one final text packet."
+    ],
+    "content_standard": {
+      "name": "icpc_three_component_content_standard",
+      "version": "1.1",
+      "applied_at": "2026-08-17",
+      "reference_card": "data/rules/icpc",
+      "official_facts_policy": "competition_specific_primary_sources_only",
+      "scope": [
+        "competition_constraints",
+        "collaboration_operations",
+        "evaluation_and_compliance",
+        "runtime_fidelity"
+      ]
+    },
+    "source_review": {
+      "reviewed_at": "2026-08-17",
+      "audit_report": "docs/rule_card_icpc_standard_gap_audit_2026-08-17.md",
+      "coverage_grade": "B",
+      "completion_status": "primary_rules_partial_or_variant_selector_required",
+      "claim_policy": "unknown_official_values_remain_null_or_explicitly_unresolved",
+      "known_gaps": [
+        "The official ARML/IRML rules page does not establish a Power Round wall-clock duration."
+      ]
+    }
+  },
+  "comparability": {
+    "overall": "proxy",
+    "dimensions": {
+      "roster": "official",
+      "timing": "adapted_turn_budget_clock_unspecified",
+      "tools": "equivalent",
+      "scoring": "rubric_proxy_of_official_fifty_point_packet",
+      "environment": "partial",
+      "collaboration": "observable_proxy",
+      "information": "shared_public_rules",
+      "communication": "adapted_coordination_budget",
+      "deliberation": "structured_trace_overlay",
+      "eligibility_and_logistics": "role_immersion_text_only",
+      "handwriting_and_anonymity": "specified_not_enforced"
+    }
+  },
+  "deliverable": {
+    "answer_format": "Submit the team's final answers in numbered order, using exact values when required.",
+    "shared": true,
+    "mime_types": [
+      "text/plain"
+    ],
+    "task_types": [
+      "team_power"
+    ],
+    "official_deliverable": "proof_packet",
+    "official_mime_types": [
+      "text/plain"
+    ]
+  }
+}

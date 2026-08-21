@@ -192,19 +192,22 @@ Read-only research of **primary official** contestant-facing constraints for eve
     "wsc_writing": {
       "name": "World Scholar's Cup — Collaborative Writing",
       "best_source_urls": [
-        "https://scholarscup.org/events/"
+        "https://scholarscup.org/events/",
+        "https://www.dropbox.com/scl/fi/5cxl9ri1lziscxvnufxnv/Collaborative-Writing-Rubric.pdf?rlkey=5hs28p3rlk6jdlvrgneioueka&dl=1"
       ],
       "retrieved": true,
       "hard_constraints": [
-        "Team of 3 (event design: each member answers a different prompt; team writes three of three-to-four prompts).",
-        "Staged workflow: prepare with teammates (but not devices) → write individually → review one another's work at the end.",
-        "Official page emphasizes pen/pencil writing; device ban during prep is explicit on the events page.",
-        "Deliverable: handwritten essays / creative or persuasive pieces judged by Collaborative Writing Rubric (linked from events page)."
+        "The team receives three to four prompts drawn from the six World Scholar's Cup subject areas.",
+        "The team answers exactly three prompts.",
+        "Each of the three teammates answers a different prompt.",
+        "First prepare with teammates without using devices, then write independently, then review one another's work at the end.",
+        "Write the response with pen or pencil.",
+        "Responses may use a form appropriate to the prompt, including creative pieces, persuasive arguments, poems, or essays."
       ],
       "confidence": "medium",
       "proxy_limitations": [
-        "Minute-by-minute stage timings (often ~20/40/15 in secondary sources) are not numerically specified on the fetched official events page — treat timings as needing the current season packet/rubric PDF.",
-        "Handwriting + peer-edit 'may not finish teammate's unfinished piece' nuance needs the rubric PDF for high confidence."
+        "Neither the fetched official events page nor the official rubric PDF states a numeric stage schedule.",
+        "The rubric PDF contains evaluation questions only; it does not establish a rule that peer editors may not finish an incomplete response."
       ]
     },
 

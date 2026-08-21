@@ -14,11 +14,18 @@ Usage:
 from __future__ import annotations
 
 import argparse
-import json
+import sys
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
 RULES = REPO / "data" / "rules"
+sys.path.insert(0, str(REPO / "src"))
+
+from rules import (  # noqa: E402
+    iter_rule_card_ids,
+    load_rule_card_payload,
+    write_rule_card_payload,
+)
 
 BOILERPLATE = {
     (
@@ -268,10 +275,10 @@ def main() -> int:
 
     changed_cards = 0
     changed_roles = 0
-    for path in sorted(RULES.glob("*.json")):
-        if path.name == "schema.json":
-            continue
-        card = json.loads(path.read_text(encoding="utf-8"))
+    for competition_id in iter_rule_card_ids(RULES):
+        card = load_rule_card_payload(
+            competition_id, rules_root=RULES, required=True
+        )
         protocol = card.get("protocol") or ""
         touched = False
         for role in card.get("agent_roles") or []:
@@ -289,8 +296,10 @@ def main() -> int:
         changed_cards += 1
         print(f"{card['competition_id']}: rewrote duties for {len(card['agent_roles'])} roles")
         if not args.dry_run:
-            path.write_text(
-                json.dumps(card, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+            write_rule_card_payload(
+                competition_id,
+                card,
+                rules_root=RULES,
             )
 
     print(

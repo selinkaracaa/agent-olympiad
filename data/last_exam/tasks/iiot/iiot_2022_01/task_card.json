@@ -1,0 +1,33 @@
+{
+  "task_id": "iiot/iiot_2022_01",
+  "competition_id": "iiot",
+  "problem_id": "iiot_2022_01",
+  "title": "IIOT 2022 Edition — Problem 1",
+  "year": 2022,
+  "team_size": 4,
+  "source_url": "https://iio-team.github.io/competition/tasks/2022",
+  "inherits_competition_pack": "competitions/iiot",
+  "rule_card": "data/rules/iiot",
+  "input": {
+    "visibility": "agent_at_start",
+    "files": [
+      {
+        "name": "problem.md",
+        "path": "base/input/problem.md"
+      },
+      {
+        "name": "iiot_2022_problem_01.pdf.path",
+        "path": "base/input/iiot_2022_problem_01.pdf.path"
+      }
+    ]
+  },
+  "method": {
+    "visibility": "agent_at_start",
+    "path": "competitions/iiot/method"
+  },
+  "eval": {
+    "visibility": "hidden_until_grade",
+    "path": "eval/reference.json",
+    "competition_eval": "competitions/iiot/eval"
+  }
+}

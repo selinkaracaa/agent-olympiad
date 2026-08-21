@@ -1,0 +1,33 @@
+{
+  "task_id": "wharton_investment/wharton_investment_case-study-2021-2022",
+  "competition_id": "wharton_investment",
+  "problem_id": "wharton_investment_case-study-2021-2022",
+  "title": "case-study-2021-2022",
+  "year": 2021,
+  "team_size": 5,
+  "source_url": "https://globalyouth.wharton.upenn.edu/",
+  "inherits_competition_pack": "competitions/wharton_investment",
+  "rule_card": "data/rules/wharton_investment",
+  "input": {
+    "visibility": "agent_at_start",
+    "files": [
+      {
+        "name": "problem.md",
+        "path": "base/input/problem.md"
+      },
+      {
+        "name": "case-study-2021-2022.html.path",
+        "path": "base/input/case-study-2021-2022.html.path"
+      }
+    ]
+  },
+  "method": {
+    "visibility": "agent_at_start",
+    "path": "competitions/wharton_investment/method"
+  },
+  "eval": {
+    "visibility": "hidden_until_grade",
+    "path": "eval/reference.json",
+    "competition_eval": "competitions/wharton_investment/eval"
+  }
+}

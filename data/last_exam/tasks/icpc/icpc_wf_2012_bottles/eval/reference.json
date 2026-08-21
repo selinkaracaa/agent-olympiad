@@ -1,0 +1,16 @@
+{
+  "visibility": "hidden_until_grade",
+  "gold_pointer": "data/benchmarks/icpc/benchmark.json#icpc_wf_2012_bottles.gold_label",
+  "has_gold_answer": false,
+  "evaluator_id": "programming_judge",
+  "evaluator_status": "pilot",
+  "problem_package": "data/private/icpc/icpc_wf_2012_bottles",
+  "test_provenance": "benchmark_native_deterministic_v1",
+  "rubric_path": null,
+  "deliverable": null,
+  "limitations": [
+    "Pilot package uses benchmark-native tests rather than official ICPC judge data.",
+    "Pilot sandbox currently supports Python 3 submissions only."
+  ],
+  "solution_file": null
+}

@@ -1,0 +1,33 @@
+{
+  "task_id": "history_olympiad/history_olympiad_bowl_playoff_rd_1_history_bowl_2021_ihbb_asian_championships",
+  "competition_id": "history_olympiad",
+  "problem_id": "history_olympiad_bowl_playoff_rd_1_history_bowl_2021_ihbb_asian_championships",
+  "title": "Playoff-Rd.-1-History-Bowl-2021-IHBB-Asian-Championships",
+  "year": 2021,
+  "team_size": 4,
+  "source_url": "https://iacompetitionsasia.com/history-bee-bowl-practice-materials/",
+  "inherits_competition_pack": "competitions/history_olympiad",
+  "rule_card": "data/rules/history_olympiad",
+  "input": {
+    "visibility": "agent_at_start",
+    "files": [
+      {
+        "name": "problem.md",
+        "path": "base/input/problem.md"
+      },
+      {
+        "name": "Playoff-Rd.-1-History-Bowl-2021-IHBB-Asian-Championships.pdf.path",
+        "path": "base/input/Playoff-Rd.-1-History-Bowl-2021-IHBB-Asian-Championships.pdf.path"
+      }
+    ]
+  },
+  "method": {
+    "visibility": "agent_at_start",
+    "path": "competitions/history_olympiad/method"
+  },
+  "eval": {
+    "visibility": "hidden_until_grade",
+    "path": "eval/reference.json",
+    "competition_eval": "competitions/history_olympiad/eval"
+  }
+}

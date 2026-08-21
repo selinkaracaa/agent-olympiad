@@ -1,0 +1,15 @@
+{
+  "competition_id": "mystery_hunt",
+  "rule_id": "mystery_hunt:draft_v1",
+  "profile": "proxy",
+  "protocol": "progressive_release",
+  "visibility": {
+    "agent_at_start": [
+      "input",
+      "method"
+    ],
+    "hidden_until_grade": [
+      "eval"
+    ]
+  }
+}

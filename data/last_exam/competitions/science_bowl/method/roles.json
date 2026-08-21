@@ -1,0 +1,40 @@
+{
+  "source": "data/rules/science_bowl/collaboration.json#agent_roles",
+  "information_policy": "shared",
+  "roles": [
+    {
+      "name": "Agent_1",
+      "title": "captain",
+      "may_submit": true,
+      "duties": [
+        "Deliver the official team answer.",
+        "On bonuses, synthesize the team's consensus."
+      ]
+    },
+    {
+      "name": "Agent_2",
+      "title": "physical science specialist",
+      "may_submit": false,
+      "duties": [
+        "Lead physics and chemistry clues."
+      ]
+    },
+    {
+      "name": "Agent_3",
+      "title": "life and earth science specialist",
+      "may_submit": false,
+      "duties": [
+        "Lead biology and earth/space clues."
+      ]
+    },
+    {
+      "name": "Agent_4",
+      "title": "math and energy specialist",
+      "may_submit": false,
+      "duties": [
+        "Lead mathematics and energy/general science clues.",
+        "Challenge unsupported guesses."
+      ]
+    }
+  ]
+}

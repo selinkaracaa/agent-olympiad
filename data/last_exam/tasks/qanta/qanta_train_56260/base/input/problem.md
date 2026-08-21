@@ -1,0 +1,3 @@
+# Literature
+
+In the second part of this novel, "The Prayers of the Saints," Elizabeth recalls how the protagonist's biological father, Richard, killed himself after being falsely arrested and beaten by police. In the first part, "The Seventh Day," the reader learns of the family patriarch's idealization of his biological son, Royal, who dies at a bar in Chicago. The protagonist is further conflicted by his feelings towards the pastor's nephew, Brother Elisha, but he eventually reconciles with Gabriel and undergoes conversion on the "threshing floor" at the altar of his Harlem church. For 10 points, name this bildungsroman about John Grimes, the first novel of James Baldwin.

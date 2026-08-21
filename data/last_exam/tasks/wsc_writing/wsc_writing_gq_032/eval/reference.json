@@ -1,0 +1,10 @@
+{
+  "visibility": "hidden_until_grade",
+  "gold_pointer": "data/benchmarks/wsc_writing/benchmark.json#wsc_writing_gq_032.gold_label",
+  "has_gold_answer": false,
+  "evaluator_id": "rubric_llm_v1",
+  "evaluator_status": "ready",
+  "rubric_path": "data/rubrics/wsc_writing_28_v1.json",
+  "deliverable": "written_essay",
+  "solution_file": null
+}

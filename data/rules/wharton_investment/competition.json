@@ -1,0 +1,183 @@
+{
+  "schema_version": "1.0",
+  "rule_id": "wharton_investment:draft_v1",
+  "competition_id": "wharton_investment",
+  "profile": "non_comparable",
+  "protocol": "research_artifact",
+  "team": {
+    "active_min": 4,
+    "active_default": 5,
+    "active_max": 6,
+    "collaboration": "Collaborate only within the team under contest rules.",
+    "range_basis": "source_record"
+  },
+  "execution": {
+    "official_minutes": null
+  },
+  "allowed_tools": [
+    "query_rules",
+    "use_calculator",
+    "execute_code",
+    "web_search"
+  ],
+  "resources": {
+    "internet": "allowed",
+    "calculator": "allowed",
+    "code_execution": "allowed",
+    "paper_pencil": "allowed",
+    "provided_materials_only": false,
+    "generative_ai": "brainstorming_only_with_citation",
+    "live_market_simulator": "unavailable_in_runner"
+  },
+  "human_constraints": [
+    "Research publicly available market information.",
+    "Produce an investment thesis / portfolio rationale as a team.",
+    "No contact with prohibited outside advisors beyond contest rules.",
+    "Teams are 4 to 6 students including a designated student team leader, all from the same high school or campus; falling below four or exceeding six at any time is disqualifying.",
+    "No student may participate on more than one team.",
+    "The team shares one Wharton Investment Simulator (WInS) account and all trades are placed through it.",
+    "The student team leader is the sole channel for competition communications and submits all deliverables through SurveyMonkey Apply.",
+    "Do not contact the competition client; teams that do are disqualified.",
+    "Your advisor is a teacher or educator at your school who guides and registers the team but may not make decisions for you or take part in trading or strategy.",
+    "Do not engage paid advisors, education consultants, or agents, and do not enroll in any non-Wharton course claiming to teach the competition.",
+    "Produce two graded deliverables: an Investment Policy Statement defining the client's objectives, risk tolerance, and strategy, and a Comprehensive Final Report justifying your strategy, recommendations, and analysis.",
+    "Meet the published trading activity and portfolio management requirements throughout the competition.",
+    "You may use generative AI only to brainstorm; never submit AI-generated work as your own, and cite any AI-derived material like any other source.",
+    "Cite every source you use and do not plagiarize; fabricating analyses, trades, or teamwork narratives is a disqualifying ethics breach.",
+    "You are judged on strategy quality, fit to the client's objectives, depth of research and analysis, and how clearly you defend your recommendations — not on portfolio returns."
+  ],
+  "rules_text": "Wharton Global High School Investment Competition. The team researches, authors, and defends a judged artifact. The source-recorded active team may have 4 to 6 members; the runner default is 5. Collaborate only within the team under contest rules. Permitted: internet access, calculators and running code. Conditional: generative AI is limited to cited brainstorming and live market simulator is unavailable in runner. Paper and pencil are always available. Submit one shared investment policy statement and final report; Submit clearly separated Investment Policy Statement and Comprehensive Final Report sections covering client objectives, risk tolerance, strategy, evidence, portfolio decisions, and citations. Treat unexposed physical, oral, live-opponent, judge, timing, or environment mechanisms as unavailable rather than simulated facts.",
+  "provenance": {
+    "status": "source_enriched_v1",
+    "sources": [
+      {
+        "title": "Wharton Global Youth",
+        "url": "https://globalyouth.wharton.upenn.edu/",
+        "retrieved_at": "2026-08-12",
+        "local_text": "data/rules/sources/wharton_investment/01_globalyouth.wharton.upenn.txt",
+        "authority": "unclassified",
+        "edition": "not_frozen",
+        "sections": [],
+        "archive_status": "local_capture_available"
+      },
+      {
+        "title": "https://globalyouth.wharton.upenn.edu/competitions/investment-competition/rules-roles/",
+        "url": "https://globalyouth.wharton.upenn.edu/competitions/investment-competition/rules-roles/",
+        "retrieved_at": "2026-08-12",
+        "from_report": "docs/rules_lowconf_2026-08-12.md",
+        "authority": "unclassified",
+        "edition": "not_frozen",
+        "sections": [],
+        "archive_status": "locator_only_from_prior_report"
+      },
+      {
+        "title": "https://globalyouth.wharton.upenn.edu/competitions/investment-competition/",
+        "url": "https://globalyouth.wharton.upenn.edu/competitions/investment-competition/",
+        "retrieved_at": "2026-08-12",
+        "from_report": "docs/rules_lowconf_2026-08-12.md",
+        "authority": "unclassified",
+        "edition": "not_frozen",
+        "sections": [],
+        "archive_status": "locator_only_from_prior_report"
+      },
+      {
+        "title": "https://globalyouth.wharton.upenn.edu/competitions/investment-competition/faq/",
+        "url": "https://globalyouth.wharton.upenn.edu/competitions/investment-competition/faq/",
+        "retrieved_at": "2026-08-12",
+        "from_report": "docs/rules_lowconf_2026-08-12.md",
+        "authority": "unclassified",
+        "edition": "not_frozen",
+        "sections": [],
+        "archive_status": "locator_only_from_prior_report"
+      }
+    ],
+    "adaptations": [
+      "max_turns is a safety budget, not necessarily the official wall-clock limit",
+      "specialist roles are a research roster overlay",
+      "physical/oral/live opponent fidelity may be incomplete in src/",
+      "role-specific rule expertise is a benchmark coordination overlay",
+      "structured deliberation actions are a benchmark traceability overlay",
+      "limited communication is a benchmark pressure overlay, not an official message cap"
+    ],
+    "crawl_status": "ok",
+    "crawled_excerpts": [
+      {
+        "url": "https://globalyouth.wharton.upenn.edu/",
+        "excerpt": "Wharton Global Youth Program Home - Wharton Global Youth Program Skip to content Skip to main menu Faculty Youth Program Undergrad Jacobs MSQF MBA EMBA PhD Exec Ed Wharton Online Search Wharton Mobile menu toggle Wharton Global Youth Program Menu On-Campus Essentials of Finance Essentials of Entrepreneurship Leadership in the Business World Management &#038; Technology Summer Institute The Wharton One-Day High School Experience Moneyball Academy Data Science Academy Product Design Academy Applic"
+      }
+    ],
+    "enriched_at": "2026-08-12T16:53:55.315598+00:00",
+    "research_confidence": "medium",
+    "proxy_limitations": [
+      "The competition runs 10+ weeks against a live market simulator; a turn-budgeted text run cannot reproduce real price movement, trade execution, or portfolio drift.",
+      "Advisor guidance is a real but bounded human input with no analogue in the agent roster.",
+      "Semifinal and finale rounds are live oral defenses before judges."
+    ],
+    "research_merged_at": "2026-08-12T17:05:14.815789+00:00",
+    "rules_text_source": "composed_from_card_fields_v2",
+    "research_reports": [
+      "docs/rules_crawl_2026-08-11.md",
+      "docs/rules_lowconf_2026-08-12.md"
+    ],
+    "research_notes": [
+      "Trading activity minimums, the approved-securities universe, portfolio management guidelines, deliverable deadlines, and the judging rubric are published only to registered teams through SurveyMonkey Apply and could not be verified.",
+      "Season-level dates on the public page (competition begins September 28, 2026) are verified, but per-deliverable deadlines are not.",
+      "A widely circulated advisor-guidelines PDF states a maximum of seven members; the official Rules & Roles page says four to six, and the official page was used.",
+      "Official Global Youth portal hosts the Investment Competition; detailed team size/time/tool rules are in season-specific competition guidelines (not fully extracted from the portal root fetch).",
+      "Index lists team_size 5 — confirm against current season PDF/FAQ before treating as hard.",
+      "You must behave like a human teammate under official contest rules.",
+      "Do not claim tools, internet, or materials that the rule card forbids.",
+      "Do not look up answer keys or hidden solutions."
+    ],
+    "research_graded_at": "2026-08-12",
+    "content_standard": {
+      "name": "icpc_three_component_content_standard",
+      "version": "1.1",
+      "applied_at": "2026-08-17",
+      "reference_card": "data/rules/icpc",
+      "official_facts_policy": "competition_specific_primary_sources_only",
+      "scope": [
+        "competition_constraints",
+        "collaboration_operations",
+        "evaluation_and_compliance",
+        "runtime_fidelity"
+      ]
+    },
+    "source_review": {
+      "reviewed_at": "2026-08-17",
+      "audit_report": "docs/rule_card_icpc_standard_gap_audit_2026-08-17.md",
+      "coverage_grade": "B",
+      "completion_status": "primary_rules_partial_or_variant_selector_required",
+      "claim_policy": "unknown_official_values_remain_null_or_explicitly_unresolved",
+      "known_gaps": []
+    }
+  },
+  "comparability": {
+    "overall": "non_comparable",
+    "dimensions": {
+      "roster": "equivalent_4_to_6",
+      "timing": "adapted",
+      "tools": "src_tool_surface",
+      "scoring": "rubric",
+      "environment": "missing_live_market_and_multi_week_state",
+      "ai_policy": "fundamental_participant_waiver",
+      "communication": "adapted_coordination_budget",
+      "deliberation": "structured_trace_overlay",
+      "information": "role_specialized_tracking_overlay"
+    }
+  },
+  "deliverable": {
+    "answer_format": "Submit clearly separated Investment Policy Statement and Comprehensive Final Report sections covering client objectives, risk tolerance, strategy, evidence, portfolio decisions, and citations.",
+    "shared": true,
+    "mime_types": [
+      "text/plain"
+    ],
+    "task_types": [
+      "investment_case"
+    ],
+    "official_deliverable": "investment_policy_statement_and_final_report",
+    "official_mime_types": [
+      "application/pdf"
+    ]
+  }
+}

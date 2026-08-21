@@ -6,7 +6,7 @@
     "topic": "IChTo-2019-Problem-Set",
     "title": "IChTo-2019-Problem-Set",
     "task_type": "chemistry_tournament_problem_set",
-    "team_size": 3,
+    "team_size": 4,
     "source_url": "http://ichto.org/en/problems/",
     "source_file": "data/raw/ichto/IChTo-2019-Problem-Set.pdf",
     "solution_file": null,
@@ -19,7 +19,7 @@
     },
     "status": "collected",
     "is_solution_pdf": false,
-    "team_size_note": "3+"
+    "team_size_note": "Official national-team range is 4-6; benchmark default is 4."
   },
   {
     "problem_id": "ichto_IChTo-2020-Problem-Set",
@@ -28,7 +28,7 @@
     "topic": "IChTo-2020-Problem-Set",
     "title": "IChTo-2020-Problem-Set",
     "task_type": "chemistry_tournament_problem_set",
-    "team_size": 3,
+    "team_size": 4,
     "source_url": "http://ichto.org/en/problems/",
     "source_file": "data/raw/ichto/IChTo-2020-Problem-Set.pdf",
     "solution_file": null,
@@ -41,7 +41,7 @@
     },
     "status": "collected",
     "is_solution_pdf": false,
-    "team_size_note": "3+"
+    "team_size_note": "Official national-team range is 4-6; benchmark default is 4."
   },
   {
     "problem_id": "ichto_IChTo-2024-problems",
@@ -50,7 +50,7 @@
     "topic": "IChTo-2024-problems",
     "title": "IChTo-2024-problems",
     "task_type": "chemistry_tournament_problem_set",
-    "team_size": 3,
+    "team_size": 4,
     "source_url": "http://ichto.org/en/problems/",
     "source_file": "data/raw/ichto/IChTo-2024-problems.pdf",
     "solution_file": null,
@@ -63,7 +63,7 @@
     },
     "status": "collected",
     "is_solution_pdf": false,
-    "team_size_note": "3+"
+    "team_size_note": "Official national-team range is 4-6; benchmark default is 4."
   },
   {
     "problem_id": "ichto_IChTo-2025-problem-set",
@@ -72,7 +72,7 @@
     "topic": "IChTo-2025-problem-set",
     "title": "IChTo-2025-problem-set",
     "task_type": "chemistry_tournament_problem_set",
-    "team_size": 3,
+    "team_size": 4,
     "source_url": "http://ichto.org/en/problems/",
     "source_file": "data/raw/ichto/IChTo-2025-problem-set.pdf",
     "solution_file": null,
@@ -85,7 +85,7 @@
     },
     "status": "collected",
     "is_solution_pdf": false,
-    "team_size_note": "3+"
+    "team_size_note": "Official national-team range is 4-6; benchmark default is 4."
   },
   {
     "problem_id": "ichto_IChTo-2026-problem-set_260203-modified",
@@ -94,7 +94,7 @@
     "topic": "IChTo-2026-problem-set_260203-modified",
     "title": "IChTo-2026-problem-set_260203-modified",
     "task_type": "chemistry_tournament_problem_set",
-    "team_size": 3,
+    "team_size": 4,
     "source_url": "http://ichto.org/en/problems/",
     "source_file": "data/raw/ichto/IChTo-2026-problem-set_260203-modified.pdf",
     "solution_file": null,
@@ -107,7 +107,7 @@
     },
     "status": "collected",
     "is_solution_pdf": false,
-    "team_size_note": "3+"
+    "team_size_note": "Official national-team range is 4-6; benchmark default is 4."
   },
   {
     "problem_id": "ichto_IChTo-Problem-Set",
@@ -116,7 +116,7 @@
     "topic": "IChTo-Problem-Set",
     "title": "IChTo-Problem-Set",
     "task_type": "chemistry_tournament_problem_set",
-    "team_size": 3,
+    "team_size": 4,
     "source_url": "http://ichto.org/en/problems/",
     "source_file": "data/raw/ichto/IChTo-Problem-Set.pdf",
     "solution_file": null,
@@ -129,7 +129,7 @@
     },
     "status": "collected",
     "is_solution_pdf": false,
-    "team_size_note": "3+"
+    "team_size_note": "Official national-team range is 4-6; benchmark default is 4."
   },
   {
     "problem_id": "ichto_IChTo2022problemset",
@@ -138,7 +138,7 @@
     "topic": "IChTo2022problemset",
     "title": "IChTo2022problemset",
     "task_type": "chemistry_tournament_problem_set",
-    "team_size": 3,
+    "team_size": 4,
     "source_url": "http://ichto.org/en/problems/",
     "source_file": "data/raw/ichto/IChTo2022problemset.pdf",
     "solution_file": null,
@@ -151,7 +151,7 @@
     },
     "status": "collected",
     "is_solution_pdf": false,
-    "team_size_note": "3+"
+    "team_size_note": "Official national-team range is 4-6; benchmark default is 4."
   },
   {
     "problem_id": "ichto_Problem-set-2018",
@@ -160,7 +160,7 @@
     "topic": "Problem-set-2018",
     "title": "Problem-set-2018",
     "task_type": "chemistry_tournament_problem_set",
-    "team_size": 3,
+    "team_size": 4,
     "source_url": "http://ichto.org/en/problems/",
     "source_file": "data/raw/ichto/Problem-set-2018.pdf",
     "solution_file": null,
@@ -173,7 +173,7 @@
     },
     "status": "collected",
     "is_solution_pdf": false,
-    "team_size_note": "3+"
+    "team_size_note": "Official national-team range is 4-6; benchmark default is 4."
   },
   {
     "problem_id": "ichto_Problem-Set-of-IChTo-2023",
@@ -182,7 +182,7 @@
     "topic": "Problem-Set-of-IChTo-2023",
     "title": "Problem-Set-of-IChTo-2023",
     "task_type": "chemistry_tournament_problem_set",
-    "team_size": 3,
+    "team_size": 4,
     "source_url": "http://ichto.org/en/problems/",
     "source_file": "data/raw/ichto/Problem-Set-of-IChTo-2023.pdf",
     "solution_file": null,
@@ -195,6 +195,6 @@
     },
     "status": "collected",
     "is_solution_pdf": false,
-    "team_size_note": "3+"
+    "team_size_note": "Official national-team range is 4-6; benchmark default is 4."
   }
 ]

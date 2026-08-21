@@ -1,0 +1,33 @@
+{
+  "task_id": "wro/wro_2026_robomission_senior",
+  "competition_id": "wro",
+  "problem_id": "wro_2026_robomission_senior",
+  "title": "RoboMission Senior 2026",
+  "year": 2026,
+  "team_size": "2-3",
+  "source_url": "https://wro-association.org/competition/2026-season/",
+  "inherits_competition_pack": "competitions/wro",
+  "rule_card": "data/rules/wro",
+  "input": {
+    "visibility": "agent_at_start",
+    "files": [
+      {
+        "name": "problem.md",
+        "path": "base/input/problem.md"
+      },
+      {
+        "name": "WRO-2026-RoboMission-Senior-Game-Rules.pdf.path",
+        "path": "base/input/WRO-2026-RoboMission-Senior-Game-Rules.pdf.path"
+      }
+    ]
+  },
+  "method": {
+    "visibility": "agent_at_start",
+    "path": "competitions/wro/method"
+  },
+  "eval": {
+    "visibility": "hidden_until_grade",
+    "path": "eval/reference.json",
+    "competition_eval": "competitions/wro/eval"
+  }
+}

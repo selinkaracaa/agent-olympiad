@@ -1,0 +1,232 @@
+{
+  "schema_version": "1.0",
+  "rule_id": "icpc:world_finals_2026_v1",
+  "competition_id": "icpc",
+  "profile": "proxy",
+  "protocol": "human_team_shared_workstation_programming",
+  "team": {
+    "active_min": 3,
+    "active_default": 3,
+    "active_max": 3,
+    "collaboration": "Three contestants may collaborate with one another throughout the contest while sharing one workstation.",
+    "coach_role": "administrative_contact_only_not_a_contestant",
+    "coach_during_contest": "no_problem_solving_help",
+    "co_location": "three_contestants_share_one_on_site_team_workstation",
+    "official_roster_note": "The World Finals team is the same three contestants who qualified; reserves are not allowed. Eligibility, coach certification, visas, attendance, and host logistics are official contestant identity rules included for role immersion and are not runtime-enforced state machines. Season-specific regional eligibility lines (age, enrollment year, regional-season counts) must be read from the current Regional Rules and are not frozen as permanent dates in this card."
+  },
+  "execution": {
+    "official_minutes": 300,
+    "multi_problem_packet": "unavailable",
+    "official_packet_size_note": "Recent World Championships have posed ten or more problems; exact count is an event parameter.",
+    "problem_language": "English",
+    "official_contest_communications_language": "English",
+    "contestant_to_official_interpreter": "allowed_team_identified",
+    "allowed_languages": [
+      "C",
+      "C++",
+      "Java",
+      "Kotlin",
+      "Python3"
+    ],
+    "program_io_model": "stdin_to_stdout",
+    "problems_independent": true,
+    "live_scoreboard": "official_during_contest",
+    "live_scoreboard_contents": "teams ordered by current rank with performance statistics; same-rank alphabetical",
+    "scoreboard_freeze": "accepted_notifications_may_suspend_rejected_continue",
+    "clarification_channel": "unavailable"
+  },
+  "allowed_tools": [
+    "query_rules",
+    "execute_code"
+  ],
+  "resources": {
+    "internet": "forbidden",
+    "calculator": "forbidden",
+    "code_execution": "shared_workstation_only",
+    "paper_pencil": "allowed",
+    "unapproved_materials": "forbidden",
+    "shared_workstation": true,
+    "shared_workstation_count": 1,
+    "extra_computers": "forbidden",
+    "personal_electronic_devices": "forbidden",
+    "root_access": "forbidden",
+    "approved_printed_materials": "allowed",
+    "team_reference_document": "up_to_25_single_sided_letter_or_a4_pages",
+    "natural_language_dictionary": "one_unannotated_copy_per_contestant",
+    "ide_internal_ai_tools": "disabled",
+    "removable_storage": "forbidden",
+    "external_llms_and_search_engines": "forbidden",
+    "outside_communication": "forbidden",
+    "other_teams_code_or_materials": "forbidden"
+  },
+  "human_constraints": [
+    "Treat yourself as an eligible ICPC World Finals contestant: you advanced through Regional Contests under the ICPC Regional Rules and Region-Specific Rules, and you compete for one university team only.",
+    "Only one team from a given institution may advance to the World Finals; do not invent a second institutional World Finals team or a parallel roster.",
+    "No contestant on the qualifying team may have competed as a contestant in two previous World Finals; do not fictionalize prior World Finals contestant careers that would make a teammate ineligible.",
+    "The coach is the administrative point of contact before and during World Finals activities; a contestant may not serve as the coach, and the coach must complete team certification within five business days of notification.",
+    "The coach does not join contest-time problem solving and must not provide answers, algorithms, or debugging help during the contest.",
+    "The three contestants compete together at the shared team workstation; they may not treat the contest as three independent remote solves.",
+    "Visa and travel eligibility obligations bind the real team: members studying on visas must be able to return to their point of origin after the World Finals, and teams invited to apply for visas must initiate that process within ten business days.",
+    "The World Finals team comprises the same three members who qualified; reserves are not allowed, and unwilling, unable, or unfit teammates are handled through the coach and Contest Manager rather than by inventing substitutes mid-contest.",
+    "At on-site registration, participants present photo identification, and contestants show proof of enrollment at the university during the term of the regional contest at which they qualified; all team members follow applicable health and safety rules.",
+    "Finalists must attend all required events from On-Site Registration through Celebration as published in the Schedule of Events; missing a required event can mean disqualification and forfeiture of scholarships and prizes.",
+    "Coaches must remain accessible during On-Site Registration, Dress Rehearsal, the ICPC World Championship, and the Awards Ceremony, and the team follows special event instructions including official Contest-shirt dress expectations for the Awards Ceremony stage.",
+    "The Host provides hotel accommodations for the coach and three contestants according to the published invitation dates and complimentary contest hospitality; transportation to the World Finals is the team's responsibility, and prizes are awarded only as permitted by applicable law.",
+    "The World Finals team consists of exactly three contestants.",
+    "The contest is scheduled for five hours unless the Finals Director extends it because of unforeseen circumstances.",
+    "Recent ICPC World Championships have posed ten or more programming problems; the exact packet size is an event parameter, and the team may choose the order in which to attempt the problems.",
+    "Problems are posed in English.",
+    "During the contest, all communications from contest officials to contestants are in English.",
+    "Each team may identify an interpreter to translate questions posed by contestants to contest officials; the interpreter does not provide problem-solving help.",
+    "World Finals programming tools include C, C++, Java, Kotlin, and Python 3; solutions read from standard input and write to standard output.",
+    "Problems are mutually independent; each problem statement typically supplies background, input/output format, constraints, and samples, and only an Accepted run solves that problem.",
+    "All three contestants share exactly one equivalent team workstation; the team may not substitute its own hardware.",
+    "Only the contestant currently using the shared workstation may edit machine files, compile, execute local tests, or submit a run.",
+    "Off-workstation contestants may read problems, reason on paper, prepare pseudocode and tests, communicate with teammates, and review visible work, but may not use another computing environment.",
+    "The public Internet, root access, extra computers or terminals, calculators, personal electronic devices, removable storage, unapproved machine-readable software or data, external LLMs, search engines, and outside communication tools are forbidden.",
+    "Contestants may not view another team's code or materials, interfere with other teams or contest equipment, or receive outside problem-solving help.",
+    "Contestants may use paper, approved local documentation, inspected printed reference material, and the event-approved Team Reference Document.",
+    "Each contestant may use at most one inspected, unannotated natural-language dictionary.",
+    "Problem-solving communication is limited to teammates; designated contest personnel may be contacted only for official or system matters; coaches must not be used as in-contest solvers.",
+    "Programs must be submitted through the contest control system and are judged on hidden tests in an isolated environment.",
+    "Judge outcomes include Accepted, Compilation Error, Run-Time Error, Time-Limit Exceeded, and Wrong Answer; rejected runs may be corrected and resubmitted after the pending wait completes.",
+    "Repeated Compilation Error submissions that appear to abuse or disrupt the contest control system may be treated as misconduct even though Compilation Error itself is not time-penalized.",
+    "During the contest, a live Scoreboard posts teams in order by current rank, alphabetically within the same rank, together with team performance statistics; wrong attempts on unsolved problems may be visible without adding to total time until that problem is Accepted.",
+    "Problems solved always outranks total time: more solved problems beats fewer solved problems regardless of penalty.",
+    "Teams rank first by number of solved problems, then by lower total time, then by the earlier time of the last accepted submission.",
+    "A solved problem contributes the minutes to its first accepted run plus 20 minutes for each prior penalized rejection; Compilation Error is not penalized and unsolved problems add no official time.",
+    "Official evaluation is not correctness alone: wall-clock time to first Accepted, the count of penalized attempts, and resulting total time all affect ranking even when the final code is right.",
+    "Contestants may submit claims of ambiguity, inconsistency, sample error, or missing conditions through the clarification channel rather than asking outsiders; judges may reply to the team only, say the statement is already clear, issue a global clarification, or correct the statement or tests.",
+    "The scoreboard may stop revealing accepted results after an announced freeze while rejected-run notifications continue; exact freeze timing is an event parameter."
+  ],
+  "rules_text": "You are an eligible ICPC World Finals contestant on a fixed three-person co-located university team that qualified through Regional Contests. Only one team per institution advances; no contestant may already have competed in two prior World Finals; reserves are forbidden; the coach—not a contestant—is the administrative contact, completes certification on time, and gives no contest-time problem-solving help. Visa and enrollment proof obligations are part of your team identity; finalists attend required events from On-Site Registration through Celebration. On contest day you share one workstation for five hours. Recent World Championships pose ten or more independent English problems; allowed languages include C, C++, Java, Kotlin, and Python 3 with stdin/stdout programs. Officials speak English; an interpreter may translate contestant questions to officials only. One contestant at a time may edit, compile, test, and submit; teammates reason, prepare tests, review, and coordinate off-machine. After each submit, treat the run as pending until the contest control system returns a verdict. A live Scoreboard shows ranks and stats; Accepted updates may freeze near the end while Rejected notices continue. Internet, phones, USBs, calculators, external LLMs/search, other teams' code, and outside help are forbidden. Clarifications go through the contest system. Ranking prioritizes problems solved over total time; total time includes solve minutes plus 20 minutes per prior penalized rejection on solved problems (CE not penalized).",
+  "provenance": {
+    "status": "source_grounded",
+    "sources": [
+      {
+        "title": "2026 ICPC World Finals Rules",
+        "url": "https://icpc.global/worldfinals/rules",
+        "authority": "official",
+        "edition": "2026 World Finals, version 24 June 2026 with place correction 25 July 2026",
+        "archive_status": "official_url_verified_not_locally_archived",
+        "sections": [
+          "Team Requirements",
+          "Attendance",
+          "Support and Prizes",
+          "Conduct of the Finals",
+          "Scoring of the Finals",
+          "Computing Environment",
+          "Contestant Conduct",
+          "Championship Awards Resolver Detail"
+        ]
+      },
+      {
+        "title": "ICPC Regional Rules",
+        "url": "https://icpc.global/regionals/rules",
+        "authority": "official",
+        "edition": "current regional rules; season-specific eligibility lines are not frozen here",
+        "archive_status": "official_url_verified_not_locally_archived",
+        "sections": [
+          "regional qualification and eligibility",
+          "season-count and enrollment constraints"
+        ]
+      },
+      {
+        "title": "2026 ICPC World Finals about page",
+        "url": "https://worldfinals.icpc.global/2026/about/",
+        "authority": "official",
+        "edition": "2026 World Finals",
+        "archive_status": "official_url_verified_not_locally_archived",
+        "sections": [
+          "World Finals overview and linked rules mirrors"
+        ]
+      },
+      {
+        "title": "ICPC World Finals Programming Environment",
+        "url": "https://docs.icpc.global/worldfinals-programming-environment/",
+        "authority": "official",
+        "edition": "2026 World Finals environment",
+        "sections": [
+          "complete programming-environment specification"
+        ],
+        "archive_status": "local_text_capture_available",
+        "local_text": "data/rules/sources/icpc/01_worldfinals-programming-environment.txt"
+      },
+      {
+        "title": "ICPC World Finals On-Site Registration",
+        "url": "https://icpc.global/worldfinals/on-site-registration",
+        "authority": "official",
+        "edition": "2026 World Finals registration",
+        "sections": [
+          "team registration and contestant credentials"
+        ],
+        "archive_status": "official_url_verified_not_locally_archived"
+      }
+    ],
+    "adaptations": [
+      "max_turns is a safety budget rather than the official wall-clock limit",
+      "machine execution currently uses the repository execute_code proxy",
+      "workstation ownership, packet state, repeated judge runs, clarifications, and scoreboard freeze are specified but not yet enforced by src",
+      "Team Requirements, Attendance, and Support and Prizes are included as contestant-facing role-immersion constraints so agents inhabit an eligible World Finals identity; they are not implemented as runtime eligibility, visa, lodging, or attendance checks",
+      "One-turn post-submit pending wait is a simulation choice approximating contest-control judging latency; official rules do not define a numbered cooldown, but runs are pending until a verdict returns",
+      "Live Scoreboard viewing is official during the contest; the current runner does not yet publish a live multi-team board"
+    ],
+    "official_time_note": "5 hours.",
+    "research_confidence": "high",
+    "research_notes": [
+      "Eligibility, coach certification, visas, on-site credentials, mandatory attendance, host lodging, and prize-law clauses are conscience/role text for agents, not executable logistics.",
+      "Official scoring already folds solve wall-clock and prior rejected attempts into total time; evaluation must report those even when final source is correct.",
+      "Do not hard-code seasonal regional eligibility dates or temporary five-regional-season allowances; pin the season from Regional Rules when registering or auditing a live team."
+    ],
+    "proxy_limitations": [
+      "The runtime does not yet lease one workstation to one contestant at a time.",
+      "The current benchmark loads one problem rather than a World Finals packet of ten or more English problems.",
+      "Team-identified interpreters for contestant-to-official questions, the clarification channel, and scoreboard freeze remain deferred.",
+      "The programming judge, per-problem verdict history, one-turn pending-run latency, and live Scoreboard remain deferred.",
+      "Regional qualification history, one-institution advancement, prior-World-Finals eligibility, coach certification timers, visa workflows, on-site ID/enrollment checks, Schedule of Events attendance, and Host lodging or prize disbursement are not simulated as state."
+    ]
+  },
+  "comparability": {
+    "overall": "proxy",
+    "dimensions": {
+      "roster": "official",
+      "timing": "adapted_turn_budget",
+      "tools": "src_tool_surface",
+      "scoring": "specified_but_deferred",
+      "environment": "partial",
+      "workstation": "specified_not_enforced",
+      "packet": "not_implemented",
+      "judge_state": "not_implemented",
+      "pending_run_latency": "simulation_one_turn_not_enforced",
+      "live_scoreboard": "official_specified_not_enforced",
+      "collaboration": "observable_proxy",
+      "eligibility_and_logistics": "role_immersion_text_only"
+    }
+  },
+  "deliverable": {
+    "answer_format": "Submit a complete stdin/stdout program in an allowed World Finals language (C, C++, Java, Kotlin, or Python 3) through the programming judge. Only an Accepted run solves a problem.",
+    "shared": true,
+    "mime_types": [
+      "text/plain"
+    ],
+    "task_types": [
+      "algorithmic_programming"
+    ],
+    "official_deliverable": "source_code",
+    "official_languages": [
+      "C",
+      "C++",
+      "Java",
+      "Kotlin",
+      "Python3"
+    ],
+    "official_mime_types": [
+      "text/x-csrc",
+      "text/x-c++src",
+      "text/x-java",
+      "text/x-kotlin",
+      "text/x-python"
+    ],
+    "io_model": "stdin_stdout"
+  }
+}

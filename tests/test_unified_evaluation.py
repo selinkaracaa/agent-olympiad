@@ -97,8 +97,8 @@ class RegistryAndModeTests(unittest.TestCase):
         self.assertEqual(rubric.id, "rubric_llm_v1")
         with self.assertRaises(RegistryError):
             resolve_evaluator_by_id("missing_evaluator")
-        with self.assertRaises(RegistryError):
-            resolve_evaluator_by_id("programming_judge")
+        programming = resolve_evaluator_by_id("programming_judge")
+        self.assertEqual(strategy_kind(programming), "programming")
 
     def test_question_and_competition_packets(self):
         with tempfile.TemporaryDirectory() as temp_dir:

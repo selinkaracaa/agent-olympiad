@@ -1,0 +1,33 @@
+{
+  "task_id": "qanta/qanta_dev_150473",
+  "competition_id": "qanta",
+  "problem_id": "qanta_dev_150473",
+  "title": "Science",
+  "year": 2015,
+  "team_size": 4,
+  "source_url": "https://www.qanta.org/",
+  "inherits_competition_pack": "competitions/qanta",
+  "rule_card": "data/rules/qanta",
+  "input": {
+    "visibility": "agent_at_start",
+    "files": [
+      {
+        "name": "problem.md",
+        "path": "base/input/problem.md"
+      },
+      {
+        "name": "qanta.dev.2021.12.20.json.path",
+        "path": "base/input/qanta.dev.2021.12.20.json.path"
+      }
+    ]
+  },
+  "method": {
+    "visibility": "agent_at_start",
+    "path": "competitions/qanta/method"
+  },
+  "eval": {
+    "visibility": "hidden_until_grade",
+    "path": "eval/reference.json",
+    "competition_eval": "competitions/qanta/eval"
+  }
+}

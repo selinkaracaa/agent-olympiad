@@ -1,0 +1,3 @@
+# Literature
+
+A character in this play tells a story about someone being kicked in the head by a red mare but who resists dying for some time afterwards. In its final scene, Shawn is hit by a female character, who rejects his offer to have Father Reilly marry them. In this play, the main character wins a donkey race using the slowest animal, impressing such women as the barmaid Pegeen. The protagonist tells the denizens of Flaherty's tavern that he has murdered his father, which at first brings him praise and then scorn. During its 1907 premiere, this play caused riots at Dublin's Abbey Theatre. For 10 points, name this John Millington Synge play about Christy Mahon.
