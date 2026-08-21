@@ -42,7 +42,8 @@
       "task_types": ["algorithmic_programming", "programming"],
       "submission_mime_types": ["text/x-c++src", "text/x-python"],
       "strategy": "official_tests_in_isolated_sandbox",
-      "status": "deferred_missing_tests_and_sandbox"
+      "status": "sample_tests_mvp",
+      "notes": "Local Kattis sample .in/.ans judge + 20-min WA penalty on simulated clock. Secret tests / DomJudge / multi-language still deferred."
     },
     {
       "id": "physical_lab_judge",

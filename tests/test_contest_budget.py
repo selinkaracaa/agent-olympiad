@@ -15,13 +15,15 @@ from collaboration import CollabConfig, run_round_table
 
 
 class ContestBudgetTests(unittest.TestCase):
-    def test_default_turns_are_fifty(self):
+    def test_arml_turns_follow_duration(self):
         budget = resolve_contest_budget("arml_local")
-        self.assertEqual(budget.max_turns, 50)
+        self.assertEqual(budget.duration_minutes, 60)
+        self.assertEqual(budget.max_turns, 12)  # 60 / 5
 
-    def test_icpc_has_output_cap_placeholder(self):
+    def test_icpc_has_output_cap_and_five_hour_clock(self):
         budget = resolve_contest_budget("icpc")
-        self.assertEqual(budget.max_turns, 50)
+        self.assertEqual(budget.duration_minutes, 300)
+        self.assertEqual(budget.max_turns, 60)  # 300 / 5
         self.assertEqual(budget.max_output_tokens_per_call, 4096)
 
     def test_runtime_override(self):
@@ -42,6 +44,13 @@ class ContestBudgetTests(unittest.TestCase):
         self.assertLessEqual(estimate_tokens(capped), env.max_output_tokens_per_call or 0)
         self.assertGreater(env.tokens_used, 0)
 
+    def test_env_advances_simulated_clock(self):
+        env = OlympiadEnvironment("arml_local", "arml_local_2009", max_turns=3)
+        env.begin_turn()
+        self.assertEqual(env.simulated_minutes, 5.0)
+        env.begin_turn()
+        self.assertEqual(env.simulated_minutes, 10.0)
+
     def test_token_budget_stops_collaboration(self):
         def huge(_s, _u):
             return "token " * 10_000
@@ -59,7 +68,6 @@ class ContestBudgetTests(unittest.TestCase):
         )
         self.assertLessEqual(result["tokens_used"], 50)
         self.assertFalse(result["submitted"])
-
 
 if __name__ == "__main__":
     unittest.main()

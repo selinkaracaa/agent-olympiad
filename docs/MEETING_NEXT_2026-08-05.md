@@ -1,26 +1,28 @@
-# Meeting follow-ups — 2026-08-05
+# Meeting follow-ups — updated 2026-08-21
 
-Priorities:
+See full notes: [`docs/MEETING_2026-08-21.md`](MEETING_2026-08-21.md)
 
-1. **Turn budget in collaboration** — DONE  
-   - Turn = time; each agent ≤ 1 LLM call/turn or `sleep`  
-   - API calls = cost (`--max-api-calls`)  
-   - Token caps = per-call + team-wide (`src/contest_budget.py`)  
-   - Per-competition defaults: 50 turns; ICPC/IIOT 4K output/call placeholder  
-   - Keep all three schemas as baselines
+## Reality gaps — status
 
-2. **Run baseline table** — next (live)  
-   ```bash
-   export PERPLEXITY_API_KEY=pplx-...
-   python3 src/run_smoke_batch.py --live --rounds 2   # all 20 families
-   python3 src/run_exam.py --all-schemas --rounds 2   # ARML scored pilot
-   ```
-   Compare round_table / centralized / decentralized on the same problem.
+1. **Wall-clock proxy** — DONE (MVP): duration→turns + `simulated_minutes`
+2. **Live search + anti-cheat** — DONE (MVP): DuckDuckGo + leak block; lab/star fixtures when present
+3. **ICPC sample judge + 20-min WA** — DONE (MVP): Kattis samples; secret tests deferred
+4. **More gold contests** — DONE (MVP): ARML Local/National Team + Purple Comet HS 2018–2024
 
-3. **Integrate additional contests** — see [`docs/SOFTWARE_DESIGN.md`](SOFTWARE_DESIGN.md); resolve PR conflicts if any (requirements / registry).
+## Next experiment
 
-4. **ICPC online judge** — spike: submit via Codeforces/Kattis/etc. and parse verdict text. Deferred after baselines unless blocked.
+Gold suite (not all 20): single-agent baseline + round_table / centralized / decentralized,
+then homogeneous / heterogeneous models.
 
-5. **Lab env-agent** — lower priority for the paper.
+```bash
+python3 collectors/fetch_icpc_samples.py --limit 20
+python3 src/run_competition_batch.py --live --schema centralized \
+  --competitions arml_local,arml_national_team,purple_comet,icpc
+```
 
-Reference: this note + `SOFTWARE_DESIGN.md` + `docs/TESTS_AND_RESULTS.md` + `python3 src/main.py` offline proof of turn/API counters.
+## Still open
+
+- DomJudge / secret ICPC tests; C++/Java; shared-computer lock
+- HMMT / Fyziklani curated shorts
+- Single-agent equal-budget baseline wiring
+- ≥5 collaboration baselines; hetero model teams

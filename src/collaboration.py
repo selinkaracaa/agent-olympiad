@@ -5,7 +5,7 @@ from actions import apply_agent_response, build_action_instructions, extract_fin
 from contest_budget import resolve_contest_budget
 from env import TurnLimitExceededError
 
-SchemaName = Literal["round_table", "centralized", "decentralized"]
+SchemaName = Literal["round_table", "centralized", "decentralized", "single_agent"]
 QueryFn = Callable[[str, str], str]
 
 
@@ -14,7 +14,8 @@ class CollabConfig:
     """Collaboration budgets and schema knobs.
 
     Turns = time constraint (contest clock). Each turn, each eligible agent may
-    make at most one LLM call (or choose to sleep).
+    make at most one LLM call (or choose to sleep), except single_agent which
+    may use up to `solo_calls_per_turn` calls per turn to match team API budget.
     API calls = cost constraint across the whole run.
     """
 
@@ -27,6 +28,8 @@ class CollabConfig:
     decentralized_events: int | None = None
     synthesize: bool = True
     progress: Callable[[str], None] | None = None
+    # Equal-resource solo baseline: calls allowed per turn (= team size by default).
+    solo_calls_per_turn: int | None = None
 
     def resolved_max_turns(self, competition_id: str) -> int:
         if self.rounds is not None:
@@ -421,6 +424,56 @@ def run_decentralized(env, query_llm_fn: QueryFn, config: CollabConfig | None = 
     return _result(env, "decentralized")
 
 
+def run_single_agent(env, query_llm_fn: QueryFn, config: CollabConfig | None = None) -> dict:
+    """Baseline: one agent, same wall-clock turns, equal total API budget.
+
+    Per turn the solo agent may make up to `team_size` LLM calls (or sleep),
+    matching the multi-agent per-turn call budget.
+    """
+    config = config or CollabConfig()
+    natural_team = env.team_size
+    calls_per_turn = config.solo_calls_per_turn or max(1, natural_team)
+    _apply_budget_config(env, config)
+    query = _budgeted_query(env, query_llm_fn, config)
+    schema_note = (
+        "Single-agent baseline: you alone have the full team resource budget. "
+        f"Each turn you may take up to {calls_per_turn} actions/calls "
+        f"(equal to a {natural_team}-agent team's per-turn budget), or sleep."
+    )
+    agent = "Solo"
+
+    while not _should_stop(env):
+        if not env.can_begin_turn():
+            break
+        turn = env.begin_turn()
+        for slot in range(1, calls_per_turn + 1):
+            if _should_stop(env):
+                break
+            extra = (
+                f"Collaboration turn {turn} of {env.max_turns}, "
+                f"solo slot {slot}/{calls_per_turn}. "
+                "Solve the full contest packet and submit when ready."
+            )
+            _run_agent_once(
+                env,
+                query,
+                agent,
+                schema_note,
+                extra=extra,
+                progress=config.progress,
+            )
+            if env.action_log and env.action_log[-1].get("action") == "sleep":
+                break
+
+    if config.synthesize and not env.submitted:
+        _run_synthesis(env, query, schema_note, agent, progress=config.progress)
+
+    result = _result(env, "single_agent")
+    result["solo_calls_per_turn"] = calls_per_turn
+    result["natural_team_size"] = natural_team
+    return result
+
+
 def _result(env, schema: str) -> dict:
     return {
         "schema": schema,
@@ -446,6 +499,7 @@ SCHEMAS: dict[SchemaName, Callable] = {
     "round_table": run_round_table,
     "centralized": run_centralized,
     "decentralized": run_decentralized,
+    "single_agent": run_single_agent,
 }
 
 

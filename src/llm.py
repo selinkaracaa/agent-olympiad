@@ -1,6 +1,7 @@
 import base64
 import io
 import os
+import re
 import time
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -353,3 +354,39 @@ def resolve_query_fn(
     if use_mock:
         return mock_agent_llm
     return make_perplexity_caller(model=model or "openai/gpt-5.4-mini")
+
+
+_AGENT_ROLE_RE = re.compile(r"^You are ([A-Za-z0-9_]+)\b", re.MULTILINE)
+
+
+def make_roster_caller(
+    models_by_agent: dict[str, str],
+    *,
+    default_model: str,
+    api: str = "agent",
+    max_output_tokens: int = 16000,
+) -> QueryFn:
+    """Route each agent call to a model based on the system-prompt role line.
+
+    Collaboration prompts start with ``You are Agent_1 ...`` / ``You are Solo ...``.
+    Missing agents fall back to ``default_model``.
+    """
+    callers: dict[str, QueryFn] = {}
+    models = {**models_by_agent}
+    models.setdefault("__default__", default_model)
+
+    def _caller_for(model: str) -> QueryFn:
+        if model not in callers:
+            callers[model] = make_perplexity_caller(
+                model=model, api=api, max_output_tokens=max_output_tokens
+            )
+        return callers[model]
+
+    def call(system_prompt: str, user_prompt: str) -> str:
+        match = _AGENT_ROLE_RE.search(system_prompt or "")
+        agent = match.group(1) if match else None
+        model = models.get(agent) if agent else None
+        model = model or models["__default__"]
+        return _caller_for(model)(system_prompt, user_prompt)
+
+    return call

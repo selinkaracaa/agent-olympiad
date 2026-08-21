@@ -106,7 +106,8 @@ def run_one(
         "grade_score": grade.get("score"),
         "grade_max_score": grade.get("max_score"),
         "graded": grade.get("graded"),
-        "final_answer_preview": (result.get("final_answer") or "")[:300],
+        "final_answer": result.get("final_answer") or "",
+        "final_answer_preview": (result.get("final_answer") or "")[:2000],
         "status": "ok",
         "error": None,
     }

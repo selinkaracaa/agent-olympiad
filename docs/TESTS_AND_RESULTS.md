@@ -89,6 +89,46 @@ Rule: ≤1 LLM call per agent per turn, or `ACTION: sleep`.
 
 `llm_judge_required` on a smoke row means either judge was off (`--no-judge` / mock) or that problem still has no runnable registered judge (e.g. programming sandbox). Live smoke defaults to `--judge`: after submit it runs `rubric_llm_v1` / text proxy for `slide_deck_v1` via `evaluation.finalize.apply_registered_judge`.
 
+**Coordination / collaboration score (MultiAgentBench):** live competition batches also report `CS = mean(Communication, Planning)` on a 0–5 scale (`src/evaluation/collaboration_score.py`, arXiv:2503.01935). Independent of task accuracy.
+
+**Contest rules audit:** `python3 src/contest_rules.py --report` — 20 families mapped; env encodes tools/search policy/wrong-submit counters; gaps remain for shared-computer locks, guts batches, staged WSC, orals, ICPC secret tests.
+
+**Reality upgrades (2026-08-21):** duration→turn budgets; live DuckDuckGo search; ICPC Kattis **sample** judge (WA burns 20 min remaining clock); gold shorts on ARML Local, ARML National Team, Purple Comet HS/MS 2018–2024, HMMT Guts 2024.
+
+## Phase B matrix (multi-model + CS, registry budgets)
+
+```bash
+export PERPLEXITY_API_KEY=pplx-...
+python3 src/run_phase_b_matrix.py --live
+# resume if interrupted:
+python3 src/run_phase_b_matrix.py --live --resume results/phase_b/<ts>/phase_b_matrix.json
+```
+
+- 5 gold contests × 4 schemas × 4 teams (gpt / claude / gemini / hetero) = **80 cells**
+- Turns = contest duration registry (ARML Local 12, National 4, Purple 18, HMMT Guts 16, ICPC 60)
+- Scores: task grade + MultiAgentBench **CS** (`--judge-collab` on by default)
+- Artifacts under `results/phase_b/<timestamp>/phase_b_matrix.json` (saved after each cell)
+
+---
+
+```bash
+python3 src/run_phase_a.py --live --max-turns 8
+```
+
+- Model: `openai/gpt-5.4-mini` · 8 turns · artifact `results/phase_a/20260821-155239/phase_a.json`
+- Rescored (no re-run): `phase_a_rescored.json` after gold parser v2 (`T-1`, semicolon sheets, √→sqrt)
+- Result: **20/20 ok** (5 contests × single_agent / centralized / round_table / decentralized)
+
+| Contest | single | centralized | round_table | decentralized |
+|---|---:|---:|---:|---:|
+| ARML Local /40 | 8.9 | **22.2** | **31.1** | 17.8 |
+| ARML National Team /50 | **37.5** | 37.5 | **43.8** | **43.8** |
+| Purple Comet HS /30 | 5 | **6** | 4 | 4 |
+| HMMT Guts /50 | **5.6** | 4.2 | 4.2 | 2.8 |
+| ICPC bottles (sample) | 0 | 0 | 0 | 0 |
+
+Note: prior zeros on National Team were mostly **answer-format parse misses** (`T-1 …` / `a; b; c`), not wrong math. Solo often still submitted early (1–2 turns). ICPC sample AC unmet at 8 turns.
+
 ---
 
 # Test results

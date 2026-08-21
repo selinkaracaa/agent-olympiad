@@ -1,0 +1,1081 @@
+{
+  "_comment": "Official Purple Comet HS answer keys from purplecomet.org/answerlist/<year>/2",
+  "purple_comet_hs_2018": {
+    "1": {
+      "expected": "2315"
+    },
+    "2": {
+      "expected": "90"
+    },
+    "3": {
+      "expected": "1018"
+    },
+    "4": {
+      "expected": "345"
+    },
+    "5": {
+      "expected": "60"
+    },
+    "6": {
+      "expected": "84"
+    },
+    "7": {
+      "expected": "42"
+    },
+    "8": {
+      "expected": "223"
+    },
+    "9": {
+      "expected": "176"
+    },
+    "10": {
+      "expected": "81"
+    },
+    "11": {
+      "expected": "66"
+    },
+    "12": {
+      "expected": "240"
+    },
+    "13": {
+      "expected": "95"
+    },
+    "14": {
+      "expected": "225"
+    },
+    "15": {
+      "expected": "13"
+    },
+    "16": {
+      "expected": "887"
+    },
+    "17": {
+      "expected": "210"
+    },
+    "18": {
+      "expected": "271"
+    },
+    "19": {
+      "expected": "0"
+    },
+    "20": {
+      "expected": "73"
+    },
+    "21": {
+      "expected": "28"
+    },
+    "22": {
+      "expected": "226"
+    },
+    "23": {
+      "expected": "46"
+    },
+    "24": {
+      "expected": "118"
+    },
+    "25": {
+      "expected": "69"
+    },
+    "26": {
+      "expected": "32"
+    },
+    "27": {
+      "expected": "274"
+    },
+    "28": {
+      "expected": "94"
+    },
+    "29": {
+      "expected": "489"
+    },
+    "30": {
+      "expected": "88"
+    }
+  },
+  "purple_comet_hs_2019": {
+    "1": {
+      "expected": "30"
+    },
+    "2": {
+      "expected": "40"
+    },
+    "3": {
+      "expected": "859"
+    },
+    "4": {
+      "expected": "30"
+    },
+    "5": {
+      "expected": "108"
+    },
+    "6": {
+      "expected": "100"
+    },
+    "7": {
+      "expected": "4"
+    },
+    "8": {
+      "expected": "150"
+    },
+    "9": {
+      "expected": "15"
+    },
+    "10": {
+      "expected": "321"
+    },
+    "11": {
+      "expected": "46"
+    },
+    "12": {
+      "expected": "49"
+    },
+    "13": {
+      "expected": "19"
+    },
+    "14": {
+      "expected": "140"
+    },
+    "15": {
+      "expected": "21"
+    },
+    "16": {
+      "expected": "625"
+    },
+    "17": {
+      "expected": "768"
+    },
+    "18": {
+      "expected": "149"
+    },
+    "19": {
+      "expected": "0"
+    },
+    "20": {
+      "expected": "308"
+    },
+    "21": {
+      "expected": "77"
+    },
+    "22": {
+      "expected": "2636"
+    },
+    "23": {
+      "expected": "2"
+    },
+    "24": {
+      "expected": "148"
+    },
+    "25": {
+      "expected": "124"
+    },
+    "26": {
+      "expected": "4350"
+    },
+    "27": {
+      "expected": "153"
+    },
+    "28": {
+      "expected": "388"
+    },
+    "29": {
+      "expected": "113"
+    },
+    "30": {
+      "expected": "2275"
+    }
+  },
+  "purple_comet_hs_2020": {
+    "1": {
+      "expected": "47"
+    },
+    "2": {
+      "expected": "26"
+    },
+    "3": {
+      "expected": "231"
+    },
+    "4": {
+      "expected": "90"
+    },
+    "5": {
+      "expected": "27"
+    },
+    "6": {
+      "expected": "34"
+    },
+    "7": {
+      "expected": "24"
+    },
+    "8": {
+      "expected": "35"
+    },
+    "9": {
+      "expected": "24"
+    },
+    "10": {
+      "expected": "364"
+    },
+    "11": {
+      "expected": "7"
+    },
+    "12": {
+      "expected": "120"
+    },
+    "13": {
+      "expected": "25249"
+    },
+    "14": {
+      "expected": "445"
+    },
+    "15": {
+      "expected": "381"
+    },
+    "16": {
+      "expected": "9"
+    },
+    "17": {
+      "expected": "131"
+    },
+    "18": {
+      "expected": "36"
+    },
+    "19": {
+      "expected": "1013"
+    },
+    "20": {
+      "expected": "80"
+    },
+    "21": {
+      "expected": "33"
+    },
+    "22": {
+      "expected": "79"
+    },
+    "23": {
+      "expected": "8"
+    },
+    "24": {
+      "expected": "30"
+    },
+    "25": {
+      "expected": "572"
+    },
+    "26": {
+      "expected": "59"
+    },
+    "27": {
+      "expected": "153"
+    },
+    "28": {
+      "expected": "585"
+    },
+    "29": {
+      "expected": "114"
+    },
+    "30": {
+      "expected": "56"
+    }
+  },
+  "purple_comet_hs_2021": {
+    "1": {
+      "expected": "63"
+    },
+    "2": {
+      "expected": "91"
+    },
+    "3": {
+      "expected": "25"
+    },
+    "4": {
+      "expected": "31"
+    },
+    "5": {
+      "expected": "48"
+    },
+    "6": {
+      "expected": "112"
+    },
+    "7": {
+      "expected": "192"
+    },
+    "8": {
+      "expected": "53"
+    },
+    "9": {
+      "expected": "18"
+    },
+    "10": {
+      "expected": "60"
+    },
+    "11": {
+      "expected": "34"
+    },
+    "12": {
+      "expected": "210"
+    },
+    "13": {
+      "expected": "25"
+    },
+    "14": {
+      "expected": "29"
+    },
+    "15": {
+      "expected": "36"
+    },
+    "16": {
+      "expected": "109"
+    },
+    "17": {
+      "expected": "15001"
+    },
+    "18": {
+      "expected": "287"
+    },
+    "19": {
+      "expected": "100"
+    },
+    "20": {
+      "expected": "69"
+    },
+    "21": {
+      "expected": "184"
+    },
+    "22": {
+      "expected": "131"
+    },
+    "23": {
+      "expected": "49"
+    },
+    "24": {
+      "expected": "35"
+    },
+    "25": {
+      "expected": "3553"
+    },
+    "26": {
+      "expected": "5990"
+    },
+    "27": {
+      "expected": "446"
+    },
+    "28": {
+      "expected": "1347"
+    },
+    "29": {
+      "expected": "1152"
+    },
+    "30": {
+      "expected": "911"
+    }
+  },
+  "purple_comet_hs_2022": {
+    "1": {
+      "expected": "77"
+    },
+    "2": {
+      "expected": "29"
+    },
+    "3": {
+      "expected": "81"
+    },
+    "4": {
+      "expected": "50"
+    },
+    "5": {
+      "expected": "48"
+    },
+    "6": {
+      "expected": "45"
+    },
+    "7": {
+      "expected": "50"
+    },
+    "8": {
+      "expected": "1"
+    },
+    "9": {
+      "expected": "140"
+    },
+    "10": {
+      "expected": "1265"
+    },
+    "11": {
+      "expected": "104"
+    },
+    "12": {
+      "expected": "46"
+    },
+    "13": {
+      "expected": "364"
+    },
+    "14": {
+      "expected": "19"
+    },
+    "15": {
+      "expected": "82"
+    },
+    "16": {
+      "expected": "41"
+    },
+    "17": {
+      "expected": "1501"
+    },
+    "18": {
+      "expected": "72"
+    },
+    "19": {
+      "expected": "576"
+    },
+    "20": {
+      "expected": "62"
+    },
+    "21": {
+      "expected": "86"
+    },
+    "22": {
+      "expected": "345"
+    },
+    "23": {
+      "expected": "154"
+    },
+    "24": {
+      "expected": "56"
+    },
+    "25": {
+      "expected": "4717"
+    },
+    "26": {
+      "expected": "17"
+    },
+    "27": {
+      "expected": "71"
+    },
+    "28": {
+      "expected": "833"
+    },
+    "29": {
+      "expected": "66"
+    },
+    "30": {
+      "expected": "100"
+    }
+  },
+  "purple_comet_hs_2023": {
+    "1": {
+      "expected": "82192020202120222023"
+    },
+    "2": {
+      "expected": "45"
+    },
+    "3": {
+      "expected": "66"
+    },
+    "4": {
+      "expected": "384"
+    },
+    "5": {
+      "expected": "60"
+    },
+    "6": {
+      "expected": "22"
+    },
+    "7": {
+      "expected": "35"
+    },
+    "8": {
+      "expected": "40"
+    },
+    "9": {
+      "expected": "0"
+    },
+    "10": {
+      "expected": "46"
+    },
+    "11": {
+      "expected": "24"
+    },
+    "12": {
+      "expected": "2025"
+    },
+    "13": {
+      "expected": "193"
+    },
+    "14": {
+      "expected": "60"
+    },
+    "15": {
+      "expected": "239"
+    },
+    "16": {
+      "expected": "136"
+    },
+    "17": {
+      "expected": "41"
+    },
+    "18": {
+      "expected": "14"
+    },
+    "19": {
+      "expected": "168"
+    },
+    "20": {
+      "expected": "49"
+    },
+    "21": {
+      "expected": "95"
+    },
+    "22": {
+      "expected": "43"
+    },
+    "23": {
+      "expected": "55"
+    },
+    "24": {
+      "expected": "293"
+    },
+    "25": {
+      "expected": "360"
+    },
+    "26": {
+      "expected": "53"
+    },
+    "27": {
+      "expected": "65"
+    },
+    "28": {
+      "expected": "42"
+    },
+    "29": {
+      "expected": "87"
+    },
+    "30": {
+      "expected": "194339"
+    }
+  },
+  "purple_comet_hs_2024": {
+    "1": {
+      "expected": "60"
+    },
+    "2": {
+      "expected": "176"
+    },
+    "3": {
+      "expected": "26"
+    },
+    "4": {
+      "expected": "6989"
+    },
+    "5": {
+      "expected": "32"
+    },
+    "6": {
+      "expected": "57"
+    },
+    "7": {
+      "expected": "262"
+    },
+    "8": {
+      "expected": "61"
+    },
+    "9": {
+      "expected": "172"
+    },
+    "10": {
+      "expected": "109"
+    },
+    "11": {
+      "expected": "64"
+    },
+    "12": {
+      "expected": "91"
+    },
+    "13": {
+      "expected": "70"
+    },
+    "14": {
+      "expected": "40"
+    },
+    "15": {
+      "expected": "400000002"
+    },
+    "16": {
+      "expected": "546"
+    },
+    "17": {
+      "expected": "71"
+    },
+    "18": {
+      "expected": "658"
+    },
+    "19": {
+      "expected": "283"
+    },
+    "20": {
+      "expected": "70"
+    },
+    "21": {
+      "expected": "97"
+    },
+    "22": {
+      "expected": "249"
+    },
+    "23": {
+      "expected": "19"
+    },
+    "24": {
+      "expected": "638"
+    },
+    "25": {
+      "expected": "391"
+    },
+    "26": {
+      "expected": "25"
+    },
+    "27": {
+      "expected": "64"
+    },
+    "28": {
+      "expected": "52"
+    },
+    "29": {
+      "expected": "109"
+    },
+    "30": {
+      "expected": "66"
+    }
+  },
+  "purple_comet_ms_2018": {
+    "1": {
+      "expected": "20"
+    },
+    "2": {
+      "expected": "148"
+    },
+    "3": {
+      "expected": "31"
+    },
+    "4": {
+      "expected": "104"
+    },
+    "5": {
+      "expected": "2"
+    },
+    "6": {
+      "expected": "999"
+    },
+    "7": {
+      "expected": "245"
+    },
+    "8": {
+      "expected": "39"
+    },
+    "9": {
+      "expected": "44"
+    },
+    "10": {
+      "expected": "108"
+    },
+    "11": {
+      "expected": "112"
+    },
+    "12": {
+      "expected": "1080"
+    },
+    "13": {
+      "expected": "1991"
+    },
+    "14": {
+      "expected": "58"
+    },
+    "15": {
+      "expected": "159"
+    },
+    "16": {
+      "expected": "143"
+    },
+    "17": {
+      "expected": "1215"
+    },
+    "18": {
+      "expected": "17"
+    },
+    "19": {
+      "expected": "248"
+    },
+    "20": {
+      "expected": "195"
+    }
+  },
+  "purple_comet_ms_2019": {
+    "1": {
+      "expected": "60"
+    },
+    "2": {
+      "expected": "0"
+    },
+    "3": {
+      "expected": "108"
+    },
+    "4": {
+      "expected": "71"
+    },
+    "5": {
+      "expected": "22"
+    },
+    "6": {
+      "expected": "1346"
+    },
+    "7": {
+      "expected": "56"
+    },
+    "8": {
+      "expected": "103184"
+    },
+    "9": {
+      "expected": "52"
+    },
+    "10": {
+      "expected": "222"
+    },
+    "11": {
+      "expected": "829"
+    },
+    "12": {
+      "expected": "336"
+    },
+    "13": {
+      "expected": "51"
+    },
+    "14": {
+      "expected": "20"
+    },
+    "15": {
+      "expected": "51"
+    },
+    "16": {
+      "expected": "10"
+    },
+    "17": {
+      "expected": "504"
+    },
+    "18": {
+      "expected": "63"
+    },
+    "19": {
+      "expected": "22"
+    },
+    "20": {
+      "expected": "131"
+    }
+  },
+  "purple_comet_ms_2020": {
+    "1": {
+      "expected": "1250"
+    },
+    "2": {
+      "expected": "490"
+    },
+    "3": {
+      "expected": "63"
+    },
+    "4": {
+      "expected": "45"
+    },
+    "5": {
+      "expected": "9"
+    },
+    "6": {
+      "expected": "52"
+    },
+    "7": {
+      "expected": "120"
+    },
+    "8": {
+      "expected": "277"
+    },
+    "9": {
+      "expected": "577"
+    },
+    "10": {
+      "expected": "2101"
+    },
+    "11": {
+      "expected": "29"
+    },
+    "12": {
+      "expected": "53"
+    },
+    "13": {
+      "expected": "30"
+    },
+    "14": {
+      "expected": "1176"
+    },
+    "15": {
+      "expected": "67"
+    },
+    "16": {
+      "expected": "48"
+    },
+    "17": {
+      "expected": "285"
+    },
+    "18": {
+      "expected": "107"
+    },
+    "19": {
+      "expected": "21"
+    },
+    "20": {
+      "expected": "471"
+    }
+  },
+  "purple_comet_ms_2021": {
+    "1": {
+      "expected": "23"
+    },
+    "2": {
+      "expected": "47"
+    },
+    "3": {
+      "expected": "8456173452"
+    },
+    "4": {
+      "expected": "27"
+    },
+    "5": {
+      "expected": "30"
+    },
+    "6": {
+      "expected": "74"
+    },
+    "7": {
+      "expected": "352"
+    },
+    "8": {
+      "expected": "340"
+    },
+    "9": {
+      "expected": "47"
+    },
+    "10": {
+      "expected": "18"
+    },
+    "11": {
+      "expected": "331"
+    },
+    "12": {
+      "expected": "148"
+    },
+    "13": {
+      "expected": "61"
+    },
+    "14": {
+      "expected": "32"
+    },
+    "15": {
+      "expected": "1792"
+    },
+    "16": {
+      "expected": "31"
+    },
+    "17": {
+      "expected": "66"
+    },
+    "18": {
+      "expected": "6"
+    },
+    "19": {
+      "expected": "53"
+    },
+    "20": {
+      "expected": "133"
+    }
+  },
+  "purple_comet_ms_2022": {
+    "1": {
+      "expected": "24"
+    },
+    "2": {
+      "expected": "1092"
+    },
+    "3": {
+      "expected": "93"
+    },
+    "4": {
+      "expected": "38"
+    },
+    "5": {
+      "expected": "1"
+    },
+    "6": {
+      "expected": "9"
+    },
+    "7": {
+      "expected": "1"
+    },
+    "8": {
+      "expected": "276"
+    },
+    "9": {
+      "expected": "25"
+    },
+    "10": {
+      "expected": "26"
+    },
+    "11": {
+      "expected": "4107"
+    },
+    "12": {
+      "expected": "40"
+    },
+    "13": {
+      "expected": "98057"
+    },
+    "14": {
+      "expected": "317"
+    },
+    "15": {
+      "expected": "1314"
+    },
+    "16": {
+      "expected": "41"
+    },
+    "17": {
+      "expected": "20"
+    },
+    "18": {
+      "expected": "150"
+    },
+    "19": {
+      "expected": "4900"
+    },
+    "20": {
+      "expected": "18"
+    }
+  },
+  "purple_comet_ms_2023": {
+    "1": {
+      "expected": "210"
+    },
+    "2": {
+      "expected": "200"
+    },
+    "3": {
+      "expected": "15"
+    },
+    "4": {
+      "expected": "8164961"
+    },
+    "5": {
+      "expected": "151"
+    },
+    "6": {
+      "expected": "257889"
+    },
+    "7": {
+      "expected": "99"
+    },
+    "8": {
+      "expected": "120"
+    },
+    "9": {
+      "expected": "84"
+    },
+    "10": {
+      "expected": "196"
+    },
+    "11": {
+      "expected": "45"
+    },
+    "12": {
+      "expected": "11"
+    },
+    "13": {
+      "expected": "78"
+    },
+    "14": {
+      "expected": "48"
+    },
+    "15": {
+      "expected": "448"
+    },
+    "16": {
+      "expected": "145"
+    },
+    "17": {
+      "expected": "25"
+    },
+    "18": {
+      "expected": "232"
+    },
+    "19": {
+      "expected": "612"
+    },
+    "20": {
+      "expected": "293"
+    }
+  },
+  "purple_comet_ms_2024": {
+    "1": {
+      "expected": "54"
+    },
+    "2": {
+      "expected": "40"
+    },
+    "3": {
+      "expected": "15"
+    },
+    "4": {
+      "expected": "60"
+    },
+    "5": {
+      "expected": "12"
+    },
+    "6": {
+      "expected": "29"
+    },
+    "7": {
+      "expected": "144"
+    },
+    "8": {
+      "expected": "12"
+    },
+    "9": {
+      "expected": "631"
+    },
+    "10": {
+      "expected": "4278"
+    },
+    "11": {
+      "expected": "1156"
+    },
+    "12": {
+      "expected": "180"
+    },
+    "13": {
+      "expected": "133"
+    },
+    "14": {
+      "expected": "9884"
+    },
+    "15": {
+      "expected": "10"
+    },
+    "16": {
+      "expected": "87"
+    },
+    "17": {
+      "expected": "107"
+    },
+    "18": {
+      "expected": "365"
+    },
+    "19": {
+      "expected": "193"
+    },
+    "20": {
+      "expected": "17"
+    }
+  }
+}

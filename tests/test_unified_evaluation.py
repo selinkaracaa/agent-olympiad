@@ -71,6 +71,35 @@ class GoldEvaluatorTests(unittest.TestCase):
         self.assertEqual(result.total_score, 12)
         self.assertEqual(result.max_score, 12)
 
+    def test_parse_team_tokens_and_semicolons(self):
+        team = parse_numbered_answers(
+            "T-1 135432 T-2 2√10 T-3 32 T-4 49/3"
+        )
+        self.assertEqual(team["1"], "135432")
+        self.assertEqual(team["2"], "2√10")
+        self.assertEqual(team["3"], "32")
+
+        semi = parse_numbered_answers(
+            "135432; 2sqrt(10); 32; 49/3; (2+sqrt(2),1+sqrt(2))"
+        )
+        self.assertEqual(semi["1"], "135432")
+        self.assertEqual(semi["2"], "2sqrt(10)")
+        self.assertEqual(semi["5"], "(2+sqrt(2),1+sqrt(2))")
+
+    def test_semicolon_sheet_scores_against_gold(self):
+        parts = load_gold_parts(
+            {
+                "parts": [
+                    {"id": "1", "expected": "135432", "points": 5},
+                    {"id": "2", "expected": "2√10", "points": 5, "aliases": ["2sqrt(10)"]},
+                    {"id": "3", "expected": "32", "points": 5},
+                ]
+            }
+        )
+        submission = "135432; 2sqrt(10); 32"
+        result = GoldAnswerEvaluator(parts=parts, submission_text=submission).evaluate()
+        self.assertEqual(result.total_score, 15)
+
     def test_missing_structured_gold_raises(self):
         with self.assertRaises(Exception):
             load_gold_parts({"expected_answer": "only a blob"})

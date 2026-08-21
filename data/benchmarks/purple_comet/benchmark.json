@@ -871,7 +871,249 @@
     "gold_label": {
       "expected_answer": null,
       "grading_rubric": "Non-negative integer answers; official answer key.",
-      "human_baseline": null
+      "human_baseline": null,
+      "parts": [
+        {
+          "id": "1",
+          "expected": "2315",
+          "points": 1.0,
+          "reference": "Official short answer: 2315",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "2",
+          "expected": "90",
+          "points": 1.0,
+          "reference": "Official short answer: 90",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "3",
+          "expected": "1018",
+          "points": 1.0,
+          "reference": "Official short answer: 1018",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "4",
+          "expected": "345",
+          "points": 1.0,
+          "reference": "Official short answer: 345",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "5",
+          "expected": "60",
+          "points": 1.0,
+          "reference": "Official short answer: 60",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "6",
+          "expected": "84",
+          "points": 1.0,
+          "reference": "Official short answer: 84",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "7",
+          "expected": "42",
+          "points": 1.0,
+          "reference": "Official short answer: 42",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "8",
+          "expected": "223",
+          "points": 1.0,
+          "reference": "Official short answer: 223",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "9",
+          "expected": "176",
+          "points": 1.0,
+          "reference": "Official short answer: 176",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "10",
+          "expected": "81",
+          "points": 1.0,
+          "reference": "Official short answer: 81",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "11",
+          "expected": "66",
+          "points": 1.0,
+          "reference": "Official short answer: 66",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "12",
+          "expected": "240",
+          "points": 1.0,
+          "reference": "Official short answer: 240",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "13",
+          "expected": "95",
+          "points": 1.0,
+          "reference": "Official short answer: 95",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "14",
+          "expected": "225",
+          "points": 1.0,
+          "reference": "Official short answer: 225",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "15",
+          "expected": "13",
+          "points": 1.0,
+          "reference": "Official short answer: 13",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "16",
+          "expected": "887",
+          "points": 1.0,
+          "reference": "Official short answer: 887",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "17",
+          "expected": "210",
+          "points": 1.0,
+          "reference": "Official short answer: 210",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "18",
+          "expected": "271",
+          "points": 1.0,
+          "reference": "Official short answer: 271",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "19",
+          "expected": "0",
+          "points": 1.0,
+          "reference": "Official short answer: 0",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "20",
+          "expected": "73",
+          "points": 1.0,
+          "reference": "Official short answer: 73",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "21",
+          "expected": "28",
+          "points": 1.0,
+          "reference": "Official short answer: 28",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "22",
+          "expected": "226",
+          "points": 1.0,
+          "reference": "Official short answer: 226",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "23",
+          "expected": "46",
+          "points": 1.0,
+          "reference": "Official short answer: 46",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "24",
+          "expected": "118",
+          "points": 1.0,
+          "reference": "Official short answer: 118",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "25",
+          "expected": "69",
+          "points": 1.0,
+          "reference": "Official short answer: 69",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "26",
+          "expected": "32",
+          "points": 1.0,
+          "reference": "Official short answer: 32",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "27",
+          "expected": "274",
+          "points": 1.0,
+          "reference": "Official short answer: 274",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "28",
+          "expected": "94",
+          "points": 1.0,
+          "reference": "Official short answer: 94",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "29",
+          "expected": "489",
+          "points": 1.0,
+          "reference": "Official short answer: 489",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "30",
+          "expected": "88",
+          "points": 1.0,
+          "reference": "Official short answer: 88",
+          "match_mode": "normalized",
+          "aliases": []
+        }
+      ]
     },
     "assets": [
       {
@@ -883,11 +1125,12 @@
     "competition_id": "purple_comet",
     "status": "collected",
     "evaluation": {
-      "evaluator_id": "rubric_llm_v1",
+      "evaluator_id": "gold_answer_v1",
       "status": "ready",
       "rubric_path": "data/rubrics/worked_answer_100_v1.json",
-      "deliverable": "worked_answers",
-      "fallback_evaluator_id": "gold_answer_v1"
+      "deliverable": "answer_sheet",
+      "fallback_evaluator_id": "rubric_llm_v1",
+      "short_answer_source": "data/rubrics/purple_comet_short_answers.json"
     }
   },
   {
@@ -904,7 +1147,169 @@
     "gold_label": {
       "expected_answer": null,
       "grading_rubric": "Non-negative integer answers; official answer key.",
-      "human_baseline": null
+      "human_baseline": null,
+      "parts": [
+        {
+          "id": "1",
+          "expected": "20",
+          "points": 1.0,
+          "reference": "Official short answer: 20",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "2",
+          "expected": "148",
+          "points": 1.0,
+          "reference": "Official short answer: 148",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "3",
+          "expected": "31",
+          "points": 1.0,
+          "reference": "Official short answer: 31",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "4",
+          "expected": "104",
+          "points": 1.0,
+          "reference": "Official short answer: 104",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "5",
+          "expected": "2",
+          "points": 1.0,
+          "reference": "Official short answer: 2",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "6",
+          "expected": "999",
+          "points": 1.0,
+          "reference": "Official short answer: 999",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "7",
+          "expected": "245",
+          "points": 1.0,
+          "reference": "Official short answer: 245",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "8",
+          "expected": "39",
+          "points": 1.0,
+          "reference": "Official short answer: 39",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "9",
+          "expected": "44",
+          "points": 1.0,
+          "reference": "Official short answer: 44",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "10",
+          "expected": "108",
+          "points": 1.0,
+          "reference": "Official short answer: 108",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "11",
+          "expected": "112",
+          "points": 1.0,
+          "reference": "Official short answer: 112",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "12",
+          "expected": "1080",
+          "points": 1.0,
+          "reference": "Official short answer: 1080",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "13",
+          "expected": "1991",
+          "points": 1.0,
+          "reference": "Official short answer: 1991",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "14",
+          "expected": "58",
+          "points": 1.0,
+          "reference": "Official short answer: 58",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "15",
+          "expected": "159",
+          "points": 1.0,
+          "reference": "Official short answer: 159",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "16",
+          "expected": "143",
+          "points": 1.0,
+          "reference": "Official short answer: 143",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "17",
+          "expected": "1215",
+          "points": 1.0,
+          "reference": "Official short answer: 1215",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "18",
+          "expected": "17",
+          "points": 1.0,
+          "reference": "Official short answer: 17",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "19",
+          "expected": "248",
+          "points": 1.0,
+          "reference": "Official short answer: 248",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "20",
+          "expected": "195",
+          "points": 1.0,
+          "reference": "Official short answer: 195",
+          "match_mode": "normalized",
+          "aliases": []
+        }
+      ]
     },
     "assets": [
       {
@@ -916,11 +1321,12 @@
     "competition_id": "purple_comet",
     "status": "collected",
     "evaluation": {
-      "evaluator_id": "rubric_llm_v1",
+      "evaluator_id": "gold_answer_v1",
       "status": "ready",
       "rubric_path": "data/rubrics/worked_answer_100_v1.json",
-      "deliverable": "worked_answers",
-      "fallback_evaluator_id": "gold_answer_v1"
+      "deliverable": "answer_sheet",
+      "fallback_evaluator_id": "rubric_llm_v1",
+      "short_answer_source": "data/rubrics/purple_comet_short_answers.json"
     }
   },
   {
@@ -937,7 +1343,249 @@
     "gold_label": {
       "expected_answer": null,
       "grading_rubric": "Non-negative integer answers; official answer key.",
-      "human_baseline": null
+      "human_baseline": null,
+      "parts": [
+        {
+          "id": "1",
+          "expected": "30",
+          "points": 1.0,
+          "reference": "Official short answer: 30",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "2",
+          "expected": "40",
+          "points": 1.0,
+          "reference": "Official short answer: 40",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "3",
+          "expected": "859",
+          "points": 1.0,
+          "reference": "Official short answer: 859",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "4",
+          "expected": "30",
+          "points": 1.0,
+          "reference": "Official short answer: 30",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "5",
+          "expected": "108",
+          "points": 1.0,
+          "reference": "Official short answer: 108",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "6",
+          "expected": "100",
+          "points": 1.0,
+          "reference": "Official short answer: 100",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "7",
+          "expected": "4",
+          "points": 1.0,
+          "reference": "Official short answer: 4",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "8",
+          "expected": "150",
+          "points": 1.0,
+          "reference": "Official short answer: 150",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "9",
+          "expected": "15",
+          "points": 1.0,
+          "reference": "Official short answer: 15",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "10",
+          "expected": "321",
+          "points": 1.0,
+          "reference": "Official short answer: 321",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "11",
+          "expected": "46",
+          "points": 1.0,
+          "reference": "Official short answer: 46",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "12",
+          "expected": "49",
+          "points": 1.0,
+          "reference": "Official short answer: 49",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "13",
+          "expected": "19",
+          "points": 1.0,
+          "reference": "Official short answer: 19",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "14",
+          "expected": "140",
+          "points": 1.0,
+          "reference": "Official short answer: 140",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "15",
+          "expected": "21",
+          "points": 1.0,
+          "reference": "Official short answer: 21",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "16",
+          "expected": "625",
+          "points": 1.0,
+          "reference": "Official short answer: 625",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "17",
+          "expected": "768",
+          "points": 1.0,
+          "reference": "Official short answer: 768",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "18",
+          "expected": "149",
+          "points": 1.0,
+          "reference": "Official short answer: 149",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "19",
+          "expected": "0",
+          "points": 1.0,
+          "reference": "Official short answer: 0",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "20",
+          "expected": "308",
+          "points": 1.0,
+          "reference": "Official short answer: 308",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "21",
+          "expected": "77",
+          "points": 1.0,
+          "reference": "Official short answer: 77",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "22",
+          "expected": "2636",
+          "points": 1.0,
+          "reference": "Official short answer: 2636",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "23",
+          "expected": "2",
+          "points": 1.0,
+          "reference": "Official short answer: 2",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "24",
+          "expected": "148",
+          "points": 1.0,
+          "reference": "Official short answer: 148",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "25",
+          "expected": "124",
+          "points": 1.0,
+          "reference": "Official short answer: 124",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "26",
+          "expected": "4350",
+          "points": 1.0,
+          "reference": "Official short answer: 4350",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "27",
+          "expected": "153",
+          "points": 1.0,
+          "reference": "Official short answer: 153",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "28",
+          "expected": "388",
+          "points": 1.0,
+          "reference": "Official short answer: 388",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "29",
+          "expected": "113",
+          "points": 1.0,
+          "reference": "Official short answer: 113",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "30",
+          "expected": "2275",
+          "points": 1.0,
+          "reference": "Official short answer: 2275",
+          "match_mode": "normalized",
+          "aliases": []
+        }
+      ]
     },
     "assets": [
       {
@@ -949,11 +1597,12 @@
     "competition_id": "purple_comet",
     "status": "collected",
     "evaluation": {
-      "evaluator_id": "rubric_llm_v1",
+      "evaluator_id": "gold_answer_v1",
       "status": "ready",
       "rubric_path": "data/rubrics/worked_answer_100_v1.json",
-      "deliverable": "worked_answers",
-      "fallback_evaluator_id": "gold_answer_v1"
+      "deliverable": "answer_sheet",
+      "fallback_evaluator_id": "rubric_llm_v1",
+      "short_answer_source": "data/rubrics/purple_comet_short_answers.json"
     }
   },
   {
@@ -970,7 +1619,169 @@
     "gold_label": {
       "expected_answer": null,
       "grading_rubric": "Non-negative integer answers; official answer key.",
-      "human_baseline": null
+      "human_baseline": null,
+      "parts": [
+        {
+          "id": "1",
+          "expected": "60",
+          "points": 1.0,
+          "reference": "Official short answer: 60",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "2",
+          "expected": "0",
+          "points": 1.0,
+          "reference": "Official short answer: 0",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "3",
+          "expected": "108",
+          "points": 1.0,
+          "reference": "Official short answer: 108",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "4",
+          "expected": "71",
+          "points": 1.0,
+          "reference": "Official short answer: 71",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "5",
+          "expected": "22",
+          "points": 1.0,
+          "reference": "Official short answer: 22",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "6",
+          "expected": "1346",
+          "points": 1.0,
+          "reference": "Official short answer: 1346",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "7",
+          "expected": "56",
+          "points": 1.0,
+          "reference": "Official short answer: 56",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "8",
+          "expected": "103184",
+          "points": 1.0,
+          "reference": "Official short answer: 103184",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "9",
+          "expected": "52",
+          "points": 1.0,
+          "reference": "Official short answer: 52",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "10",
+          "expected": "222",
+          "points": 1.0,
+          "reference": "Official short answer: 222",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "11",
+          "expected": "829",
+          "points": 1.0,
+          "reference": "Official short answer: 829",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "12",
+          "expected": "336",
+          "points": 1.0,
+          "reference": "Official short answer: 336",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "13",
+          "expected": "51",
+          "points": 1.0,
+          "reference": "Official short answer: 51",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "14",
+          "expected": "20",
+          "points": 1.0,
+          "reference": "Official short answer: 20",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "15",
+          "expected": "51",
+          "points": 1.0,
+          "reference": "Official short answer: 51",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "16",
+          "expected": "10",
+          "points": 1.0,
+          "reference": "Official short answer: 10",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "17",
+          "expected": "504",
+          "points": 1.0,
+          "reference": "Official short answer: 504",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "18",
+          "expected": "63",
+          "points": 1.0,
+          "reference": "Official short answer: 63",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "19",
+          "expected": "22",
+          "points": 1.0,
+          "reference": "Official short answer: 22",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "20",
+          "expected": "131",
+          "points": 1.0,
+          "reference": "Official short answer: 131",
+          "match_mode": "normalized",
+          "aliases": []
+        }
+      ]
     },
     "assets": [
       {
@@ -982,11 +1793,12 @@
     "competition_id": "purple_comet",
     "status": "collected",
     "evaluation": {
-      "evaluator_id": "rubric_llm_v1",
+      "evaluator_id": "gold_answer_v1",
       "status": "ready",
       "rubric_path": "data/rubrics/worked_answer_100_v1.json",
-      "deliverable": "worked_answers",
-      "fallback_evaluator_id": "gold_answer_v1"
+      "deliverable": "answer_sheet",
+      "fallback_evaluator_id": "rubric_llm_v1",
+      "short_answer_source": "data/rubrics/purple_comet_short_answers.json"
     }
   },
   {
@@ -1003,7 +1815,249 @@
     "gold_label": {
       "expected_answer": null,
       "grading_rubric": "Non-negative integer answers; official answer key.",
-      "human_baseline": null
+      "human_baseline": null,
+      "parts": [
+        {
+          "id": "1",
+          "expected": "47",
+          "points": 1.0,
+          "reference": "Official short answer: 47",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "2",
+          "expected": "26",
+          "points": 1.0,
+          "reference": "Official short answer: 26",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "3",
+          "expected": "231",
+          "points": 1.0,
+          "reference": "Official short answer: 231",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "4",
+          "expected": "90",
+          "points": 1.0,
+          "reference": "Official short answer: 90",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "5",
+          "expected": "27",
+          "points": 1.0,
+          "reference": "Official short answer: 27",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "6",
+          "expected": "34",
+          "points": 1.0,
+          "reference": "Official short answer: 34",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "7",
+          "expected": "24",
+          "points": 1.0,
+          "reference": "Official short answer: 24",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "8",
+          "expected": "35",
+          "points": 1.0,
+          "reference": "Official short answer: 35",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "9",
+          "expected": "24",
+          "points": 1.0,
+          "reference": "Official short answer: 24",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "10",
+          "expected": "364",
+          "points": 1.0,
+          "reference": "Official short answer: 364",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "11",
+          "expected": "7",
+          "points": 1.0,
+          "reference": "Official short answer: 7",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "12",
+          "expected": "120",
+          "points": 1.0,
+          "reference": "Official short answer: 120",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "13",
+          "expected": "25249",
+          "points": 1.0,
+          "reference": "Official short answer: 25249",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "14",
+          "expected": "445",
+          "points": 1.0,
+          "reference": "Official short answer: 445",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "15",
+          "expected": "381",
+          "points": 1.0,
+          "reference": "Official short answer: 381",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "16",
+          "expected": "9",
+          "points": 1.0,
+          "reference": "Official short answer: 9",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "17",
+          "expected": "131",
+          "points": 1.0,
+          "reference": "Official short answer: 131",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "18",
+          "expected": "36",
+          "points": 1.0,
+          "reference": "Official short answer: 36",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "19",
+          "expected": "1013",
+          "points": 1.0,
+          "reference": "Official short answer: 1013",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "20",
+          "expected": "80",
+          "points": 1.0,
+          "reference": "Official short answer: 80",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "21",
+          "expected": "33",
+          "points": 1.0,
+          "reference": "Official short answer: 33",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "22",
+          "expected": "79",
+          "points": 1.0,
+          "reference": "Official short answer: 79",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "23",
+          "expected": "8",
+          "points": 1.0,
+          "reference": "Official short answer: 8",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "24",
+          "expected": "30",
+          "points": 1.0,
+          "reference": "Official short answer: 30",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "25",
+          "expected": "572",
+          "points": 1.0,
+          "reference": "Official short answer: 572",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "26",
+          "expected": "59",
+          "points": 1.0,
+          "reference": "Official short answer: 59",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "27",
+          "expected": "153",
+          "points": 1.0,
+          "reference": "Official short answer: 153",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "28",
+          "expected": "585",
+          "points": 1.0,
+          "reference": "Official short answer: 585",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "29",
+          "expected": "114",
+          "points": 1.0,
+          "reference": "Official short answer: 114",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "30",
+          "expected": "56",
+          "points": 1.0,
+          "reference": "Official short answer: 56",
+          "match_mode": "normalized",
+          "aliases": []
+        }
+      ]
     },
     "assets": [
       {
@@ -1015,11 +2069,12 @@
     "competition_id": "purple_comet",
     "status": "collected",
     "evaluation": {
-      "evaluator_id": "rubric_llm_v1",
+      "evaluator_id": "gold_answer_v1",
       "status": "ready",
       "rubric_path": "data/rubrics/worked_answer_100_v1.json",
-      "deliverable": "worked_answers",
-      "fallback_evaluator_id": "gold_answer_v1"
+      "deliverable": "answer_sheet",
+      "fallback_evaluator_id": "rubric_llm_v1",
+      "short_answer_source": "data/rubrics/purple_comet_short_answers.json"
     }
   },
   {
@@ -1036,7 +2091,169 @@
     "gold_label": {
       "expected_answer": null,
       "grading_rubric": "Non-negative integer answers; official answer key.",
-      "human_baseline": null
+      "human_baseline": null,
+      "parts": [
+        {
+          "id": "1",
+          "expected": "1250",
+          "points": 1.0,
+          "reference": "Official short answer: 1250",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "2",
+          "expected": "490",
+          "points": 1.0,
+          "reference": "Official short answer: 490",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "3",
+          "expected": "63",
+          "points": 1.0,
+          "reference": "Official short answer: 63",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "4",
+          "expected": "45",
+          "points": 1.0,
+          "reference": "Official short answer: 45",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "5",
+          "expected": "9",
+          "points": 1.0,
+          "reference": "Official short answer: 9",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "6",
+          "expected": "52",
+          "points": 1.0,
+          "reference": "Official short answer: 52",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "7",
+          "expected": "120",
+          "points": 1.0,
+          "reference": "Official short answer: 120",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "8",
+          "expected": "277",
+          "points": 1.0,
+          "reference": "Official short answer: 277",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "9",
+          "expected": "577",
+          "points": 1.0,
+          "reference": "Official short answer: 577",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "10",
+          "expected": "2101",
+          "points": 1.0,
+          "reference": "Official short answer: 2101",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "11",
+          "expected": "29",
+          "points": 1.0,
+          "reference": "Official short answer: 29",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "12",
+          "expected": "53",
+          "points": 1.0,
+          "reference": "Official short answer: 53",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "13",
+          "expected": "30",
+          "points": 1.0,
+          "reference": "Official short answer: 30",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "14",
+          "expected": "1176",
+          "points": 1.0,
+          "reference": "Official short answer: 1176",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "15",
+          "expected": "67",
+          "points": 1.0,
+          "reference": "Official short answer: 67",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "16",
+          "expected": "48",
+          "points": 1.0,
+          "reference": "Official short answer: 48",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "17",
+          "expected": "285",
+          "points": 1.0,
+          "reference": "Official short answer: 285",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "18",
+          "expected": "107",
+          "points": 1.0,
+          "reference": "Official short answer: 107",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "19",
+          "expected": "21",
+          "points": 1.0,
+          "reference": "Official short answer: 21",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "20",
+          "expected": "471",
+          "points": 1.0,
+          "reference": "Official short answer: 471",
+          "match_mode": "normalized",
+          "aliases": []
+        }
+      ]
     },
     "assets": [
       {
@@ -1048,11 +2265,12 @@
     "competition_id": "purple_comet",
     "status": "collected",
     "evaluation": {
-      "evaluator_id": "rubric_llm_v1",
+      "evaluator_id": "gold_answer_v1",
       "status": "ready",
       "rubric_path": "data/rubrics/worked_answer_100_v1.json",
-      "deliverable": "worked_answers",
-      "fallback_evaluator_id": "gold_answer_v1"
+      "deliverable": "answer_sheet",
+      "fallback_evaluator_id": "rubric_llm_v1",
+      "short_answer_source": "data/rubrics/purple_comet_short_answers.json"
     }
   },
   {
@@ -1069,7 +2287,249 @@
     "gold_label": {
       "expected_answer": null,
       "grading_rubric": "Non-negative integer answers; official answer key.",
-      "human_baseline": null
+      "human_baseline": null,
+      "parts": [
+        {
+          "id": "1",
+          "expected": "63",
+          "points": 1.0,
+          "reference": "Official short answer: 63",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "2",
+          "expected": "91",
+          "points": 1.0,
+          "reference": "Official short answer: 91",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "3",
+          "expected": "25",
+          "points": 1.0,
+          "reference": "Official short answer: 25",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "4",
+          "expected": "31",
+          "points": 1.0,
+          "reference": "Official short answer: 31",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "5",
+          "expected": "48",
+          "points": 1.0,
+          "reference": "Official short answer: 48",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "6",
+          "expected": "112",
+          "points": 1.0,
+          "reference": "Official short answer: 112",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "7",
+          "expected": "192",
+          "points": 1.0,
+          "reference": "Official short answer: 192",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "8",
+          "expected": "53",
+          "points": 1.0,
+          "reference": "Official short answer: 53",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "9",
+          "expected": "18",
+          "points": 1.0,
+          "reference": "Official short answer: 18",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "10",
+          "expected": "60",
+          "points": 1.0,
+          "reference": "Official short answer: 60",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "11",
+          "expected": "34",
+          "points": 1.0,
+          "reference": "Official short answer: 34",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "12",
+          "expected": "210",
+          "points": 1.0,
+          "reference": "Official short answer: 210",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "13",
+          "expected": "25",
+          "points": 1.0,
+          "reference": "Official short answer: 25",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "14",
+          "expected": "29",
+          "points": 1.0,
+          "reference": "Official short answer: 29",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "15",
+          "expected": "36",
+          "points": 1.0,
+          "reference": "Official short answer: 36",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "16",
+          "expected": "109",
+          "points": 1.0,
+          "reference": "Official short answer: 109",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "17",
+          "expected": "15001",
+          "points": 1.0,
+          "reference": "Official short answer: 15001",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "18",
+          "expected": "287",
+          "points": 1.0,
+          "reference": "Official short answer: 287",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "19",
+          "expected": "100",
+          "points": 1.0,
+          "reference": "Official short answer: 100",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "20",
+          "expected": "69",
+          "points": 1.0,
+          "reference": "Official short answer: 69",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "21",
+          "expected": "184",
+          "points": 1.0,
+          "reference": "Official short answer: 184",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "22",
+          "expected": "131",
+          "points": 1.0,
+          "reference": "Official short answer: 131",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "23",
+          "expected": "49",
+          "points": 1.0,
+          "reference": "Official short answer: 49",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "24",
+          "expected": "35",
+          "points": 1.0,
+          "reference": "Official short answer: 35",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "25",
+          "expected": "3553",
+          "points": 1.0,
+          "reference": "Official short answer: 3553",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "26",
+          "expected": "5990",
+          "points": 1.0,
+          "reference": "Official short answer: 5990",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "27",
+          "expected": "446",
+          "points": 1.0,
+          "reference": "Official short answer: 446",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "28",
+          "expected": "1347",
+          "points": 1.0,
+          "reference": "Official short answer: 1347",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "29",
+          "expected": "1152",
+          "points": 1.0,
+          "reference": "Official short answer: 1152",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "30",
+          "expected": "911",
+          "points": 1.0,
+          "reference": "Official short answer: 911",
+          "match_mode": "normalized",
+          "aliases": []
+        }
+      ]
     },
     "assets": [
       {
@@ -1081,11 +2541,12 @@
     "competition_id": "purple_comet",
     "status": "collected",
     "evaluation": {
-      "evaluator_id": "rubric_llm_v1",
+      "evaluator_id": "gold_answer_v1",
       "status": "ready",
       "rubric_path": "data/rubrics/worked_answer_100_v1.json",
-      "deliverable": "worked_answers",
-      "fallback_evaluator_id": "gold_answer_v1"
+      "deliverable": "answer_sheet",
+      "fallback_evaluator_id": "rubric_llm_v1",
+      "short_answer_source": "data/rubrics/purple_comet_short_answers.json"
     }
   },
   {
@@ -1102,7 +2563,169 @@
     "gold_label": {
       "expected_answer": null,
       "grading_rubric": "Non-negative integer answers; official answer key.",
-      "human_baseline": null
+      "human_baseline": null,
+      "parts": [
+        {
+          "id": "1",
+          "expected": "23",
+          "points": 1.0,
+          "reference": "Official short answer: 23",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "2",
+          "expected": "47",
+          "points": 1.0,
+          "reference": "Official short answer: 47",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "3",
+          "expected": "8456173452",
+          "points": 1.0,
+          "reference": "Official short answer: 8456173452",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "4",
+          "expected": "27",
+          "points": 1.0,
+          "reference": "Official short answer: 27",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "5",
+          "expected": "30",
+          "points": 1.0,
+          "reference": "Official short answer: 30",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "6",
+          "expected": "74",
+          "points": 1.0,
+          "reference": "Official short answer: 74",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "7",
+          "expected": "352",
+          "points": 1.0,
+          "reference": "Official short answer: 352",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "8",
+          "expected": "340",
+          "points": 1.0,
+          "reference": "Official short answer: 340",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "9",
+          "expected": "47",
+          "points": 1.0,
+          "reference": "Official short answer: 47",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "10",
+          "expected": "18",
+          "points": 1.0,
+          "reference": "Official short answer: 18",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "11",
+          "expected": "331",
+          "points": 1.0,
+          "reference": "Official short answer: 331",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "12",
+          "expected": "148",
+          "points": 1.0,
+          "reference": "Official short answer: 148",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "13",
+          "expected": "61",
+          "points": 1.0,
+          "reference": "Official short answer: 61",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "14",
+          "expected": "32",
+          "points": 1.0,
+          "reference": "Official short answer: 32",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "15",
+          "expected": "1792",
+          "points": 1.0,
+          "reference": "Official short answer: 1792",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "16",
+          "expected": "31",
+          "points": 1.0,
+          "reference": "Official short answer: 31",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "17",
+          "expected": "66",
+          "points": 1.0,
+          "reference": "Official short answer: 66",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "18",
+          "expected": "6",
+          "points": 1.0,
+          "reference": "Official short answer: 6",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "19",
+          "expected": "53",
+          "points": 1.0,
+          "reference": "Official short answer: 53",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "20",
+          "expected": "133",
+          "points": 1.0,
+          "reference": "Official short answer: 133",
+          "match_mode": "normalized",
+          "aliases": []
+        }
+      ]
     },
     "assets": [
       {
@@ -1114,11 +2737,12 @@
     "competition_id": "purple_comet",
     "status": "collected",
     "evaluation": {
-      "evaluator_id": "rubric_llm_v1",
+      "evaluator_id": "gold_answer_v1",
       "status": "ready",
       "rubric_path": "data/rubrics/worked_answer_100_v1.json",
-      "deliverable": "worked_answers",
-      "fallback_evaluator_id": "gold_answer_v1"
+      "deliverable": "answer_sheet",
+      "fallback_evaluator_id": "rubric_llm_v1",
+      "short_answer_source": "data/rubrics/purple_comet_short_answers.json"
     }
   },
   {
@@ -1135,7 +2759,249 @@
     "gold_label": {
       "expected_answer": null,
       "grading_rubric": "Non-negative integer answers; official answer key.",
-      "human_baseline": null
+      "human_baseline": null,
+      "parts": [
+        {
+          "id": "1",
+          "expected": "77",
+          "points": 1.0,
+          "reference": "Official short answer: 77",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "2",
+          "expected": "29",
+          "points": 1.0,
+          "reference": "Official short answer: 29",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "3",
+          "expected": "81",
+          "points": 1.0,
+          "reference": "Official short answer: 81",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "4",
+          "expected": "50",
+          "points": 1.0,
+          "reference": "Official short answer: 50",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "5",
+          "expected": "48",
+          "points": 1.0,
+          "reference": "Official short answer: 48",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "6",
+          "expected": "45",
+          "points": 1.0,
+          "reference": "Official short answer: 45",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "7",
+          "expected": "50",
+          "points": 1.0,
+          "reference": "Official short answer: 50",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "8",
+          "expected": "1",
+          "points": 1.0,
+          "reference": "Official short answer: 1",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "9",
+          "expected": "140",
+          "points": 1.0,
+          "reference": "Official short answer: 140",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "10",
+          "expected": "1265",
+          "points": 1.0,
+          "reference": "Official short answer: 1265",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "11",
+          "expected": "104",
+          "points": 1.0,
+          "reference": "Official short answer: 104",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "12",
+          "expected": "46",
+          "points": 1.0,
+          "reference": "Official short answer: 46",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "13",
+          "expected": "364",
+          "points": 1.0,
+          "reference": "Official short answer: 364",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "14",
+          "expected": "19",
+          "points": 1.0,
+          "reference": "Official short answer: 19",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "15",
+          "expected": "82",
+          "points": 1.0,
+          "reference": "Official short answer: 82",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "16",
+          "expected": "41",
+          "points": 1.0,
+          "reference": "Official short answer: 41",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "17",
+          "expected": "1501",
+          "points": 1.0,
+          "reference": "Official short answer: 1501",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "18",
+          "expected": "72",
+          "points": 1.0,
+          "reference": "Official short answer: 72",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "19",
+          "expected": "576",
+          "points": 1.0,
+          "reference": "Official short answer: 576",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "20",
+          "expected": "62",
+          "points": 1.0,
+          "reference": "Official short answer: 62",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "21",
+          "expected": "86",
+          "points": 1.0,
+          "reference": "Official short answer: 86",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "22",
+          "expected": "345",
+          "points": 1.0,
+          "reference": "Official short answer: 345",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "23",
+          "expected": "154",
+          "points": 1.0,
+          "reference": "Official short answer: 154",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "24",
+          "expected": "56",
+          "points": 1.0,
+          "reference": "Official short answer: 56",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "25",
+          "expected": "4717",
+          "points": 1.0,
+          "reference": "Official short answer: 4717",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "26",
+          "expected": "17",
+          "points": 1.0,
+          "reference": "Official short answer: 17",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "27",
+          "expected": "71",
+          "points": 1.0,
+          "reference": "Official short answer: 71",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "28",
+          "expected": "833",
+          "points": 1.0,
+          "reference": "Official short answer: 833",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "29",
+          "expected": "66",
+          "points": 1.0,
+          "reference": "Official short answer: 66",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "30",
+          "expected": "100",
+          "points": 1.0,
+          "reference": "Official short answer: 100",
+          "match_mode": "normalized",
+          "aliases": []
+        }
+      ]
     },
     "assets": [
       {
@@ -1147,11 +3013,12 @@
     "competition_id": "purple_comet",
     "status": "collected",
     "evaluation": {
-      "evaluator_id": "rubric_llm_v1",
+      "evaluator_id": "gold_answer_v1",
       "status": "ready",
       "rubric_path": "data/rubrics/worked_answer_100_v1.json",
-      "deliverable": "worked_answers",
-      "fallback_evaluator_id": "gold_answer_v1"
+      "deliverable": "answer_sheet",
+      "fallback_evaluator_id": "rubric_llm_v1",
+      "short_answer_source": "data/rubrics/purple_comet_short_answers.json"
     }
   },
   {
@@ -1168,7 +3035,169 @@
     "gold_label": {
       "expected_answer": null,
       "grading_rubric": "Non-negative integer answers; official answer key.",
-      "human_baseline": null
+      "human_baseline": null,
+      "parts": [
+        {
+          "id": "1",
+          "expected": "24",
+          "points": 1.0,
+          "reference": "Official short answer: 24",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "2",
+          "expected": "1092",
+          "points": 1.0,
+          "reference": "Official short answer: 1092",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "3",
+          "expected": "93",
+          "points": 1.0,
+          "reference": "Official short answer: 93",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "4",
+          "expected": "38",
+          "points": 1.0,
+          "reference": "Official short answer: 38",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "5",
+          "expected": "1",
+          "points": 1.0,
+          "reference": "Official short answer: 1",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "6",
+          "expected": "9",
+          "points": 1.0,
+          "reference": "Official short answer: 9",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "7",
+          "expected": "1",
+          "points": 1.0,
+          "reference": "Official short answer: 1",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "8",
+          "expected": "276",
+          "points": 1.0,
+          "reference": "Official short answer: 276",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "9",
+          "expected": "25",
+          "points": 1.0,
+          "reference": "Official short answer: 25",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "10",
+          "expected": "26",
+          "points": 1.0,
+          "reference": "Official short answer: 26",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "11",
+          "expected": "4107",
+          "points": 1.0,
+          "reference": "Official short answer: 4107",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "12",
+          "expected": "40",
+          "points": 1.0,
+          "reference": "Official short answer: 40",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "13",
+          "expected": "98057",
+          "points": 1.0,
+          "reference": "Official short answer: 98057",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "14",
+          "expected": "317",
+          "points": 1.0,
+          "reference": "Official short answer: 317",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "15",
+          "expected": "1314",
+          "points": 1.0,
+          "reference": "Official short answer: 1314",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "16",
+          "expected": "41",
+          "points": 1.0,
+          "reference": "Official short answer: 41",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "17",
+          "expected": "20",
+          "points": 1.0,
+          "reference": "Official short answer: 20",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "18",
+          "expected": "150",
+          "points": 1.0,
+          "reference": "Official short answer: 150",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "19",
+          "expected": "4900",
+          "points": 1.0,
+          "reference": "Official short answer: 4900",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "20",
+          "expected": "18",
+          "points": 1.0,
+          "reference": "Official short answer: 18",
+          "match_mode": "normalized",
+          "aliases": []
+        }
+      ]
     },
     "assets": [
       {
@@ -1180,11 +3209,12 @@
     "competition_id": "purple_comet",
     "status": "collected",
     "evaluation": {
-      "evaluator_id": "rubric_llm_v1",
+      "evaluator_id": "gold_answer_v1",
       "status": "ready",
       "rubric_path": "data/rubrics/worked_answer_100_v1.json",
-      "deliverable": "worked_answers",
-      "fallback_evaluator_id": "gold_answer_v1"
+      "deliverable": "answer_sheet",
+      "fallback_evaluator_id": "rubric_llm_v1",
+      "short_answer_source": "data/rubrics/purple_comet_short_answers.json"
     }
   },
   {
@@ -1201,7 +3231,249 @@
     "gold_label": {
       "expected_answer": null,
       "grading_rubric": "Non-negative integer answers; official answer key.",
-      "human_baseline": null
+      "human_baseline": null,
+      "parts": [
+        {
+          "id": "1",
+          "expected": "82192020202120222023",
+          "points": 1.0,
+          "reference": "Official short answer: 82192020202120222023",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "2",
+          "expected": "45",
+          "points": 1.0,
+          "reference": "Official short answer: 45",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "3",
+          "expected": "66",
+          "points": 1.0,
+          "reference": "Official short answer: 66",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "4",
+          "expected": "384",
+          "points": 1.0,
+          "reference": "Official short answer: 384",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "5",
+          "expected": "60",
+          "points": 1.0,
+          "reference": "Official short answer: 60",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "6",
+          "expected": "22",
+          "points": 1.0,
+          "reference": "Official short answer: 22",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "7",
+          "expected": "35",
+          "points": 1.0,
+          "reference": "Official short answer: 35",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "8",
+          "expected": "40",
+          "points": 1.0,
+          "reference": "Official short answer: 40",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "9",
+          "expected": "0",
+          "points": 1.0,
+          "reference": "Official short answer: 0",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "10",
+          "expected": "46",
+          "points": 1.0,
+          "reference": "Official short answer: 46",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "11",
+          "expected": "24",
+          "points": 1.0,
+          "reference": "Official short answer: 24",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "12",
+          "expected": "2025",
+          "points": 1.0,
+          "reference": "Official short answer: 2025",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "13",
+          "expected": "193",
+          "points": 1.0,
+          "reference": "Official short answer: 193",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "14",
+          "expected": "60",
+          "points": 1.0,
+          "reference": "Official short answer: 60",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "15",
+          "expected": "239",
+          "points": 1.0,
+          "reference": "Official short answer: 239",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "16",
+          "expected": "136",
+          "points": 1.0,
+          "reference": "Official short answer: 136",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "17",
+          "expected": "41",
+          "points": 1.0,
+          "reference": "Official short answer: 41",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "18",
+          "expected": "14",
+          "points": 1.0,
+          "reference": "Official short answer: 14",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "19",
+          "expected": "168",
+          "points": 1.0,
+          "reference": "Official short answer: 168",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "20",
+          "expected": "49",
+          "points": 1.0,
+          "reference": "Official short answer: 49",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "21",
+          "expected": "95",
+          "points": 1.0,
+          "reference": "Official short answer: 95",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "22",
+          "expected": "43",
+          "points": 1.0,
+          "reference": "Official short answer: 43",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "23",
+          "expected": "55",
+          "points": 1.0,
+          "reference": "Official short answer: 55",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "24",
+          "expected": "293",
+          "points": 1.0,
+          "reference": "Official short answer: 293",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "25",
+          "expected": "360",
+          "points": 1.0,
+          "reference": "Official short answer: 360",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "26",
+          "expected": "53",
+          "points": 1.0,
+          "reference": "Official short answer: 53",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "27",
+          "expected": "65",
+          "points": 1.0,
+          "reference": "Official short answer: 65",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "28",
+          "expected": "42",
+          "points": 1.0,
+          "reference": "Official short answer: 42",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "29",
+          "expected": "87",
+          "points": 1.0,
+          "reference": "Official short answer: 87",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "30",
+          "expected": "194339",
+          "points": 1.0,
+          "reference": "Official short answer: 194339",
+          "match_mode": "normalized",
+          "aliases": []
+        }
+      ]
     },
     "assets": [
       {
@@ -1213,11 +3485,12 @@
     "competition_id": "purple_comet",
     "status": "collected",
     "evaluation": {
-      "evaluator_id": "rubric_llm_v1",
+      "evaluator_id": "gold_answer_v1",
       "status": "ready",
       "rubric_path": "data/rubrics/worked_answer_100_v1.json",
-      "deliverable": "worked_answers",
-      "fallback_evaluator_id": "gold_answer_v1"
+      "deliverable": "answer_sheet",
+      "fallback_evaluator_id": "rubric_llm_v1",
+      "short_answer_source": "data/rubrics/purple_comet_short_answers.json"
     }
   },
   {
@@ -1234,7 +3507,169 @@
     "gold_label": {
       "expected_answer": null,
       "grading_rubric": "Non-negative integer answers; official answer key.",
-      "human_baseline": null
+      "human_baseline": null,
+      "parts": [
+        {
+          "id": "1",
+          "expected": "210",
+          "points": 1.0,
+          "reference": "Official short answer: 210",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "2",
+          "expected": "200",
+          "points": 1.0,
+          "reference": "Official short answer: 200",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "3",
+          "expected": "15",
+          "points": 1.0,
+          "reference": "Official short answer: 15",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "4",
+          "expected": "8164961",
+          "points": 1.0,
+          "reference": "Official short answer: 8164961",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "5",
+          "expected": "151",
+          "points": 1.0,
+          "reference": "Official short answer: 151",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "6",
+          "expected": "257889",
+          "points": 1.0,
+          "reference": "Official short answer: 257889",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "7",
+          "expected": "99",
+          "points": 1.0,
+          "reference": "Official short answer: 99",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "8",
+          "expected": "120",
+          "points": 1.0,
+          "reference": "Official short answer: 120",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "9",
+          "expected": "84",
+          "points": 1.0,
+          "reference": "Official short answer: 84",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "10",
+          "expected": "196",
+          "points": 1.0,
+          "reference": "Official short answer: 196",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "11",
+          "expected": "45",
+          "points": 1.0,
+          "reference": "Official short answer: 45",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "12",
+          "expected": "11",
+          "points": 1.0,
+          "reference": "Official short answer: 11",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "13",
+          "expected": "78",
+          "points": 1.0,
+          "reference": "Official short answer: 78",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "14",
+          "expected": "48",
+          "points": 1.0,
+          "reference": "Official short answer: 48",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "15",
+          "expected": "448",
+          "points": 1.0,
+          "reference": "Official short answer: 448",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "16",
+          "expected": "145",
+          "points": 1.0,
+          "reference": "Official short answer: 145",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "17",
+          "expected": "25",
+          "points": 1.0,
+          "reference": "Official short answer: 25",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "18",
+          "expected": "232",
+          "points": 1.0,
+          "reference": "Official short answer: 232",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "19",
+          "expected": "612",
+          "points": 1.0,
+          "reference": "Official short answer: 612",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "20",
+          "expected": "293",
+          "points": 1.0,
+          "reference": "Official short answer: 293",
+          "match_mode": "normalized",
+          "aliases": []
+        }
+      ]
     },
     "assets": [
       {
@@ -1246,11 +3681,12 @@
     "competition_id": "purple_comet",
     "status": "collected",
     "evaluation": {
-      "evaluator_id": "rubric_llm_v1",
+      "evaluator_id": "gold_answer_v1",
       "status": "ready",
       "rubric_path": "data/rubrics/worked_answer_100_v1.json",
-      "deliverable": "worked_answers",
-      "fallback_evaluator_id": "gold_answer_v1"
+      "deliverable": "answer_sheet",
+      "fallback_evaluator_id": "rubric_llm_v1",
+      "short_answer_source": "data/rubrics/purple_comet_short_answers.json"
     }
   },
   {
@@ -1267,7 +3703,249 @@
     "gold_label": {
       "expected_answer": null,
       "grading_rubric": "Non-negative integer answers; official answer key.",
-      "human_baseline": null
+      "human_baseline": null,
+      "parts": [
+        {
+          "id": "1",
+          "expected": "60",
+          "points": 1.0,
+          "reference": "Official short answer: 60",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "2",
+          "expected": "176",
+          "points": 1.0,
+          "reference": "Official short answer: 176",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "3",
+          "expected": "26",
+          "points": 1.0,
+          "reference": "Official short answer: 26",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "4",
+          "expected": "6989",
+          "points": 1.0,
+          "reference": "Official short answer: 6989",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "5",
+          "expected": "32",
+          "points": 1.0,
+          "reference": "Official short answer: 32",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "6",
+          "expected": "57",
+          "points": 1.0,
+          "reference": "Official short answer: 57",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "7",
+          "expected": "262",
+          "points": 1.0,
+          "reference": "Official short answer: 262",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "8",
+          "expected": "61",
+          "points": 1.0,
+          "reference": "Official short answer: 61",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "9",
+          "expected": "172",
+          "points": 1.0,
+          "reference": "Official short answer: 172",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "10",
+          "expected": "109",
+          "points": 1.0,
+          "reference": "Official short answer: 109",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "11",
+          "expected": "64",
+          "points": 1.0,
+          "reference": "Official short answer: 64",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "12",
+          "expected": "91",
+          "points": 1.0,
+          "reference": "Official short answer: 91",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "13",
+          "expected": "70",
+          "points": 1.0,
+          "reference": "Official short answer: 70",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "14",
+          "expected": "40",
+          "points": 1.0,
+          "reference": "Official short answer: 40",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "15",
+          "expected": "400000002",
+          "points": 1.0,
+          "reference": "Official short answer: 400000002",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "16",
+          "expected": "546",
+          "points": 1.0,
+          "reference": "Official short answer: 546",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "17",
+          "expected": "71",
+          "points": 1.0,
+          "reference": "Official short answer: 71",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "18",
+          "expected": "658",
+          "points": 1.0,
+          "reference": "Official short answer: 658",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "19",
+          "expected": "283",
+          "points": 1.0,
+          "reference": "Official short answer: 283",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "20",
+          "expected": "70",
+          "points": 1.0,
+          "reference": "Official short answer: 70",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "21",
+          "expected": "97",
+          "points": 1.0,
+          "reference": "Official short answer: 97",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "22",
+          "expected": "249",
+          "points": 1.0,
+          "reference": "Official short answer: 249",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "23",
+          "expected": "19",
+          "points": 1.0,
+          "reference": "Official short answer: 19",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "24",
+          "expected": "638",
+          "points": 1.0,
+          "reference": "Official short answer: 638",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "25",
+          "expected": "391",
+          "points": 1.0,
+          "reference": "Official short answer: 391",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "26",
+          "expected": "25",
+          "points": 1.0,
+          "reference": "Official short answer: 25",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "27",
+          "expected": "64",
+          "points": 1.0,
+          "reference": "Official short answer: 64",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "28",
+          "expected": "52",
+          "points": 1.0,
+          "reference": "Official short answer: 52",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "29",
+          "expected": "109",
+          "points": 1.0,
+          "reference": "Official short answer: 109",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "30",
+          "expected": "66",
+          "points": 1.0,
+          "reference": "Official short answer: 66",
+          "match_mode": "normalized",
+          "aliases": []
+        }
+      ]
     },
     "assets": [
       {
@@ -1279,11 +3957,12 @@
     "competition_id": "purple_comet",
     "status": "collected",
     "evaluation": {
-      "evaluator_id": "rubric_llm_v1",
+      "evaluator_id": "gold_answer_v1",
       "status": "ready",
       "rubric_path": "data/rubrics/worked_answer_100_v1.json",
-      "deliverable": "worked_answers",
-      "fallback_evaluator_id": "gold_answer_v1"
+      "deliverable": "answer_sheet",
+      "fallback_evaluator_id": "rubric_llm_v1",
+      "short_answer_source": "data/rubrics/purple_comet_short_answers.json"
     }
   },
   {
@@ -1300,7 +3979,169 @@
     "gold_label": {
       "expected_answer": null,
       "grading_rubric": "Non-negative integer answers; official answer key.",
-      "human_baseline": null
+      "human_baseline": null,
+      "parts": [
+        {
+          "id": "1",
+          "expected": "54",
+          "points": 1.0,
+          "reference": "Official short answer: 54",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "2",
+          "expected": "40",
+          "points": 1.0,
+          "reference": "Official short answer: 40",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "3",
+          "expected": "15",
+          "points": 1.0,
+          "reference": "Official short answer: 15",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "4",
+          "expected": "60",
+          "points": 1.0,
+          "reference": "Official short answer: 60",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "5",
+          "expected": "12",
+          "points": 1.0,
+          "reference": "Official short answer: 12",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "6",
+          "expected": "29",
+          "points": 1.0,
+          "reference": "Official short answer: 29",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "7",
+          "expected": "144",
+          "points": 1.0,
+          "reference": "Official short answer: 144",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "8",
+          "expected": "12",
+          "points": 1.0,
+          "reference": "Official short answer: 12",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "9",
+          "expected": "631",
+          "points": 1.0,
+          "reference": "Official short answer: 631",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "10",
+          "expected": "4278",
+          "points": 1.0,
+          "reference": "Official short answer: 4278",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "11",
+          "expected": "1156",
+          "points": 1.0,
+          "reference": "Official short answer: 1156",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "12",
+          "expected": "180",
+          "points": 1.0,
+          "reference": "Official short answer: 180",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "13",
+          "expected": "133",
+          "points": 1.0,
+          "reference": "Official short answer: 133",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "14",
+          "expected": "9884",
+          "points": 1.0,
+          "reference": "Official short answer: 9884",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "15",
+          "expected": "10",
+          "points": 1.0,
+          "reference": "Official short answer: 10",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "16",
+          "expected": "87",
+          "points": 1.0,
+          "reference": "Official short answer: 87",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "17",
+          "expected": "107",
+          "points": 1.0,
+          "reference": "Official short answer: 107",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "18",
+          "expected": "365",
+          "points": 1.0,
+          "reference": "Official short answer: 365",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "19",
+          "expected": "193",
+          "points": 1.0,
+          "reference": "Official short answer: 193",
+          "match_mode": "normalized",
+          "aliases": []
+        },
+        {
+          "id": "20",
+          "expected": "17",
+          "points": 1.0,
+          "reference": "Official short answer: 17",
+          "match_mode": "normalized",
+          "aliases": []
+        }
+      ]
     },
     "assets": [
       {
@@ -1312,11 +4153,12 @@
     "competition_id": "purple_comet",
     "status": "collected",
     "evaluation": {
-      "evaluator_id": "rubric_llm_v1",
+      "evaluator_id": "gold_answer_v1",
       "status": "ready",
       "rubric_path": "data/rubrics/worked_answer_100_v1.json",
-      "deliverable": "worked_answers",
-      "fallback_evaluator_id": "gold_answer_v1"
+      "deliverable": "answer_sheet",
+      "fallback_evaluator_id": "rubric_llm_v1",
+      "short_answer_source": "data/rubrics/purple_comet_short_answers.json"
     }
   },
   {
