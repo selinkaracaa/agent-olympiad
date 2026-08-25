@@ -1,6 +1,8 @@
 """Structured, auditable evaluators for team-task submissions."""
 
 from .default_rubrics import ensure_default_rubrics
+from .finalize import apply_registered_judge
+from .collaboration_score import CoordinationScoreResult, score_coordination
 from .gold import GoldAnswerEvaluator, load_gold_parts
 from .modes import (
     EvalMode,
@@ -17,18 +19,10 @@ from .models import (
     Rubric,
     load_rubric,
 )
-from .programming import (
-    DockerProgrammingJudge,
-    ProblemPackage,
-    ProgrammingJudgeError,
-    ProgrammingJudgeResult,
-    load_problem_package,
-)
 from .registry import (
     EvaluatorSpec,
     RegistryError,
     load_registry,
-    resolve_evaluator_by_id,
     resolve_evaluator_spec,
     strategy_kind,
 )
@@ -48,26 +42,23 @@ __all__ = [
     "EvaluationError",
     "EvaluationResult",
     "EvaluatorSpec",
-    "DockerProgrammingJudge",
     "GoldAnswerEvaluator",
-    "ProblemPackage",
-    "ProgrammingJudgeError",
-    "ProgrammingJudgeResult",
+    "CoordinationScoreResult",
     "QuestionSpec",
     "RegistryError",
     "Rubric",
     "RubricDocumentEvaluator",
     "SlideDeckEvaluator",
+    "apply_registered_judge",
+    "score_coordination",
     "build_competition_packet",
     "build_question_packet",
     "build_task_asset",
     "ensure_default_rubrics",
     "evaluate_slide_deck",
     "load_gold_parts",
-    "load_problem_package",
     "load_registry",
     "load_rubric",
-    "resolve_evaluator_by_id",
     "resolve_evaluator_spec",
     "resolve_problem_task_pdf",
     "strategy_kind",

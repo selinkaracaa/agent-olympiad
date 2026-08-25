@@ -4,8 +4,8 @@
     "mode": "gold_or_judge",
     "unit": "problem_or_question",
     "evaluator_id": "programming_judge",
-    "evaluator_status": "ready_with_limitations",
-    "evaluator_strategy": "hidden_problem_package_tests_in_isolated_sandbox_with_time_and_attempt_accounting",
+    "evaluator_status": "deferred",
+    "evaluator_strategy": "official_tests_in_isolated_sandbox",
     "official_performance": {
       "ranking_order": [
         "problems_solved_descending",
@@ -231,6 +231,6 @@
   },
   "submission": {
     "max_count": null,
-    "adaptation": "Official contests allow repeated runs with per-problem pending judging across C/C++/Java/Kotlin/Python3; the current runner still accepts a single final source text without live pending latency or scoreboard."
+    "adaptation": "Official submissions are compiled and judged; the runner submits source text only."
   }
 }

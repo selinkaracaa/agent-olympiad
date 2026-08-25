@@ -203,7 +203,7 @@
       "Do not look up answer keys or hidden solutions."
     ],
     "evaluation_criteria": [
-      "Repository evaluation status: Task performance is specified per problem_or_question in gold_or_judge mode, but the repository evaluator is deferred; do not invent a completed score.",
+      "Repository evaluation status: Task performance is specified per problem_or_question in gold_or_judge mode, but the repository evaluator is unassigned; do not invent a completed score.",
       "Source-recorded competition rule: You gain points for keeping required services up, preventing unauthorized access, and completing business injects, and lose them for SLA violations, using recovery services, and successful Red Team penetrations; no running score is shown during play.",
       "Source-recorded competition rule: Submit written incident reports for Red Team activity you detect — a thorough report with source and destination addresses, timeline, impact, and remediation can reduce that incident's penalty, while vague ones earn nothing.",
       "You gain points for keeping required services up, preventing unauthorized access, and completing business injects, and lose them for SLA violations, using recovery services, and successful Red Team penetrations; no running score is shown during play.",

@@ -33,12 +33,9 @@ sys.path.insert(0, str(REPO_ROOT / "src"))
 from artifacts import Asset, normalize_submission
 from artifacts.assets import file_sha256
 from evaluation import (
-    DockerProgrammingJudge,
     GoldAnswerEvaluator,
-    ProgrammingJudgeError,
     RegistryError,
     load_gold_parts,
-    load_problem_package,
     load_rubric,
     resolve_evaluator_spec,
     strategy_kind,
@@ -108,8 +105,6 @@ def main() -> None:
     parser.add_argument("--gold-json", type=Path, default=None)
     parser.add_argument("--submission", type=Path, default=None)
     parser.add_argument("--submission-text", type=Path, default=None)
-    parser.add_argument("--problem-package", type=Path, default=None)
-    parser.add_argument("--language", choices=["python3"], default="python3")
     parser.add_argument("--output", type=Path, default=None)
     args = parser.parse_args()
 
@@ -231,25 +226,6 @@ def main() -> None:
             pass
         payload = {"packet": packet_meta, "evaluation": slide_result.evaluation.to_dict()}
         payload.update({k: v for k, v in slide_result.payload.items() if k != "evaluation"})
-
-    elif spec.id == "programming_judge":
-        package_path = args.problem_package
-        if package_path is None and evaluation_meta.get("problem_package"):
-            package_path = REPO_ROOT / str(evaluation_meta["problem_package"])
-        if package_path is None or args.submission is None:
-            raise SystemExit(
-                "programming_judge requires --submission and --problem-package "
-                "or evaluation.problem_package"
-            )
-        package = load_problem_package(package_path)
-        try:
-            result = DockerProgrammingJudge(package).evaluate(
-                args.submission,
-                language=args.language,
-            )
-        except ProgrammingJudgeError as exc:
-            raise SystemExit(f"programming_judge unavailable: {exc}") from exc
-        payload = {"packet": packet_meta, "evaluation": result.to_dict()}
 
     elif kind == "llm_judge" or spec.id == "rubric_llm_v1":
         rubric_path = Path(args.rubric).resolve() if args.rubric else None

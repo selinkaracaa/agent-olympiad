@@ -4,7 +4,7 @@
     "mode": "rubric",
     "unit": "problem_or_question",
     "evaluator_id": null,
-    "evaluator_status": "deferred",
+    "evaluator_status": "unassigned",
     "official_performance": {
       "source_status": "source_grounded",
       "source_review_status": "primary_rules_partial_or_variant_selector_required",

@@ -1,19 +1,7 @@
-"""ICPC runner with full in-prompt rules, structured memory, and evidence-led debate.
-
-This module is intentionally separate from ``collaboration.py``.  It is an
-ICPC-only experimental runner.  Agents receive the complete contestant-visible
-RuleCard in the system prompt.  Hidden evaluation fields stay out of the
-prompt.  Private notes and code observations still require explicit publish
-before teammates can use them.
-
-The runner keeps a bounded tool loop so code-execution results return to the
-same agent immediately.  It reuses the repository's problem/rule loader, ICPC
-environment, LLM caller, and deliberation ledger.
-"""
-
 from __future__ import annotations
 
 import argparse
+import ast
 import hashlib
 import json
 import re
@@ -403,6 +391,8 @@ class Scoreboard:
     def submit(self, agent_name: str, turn: int, code: str) -> ScoreboardRun:
         if self.pending is not None:
             raise ValueError("A sample-judge run is still pending.")
+        if self.accepted_run() is not None:
+            raise ValueError("This problem is already AC on sample-judge.")
         self._next_id += 1
         run = ScoreboardRun(
             run_id=f"R{self._next_id}",
@@ -428,8 +418,9 @@ class Scoreboard:
         run.pending = False
         self.pending = None
         self.runs.append(run)
-        if verdict == "AC" and self.first_ac_turn is None:
-            self.first_ac_turn = run.turn
+        if verdict == "AC":
+            if self.first_ac_turn is None:
+                self.first_ac_turn = run.turn
             self.status = "AC"
         elif self.first_ac_turn is None:
             self.status = verdict
@@ -455,8 +446,9 @@ class Scoreboard:
             code=code,
         )
         self.runs.append(run)
-        if verdict == "AC" and self.first_ac_turn is None:
-            self.first_ac_turn = turn
+        if verdict == "AC":
+            if self.first_ac_turn is None:
+                self.first_ac_turn = turn
             self.status = "AC"
         elif self.first_ac_turn is None:
             self.status = verdict
@@ -479,6 +471,9 @@ class Scoreboard:
 
     def solved(self) -> int:
         return 1 if self.first_ac_turn is not None else 0
+
+    def accepted_run(self) -> ScoreboardRun | None:
+        return next((run for run in self.runs if run.verdict == "AC"), None)
 
     def verdict_counts(self) -> dict[str, int]:
         counts: dict[str, int] = {}
@@ -912,7 +907,11 @@ Return one JSON action now."""
                     "SUBMIT DENIED: a run is still pending sample-judge; "
                     f"{self.scoreboard.pending.run_id}."
                 )
-            code = self._required_text(command, "code")
+            if self.scoreboard.accepted_run() is not None:
+                return ToolOutcome(
+                    "SUBMIT DENIED: this problem is already AC on sample-judge."
+                )
+            code = _strip_code_fence(self._required_text(command, "code"))
             if len(code) > MAX_CODE_CHARS:
                 raise ValueError(f"code exceeds {MAX_CODE_CHARS} characters.")
             run = self.scoreboard.submit(agent_name, self.turn, code)
@@ -932,6 +931,12 @@ Return one JSON action now."""
             "revise": "revise",
             "decide": "decide",
         }
+        public_actions = set(debate_actions) | {"speak", "done"}
+        if action in public_actions and self.workstation.owner == agent_name:
+            return ToolOutcome(
+                "WORKSTATION HELD: release the workstation before ending your "
+                "public turn."
+            )
         if action in debate_actions:
             ledger_action = debate_actions[action]
             if action == "propose":
@@ -982,6 +987,8 @@ You are {agent_name}, the designated ICPC source-code synthesizer.
 - no Internet, outside help, or hidden solutions;
 - produce one complete source file that reads stdin and writes stdout;
 - do not wrap the source in Markdown fences.
+- begin immediately with valid Python source (for example import, from, or def);
+- never prefix the source with words such as code or python.
 
 ANSWER FORMAT
 {self.card.answer_format or "Python 3 program. Read all input from stdin and write the answer to stdout."}
@@ -1062,7 +1069,23 @@ def parse_agent_command(response: str) -> dict[str, Any]:
 def _strip_code_fence(response: str) -> str:
     text = str(response or "").strip()
     match = re.fullmatch(r"```(?:[a-zA-Z0-9_+.-]+)?\s*(.*?)\s*```", text, flags=re.DOTALL)
-    return match.group(1).strip() if match else text
+    if match:
+        return match.group(1).strip()
+    for prefix in ("code", "python"):
+        if not text.lower().startswith(prefix):
+            continue
+        candidate = text[len(prefix) :].lstrip()
+        try:
+            ast.parse(candidate)
+        except SyntaxError:
+            continue
+        return candidate
+    try:
+        ast.parse(text)
+        return text
+    except SyntaxError:
+        pass
+    return text
 
 
 class ScriptedMockLLM:
@@ -1199,15 +1222,21 @@ class ICPCRunner:
         if session.debate.report()["open_proposals"]:
             self._run_agent_turn(session, session.submitter, "decision")
 
-        final_system, final_user = session.final_context(session.submitter)
-        try:
-            final_answer = _strip_code_fence(self.query_fn(final_system, final_user))
-        except RuntimeError as exc:
-            if "empty message" not in str(exc).lower():
-                raise
-            final_answer = _strip_code_fence(self.query_fn(final_system, final_user))
-        submit_result = env.execute_action(session.submitter, "submit_final", final_answer)
         session.resolve_pending()
+        accepted_run = session.scoreboard.accepted_run()
+        if accepted_run is not None:
+            final_answer = accepted_run.code
+            final_source = f"sample-judge:{accepted_run.run_id}"
+        else:
+            final_system, final_user = session.final_context(session.submitter)
+            try:
+                final_answer = _strip_code_fence(self.query_fn(final_system, final_user))
+            except RuntimeError as exc:
+                if "empty message" not in str(exc).lower():
+                    raise
+                final_answer = _strip_code_fence(self.query_fn(final_system, final_user))
+            final_source = "final_synthesis"
+        submit_result = env.execute_action(session.submitter, "submit_final", final_answer)
         if not session.scoreboard.runs:
             run = session.scoreboard.record_immediate(
                 env,
@@ -1234,6 +1263,7 @@ class ICPCRunner:
             "submitted": env.submitted,
             "submitted_by": env.submitted_by,
             "submit_result": submit_result,
+            "final_source": final_source,
             "final_answer": env.workspace.get("final_answer", ""),
             "grade": grade,
             "session": session.snapshot(),
@@ -1309,9 +1339,17 @@ def run_self_test() -> dict[str, Any]:
         },
     )
     assert "hello sample" in stdin_result.message
+    held = session.apply(
+        "Agent_1", {"action": "done", "content": "Leaving without release."}
+    )
+    assert "WORKSTATION HELD" in held.message
+    assert not held.terminal
+    assert session.workstation.owner == "Agent_1"
     assert "RELEASED" in session.apply(
         "Agent_1", {"action": "workstation_release"}
     ).message
+    assert _strip_code_fence("codeimport sys\nprint(1)") == "import sys\nprint(1)"
+    assert _strip_code_fence("python\nprint(1)") == "print(1)"
 
     samples = session.scoreboard.samples
     assert len(samples) == 2
@@ -1379,6 +1417,8 @@ def run_self_test() -> dict[str, Any]:
     assert session.scoreboard.solved() == 1
     assert session.scoreboard.penalty() == ac.turn + 20
     assert session.scoreboard.penalized_rejections() == 1
+    assert session.scoreboard.accepted_run() is ac
+    assert session.scoreboard.accepted_run().code == ceiling_ac.strip()
 
     final_system, _final_user = session.final_context("Agent_1")
     assert "FINAL_SYNTHESIS" in final_system

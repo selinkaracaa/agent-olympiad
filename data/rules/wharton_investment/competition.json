@@ -46,7 +46,7 @@
     "Cite every source you use and do not plagiarize; fabricating analyses, trades, or teamwork narratives is a disqualifying ethics breach.",
     "You are judged on strategy quality, fit to the client's objectives, depth of research and analysis, and how clearly you defend your recommendations — not on portfolio returns."
   ],
-  "rules_text": "Wharton Global High School Investment Competition. The team researches, authors, and defends a judged artifact. The source-recorded active team may have 4 to 6 members; the runner default is 5. Collaborate only within the team under contest rules. Permitted: internet access, calculators and running code. Conditional: generative AI is limited to cited brainstorming and live market simulator is unavailable in runner. Paper and pencil are always available. Submit one shared investment policy statement and final report; Submit clearly separated Investment Policy Statement and Comprehensive Final Report sections covering client objectives, risk tolerance, strategy, evidence, portfolio decisions, and citations. Treat unexposed physical, oral, live-opponent, judge, timing, or environment mechanisms as unavailable rather than simulated facts.",
+  "rules_text": "Wharton Global High School Investment Competition. The team researches, authors, and defends a judged artifact. The source-recorded active team may have 4 to 6 members; the runner default is 5. Collaborate only within the team under contest rules. Permitted: internet access, calculators and running code. Conditional: generative AI is limited to cited brainstorming and live market simulator is unavailable in runner. Paper and pencil are always available. Submit one shared investment report; Submit clearly separated Investment Policy Statement and Comprehensive Final Report sections covering client objectives, risk tolerance, strategy, evidence, portfolio decisions, and citations. Treat unexposed physical, oral, live-opponent, judge, timing, or environment mechanisms as unavailable rather than simulated facts.",
   "provenance": {
     "status": "source_enriched_v1",
     "sources": [
@@ -175,7 +175,7 @@
     "task_types": [
       "investment_case"
     ],
-    "official_deliverable": "investment_policy_statement_and_final_report",
+    "official_deliverable": "investment_report",
     "official_mime_types": [
       "application/pdf"
     ]

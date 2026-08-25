@@ -141,7 +141,7 @@
       "Do not look up answer keys or hidden solutions."
     ],
     "evaluation_criteria": [
-      "Repository evaluation status: Task performance is specified per question in gold mode, but the repository evaluator is deferred_benchmark_metadata_missing; do not invent a completed score.",
+      "Repository evaluation status: Task performance is specified per question in gold mode, but the repository evaluator is unassigned; do not invent a completed score.",
       "Source-recorded competition rule: Do not use reference materials or electronic devices at any point during play, and keep none on your table, in your lap, in view, or on your person.",
       "Source-recorded competition rule: A tossup answered correctly is worth 10 points and earns your team a three-part bonus totaling 30 points; NAQT additionally awards 15 for a correct answer before the power mark.",
       "Source-recorded competition rule: Interrupting a tossup before it is fully read and answering incorrectly costs your team 5 points; there is no penalty for a wrong answer after the question has been read in full.",

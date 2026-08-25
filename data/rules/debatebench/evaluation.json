@@ -3,7 +3,7 @@
     "mode": "rubric",
     "unit": "artifact",
     "evaluator_id": null,
-    "evaluator_status": "deferred",
+    "evaluator_status": "unassigned",
     "official_performance": {
       "source_status": "source_enriched_v1",
       "source_review_status": "material_official_fields_remain_unverified",
@@ -11,14 +11,14 @@
       "mode": "rubric",
       "unit": "artifact",
       "criteria": [
-        "Repository evaluation status: Task performance is specified per artifact in rubric mode, but the repository evaluator is deferred; do not invent a completed score."
+        "Repository evaluation status: Task performance is specified per artifact in rubric mode, but the repository evaluator is unassigned; do not invent a completed score."
       ],
       "mechanics": [],
       "tie_breakers": [],
       "source_refs": [],
       "unresolved": [],
       "repository_evaluator_id": null,
-      "repository_evaluator_status": "deferred"
+      "repository_evaluator_status": "unassigned"
     },
     "rule_compliance": {
       "reported_separately_from_performance": true,
@@ -91,7 +91,7 @@
     },
     "current_repository_availability": {
       "evaluator_ready": false,
-      "evaluator_status": "deferred",
+      "evaluator_status": "unassigned",
       "official_environment_fully_reproduced": false,
       "official_wall_clock_enforced": false,
       "declared_unavailable_mechanisms": [
@@ -109,5 +109,5 @@
   "submission": {
     "max_count": 1
   },
-  "evaluation_guidance": "Task performance: evaluate the oral speech per artifact in rubric mode and enforce this answer contract: Submit eight labeled speeches in official order: PM, LO, DPM, DLO, MG, MO, GW, OW. Preserve coalition privacy and identify POIs separately. Repository status: the evaluator is deferred. Do not invent a completed benchmark grade or claim evaluator readiness. Rule compliance: report prohibited tools, outside assistance, hidden-answer access, unauthorized submission, and competition-specific violations separately from task performance. Collaboration quality: assess allocation, evidence exchange, verification, handoffs, recovery, replanning, and communication efficiency without rewarding fixed roles, equal airtime, or message volume by themselves. Fidelity: identify official mechanisms that the current runner does not reproduce; never treat a proxy action as proof that a physical, oral, live-opponent, judge, or mutable-environment event occurred."
+  "evaluation_guidance": "Task performance: evaluate the oral speech per artifact in rubric mode and enforce this answer contract: Submit eight labeled speeches in official order: PM, LO, DPM, DLO, MG, MO, GW, OW. Preserve coalition privacy and identify POIs separately. Repository status: the evaluator is unassigned. Do not invent a completed benchmark grade or claim evaluator readiness. Rule compliance: report prohibited tools, outside assistance, hidden-answer access, unauthorized submission, and competition-specific violations separately from task performance. Collaboration quality: assess allocation, evidence exchange, verification, handoffs, recovery, replanning, and communication efficiency without rewarding fixed roles, equal airtime, or message volume by themselves. Fidelity: identify official mechanisms that the current runner does not reproduce; never treat a proxy action as proof that a physical, oral, live-opponent, judge, or mutable-environment event occurred."
 }

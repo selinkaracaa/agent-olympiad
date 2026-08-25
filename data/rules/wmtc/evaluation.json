@@ -4,7 +4,7 @@
     "mode": "gold",
     "unit": "problem",
     "evaluator_id": null,
-    "evaluator_status": "deferred_benchmark_metadata_missing",
+    "evaluator_status": "unassigned",
     "recommended_evaluator_id": "gold_answer_v1",
     "official_performance": {
       "source_status": "source_grounded",
@@ -132,7 +132,6 @@
     }
   },
   "submission": {
-    "max_count": 1,
-    "adaptation": "Official Team Round uses a paper answer sheet; the runner accepts numbered plain-text answers."
+    "max_count": 1
   }
 }

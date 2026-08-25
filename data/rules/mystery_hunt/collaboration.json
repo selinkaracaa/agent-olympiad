@@ -220,7 +220,7 @@
       "Source-recorded competition rule: The 2026 winner must satisfy the hunt's MIT-student eligibility requirement and is expected to write the following year's hunt."
     ],
     "evaluation_criteria": [
-      "Repository evaluation status: Task performance is specified per problem_or_question in gold mode, but the repository evaluator is deferred_benchmark_metadata_missing; do not invent a completed score.",
+      "Repository evaluation status: Task performance is specified per problem_or_question in gold mode, but the repository evaluator is unassigned; do not invent a completed score.",
       "Source-recorded competition rule: Answers must be submitted in the canonical answer form accepted by the current hunt's answer mechanism.",
       "Source-recorded competition rule: Remote participation does not reproduce every in-person interaction, and the in-person runaround is required to win the 2026 hunt."
     ],

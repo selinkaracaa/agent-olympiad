@@ -167,15 +167,15 @@
     ],
     "deliverable_format": [
       "Runner answer contract: Submit clearly separated Investment Policy Statement and Comprehensive Final Report sections covering client objectives, risk tolerance, strategy, evidence, portfolio decisions, and citations.",
-      "Official deliverable: investment policy statement and final report.",
-      "Benchmark adaptation: The two official PDF deliverables are serialized as two labeled sections in one text submission.",
+      "Official deliverable: investment report.",
+      "Benchmark adaptation: Official entries are PDF reports; the runner submits the report as text.",
       "Source-recorded competition rule: Produce two graded deliverables: an Investment Policy Statement defining the client's objectives, risk tolerance, and strategy, and a Comprehensive Final Report justifying your strategy, recommendations, and analysis.",
       "Produce two graded deliverables: an Investment Policy Statement defining the client's objectives, risk tolerance, and strategy, and a Comprehensive Final Report justifying your strategy, recommendations, and analysis.",
       "Do not look up answer keys or hidden solutions.",
       "Submit an Investment Policy Statement and a Comprehensive Final Report."
     ],
     "evaluation_criteria": [
-      "Repository evaluation status: Task performance is specified per artifact in rubric mode, but the repository evaluator is deferred; do not invent a completed score.",
+      "Repository evaluation status: Task performance is specified per artifact in rubric mode, but the repository evaluator is unassigned; do not invent a completed score.",
       "Judging rewards strategy quality, client fit, research depth, analysis, and clarity—not portfolio returns."
     ],
     "runtime_limitations": [

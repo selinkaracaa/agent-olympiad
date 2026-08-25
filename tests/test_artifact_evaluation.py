@@ -14,7 +14,6 @@ from artifacts.assets import Asset, AssetError, load_assets
 from artifacts.slides import (
     ArtifactValidation,
     NormalizedSubmission,
-    find_chrome_binary,
     normalize_submission,
     validate_html_slides,
     validate_pdf_slides,
@@ -112,10 +111,6 @@ class SlideArtifactTests(unittest.TestCase):
             self.assertFalse(result.valid)
             self.assertTrue(any("16:9" in error for error in result.errors))
 
-    @unittest.skipIf(
-        find_chrome_binary() is None,
-        "Chrome/Chromium is not installed; HTML slide rendering is unavailable.",
-    )
     def test_html_normalizes_to_two_page_pdf(self):
         html = """<!doctype html><html><head><style>
         section { font-family: sans-serif; }

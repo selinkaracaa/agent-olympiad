@@ -190,7 +190,7 @@
       "Do not look up answer keys or hidden solutions."
     ],
     "evaluation_criteria": [
-      "Repository evaluation status: Task performance is specified per artifact in rubric mode, but the repository evaluator is deferred; do not invent a completed score."
+      "Repository evaluation status: Task performance is specified per artifact in rubric mode, but the repository evaluator is unassigned; do not invent a completed score."
     ],
     "runtime_limitations": [
       "Runtime limitation: Live interruption by POIs, protected time, and the 15-second offer window depend on real-time speech that turn-based text cannot reproduce.",

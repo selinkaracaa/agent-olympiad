@@ -96,7 +96,7 @@
       "Source-recorded competition rule: The team may consult verbally on a bonus, and the captain gives the final bonus answer unless another member is explicitly designated under the rules."
     ],
     "evaluation_criteria": [
-      "Repository evaluation status: Task performance is specified per question in gold mode, but the repository evaluator is deferred_benchmark_metadata_missing; do not invent a completed score.",
+      "Repository evaluation status: Task performance is specified per question in gold mode, but the repository evaluator is unassigned; do not invent a completed score.",
       "Source-recorded competition rule: A correct tossup is worth four points and earns that team a bonus question worth ten points.",
       "Source-recorded competition rule: An incorrect interrupt adds four points to the opposing team's score and may leave the opposing team eligible to hear the full tossup."
     ],

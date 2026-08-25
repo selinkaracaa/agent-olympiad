@@ -142,7 +142,7 @@
       "The recorded pitch is 5–10 minutes; finalists face roughly 20 minutes of Q&A."
     ],
     "evaluation_criteria": [
-      "Repository evaluation status: Task performance is specified per artifact in rubric mode, but the repository evaluator is deferred; do not invent a completed score.",
+      "Repository evaluation status: Task performance is specified per artifact in rubric mode, but the repository evaluator is unassigned; do not invent a completed score.",
       "Source-recorded competition rule: Submit by the published Round 1 deadline; late submissions are not accepted.",
       "Source-recorded competition rule: Finalists then face a live judge panel for roughly 20 minutes of Q&A on the case, their submitted deck, and general M&A knowledge.",
       "Submit by the published Round 1 deadline; late submissions are not accepted.",

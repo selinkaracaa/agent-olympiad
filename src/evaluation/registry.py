@@ -43,10 +43,6 @@ def load_registry(path: Path | None = None) -> list[EvaluatorSpec]:
     return specs
 
 
-def _is_ready(spec: EvaluatorSpec) -> bool:
-    return not spec.status.startswith("deferred") and "missing" not in spec.status
-
-
 def resolve_evaluator_spec(
     task_type: str,
     *,
@@ -57,7 +53,13 @@ def resolve_evaluator_spec(
     matches = [spec for spec in specs if task_type in spec.task_types]
     if not matches:
         raise RegistryError(f"No evaluator registered for task_type={task_type!r}.")
-    usable = [spec for spec in matches if allow_deferred or _is_ready(spec)]
+    usable = [
+        spec
+        for spec in matches
+        if allow_deferred
+        or not spec.status.startswith("deferred")
+        and "missing" not in spec.status
+    ]
     # Prefer concrete MVP / existing over deferred.
     preferred = usable or matches
     preferred.sort(
@@ -78,32 +80,12 @@ def resolve_evaluator_spec(
     return chosen
 
 
-def resolve_evaluator_by_id(
-    evaluator_id: str,
-    *,
-    registry_path: Path | None = None,
-    allow_deferred: bool = False,
-) -> EvaluatorSpec:
-    """Resolve one evaluator by its registry id, refusing deferred ones by default."""
-    for spec in load_registry(registry_path):
-        if spec.id != evaluator_id:
-            continue
-        if not allow_deferred and not _is_ready(spec):
-            raise RegistryError(
-                f"Evaluator {spec.id} is not ready (status={spec.status})."
-            )
-        return spec
-    raise RegistryError(f"No evaluator registered with id={evaluator_id!r}.")
-
-
 def strategy_kind(spec: EvaluatorSpec) -> str:
-    """Map registry strategy strings to a coarse evaluator implementation kind."""
+    """Map registry strategy strings to coarse kinds: gold | llm_judge | deferred."""
     strategy = spec.strategy.lower()
     if "official_gold" in strategy or strategy.startswith("gold"):
         return "gold"
-    if "sandbox" in strategy and not spec.status.startswith("deferred"):
-        return "programming"
-    if "deferred" in spec.status or "physical" in strategy:
+    if "deferred" in spec.status or "sandbox" in strategy or "physical" in strategy:
         return "deferred"
     if "rubric" in strategy or "multimodal" in strategy or "llm" in strategy:
         return "llm_judge"

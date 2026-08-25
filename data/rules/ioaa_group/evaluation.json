@@ -143,7 +143,6 @@
     }
   },
   "submission": {
-    "max_count": 1,
-    "adaptation": "Official group work uses boxed paper answer sheets and, in some years, drawings or instrument readings; the runner accepts numbered worked-answer text."
+    "max_count": 1
   }
 }

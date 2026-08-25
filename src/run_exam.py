@@ -80,24 +80,41 @@ def run_one_schema(
     competition: str,
     problem_id: str,
     schema: str,
-    rounds: int,
+    rounds: int | None,
     agent_fn,
     batch_stamp: str,
+    max_api_calls: int | None = None,
+    max_output_tokens_per_call: int | None = None,
+    max_total_tokens: int | None = None,
 ) -> dict:
-    env = OlympiadEnvironment(competition, problem_id)
+    env = OlympiadEnvironment(
+        competition,
+        problem_id,
+        max_turns=rounds,
+        max_api_calls=max_api_calls,
+        max_output_tokens_per_call=max_output_tokens_per_call,
+        max_total_tokens=max_total_tokens,
+    )
     meta = env.get_metadata()
 
     print("\n" + "=" * 60)
     print(f"  {problem_id} — {schema}")
     print("=" * 60)
-    print(f"  Year: {meta.get('year')}  |  Team: {meta['team_size']}  |  Rounds: {rounds}")
+    print(
+        f"  Year: {meta.get('year')}  |  Team: {meta['team_size']}  |  "
+        f"Turns: {env.max_turns}  |  Out/call: {env.max_output_tokens_per_call or '∞'}"
+    )
 
     def progress(msg: str) -> None:
         print(f"  {msg}", flush=True)
 
     config = CollabConfig(
+        max_turns=rounds,
         rounds=rounds,
         decentralized_events=rounds,
+        max_api_calls=max_api_calls,
+        max_output_tokens_per_call=max_output_tokens_per_call,
+        max_total_tokens=max_total_tokens,
         synthesize=True,
         progress=progress,
     )
@@ -106,7 +123,9 @@ def run_one_schema(
     parts = len(re.findall(r"(?:^|\n)\s*\d+\s*[\.\)]", result.get("final_answer", "")))
 
     print(f"\n  Submitted:    {result['submitted']} (by {result['submitted_by']})")
-    print(f"  Turns used:   {result['turns_used']}")
+    print(f"  Turns used:   {result['turns_used']}/{result.get('max_turns', '?')}")
+    print(f"  API calls:    {result.get('api_calls', '?')}")
+    print(f"  Tokens used:  {result.get('tokens_used', '?')}")
     print(f"  Answer parts: {parts} numbered problems")
     print(f"  Chat msgs:    {result['chat_messages']}")
 
@@ -127,6 +146,12 @@ def run_one_schema(
         "agent_model": AGENT_MODEL,
         "judge_model": judge_model_used,
         "rounds": rounds,
+        "max_turns": result.get("max_turns"),
+        "api_calls": result.get("api_calls"),
+        "max_api_calls": result.get("max_api_calls"),
+        "tokens_used": result.get("tokens_used"),
+        "max_total_tokens": result.get("max_total_tokens"),
+        "max_output_tokens_per_call": result.get("max_output_tokens_per_call"),
         "numbered_parts": parts,
         "chat_history": env.chat_history,
         "action_log": env.action_log,
@@ -144,7 +169,25 @@ def main():
     parser.add_argument("--competition", default=DEFAULT_COMPETITION)
     parser.add_argument("--schema", default="round_table", choices=ALL_SCHEMAS)
     parser.add_argument("--all-schemas", action="store_true", help="Run round_table, centralized, decentralized")
-    parser.add_argument("--rounds", type=int, default=2)
+    parser.add_argument(
+        "--rounds",
+        type=int,
+        default=None,
+        help="Max collaboration turns (default: per-competition registry, usually 50)",
+    )
+    parser.add_argument("--max-api-calls", type=int, default=None, help="Optional API call budget")
+    parser.add_argument(
+        "--max-output-tokens-per-call",
+        type=int,
+        default=None,
+        help="Cap model output tokens per agent call (e.g. 4096 for ICPC)",
+    )
+    parser.add_argument(
+        "--max-total-tokens",
+        type=int,
+        default=None,
+        help="Optional team-wide output token budget for the whole run",
+    )
     args = parser.parse_args()
 
     if not os.environ.get("PERPLEXITY_API_KEY"):
@@ -171,6 +214,9 @@ def main():
             args.rounds,
             agent_fn,
             batch_stamp,
+            max_api_calls=args.max_api_calls,
+            max_output_tokens_per_call=args.max_output_tokens_per_call,
+            max_total_tokens=args.max_total_tokens,
         )
         summaries.append(payload)
 
@@ -181,7 +227,7 @@ def main():
         total = extract_total_score(s.get("judge_feedback", ""))
         print(
             f"  {s['schema']:<16} parts={s.get('numbered_parts', '?'):>2}  "
-            f"turns={s['turns_used']:>2}  {total}"
+            f"turns={s['turns_used']:>2}  api={s.get('api_calls', '?'):>3}  {total}"
         )
 
 

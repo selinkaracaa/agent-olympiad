@@ -1,20 +1,27 @@
 import ast
 import json
+import math
 import operator
 import os
 import re
 import subprocess
 import sys
 import tempfile
-from html import unescape
+from pathlib import Path
 from typing import Any, Optional
-from urllib.parse import parse_qs, quote_plus, urlparse
-from urllib.request import Request, urlopen
 
 from communication import CommunicationBudget
+from contest_budget import (
+    ContestBudget,
+    estimate_tokens,
+    resolve_contest_budget,
+    truncate_to_token_budget,
+)
+from contest_rules import get_contest_rules
 from deliberation import DELIBERATION_ACTIONS, DeliberationLedger
 from rules import RuleCardError, load_rule_card
 from runtimes import CompetitionRuntime, RuntimeUnavailableError
+from tools_search import live_web_search, looks_like_answer_lookup
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DEFAULT_BENCHMARK_PATH = os.path.join(REPO_ROOT, "data", "benchmarks")
@@ -50,9 +57,6 @@ TEAM_SIZE_MATRIX = {
     "gcch_harvard": 4,
     "history_olympiad": 4,
     "ichto": 3,
-    "ioaa": 5,
-    "ioai": 4,
-    "iol": 4,
     "mystery_hunt": 12,
     "nyu_ctf_bench": 5,
     "pumac_power": 8,
@@ -70,13 +74,14 @@ TEAM_SIZE_MATRIX = {
 
 COMPETITION_TOOL_REGISTRY = {
     "purple_comet": ["use_calculator"],
-    "fyziklani": ["use_calculator"],
+    "fyziklani": ["use_calculator", "web_search"],
     "iiot": ["execute_code"],
     "icpc": ["execute_code"],
     "mcm": ["execute_code", "web_search"],
     "icm": ["execute_code", "web_search"],
     "ieo_business_case": ["use_calculator", "execute_code", "web_search"],
     "jessup": ["web_search"],
+    "iypt": ["web_search", "execute_code", "use_calculator"],
     "ijso_practical": ["use_calculator", "inspect_environment"],
     "ioaa_group": ["use_calculator", "read_star_chart"],
     "iol_team": [],
@@ -104,7 +109,6 @@ COMPETITION_TOOL_REGISTRY = {
     "science_olympiad": ["use_calculator", "read_official_materials"],
     "odyssey_of_the_mind": [],
     "wmtc": [],
-    # question-level skill corpora (promoted into primary catalog)
     "qanta": [],
     "science_bowl": [],
     "mystery_hunt": ["execute_code", "web_search"],
@@ -122,10 +126,11 @@ ALL_ACTIONS = {
     "write_scratchpad",
     "write_private_notes",
     "submit_final",
-    "query_rules",
+    "sleep",
     "use_calculator",
     "execute_code",
     "web_search",
+    "query_rules",
     "read_official_materials",
     "read_lab_equipment",
     "read_star_chart",
@@ -140,6 +145,7 @@ TOOL_ACTIONS = ALL_ACTIONS - {
     "write_scratchpad",
     "write_private_notes",
     "submit_final",
+    "sleep",
     *DELIBERATION_ACTIONS,
 }
 
@@ -173,36 +179,58 @@ class OlympiadEnvironment:
         competition_id: str,
         problem_id: str,
         base_path: str = DEFAULT_BENCHMARK_PATH,
-        max_turns: Optional[int] = None,
+        max_turns: int | None = None,
+        max_api_calls: int | None = None,
+        max_output_tokens_per_call: int | None = None,
+        max_total_tokens: int | None = None,
     ):
         self.competition_id = competition_id
         self.problem_id = problem_id
         self.base_path = base_path
+        self.problem_data = self._load_problem()
+        self.rule_card = load_rule_card(competition_id)
+
+        budget = resolve_contest_budget(
+            competition_id,
+            max_turns=(
+                max_turns
+                if max_turns is not None
+                else self.rule_card.max_turns
+                if self.rule_card is not None
+                else None
+            ),
+            max_api_calls=max_api_calls,
+            max_output_tokens_per_call=max_output_tokens_per_call,
+            max_total_tokens=max_total_tokens,
+        )
+        self.budget = budget
+        self.max_turns = budget.max_turns
+        self.max_api_calls = budget.max_api_calls
+        self.max_output_tokens_per_call = budget.max_output_tokens_per_call
+        self.max_total_tokens = budget.max_total_tokens
+        self.duration_minutes = budget.duration_minutes
+        self.minutes_per_turn = budget.minutes_per_turn
+        self.simulated_minutes = 0.0
 
         self.chat_history: list[dict[str, str]] = []
         self.action_log: list[dict[str, Any]] = []
         self.deliberation = DeliberationLedger()
-        self.private_notes: dict[str, str] = {}
-        self.workspace = {"scratchpad": "", "final_answer": ""}
-        self.current_turn = 0
-        self.submitted = False
-        self.submitted_by: Optional[str] = None
-
-        self.problem_data = self._load_problem()
-        self.rule_card = load_rule_card(competition_id)
         self.communication = CommunicationBudget(
             self.rule_card.communication if self.rule_card is not None else {}
         )
-        self.max_turns = (
-            int(max_turns)
-            if max_turns is not None
-            else self.rule_card.max_turns
-            if self.rule_card is not None
-            else 50
-        )
-        if self.max_turns < 1:
-            raise ValueError("max_turns must be positive.")
+        self.private_notes: dict[str, str] = {}
+        self.workspace = {"scratchpad": "", "final_answer": ""}
+        self.current_turn = 0  # collaboration turns completed
+        self.action_count = 0  # env actions executed (speak/tools/etc.)
+        self.api_calls = 0  # LLM calls made by collaboration layer
+        self.tokens_used = 0  # estimated output tokens consumed
+        self.submitted = False
+        self.submitted_by: Optional[str] = None
+        self.wrong_submissions = 0
+        self.rule_violations: list[str] = []
+        self.contest_rules = get_contest_rules(competition_id)
         self.runtime = CompetitionRuntime(competition_id, self.problem_data)
+
         if self.rule_card is not None:
             unknown_tools = set(self.rule_card.allowed_tools) - TOOL_ACTIONS
             if unknown_tools:
@@ -213,22 +241,23 @@ class OlympiadEnvironment:
             self.allowed_tools = list(self.rule_card.allowed_tools)
         else:
             self.allowed_tools = list(COMPETITION_TOOL_REGISTRY.get(competition_id, []))
+        # Prefer tools declared in the rules audit when registry is empty but
+        # rules list encoded tools (keeps DATA_COLLECTION + contest_rules aligned).
+        if not self.allowed_tools and self.contest_rules and self.contest_rules.encoded_tools:
+            self.allowed_tools = list(self.contest_rules.encoded_tools)
         if competition_id == "cybench" and self.runtime.allows_open_internet():
             self.allowed_tools.append("web_search")
 
         problem_team_size = self.problem_data.get("team_size")
-        rule_default = (
-            self.rule_card.team_size_default if self.rule_card is not None else None
-        )
-        self.team_size = self._coerce_team_size(
+        self.team_size = self._resolve_team_size(
             problem_team_size,
             competition_id,
-            default_size=rule_default,
+            default_size=(
+                self.rule_card.team_size_default if self.rule_card is not None else None
+            ),
         )
         if self.rule_card is not None and not (
-            self.rule_card.team_size_min
-            <= self.team_size
-            <= self.rule_card.team_size_max
+            self.rule_card.team_size_min <= self.team_size <= self.rule_card.team_size_max
         ):
             raise RuleCardError(
                 f"Problem {problem_id!r} team_size={self.team_size} is outside rule-card "
@@ -236,19 +265,34 @@ class OlympiadEnvironment:
             )
 
     @staticmethod
-    def _coerce_team_size(
-        raw: Any,
-        competition_id: str,
-        *,
-        default_size: Optional[int] = None,
+    def _resolve_team_size(
+        raw: Any, competition_id: str, *, default_size: int | None = None
     ) -> int:
-        if isinstance(raw, int) and raw > 0:
+        if raw is None:
+            return default_size or TEAM_SIZE_MATRIX.get(competition_id, 3)
+        if isinstance(raw, int):
             return raw
-        if isinstance(raw, str) and raw.strip().isdigit():
-            return int(raw.strip())
-        if default_size is not None:
-            return default_size
-        return TEAM_SIZE_MATRIX.get(competition_id, 3)
+        text = str(raw).strip()
+        if not text:
+            return default_size or TEAM_SIZE_MATRIX.get(competition_id, 3)
+        if "-" in text:
+            # Ranges like "2-5" → use upper bound for agent count.
+            parts = text.split("-", 1)
+            try:
+                return int(parts[1].strip())
+            except ValueError:
+                return default_size or TEAM_SIZE_MATRIX.get(competition_id, 3)
+        try:
+            return int(text)
+        except ValueError:
+            return default_size or TEAM_SIZE_MATRIX.get(competition_id, 3)
+
+    def _problem_statement(self) -> str:
+        for key in ("problem_description", "description", "prompt", "topic"):
+            value = self.problem_data.get(key)
+            if value and str(value).strip():
+                return str(value).strip()
+        return f"Problem {self.problem_id} ({self.competition_id})"
 
     def _benchmark_file(self) -> str:
         return os.path.join(self.base_path, self.competition_id, "benchmark.json")
@@ -276,7 +320,7 @@ class OlympiadEnvironment:
         return list(self.allowed_tools)
 
     def get_metadata(self) -> dict:
-        gold = self.problem_data.get("gold_label") or {}
+        rules = self.contest_rules
         metadata = {
             "competition_id": self.competition_id,
             "problem_id": self.problem_id,
@@ -285,9 +329,15 @@ class OlympiadEnvironment:
             "task_type": self.problem_data.get("task_type"),
             "team_size": self.team_size,
             "allowed_tools": self.get_available_tools(),
-            "has_gold_answer": bool(
-                gold.get("expected_answer") or gold.get("parts") or gold.get("answers")
+            "has_gold_answer": bool(self.problem_data.get("gold_label", {}).get("expected_answer")),
+            "search_policy": rules.search_policy if rules else None,
+            "wrong_submission_penalty_minutes": (
+                rules.wrong_submission_penalty_minutes if rules else None
             ),
+            "rules_gap_count": len(rules.gaps()) if rules else None,
+            "duration_minutes": self.duration_minutes,
+            "max_turns": self.max_turns,
+            "minutes_per_turn": self.minutes_per_turn,
         }
         if self.rule_card is not None:
             from rules.views import agent_view
@@ -297,70 +347,17 @@ class OlympiadEnvironment:
 
     def query_rules(self, query: str = "", *, agent_name: str | None = None) -> str:
         if self.rule_card is None:
-            return json.dumps(
-                {
-                    "competition_id": self.competition_id,
-                    "allowed_tools": self.get_available_tools(),
-                    "team_size": self.team_size,
-                    "note": "No rule card on file; legacy env defaults are in effect.",
-                },
-                ensure_ascii=False,
-                indent=2,
-            )
-        card = self.rule_card
-        role_scoped = card.information_policy.get("mode") in {
-            "role_scoped",
-            "role_specialized",
-        }
-        if role_scoped and agent_name:
-            role = card.role_for(agent_name)
-            if role is None:
-                return json.dumps(
-                    {"error": f"No rule-card role found for {agent_name!r}."},
-                    ensure_ascii=False,
-                    indent=2,
-                )
             payload = {
-                "rule_id": card.rule_id,
-                "competition_id": card.competition_id,
-                "your_role": {
-                    "name": role.name,
-                    "title": role.title,
-                    "duties": list(role.duties),
-                    "may_submit": role.may_submit,
-                    "information_access": list(role.information_access),
-                    "rule_expertise": list(role.rule_expertise),
-                },
-                "allowed_tools": list(card.allowed_tools),
-                "agent_constraints": list(card.agent_constraints),
-                "deliberation": card.deliberation,
-                "communication": card.communication,
+                "competition_id": self.competition_id,
+                "allowed_tools": self.get_available_tools(),
+                "team_size": self.team_size,
+                "note": "No rule card on file; legacy env defaults are in effect.",
             }
-            if card.role_can_access(agent_name, "contest_rules"):
-                payload.update(
-                    {
-                        "profile": card.profile,
-                        "protocol": card.protocol,
-                        "rules_text": card.rules_text,
-                        "human_constraints": list(card.human_constraints),
-                        "answer_format": card.answer_format,
-                        "resources": card.resources,
-                    }
-                )
-            else:
-                payload["contest_rules"] = (
-                    "Not included in your private briefing. Ask a teammate who "
-                    "holds the contest-rules packet to summarize relevant constraints."
-                )
-            if role.rule_expertise:
-                payload["your_rule_specialties"] = {
-                    category: card.rule_sections.get(category, [])
-                    for category in role.rule_expertise
-                }
-            prefix = f"Rule query: {query}\n" if query.strip() else ""
-            return prefix + json.dumps(payload, ensure_ascii=False, indent=2)
+            return json.dumps(payload, ensure_ascii=False, indent=2)
 
-        payload = {
+        card = self.rule_card
+        role = card.role_for(agent_name) if agent_name else None
+        payload: dict[str, Any] = {
             "rule_id": card.rule_id,
             "competition_id": card.competition_id,
             "profile": card.profile,
@@ -373,39 +370,127 @@ class OlympiadEnvironment:
             "resources": card.resources,
             "deliberation": card.deliberation,
             "communication": card.communication,
-            "agent_roles": [
-                {
-                    "name": role.name,
-                    "title": role.title,
-                    "duties": list(role.duties),
-                    "may_submit": role.may_submit,
-                }
-                for role in card.roster(self.team_size)
-            ],
         }
+        if role is not None:
+            payload["your_role"] = {
+                "name": role.name,
+                "title": role.title,
+                "duties": list(role.duties),
+                "may_submit": role.may_submit,
+                "information_access": list(role.information_access),
+                "rule_expertise": list(role.rule_expertise),
+            }
+            if role.rule_expertise:
+                payload["your_rule_specialties"] = {
+                    category: card.rule_sections.get(category, [])
+                    for category in role.rule_expertise
+                }
+        else:
+            payload["agent_roles"] = [
+                {
+                    "name": item.name,
+                    "title": item.title,
+                    "duties": list(item.duties),
+                    "may_submit": item.may_submit,
+                }
+                for item in card.roster(self.team_size)
+            ]
         prefix = f"Rule query: {query}\n" if query.strip() else ""
         return prefix + json.dumps(payload, ensure_ascii=False, indent=2)
 
     def get_state(self) -> dict:
+        api_status = (
+            f"{self.api_calls}/{self.max_api_calls}"
+            if self.max_api_calls is not None
+            else f"{self.api_calls}/∞"
+        )
+        token_status = (
+            f"{self.tokens_used}/{self.max_total_tokens}"
+            if self.max_total_tokens is not None
+            else f"{self.tokens_used}/∞"
+        )
+        per_call_cap = (
+            str(self.max_output_tokens_per_call)
+            if self.max_output_tokens_per_call is not None
+            else "∞"
+        )
         return {
             "competition_id": self.competition_id,
             "problem_id": self.problem_id,
             "team_size": self.team_size,
             "allowed_tools": self.get_available_tools(),
-            "problem_statement": self.problem_data["problem_description"],
+            "problem_statement": self._problem_statement(),
             "chat_logs": list(self.chat_history),
             "shared_workspace": dict(self.workspace),
             "deliberation": self.deliberation.report(),
             "communication": self.communication.report(),
             "turn_status": f"{self.current_turn}/{self.max_turns}",
+            "api_call_status": api_status,
+            "token_status": token_status,
+            "output_token_cap_per_call": per_call_cap,
             "submitted": self.submitted,
+            "wrong_submissions": self.wrong_submissions,
+            "search_policy": self.contest_rules.search_policy if self.contest_rules else None,
+            "duration_minutes": self.duration_minutes,
+            "simulated_minutes": self.simulated_minutes,
+            "clock_status": (
+                f"{self.simulated_minutes:g}/{self.duration_minutes} min"
+                if self.duration_minutes is not None
+                else f"{self.simulated_minutes:g} min"
+            ),
         }
 
-    def _check_turn_limit(self) -> None:
+    def turns_exhausted(self) -> bool:
+        """True when no further collaboration turns may be started."""
+        return self.current_turn >= self.max_turns
+
+    def can_begin_turn(self) -> bool:
         if self.current_turn >= self.max_turns:
+            return False
+        # WA penalties burn remaining contest clock; stop when duration is spent.
+        if (
+            self.duration_minutes is not None
+            and self.simulated_minutes >= float(self.duration_minutes)
+        ):
+            return False
+        return True
+
+    def api_budget_exhausted(self) -> bool:
+        return self.max_api_calls is not None and self.api_calls >= self.max_api_calls
+
+    def token_budget_exhausted(self) -> bool:
+        return self.max_total_tokens is not None and self.tokens_used >= self.max_total_tokens
+
+    def apply_output_token_budget(self, text: str) -> str:
+        """Enforce per-call and team-wide output token caps."""
+        capped = text
+        if self.max_output_tokens_per_call is not None:
+            capped = truncate_to_token_budget(capped, self.max_output_tokens_per_call)
+        if self.max_total_tokens is not None:
+            remaining = self.max_total_tokens - self.tokens_used
+            capped = truncate_to_token_budget(capped, remaining)
+        self.tokens_used += estimate_tokens(capped)
+        return capped
+
+    def begin_turn(self) -> int:
+        """Start a collaboration turn (time step). Raises if turn budget is spent."""
+        if not self.can_begin_turn():
             raise TurnLimitExceededError(
                 f"Turn limit reached ({self.max_turns}) for {self.problem_id}"
             )
+        self.current_turn += 1
+        # Advance by turn schedule, but never rewind time already burned by WA.
+        turn_clock = self.budget.simulated_minutes_for_turns(self.current_turn)
+        self.simulated_minutes = max(self.simulated_minutes, turn_clock)
+        return self.current_turn
+
+    def record_api_call(self) -> None:
+        """Count one LLM call against the cost budget."""
+        if self.api_budget_exhausted():
+            raise TurnLimitExceededError(
+                f"API call budget reached ({self.max_api_calls}) for {self.problem_id}"
+            )
+        self.api_calls += 1
 
     def _log_action(self, agent_name: str, action_type: str, payload: str, result: str) -> None:
         self.action_log.append(
@@ -431,7 +516,7 @@ class OlympiadEnvironment:
             and self.rule_card.deliberation.get("mode") == "structured"
         ):
             return (
-                f"RULE VIOLATION: Structured deliberation action "
+                "RULE VIOLATION: Structured deliberation action "
                 f"'{action_type}' is not enabled for {self.competition_id}."
             )
         if action_type == "submit_final" and self.submitted:
@@ -439,8 +524,7 @@ class OlympiadEnvironment:
         return None
 
     def execute_action(self, agent_name: str, action_type: str, payload: str) -> str:
-        self._check_turn_limit()
-        self.current_turn += 1
+        self.action_count += 1
 
         violation = self.validate_action(action_type)
         if violation:
@@ -454,12 +538,7 @@ class OlympiadEnvironment:
             turn=self.current_turn,
         )
         if communication_violation:
-            self._log_action(
-                agent_name,
-                action_type,
-                payload,
-                communication_violation,
-            )
+            self._log_action(agent_name, action_type, payload, communication_violation)
             return communication_violation
 
         if action_type == "speak":
@@ -482,11 +561,11 @@ class OlympiadEnvironment:
             )
             if not result.startswith("Deliberation error:"):
                 self.chat_history.append(
-                    {
-                        "sender": agent_name,
-                        "message": f"[DELIBERATION] {result}",
-                    }
+                    {"sender": agent_name, "message": f"[DELIBERATION] {result}"}
                 )
+        elif action_type == "sleep":
+            reason = payload.strip() or "passing this turn"
+            result = f"{agent_name} sleeps ({reason})."
         elif action_type == "submit_final":
             error = self._validate_submission(payload)
             if error:
@@ -514,12 +593,25 @@ class OlympiadEnvironment:
         elif action_type == "read_official_materials":
             result = self._read_official_materials(payload)
         elif action_type == "read_lab_equipment":
+            loaded = self._tool_asset_text("lab", payload)
             result = (
-                "Lab equipment is not connected to a task-specific simulator. "
-                "Use inspect_environment for the verified runtime status."
+                f"[read_lab_equipment]\n{loaded}"
+                if loaded
+                else (
+                    f"[read_lab_equipment] No fixture for {payload!r}. "
+                    "Add problem assets/tool_fixtures with lab readings."
+                )
             )
         elif action_type == "read_star_chart":
-            result = f"[read_star_chart stub] Simulated star chart for: {payload}"
+            loaded = self._tool_asset_text("star", payload)
+            result = (
+                f"[read_star_chart]\n{loaded}"
+                if loaded
+                else (
+                    f"[read_star_chart] No fixture for {payload!r}. "
+                    "Add problem assets/tool_fixtures with chart data."
+                )
+            )
         elif action_type == "inspect_environment":
             result = self.runtime.inspect()
         elif action_type == "start_environment":
@@ -532,15 +624,95 @@ class OlympiadEnvironment:
             result = f"Operational error: action '{action_type}' not implemented."
 
         if not result.startswith("Deliberation error:"):
-            self.communication.record(
-                agent_name=agent_name,
-                action_type=action_type,
-            )
+            self.communication.record(agent_name=agent_name, action_type=action_type)
         self._log_action(agent_name, action_type, payload, result)
         return result
 
     def get_private_notes(self, agent_name: str) -> str:
         return self.private_notes.get(agent_name, "")
+
+    def _run_web_search(self, payload: str) -> str:
+        """Live search with contest policy + answer-key anti-cheat."""
+        policy = self.contest_rules.search_policy if self.contest_rules else "forbidden"
+        query = (payload or "").strip()
+        if policy == "forbidden":
+            msg = "RULE VIOLATION: web_search is banned for this contest."
+            self.rule_violations.append(msg)
+            return msg
+        if policy == "judge_only":
+            msg = (
+                "RULE VIOLATION: only the online judge network is allowed "
+                "(no open web search)."
+            )
+            self.rule_violations.append(msg)
+            return msg
+        if looks_like_answer_lookup(query):
+            msg = (
+                "RULE VIOLATION: search query looks like an answer-key lookup "
+                f"(policy={policy}). Query blocked."
+            )
+            self.rule_violations.append(msg)
+            return msg
+        try:
+            report = live_web_search(query)
+            if policy == "no_solution_lookup":
+                report += (
+                    "\n[policy=no_solution_lookup] Do not search solution methods "
+                    "or official answers."
+                )
+            return report
+        except Exception as exc:
+            return f"web_search error: {exc}"
+
+    def _tool_asset_text(self, role_substring: str, payload: str) -> str | None:
+        """Load text/JSON assets from problem metadata for lab/star tools."""
+        needle = role_substring.lower()
+        for asset in self.problem_data.get("assets") or []:
+            role = str(asset.get("role") or "").lower()
+            path_text = str(asset.get("path") or "")
+            if needle not in role and needle not in path_text.lower():
+                continue
+            path = Path(path_text)
+            if not path.is_absolute():
+                path = Path(REPO_ROOT) / path
+            if path.is_file():
+                return path.read_text(encoding="utf-8", errors="replace")[:8000]
+        fixtures = self.problem_data.get("tool_fixtures") or {}
+        key = payload.strip() or role_substring
+        if key in fixtures:
+            return str(fixtures[key])[:8000]
+        if role_substring in fixtures:
+            return str(fixtures[role_substring])[:8000]
+        return None
+
+    def record_wrong_submission(self) -> None:
+        """WA/TLE/RE: burn contest clock (remove remaining time), don't stack a bonus.
+
+        Real ICPC ranking adds 20 min to the time score; in this simulator we model
+        the cost as consuming 20 minutes of the remaining shared contest clock so
+        teams have less time left to keep working.
+        """
+        self.wrong_submissions += 1
+        rules = self.contest_rules
+        if not rules or rules.wrong_submission_penalty_minutes is None:
+            return
+        burn = float(rules.wrong_submission_penalty_minutes)
+        self.simulated_minutes += burn
+        step = float(
+            self.budget.clock_minutes_per_turn
+            or self.minutes_per_turn
+            or 5.0
+        )
+        if step > 0:
+            turns_burned = max(1, int(math.ceil(burn / step)))
+            self.current_turn = min(self.max_turns, self.current_turn + turns_burned)
+
+    def penalty_minutes(self) -> int | None:
+        """Minutes of contest clock burned by wrong submissions so far."""
+        rules = self.contest_rules
+        if not rules or rules.wrong_submission_penalty_minutes is None:
+            return None
+        return self.wrong_submissions * rules.wrong_submission_penalty_minutes
 
     def _validate_submission(self, payload: str) -> Optional[str]:
         if not payload or not payload.strip():
@@ -562,6 +734,8 @@ class OlympiadEnvironment:
     def _eval_ast(node: ast.AST) -> float:
         if isinstance(node, ast.Constant) and isinstance(node.value, (int, float)):
             return float(node.value)
+        if isinstance(node, ast.Num):
+            return float(node.n)
         if isinstance(node, ast.BinOp) and type(node.op) in _SAFE_BINOPS:
             left = OlympiadEnvironment._eval_ast(node.left)
             right = OlympiadEnvironment._eval_ast(node.right)
@@ -574,16 +748,12 @@ class OlympiadEnvironment:
         return f"Calculator output: {self._safe_calculate(payload)}"
 
     @staticmethod
-    def _validate_isolated_code(
-        payload: str,
-        extra_modules: frozenset[str] = frozenset(),
-    ) -> str | None:
-        """Keep role-scoped code execution computational, not a repository reader."""
+    def _validate_isolated_code(payload: str) -> str | None:
+        """Keep role-specialized execution computational, not a repository reader."""
         try:
             tree = ast.parse(payload, mode="exec")
         except SyntaxError as exc:
             return f"Code error: {exc}"
-
         safe_modules = {
             "collections",
             "decimal",
@@ -594,7 +764,6 @@ class OlympiadEnvironment:
             "math",
             "random",
             "statistics",
-            *extra_modules,
         }
         banned_names = {"open", "exec", "eval", "compile", "__import__", "input"}
         for node in ast.walk(tree):
@@ -615,23 +784,15 @@ class OlympiadEnvironment:
                 return "Code error: dunder attribute access is unavailable."
         return None
 
-    def _run_code(
-        self,
-        payload: str,
-        *,
-        isolated: bool = False,
-        stdin: str | None = None,
-        extra_modules: frozenset[str] = frozenset(),
-    ) -> str:
+    def _run_code(self, payload: str, *, isolated: bool = False) -> str:
         if isolated:
-            error = self._validate_isolated_code(payload, extra_modules=extra_modules)
+            error = self._validate_isolated_code(payload)
             if error:
                 return error
         try:
             with tempfile.TemporaryDirectory(prefix="agent-olympiad-code-") as workdir:
                 proc = subprocess.run(
                     [sys.executable, "-I", "-c", payload],
-                    input=stdin,
                     capture_output=True,
                     text=True,
                     timeout=5,
@@ -647,52 +808,19 @@ class OlympiadEnvironment:
         except OSError as exc:
             return f"Code error: {exc}"
 
-    @staticmethod
-    def _run_web_search(query: str) -> str:
-        if not query.strip():
-            return "Web search error: query cannot be empty."
-        try:
-            request = Request(
-                f"https://lite.duckduckgo.com/lite/?q={quote_plus(query.strip())}",
-                headers={"User-Agent": "Mozilla/5.0 AgentOlympiad/1.0"},
-            )
-            with urlopen(request, timeout=10) as response:
-                html = response.read(1_000_000).decode("utf-8", errors="replace")
-            matches = re.findall(
-                r"<a[^>]+href=[\"']([^\"']+)[\"'][^>]*>(.*?)</a>",
-                html,
-                flags=re.IGNORECASE | re.DOTALL,
-            )
-            results = []
-            for url, title_html in matches:
-                title = unescape(re.sub(r"<[^>]+>", "", title_html)).strip()
-                if not title or title.lower() == "duckduckgo":
-                    continue
-                if url.startswith("//duckduckgo.com/l/"):
-                    url = parse_qs(urlparse("https:" + url).query).get("uddg", [url])[0]
-                results.append(f"- {title}\n  {unescape(url)}")
-                if len(results) == 5:
-                    break
-            if not results:
-                return "Web search returned no parseable results."
-            return "Web search results:\n" + "\n".join(results)
-        except (OSError, TimeoutError, ValueError) as exc:
-            return f"Web search error: {exc}"
-
     def _read_official_materials(self, query: str) -> str:
         raw_root = os.path.realpath(os.path.join(REPO_ROOT, "data", "raw"))
         declared = [self.problem_data.get("source_file")]
         declared.extend(self.problem_data.get("agent_visible_files") or [])
-        files = []
+        files: list[str] = []
         for value in declared:
             if not value:
                 continue
             candidate = os.path.realpath(os.path.join(REPO_ROOT, str(value)))
-            if os.path.commonpath([candidate, raw_root]) != raw_root:
-                continue
-            if os.path.isfile(candidate):
+            if os.path.commonpath([candidate, raw_root]) == raw_root and os.path.isfile(
+                candidate
+            ):
                 files.append(candidate)
-
         if not files:
             return (
                 "Official-material lookup unavailable: this problem has no existing "
@@ -700,7 +828,7 @@ class OlympiadEnvironment:
             )
 
         needle = query.strip().lower()
-        excerpts = []
+        excerpts: list[str] = []
         for path in files[:10]:
             try:
                 if path.lower().endswith(".pdf"):
@@ -717,21 +845,15 @@ class OlympiadEnvironment:
                     with open(path, "r", encoding="utf-8", errors="replace") as handle:
                         text = handle.read(2_000_000)
                 else:
-                    excerpts.append(f"{os.path.relpath(path, REPO_ROOT)} (binary material)")
                     continue
             except (OSError, ValueError) as exc:
                 excerpts.append(f"{os.path.relpath(path, REPO_ROOT)}: read error: {exc}")
                 continue
-
-            if not needle:
-                excerpt = text[:1500]
-            else:
-                index = text.lower().find(needle)
-                if index < 0:
-                    continue
-                excerpt = text[max(0, index - 500) : index + len(needle) + 1000]
+            index = text.lower().find(needle) if needle else 0
+            if index < 0:
+                continue
+            excerpt = text[max(0, index - 500) : index + len(needle) + 1000]
             excerpts.append(f"=== {os.path.relpath(path, REPO_ROOT)} ===\n{excerpt.strip()}")
-
         if not excerpts:
             return f"No occurrence of {query!r} in the declared official materials."
         return "\n\n".join(excerpts)[:12000]
@@ -764,9 +886,59 @@ class OlympiadEnvironment:
             }
 
         answer = self.workspace["final_answer"]
-        gold = self.problem_data.get("gold_label", {})
+        gold = self.problem_data.get("gold_label", {}) or {}
         expected = gold.get("expected_answer")
         rubric = gold.get("grading_rubric") or ""
+        evaluation = self.problem_data.get("evaluation") or {}
+
+        # Prefer structured curated short answers when present.
+        parts = gold.get("parts") or []
+        if any(str(p.get("expected") or "").strip() for p in parts):
+            try:
+                from evaluation.gold import GoldAnswerEvaluator, load_gold_parts
+
+                result = GoldAnswerEvaluator(
+                    parts=load_gold_parts(gold),
+                    submission_text=answer,
+                ).evaluate()
+                return {
+                    "graded": True,
+                    "method": "gold_answer_v1",
+                    "score": result.total_score,
+                    "max_score": result.max_score,
+                    "correct": result.total_score >= result.max_score,
+                    "evaluation": result.to_dict(),
+                    "submitted_by": self.submitted_by,
+                }
+            except Exception as exc:
+                # Fall through to other graders.
+                gold_error = str(exc)
+        else:
+            gold_error = None
+
+        task_type = self.problem_data.get("task_type", "")
+        if task_type in {"algorithmic_programming", "programming"} or evaluation.get(
+            "evaluator_id"
+        ) == "programming_judge":
+            from evaluation.programming_judge import judge_programming_submission
+
+            judged = judge_programming_submission(
+                self.problem_data,
+                answer,
+                competition_id=self.competition_id,
+                repo_root=Path(REPO_ROOT),
+                fetch_kattis=True,
+            )
+            if judged.wrong_submission:
+                self.record_wrong_submission()
+            grade = judged.to_grade_dict(submitted_by=self.submitted_by)
+            grade["penalty_minutes"] = self.penalty_minutes()
+            grade["simulated_minutes"] = self.simulated_minutes
+            grade["clock_burned_by_wa"] = bool(judged.wrong_submission)
+            if judged.verdict == "AC":
+                # Clock already includes any prior WA burns; do not add again.
+                grade["icpc_time_score"] = int(self.simulated_minutes)
+            return grade
 
         if expected:
             norm_answer = self._normalize_answer(answer)
@@ -790,18 +962,7 @@ class OlympiadEnvironment:
                 "note": "Answer did not match gold via substring check; use LLM judge for partial credit.",
             }
 
-        task_type = self.problem_data.get("task_type", "")
-        if task_type in {"algorithmic_programming", "programming"}:
-            return {
-                "graded": False,
-                "method": "judge_sandbox_required",
-                "score": None,
-                "max_score": None,
-                "reason": "ICPC/IIOT problems require an automated judge, not text gold.",
-                "submitted_by": self.submitted_by,
-            }
-
-        return {
+        payload = {
             "graded": False,
             "method": "llm_judge_required",
             "score": None,
@@ -810,6 +971,9 @@ class OlympiadEnvironment:
             "grading_rubric": rubric,
             "submitted_by": self.submitted_by,
         }
+        if gold_error:
+            payload["gold_error"] = gold_error
+        return payload
 
     def reset(self) -> None:
         self.chat_history.clear()
@@ -819,5 +983,11 @@ class OlympiadEnvironment:
         self.private_notes.clear()
         self.workspace = {"scratchpad": "", "final_answer": ""}
         self.current_turn = 0
+        self.simulated_minutes = 0.0
+        self.action_count = 0
+        self.api_calls = 0
+        self.tokens_used = 0
         self.submitted = False
         self.submitted_by = None
+        self.wrong_submissions = 0
+        self.rule_violations.clear()

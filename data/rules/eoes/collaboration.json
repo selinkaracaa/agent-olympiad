@@ -88,7 +88,7 @@
       "Do not look up answer keys or hidden solutions."
     ],
     "evaluation_criteria": [
-      "Repository evaluation status: Task performance is specified per problem_or_question in gold_or_judge mode, but the repository evaluator is deferred; do not invent a completed score."
+      "Repository evaluation status: Task performance is specified per problem_or_question in gold_or_judge mode, but the repository evaluator is unassigned; do not invent a completed score."
     ],
     "runtime_limitations": [
       "Runtime limitation: Wet-lab / instrument practicals are non-comparable to PDF reading agents without a lab proxy.",

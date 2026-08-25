@@ -3,8 +3,8 @@
   "scoring": {
     "mode": "gold",
     "unit": "problem_or_question",
-    "evaluator_id": null,
-    "evaluator_status": "deferred_benchmark_metadata_missing",
+    "evaluator_id": "rubric_llm_v1",
+    "evaluator_status": "ready",
     "recommended_evaluator_id": "gold_answer_v1",
     "official_performance": {
       "source_status": "source_grounded",
@@ -181,7 +181,9 @@
         "season"
       ],
       "submission_adaptation": null
-    }
+    },
+    "rubric_path": "data/rubrics/worked_answer_100_v1.json",
+    "evaluator_strategy": "structured_rubric_llm_judge"
   },
   "submission": {
     "max_count": 1

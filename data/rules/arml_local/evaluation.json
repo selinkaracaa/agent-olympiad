@@ -131,7 +131,6 @@
   },
   "submission": {
     "max_count": 1,
-    "finality": "irrevocable",
-    "adaptation": "The official Team Round contains 15 questions; current benchmark rows serialize only 10 answer parts."
+    "finality": "irrevocable"
   }
 }

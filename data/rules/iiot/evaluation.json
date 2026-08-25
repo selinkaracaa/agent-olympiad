@@ -206,6 +206,6 @@
   },
   "submission": {
     "max_count": 1,
-    "adaptation": "Official contests send source programs to an automatic evaluator, possibly more than once; this session still accepts a single final source text without live pending latency, dual-machine leases, or published ranking."
+    "adaptation": "Official submissions are compiled and judged; the runner submits source text only."
   }
 }

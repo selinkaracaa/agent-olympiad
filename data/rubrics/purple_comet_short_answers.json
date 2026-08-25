@@ -1,2147 +1,6 @@
 {
-  "_comment": "Official organizer answer-key/rubric extraction. Coverage is intentionally partial where no official local solution or marking allocation is available.",
-  "_dataset": "purple_comet",
-  "_kind": "short_answer_mapping",
-  "_provenance_policy": "Only benchmark-linked official organizer problem, solution, answer-key, or marking files were used.",
-  "purple_comet_2005_hs": {
-    "1": {
-      "expected": "490"
-    },
-    "2": {
-      "expected": "382"
-    },
-    "3": {
-      "expected": "96"
-    },
-    "4": {
-      "expected": "105717501"
-    },
-    "5": {
-      "expected": "11"
-    },
-    "6": {
-      "expected": "72"
-    },
-    "7": {
-      "expected": "3146"
-    },
-    "8": {
-      "expected": "70"
-    },
-    "9": {
-      "expected": "50"
-    },
-    "10": {
-      "expected": "16"
-    },
-    "11": {
-      "expected": "15"
-    },
-    "12": {
-      "expected": "4"
-    },
-    "13": {
-      "expected": "33"
-    },
-    "14": {
-      "expected": "24"
-    },
-    "15": {
-      "expected": "2052"
-    },
-    "16": {
-      "expected": "77"
-    },
-    "17": {
-      "expected": "1999"
-    },
-    "18": {
-      "expected": "13"
-    },
-    "19": {
-      "expected": "18"
-    },
-    "20": {
-      "expected": "37"
-    },
-    "21": {
-      "expected": "5393"
-    },
-    "22": {
-      "expected": "349526"
-    },
-    "23": {
-      "expected": "1024"
-    },
-    "24": {
-      "expected": "122"
-    },
-    "25": {
-      "expected": "48"
-    },
-    "_provenance": {
-      "organizer": "Purple Comet! Math Meet",
-      "source_url": "https://purplecomet.org/files/2005HS_English.pdf",
-      "source_file": "data/raw/purple_comet/2005/purple_comet_hs_2005.pdf",
-      "solution_file": "data/raw/purple_comet/2005/purple_comet_hs_2005_answers.json"
-    },
-    "_coverage": {
-      "covered_parts": 25,
-      "expected_parts": 25,
-      "scoring_note": "Exact-match each response against the official ordered numeric answer list. No written solutions or reliable official per-problem point weights are present locally, so score by number correct and leave total_points null."
-    }
-  },
-  "purple_comet_2005_ms": {
-    "1": {
-      "expected": "14580"
-    },
-    "2": {
-      "expected": "102"
-    },
-    "3": {
-      "expected": "96"
-    },
-    "4": {
-      "expected": "118"
-    },
-    "5": {
-      "expected": "126632"
-    },
-    "6": {
-      "expected": "382"
-    },
-    "7": {
-      "expected": "24"
-    },
-    "8": {
-      "expected": "29"
-    },
-    "9": {
-      "expected": "4"
-    },
-    "10": {
-      "expected": "7"
-    },
-    "11": {
-      "expected": "30"
-    },
-    "12": {
-      "expected": "24"
-    },
-    "13": {
-      "expected": "125"
-    },
-    "14": {
-      "expected": "40"
-    },
-    "15": {
-      "expected": "2052"
-    },
-    "_provenance": {
-      "organizer": "Purple Comet! Math Meet",
-      "source_url": "https://purplecomet.org/files/2005MS_English.pdf",
-      "source_file": "data/raw/purple_comet/2005/purple_comet_ms_2005.pdf",
-      "solution_file": "data/raw/purple_comet/2005/purple_comet_ms_2005_answers.json"
-    },
-    "_coverage": {
-      "covered_parts": 15,
-      "expected_parts": 15,
-      "scoring_note": "Exact-match each response against the official ordered numeric answer list. No written solutions or reliable official per-problem point weights are present locally, so score by number correct and leave total_points null."
-    }
-  },
-  "purple_comet_2006_hs": {
-    "1": {
-      "expected": "630"
-    },
-    "2": {
-      "expected": "1875"
-    },
-    "3": {
-      "expected": "39"
-    },
-    "4": {
-      "expected": "450"
-    },
-    "5": {
-      "expected": "47094"
-    },
-    "6": {
-      "expected": "12354"
-    },
-    "7": {
-      "expected": "41"
-    },
-    "8": {
-      "expected": "185"
-    },
-    "9": {
-      "expected": "163"
-    },
-    "10": {
-      "expected": "114"
-    },
-    "11": {
-      "expected": "168"
-    },
-    "12": {
-      "expected": "120"
-    },
-    "13": {
-      "expected": "138600"
-    },
-    "14": {
-      "expected": "237"
-    },
-    "15": {
-      "expected": "61"
-    },
-    "16": {
-      "expected": "122"
-    },
-    "17": {
-      "expected": "24300"
-    },
-    "18": {
-      "expected": "784"
-    },
-    "19": {
-      "expected": "225"
-    },
-    "20": {
-      "expected": "1932"
-    },
-    "21": {
-      "expected": "6"
-    },
-    "22": {
-      "expected": "34"
-    },
-    "23": {
-      "expected": "120"
-    },
-    "24": {
-      "expected": "361"
-    },
-    "25": {
-      "expected": "9"
-    },
-    "_provenance": {
-      "organizer": "Purple Comet! Math Meet",
-      "source_url": "https://purplecomet.org/files/2006HS_English.pdf",
-      "source_file": "data/raw/purple_comet/2006/purple_comet_hs_2006.pdf",
-      "solution_file": "data/raw/purple_comet/2006/purple_comet_hs_2006_answers.json"
-    },
-    "_coverage": {
-      "covered_parts": 25,
-      "expected_parts": 25,
-      "scoring_note": "Exact-match each response against the official ordered numeric answer list. No written solutions or reliable official per-problem point weights are present locally, so score by number correct and leave total_points null."
-    }
-  },
-  "purple_comet_2006_ms": {
-    "1": {
-      "expected": "783"
-    },
-    "2": {
-      "expected": "10"
-    },
-    "3": {
-      "expected": "527"
-    },
-    "4": {
-      "expected": "279"
-    },
-    "5": {
-      "expected": "630"
-    },
-    "6": {
-      "expected": "7"
-    },
-    "7": {
-      "expected": "1875"
-    },
-    "8": {
-      "expected": "450"
-    },
-    "9": {
-      "expected": "132"
-    },
-    "10": {
-      "expected": "163"
-    },
-    "11": {
-      "expected": "0"
-    },
-    "12": {
-      "expected": "270"
-    },
-    "13": {
-      "expected": "114"
-    },
-    "14": {
-      "expected": "5491"
-    },
-    "15": {
-      "expected": "24300"
-    },
-    "_provenance": {
-      "organizer": "Purple Comet! Math Meet",
-      "source_url": "https://purplecomet.org/files/2006MS_English.pdf",
-      "source_file": "data/raw/purple_comet/2006/purple_comet_ms_2006.pdf",
-      "solution_file": "data/raw/purple_comet/2006/purple_comet_ms_2006_answers.json"
-    },
-    "_coverage": {
-      "covered_parts": 15,
-      "expected_parts": 15,
-      "scoring_note": "Exact-match each response against the official ordered numeric answer list. No written solutions or reliable official per-problem point weights are present locally, so score by number correct and leave total_points null."
-    }
-  },
-  "purple_comet_2007_hs": {
-    "1": {
-      "expected": "231"
-    },
-    "2": {
-      "expected": "7"
-    },
-    "3": {
-      "expected": "45"
-    },
-    "4": {
-      "expected": "120"
-    },
-    "5": {
-      "expected": "383"
-    },
-    "6": {
-      "expected": "770"
-    },
-    "7": {
-      "expected": "65"
-    },
-    "8": {
-      "expected": "67"
-    },
-    "9": {
-      "expected": "1094"
-    },
-    "10": {
-      "expected": "125"
-    },
-    "11": {
-      "expected": "617"
-    },
-    "12": {
-      "expected": "216"
-    },
-    "13": {
-      "expected": "65"
-    },
-    "14": {
-      "expected": "6117"
-    },
-    "15": {
-      "expected": "252"
-    },
-    "16": {
-      "expected": "70"
-    },
-    "17": {
-      "expected": "19080"
-    },
-    "18": {
-      "expected": "16"
-    },
-    "19": {
-      "expected": "1106"
-    },
-    "20": {
-      "expected": "776"
-    },
-    "21": {
-      "expected": "7"
-    },
-    "22": {
-      "expected": "19683"
-    },
-    "23": {
-      "expected": "192"
-    },
-    "24": {
-      "expected": "121"
-    },
-    "25": {
-      "expected": "133"
-    },
-    "_provenance": {
-      "organizer": "Purple Comet! Math Meet",
-      "source_url": "https://purplecomet.org/files/2007HS_English.pdf",
-      "source_file": "data/raw/purple_comet/2007/purple_comet_hs_2007.pdf",
-      "solution_file": "data/raw/purple_comet/2007/purple_comet_hs_2007_answers.json"
-    },
-    "_coverage": {
-      "covered_parts": 25,
-      "expected_parts": 25,
-      "scoring_note": "Exact-match each response against the official ordered numeric answer list. No written solutions or reliable official per-problem point weights are present locally, so score by number correct and leave total_points null."
-    }
-  },
-  "purple_comet_2007_ms": {
-    "1": {
-      "expected": "9"
-    },
-    "2": {
-      "expected": "1500"
-    },
-    "3": {
-      "expected": "144"
-    },
-    "4": {
-      "expected": "780"
-    },
-    "5": {
-      "expected": "1461"
-    },
-    "6": {
-      "expected": "360"
-    },
-    "7": {
-      "expected": "12"
-    },
-    "8": {
-      "expected": "97"
-    },
-    "9": {
-      "expected": "1185"
-    },
-    "10": {
-      "expected": "72"
-    },
-    "11": {
-      "expected": "252"
-    },
-    "12": {
-      "expected": "240"
-    },
-    "13": {
-      "expected": "1001"
-    },
-    "14": {
-      "expected": "280"
-    },
-    "15": {
-      "expected": "70"
-    },
-    "_provenance": {
-      "organizer": "Purple Comet! Math Meet",
-      "source_url": "https://purplecomet.org/files/2007MS_English.pdf",
-      "source_file": "data/raw/purple_comet/2007/purple_comet_ms_2007.pdf",
-      "solution_file": "data/raw/purple_comet/2007/purple_comet_ms_2007_answers.json"
-    },
-    "_coverage": {
-      "covered_parts": 15,
-      "expected_parts": 15,
-      "scoring_note": "Exact-match each response against the official ordered numeric answer list. No written solutions or reliable official per-problem point weights are present locally, so score by number correct and leave total_points null."
-    }
-  },
-  "purple_comet_2008_hs": {
-    "1": {
-      "expected": "2578899"
-    },
-    "2": {
-      "expected": "80"
-    },
-    "3": {
-      "expected": "397"
-    },
-    "4": {
-      "expected": "540"
-    },
-    "5": {
-      "expected": "13500"
-    },
-    "6": {
-      "expected": "320"
-    },
-    "7": {
-      "expected": "29"
-    },
-    "8": {
-      "expected": "60"
-    },
-    "9": {
-      "expected": "2820"
-    },
-    "10": {
-      "expected": "103950"
-    },
-    "11": {
-      "expected": "194"
-    },
-    "12": {
-      "expected": "252"
-    },
-    "13": {
-      "expected": "133"
-    },
-    "14": {
-      "expected": "2128"
-    },
-    "15": {
-      "expected": "19999999999999999999999"
-    },
-    "16": {
-      "expected": "98"
-    },
-    "17": {
-      "expected": "504"
-    },
-    "18": {
-      "expected": "171"
-    },
-    "19": {
-      "expected": "1875"
-    },
-    "20": {
-      "expected": "313"
-    },
-    "21": {
-      "expected": "53"
-    },
-    "22": {
-      "expected": "896"
-    },
-    "23": {
-      "expected": "45"
-    },
-    "24": {
-      "expected": "9221"
-    },
-    "25": {
-      "expected": "160"
-    },
-    "_provenance": {
-      "organizer": "Purple Comet! Math Meet",
-      "source_url": "https://purplecomet.org/files/2008HS_English.pdf",
-      "source_file": "data/raw/purple_comet/2008/purple_comet_hs_2008.pdf",
-      "solution_file": "data/raw/purple_comet/2008/purple_comet_hs_2008_answers.json"
-    },
-    "_coverage": {
-      "covered_parts": 25,
-      "expected_parts": 25,
-      "scoring_note": "Exact-match each response against the official ordered numeric answer list. No written solutions or reliable official per-problem point weights are present locally, so score by number correct and leave total_points null."
-    }
-  },
-  "purple_comet_2008_ms": {
-    "1": {
-      "expected": "31"
-    },
-    "2": {
-      "expected": "76"
-    },
-    "3": {
-      "expected": "486"
-    },
-    "4": {
-      "expected": "165"
-    },
-    "5": {
-      "expected": "66"
-    },
-    "6": {
-      "expected": "75"
-    },
-    "7": {
-      "expected": "150"
-    },
-    "8": {
-      "expected": "238"
-    },
-    "9": {
-      "expected": "172"
-    },
-    "10": {
-      "expected": "544"
-    },
-    "11": {
-      "expected": "221"
-    },
-    "12": {
-      "expected": "544"
-    },
-    "13": {
-      "expected": "60"
-    },
-    "14": {
-      "expected": "29"
-    },
-    "15": {
-      "expected": "6852"
-    },
-    "_provenance": {
-      "organizer": "Purple Comet! Math Meet",
-      "source_url": "https://purplecomet.org/files/2008MS_English.pdf",
-      "source_file": "data/raw/purple_comet/2008/purple_comet_ms_2008.pdf",
-      "solution_file": "data/raw/purple_comet/2008/purple_comet_ms_2008_answers.json"
-    },
-    "_coverage": {
-      "covered_parts": 15,
-      "expected_parts": 15,
-      "scoring_note": "Exact-match each response against the official ordered numeric answer list. No written solutions or reliable official per-problem point weights are present locally, so score by number correct and leave total_points null."
-    }
-  },
-  "purple_comet_2009_hs": {
-    "1": {
-      "expected": "19"
-    },
-    "2": {
-      "expected": "5"
-    },
-    "3": {
-      "expected": "727"
-    },
-    "4": {
-      "expected": "95"
-    },
-    "5": {
-      "expected": "25"
-    },
-    "6": {
-      "expected": "576"
-    },
-    "7": {
-      "expected": "81"
-    },
-    "8": {
-      "expected": "240"
-    },
-    "9": {
-      "expected": "88"
-    },
-    "10": {
-      "expected": "1033"
-    },
-    "11": {
-      "expected": "23"
-    },
-    "12": {
-      "expected": "3810"
-    },
-    "13": {
-      "expected": "25"
-    },
-    "14": {
-      "expected": "10"
-    },
-    "15": {
-      "expected": "801"
-    },
-    "16": {
-      "expected": "524"
-    },
-    "17": {
-      "expected": "78"
-    },
-    "18": {
-      "expected": "623"
-    },
-    "19": {
-      "expected": "57"
-    },
-    "20": {
-      "expected": "287"
-    },
-    "21": {
-      "expected": "107"
-    },
-    "22": {
-      "expected": "20"
-    },
-    "23": {
-      "expected": "61"
-    },
-    "24": {
-      "expected": "364"
-    },
-    "25": {
-      "expected": "20090"
-    },
-    "_provenance": {
-      "organizer": "Purple Comet! Math Meet",
-      "source_url": "https://purplecomet.org/files/2009HS_English.pdf",
-      "source_file": "data/raw/purple_comet/2009/purple_comet_hs_2009.pdf",
-      "solution_file": "data/raw/purple_comet/2009/purple_comet_hs_2009_answers.json"
-    },
-    "_coverage": {
-      "covered_parts": 25,
-      "expected_parts": 25,
-      "scoring_note": "Exact-match each response against the official ordered numeric answer list. No written solutions or reliable official per-problem point weights are present locally, so score by number correct and leave total_points null."
-    }
-  },
-  "purple_comet_2009_ms": {
-    "1": {
-      "expected": "76"
-    },
-    "2": {
-      "expected": "8"
-    },
-    "3": {
-      "expected": "142"
-    },
-    "4": {
-      "expected": "18"
-    },
-    "5": {
-      "expected": "4000"
-    },
-    "6": {
-      "expected": "1991"
-    },
-    "7": {
-      "expected": "72"
-    },
-    "8": {
-      "expected": "20"
-    },
-    "9": {
-      "expected": "54"
-    },
-    "10": {
-      "expected": "100"
-    },
-    "11": {
-      "expected": "90"
-    },
-    "12": {
-      "expected": "1728"
-    },
-    "13": {
-      "expected": "1920"
-    },
-    "14": {
-      "expected": "600"
-    },
-    "15": {
-      "expected": "1377"
-    },
-    "_provenance": {
-      "organizer": "Purple Comet! Math Meet",
-      "source_url": "https://purplecomet.org/files/2009MS_English.pdf",
-      "source_file": "data/raw/purple_comet/2009/purple_comet_ms_2009.pdf",
-      "solution_file": "data/raw/purple_comet/2009/purple_comet_ms_2009_answers.json"
-    },
-    "_coverage": {
-      "covered_parts": 15,
-      "expected_parts": 15,
-      "scoring_note": "Exact-match each response against the official ordered numeric answer list. No written solutions or reliable official per-problem point weights are present locally, so score by number correct and leave total_points null."
-    }
-  },
-  "purple_comet_2010_hs": {
-    "1": {
-      "expected": "8"
-    },
-    "2": {
-      "expected": "19"
-    },
-    "3": {
-      "expected": "66"
-    },
-    "4": {
-      "expected": "34825"
-    },
-    "5": {
-      "expected": "98"
-    },
-    "6": {
-      "expected": "7245"
-    },
-    "7": {
-      "expected": "7"
-    },
-    "8": {
-      "expected": "288"
-    },
-    "9": {
-      "expected": "64"
-    },
-    "10": {
-      "expected": "182"
-    },
-    "11": {
-      "expected": "11"
-    },
-    "12": {
-      "expected": "51"
-    },
-    "13": {
-      "expected": "630"
-    },
-    "14": {
-      "expected": "126"
-    },
-    "15": {
-      "expected": "47"
-    },
-    "16": {
-      "expected": "21"
-    },
-    "17": {
-      "expected": "2521"
-    },
-    "18": {
-      "expected": "122"
-    },
-    "19": {
-      "expected": "147"
-    },
-    "20": {
-      "expected": "162"
-    },
-    "21": {
-      "expected": "891"
-    },
-    "22": {
-      "expected": "42"
-    },
-    "23": {
-      "expected": "19"
-    },
-    "24": {
-      "expected": "24"
-    },
-    "25": {
-      "expected": "10"
-    },
-    "26": {
-      "expected": "71"
-    },
-    "27": {
-      "expected": "35"
-    },
-    "28": {
-      "expected": "97"
-    },
-    "29": {
-      "expected": "175"
-    },
-    "30": {
-      "expected": "20"
-    },
-    "_provenance": {
-      "organizer": "Purple Comet! Math Meet",
-      "source_url": "https://purplecomet.org/files/2010HS_English.pdf",
-      "source_file": "data/raw/purple_comet/2010/purple_comet_hs_2010.pdf",
-      "solution_file": "data/raw/purple_comet/2010/purple_comet_hs_2010_answers.json"
-    },
-    "_coverage": {
-      "covered_parts": 30,
-      "expected_parts": 30,
-      "scoring_note": "Exact-match each response against the official ordered numeric answer list. No written solutions or reliable official per-problem point weights are present locally, so score by number correct and leave total_points null."
-    }
-  },
-  "purple_comet_2010_ms": {
-    "1": {
-      "expected": "165"
-    },
-    "2": {
-      "expected": "60"
-    },
-    "3": {
-      "expected": "69"
-    },
-    "4": {
-      "expected": "14"
-    },
-    "5": {
-      "expected": "89"
-    },
-    "6": {
-      "expected": "47"
-    },
-    "7": {
-      "expected": "50"
-    },
-    "8": {
-      "expected": "6333"
-    },
-    "9": {
-      "expected": "35"
-    },
-    "10": {
-      "expected": "55"
-    },
-    "11": {
-      "expected": "176"
-    },
-    "12": {
-      "expected": "337"
-    },
-    "13": {
-      "expected": "129"
-    },
-    "14": {
-      "expected": "81"
-    },
-    "15": {
-      "expected": "2073"
-    },
-    "16": {
-      "expected": "608"
-    },
-    "17": {
-      "expected": "640"
-    },
-    "18": {
-      "expected": "675"
-    },
-    "19": {
-      "expected": "54"
-    },
-    "20": {
-      "expected": "4021"
-    },
-    "_provenance": {
-      "organizer": "Purple Comet! Math Meet",
-      "source_url": "https://purplecomet.org/files/2010MS_English.pdf",
-      "source_file": "data/raw/purple_comet/2010/purple_comet_ms_2010.pdf",
-      "solution_file": "data/raw/purple_comet/2010/purple_comet_ms_2010_answers.json"
-    },
-    "_coverage": {
-      "covered_parts": 20,
-      "expected_parts": 20,
-      "scoring_note": "Exact-match each response against the official ordered numeric answer list. No written solutions or reliable official per-problem point weights are present locally, so score by number correct and leave total_points null."
-    }
-  },
-  "purple_comet_2011_hs": {
-    "1": {
-      "expected": "24"
-    },
-    "2": {
-      "expected": "60"
-    },
-    "3": {
-      "expected": "150"
-    },
-    "4": {
-      "expected": "12"
-    },
-    "5": {
-      "expected": "95"
-    },
-    "6": {
-      "expected": "29"
-    },
-    "7": {
-      "expected": "73"
-    },
-    "8": {
-      "expected": "952"
-    },
-    "9": {
-      "expected": "52"
-    },
-    "10": {
-      "expected": "31"
-    },
-    "11": {
-      "expected": "100"
-    },
-    "12": {
-      "expected": "600"
-    },
-    "13": {
-      "expected": "405"
-    },
-    "14": {
-      "expected": "6"
-    },
-    "15": {
-      "expected": "67"
-    },
-    "16": {
-      "expected": "522801"
-    },
-    "17": {
-      "expected": "336"
-    },
-    "18": {
-      "expected": "259"
-    },
-    "19": {
-      "expected": "64"
-    },
-    "20": {
-      "expected": "47"
-    },
-    "21": {
-      "expected": "60"
-    },
-    "22": {
-      "expected": "1320"
-    },
-    "23": {
-      "expected": "8"
-    },
-    "24": {
-      "expected": "19"
-    },
-    "25": {
-      "expected": "19"
-    },
-    "26": {
-      "expected": "361"
-    },
-    "27": {
-      "expected": "17"
-    },
-    "28": {
-      "expected": "46"
-    },
-    "29": {
-      "expected": "41"
-    },
-    "30": {
-      "expected": "2449"
-    },
-    "_provenance": {
-      "organizer": "Purple Comet! Math Meet",
-      "source_url": "https://purplecomet.org/files/2011HS_English.pdf",
-      "source_file": "data/raw/purple_comet/2011/purple_comet_hs_2011.pdf",
-      "solution_file": "data/raw/purple_comet/2011/purple_comet_hs_2011_answers.json"
-    },
-    "_coverage": {
-      "covered_parts": 30,
-      "expected_parts": 30,
-      "scoring_note": "Exact-match each response against the official ordered numeric answer list. No written solutions or reliable official per-problem point weights are present locally, so score by number correct and leave total_points null."
-    }
-  },
-  "purple_comet_2011_ms": {
-    "1": {
-      "expected": "41"
-    },
-    "2": {
-      "expected": "75"
-    },
-    "3": {
-      "expected": "215"
-    },
-    "4": {
-      "expected": "1"
-    },
-    "5": {
-      "expected": "5"
-    },
-    "6": {
-      "expected": "24"
-    },
-    "7": {
-      "expected": "247"
-    },
-    "8": {
-      "expected": "117"
-    },
-    "9": {
-      "expected": "10"
-    },
-    "10": {
-      "expected": "90"
-    },
-    "11": {
-      "expected": "16"
-    },
-    "12": {
-      "expected": "60"
-    },
-    "13": {
-      "expected": "32"
-    },
-    "14": {
-      "expected": "99972"
-    },
-    "15": {
-      "expected": "55"
-    },
-    "16": {
-      "expected": "1509"
-    },
-    "17": {
-      "expected": "2017"
-    },
-    "18": {
-      "expected": "2011"
-    },
-    "19": {
-      "expected": "720"
-    },
-    "20": {
-      "expected": "650"
-    },
-    "_provenance": {
-      "organizer": "Purple Comet! Math Meet",
-      "source_url": "https://purplecomet.org/files/2011MS_English.pdf",
-      "source_file": "data/raw/purple_comet/2011/purple_comet_ms_2011.pdf",
-      "solution_file": "data/raw/purple_comet/2011/purple_comet_ms_2011_answers.json"
-    },
-    "_coverage": {
-      "covered_parts": 20,
-      "expected_parts": 20,
-      "scoring_note": "Exact-match each response against the official ordered numeric answer list. No written solutions or reliable official per-problem point weights are present locally, so score by number correct and leave total_points null."
-    }
-  },
-  "purple_comet_2012_hs": {
-    "1": {
-      "expected": "48"
-    },
-    "2": {
-      "expected": "703"
-    },
-    "3": {
-      "expected": "144"
-    },
-    "4": {
-      "expected": "15"
-    },
-    "5": {
-      "expected": "33"
-    },
-    "6": {
-      "expected": "135"
-    },
-    "7": {
-      "expected": "189"
-    },
-    "8": {
-      "expected": "73"
-    },
-    "9": {
-      "expected": "81"
-    },
-    "10": {
-      "expected": "414"
-    },
-    "11": {
-      "expected": "259"
-    },
-    "12": {
-      "expected": "190"
-    },
-    "13": {
-      "expected": "34"
-    },
-    "14": {
-      "expected": "11"
-    },
-    "15": {
-      "expected": "4374"
-    },
-    "16": {
-      "expected": "167"
-    },
-    "17": {
-      "expected": "781"
-    },
-    "18": {
-      "expected": "138"
-    },
-    "19": {
-      "expected": "8"
-    },
-    "20": {
-      "expected": "46"
-    },
-    "21": {
-      "expected": "142"
-    },
-    "22": {
-      "expected": "13"
-    },
-    "23": {
-      "expected": "2093124"
-    },
-    "24": {
-      "expected": "55"
-    },
-    "25": {
-      "expected": "47"
-    },
-    "26": {
-      "expected": "93"
-    },
-    "27": {
-      "expected": "286"
-    },
-    "28": {
-      "expected": "6"
-    },
-    "29": {
-      "expected": "253"
-    },
-    "30": {
-      "expected": "67"
-    },
-    "_provenance": {
-      "organizer": "Purple Comet! Math Meet",
-      "source_url": "https://purplecomet.org/files/2012HS_English.pdf",
-      "source_file": "data/raw/purple_comet/2012/purple_comet_hs_2012.pdf",
-      "solution_file": "data/raw/purple_comet/2012/purple_comet_hs_2012_answers.json"
-    },
-    "_coverage": {
-      "covered_parts": 30,
-      "expected_parts": 30,
-      "scoring_note": "Exact-match each response against the official ordered numeric answer list. No written solutions or reliable official per-problem point weights are present locally, so score by number correct and leave total_points null."
-    }
-  },
-  "purple_comet_2012_ms": {
-    "1": {
-      "expected": "549"
-    },
-    "2": {
-      "expected": "90"
-    },
-    "3": {
-      "expected": "30"
-    },
-    "4": {
-      "expected": "18"
-    },
-    "5": {
-      "expected": "20"
-    },
-    "6": {
-      "expected": "35"
-    },
-    "7": {
-      "expected": "50"
-    },
-    "8": {
-      "expected": "105"
-    },
-    "9": {
-      "expected": "32"
-    },
-    "10": {
-      "expected": "111888"
-    },
-    "11": {
-      "expected": "10"
-    },
-    "12": {
-      "expected": "20"
-    },
-    "13": {
-      "expected": "779"
-    },
-    "14": {
-      "expected": "520"
-    },
-    "15": {
-      "expected": "19"
-    },
-    "16": {
-      "expected": "61"
-    },
-    "17": {
-      "expected": "29"
-    },
-    "18": {
-      "expected": "208"
-    },
-    "19": {
-      "expected": "1560"
-    },
-    "20": {
-      "expected": "84269"
-    },
-    "_provenance": {
-      "organizer": "Purple Comet! Math Meet",
-      "source_url": "https://purplecomet.org/files/2012MS_English.pdf",
-      "source_file": "data/raw/purple_comet/2012/purple_comet_ms_2012.pdf",
-      "solution_file": "data/raw/purple_comet/2012/purple_comet_ms_2012_answers.json"
-    },
-    "_coverage": {
-      "covered_parts": 20,
-      "expected_parts": 20,
-      "scoring_note": "Exact-match each response against the official ordered numeric answer list. No written solutions or reliable official per-problem point weights are present locally, so score by number correct and leave total_points null."
-    }
-  },
-  "purple_comet_2013_hs": {
-    "1": {
-      "expected": "45"
-    },
-    "2": {
-      "expected": "80"
-    },
-    "3": {
-      "expected": "254"
-    },
-    "4": {
-      "expected": "48"
-    },
-    "5": {
-      "expected": "720"
-    },
-    "6": {
-      "expected": "48"
-    },
-    "7": {
-      "expected": "504405"
-    },
-    "8": {
-      "expected": "540"
-    },
-    "9": {
-      "expected": "18"
-    },
-    "10": {
-      "expected": "4022"
-    },
-    "11": {
-      "expected": "60"
-    },
-    "12": {
-      "expected": "7801"
-    },
-    "13": {
-      "expected": "19"
-    },
-    "14": {
-      "expected": "19"
-    },
-    "15": {
-      "expected": "497"
-    },
-    "16": {
-      "expected": "3540"
-    },
-    "17": {
-      "expected": "45"
-    },
-    "18": {
-      "expected": "126"
-    },
-    "19": {
-      "expected": "439"
-    },
-    "20": {
-      "expected": "36"
-    },
-    "21": {
-      "expected": "0"
-    },
-    "22": {
-      "expected": "397"
-    },
-    "23": {
-      "expected": "55"
-    },
-    "24": {
-      "expected": "27"
-    },
-    "25": {
-      "expected": "70"
-    },
-    "26": {
-      "expected": "1088"
-    },
-    "27": {
-      "expected": "125"
-    },
-    "28": {
-      "expected": "4500"
-    },
-    "29": {
-      "expected": "798"
-    },
-    "30": {
-      "expected": "245"
-    },
-    "_provenance": {
-      "organizer": "Purple Comet! Math Meet",
-      "source_url": "https://purplecomet.org/files/2013HS_English.pdf",
-      "source_file": "data/raw/purple_comet/2013/purple_comet_hs_2013.pdf",
-      "solution_file": "data/raw/purple_comet/2013/purple_comet_hs_2013_answers.json"
-    },
-    "_coverage": {
-      "covered_parts": 30,
-      "expected_parts": 30,
-      "scoring_note": "Exact-match each response against the official ordered numeric answer list. No written solutions or reliable official per-problem point weights are present locally, so score by number correct and leave total_points null."
-    }
-  },
-  "purple_comet_2013_ms": {
-    "1": {
-      "expected": "175"
-    },
-    "2": {
-      "expected": "14"
-    },
-    "3": {
-      "expected": "17"
-    },
-    "4": {
-      "expected": "56"
-    },
-    "5": {
-      "expected": "24"
-    },
-    "6": {
-      "expected": "1500"
-    },
-    "7": {
-      "expected": "7200000"
-    },
-    "8": {
-      "expected": "72"
-    },
-    "9": {
-      "expected": "66660"
-    },
-    "10": {
-      "expected": "134"
-    },
-    "11": {
-      "expected": "536"
-    },
-    "12": {
-      "expected": "1850"
-    },
-    "13": {
-      "expected": "11"
-    },
-    "14": {
-      "expected": "84"
-    },
-    "15": {
-      "expected": "32"
-    },
-    "16": {
-      "expected": "3000"
-    },
-    "17": {
-      "expected": "203"
-    },
-    "18": {
-      "expected": "13"
-    },
-    "19": {
-      "expected": "6"
-    },
-    "20": {
-      "expected": "77"
-    },
-    "_provenance": {
-      "organizer": "Purple Comet! Math Meet",
-      "source_url": "https://purplecomet.org/files/2013MS_English.pdf",
-      "source_file": "data/raw/purple_comet/2013/purple_comet_ms_2013.pdf",
-      "solution_file": "data/raw/purple_comet/2013/purple_comet_ms_2013_answers.json"
-    },
-    "_coverage": {
-      "covered_parts": 20,
-      "expected_parts": 20,
-      "scoring_note": "Exact-match each response against the official ordered numeric answer list. No written solutions or reliable official per-problem point weights are present locally, so score by number correct and leave total_points null."
-    }
-  },
-  "purple_comet_2014_hs": {
-    "1": {
-      "expected": "48"
-    },
-    "2": {
-      "expected": "39"
-    },
-    "3": {
-      "expected": "136"
-    },
-    "4": {
-      "expected": "33"
-    },
-    "5": {
-      "expected": "48"
-    },
-    "6": {
-      "expected": "59"
-    },
-    "7": {
-      "expected": "79"
-    },
-    "8": {
-      "expected": "54"
-    },
-    "9": {
-      "expected": "8"
-    },
-    "10": {
-      "expected": "49"
-    },
-    "11": {
-      "expected": "640"
-    },
-    "12": {
-      "expected": "94"
-    },
-    "13": {
-      "expected": "7"
-    },
-    "14": {
-      "expected": "40"
-    },
-    "15": {
-      "expected": "92"
-    },
-    "16": {
-      "expected": "344"
-    },
-    "17": {
-      "expected": "114"
-    },
-    "18": {
-      "expected": "403"
-    },
-    "19": {
-      "expected": "31"
-    },
-    "20": {
-      "expected": "600"
-    },
-    "21": {
-      "expected": "246"
-    },
-    "22": {
-      "expected": "120"
-    },
-    "23": {
-      "expected": "32"
-    },
-    "24": {
-      "expected": "93"
-    },
-    "25": {
-      "expected": "26"
-    },
-    "26": {
-      "expected": "24"
-    },
-    "27": {
-      "expected": "59"
-    },
-    "28": {
-      "expected": "16"
-    },
-    "29": {
-      "expected": "203"
-    },
-    "30": {
-      "expected": "51"
-    },
-    "_provenance": {
-      "organizer": "Purple Comet! Math Meet",
-      "source_url": "https://purplecomet.org/files/2014HS_English.pdf",
-      "source_file": "data/raw/purple_comet/2014/purple_comet_hs_2014.pdf",
-      "solution_file": "data/raw/purple_comet/2014/purple_comet_hs_2014_answers.json"
-    },
-    "_coverage": {
-      "covered_parts": 30,
-      "expected_parts": 30,
-      "scoring_note": "Exact-match each response against the official ordered numeric answer list. No written solutions or reliable official per-problem point weights are present locally, so score by number correct and leave total_points null."
-    }
-  },
-  "purple_comet_2014_ms": {
-    "1": {
-      "expected": "15"
-    },
-    "2": {
-      "expected": "97"
-    },
-    "3": {
-      "expected": "180"
-    },
-    "4": {
-      "expected": "180"
-    },
-    "5": {
-      "expected": "64"
-    },
-    "6": {
-      "expected": "44"
-    },
-    "7": {
-      "expected": "28"
-    },
-    "8": {
-      "expected": "36"
-    },
-    "9": {
-      "expected": "45"
-    },
-    "10": {
-      "expected": "55"
-    },
-    "11": {
-      "expected": "94"
-    },
-    "12": {
-      "expected": "13"
-    },
-    "13": {
-      "expected": "55"
-    },
-    "14": {
-      "expected": "5"
-    },
-    "15": {
-      "expected": "350"
-    },
-    "16": {
-      "expected": "57"
-    },
-    "17": {
-      "expected": "200"
-    },
-    "18": {
-      "expected": "22"
-    },
-    "19": {
-      "expected": "956"
-    },
-    "20": {
-      "expected": "1248"
-    },
-    "_provenance": {
-      "organizer": "Purple Comet! Math Meet",
-      "source_url": "https://purplecomet.org/files/2014MS_English.pdf",
-      "source_file": "data/raw/purple_comet/2014/purple_comet_ms_2014.pdf",
-      "solution_file": "data/raw/purple_comet/2014/purple_comet_ms_2014_answers.json"
-    },
-    "_coverage": {
-      "covered_parts": 20,
-      "expected_parts": 20,
-      "scoring_note": "Exact-match each response against the official ordered numeric answer list. No written solutions or reliable official per-problem point weights are present locally, so score by number correct and leave total_points null."
-    }
-  },
-  "purple_comet_2015_hs": {
-    "1": {
-      "expected": "52"
-    },
-    "2": {
-      "expected": "6"
-    },
-    "3": {
-      "expected": "50"
-    },
-    "4": {
-      "expected": "86"
-    },
-    "5": {
-      "expected": "54"
-    },
-    "6": {
-      "expected": "53"
-    },
-    "7": {
-      "expected": "397"
-    },
-    "8": {
-      "expected": "107"
-    },
-    "9": {
-      "expected": "4004"
-    },
-    "10": {
-      "expected": "35"
-    },
-    "11": {
-      "expected": "15"
-    },
-    "12": {
-      "expected": "825"
-    },
-    "13": {
-      "expected": "288"
-    },
-    "14": {
-      "expected": "768"
-    },
-    "15": {
-      "expected": "360"
-    },
-    "16": {
-      "expected": "3073"
-    },
-    "17": {
-      "expected": "256"
-    },
-    "18": {
-      "expected": "12"
-    },
-    "19": {
-      "expected": "176"
-    },
-    "20": {
-      "expected": "47"
-    },
-    "21": {
-      "expected": "0"
-    },
-    "22": {
-      "expected": "91"
-    },
-    "23": {
-      "expected": "413"
-    },
-    "24": {
-      "expected": "71"
-    },
-    "25": {
-      "expected": "243"
-    },
-    "26": {
-      "expected": "25"
-    },
-    "27": {
-      "expected": "372"
-    },
-    "28": {
-      "expected": "9720"
-    },
-    "29": {
-      "expected": "304"
-    },
-    "30": {
-      "expected": "1166"
-    },
-    "_provenance": {
-      "organizer": "Purple Comet! Math Meet",
-      "source_url": "https://purplecomet.org/files/2015HS_English.pdf",
-      "source_file": "data/raw/purple_comet/2015/purple_comet_hs_2015.pdf",
-      "solution_file": "data/raw/purple_comet/2015/purple_comet_hs_2015_answers.json"
-    },
-    "_coverage": {
-      "covered_parts": 30,
-      "expected_parts": 30,
-      "scoring_note": "Exact-match each response against the official ordered numeric answer list. No written solutions or reliable official per-problem point weights are present locally, so score by number correct and leave total_points null."
-    }
-  },
-  "purple_comet_2015_ms": {
-    "1": {
-      "expected": "11"
-    },
-    "2": {
-      "expected": "60"
-    },
-    "3": {
-      "expected": "199"
-    },
-    "4": {
-      "expected": "160"
-    },
-    "5": {
-      "expected": "100"
-    },
-    "6": {
-      "expected": "1899"
-    },
-    "7": {
-      "expected": "41"
-    },
-    "8": {
-      "expected": "37"
-    },
-    "9": {
-      "expected": "252"
-    },
-    "10": {
-      "expected": "129"
-    },
-    "11": {
-      "expected": "1890"
-    },
-    "12": {
-      "expected": "54"
-    },
-    "13": {
-      "expected": "1250"
-    },
-    "14": {
-      "expected": "36"
-    },
-    "15": {
-      "expected": "13"
-    },
-    "16": {
-      "expected": "252"
-    },
-    "17": {
-      "expected": "14"
-    },
-    "18": {
-      "expected": "68"
-    },
-    "19": {
-      "expected": "527"
-    },
-    "20": {
-      "expected": "47"
-    },
-    "_provenance": {
-      "organizer": "Purple Comet! Math Meet",
-      "source_url": "https://purplecomet.org/files/2015MS_English.pdf",
-      "source_file": "data/raw/purple_comet/2015/purple_comet_ms_2015.pdf",
-      "solution_file": "data/raw/purple_comet/2015/purple_comet_ms_2015_answers.json"
-    },
-    "_coverage": {
-      "covered_parts": 20,
-      "expected_parts": 20,
-      "scoring_note": "Exact-match each response against the official ordered numeric answer list. No written solutions or reliable official per-problem point weights are present locally, so score by number correct and leave total_points null."
-    }
-  },
-  "purple_comet_2016_hs": {
-    "1": {
-      "expected": "1258"
-    },
-    "2": {
-      "expected": "50"
-    },
-    "3": {
-      "expected": "15"
-    },
-    "4": {
-      "expected": "234"
-    },
-    "5": {
-      "expected": "269"
-    },
-    "6": {
-      "expected": "180"
-    },
-    "7": {
-      "expected": "156"
-    },
-    "8": {
-      "expected": "65"
-    },
-    "9": {
-      "expected": "210"
-    },
-    "10": {
-      "expected": "87"
-    },
-    "11": {
-      "expected": "328"
-    },
-    "12": {
-      "expected": "17"
-    },
-    "13": {
-      "expected": "20"
-    },
-    "14": {
-      "expected": "1008"
-    },
-    "15": {
-      "expected": "282282"
-    },
-    "16": {
-      "expected": "904"
-    },
-    "17": {
-      "expected": "52"
-    },
-    "18": {
-      "expected": "302"
-    },
-    "19": {
-      "expected": "323"
-    },
-    "20": {
-      "expected": "146"
-    },
-    "21": {
-      "expected": "30"
-    },
-    "22": {
-      "expected": "32"
-    },
-    "23": {
-      "expected": "11"
-    },
-    "24": {
-      "expected": "29"
-    },
-    "25": {
-      "expected": "1395"
-    },
-    "26": {
-      "expected": "209"
-    },
-    "27": {
-      "expected": "231"
-    },
-    "28": {
-      "expected": "66"
-    },
-    "29": {
-      "expected": "7296"
-    },
-    "30": {
-      "expected": "18"
-    },
-    "_provenance": {
-      "organizer": "Purple Comet! Math Meet",
-      "source_url": "https://purplecomet.org/files/2016HS_English.pdf",
-      "source_file": "data/raw/purple_comet/2016/purple_comet_hs_2016.pdf",
-      "solution_file": "data/raw/purple_comet/2016/purple_comet_hs_2016_answers.json"
-    },
-    "_coverage": {
-      "covered_parts": 30,
-      "expected_parts": 30,
-      "scoring_note": "Exact-match each response against the official ordered numeric answer list. No written solutions or reliable official per-problem point weights are present locally, so score by number correct and leave total_points null."
-    }
-  },
-  "purple_comet_2016_ms": {
-    "1": {
-      "expected": "36"
-    },
-    "2": {
-      "expected": "120"
-    },
-    "3": {
-      "expected": "2695"
-    },
-    "4": {
-      "expected": "135"
-    },
-    "5": {
-      "expected": "15"
-    },
-    "6": {
-      "expected": "24"
-    },
-    "7": {
-      "expected": "33"
-    },
-    "8": {
-      "expected": "44"
-    },
-    "9": {
-      "expected": "8"
-    },
-    "10": {
-      "expected": "144"
-    },
-    "11": {
-      "expected": "1210"
-    },
-    "12": {
-      "expected": "19"
-    },
-    "13": {
-      "expected": "182"
-    },
-    "14": {
-      "expected": "22"
-    },
-    "15": {
-      "expected": "108"
-    },
-    "16": {
-      "expected": "6528"
-    },
-    "17": {
-      "expected": "19"
-    },
-    "18": {
-      "expected": "1800"
-    },
-    "19": {
-      "expected": "165"
-    },
-    "20": {
-      "expected": "196"
-    },
-    "_provenance": {
-      "organizer": "Purple Comet! Math Meet",
-      "source_url": "https://purplecomet.org/files/2016MS_English.pdf",
-      "source_file": "data/raw/purple_comet/2016/purple_comet_ms_2016.pdf",
-      "solution_file": "data/raw/purple_comet/2016/purple_comet_ms_2016_answers.json"
-    },
-    "_coverage": {
-      "covered_parts": 20,
-      "expected_parts": 20,
-      "scoring_note": "Exact-match each response against the official ordered numeric answer list. No written solutions or reliable official per-problem point weights are present locally, so score by number correct and leave total_points null."
-    }
-  },
-  "purple_comet_2017_hs": {
-    "1": {
-      "expected": "757"
-    },
-    "2": {
-      "expected": "63"
-    },
-    "3": {
-      "expected": "84"
-    },
-    "4": {
-      "expected": "70"
-    },
-    "5": {
-      "expected": "67"
-    },
-    "6": {
-      "expected": "657"
-    },
-    "7": {
-      "expected": "46"
-    },
-    "8": {
-      "expected": "1250"
-    },
-    "9": {
-      "expected": "82"
-    },
-    "10": {
-      "expected": "738"
-    },
-    "11": {
-      "expected": "343"
-    },
-    "12": {
-      "expected": "846"
-    },
-    "13": {
-      "expected": "178"
-    },
-    "14": {
-      "expected": "13"
-    },
-    "15": {
-      "expected": "67"
-    },
-    "16": {
-      "expected": "283"
-    },
-    "17": {
-      "expected": "171"
-    },
-    "18": {
-      "expected": "200"
-    },
-    "19": {
-      "expected": "899"
-    },
-    "20": {
-      "expected": "6"
-    },
-    "21": {
-      "expected": "305"
-    },
-    "22": {
-      "expected": "148"
-    },
-    "23": {
-      "expected": "1760"
-    },
-    "24": {
-      "expected": "843"
-    },
-    "25": {
-      "expected": "64"
-    },
-    "26": {
-      "expected": "119"
-    },
-    "27": {
-      "expected": "96"
-    },
-    "28": {
-      "expected": "451"
-    },
-    "29": {
-      "expected": "63"
-    },
-    "30": {
-      "expected": "704"
-    },
-    "_provenance": {
-      "organizer": "Purple Comet! Math Meet",
-      "source_url": "https://purplecomet.org/files/2017HS_English.pdf",
-      "source_file": "data/raw/purple_comet/2017/purple_comet_hs_2017.pdf",
-      "solution_file": "data/raw/purple_comet/2017/purple_comet_hs_2017_answers.json"
-    },
-    "_coverage": {
-      "covered_parts": 30,
-      "expected_parts": 30,
-      "scoring_note": "Exact-match each response against the official ordered numeric answer list. No written solutions or reliable official per-problem point weights are present locally, so score by number correct and leave total_points null."
-    }
-  },
-  "purple_comet_2017_ms": {
-    "1": {
-      "expected": "5"
-    },
-    "2": {
-      "expected": "36"
-    },
-    "3": {
-      "expected": "2444"
-    },
-    "4": {
-      "expected": "128"
-    },
-    "5": {
-      "expected": "125"
-    },
-    "6": {
-      "expected": "126"
-    },
-    "7": {
-      "expected": "15"
-    },
-    "8": {
-      "expected": "463"
-    },
-    "9": {
-      "expected": "45"
-    },
-    "10": {
-      "expected": "540"
-    },
-    "11": {
-      "expected": "991"
-    },
-    "12": {
-      "expected": "9"
-    },
-    "13": {
-      "expected": "216"
-    },
-    "14": {
-      "expected": "408"
-    },
-    "15": {
-      "expected": "343"
-    },
-    "16": {
-      "expected": "21"
-    },
-    "17": {
-      "expected": "5041"
-    },
-    "18": {
-      "expected": "819"
-    },
-    "19": {
-      "expected": "67"
-    },
-    "20": {
-      "expected": "581"
-    },
-    "_provenance": {
-      "organizer": "Purple Comet! Math Meet",
-      "source_url": "https://purplecomet.org/files/2017MS_English.pdf",
-      "source_file": "data/raw/purple_comet/2017/purple_comet_ms_2017.pdf",
-      "solution_file": "data/raw/purple_comet/2017/purple_comet_ms_2017_answers.json"
-    },
-    "_coverage": {
-      "covered_parts": 20,
-      "expected_parts": 20,
-      "scoring_note": "Exact-match each response against the official ordered numeric answer list. No written solutions or reliable official per-problem point weights are present locally, so score by number correct and leave total_points null."
-    }
-  },
-  "purple_comet_2018_hs": {
+  "_comment": "Official Purple Comet HS answer keys from purplecomet.org/answerlist/<year>/2",
+  "purple_comet_hs_2018": {
     "1": {
       "expected": "2315"
     },
@@ -2231,93 +90,9 @@
     },
     "30": {
       "expected": "88"
-    },
-    "_provenance": {
-      "organizer": "Purple Comet! Math Meet",
-      "source_url": "https://purplecomet.org/files/2018HS_English.pdf",
-      "source_file": "data/raw/purple_comet/2018/purple_comet_hs_2018.pdf",
-      "solution_file": "data/raw/purple_comet/2018/purple_comet_hs_2018_answers.json"
-    },
-    "_coverage": {
-      "covered_parts": 30,
-      "expected_parts": 30,
-      "scoring_note": "Exact-match each response against the official ordered numeric answer list. No written solutions or reliable official per-problem point weights are present locally, so score by number correct and leave total_points null."
     }
   },
-  "purple_comet_2018_ms": {
-    "1": {
-      "expected": "20"
-    },
-    "2": {
-      "expected": "148"
-    },
-    "3": {
-      "expected": "31"
-    },
-    "4": {
-      "expected": "104"
-    },
-    "5": {
-      "expected": "2"
-    },
-    "6": {
-      "expected": "999"
-    },
-    "7": {
-      "expected": "245"
-    },
-    "8": {
-      "expected": "39"
-    },
-    "9": {
-      "expected": "44"
-    },
-    "10": {
-      "expected": "108"
-    },
-    "11": {
-      "expected": "112"
-    },
-    "12": {
-      "expected": "1080"
-    },
-    "13": {
-      "expected": "1991"
-    },
-    "14": {
-      "expected": "58"
-    },
-    "15": {
-      "expected": "159"
-    },
-    "16": {
-      "expected": "143"
-    },
-    "17": {
-      "expected": "1215"
-    },
-    "18": {
-      "expected": "17"
-    },
-    "19": {
-      "expected": "248"
-    },
-    "20": {
-      "expected": "195"
-    },
-    "_provenance": {
-      "organizer": "Purple Comet! Math Meet",
-      "source_url": "https://purplecomet.org/files/2018MS_English.pdf",
-      "source_file": "data/raw/purple_comet/2018/purple_comet_ms_2018.pdf",
-      "solution_file": "data/raw/purple_comet/2018/purple_comet_ms_2018_answers.json"
-    },
-    "_coverage": {
-      "covered_parts": 20,
-      "expected_parts": 20,
-      "scoring_note": "Exact-match each response against the official ordered numeric answer list. No written solutions or reliable official per-problem point weights are present locally, so score by number correct and leave total_points null."
-    }
-  },
-  "purple_comet_2019_hs": {
+  "purple_comet_hs_2019": {
     "1": {
       "expected": "30"
     },
@@ -2407,93 +182,9 @@
     },
     "30": {
       "expected": "2275"
-    },
-    "_provenance": {
-      "organizer": "Purple Comet! Math Meet",
-      "source_url": "https://purplecomet.org/files/2019HS_English.pdf",
-      "source_file": "data/raw/purple_comet/2019/purple_comet_hs_2019.pdf",
-      "solution_file": "data/raw/purple_comet/2019/purple_comet_hs_2019_answers.json"
-    },
-    "_coverage": {
-      "covered_parts": 30,
-      "expected_parts": 30,
-      "scoring_note": "Exact-match each response against the official ordered numeric answer list. No written solutions or reliable official per-problem point weights are present locally, so score by number correct and leave total_points null."
     }
   },
-  "purple_comet_2019_ms": {
-    "1": {
-      "expected": "60"
-    },
-    "2": {
-      "expected": "0"
-    },
-    "3": {
-      "expected": "108"
-    },
-    "4": {
-      "expected": "71"
-    },
-    "5": {
-      "expected": "22"
-    },
-    "6": {
-      "expected": "1346"
-    },
-    "7": {
-      "expected": "56"
-    },
-    "8": {
-      "expected": "103184"
-    },
-    "9": {
-      "expected": "52"
-    },
-    "10": {
-      "expected": "222"
-    },
-    "11": {
-      "expected": "829"
-    },
-    "12": {
-      "expected": "336"
-    },
-    "13": {
-      "expected": "51"
-    },
-    "14": {
-      "expected": "20"
-    },
-    "15": {
-      "expected": "51"
-    },
-    "16": {
-      "expected": "10"
-    },
-    "17": {
-      "expected": "504"
-    },
-    "18": {
-      "expected": "63"
-    },
-    "19": {
-      "expected": "22"
-    },
-    "20": {
-      "expected": "131"
-    },
-    "_provenance": {
-      "organizer": "Purple Comet! Math Meet",
-      "source_url": "https://purplecomet.org/files/2019MS_English.pdf",
-      "source_file": "data/raw/purple_comet/2019/purple_comet_ms_2019.pdf",
-      "solution_file": "data/raw/purple_comet/2019/purple_comet_ms_2019_answers.json"
-    },
-    "_coverage": {
-      "covered_parts": 20,
-      "expected_parts": 20,
-      "scoring_note": "Exact-match each response against the official ordered numeric answer list. No written solutions or reliable official per-problem point weights are present locally, so score by number correct and leave total_points null."
-    }
-  },
-  "purple_comet_2020_hs": {
+  "purple_comet_hs_2020": {
     "1": {
       "expected": "47"
     },
@@ -2583,93 +274,9 @@
     },
     "30": {
       "expected": "56"
-    },
-    "_provenance": {
-      "organizer": "Purple Comet! Math Meet",
-      "source_url": "https://purplecomet.org/files/2020HS_English.pdf",
-      "source_file": "data/raw/purple_comet/2020/purple_comet_hs_2020.pdf",
-      "solution_file": "data/raw/purple_comet/2020/purple_comet_hs_2020_answers.json"
-    },
-    "_coverage": {
-      "covered_parts": 30,
-      "expected_parts": 30,
-      "scoring_note": "Exact-match each response against the official ordered numeric answer list. No written solutions or reliable official per-problem point weights are present locally, so score by number correct and leave total_points null."
     }
   },
-  "purple_comet_2020_ms": {
-    "1": {
-      "expected": "1250"
-    },
-    "2": {
-      "expected": "490"
-    },
-    "3": {
-      "expected": "63"
-    },
-    "4": {
-      "expected": "45"
-    },
-    "5": {
-      "expected": "9"
-    },
-    "6": {
-      "expected": "52"
-    },
-    "7": {
-      "expected": "120"
-    },
-    "8": {
-      "expected": "277"
-    },
-    "9": {
-      "expected": "577"
-    },
-    "10": {
-      "expected": "2101"
-    },
-    "11": {
-      "expected": "29"
-    },
-    "12": {
-      "expected": "53"
-    },
-    "13": {
-      "expected": "30"
-    },
-    "14": {
-      "expected": "1176"
-    },
-    "15": {
-      "expected": "67"
-    },
-    "16": {
-      "expected": "48"
-    },
-    "17": {
-      "expected": "285"
-    },
-    "18": {
-      "expected": "107"
-    },
-    "19": {
-      "expected": "21"
-    },
-    "20": {
-      "expected": "471"
-    },
-    "_provenance": {
-      "organizer": "Purple Comet! Math Meet",
-      "source_url": "https://purplecomet.org/files/2020MS_English.pdf",
-      "source_file": "data/raw/purple_comet/2020/purple_comet_ms_2020.pdf",
-      "solution_file": "data/raw/purple_comet/2020/purple_comet_ms_2020_answers.json"
-    },
-    "_coverage": {
-      "covered_parts": 20,
-      "expected_parts": 20,
-      "scoring_note": "Exact-match each response against the official ordered numeric answer list. No written solutions or reliable official per-problem point weights are present locally, so score by number correct and leave total_points null."
-    }
-  },
-  "purple_comet_2021_hs": {
+  "purple_comet_hs_2021": {
     "1": {
       "expected": "63"
     },
@@ -2759,93 +366,9 @@
     },
     "30": {
       "expected": "911"
-    },
-    "_provenance": {
-      "organizer": "Purple Comet! Math Meet",
-      "source_url": "https://purplecomet.org/files/2021HS_English.pdf",
-      "source_file": "data/raw/purple_comet/2021/purple_comet_hs_2021.pdf",
-      "solution_file": "data/raw/purple_comet/2021/purple_comet_hs_2021_answers.json"
-    },
-    "_coverage": {
-      "covered_parts": 30,
-      "expected_parts": 30,
-      "scoring_note": "Exact-match each response against the official ordered numeric answer list. No written solutions or reliable official per-problem point weights are present locally, so score by number correct and leave total_points null."
     }
   },
-  "purple_comet_2021_ms": {
-    "1": {
-      "expected": "23"
-    },
-    "2": {
-      "expected": "47"
-    },
-    "3": {
-      "expected": "8456173452"
-    },
-    "4": {
-      "expected": "27"
-    },
-    "5": {
-      "expected": "30"
-    },
-    "6": {
-      "expected": "74"
-    },
-    "7": {
-      "expected": "352"
-    },
-    "8": {
-      "expected": "340"
-    },
-    "9": {
-      "expected": "47"
-    },
-    "10": {
-      "expected": "18"
-    },
-    "11": {
-      "expected": "331"
-    },
-    "12": {
-      "expected": "148"
-    },
-    "13": {
-      "expected": "61"
-    },
-    "14": {
-      "expected": "32"
-    },
-    "15": {
-      "expected": "1792"
-    },
-    "16": {
-      "expected": "31"
-    },
-    "17": {
-      "expected": "66"
-    },
-    "18": {
-      "expected": "6"
-    },
-    "19": {
-      "expected": "53"
-    },
-    "20": {
-      "expected": "133"
-    },
-    "_provenance": {
-      "organizer": "Purple Comet! Math Meet",
-      "source_url": "https://purplecomet.org/files/2021MS_English.pdf",
-      "source_file": "data/raw/purple_comet/2021/purple_comet_ms_2021.pdf",
-      "solution_file": "data/raw/purple_comet/2021/purple_comet_ms_2021_answers.json"
-    },
-    "_coverage": {
-      "covered_parts": 20,
-      "expected_parts": 20,
-      "scoring_note": "Exact-match each response against the official ordered numeric answer list. No written solutions or reliable official per-problem point weights are present locally, so score by number correct and leave total_points null."
-    }
-  },
-  "purple_comet_2022_hs": {
+  "purple_comet_hs_2022": {
     "1": {
       "expected": "77"
     },
@@ -2935,93 +458,9 @@
     },
     "30": {
       "expected": "100"
-    },
-    "_provenance": {
-      "organizer": "Purple Comet! Math Meet",
-      "source_url": "https://purplecomet.org/files/2022HS_English.pdf",
-      "source_file": "data/raw/purple_comet/2022/purple_comet_hs_2022.pdf",
-      "solution_file": "data/raw/purple_comet/2022/purple_comet_hs_2022_answers.json"
-    },
-    "_coverage": {
-      "covered_parts": 30,
-      "expected_parts": 30,
-      "scoring_note": "Exact-match each response against the official ordered numeric answer list. No written solutions or reliable official per-problem point weights are present locally, so score by number correct and leave total_points null."
     }
   },
-  "purple_comet_2022_ms": {
-    "1": {
-      "expected": "24"
-    },
-    "2": {
-      "expected": "1092"
-    },
-    "3": {
-      "expected": "93"
-    },
-    "4": {
-      "expected": "38"
-    },
-    "5": {
-      "expected": "1"
-    },
-    "6": {
-      "expected": "9"
-    },
-    "7": {
-      "expected": "1"
-    },
-    "8": {
-      "expected": "276"
-    },
-    "9": {
-      "expected": "25"
-    },
-    "10": {
-      "expected": "26"
-    },
-    "11": {
-      "expected": "4107"
-    },
-    "12": {
-      "expected": "40"
-    },
-    "13": {
-      "expected": "98057"
-    },
-    "14": {
-      "expected": "317"
-    },
-    "15": {
-      "expected": "1314"
-    },
-    "16": {
-      "expected": "41"
-    },
-    "17": {
-      "expected": "20"
-    },
-    "18": {
-      "expected": "150"
-    },
-    "19": {
-      "expected": "4900"
-    },
-    "20": {
-      "expected": "18"
-    },
-    "_provenance": {
-      "organizer": "Purple Comet! Math Meet",
-      "source_url": "https://purplecomet.org/files/2022MS_English.pdf",
-      "source_file": "data/raw/purple_comet/2022/purple_comet_ms_2022.pdf",
-      "solution_file": "data/raw/purple_comet/2022/purple_comet_ms_2022_answers.json"
-    },
-    "_coverage": {
-      "covered_parts": 20,
-      "expected_parts": 20,
-      "scoring_note": "Exact-match each response against the official ordered numeric answer list. No written solutions or reliable official per-problem point weights are present locally, so score by number correct and leave total_points null."
-    }
-  },
-  "purple_comet_2023_hs": {
+  "purple_comet_hs_2023": {
     "1": {
       "expected": "82192020202120222023"
     },
@@ -3111,93 +550,9 @@
     },
     "30": {
       "expected": "194339"
-    },
-    "_provenance": {
-      "organizer": "Purple Comet! Math Meet",
-      "source_url": "https://purplecomet.org/files/2023HS_English.pdf",
-      "source_file": "data/raw/purple_comet/2023/purple_comet_hs_2023.pdf",
-      "solution_file": "data/raw/purple_comet/2023/purple_comet_hs_2023_answers.json"
-    },
-    "_coverage": {
-      "covered_parts": 30,
-      "expected_parts": 30,
-      "scoring_note": "Exact-match each response against the official ordered numeric answer list. No written solutions or reliable official per-problem point weights are present locally, so score by number correct and leave total_points null."
     }
   },
-  "purple_comet_2023_ms": {
-    "1": {
-      "expected": "210"
-    },
-    "2": {
-      "expected": "200"
-    },
-    "3": {
-      "expected": "15"
-    },
-    "4": {
-      "expected": "8164961"
-    },
-    "5": {
-      "expected": "151"
-    },
-    "6": {
-      "expected": "257889"
-    },
-    "7": {
-      "expected": "99"
-    },
-    "8": {
-      "expected": "120"
-    },
-    "9": {
-      "expected": "84"
-    },
-    "10": {
-      "expected": "196"
-    },
-    "11": {
-      "expected": "45"
-    },
-    "12": {
-      "expected": "11"
-    },
-    "13": {
-      "expected": "78"
-    },
-    "14": {
-      "expected": "48"
-    },
-    "15": {
-      "expected": "448"
-    },
-    "16": {
-      "expected": "145"
-    },
-    "17": {
-      "expected": "25"
-    },
-    "18": {
-      "expected": "232"
-    },
-    "19": {
-      "expected": "612"
-    },
-    "20": {
-      "expected": "293"
-    },
-    "_provenance": {
-      "organizer": "Purple Comet! Math Meet",
-      "source_url": "https://purplecomet.org/files/2023MS_English.pdf",
-      "source_file": "data/raw/purple_comet/2023/purple_comet_ms_2023.pdf",
-      "solution_file": "data/raw/purple_comet/2023/purple_comet_ms_2023_answers.json"
-    },
-    "_coverage": {
-      "covered_parts": 20,
-      "expected_parts": 20,
-      "scoring_note": "Exact-match each response against the official ordered numeric answer list. No written solutions or reliable official per-problem point weights are present locally, so score by number correct and leave total_points null."
-    }
-  },
-  "purple_comet_2024_hs": {
+  "purple_comet_hs_2024": {
     "1": {
       "expected": "60"
     },
@@ -3287,20 +642,381 @@
     },
     "30": {
       "expected": "66"
-    },
-    "_provenance": {
-      "organizer": "Purple Comet! Math Meet",
-      "source_url": "https://purplecomet.org/files/2024HS_English.pdf",
-      "source_file": "data/raw/purple_comet/2024/purple_comet_hs_2024.pdf",
-      "solution_file": "data/raw/purple_comet/2024/purple_comet_hs_2024_answers.json"
-    },
-    "_coverage": {
-      "covered_parts": 30,
-      "expected_parts": 30,
-      "scoring_note": "Exact-match each response against the official ordered numeric answer list. No written solutions or reliable official per-problem point weights are present locally, so score by number correct and leave total_points null."
     }
   },
-  "purple_comet_2024_ms": {
+  "purple_comet_ms_2018": {
+    "1": {
+      "expected": "20"
+    },
+    "2": {
+      "expected": "148"
+    },
+    "3": {
+      "expected": "31"
+    },
+    "4": {
+      "expected": "104"
+    },
+    "5": {
+      "expected": "2"
+    },
+    "6": {
+      "expected": "999"
+    },
+    "7": {
+      "expected": "245"
+    },
+    "8": {
+      "expected": "39"
+    },
+    "9": {
+      "expected": "44"
+    },
+    "10": {
+      "expected": "108"
+    },
+    "11": {
+      "expected": "112"
+    },
+    "12": {
+      "expected": "1080"
+    },
+    "13": {
+      "expected": "1991"
+    },
+    "14": {
+      "expected": "58"
+    },
+    "15": {
+      "expected": "159"
+    },
+    "16": {
+      "expected": "143"
+    },
+    "17": {
+      "expected": "1215"
+    },
+    "18": {
+      "expected": "17"
+    },
+    "19": {
+      "expected": "248"
+    },
+    "20": {
+      "expected": "195"
+    }
+  },
+  "purple_comet_ms_2019": {
+    "1": {
+      "expected": "60"
+    },
+    "2": {
+      "expected": "0"
+    },
+    "3": {
+      "expected": "108"
+    },
+    "4": {
+      "expected": "71"
+    },
+    "5": {
+      "expected": "22"
+    },
+    "6": {
+      "expected": "1346"
+    },
+    "7": {
+      "expected": "56"
+    },
+    "8": {
+      "expected": "103184"
+    },
+    "9": {
+      "expected": "52"
+    },
+    "10": {
+      "expected": "222"
+    },
+    "11": {
+      "expected": "829"
+    },
+    "12": {
+      "expected": "336"
+    },
+    "13": {
+      "expected": "51"
+    },
+    "14": {
+      "expected": "20"
+    },
+    "15": {
+      "expected": "51"
+    },
+    "16": {
+      "expected": "10"
+    },
+    "17": {
+      "expected": "504"
+    },
+    "18": {
+      "expected": "63"
+    },
+    "19": {
+      "expected": "22"
+    },
+    "20": {
+      "expected": "131"
+    }
+  },
+  "purple_comet_ms_2020": {
+    "1": {
+      "expected": "1250"
+    },
+    "2": {
+      "expected": "490"
+    },
+    "3": {
+      "expected": "63"
+    },
+    "4": {
+      "expected": "45"
+    },
+    "5": {
+      "expected": "9"
+    },
+    "6": {
+      "expected": "52"
+    },
+    "7": {
+      "expected": "120"
+    },
+    "8": {
+      "expected": "277"
+    },
+    "9": {
+      "expected": "577"
+    },
+    "10": {
+      "expected": "2101"
+    },
+    "11": {
+      "expected": "29"
+    },
+    "12": {
+      "expected": "53"
+    },
+    "13": {
+      "expected": "30"
+    },
+    "14": {
+      "expected": "1176"
+    },
+    "15": {
+      "expected": "67"
+    },
+    "16": {
+      "expected": "48"
+    },
+    "17": {
+      "expected": "285"
+    },
+    "18": {
+      "expected": "107"
+    },
+    "19": {
+      "expected": "21"
+    },
+    "20": {
+      "expected": "471"
+    }
+  },
+  "purple_comet_ms_2021": {
+    "1": {
+      "expected": "23"
+    },
+    "2": {
+      "expected": "47"
+    },
+    "3": {
+      "expected": "8456173452"
+    },
+    "4": {
+      "expected": "27"
+    },
+    "5": {
+      "expected": "30"
+    },
+    "6": {
+      "expected": "74"
+    },
+    "7": {
+      "expected": "352"
+    },
+    "8": {
+      "expected": "340"
+    },
+    "9": {
+      "expected": "47"
+    },
+    "10": {
+      "expected": "18"
+    },
+    "11": {
+      "expected": "331"
+    },
+    "12": {
+      "expected": "148"
+    },
+    "13": {
+      "expected": "61"
+    },
+    "14": {
+      "expected": "32"
+    },
+    "15": {
+      "expected": "1792"
+    },
+    "16": {
+      "expected": "31"
+    },
+    "17": {
+      "expected": "66"
+    },
+    "18": {
+      "expected": "6"
+    },
+    "19": {
+      "expected": "53"
+    },
+    "20": {
+      "expected": "133"
+    }
+  },
+  "purple_comet_ms_2022": {
+    "1": {
+      "expected": "24"
+    },
+    "2": {
+      "expected": "1092"
+    },
+    "3": {
+      "expected": "93"
+    },
+    "4": {
+      "expected": "38"
+    },
+    "5": {
+      "expected": "1"
+    },
+    "6": {
+      "expected": "9"
+    },
+    "7": {
+      "expected": "1"
+    },
+    "8": {
+      "expected": "276"
+    },
+    "9": {
+      "expected": "25"
+    },
+    "10": {
+      "expected": "26"
+    },
+    "11": {
+      "expected": "4107"
+    },
+    "12": {
+      "expected": "40"
+    },
+    "13": {
+      "expected": "98057"
+    },
+    "14": {
+      "expected": "317"
+    },
+    "15": {
+      "expected": "1314"
+    },
+    "16": {
+      "expected": "41"
+    },
+    "17": {
+      "expected": "20"
+    },
+    "18": {
+      "expected": "150"
+    },
+    "19": {
+      "expected": "4900"
+    },
+    "20": {
+      "expected": "18"
+    }
+  },
+  "purple_comet_ms_2023": {
+    "1": {
+      "expected": "210"
+    },
+    "2": {
+      "expected": "200"
+    },
+    "3": {
+      "expected": "15"
+    },
+    "4": {
+      "expected": "8164961"
+    },
+    "5": {
+      "expected": "151"
+    },
+    "6": {
+      "expected": "257889"
+    },
+    "7": {
+      "expected": "99"
+    },
+    "8": {
+      "expected": "120"
+    },
+    "9": {
+      "expected": "84"
+    },
+    "10": {
+      "expected": "196"
+    },
+    "11": {
+      "expected": "45"
+    },
+    "12": {
+      "expected": "11"
+    },
+    "13": {
+      "expected": "78"
+    },
+    "14": {
+      "expected": "48"
+    },
+    "15": {
+      "expected": "448"
+    },
+    "16": {
+      "expected": "145"
+    },
+    "17": {
+      "expected": "25"
+    },
+    "18": {
+      "expected": "232"
+    },
+    "19": {
+      "expected": "612"
+    },
+    "20": {
+      "expected": "293"
+    }
+  },
+  "purple_comet_ms_2024": {
     "1": {
       "expected": "54"
     },
@@ -3360,381 +1076,6 @@
     },
     "20": {
       "expected": "17"
-    },
-    "_provenance": {
-      "organizer": "Purple Comet! Math Meet",
-      "source_url": "https://purplecomet.org/files/2024MS_English.pdf",
-      "source_file": "data/raw/purple_comet/2024/purple_comet_ms_2024.pdf",
-      "solution_file": "data/raw/purple_comet/2024/purple_comet_ms_2024_answers.json"
-    },
-    "_coverage": {
-      "covered_parts": 20,
-      "expected_parts": 20,
-      "scoring_note": "Exact-match each response against the official ordered numeric answer list. No written solutions or reliable official per-problem point weights are present locally, so score by number correct and leave total_points null."
     }
-  },
-  "purple_comet_2025_hs": {
-    "1": {
-      "expected": "19"
-    },
-    "2": {
-      "expected": "180"
-    },
-    "3": {
-      "expected": "84"
-    },
-    "4": {
-      "expected": "96"
-    },
-    "5": {
-      "expected": "8192"
-    },
-    "6": {
-      "expected": "1012"
-    },
-    "7": {
-      "expected": "125"
-    },
-    "8": {
-      "expected": "9"
-    },
-    "9": {
-      "expected": "8"
-    },
-    "10": {
-      "expected": "51"
-    },
-    "11": {
-      "expected": "84"
-    },
-    "12": {
-      "expected": "56"
-    },
-    "13": {
-      "expected": "284"
-    },
-    "14": {
-      "expected": "0"
-    },
-    "15": {
-      "expected": "828"
-    },
-    "16": {
-      "expected": "101"
-    },
-    "17": {
-      "expected": "108"
-    },
-    "18": {
-      "expected": "107"
-    },
-    "19": {
-      "expected": "68"
-    },
-    "20": {
-      "expected": "53"
-    },
-    "21": {
-      "expected": "125"
-    },
-    "22": {
-      "expected": "166"
-    },
-    "23": {
-      "expected": "1952"
-    },
-    "24": {
-      "expected": "59"
-    },
-    "25": {
-      "expected": "37"
-    },
-    "26": {
-      "expected": "27"
-    },
-    "27": {
-      "expected": "10"
-    },
-    "28": {
-      "expected": "17"
-    },
-    "29": {
-      "expected": "128"
-    },
-    "30": {
-      "expected": "67"
-    },
-    "_provenance": {
-      "organizer": "Purple Comet! Math Meet",
-      "source_url": "https://purplecomet.org/files/2025HS_English.pdf",
-      "source_file": "data/raw/purple_comet/2025/purple_comet_hs_2025.pdf",
-      "solution_file": "data/raw/purple_comet/2025/purple_comet_hs_2025_answers.json"
-    },
-    "_coverage": {
-      "covered_parts": 30,
-      "expected_parts": 30,
-      "scoring_note": "Exact-match each response against the official ordered numeric answer list. No written solutions or reliable official per-problem point weights are present locally, so score by number correct and leave total_points null."
-    }
-  },
-  "purple_comet_2025_ms": {
-    "1": {
-      "expected": "5"
-    },
-    "2": {
-      "expected": "32"
-    },
-    "3": {
-      "expected": "96"
-    },
-    "4": {
-      "expected": "44"
-    },
-    "5": {
-      "expected": "48"
-    },
-    "6": {
-      "expected": "1145578899"
-    },
-    "7": {
-      "expected": "726"
-    },
-    "8": {
-      "expected": "228"
-    },
-    "9": {
-      "expected": "1728"
-    },
-    "10": {
-      "expected": "75685094"
-    },
-    "11": {
-      "expected": "440"
-    },
-    "12": {
-      "expected": "126"
-    },
-    "13": {
-      "expected": "108"
-    },
-    "14": {
-      "expected": "7"
-    },
-    "15": {
-      "expected": "25"
-    },
-    "16": {
-      "expected": "394"
-    },
-    "17": {
-      "expected": "54"
-    },
-    "18": {
-      "expected": "66"
-    },
-    "19": {
-      "expected": "101"
-    },
-    "20": {
-      "expected": "116"
-    },
-    "_provenance": {
-      "organizer": "Purple Comet! Math Meet",
-      "source_url": "https://purplecomet.org/files/2025MS_English.pdf",
-      "source_file": "data/raw/purple_comet/2025/purple_comet_ms_2025.pdf",
-      "solution_file": "data/raw/purple_comet/2025/purple_comet_ms_2025_answers.json"
-    },
-    "_coverage": {
-      "covered_parts": 20,
-      "expected_parts": 20,
-      "scoring_note": "Exact-match each response against the official ordered numeric answer list. No written solutions or reliable official per-problem point weights are present locally, so score by number correct and leave total_points null."
-    }
-  },
-  "purple_comet_2026_hs": {
-    "1": {
-      "expected": "26"
-    },
-    "2": {
-      "expected": "12"
-    },
-    "3": {
-      "expected": "24"
-    },
-    "4": {
-      "expected": "38"
-    },
-    "5": {
-      "expected": "33"
-    },
-    "6": {
-      "expected": "364"
-    },
-    "7": {
-      "expected": "44"
-    },
-    "8": {
-      "expected": "72"
-    },
-    "9": {
-      "expected": "79"
-    },
-    "10": {
-      "expected": "55"
-    },
-    "11": {
-      "expected": "169"
-    },
-    "12": {
-      "expected": "498"
-    },
-    "13": {
-      "expected": "136"
-    },
-    "14": {
-      "expected": "213"
-    },
-    "15": {
-      "expected": "70"
-    },
-    "16": {
-      "expected": "288"
-    },
-    "17": {
-      "expected": "18"
-    },
-    "18": {
-      "expected": "202"
-    },
-    "19": {
-      "expected": "97"
-    },
-    "20": {
-      "expected": "40"
-    },
-    "21": {
-      "expected": "171"
-    },
-    "22": {
-      "expected": "3480"
-    },
-    "23": {
-      "expected": "112"
-    },
-    "24": {
-      "expected": "869"
-    },
-    "25": {
-      "expected": "38"
-    },
-    "26": {
-      "expected": "42"
-    },
-    "27": {
-      "expected": "119"
-    },
-    "28": {
-      "expected": "84"
-    },
-    "29": {
-      "expected": "406"
-    },
-    "30": {
-      "expected": "190"
-    },
-    "_provenance": {
-      "organizer": "Purple Comet! Math Meet",
-      "source_url": "https://purplecomet.org/files/2026HS_English.pdf",
-      "source_file": "data/raw/purple_comet/2026/purple_comet_hs_2026.pdf",
-      "solution_file": "data/raw/purple_comet/2026/purple_comet_hs_2026_answers.json"
-    },
-    "_coverage": {
-      "covered_parts": 30,
-      "expected_parts": 30,
-      "scoring_note": "Exact-match each response against the official ordered numeric answer list. No written solutions or reliable official per-problem point weights are present locally, so score by number correct and leave total_points null."
-    }
-  },
-  "purple_comet_2026_ms": {
-    "1": {
-      "expected": "126"
-    },
-    "2": {
-      "expected": "28"
-    },
-    "3": {
-      "expected": "32"
-    },
-    "4": {
-      "expected": "152"
-    },
-    "5": {
-      "expected": "28"
-    },
-    "6": {
-      "expected": "270"
-    },
-    "7": {
-      "expected": "17"
-    },
-    "8": {
-      "expected": "803"
-    },
-    "9": {
-      "expected": "100"
-    },
-    "10": {
-      "expected": "26"
-    },
-    "11": {
-      "expected": "169"
-    },
-    "12": {
-      "expected": "21"
-    },
-    "13": {
-      "expected": "210"
-    },
-    "14": {
-      "expected": "2023"
-    },
-    "15": {
-      "expected": "27"
-    },
-    "16": {
-      "expected": "47"
-    },
-    "17": {
-      "expected": "56"
-    },
-    "18": {
-      "expected": "242"
-    },
-    "19": {
-      "expected": "161"
-    },
-    "20": {
-      "expected": "887"
-    },
-    "_provenance": {
-      "organizer": "Purple Comet! Math Meet",
-      "source_url": "https://purplecomet.org/files/2026MS_English.pdf",
-      "source_file": "data/raw/purple_comet/2026/purple_comet_ms_2026.pdf",
-      "solution_file": "data/raw/purple_comet/2026/purple_comet_ms_2026_answers.json"
-    },
-    "_coverage": {
-      "covered_parts": 20,
-      "expected_parts": 20,
-      "scoring_note": "Exact-match each response against the official ordered numeric answer list. No written solutions or reliable official per-problem point weights are present locally, so score by number correct and leave total_points null."
-    }
-  },
-  "_coverage": {
-    "covered_parts": 1050,
-    "expected_parts": 1050,
-    "sessions": 44
-  },
-  "_quality_audit": {
-    "failure_class": "prompt/OCR heading/worked-fragment stored as expected",
-    "retained_expected_values": 1050,
-    "removed_expected_values": 0,
-    "coverage_changed": false,
-    "result": "All 1050 expected values checked as ordered entries from official numeric answer lists."
   }
 }

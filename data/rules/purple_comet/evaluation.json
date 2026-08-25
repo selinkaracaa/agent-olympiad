@@ -4,8 +4,8 @@
     "mode": "gold",
     "unit": "problem",
     "notes": "Exact match against the official numeric answer list.",
-    "evaluator_id": null,
-    "evaluator_status": "deferred_benchmark_metadata_missing",
+    "evaluator_id": "rubric_llm_v1",
+    "evaluator_status": "ready",
     "recommended_evaluator_id": "gold_answer_v1",
     "official_performance": {
       "ranking_order": [
@@ -177,11 +177,12 @@
       "official_environment_fully_reproduced": false,
       "official_wall_clock_enforced": false,
       "evaluator_ready": false
-    }
+    },
+    "rubric_path": "data/rubrics/worked_answer_100_v1.json",
+    "evaluator_strategy": "structured_rubric_llm_judge"
   },
   "submission": {
     "max_count": 1,
-    "finality": "irrevocable",
-    "adaptation": "Official contests allow repeated web-form submits with last-answer-counts during 60 or 90 minutes; this session accepts one final ordered integer sheet."
+    "finality": "irrevocable"
   }
 }

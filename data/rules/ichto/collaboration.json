@@ -146,7 +146,7 @@
       "Submit the written memorial/case analysis and a concise oral outline."
     ],
     "evaluation_criteria": [
-      "Repository evaluation status: Task performance is specified per artifact in rubric mode, but the repository evaluator is deferred; do not invent a completed score."
+      "Repository evaluation status: Task performance is specified per artifact in rubric mode, but the repository evaluator is unassigned; do not invent a completed score."
     ],
     "runtime_limitations": [
       "Runtime limitation: The event is a live oral debate with jury scorecards; monologue timing, oratory, and slide quality carry real marks that text-only simulation cannot reproduce.",

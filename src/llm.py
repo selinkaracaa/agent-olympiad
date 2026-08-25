@@ -1,6 +1,7 @@
 import base64
 import io
 import os
+import re
 import time
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -243,10 +244,7 @@ def mock_agent_llm(system_prompt: str, user_prompt: str) -> str:
     """Deterministic mock for offline diagnostics."""
     combined = f"{system_prompt}\n{user_prompt}"
 
-    if (
-        "writing the team's official final answer" in combined.lower()
-        or "=== final team answer ===" in combined.lower()
-    ):
+    if "synthesize" in combined.lower() or "final team answer" in combined.lower():
         return (
             "ACTION: submit_final | PAYLOAD: "
             "1. (-6, 13)  2. slope -21  3. $52  4. 5√11  5. 49√3/2"
@@ -260,6 +258,18 @@ def mock_agent_llm(system_prompt: str, user_prompt: str) -> str:
 
     if "group leader" in combined.lower() and "assign" in combined.lower():
         return "Agent_2 handles problems 1-3. Agent_3 handles problems 4-6. I will synthesize."
+
+    if "you are coach" in combined.lower() and "unseen problem" in combined.lower():
+        return (
+            "ACTION: speak | PAYLOAD: Triage first, assign independent checks, "
+            "and reserve the final quarter for integration and verification."
+        )
+
+    if "you are coach" in combined.lower() and "final participation" in combined.lower():
+        return (
+            "ACTION: speak | PAYLOAD: Follow the agreed priorities, report blockers "
+            "early, and switch to final cross-checking at the planned checkpoint."
+        )
 
     if "your assigned slice" in combined.lower():
         return "ACTION: speak | PAYLOAD: My slice is complete. Key results attached in scratchpad notes."
@@ -285,13 +295,9 @@ def mock_agent_llm(system_prompt: str, user_prompt: str) -> str:
 def make_perplexity_caller(
     model: str = "openai/gpt-5.4-mini",
     api: str = "agent",
-    max_output_tokens: int | None = 16000,
+    max_output_tokens: int = 16000,
 ) -> QueryFn:
-    """Build a real LLM caller using PERPLEXITY_API_KEY.
-
-    Pass ``max_output_tokens=None`` to omit an application-level output cap and
-    defer to the selected model/provider's own limits.
-    """
+    """Build a real LLM caller using PERPLEXITY_API_KEY. Raises if key missing."""
     api_key = os.environ.get("PERPLEXITY_API_KEY")
     if not api_key:
         raise ValueError("Set PERPLEXITY_API_KEY to use a live LLM caller.")
@@ -304,13 +310,10 @@ def make_perplexity_caller(
         full_input = f"{system_prompt}\n\n{user_prompt}"
         for attempt in range(max_retries):
             try:
-                payload = {"model": model, "input": full_input}
-                if max_output_tokens is not None:
-                    payload["max_output_tokens"] = int(max_output_tokens)
                 resp = requests.post(
                     "https://api.perplexity.ai/v1/agent",
                     headers=headers,
-                    json=payload,
+                    json={"model": model, "input": full_input, "max_output_tokens": max_output_tokens},
                     timeout=180,
                 )
                 if not resp.ok:
@@ -356,72 +359,6 @@ def make_perplexity_caller(
     return call_sonar
 
 
-def make_tinker_caller(
-    model: str = "openai/gpt-oss-20b",
-    *,
-    max_tokens: int = 2048,
-    temperature: float = 0.2,
-    base_url: str = "https://tinker.thinkingmachines.dev/services/tinker-prod/oai/api/v1",
-) -> QueryFn:
-    """Build an OpenAI-compatible caller against Thinking Machines Tinker.
-
-    Requires ``TINKER_API_KEY``. Prefer cheap sampler models such as
-    ``openai/gpt-oss-20b`` for smoke tests.
-    """
-    api_key = os.environ.get("TINKER_API_KEY")
-    if not api_key:
-        raise ValueError("Set TINKER_API_KEY to use a Tinker LLM caller.")
-
-    from openai import OpenAI
-
-    client = OpenAI(
-        api_key=api_key,
-        base_url=base_url,
-        timeout=180,
-        max_retries=1,
-    )
-
-    def _message_text(message: Any) -> str:
-        content = getattr(message, "content", None)
-        if isinstance(content, str) and content.strip():
-            return content
-        # Some Tinker sampler models put the answer in reasoning_content when
-        # output tokens are spent on chain-of-thought first.
-        reasoning = getattr(message, "reasoning_content", None)
-        if isinstance(reasoning, str) and reasoning.strip():
-            return reasoning
-        if content is None:
-            return ""
-        return str(content)
-
-    def call(system_prompt: str, user_prompt: str, max_retries: int = 3) -> str:
-        last_error: Exception | None = None
-        for attempt in range(max_retries):
-            try:
-                response = client.chat.completions.create(
-                    model=model,
-                    messages=[
-                        {"role": "system", "content": system_prompt},
-                        {"role": "user", "content": user_prompt},
-                    ],
-                    max_tokens=int(max_tokens),
-                    temperature=float(temperature),
-                )
-                text = _message_text(response.choices[0].message)
-                if not str(text).strip():
-                    raise RuntimeError("Tinker returned an empty message content.")
-                return str(text)
-            except Exception as exc:  # noqa: BLE001 - surface provider errors after retries
-                last_error = exc
-                if attempt < max_retries - 1:
-                    time.sleep(8 * (attempt + 1))
-                else:
-                    break
-        raise RuntimeError(f"Tinker call failed: {last_error}")
-
-    return call
-
-
 def resolve_query_fn(
     use_mock: bool = True,
     model: Optional[str] = None,
@@ -429,3 +366,39 @@ def resolve_query_fn(
     if use_mock:
         return mock_agent_llm
     return make_perplexity_caller(model=model or "openai/gpt-5.4-mini")
+
+
+_AGENT_ROLE_RE = re.compile(r"^You are ([A-Za-z0-9_]+)\b", re.MULTILINE)
+
+
+def make_roster_caller(
+    models_by_agent: dict[str, str],
+    *,
+    default_model: str,
+    api: str = "agent",
+    max_output_tokens: int = 16000,
+) -> QueryFn:
+    """Route each agent call to a model based on the system-prompt role line.
+
+    Collaboration prompts start with ``You are Agent_1 ...`` / ``You are Solo ...``.
+    Missing agents fall back to ``default_model``.
+    """
+    callers: dict[str, QueryFn] = {}
+    models = {**models_by_agent}
+    models.setdefault("__default__", default_model)
+
+    def _caller_for(model: str) -> QueryFn:
+        if model not in callers:
+            callers[model] = make_perplexity_caller(
+                model=model, api=api, max_output_tokens=max_output_tokens
+            )
+        return callers[model]
+
+    def call(system_prompt: str, user_prompt: str) -> str:
+        match = _AGENT_ROLE_RE.search(system_prompt or "")
+        agent = match.group(1) if match else None
+        model = models.get(agent) if agent else None
+        model = model or models["__default__"]
+        return _caller_for(model)(system_prompt, user_prompt)
+
+    return call

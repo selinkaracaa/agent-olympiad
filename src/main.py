@@ -28,7 +28,8 @@ def _print_result(label: str, result: dict) -> None:
     print(f"\n[{label}]")
     print(f"  schema:       {result['schema']}")
     print(f"  submitted:    {result['submitted']} (by {result['submitted_by']})")
-    print(f"  turns used:   {result['turns_used']}")
+    print(f"  turns used:   {result['turns_used']}/{result.get('max_turns', '?')}")
+    print(f"  api calls:    {result.get('api_calls', '?')}")
     print(f"  chat msgs:    {result['chat_messages']}")
     grade = result["grade"]
     print(f"  grade:        {json.dumps(grade, indent=2)}")

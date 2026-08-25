@@ -12,6 +12,7 @@ Available action types:
 - speak           — broadcast a message to the team
 - write_scratchpad — update the shared working notes
 - write_private_notes — save private working notes visible only to you
+- sleep           — pass this turn (optional reason in PAYLOAD)
 - submit_final    — submit the team's final answer (only when ready)
 {deliberation_lines}
 {tool_lines}
@@ -19,6 +20,7 @@ Available action types:
 Rules:
 - Use only tools listed as allowed for this contest.
 - Obey the binding human contest rules in your system prompt.
+- Each turn you get at most ONE model call: act, or sleep.
 - submit_final must contain the complete team answer.
 - Be substantive; build on prior discussion."""
 
@@ -78,10 +80,19 @@ def apply_agent_response(
     response: str,
     *,
     submitters: Optional[set[str]] = None,
+    allowed_actions: Optional[set[str]] = None,
 ) -> list[str]:
     """Parse and execute all actions from an agent response. Returns result strings."""
     results = []
     for action_type, payload in parse_agent_response(response):
+        if allowed_actions is not None and action_type not in allowed_actions:
+            result = env.execute_action(
+                agent_name,
+                "sleep",
+                f"blocked prohibited action '{action_type}'",
+            )
+            results.append(result)
+            continue
         if action_type == "submit_final" and submitters is not None and agent_name not in submitters:
             result = env.execute_action(agent_name, "write_scratchpad", payload)
             results.append(f"(redirected submit_final to scratchpad) {result}")

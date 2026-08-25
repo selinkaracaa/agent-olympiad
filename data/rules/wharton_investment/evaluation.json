@@ -1,10 +1,10 @@
 {
-  "evaluation_guidance": "Competition-specific criteria: Judges prioritize the quality of the investment strategy, fit to the client's objectives and risk tolerance, depth of research and analysis, and clarity of the team's defense—not raw portfolio returns. Task performance: evaluate the investment policy statement and final report per artifact in rubric mode and enforce this answer contract: Submit clearly separated Investment Policy Statement and Comprehensive Final Report sections covering client objectives, risk tolerance, strategy, evidence, portfolio decisions, and citations. Repository status: the evaluator is deferred. Do not invent a completed benchmark grade or claim evaluator readiness. Rule compliance: report prohibited tools, outside assistance, hidden-answer access, unauthorized submission, and competition-specific violations separately from task performance. Collaboration quality: assess allocation, evidence exchange, verification, handoffs, recovery, replanning, and communication efficiency without rewarding fixed roles, equal airtime, or message volume by themselves. Fidelity: identify official mechanisms that the current runner does not reproduce; never treat a proxy action as proof that a physical, oral, live-opponent, judge, or mutable-environment event occurred.",
+  "evaluation_guidance": "Competition-specific criteria: Judges prioritize the quality of the investment strategy, fit to the client's objectives and risk tolerance, depth of research and analysis, and clarity of the team's defense—not raw portfolio returns. Task performance: evaluate the investment report per artifact in rubric mode and enforce this answer contract: Submit clearly separated Investment Policy Statement and Comprehensive Final Report sections covering client objectives, risk tolerance, strategy, evidence, portfolio decisions, and citations. Repository status: the evaluator is unassigned. Do not invent a completed benchmark grade or claim evaluator readiness. Rule compliance: report prohibited tools, outside assistance, hidden-answer access, unauthorized submission, and competition-specific violations separately from task performance. Collaboration quality: assess allocation, evidence exchange, verification, handoffs, recovery, replanning, and communication efficiency without rewarding fixed roles, equal airtime, or message volume by themselves. Fidelity: identify official mechanisms that the current runner does not reproduce; never treat a proxy action as proof that a physical, oral, live-opponent, judge, or mutable-environment event occurred.",
   "scoring": {
     "mode": "rubric",
     "unit": "artifact",
     "evaluator_id": null,
-    "evaluator_status": "deferred",
+    "evaluator_status": "unassigned",
     "competition_specific_criteria": "Judges prioritize the quality of the investment strategy, fit to the client's objectives and risk tolerance, depth of research and analysis, and clarity of the team's defense—not raw portfolio returns.",
     "official_performance": {
       "source_status": "source_enriched_v1",
@@ -13,7 +13,7 @@
       "mode": "rubric",
       "unit": "artifact",
       "criteria": [
-        "Repository evaluation status: Task performance is specified per artifact in rubric mode, but the repository evaluator is deferred; do not invent a completed score.",
+        "Repository evaluation status: Task performance is specified per artifact in rubric mode, but the repository evaluator is unassigned; do not invent a completed score.",
         "Judging rewards strategy quality, client fit, research depth, analysis, and clarity—not portfolio returns."
       ],
       "mechanics": [],
@@ -21,7 +21,7 @@
       "source_refs": [],
       "unresolved": [],
       "repository_evaluator_id": null,
-      "repository_evaluator_status": "deferred"
+      "repository_evaluator_status": "unassigned"
     },
     "rule_compliance": {
       "reported_separately_from_performance": true,
@@ -94,7 +94,7 @@
     },
     "current_repository_availability": {
       "evaluator_ready": false,
-      "evaluator_status": "deferred",
+      "evaluator_status": "unassigned",
       "official_environment_fully_reproduced": false,
       "official_wall_clock_enforced": false,
       "declared_unavailable_mechanisms": [],
@@ -104,11 +104,11 @@
         "Semifinal and finale rounds are live oral defenses before judges."
       ],
       "required_selectors": [],
-      "submission_adaptation": "The two official PDF deliverables are serialized as two labeled sections in one text submission."
+      "submission_adaptation": "Official entries are PDF reports; the runner submits the report as text."
     }
   },
   "submission": {
     "max_count": 1,
-    "adaptation": "The two official PDF deliverables are serialized as two labeled sections in one text submission."
+    "adaptation": "Official entries are PDF reports; the runner submits the report as text."
   }
 }

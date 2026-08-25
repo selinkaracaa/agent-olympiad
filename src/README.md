@@ -71,7 +71,8 @@ env.grade_submission()
 | `chat_history` | Full team discussion — every `speak` action appends here. All schemas read this. |
 | `workspace` | Shared `scratchpad` (working notes) and `final_answer` (official submission). |
 | `action_log` | Audit trail of every action, turn number, and env response. Saved in experiment JSONs. |
-| `max_turns` | Hard cap (default 50) to prevent runaway loops. |
+| `max_turns` | Time budget (default 50). One collaboration turn = each eligible agent ≤ 1 LLM call (or `sleep`). |
+| `max_api_calls` | Optional cost budget across the whole run (discussion + synthesis). |
 
 **Tool gatekeeper:** Before any tool runs, `validate_action()` checks whether that action is allowed for this competition. If an agent tries `use_calculator` on ARML, the env returns a rule violation — it does not silently run the tool.
 
@@ -83,7 +84,7 @@ env.grade_submission()
 **Grading (`grade_submission()`):**
 1. If a gold `expected_answer` exists → normalized substring match (coarse, good for smoke tests)
 2. If task is programming (ICPC/IIOT) → flags `judge_sandbox_required`
-3. Otherwise → flags `llm_judge_required` (used by `run_exam.py` for partial credit)
+3. Otherwise → flags `llm_judge_required`; live smoke / `apply_registered_judge` then runs `rubric_llm_v1`
 
 Problems load from `data/benchmarks/{competition_id}/benchmark.json`.
 
@@ -159,7 +160,7 @@ Separate from discussion. After all rounds, one agent is prompted to write the *
 - Retries up to 2× if fewer than 5 numbered parts detected
 - Prefers full response text over truncated `ACTION: submit_final` payloads (this fix took scores from 4/40 → 17–20/40)
 
-**`CollabConfig`:** `rounds`, `decentralized_events`, `synthesize` (bool), `progress` (callback for logging).
+**`CollabConfig`:** `max_turns` (time), `max_api_calls` (cost), `rounds` / `decentralized_events` (aliases for smoke), `synthesize`, `progress`.
 
 ---
 

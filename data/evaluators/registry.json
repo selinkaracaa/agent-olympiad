@@ -41,10 +41,9 @@
       "id": "programming_judge",
       "task_types": ["algorithmic_programming", "programming"],
       "submission_mime_types": ["text/x-c++src", "text/x-python"],
-      "strategy": "hidden_problem_package_tests_in_isolated_sandbox",
-      "status": "pilot",
-      "languages": ["python3"],
-      "notes": "Runnable only for problems whose evaluation metadata declares a checked hidden problem_package."
+      "strategy": "official_tests_in_isolated_sandbox",
+      "status": "sample_tests_mvp",
+      "notes": "Local Kattis sample .in/.ans judge + 20-min WA penalty on simulated clock. Secret tests / DomJudge / multi-language still deferred."
     },
     {
       "id": "physical_lab_judge",

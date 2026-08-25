@@ -389,6 +389,25 @@ def ensure_sentence(value: str) -> str:
 def display_names() -> dict[str, str]:
     payload = json.loads(INDEX.read_text(encoding="utf-8"))
     names = {item["id"]: item["name"] for item in payload["olympiads"]}
+    # A hand-merged catalog may temporarily omit competitions whose rule cards
+    # remain valid. Preserve their already-standardized contestant-facing name
+    # instead of replacing it with the competition id on the next run.
+    for competition_id in iter_rule_card_ids(RULES):
+        if competition_id in names:
+            continue
+        card = load_rule_card_payload(
+            competition_id, rules_root=RULES, required=True
+        )
+        rules_text = str(card.get("rules_text") or "")
+        summary = PROTOCOL_SUMMARIES.get(card.get("protocol"), "")
+        marker = f". {summary}" if summary else ""
+        preserved_name = (
+            rules_text.split(marker, 1)[0].strip()
+            if marker and marker in rules_text
+            else rules_text.split(".", 1)[0].strip()
+        )
+        if preserved_name:
+            names[competition_id] = preserved_name
     # The catalog currently carries a mojibake separator for this display name.
     # Keep the rule card contestant-facing without broadening this task into an
     # index cleanup.

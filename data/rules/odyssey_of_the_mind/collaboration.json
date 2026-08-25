@@ -153,7 +153,7 @@
       "Do not look up answer keys or hidden solutions."
     ],
     "evaluation_criteria": [
-      "Repository evaluation status: Task performance is specified per artifact in rubric mode, but the repository evaluator is deferred; do not invent a completed score."
+      "Repository evaluation status: Task performance is specified per artifact in rubric mode, but the repository evaluator is unassigned; do not invent a completed score."
     ],
     "runtime_limitations": [
       "Runtime limitation: Physical props, vehicles, structures, and live Spontaneous cannot be PDF-synopses-evaluated as equivalent.",
