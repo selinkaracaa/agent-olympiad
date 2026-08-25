@@ -48,13 +48,20 @@ DEFAULT_SCHEMAS = [
     "round_table",
     "decentralized",
     "open_table_coach",
+    "debate",
+    "self_consistency",
+    "memory_solo",
+    "subagent",
+    "liveoi_best_of_8",
 ]
 JUDGE_MODEL = "openai/gpt-5.4-mini"
 
 
 def agent_roster(schema: str, team_size: int) -> list[str]:
-    if schema == "single_agent":
+    if schema in {"single_agent", "self_consistency", "memory_solo", "liveoi_best_of_8"}:
         return ["Solo"]
+    if schema == "subagent":
+        return ["Orchestrator", *[f"Worker_{i}" for i in range(1, team_size + 1)]]
     if schema == "centralized":
         return ["Group_Leader", *[f"Agent_{i}" for i in range(2, team_size + 1)]]
     agents = [f"Agent_{i}" for i in range(1, team_size + 1)]

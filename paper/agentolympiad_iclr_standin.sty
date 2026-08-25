@@ -1,0 +1,21 @@
+% Agent Olympiad temporary ICLR-like stand-in style.
+% THIS IS NOT THE OFFICIAL ICLR TEMPLATE and must be replaced before submission.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{agentolympiad_iclr_standin}[2026/08/25 Temporary stand-in]
+
+\RequirePackage[letterpaper,margin=1in]{geometry}
+\RequirePackage{xcolor}
+\RequirePackage{titlesec}
+\RequirePackage{fancyhdr}
+
+\definecolor{aoblue}{RGB}{33,75,135}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt}
+\titleformat{\section}{\large\bfseries\color{aoblue}}{\thesection}{0.6em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{0.6em}{}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\footnotesize Agent Olympiad draft}
+\fancyhead[R]{\footnotesize TEMPORARY STYLE --- NOT OFFICIAL ICLR}
+\fancyfoot[C]{\thepage}
+\setlength{\headheight}{14pt}

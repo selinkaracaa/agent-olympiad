@@ -28,6 +28,25 @@ Benchmark **multi-agent AI teams** on olympiad-style **team tasks**. Part of the
 
 `data/base/` follows the [Agents Last Exam](https://huggingface.co/datasets/agents-last-exam/agents-last-exam-data) per-task layout (`…/base/input`, optional `software/`). Regenerate with `python collectors/build_ale_base.py --clean`.
 
+## Programming leaderboards
+
+`src/leaderboard.py` provides deterministic ICPC standings and the
+LiveOIBench three-stage ranking pipeline (explicit oracle best-of-8 selection,
+contest-local score totals, then normalized global aggregation). Human
+baselines are read only from local JSON/CSV files under
+`data/human_baselines/`; missing data is reported rather than downloaded.
+Run `python src/leaderboard.py --help` for the JSON/CSV commands.
+
+`src/liveoibench_adapter.py` exports `<model>_code.json`, validates a locally
+mounted LiveOIBench problem tree, and imports local contestant JSON (or parquet
+when pandas/pyarrow is installed). It has no network behavior and never runs
+LiveOIBench's host judge or setup/evaluation scripts:
+
+```bash
+python src/liveoibench_adapter.py export --input candidates.json --model my_model --output predictions/
+python src/liveoibench_adapter.py import-problem --problem-dir /mounted/IOI/2024/contest/task --output package-summary.json
+```
+
 ## Refresh benchmarks from PDFs
 
 ```bash

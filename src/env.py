@@ -121,11 +121,17 @@ COMPETITION_TOOL_REGISTRY = {
     ],
 }
 
+COMPETITION_ACTION_REGISTRY = {
+    "icpc": ["submit_code"],
+    "iiot": ["submit_code"],
+}
+
 ALL_ACTIONS = {
     "speak",
     "write_scratchpad",
     "write_private_notes",
     "submit_final",
+    "submit_code",
     "sleep",
     "use_calculator",
     "execute_code",
@@ -145,6 +151,7 @@ TOOL_ACTIONS = ALL_ACTIONS - {
     "write_scratchpad",
     "write_private_notes",
     "submit_final",
+    "submit_code",
     "sleep",
     *DELIBERATION_ACTIONS,
 }
@@ -214,6 +221,8 @@ class OlympiadEnvironment:
 
         self.chat_history: list[dict[str, str]] = []
         self.action_log: list[dict[str, Any]] = []
+        self.agent_observations: dict[str, list[dict[str, Any]]] = {}
+        self.budget_snapshots: list[dict[str, Any]] = []
         self.deliberation = DeliberationLedger()
         self.communication = CommunicationBudget(
             self.rule_card.communication if self.rule_card is not None else {}
@@ -227,6 +236,7 @@ class OlympiadEnvironment:
         self.submitted = False
         self.submitted_by: Optional[str] = None
         self.wrong_submissions = 0
+        self.submission_attempts = 0
         self.rule_violations: list[str] = []
         self.contest_rules = get_contest_rules(competition_id)
         self.runtime = CompetitionRuntime(competition_id, self.problem_data)
@@ -263,6 +273,7 @@ class OlympiadEnvironment:
                 f"Problem {problem_id!r} team_size={self.team_size} is outside rule-card "
                 f"range {self.rule_card.team_size_min}-{self.rule_card.team_size_max}."
             )
+        self.record_budget_snapshot("initialized")
 
     @staticmethod
     def _resolve_team_size(
@@ -430,6 +441,7 @@ class OlympiadEnvironment:
             "output_token_cap_per_call": per_call_cap,
             "submitted": self.submitted,
             "wrong_submissions": self.wrong_submissions,
+            "submission_attempts": self.submission_attempts,
             "search_policy": self.contest_rules.search_policy if self.contest_rules else None,
             "duration_minutes": self.duration_minutes,
             "simulated_minutes": self.simulated_minutes,
@@ -439,6 +451,71 @@ class OlympiadEnvironment:
                 else f"{self.simulated_minutes:g} min"
             ),
         }
+
+    def record_budget_snapshot(self, event: str) -> None:
+        """Capture JSON-safe budget state at a meaningful mutation boundary."""
+        self.budget_snapshots.append(
+            {
+                "event": event,
+                "turn": self.current_turn,
+                "action_count": self.action_count,
+                "api_calls": self.api_calls,
+                "tokens_used": self.tokens_used,
+                "simulated_minutes": self.simulated_minutes,
+                "wrong_submissions": self.wrong_submissions,
+                "submission_attempts": self.submission_attempts,
+                "limits": {
+                    "max_turns": self.max_turns,
+                    "max_api_calls": self.max_api_calls,
+                    "max_output_tokens_per_call": self.max_output_tokens_per_call,
+                    "max_total_tokens": self.max_total_tokens,
+                    "duration_minutes": self.duration_minutes,
+                },
+            }
+        )
+
+    def consume_agent_observations(self, agent_name: str) -> list[dict[str, Any]]:
+        """Return and clear observations intended only for one agent's next call."""
+        return self.agent_observations.pop(agent_name, [])
+
+    def to_transcript(self) -> dict[str, Any]:
+        """Return the complete, JSON-serializable record of this environment."""
+        transcript = {
+            "metadata": self.get_metadata(),
+            "chat_history": list(self.chat_history),
+            "action_log": list(self.action_log),
+            "rule_violations": list(self.rule_violations),
+            "workspace": dict(self.workspace),
+            "private_notes": dict(self.private_notes),
+            "pending_agent_observations": {
+                agent: list(entries) for agent, entries in self.agent_observations.items()
+            },
+            "budget_turn_summary": {
+                "turns_used": self.current_turn,
+                "max_turns": self.max_turns,
+                "action_count": self.action_count,
+                "api_calls": self.api_calls,
+                "max_api_calls": self.max_api_calls,
+                "tokens_used": self.tokens_used,
+                "max_total_tokens": self.max_total_tokens,
+                "max_output_tokens_per_call": self.max_output_tokens_per_call,
+                "duration_minutes": self.duration_minutes,
+                "simulated_minutes": self.simulated_minutes,
+                "wrong_submissions": self.wrong_submissions,
+                "submission_attempts": self.submission_attempts,
+                "penalty_minutes": self.penalty_minutes(),
+            },
+            "budget_snapshots": list(self.budget_snapshots),
+            "submission": {
+                "submitted": self.submitted,
+                "submitted_by": self.submitted_by,
+                "final_answer": self.workspace.get("final_answer", ""),
+            },
+            "deliberation": self.deliberation.report(),
+            "communication": self.communication.report(),
+        }
+        json.dumps(transcript, ensure_ascii=False)
+        return transcript
 
     def turns_exhausted(self) -> bool:
         """True when no further collaboration turns may be started."""
@@ -470,6 +547,7 @@ class OlympiadEnvironment:
             remaining = self.max_total_tokens - self.tokens_used
             capped = truncate_to_token_budget(capped, remaining)
         self.tokens_used += estimate_tokens(capped)
+        self.record_budget_snapshot("output_tokens")
         return capped
 
     def begin_turn(self) -> int:
@@ -482,6 +560,7 @@ class OlympiadEnvironment:
         # Advance by turn schedule, but never rewind time already burned by WA.
         turn_clock = self.budget.simulated_minutes_for_turns(self.current_turn)
         self.simulated_minutes = max(self.simulated_minutes, turn_clock)
+        self.record_budget_snapshot("begin_turn")
         return self.current_turn
 
     def record_api_call(self) -> None:
@@ -491,15 +570,39 @@ class OlympiadEnvironment:
                 f"API call budget reached ({self.max_api_calls}) for {self.problem_id}"
             )
         self.api_calls += 1
+        self.record_budget_snapshot("api_call")
+
+    @staticmethod
+    def _action_visibility(action_type: str, result: str) -> str:
+        if action_type == "speak" and result == "Message broadcast to all agents.":
+            return "public"
+        if action_type in DELIBERATION_ACTIONS and not result.startswith(
+            "Deliberation error:"
+        ):
+            return "public"
+        if action_type == "write_scratchpad" and result == "Shared scratchpad updated.":
+            return "shared"
+        return "private"
 
     def _log_action(self, agent_name: str, action_type: str, payload: str, result: str) -> None:
-        self.action_log.append(
+        entry = {
+            "turn": self.current_turn,
+            "agent": agent_name,
+            "sender": agent_name,
+            "action": action_type,
+            "payload": payload,
+            "result": result,
+            "visibility": self._action_visibility(action_type, result),
+        }
+        self.action_log.append(entry)
+        self.agent_observations.setdefault(agent_name, []).append(
             {
-                "turn": self.current_turn,
+                "turn": entry["turn"],
                 "agent": agent_name,
+                "sender": agent_name,
                 "action": action_type,
-                "payload": payload,
                 "result": result,
+                "visibility": entry["visibility"],
             }
         )
 
@@ -521,6 +624,21 @@ class OlympiadEnvironment:
             )
         if action_type == "submit_final" and self.submitted:
             return "Submission already finalized; further submit_final actions are ignored."
+        if action_type == "submit_code":
+            task_type = str(self.problem_data.get("task_type") or "")
+            evaluator_id = str(
+                (self.problem_data.get("evaluation") or {}).get("evaluator_id") or ""
+            )
+            if (
+                action_type
+                not in COMPETITION_ACTION_REGISTRY.get(self.competition_id, ())
+                or task_type not in {"algorithmic_programming", "programming"}
+                and evaluator_id != "programming_judge"
+            ):
+                return (
+                    "RULE VIOLATION: submit_code is available only for "
+                    "programming contests."
+                )
         return None
 
     def execute_action(self, agent_name: str, action_type: str, payload: str) -> str:
@@ -575,6 +693,8 @@ class OlympiadEnvironment:
                 self.submitted = True
                 self.submitted_by = agent_name
                 result = f"Submission finalized by {agent_name}."
+        elif action_type == "submit_code":
+            result = self._submit_code(payload)
         elif action_type == "query_rules":
             result = self.query_rules(payload, agent_name=agent_name)
         elif action_type == "use_calculator":
@@ -685,6 +805,38 @@ class OlympiadEnvironment:
             return str(fixtures[role_substring])[:8000]
         return None
 
+    def _submit_code(self, payload: str) -> str:
+        """Judge a non-final programming attempt on public sample tests."""
+        from evaluation.programming_judge import judge_programming_submission
+
+        self.submission_attempts += 1
+        judged = judge_programming_submission(
+            self.problem_data,
+            payload,
+            competition_id=self.competition_id,
+            repo_root=Path(REPO_ROOT),
+            fetch_kattis=False,
+            test_scope="sample",
+        )
+        if judged.wrong_submission:
+            self.record_wrong_submission()
+        feedback = judged.to_dict()
+        feedback.update(
+            {
+                "action": "submit_code",
+                "attempt": self.submission_attempts,
+                "finalized": False,
+                "penalty_minutes": self.penalty_minutes(),
+                "simulated_minutes": self.simulated_minutes,
+                "continue_allowed": self.can_begin_turn(),
+            }
+        )
+        if judged.verdict == "AC":
+            feedback["note"] = (
+                "Sample AC only; final hidden tests may still reject this solution."
+            )
+        return json.dumps(feedback, sort_keys=True)
+
     def record_wrong_submission(self) -> None:
         """WA/TLE/RE: burn contest clock (remove remaining time), don't stack a bonus.
 
@@ -695,6 +847,7 @@ class OlympiadEnvironment:
         self.wrong_submissions += 1
         rules = self.contest_rules
         if not rules or rules.wrong_submission_penalty_minutes is None:
+            self.record_budget_snapshot("wrong_submission")
             return
         burn = float(rules.wrong_submission_penalty_minutes)
         self.simulated_minutes += burn
@@ -706,6 +859,7 @@ class OlympiadEnvironment:
         if step > 0:
             turns_burned = max(1, int(math.ceil(burn / step)))
             self.current_turn = min(self.max_turns, self.current_turn + turns_burned)
+        self.record_budget_snapshot("wrong_submission")
 
     def penalty_minutes(self) -> int | None:
         """Minutes of contest clock burned by wrong submissions so far."""
@@ -978,6 +1132,8 @@ class OlympiadEnvironment:
     def reset(self) -> None:
         self.chat_history.clear()
         self.action_log.clear()
+        self.agent_observations.clear()
+        self.budget_snapshots.clear()
         self.deliberation.reset()
         self.communication.reset()
         self.private_notes.clear()
@@ -990,4 +1146,6 @@ class OlympiadEnvironment:
         self.submitted = False
         self.submitted_by = None
         self.wrong_submissions = 0
+        self.submission_attempts = 0
         self.rule_violations.clear()
+        self.record_budget_snapshot("reset")

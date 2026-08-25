@@ -1,0 +1,27 @@
+\section{Benchmark}
+The repository catalogues team competitions spanning short-answer
+mathematics, proof writing, linguistics, science practicals, business cases,
+modeling, oral/debate formats, and programming. Each rule card separates
+official constraints from simulator adaptations. This matters because a PDF
+question, a physical laboratory, and a five-hour shared-workstation contest
+have different fidelity gaps.
+
+The unit of interest is a contest session or packet under a shared budget.
+Task interfaces expose only permitted materials and tools; evaluators use
+curated answers, rubrics, artifact checks, or programming tests as available.
+Coverage is heterogeneous: some short-answer packets have deterministic gold
+grading, open-ended work often uses an LLM rubric, and physical or oral
+components remain proxies.
+
+\subsection{LiveOIBench boundary}
+The locally inspected upstream toolkit describes 403 problems, official test
+data, human contestant results, and no interactive judge feedback to the model
+during independent candidate generation \cite{zou2025liveoibench}. Its
+best-of-8 score is an oracle selection over official outcomes. The upstream
+judge compiles and runs submissions and, for some tasks, invokes host-side
+setup or evaluation scripts. We do not execute that machinery directly.
+Our offline adapter validates mounted metadata and paths, exports the expected
+code JSON shape, does not read secret input/output contents into agent-visible
+structures, and disables upstream host-script execution. Actual judging must
+cross into this repository's trusted sandbox, which currently supports
+container-isolated C++ and a smaller local package interface.

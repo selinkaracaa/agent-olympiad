@@ -1,0 +1,42 @@
+\section{Experiments}
+\subsection{Planned design}
+The paper-scale design crosses competition families, homogeneous and
+heterogeneous rosters, collaboration protocols, and matched resource budgets.
+Every cell should preserve raw transcripts, model identifiers, grading scope,
+turns, calls, tokens, and seeds. Repeated packets and runs are required before
+inferential claims. Handicap sweeps test whether conclusions survive alternate
+solo resource allocations.
+
+\subsection{Preliminary ARML Local snapshot}
+Table~\ref{tab:arml-prelim} transcribes the 14 completed cells documented in
+\texttt{docs/UPDATE\_2026-08-21.md}. It covers only ARML Local 2009, one packet,
+and one run per cell. It is \textbf{preliminary and confounded}: several solo
+runs submitted after one turn despite a 12-turn allowance, so the table mixes
+protocol, model behavior, and early stopping. The two heterogeneous team cells
+then marked running are omitted rather than imputed.
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lrrrr}
+\toprule
+Team & Single & Centralized & Round & Decentralized \\
+\midrule
+GPT mini task (/40) & 4.4 & 26.7 & 22.2 & 17.8 \\
+GPT mini CS & 1.0 & 4.0 & 3.0 & 3.5 \\
+Claude task (/40) & 35.6 & 22.2 & 35.6 & 26.7 \\
+Claude CS & 0.5 & 4.0 & 3.0 & 3.5 \\
+Gemini task (/40) & 40.0 & 35.6 & 35.6 & 40.0 \\
+Gemini CS & 1.0 & 3.5 & 3.5 & 3.0 \\
+Heterogeneous task (/40) & 13.3 & 35.6 & -- & -- \\
+Heterogeneous CS & 0.5 & 3.5 & -- & -- \\
+\bottomrule
+\end{tabular}
+\caption{Preliminary ARML Local 2009 task score and MultiAgentBench-style CS.
+These single-packet, early-stopping-confounded values are not final results.}
+\label{tab:arml-prelim}
+\end{table}
+
+The same update records one-turn solo usage for GPT mini, Claude, and the
+heterogeneous solo, and one turn/two calls for Gemini solo. Consequently, turn
+limits alone cannot be used to claim that collaboration helped or harmed.

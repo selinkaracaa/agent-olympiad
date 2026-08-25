@@ -1,0 +1,36 @@
+\section{Limitations and Threats to Validity}
+\paragraph{Internal validity.}
+The ARML snapshot has one packet, one run per cell, incomplete heterogeneous
+coverage, different model propensities to stop, and an LLM-judged CS. Parser
+changes can alter short-answer scores without changing reasoning. Model,
+protocol, call count, and early submission are not yet fully separated.
+
+\paragraph{Construct validity.}
+Turns approximate elapsed time but are not human minutes. API calls and token
+windows differ from speech and paper. Lexical proxies can mismeasure semantic
+communication, and rubric judges may share biases with evaluated models.
+High message volume or balanced participation is not necessarily cohesion.
+
+\paragraph{External validity.}
+Public packets may be contaminated in model training. One mathematics packet
+cannot support claims about programming, labs, writing, oral defense, or
+multi-day research. LiveOIBench's oracle best-of-8 and official tests provide a
+useful programming anchor, but independent candidates are not a collaborating
+contest team \cite{zou2025liveoibench}.
+
+\paragraph{Human--agent mismatch.}
+Humans share physical devices, tire over hours, communicate by speech and
+gesture, develop persistent skills and social trust, and may be assigned or
+choose roles. Agents instead pay token/context costs, can be cloned, and do
+not experience physical fatigue or laboratory manipulation. Internet,
+submission feedback, penalties, and machine access can be modeled with
+varying fidelity; speech bandwidth, five-hour fatigue, and wet labs currently
+cannot. These differences require dimension-by-dimension fidelity labels, not
+a blanket claim that an agent run reproduces a human contest.
+
+\paragraph{Safety and reproducibility.}
+Official tests and custom judges are trusted evaluator assets, not agent
+context. Upstream host execution is unsafe for untrusted code. Our adapter is
+non-executing; sandbox judging is a separate boundary. Missing official tests,
+timestamps, multimodal assets, or isolation must be reported rather than
+silently replaced by sample tests or host execution.

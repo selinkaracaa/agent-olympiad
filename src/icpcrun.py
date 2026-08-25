@@ -13,6 +13,7 @@ from typing import Any, Callable, Iterable, Literal
 from deliberation import DeliberationLedger
 from env import OlympiadEnvironment
 from llm import QueryFn, make_perplexity_caller, make_tinker_caller
+from memory import MemoryStore as SharedMemoryStore
 from rules.models import AgentRole, RuleCard
 from rules.views import agent_view
 
@@ -565,7 +566,7 @@ class RuleSession:
         self.role_by_name = {role.name: role for role in self.roles}
         self.submitter = self.roles[0].name
         self.contest_rules = _render_contest_rules(self.card, team_size=env.team_size)
-        self.memory = MemoryStore(self.role_by_name)
+        self.memory = SharedMemoryStore(self.role_by_name)
         self.debate = DeliberationLedger()
         self.workstation = WorkstationLease()
         self.scoreboard = Scoreboard(

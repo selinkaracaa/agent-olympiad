@@ -1,0 +1,36 @@
+\section{Metrics}
+\paragraph{Task performance.}
+We report the official or closest valid task score, its maximum, grading
+scope, and resource use. Programming results distinguish official-secret from
+sample-only tests; rubric scores are never presented as deterministic gold.
+
+\paragraph{Communication and strategy.}
+Deterministic proxies include talk-share inequality, silence, lexical
+redundancy, addressed-message and question-follow-up rates, observation reuse,
+parse failures, part coverage, duplicated effort, budget utilization,
+premature submission, verification language, answer churn, unresolved
+disagreement, synthesis fidelity, and leader concentration. These are
+auditable lexical/log features, not semantic correctness. MultiAgentBench-style
+CS is the mean of a 0--5 communication score and 1--5 planning score, with
+communication set to zero when no peer communication exists
+\cite{zhu2025multiagentbench}. CS uses an LLM judge and must be reported with
+its model and prompts.
+
+\paragraph{Controlled decomposition.}
+For normalized task score $S$, we define
+\[
+G_{\mathrm{division}}=S_{\mathrm{subagent}}-S_{\mathrm{solo}},\qquad
+G_{\mathrm{cohesion}}=S_{\mathrm{team}}-S_{\mathrm{subagent}}.
+\]
+The first asks whether decomposition helps; the second asks whether
+interactive teammates add value beyond independent workers. If a separately
+graded transcript ceiling $S_{\mathrm{ceiling}}$ exists, synthesis loss is
+$S_{\mathrm{ceiling}}-S_{\mathrm{team}}$. The implementation returns null
+with a reason when comparable cells or the ceiling are absent. Negative loss
+is possible under noise and should not be silently clipped.
+
+All content-sensitive process measures are heuristics. Lexical overlap can
+miss paraphrases or mistake shared vocabulary for duplication; verification
+words do not prove a valid check; balanced speech need not be productive; and
+CS may reward plausible process descriptions. These signals diagnose runs but
+cannot replace task scores or human transcript review.

@@ -1,0 +1,34 @@
+\section{Methods and Baselines}
+All comparisons should match model family, task, context access, and total
+call/token/turn envelope unless the varied resource is the treatment. A
+resource-matched single agent receives the team's per-turn call allowance;
+handicap sweeps vary solo turns and calls to expose crossover points instead
+of relying on one arbitrary budget.
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lll}
+\toprule
+Family & Conditions & Capability isolated \\
+\midrule
+Prompt/process & memory solo; discussion; debate & persistence or interaction \\
+Architecture & centralized; decentralized & leader bottleneck vs peer control \\
+ & round table; open table + coach & turn-taking and temporary advice \\
+Non-team & single; equal-budget single & concurrency vs raw resources \\
+Sampling & self-consistency & independent sampling + voting \\
+Delegation & subagent & decomposition without worker cohesion \\
+External anchor & LiveOIBench best-of-8 & oracle selection over eight samples \\
+Resources & handicap sweeps & sensitivity to turns/calls \\
+\bottomrule
+\end{tabular}
+\caption{Planned baseline matrix. ``Discussion'' denotes the ordinary shared
+round-table protocol; completed coverage differs by condition.}
+\end{table}
+
+Prompt-based memory, debate, self-consistency, subagent, and core team
+protocols are implemented. The full crossed paper matrix has not been run.
+The coach is restricted to preparation and the opening exchange. Subagent
+workers are stateless and mutually invisible; their orchestrator aggregates
+returns. Interactive team conditions expose shared history and workspace.
+This contrast is necessary for interpreting cohesion rather than call count.

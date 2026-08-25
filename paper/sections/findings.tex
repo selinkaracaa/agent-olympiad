@@ -1,0 +1,20 @@
+\section{Preliminary Findings and Failure Hypotheses}
+The pilot demonstrates that task score and collaboration score are distinct:
+a solo solver can be correct without peer communication, while a highly rated
+process can still lose task points. It also shows model--protocol interaction
+on one packet, but is too small and confounded for general ranking claims.
+
+Multi-agent systems can lose to a matched solo system for several mechanisms:
+(1) communication and coordination consume calls and context; (2) aggregation
+may discard correct partial work; (3) the group may converge or submit
+prematurely; (4) teammates may duplicate effort; (5) long shared histories may
+dilute task-relevant context; and (6) a centralized leader may bottleneck
+assignment, information flow, or synthesis. A previously observed
+tool-observation routing defect was also a systems confound: results were not
+reliably returned to the calling agent. It is now fixed and covered by a test
+that gives each private result only to its caller on the next prompt.
+
+These mechanisms are hypotheses to test against transcripts and controlled
+baselines. A team exhausting a turn limit while a solo run stops early does
+not by itself prove that collaboration is harmful; conversely, more calls do
+not establish genuine cohesion.

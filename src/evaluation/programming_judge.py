@@ -1,69 +1,31 @@
-"""Local programming judge: run submissions against bundled sample tests.
-
-ICPC/IIOT full secret tests + DomJudge are still future work. This module:
-  1. Loads .in/.ans pairs from data/benchmarks/<comp>/samples/<problem_id>/
-  2. Optionally downloads Kattis samples.zip when kattis_id is known
-  3. Executes Python (and simple CPython via python3) under a timeout
-  4. Returns AC/WA/TLE/RE style verdicts; WA burns 20 min of remaining contest clock
-"""
+"""Compatibility adapter from benchmark records to the consolidated judge."""
 
 from __future__ import annotations
 
 import json
+import os
 import re
-import subprocess
-import sys
 import tempfile
 import zipfile
-from dataclasses import asdict, dataclass, field
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 from urllib.request import Request, urlopen
 
+from judge import JudgeResult, load_problem_package, package_from_sample_directory
+from judge import run_submission as run_package_submission
+
 REPO_ROOT = Path(__file__).resolve().parents[2]
-UA = "agent-olympiad-local-judge/1.0 (research; sample tests only)"
+UA = "agent-olympiad-local-judge/2.0 (research sample collector)"
 
 
-@dataclass
+@dataclass(frozen=True)
 class TestCase:
+    """Legacy in-memory sample shape retained for callers."""
+
     name: str
     stdin: str
     expected: str
-
-
-@dataclass
-class CaseResult:
-    name: str
-    verdict: str  # AC | WA | TLE | RE
-    stdout: str = ""
-    stderr: str = ""
-    detail: str = ""
-
-
-@dataclass
-class JudgeResult:
-    graded: bool
-    method: str
-    verdict: str  # AC | WA | TLE | RE | NO_TESTS
-    score: float | None
-    max_score: float | None
-    cases: list[CaseResult] = field(default_factory=list)
-    reason: str = ""
-    wrong_submission: bool = False
-
-    def to_grade_dict(self, *, submitted_by: str | None = None) -> dict[str, Any]:
-        return {
-            "graded": self.graded,
-            "method": self.method,
-            "verdict": self.verdict,
-            "score": self.score,
-            "max_score": self.max_score,
-            "correct": self.verdict == "AC",
-            "reason": self.reason,
-            "cases": [asdict(c) for c in self.cases],
-            "wrong_submission": self.wrong_submission,
-            "submitted_by": submitted_by,
-        }
 
 
 def samples_dir(competition_id: str, problem_id: str, repo_root: Path | None = None) -> Path:
@@ -75,23 +37,28 @@ def load_sample_cases(directory: Path) -> list[TestCase]:
     if not directory.is_dir():
         return []
     cases: list[TestCase] = []
-    inputs = sorted(directory.glob("*.in"))
-    for inp in inputs:
-        ans = inp.with_suffix(".ans")
-        if not ans.exists():
-            # Kattis sometimes uses .out
-            ans = inp.with_suffix(".out")
-        if not ans.exists():
-            continue
-        cases.append(
-            TestCase(
-                name=inp.stem,
-                stdin=inp.read_text(encoding="utf-8", errors="replace"),
-                expected=ans.read_text(encoding="utf-8", errors="replace"),
+    for input_path in sorted(directory.glob("*.in")):
+        answer_path = input_path.with_suffix(".ans")
+        if not answer_path.is_file():
+            answer_path = input_path.with_suffix(".out")
+        if answer_path.is_file():
+            cases.append(
+                TestCase(
+                    input_path.stem,
+                    input_path.read_text(encoding="utf-8", errors="replace"),
+                    answer_path.read_text(encoding="utf-8", errors="replace"),
+                )
             )
-        )
-    # Also accept paired sample-N.in / sample-N.ans naming already covered by *.in
     return cases
+
+
+def _safe_members(archive: zipfile.ZipFile) -> list[zipfile.ZipInfo]:
+    members = archive.infolist()
+    for member in members:
+        path = Path(member.filename.replace("\\", "/"))
+        if path.is_absolute() or ".." in path.parts:
+            raise RuntimeError(f"Unsafe ZIP path: {member.filename}")
+    return members
 
 
 def ensure_kattis_samples(
@@ -100,88 +67,75 @@ def ensure_kattis_samples(
     *,
     force: bool = False,
 ) -> list[TestCase]:
-    """Download open.kattis.com samples.zip into dest if missing."""
+    """Download and atomically install a Kattis sample archive."""
     existing = load_sample_cases(dest)
     if existing and not force:
         return existing
-    dest.mkdir(parents=True, exist_ok=True)
     url = f"https://open.kattis.com/problems/{kattis_id}/file/statement/samples.zip"
-    req = Request(url, headers={"User-Agent": UA})
+    request = Request(url, headers={"User-Agent": UA})
     try:
-        with urlopen(req, timeout=30) as resp:
-            data = resp.read()
+        with urlopen(request, timeout=30) as response:
+            payload = response.read()
     except Exception as exc:
         raise RuntimeError(f"Failed to fetch Kattis samples for {kattis_id}: {exc}") from exc
-    zip_path = dest / "samples.zip"
-    zip_path.write_bytes(data)
-    with zipfile.ZipFile(zip_path) as zf:
-        zf.extractall(dest)
+
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory(prefix=f".{dest.name}.", dir=dest.parent) as temp:
+        staging = Path(temp) / "samples"
+        staging.mkdir()
+        archive_path = Path(temp) / "samples.zip"
+        archive_path.write_bytes(payload)
+        with zipfile.ZipFile(archive_path) as archive:
+            for member in _safe_members(archive):
+                if member.is_dir():
+                    continue
+                target = staging / Path(member.filename.replace("\\", "/")).name
+                if target.suffix.lower() not in {".in", ".ans", ".out"}:
+                    continue
+                target.write_bytes(archive.read(member))
+        if not load_sample_cases(staging):
+            raise RuntimeError(f"Kattis archive for {kattis_id} has no paired samples.")
+        if dest.exists():
+            for old in dest.glob("*"):
+                if old.is_file():
+                    old.unlink()
+        dest.mkdir(parents=True, exist_ok=True)
+        for source in staging.iterdir():
+            os.replace(source, dest / source.name)
     return load_sample_cases(dest)
 
 
-def _normalize_output(text: str) -> str:
-    lines = [line.rstrip() for line in text.replace("\r\n", "\n").split("\n")]
-    while lines and lines[-1] == "":
-        lines.pop()
-    return "\n".join(lines)
+def _extract_source(submission: str) -> tuple[str, str]:
+    fence = re.search(
+        r"```(?P<language>python|py|python3|cpp|c\+\+|cpp17|c\+\+17)?\s*\n"
+        r"(?P<source>.*?)```",
+        submission,
+        re.IGNORECASE | re.DOTALL,
+    )
+    if not fence:
+        return submission.strip(), "python3"
+    language = (fence.group("language") or "python3").lower()
+    if language in {"cpp", "c++", "cpp17", "c++17"}:
+        language = "cpp17"
+    else:
+        language = "python3"
+    return fence.group("source").strip(), language
 
 
-def _extract_python_code(submission: str) -> str:
-    """Prefer fenced python block; else whole submission."""
-    fence = re.search(r"```(?:python|py)?\n(.*?)```", submission, re.S | re.I)
-    if fence:
-        return fence.group(1).strip()
-    return submission.strip()
-
-
-def run_python_cases(
-    code: str,
-    cases: list[TestCase],
-    *,
-    timeout_sec: float = 5.0,
-) -> list[CaseResult]:
-    results: list[CaseResult] = []
-    with tempfile.TemporaryDirectory(prefix="ao_judge_") as tmp:
-        script = Path(tmp) / "main.py"
-        script.write_text(code, encoding="utf-8")
-        for case in cases:
-            try:
-                proc = subprocess.run(
-                    [sys.executable, str(script)],
-                    input=case.stdin,
-                    capture_output=True,
-                    text=True,
-                    timeout=timeout_sec,
-                    cwd=tmp,
-                )
-            except subprocess.TimeoutExpired:
-                results.append(CaseResult(name=case.name, verdict="TLE", detail="timeout"))
-                continue
-            if proc.returncode != 0:
-                results.append(
-                    CaseResult(
-                        name=case.name,
-                        verdict="RE",
-                        stdout=proc.stdout or "",
-                        stderr=(proc.stderr or "")[:2000],
-                        detail=f"exit {proc.returncode}",
-                    )
-                )
-                continue
-            got = _normalize_output(proc.stdout or "")
-            exp = _normalize_output(case.expected)
-            if got == exp:
-                results.append(CaseResult(name=case.name, verdict="AC", stdout=got))
-            else:
-                results.append(
-                    CaseResult(
-                        name=case.name,
-                        verdict="WA",
-                        stdout=got,
-                        detail=f"expected={exp[:200]!r} got={got[:200]!r}",
-                    )
-                )
-    return results
+def _official_package_path(problem: dict[str, Any], root: Path) -> Path | None:
+    evaluation = dict(problem.get("evaluation") or {})
+    raw = (
+        evaluation.get("official_bundle_path")
+        or evaluation.get("official_package_path")
+        or evaluation.get("judge_package_path")
+        or problem.get("official_bundle_path")
+    )
+    if not raw:
+        return None
+    path = Path(str(raw))
+    if not path.is_absolute():
+        path = root / path
+    return path if (path / "package.json").is_file() else None
 
 
 def judge_programming_submission(
@@ -191,91 +145,84 @@ def judge_programming_submission(
     competition_id: str,
     repo_root: Path | None = None,
     fetch_kattis: bool = True,
+    test_scope: str | None = None,
 ) -> JudgeResult:
+    """Judge a benchmark submission, preferring mounted official bundles."""
     root = repo_root or REPO_ROOT
     problem_id = str(problem.get("problem_id") or "")
-    dest = samples_dir(competition_id, problem_id, root)
-    cases = load_sample_cases(dest)
-    if not cases and fetch_kattis and problem.get("kattis_id"):
-        try:
-            cases = ensure_kattis_samples(str(problem["kattis_id"]), dest)
-        except Exception as exc:
-            return JudgeResult(
-                graded=False,
-                method="programming_sample_judge",
-                verdict="NO_TESTS",
-                score=None,
-                max_score=None,
-                reason=f"No local samples and Kattis fetch failed: {exc}",
-            )
-    if not cases:
-        return JudgeResult(
-            graded=False,
-            method="programming_sample_judge",
-            verdict="NO_TESTS",
-            score=None,
-            max_score=None,
-            reason="No sample .in/.ans pairs found; full secret tests still deferred.",
-        )
+    official_path = _official_package_path(problem, root)
+    package = load_problem_package(official_path) if official_path else None
 
-    code = _extract_python_code(submission_text)
-    if len(code) < 5:
-        return JudgeResult(
-            graded=True,
-            method="programming_sample_judge",
-            verdict="RE",
-            score=0.0,
-            max_score=1.0,
-            reason="Submission has no runnable Python code.",
-            wrong_submission=True,
+    requested_scope = test_scope.lower() if test_scope else None
+    if requested_scope is None:
+        requested_scope = "secret" if package and package.tests_for("secret") else "sample"
+    if requested_scope == "sample" and (
+        package is None or not package.tests_for("sample")
+    ):
+        destination = samples_dir(competition_id, problem_id, root)
+        if not load_sample_cases(destination) and fetch_kattis and problem.get("kattis_id"):
+            try:
+                ensure_kattis_samples(str(problem["kattis_id"]), destination)
+            except RuntimeError:
+                pass
+        package = package_from_sample_directory(
+            problem_id,
+            destination,
+            time_ms=int(problem.get("time_limit_ms", 5000)),
+            memory_mb=int(problem.get("memory_limit_mb", 256)),
+            output_kb=int(problem.get("output_limit_kb", 1024)),
         )
-
-    case_results = run_python_cases(code, cases)
-    if not case_results:
-        return JudgeResult(
-            graded=False,
-            method="programming_sample_judge",
-            verdict="NO_TESTS",
-            score=None,
-            max_score=None,
-            reason="Judge produced no case results.",
+    if package is None:
+        package = package_from_sample_directory(
+            problem_id, samples_dir(competition_id, problem_id, root)
         )
+    source, language = _extract_source(submission_text)
+    return run_package_submission(package, source, language, requested_scope)
 
-    order = {"RE": 3, "TLE": 2, "WA": 1, "AC": 0}
-    worst = max(case_results, key=lambda c: order.get(c.verdict, 0))
-    all_ac = all(c.verdict == "AC" for c in case_results)
-    verdict = "AC" if all_ac else worst.verdict
-    return JudgeResult(
-        graded=True,
-        method="programming_sample_judge",
-        verdict=verdict,
-        score=1.0 if all_ac else 0.0,
-        max_score=1.0,
-        cases=case_results,
-        reason=f"{sum(c.verdict == 'AC' for c in case_results)}/{len(case_results)} sample cases AC",
-        wrong_submission=not all_ac,
-    )
+
+def run_python_cases(
+    code: str,
+    cases: list[TestCase],
+    *,
+    timeout_sec: float = 5.0,
+):
+    """Legacy helper implemented through a temporary v1 package."""
+    with tempfile.TemporaryDirectory(prefix="ao_legacy_cases_") as temp:
+        root = Path(temp)
+        for case in cases:
+            (root / f"{case.name}.in").write_text(case.stdin, encoding="utf-8")
+            (root / f"{case.name}.ans").write_text(case.expected, encoding="utf-8")
+        package = package_from_sample_directory(
+            "legacy", root, time_ms=max(1, int(timeout_sec * 1000))
+        )
+        return list(run_package_submission(package, code, "python3", "sample").cases)
 
 
 def icpc_rank_key(
-    *,
-    solved: int,
-    penalty_minutes: int,
-    last_accept_minute: int = 0,
-) -> tuple:
-    """ICPC ranking: more solved first, then lower penalty."""
+    *, solved: int, penalty_minutes: int, last_accept_minute: int = 0
+) -> tuple[int, int, int]:
     return (-solved, penalty_minutes, last_accept_minute)
 
 
-def write_samples_manifest(competition_id: str, problem_id: str, cases: list[TestCase]) -> Path:
-    dest = samples_dir(competition_id, problem_id)
-    dest.mkdir(parents=True, exist_ok=True)
-    manifest = {
-        "competition_id": competition_id,
-        "problem_id": problem_id,
-        "n_cases": len(cases),
-        "cases": [c.name for c in cases],
-    }
-    path = dest / "manifest.json"
-    path.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
+def write_samples_manifest(
+    competition_id: str, problem_id: str, cases: list[TestCase]
+) -> Path:
+    destination = samples_dir(competition_id, problem_id)
+    destination.mkdir(parents=True, exist_ok=True)
+    path = destination / "manifest.json"
+    temporary = path.with_suffix(".json.tmp")
+    temporary.write_text(
+        json.dumps(
+            {
+                "competition_id": competition_id,
+                "problem_id": problem_id,
+                "n_cases": len(cases),
+                "cases": [case.name for case in cases],
+            },
+            indent=2,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    os.replace(temporary, path)
     return path
