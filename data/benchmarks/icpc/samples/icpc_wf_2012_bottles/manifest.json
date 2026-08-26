@@ -4,5 +4,6 @@
   "n_cases": 1,
   "cases": [
     "bottle-sample"
-  ]
+  ],
+  "official_bundle_path": "data/benchmarks/icpc/packages/icpc_wf_2012_bottles"
 }

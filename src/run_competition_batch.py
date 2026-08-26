@@ -18,6 +18,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import re
 import sys
 import tempfile
 import traceback
@@ -32,11 +33,20 @@ from contest_rules import get_contest_rules
 from env import OlympiadEnvironment, ProblemNotFoundError
 from evaluation.collaboration_score import score_coordination
 from evaluation.finalize import apply_registered_judge
-from llm import make_perplexity_caller, resolve_query_fn, resolve_request_fn
+from llm import (
+    make_perplexity_caller,
+    make_tinker_caller,
+    resolve_query_fn,
+    resolve_request_fn,
+)
 from rules import RulesMode
 from run_smoke_batch import SMOKE_CASES
 
 DEFAULT_MODEL = "openai/gpt-5.4-mini"
+TINKER_DEFAULT_MODEL = "Qwen/Qwen3.6-35B-A3B"
+TINKER_DEFAULT_MAX_TOKENS = 8192
+TINKER_DEFAULT_TEMPERATURE = 0.2
+PROVIDERS = ("perplexity", "tinker")
 
 
 def _write_json_atomic(path: Path, payload: dict) -> None:
@@ -62,6 +72,65 @@ def _write_json_atomic(path: Path, payload: dict) -> None:
             temp_path.unlink(missing_ok=True)
 
 
+def _sanitize_exception(exc: Exception) -> str:
+    message = str(exc)
+    for name in ("TINKER_API_KEY", "PERPLEXITY_API_KEY", "OPENAI_API_KEY"):
+        secret = os.environ.get(name)
+        if secret:
+            message = message.replace(secret, "[REDACTED]")
+    message = re.sub(
+        r"(?i)(authorization[\"']?\s*[:=]\s*[\"']?bearer\s+)\S+",
+        r"\1[REDACTED]",
+        message,
+    )
+    return f"{type(exc).__name__}: {message}"
+
+
+def _select_cases(
+    competitions: str | None,
+    problem_id: str | None,
+    limit: int | None,
+) -> list[tuple[str, str]]:
+    selected = (
+        [item.strip() for item in competitions.split(",") if item.strip()]
+        if competitions
+        else []
+    )
+    if problem_id:
+        if len(selected) != 1:
+            raise ValueError("--problem-id requires exactly one --competitions value.")
+        cases = [(selected[0], problem_id)]
+    else:
+        wanted = set(selected)
+        cases = [(c, p) for c, p in SMOKE_CASES if not wanted or c in wanted]
+    return cases[:limit] if limit is not None else cases
+
+
+def _resolve_model(provider: str, supplied_model: str | None) -> str:
+    if supplied_model:
+        return supplied_model
+    if provider == "tinker":
+        model = os.environ.get("TINKER_MODEL")
+        return model or TINKER_DEFAULT_MODEL
+    return DEFAULT_MODEL
+
+
+def _make_live_query(
+    provider: str,
+    model: str,
+    *,
+    max_output_tokens: int = TINKER_DEFAULT_MAX_TOKENS,
+    temperature: float = TINKER_DEFAULT_TEMPERATURE,
+):
+    if provider == "tinker":
+        return make_tinker_caller(
+            model=model,
+            max_output_tokens=max_output_tokens,
+            temperature=temperature,
+        )
+    return make_perplexity_caller(model=model)
+
+
 def _agent_names(env: OlympiadEnvironment, schema: str) -> list[str]:
     if schema in {"single_agent", "self_consistency", "memory_solo", "liveoi_best_of_8"}:
         return ["Solo"]
@@ -70,7 +139,10 @@ def _agent_names(env: OlympiadEnvironment, schema: str) -> list[str]:
     if schema == "centralized":
         workers = [f"Agent_{i}" for i in range(2, env.team_size + 1)]
         return ["Group_Leader", *workers]
-    return [f"Agent_{i}" for i in range(1, env.team_size + 1)]
+    agents = [f"Agent_{i}" for i in range(1, env.team_size + 1)]
+    if schema == "open_table_coach":
+        return [*agents, "Coach"]
+    return agents
 
 
 def run_one(
@@ -89,6 +161,10 @@ def run_one(
     rules_mode: RulesMode | str = RulesMode.OFF,
     rules_root: Path | None = None,
     rules_strict: bool = False,
+    provider: str = "perplexity",
+    model: str = "mock",
+    max_output_tokens: int | None = None,
+    temperature: float | None = None,
 ) -> dict:
     env = OlympiadEnvironment(
         competition,
@@ -99,10 +175,19 @@ def run_one(
         rules_strict=rules_strict,
     )
     baseline = env.rules_metadata()
+    transcript_path = (
+        out_dir
+        / "transcripts"
+        / f"{competition}__{problem_id}__{schema}__{env.rules_mode.value}.json"
+    )
     if not env.rules_baseline.available:
-        return {
+        row = {
             "competition": competition,
             "problem_id": problem_id,
+            "provider": provider,
+            "model": model,
+            "max_output_tokens": max_output_tokens,
+            "temperature": temperature,
             "schema": schema,
             "status": "rules_baseline_unavailable",
             "error": (
@@ -110,6 +195,11 @@ def run_one(
             ),
             **baseline,
         }
+        transcript = env.to_transcript()
+        transcript["run"] = dict(row)
+        _write_json_atomic(transcript_path, transcript)
+        row["transcript_path"] = str(transcript_path)
+        return row
     rules = get_contest_rules(competition)
     config = CollabConfig(
         max_turns=rounds,
@@ -118,57 +208,87 @@ def run_one(
         synthesize=synthesize,
         progress=progress,
     )
-    result = run_collaboration(schema, env, query_fn, config)
-    grade = result.get("grade") or {}
-
-    if judge_task and result.get("submitted") and request_fn is not None:
-        grade = apply_registered_judge(
-            env.problem_data,
-            result.get("final_answer") or "",
-            grade,
-            request_fn=request_fn,
-            work_dir=out_dir / "judge" / problem_id,
-            repo_root=REPO_ROOT,
-        )
-        result["grade"] = grade
-
+    result: dict = {}
+    grade: dict = {}
     coordination = None
-    if judge_collab and request_fn is not None:
-        agents = _agent_names(env, schema)
-        # Prefer names observed in the chat log when available.
-        seen = []
-        for msg in env.chat_history:
-            name = msg.get("sender")
-            if name and name not in seen:
-                seen.append(name)
-        if seen:
-            agents = seen
-        task_results = (
-            f"submitted={result.get('submitted')} "
-            f"grade_method={grade.get('method')} "
-            f"score={grade.get('score')}/{grade.get('max_score')}"
-        )
-        coordination = score_coordination(
-            request_fn=request_fn,
-            task_text=str(env.problem_data.get("problem_description") or env.problem_id),
-            agents=agents,
-            schema=schema,
-            chat_history=env.chat_history,
-            action_log=env.action_log,
-            task_results=task_results,
-        ).to_dict()
+    run_error = None
+    try:
+        result = run_collaboration(schema, env, query_fn, config)
+        grade = result.get("grade") or {}
 
-    transcript_path = (
-        out_dir
-        / "transcripts"
-        / f"{competition}__{problem_id}__{schema}__{env.rules_mode.value}.json"
-    )
+        if judge_task and result.get("submitted") and request_fn is not None:
+            grade = apply_registered_judge(
+                env.problem_data,
+                result.get("final_answer") or "",
+                grade,
+                request_fn=request_fn,
+                work_dir=out_dir / "judge" / problem_id,
+                repo_root=REPO_ROOT,
+            )
+            result["grade"] = grade
+
+        if judge_collab and request_fn is not None:
+            agents = _agent_names(env, schema)
+            # Prefer names observed in the chat log when available.
+            seen = []
+            for msg in env.chat_history:
+                name = msg.get("sender")
+                if name and name not in seen:
+                    seen.append(name)
+            if seen:
+                agents = seen
+            task_results = (
+                f"submitted={result.get('submitted')} "
+                f"grade_method={grade.get('method')} "
+                f"score={grade.get('score')}/{grade.get('max_score')}"
+            )
+            coordination = score_coordination(
+                request_fn=request_fn,
+                task_text=str(
+                    env.problem_data.get("problem_description") or env.problem_id
+                ),
+                agents=agents,
+                schema=schema,
+                chat_history=env.chat_history,
+                action_log=env.action_log,
+                task_results=task_results,
+            ).to_dict()
+    except Exception as exc:
+        run_error = _sanitize_exception(exc)
+        if not grade:
+            try:
+                grade = env.grade_submission()
+            except Exception as grade_exc:
+                grade = {
+                    "graded": False,
+                    "method": None,
+                    "reason": _sanitize_exception(grade_exc),
+                }
+        result = {
+            "submitted": env.submitted,
+            "submitted_by": env.submitted_by,
+            "turns_used": env.current_turn,
+            "max_turns": env.max_turns,
+            "api_calls": env.api_calls,
+            "tokens_used": env.tokens_used,
+            "final_answer": env.workspace.get("final_answer", ""),
+            "grade": grade,
+        }
+
     transcript = env.to_transcript()
     transcript["run"] = {
+        "provider": provider,
+        "model": model,
+        "max_output_tokens": max_output_tokens,
+        "temperature": temperature,
         "schema": schema,
+        "rules_mode": env.rules_mode.value,
         "task_type": env.problem_data.get("task_type"),
         "grade": grade,
         "coordination": coordination,
+        "status": "error" if run_error else "ok",
+        "error": run_error,
+        "final_result": result,
         **baseline,
     }
     _write_json_atomic(transcript_path, transcript)
@@ -176,6 +296,10 @@ def run_one(
     return {
         "competition": competition,
         "problem_id": problem_id,
+        "provider": provider,
+        "model": model,
+        "max_output_tokens": max_output_tokens,
+        "temperature": temperature,
         "schema": schema,
         **baseline,
         "task_type": env.problem_data.get("task_type"),
@@ -200,18 +324,32 @@ def run_one(
         "planning_score": (coordination or {}).get("planning_score"),
         "coordination": coordination,
         "transcript_path": str(transcript_path),
+        "final_answer": result.get("final_answer") or "",
         "final_answer_preview": (result.get("final_answer") or "")[-2000:],
         "chat_history": list(env.chat_history)[-80:],
         "action_log_tail": list(env.action_log)[-40:],
-        "status": "ok",
-        "error": None,
+        "status": "error" if run_error else "ok",
+        "error": run_error,
     }
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--live", action="store_true")
-    parser.add_argument("--model", default=DEFAULT_MODEL)
+    parser.add_argument("--provider", choices=PROVIDERS, default="perplexity")
+    parser.add_argument("--model", default=None)
+    parser.add_argument(
+        "--max-output-tokens",
+        type=int,
+        default=TINKER_DEFAULT_MAX_TOKENS,
+        help="Maximum generated tokens per Tinker sample (default: 8192)",
+    )
+    parser.add_argument(
+        "--temperature",
+        type=float,
+        default=TINKER_DEFAULT_TEMPERATURE,
+        help="Tinker sampling temperature (default: 0.2)",
+    )
     parser.add_argument("--schema", default="centralized", choices=list(SCHEMAS.keys()))
     parser.add_argument(
         "--max-turns",
@@ -238,6 +376,11 @@ def main() -> None:
         default=None,
         help="Comma-separated competition ids (default: all smoke representatives)",
     )
+    parser.add_argument(
+        "--problem-id",
+        default=None,
+        help="Exact benchmark problem id; requires exactly one competition",
+    )
     parser.add_argument("--output", type=Path, default=None)
     parser.add_argument(
         "--rules-mode",
@@ -248,37 +391,58 @@ def main() -> None:
     parser.add_argument("--rules-strict", action="store_true")
     args = parser.parse_args()
 
-    if args.live and not os.environ.get("PERPLEXITY_API_KEY"):
-        raise SystemExit("Set PERPLEXITY_API_KEY for --live runs.")
-
     judge_task = args.judge_task if args.judge_task is not None else bool(args.live)
     judge_collab = args.judge_collab if args.judge_collab is not None else bool(args.live)
-
-    cases = list(SMOKE_CASES)
-    if args.competitions:
-        wanted = {c.strip() for c in args.competitions.split(",") if c.strip()}
-        cases = [(c, p) for c, p in cases if c in wanted]
-    if args.limit is not None:
-        cases = cases[: args.limit]
+    try:
+        model = (
+            _resolve_model(args.provider, args.model)
+            if args.live
+            else (args.model or DEFAULT_MODEL)
+        )
+        cases = _select_cases(args.competitions, args.problem_id, args.limit)
+        if args.max_output_tokens <= 0:
+            raise ValueError("--max-output-tokens must be positive.")
+        if args.temperature < 0:
+            raise ValueError("--temperature must be non-negative.")
+    except ValueError as exc:
+        parser.error(str(exc))
 
     timestamp = datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S")
     out_dir = args.output or (REPO_ROOT / "results" / "competition_batch" / timestamp)
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    query_fn = (
-        make_perplexity_caller(model=args.model)
-        if args.live
-        else resolve_query_fn(use_mock=True)
-    )
     need_request = args.live and (judge_task or judge_collab)
+    if need_request and not os.environ.get("PERPLEXITY_API_KEY"):
+        parser.error(
+            "Set PERPLEXITY_API_KEY for task/collaboration judging, "
+            "or disable both judges."
+        )
+    try:
+        query_fn = (
+            _make_live_query(
+                args.provider,
+                model,
+                max_output_tokens=args.max_output_tokens,
+                temperature=args.temperature,
+            )
+            if args.live
+            else resolve_query_fn(use_mock=True)
+        )
+    except ValueError as exc:
+        parser.error(str(exc))
     request_fn = (
-        resolve_request_fn(provider="perplexity", model=args.model) if need_request else None
+        resolve_request_fn(
+            provider="perplexity",
+            model=model if args.provider == "perplexity" else DEFAULT_MODEL,
+        )
+        if need_request
+        else None
     )
 
     print(
         f"Competition batch: {len(cases)} contests | schema={args.schema} | "
         f"max_turns={args.max_turns or 'registry(50)'} | "
-        f"mode={'live' if args.live else 'mock'} | "
+        f"mode={'live' if args.live else 'mock'} | provider={args.provider} | "
         f"task_judge={'on' if judge_task else 'off'} | "
         f"collab_judge={'on' if judge_collab else 'off'}"
     )
@@ -302,6 +466,10 @@ def main() -> None:
                 rules_mode=args.rules_mode,
                 rules_root=args.rules_root,
                 rules_strict=args.rules_strict,
+                provider=args.provider,
+                model=model if args.live else "mock",
+                max_output_tokens=args.max_output_tokens if args.live else None,
+                temperature=args.temperature if args.live else None,
             )
             if row.get("status") == "rules_baseline_unavailable":
                 print(f"  UNAVAILABLE: {row['error']}", flush=True)
@@ -321,25 +489,35 @@ def main() -> None:
             row = {
                 "competition": competition,
                 "problem_id": problem_id,
+                "provider": args.provider,
+                "model": model if args.live else "mock",
+                "schema": args.schema,
+                "rules_mode": args.rules_mode,
                 "status": "error",
-                "error": str(exc),
+                "error": _sanitize_exception(exc),
             }
             print(f"  FAIL: {exc}", flush=True)
         except Exception as exc:
             row = {
                 "competition": competition,
                 "problem_id": problem_id,
+                "provider": args.provider,
+                "model": model if args.live else "mock",
+                "schema": args.schema,
+                "rules_mode": args.rules_mode,
                 "status": "error",
-                "error": str(exc),
-                "traceback": traceback.format_exc(),
+                "error": _sanitize_exception(exc),
             }
-            print(f"  FAIL: {exc}", flush=True)
+            print(f"  FAIL: {row['error']}", flush=True)
         rows.append(row)
 
     summary = {
         "timestamp": timestamp,
         "mode": "live" if args.live else "mock",
-        "model": args.model if args.live else "mock",
+        "provider": args.provider,
+        "model": model if args.live else "mock",
+        "max_output_tokens": args.max_output_tokens if args.live else None,
+        "temperature": args.temperature if args.live else None,
         "schema": args.schema,
         "rules_mode": args.rules_mode,
         "rules_coverage": {
@@ -365,7 +543,7 @@ def main() -> None:
         "results": rows,
     }
     out_path = out_dir / "competition_batch.json"
-    out_path.write_text(json.dumps(summary, indent=2), encoding="utf-8")
+    _write_json_atomic(out_path, summary)
     print("\n" + "=" * 60)
     print(
         f"  DONE: {summary['ok']}/{summary['total']} ok | "

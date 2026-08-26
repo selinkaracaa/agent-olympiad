@@ -37,7 +37,13 @@ PHASE_A_CASES: list[tuple[str, str]] = [
     ("icpc", "icpc_wf_2012_bottles"),
 ]
 
-DEFAULT_SCHEMAS = ["single_agent", "centralized", "round_table", "decentralized"]
+DEFAULT_SCHEMAS = [
+    "single_agent",
+    "centralized",
+    "round_table",
+    "decentralized",
+    "open_table_coach",
+]
 
 
 def main() -> None:

@@ -49,6 +49,16 @@ def format_agent_profiles(agents: list[str], schema: str) -> str:
             role = "group leader / coordinator" if name == "Group_Leader" else "worker"
             lines.append(f"- {name}: {role}")
         return "\n".join(lines)
+    if schema == "open_table_coach" and "Coach" in agents:
+        return "\n".join(
+            (
+                "- Coach: problem-blind pre-contest adviser and opening-turn adviser; "
+                "cannot use tools or submit and exits after turn 2"
+                if name == "Coach"
+                else f"- {name}: contestant; collaborates after Coach exits"
+            )
+            for name in agents
+        )
     return "\n".join(
         f"- {name}: team member in `{schema}` collaboration protocol" for name in agents
     ) or "(no agents listed)"

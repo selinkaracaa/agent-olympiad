@@ -61,6 +61,19 @@ coverage, schema/rule identifiers, a deterministic SHA-256 content hash, and
 the status of each baseline capability. Analysis groups include `rules_mode`,
 so baseline conditions are never pooled.
 
+### Tinker live ICPC run
+
+Install dependencies, set `TINKER_API_KEY`, then run:
+
+```bash
+python src/run_competition_batch.py --live --provider tinker --model Qwen/Qwen3.6-35B-A3B --max-output-tokens 8192 --temperature 0.2 --competitions icpc --problem-id icpc_wf_2012_bottles --schema centralized --max-turns 2 --rules-mode enforced --no-judge-task --no-judge-collab --output results/icpc_tinker_qwen
+```
+
+This uses three agents because the enforced ICPC rule-card roster has three
+members. The complete atomic transcript is written under
+`results/icpc_tinker_qwen/transcripts/`; the batch summary and final result are
+in `results/icpc_tinker_qwen/competition_batch.json`.
+
 ## Refresh benchmarks from PDFs
 
 ```bash

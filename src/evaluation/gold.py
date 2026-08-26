@@ -34,7 +34,8 @@ def normalize_answer(value: str) -> str:
 
 def _clean_answer_value(raw: str) -> str:
     text = raw.strip()
-    text = re.sub(r"^[:=\-\s]+", "", text)
+    # Preserve leading minus on numeric answers; only strip separators like "=- ".
+    text = re.sub(r"^[:=\s]+", "", text)
     # Stop before the next numbered / T- token if glued on one line.
     text = re.split(
         r"(?i)\s+(?:t-?\d+\b|(?:problem|q|part|team)\s*\d+\s*[.):=\-])",
@@ -177,6 +178,32 @@ def gold_parts_to_rubric(
     )
 
 
+def _is_unsigned_number(value: str) -> bool:
+    return bool(re.fullmatch(r"\d+(?:\.\d+)?(?:/\d+)?", value))
+
+
+def _embedded_in_actual(expected: str, actual: str) -> bool:
+    """Allow prose wrappers like ``slope -21`` without digit-prefix false positives."""
+    start = 0
+    while True:
+        idx = actual.find(expected, start)
+        if idx < 0:
+            return False
+        before = actual[idx - 1] if idx > 0 else ""
+        after = actual[idx + len(expected)] if idx + len(expected) < len(actual) else ""
+        if expected[0].isdigit() or expected.startswith("-"):
+            if before.isdigit():
+                start = idx + 1
+                continue
+        elif before.isalnum() and before not in "([{":
+            start = idx + 1
+            continue
+        if after.isalnum() and after not in ")]},.":
+            start = idx + 1
+            continue
+        return True
+
+
 def answers_match(expected: str, actual: str, aliases: tuple[str, ...] = ()) -> bool:
     candidates = (expected,) + aliases
     norm_actual = normalize_answer(actual)
@@ -184,11 +211,11 @@ def answers_match(expected: str, actual: str, aliases: tuple[str, ...] = ()) -> 
         norm_expected = normalize_answer(candidate)
         if not norm_expected:
             continue
-        if (
-            norm_expected == norm_actual
-            or norm_expected in norm_actual
-            or norm_actual in norm_expected
-        ):
+        if norm_expected == norm_actual:
+            return True
+        if _is_unsigned_number(norm_expected):
+            continue
+        if _embedded_in_actual(norm_expected, norm_actual):
             return True
     return False
 

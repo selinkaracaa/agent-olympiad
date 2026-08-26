@@ -1,0 +1,38 @@
+[
+  {
+    "problem_id": "cf_4A",
+    "competition": "Codeforces",
+    "competition_id": "codeforces",
+    "year": null,
+    "codeforces_id": "4A",
+    "contest_id": 4,
+    "problem_index": "A",
+    "title": "Watermelon",
+    "task_type": "algorithmic_programming",
+    "team_size": 1,
+    "rating": 800,
+    "tags": [
+      "brute force",
+      "math"
+    ],
+    "source_url": "https://codeforces.com/problemset/problem/4/A",
+    "problem_description": "Codeforces problem 4A. Statement is cached locally in the generated package. Judging uses public samples by default; mount authorized secret tests under tests/secret/ for full local reproduction.",
+    "gold_label": {
+      "expected_answer": null,
+      "grading_rubric": "Local trusted judge over ao.icpc-package/v1 bundles. Sample scope uses public statement tests only.",
+      "human_baseline": null
+    },
+    "status": "collected",
+    "time_limit_ms": 1000,
+    "memory_limit_mb": 64,
+    "sample_count": 1,
+    "evaluation": {
+      "evaluator_id": "programming_judge",
+      "status": "sample_tests_ready",
+      "reason": "Public Codeforces samples materialized locally.",
+      "official_bundle_path": "data/benchmarks/codeforces/packages/4A",
+      "sample_tests_path": "data/benchmarks/codeforces/packages/4A/tests/sample",
+      "notes": "Automatic judging is available for sample scope immediately. Add tests/secret/*.in/*.ans and rebuild package.json to grade secrets."
+    }
+  }
+]

@@ -244,6 +244,18 @@ def mock_agent_llm(system_prompt: str, user_prompt: str) -> str:
     """Deterministic mock for offline diagnostics."""
     combined = f"{system_prompt}\n{user_prompt}"
 
+    if "you are coach" in system_prompt.lower() and "pre-contest brief" in system_prompt.lower():
+        return (
+            "ACTION: speak | PAYLOAD: Triage first, assign independent checks, "
+            "and reserve the final quarter for integration and verification."
+        )
+
+    if "you are coach" in system_prompt.lower() and "opening discussion" in system_prompt.lower():
+        return (
+            "ACTION: speak | PAYLOAD: Follow the opening assignments, publish "
+            "checkpoints, and escalate disagreements early. I am now exiting."
+        )
+
     if "synthesize" in combined.lower() or "final team answer" in combined.lower():
         return (
             "ACTION: submit_final | PAYLOAD: "
@@ -266,6 +278,27 @@ def mock_agent_llm(system_prompt: str, user_prompt: str) -> str:
         return (
             "ACTION: execute_code | PAYLOAD: print(sum(range(10)))\n"
             "ACTION: speak | PAYLOAD: Code confirms sum 0..9 = 45."
+        )
+
+    if (
+        "codeforces" in combined.lower()
+        or "cf_4a" in combined.lower()
+        or (
+            "algorithmic_programming" in combined.lower()
+            and "submit_code" in combined.lower()
+        )
+    ):
+        solution = (
+            "n = int(input())\n"
+            'print("YES" if n % 2 == 0 and n > 2 else "NO")\n'
+        )
+        return (
+            "ACTION: execute_code | PAYLOAD: "
+            + solution
+            + "ACTION: submit_code | PAYLOAD: "
+            + solution
+            + "ACTION: submit_final | PAYLOAD: "
+            + solution
         )
 
     if "round table" in combined.lower():
@@ -345,6 +378,154 @@ def make_perplexity_caller(
     if api == "agent":
         return call_agent
     return call_sonar
+
+
+def _safe_api_error(exc: Exception) -> str:
+    message = str(exc)
+    for name in ("TINKER_API_KEY", "PERPLEXITY_API_KEY", "OPENAI_API_KEY"):
+        secret = os.environ.get(name)
+        if secret:
+            message = message.replace(secret, "[REDACTED]")
+    message = re.sub(
+        r"(?i)(authorization[\"']?\s*[:=]\s*[\"']?bearer\s+)\S+",
+        r"\1[REDACTED]",
+        message,
+    )
+    return f"{type(exc).__name__}: {message}"
+
+
+def _normalize_tinker_api_key(raw: str) -> str:
+    """Accept bare ``tml-...`` keys or ``tinker:tml-...`` credential files."""
+    key = str(raw or "").strip()
+    if key.lower().startswith("tinker:"):
+        key = key.split(":", 1)[1].strip()
+    match = re.search(r"(tml-[A-Za-z0-9_-]+)", key)
+    if match:
+        return match.group(1)
+    return key
+
+
+def make_tinker_caller(
+    model: str,
+    max_output_tokens: int = 8192,
+    temperature: float = 0.2,
+) -> QueryFn:
+    """Build a native Tinker sampling caller with lazy per-caller resources."""
+    api_key = _normalize_tinker_api_key(os.environ.get("TINKER_API_KEY", ""))
+    if not api_key:
+        raise ValueError("Set TINKER_API_KEY to use the Tinker provider.")
+    os.environ["TINKER_API_KEY"] = api_key
+    if not model or not model.strip():
+        raise ValueError("Set --model or TINKER_MODEL to select a Tinker model.")
+    if max_output_tokens <= 0:
+        raise ValueError("max_output_tokens must be positive.")
+    if temperature < 0:
+        raise ValueError("temperature must be non-negative.")
+
+    try:
+        import tinker
+    except ImportError as exc:
+        raise RuntimeError(
+            "The Tinker SDK is unavailable. Install the 'tinker' package."
+        ) from exc
+
+    client = None
+    tokenizer = None
+    transient_errors = tuple(
+        error_type
+        for name in (
+            "APIConnectionError",
+            "APITimeoutError",
+            "RateLimitError",
+            "InternalServerError",
+            "RequestFailedError",
+            "SidecarDiedError",
+        )
+        if isinstance((error_type := getattr(tinker, name, None)), type)
+    )
+
+    def resources():
+        nonlocal client, tokenizer
+        if client is None or tokenizer is None:
+            try:
+                new_client = tinker.ServiceClient().create_sampling_client(
+                    base_model=model
+                )
+                new_tokenizer = new_client.get_tokenizer()
+            except Exception as exc:
+                raise RuntimeError(
+                    f"Tinker client initialization failed: {_safe_api_error(exc)}"
+                ) from exc
+            client, tokenizer = new_client, new_tokenizer
+        return client, tokenizer
+
+    def call(system_prompt: str, user_prompt: str, max_retries: int = 3) -> str:
+        sampling_client, sampling_tokenizer = resources()
+        messages = [
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": user_prompt},
+        ]
+        try:
+            encoded = sampling_tokenizer.apply_chat_template(
+                messages,
+                tokenize=True,
+                add_generation_prompt=True,
+                enable_thinking=False,
+            )
+            input_ids = encoded["input_ids"] if hasattr(encoded, "keys") else encoded
+            prompt = tinker.ModelInput.from_ints(input_ids)
+            sampling_params = tinker.SamplingParams(
+                max_tokens=max_output_tokens,
+                temperature=temperature,
+            )
+        except Exception as exc:
+            raise RuntimeError(
+                f"Tinker prompt preparation failed: {_safe_api_error(exc)}"
+            ) from exc
+
+        last_error: Exception | None = None
+        for attempt in range(max_retries):
+            try:
+                response = sampling_client.sample(
+                    prompt,
+                    num_samples=1,
+                    sampling_params=sampling_params,
+                ).result()
+                break
+            except transient_errors as exc:
+                last_error = exc
+                if attempt < max_retries - 1:
+                    time.sleep(2**attempt)
+            except Exception as exc:
+                raise RuntimeError(
+                    f"Tinker sampling failed: {_safe_api_error(exc)}"
+                ) from exc
+        else:
+            raise RuntimeError(
+                f"Tinker sampling failed after {max_retries} attempts: "
+                f"{_safe_api_error(last_error or RuntimeError('unknown error'))}"
+            ) from last_error
+
+        if not response.sequences:
+            raise RuntimeError("Tinker returned no sampled sequences.")
+        sequence = response.sequences[0]
+        try:
+            text = sampling_tokenizer.decode(
+                sequence.tokens, skip_special_tokens=True
+            ).strip()
+        except Exception as exc:
+            raise RuntimeError(
+                f"Tinker decode failed: {_safe_api_error(exc)}"
+            ) from exc
+        if not isinstance(text, str) or not text.strip():
+            stop_reason = getattr(sequence, "stop_reason", None)
+            raise RuntimeError(
+                f"Tinker returned an empty decoded completion "
+                f"(stop_reason={stop_reason!r})."
+            )
+        return text
+
+    return call
 
 
 def resolve_query_fn(

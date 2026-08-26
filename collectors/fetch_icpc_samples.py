@@ -7,6 +7,7 @@ import argparse
 import io
 import json
 import os
+import sys
 import tempfile
 import zipfile
 from pathlib import Path
@@ -14,9 +15,16 @@ from typing import Any, Callable
 from urllib.request import Request, urlopen
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
+
+from problem_package_writer import materialize_package_from_directory
+
 BENCHMARK = ROOT / "data" / "benchmarks" / "icpc" / "benchmark.json"
 SAMPLES_ROOT = ROOT / "data" / "benchmarks" / "icpc" / "samples"
+PACKAGES_ROOT = ROOT / "data" / "benchmarks" / "icpc" / "packages"
 USER_AGENT = "agent-olympiad-icpc-samples/1.0"
+DEFAULT_TIME_MS = 5000
+DEFAULT_MEMORY_MB = 256
 
 
 def has_samples(directory: Path) -> bool:
@@ -93,6 +101,7 @@ def collect(
     *,
     benchmark_path: Path = BENCHMARK,
     samples_root: Path = SAMPLES_ROOT,
+    packages_root: Path = PACKAGES_ROOT,
     limit: int | None = None,
     force: bool = False,
     problem: str | None = None,
@@ -118,7 +127,12 @@ def collect(
         if has_samples(destination) and not force:
             if not dry_run:
                 sample_files = sorted(path.stem for path in destination.glob("*.in"))
-                _mark_sample_ready(record, destination, sample_files)
+                _mark_sample_ready(
+                    record,
+                    destination,
+                    sample_files,
+                    packages_root=packages_root,
+                )
             results.append(
                 {"problem_id": problem_id, "kattis_id": kattis_id, "status": "existing"}
             )
@@ -148,7 +162,12 @@ def collect(
             sample_files = sorted(
                 path.stem for path in destination.glob("*.in")
             )
-            _mark_sample_ready(record, destination, sample_files)
+            _mark_sample_ready(
+                record,
+                destination,
+                sample_files,
+                packages_root=packages_root,
+            )
             results.append(
                 {
                     "problem_id": problem_id,
@@ -176,12 +195,44 @@ def collect(
     return summary
 
 
+def package_dir_for(problem_id: str, packages_root: Path = PACKAGES_ROOT) -> Path:
+    return packages_root / problem_id
+
+
+def _problem_limits(record: dict[str, Any]) -> tuple[int, int]:
+    time_ms = int(record.get("time_limit_ms") or DEFAULT_TIME_MS)
+    memory_mb = int(record.get("memory_limit_mb") or DEFAULT_MEMORY_MB)
+    return max(1, time_ms), max(1, memory_mb)
+
+
+def materialize_problem_package(
+    record: dict[str, Any],
+    sample_directory: Path,
+    *,
+    packages_root: Path = PACKAGES_ROOT,
+) -> Path:
+    problem_id = str(record["problem_id"])
+    time_ms, memory_mb = _problem_limits(record)
+    package_directory = package_dir_for(problem_id, packages_root)
+    return materialize_package_from_directory(
+        problem_id=problem_id,
+        sample_directory=sample_directory,
+        package_directory=package_directory,
+        time_ms=time_ms,
+        memory_mb=memory_mb,
+        kattis_id=str(record.get("kattis_id") or "") or None,
+        include_secret_group=True,
+    )
+
+
 def _mark_sample_ready(
     record: dict[str, Any],
     destination: Path,
     case_names: list[str],
+    *,
+    packages_root: Path = PACKAGES_ROOT,
 ) -> None:
-    """Preserve the upstream benchmark annotations and per-problem manifest."""
+    """Preserve upstream annotations, flat samples, and ao.icpc-package bundle."""
     evaluation = record.setdefault("evaluation", {})
     evaluation["evaluator_id"] = "programming_judge"
     evaluation["status"] = "sample_tests_ready"
@@ -189,9 +240,21 @@ def _mark_sample_ready(
         sample_path = destination.relative_to(ROOT)
     except ValueError:
         sample_path = destination
-    evaluation["sample_tests_path"] = str(sample_path)
+    evaluation["sample_tests_path"] = str(sample_path).replace("\\", "/")
+
+    package_directory = materialize_problem_package(
+        record,
+        destination,
+        packages_root=packages_root,
+    )
+    try:
+        bundle_path = package_directory.relative_to(ROOT)
+    except ValueError:
+        bundle_path = package_directory
+    evaluation["official_bundle_path"] = str(bundle_path).replace("\\", "/")
     evaluation["notes"] = (
-        "Local sample .in/.ans from Kattis; secret tests / DomJudge still deferred."
+        "Local ao.icpc-package/v1 bundle from Kattis public samples. "
+        "Add tests/secret/*.in/*.ans under the package for authorized hidden tests."
     )
     _atomic_json(
         destination / "manifest.json",
@@ -200,6 +263,7 @@ def _mark_sample_ready(
             "problem_id": str(record["problem_id"]),
             "n_cases": len(case_names),
             "cases": case_names,
+            "official_bundle_path": evaluation["official_bundle_path"],
         },
     )
 

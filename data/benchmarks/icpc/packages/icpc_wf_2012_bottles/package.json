@@ -1,0 +1,34 @@
+{
+  "schema_version": "ao.icpc-package/v1",
+  "problem_id": "icpc_wf_2012_bottles",
+  "source": "kattis",
+  "limits": {
+    "time_ms": 5000,
+    "memory_mb": 256,
+    "output_kb": 1024
+  },
+  "checker": {
+    "mode": "token"
+  },
+  "groups": [
+    {
+      "id": "sample",
+      "scope": "sample",
+      "tests": "tests/sample"
+    }
+  ],
+  "subtasks": [
+    {
+      "id": "sample",
+      "points": 0.0,
+      "groups": [
+        "sample"
+      ]
+    }
+  ],
+  "grading_scope_labels": {
+    "sample": "kattis-public-sample",
+    "secret": "authorized-local-secret"
+  },
+  "kattis_id": "bottles"
+}

@@ -92,10 +92,19 @@ def apply_agent_response(
     response: str,
     *,
     submitters: Optional[set[str]] = None,
+    allowed_actions: Optional[set[str]] = None,
 ) -> list[str]:
     """Parse and execute all actions from an agent response. Returns result strings."""
     results = []
     for action_type, payload in parse_agent_response(response):
+        if allowed_actions is not None and action_type not in allowed_actions:
+            result = env.execute_action(
+                agent_name,
+                "sleep",
+                f"blocked prohibited action '{action_type}'",
+            )
+            results.append(result)
+            continue
         if action_type == "submit_final" and submitters is not None and agent_name not in submitters:
             if getattr(getattr(env, "rules_mode", None), "value", None) == "enforced":
                 result = env.execute_action(agent_name, action_type, payload)

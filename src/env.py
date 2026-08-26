@@ -4,6 +4,7 @@ import math
 import operator
 import os
 import subprocess
+import sys
 from pathlib import Path
 from typing import Any, Optional
 
@@ -43,6 +44,7 @@ TEAM_SIZE_MATRIX = {
     "jessup": 5,
     "iiot": 4,
     "icpc": 3,
+    "codeforces": 1,
 }
 
 COMPETITION_TOOL_REGISTRY = {
@@ -50,6 +52,7 @@ COMPETITION_TOOL_REGISTRY = {
     "fyziklani": ["use_calculator", "web_search"],
     "iiot": ["execute_code"],
     "icpc": ["execute_code"],
+    "codeforces": ["execute_code"],
     "mcm": ["execute_code", "web_search"],
     "icm": ["execute_code", "web_search"],
     "ieo_business_case": ["web_search"],
@@ -70,6 +73,7 @@ COMPETITION_TOOL_REGISTRY = {
 COMPETITION_ACTION_REGISTRY = {
     "icpc": ["submit_code"],
     "iiot": ["submit_code"],
+    "codeforces": ["submit_code"],
 }
 
 ALL_ACTIONS = {
@@ -172,6 +176,7 @@ class OlympiadEnvironment:
         self.chat_history: list[dict[str, str]] = []
         self.action_log: list[dict[str, Any]] = []
         self.agent_observations: dict[str, list[dict[str, Any]]] = {}
+        self.code_submissions: list[dict[str, Any]] = []
         self.budget_snapshots: list[dict[str, Any]] = []
         self.deliberation = DeliberationLedger()
         self.communication = CommunicationBudget(
@@ -407,6 +412,73 @@ class OlympiadEnvironment:
     def consume_agent_observations(self, agent_name: str) -> list[dict[str, Any]]:
         return self.agent_observations.pop(agent_name, [])
 
+    def _shared_team_state_keys(self) -> set[str]:
+        if self.rules_mode is not RulesMode.ENFORCED or self.rule_card is None:
+            return set()
+        simulation = self.rule_card.simulation or {}
+        raw = simulation.get("shared_team_state") or ()
+        return {str(item) for item in raw}
+
+    def submit_code_is_team_visible(self) -> bool:
+        """ICPC card shares pending_run_status with the whole team."""
+        return "pending_run_status" in self._shared_team_state_keys()
+
+    def _action_visibility(self, action_type: str) -> str:
+        if action_type in {"write_private_notes", *TOOL_ACTIONS}:
+            return "private"
+        if action_type == "submit_code":
+            return "team" if self.submit_code_is_team_visible() else "private"
+        return "team"
+
+    def _record_shared_code_submission(
+        self, agent_name: str, payload: str, result: str
+    ) -> None:
+        if not self.submit_code_is_team_visible():
+            return
+        try:
+            feedback = json.loads(result)
+        except json.JSONDecodeError:
+            return
+        entry = {
+            "turn": self.current_turn,
+            "agent": agent_name,
+            "verdict": feedback.get("verdict"),
+            "test_scope": feedback.get("test_scope"),
+            "grading_scope_label": feedback.get("grading_scope_label"),
+            "reason": feedback.get("reason"),
+            "passed": feedback.get("passed"),
+            "total": feedback.get("total"),
+            "finalized": bool(feedback.get("finalized")),
+            "code": payload.strip(),
+        }
+        cases = feedback.get("cases") or feedback.get("tests") or []
+        if cases:
+            entry["case_detail"] = cases[0].get("detail") or ""
+        self.code_submissions.append(entry)
+        scope = entry.get("grading_scope_label") or entry.get("test_scope") or "tests"
+        summary = (
+            f"[Contest control] {agent_name} submitted a programming run "
+            f"({scope}): verdict={entry.get('verdict')} "
+            f"({entry.get('reason') or 'no detail'}). "
+            "The full source is available in TEAM CODE SUBMISSIONS."
+        )
+        self.chat_history.append({"sender": "Contest_Control", "message": summary})
+
+    def format_team_code_submissions(self, *, include_source: bool = True) -> str:
+        if not self.code_submissions:
+            return ""
+        lines = ["=== TEAM CODE SUBMISSIONS (contest control) ==="]
+        for item in self.code_submissions:
+            scope = item.get("grading_scope_label") or item.get("test_scope") or "tests"
+            header = (
+                f"Turn {item['turn']} | {item['agent']} | verdict={item.get('verdict')} "
+                f"| scope={scope} | {item.get('reason') or ''}".strip()
+            )
+            lines.append(header)
+            if include_source and item.get("code"):
+                lines.append(str(item["code"]))
+        return "\n".join(lines) + "\n"
+
     def to_transcript(self) -> dict[str, Any]:
         agents = sorted(
             {
@@ -444,6 +516,7 @@ class OlympiadEnvironment:
                 "wrong_submissions": self.wrong_submissions,
             },
             "workspace": dict(self.workspace),
+            "code_submissions": list(self.code_submissions),
             "rule_violations": list(self.rule_violations),
             "deliberation": self.deliberation.report(),
             "communication": self.communication.report(),
@@ -505,12 +578,7 @@ class OlympiadEnvironment:
         self.record_budget_snapshot("api_call")
 
     def _log_action(self, agent_name: str, action_type: str, payload: str, result: str) -> None:
-        visibility = (
-            "private"
-            if action_type in TOOL_ACTIONS
-            or action_type in {"submit_code", "write_private_notes"}
-            else "team"
-        )
+        visibility = self._action_visibility(action_type)
         entry = {
             "turn": self.current_turn,
             "agent": agent_name,
@@ -521,15 +589,22 @@ class OlympiadEnvironment:
             "visibility": visibility,
         }
         self.action_log.append(entry)
+        observation = {
+            "turn": self.current_turn,
+            "action": action_type,
+            "result": result,
+            "visibility": visibility,
+        }
         if visibility == "private":
-            self.agent_observations.setdefault(agent_name, []).append(
-                {
-                    "turn": self.current_turn,
-                    "action": action_type,
-                    "result": result,
-                    "visibility": visibility,
-                }
+            self.agent_observations.setdefault(agent_name, []).append(observation)
+        elif action_type == "submit_code":
+            roster = (
+                [role.name for role in self.rule_card.agent_roles]
+                if self.rule_card is not None
+                else [agent_name]
             )
+            for peer in roster:
+                self.agent_observations.setdefault(peer, []).append(observation)
 
     def validate_action(self, action_type: str, agent_name: str | None = None) -> Optional[str]:
         if action_type not in ALL_ACTIONS:
@@ -629,6 +704,8 @@ class OlympiadEnvironment:
                 result = f"Submission finalized by {agent_name}."
         elif action_type == "submit_code":
             result = self._submit_code(payload)
+            if not result.startswith("RULE VIOLATION"):
+                self._record_shared_code_submission(agent_name, payload, result)
         elif action_type == "use_calculator":
             result = self._run_calculator(payload)
         elif action_type == "execute_code":
@@ -821,7 +898,7 @@ class OlympiadEnvironment:
     def _run_code(self, payload: str) -> str:
         try:
             proc = subprocess.run(
-                ["python3", "-c", payload],
+                [sys.executable, "-c", payload],
                 capture_output=True,
                 text=True,
                 timeout=5,
@@ -944,6 +1021,7 @@ class OlympiadEnvironment:
         self.chat_history.clear()
         self.action_log.clear()
         self.agent_observations.clear()
+        self.code_submissions.clear()
         self.budget_snapshots.clear()
         self.deliberation.reset()
         self.communication.reset()

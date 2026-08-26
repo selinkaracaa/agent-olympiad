@@ -1,3 +1,4 @@
+import json
 import re
 from collections import Counter
 from dataclasses import dataclass, field
@@ -125,6 +126,100 @@ def _format_constraints(values: list[str]) -> str:
     return "\n".join(f"- {value}" for value in values) or "(none listed)"
 
 
+def _open_table_coach_policy(env) -> dict[str, Any]:
+    if env.rules_mode is not RulesMode.ENFORCED or env.rule_card is None:
+        raise ValueError(
+            "open_table_coach requires an enforced rule card with an explicit "
+            "open_table_coach policy"
+        )
+    raw = env.rule_card.simulation.get("open_table_coach")
+    if not isinstance(raw, dict) or raw.get("enabled") is not True:
+        raise ValueError(
+            f"Rule card for {env.competition_id!r} does not enable open-table coaching"
+        )
+    required_top_level = {
+        "may_submit": False,
+        "allowed_tools": [],
+        "counts_toward_shared_api_and_token_budget": True,
+        "after_opening_access": False,
+    }
+    for field_name, expected in required_top_level.items():
+        if raw.get(field_name) != expected:
+            raise ValueError(
+                f"Unsafe open_table_coach policy: {field_name} must be {expected}"
+            )
+    precontest = raw.get("precontest_brief")
+    opening = raw.get("opening_discussion")
+    if not isinstance(precontest, dict) or not isinstance(opening, dict):
+        raise ValueError(
+            "open_table_coach requires precontest_brief and opening_discussion policies"
+        )
+    if (
+        precontest.get("turn") != 1
+        or precontest.get("problem_access") is not False
+        or set(precontest.get("allowed_actions") or ()) != {"speak", "sleep"}
+    ):
+        raise ValueError("Unsafe open_table_coach precontest_brief policy")
+    if (
+        opening.get("turn") != 2
+        or opening.get("problem_access") is not True
+        or set(opening.get("allowed_actions") or ()) != {"speak", "sleep"}
+    ):
+        raise ValueError("Unsafe open_table_coach opening_discussion policy")
+    advice_scope = precontest.get("advice_scope")
+    if not isinstance(advice_scope, list) or not advice_scope or not all(
+        isinstance(item, str) and item.strip() for item in advice_scope
+    ):
+        raise ValueError(
+            "open_table_coach precontest advice_scope must be a non-empty string list"
+        )
+    return dict(raw)
+
+
+def _coach_system_prompt(
+    env,
+    *,
+    phase: Literal["precontest", "opening"],
+    policy: dict[str, Any],
+) -> str:
+    if phase == "precontest":
+        scope = "\n".join(
+            f"- {item}" for item in policy["precontest_brief"]["advice_scope"]
+        )
+        phase_text = (
+            "The problem is unavailable. Give preparation advice only within this "
+            f"scope:\n{scope}"
+        )
+    else:
+        phase_text = (
+            "This is your final participation. Read the opening discussion and "
+            f"{policy['opening_discussion']['purpose']}. You exit after this message."
+        )
+    return (
+        f"You are Coach for a {env.competition_id} team during the "
+        f"{'pre-contest brief' if phase == 'precontest' else 'opening discussion'}.\n"
+        "You are an adviser, not a contestant. You have no tools and may only speak "
+        "or sleep. You may not edit notes, execute tools, or submit an answer.\n"
+        f"{phase_text}\n\n"
+        "Respond with plain text, or exactly one of:\n"
+        "ACTION: speak | PAYLOAD: <advice>\n"
+        "ACTION: sleep | PAYLOAD: <short reason>"
+    )
+
+
+def _precontest_coach_prompt(env, policy: dict[str, Any]) -> str:
+    visible_rules = agent_view(env.rule_card, team_size=env.team_size)
+    return (
+        "=== CONTESTANT-VISIBLE RULE CARD ===\n"
+        f"{json.dumps(visible_rules, ensure_ascii=False, indent=2)}\n\n"
+        "=== PRE-CONTEST RESOURCE ENVELOPE ===\n"
+        f"Contestants: {env.team_size}\n"
+        f"Contest turns: {env.max_turns}\n\n"
+        "Prepare the team to allocate time, communicate, verify work, and reconcile "
+        "the final deliverable while following every visible rule."
+    )
+
+
 def _system_prompt(env, role: str) -> str:
     meta = env.get_metadata()
     task_type = str(env.problem_data.get("task_type") or "")
@@ -222,7 +317,11 @@ def _agent_user_prompt(env, agent_name: str, schema_note: str, extra: str = "") 
         if private_notes is not None
         else ""
     )
-    return f"""{private_result}=== SCHEMA ===
+    team_code_section = ""
+    formatted_submissions = env.format_team_code_submissions(include_source=True)
+    if formatted_submissions:
+        team_code_section = f"{formatted_submissions}\n"
+    return f"""{private_result}{team_code_section}=== SCHEMA ===
 {schema_note}
 
 === PROBLEM ===
@@ -254,6 +353,14 @@ def _count_numbered_parts(text: str) -> int:
 
 def _synthesis_system_prompt(env, synthesizer: str) -> str:
     meta = env.get_metadata()
+    task_type = env.problem_data.get("task_type", "")
+    if task_type == "algorithmic_programming":
+        return (
+            f"You are {synthesizer}, submitting the team's official solution for "
+            f"{meta['competition_id']} ({meta.get('year', 'n/a')}).\n"
+            "Output ONLY a complete stdin/stdout source program in an allowed "
+            "language. No Markdown fences, ACTION lines, or commentary."
+        )
     return (
         f"You are {synthesizer}, writing the team's official final answer sheet for "
         f"{meta['competition_id']} ({meta.get('year', 'n/a')}).\n"
@@ -305,6 +412,8 @@ def _submit_synthesis_response(env, synthesizer: str, response: str) -> int:
 def _synthesis_prompt(env, schema_note: str) -> str:
     state = env.get_state()
     instructions = _final_answer_instructions(env)
+    team_code = env.format_team_code_submissions(include_source=True)
+    team_code_block = f"\n{team_code}\n" if team_code else ""
     return f"""=== SCHEMA ===
 {schema_note}
 
@@ -313,7 +422,7 @@ def _synthesis_prompt(env, schema_note: str) -> str:
 
 === FULL TEAM DISCUSSION ===
 {_discussion_history(env)}
-
+{team_code_block}
 === SHARED SCRATCHPAD ===
 {state['shared_workspace'].get('scratchpad') or '(empty)'}
 
@@ -349,6 +458,8 @@ def _run_agent_once(
     extra: str,
     *,
     submitters: set[str] | None = None,
+    allowed_actions: set[str] | None = None,
+    system_prompt: str | None = None,
     progress: Callable[[str], None] | None = None,
 ) -> None:
     if _should_stop(env):
@@ -357,14 +468,20 @@ def _run_agent_once(
         progress(f"Turn {env.current_turn}/{env.max_turns} — {agent} thinking...")
     try:
         response = query(
-            _system_prompt(env, agent),
+            system_prompt or _system_prompt(env, agent),
             _agent_user_prompt(env, agent, schema_note, extra=extra),
         )
     except TurnLimitExceededError:
         if progress:
             progress("API/turn budget exhausted — stopping agent calls.")
         return
-    apply_agent_response(env, agent, response, submitters=submitters)
+    apply_agent_response(
+        env,
+        agent,
+        response,
+        submitters=submitters,
+        allowed_actions=allowed_actions,
+    )
 
 
 def _run_synthesis(
@@ -385,6 +502,11 @@ def _run_synthesis(
 
     best_answer = ""
     best_parts = 0
+    requires_numbered_parts = env.problem_data.get("task_type", "") in {
+        "team_contest",
+        "team_power",
+        "team_practical",
+    }
 
     for attempt in range(2):
         if env.api_budget_exhausted() or env.token_budget_exhausted():
@@ -393,7 +515,7 @@ def _run_synthesis(
         _log(f"{synthesizer} synthesizing final answer (attempt {attempt + 1})...")
         system = _synthesis_system_prompt(env, synthesizer)
         user = _synthesis_prompt(env, schema_note)
-        if attempt > 0:
+        if attempt > 0 and requires_numbered_parts:
             user += (
                 "\n\nREMINDER: Your previous submission was incomplete. "
                 "You MUST include ALL numbered problems (1. through 10.)."
@@ -410,6 +532,8 @@ def _run_synthesis(
 
         parts = _submit_synthesis_response(env, synthesizer, response)
         answer = env.workspace.get("final_answer", "")
+        if env.submitted and not requires_numbered_parts:
+            return
         if parts > best_parts:
             best_parts = parts
             best_answer = answer
@@ -634,7 +758,6 @@ def run_single_agent(env, query_llm_fn: QueryFn, config: CollabConfig | None = N
     result["solo_calls_per_turn"] = calls_per_turn
     result["natural_team_size"] = natural_team
     return result
-
 
 def _isolated_prompt(
     env,
@@ -939,21 +1062,132 @@ def run_liveoi_best_of_8(
 def run_open_table_coach(
     env, query_llm_fn: QueryFn, config: CollabConfig | None = None
 ) -> dict:
-    """Round table with one non-submitting coach message before competition turns."""
+    """Coach prepares the team, joins one open-table turn, then exits."""
     config = config or CollabConfig()
     _apply_budget_config(env, config)
-    if not env.api_budget_exhausted():
-        env.record_api_call()
-        advice = env.apply_output_token_budget(
-            query_llm_fn(
-                "You are a non-competing coach. Give concise strategic advice only.",
-                f"Problem:\n{env._problem_statement()}",
+    policy = _open_table_coach_policy(env)
+    query = _budgeted_query(env, query_llm_fn, config)
+    visible_rules = json.dumps(
+        agent_view(env.rule_card, team_size=env.team_size),
+        ensure_ascii=False,
+        indent=2,
+    )
+    roles = _roster(env)
+    agents = [role.name for role in roles]
+    submitters = {role.name for role in roles if role.may_submit}
+    synthesizer = next(
+        (role.name for role in roles if role.may_submit),
+        agents[0],
+    )
+    coach_actions = {"speak", "sleep"}
+    schema_note = (
+        "Open Table + Coach: Coach gives a problem-blind preparation brief, then "
+        "joins exactly one problem-aware opening discussion. Coach exits after turn "
+        "2; all later collaboration is contestant-only."
+    )
+
+    # Stage 1: charged to the common turn/API/token budgets, with no problem access.
+    if not _should_stop(env) and env.can_begin_turn():
+        turn = env.begin_turn()
+        if config.progress:
+            config.progress(f"Turn {turn}/{env.max_turns} — Coach preparing team...")
+        try:
+            response = query(
+                _coach_system_prompt(env, phase="precontest", policy=policy),
+                _precontest_coach_prompt(env, policy),
             )
+        except TurnLimitExceededError:
+            response = ""
+        if response:
+            apply_agent_response(
+                env,
+                "Coach",
+                response,
+                submitters=set(),
+                allowed_actions=coach_actions,
+            )
+
+    # Stage 2: contestants open the problem-aware table; Coach summarizes and exits.
+    if not _should_stop(env) and env.can_begin_turn():
+        turn = env.begin_turn()
+        for agent in agents:
+            _run_agent_once(
+                env,
+                query,
+                agent,
+                schema_note,
+                extra=(
+                    f"Opening open-table turn {turn} of {env.max_turns}. Review the "
+                    "problem, propose assignments and priorities, and respond to the "
+                    "Coach's preparation brief.\n\n"
+                    f"CONTESTANT-VISIBLE RULE CARD:\n{visible_rules}"
+                ),
+                submitters=submitters,
+                progress=config.progress,
+            )
+            if _should_stop(env):
+                break
+        if not _should_stop(env):
+            _run_agent_once(
+                env,
+                query,
+                "Coach",
+                schema_note,
+                extra=(
+                    f"{policy['opening_discussion']['purpose']}. This is your final "
+                    "message; after it you cannot observe or communicate with the team."
+                    f"\n\nCONTESTANT-VISIBLE RULE CARD:\n{visible_rules}"
+                ),
+                submitters=set(),
+                allowed_actions=coach_actions,
+                system_prompt=_coach_system_prompt(
+                    env,
+                    phase="opening",
+                    policy=policy,
+                ),
+                progress=config.progress,
+            )
+
+    # Stage 3: Coach is never called again.
+    while not _should_stop(env):
+        if not env.can_begin_turn():
+            break
+        turn = env.begin_turn()
+        for agent in agents:
+            _run_agent_once(
+                env,
+                query,
+                agent,
+                schema_note,
+                extra=(
+                    f"Contestant-only collaboration turn {turn} of {env.max_turns}. "
+                    "Coach has exited and cannot observe or participate.\n\n"
+                    f"CONTESTANT-VISIBLE RULE CARD:\n{visible_rules}"
+                ),
+                submitters=submitters,
+                progress=config.progress,
+            )
+            if _should_stop(env):
+                break
+
+    if config.synthesize and not env.submitted:
+        _run_synthesis(
+            env,
+            query,
+            schema_note,
+            synthesizer,
+            submitters=submitters,
+            progress=config.progress,
         )
-        env.execute_action("Coach", "speak", advice)
-    result = run_round_table(env, query_llm_fn, config)
-    result["schema"] = "open_table_coach"
-    result["coach_advice"] = advice if "advice" in locals() else ""
+
+    result = _result(env, "open_table_coach")
+    result["coach_policy_status"] = policy.get("status")
+    result["coach_exit_after_turn"] = 2
+    result["coach_problem_access"] = {
+        "precontest_brief": False,
+        "opening_discussion": True,
+        "after_opening": False,
+    }
     return result
 
 

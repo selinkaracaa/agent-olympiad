@@ -1,0 +1,16 @@
+{
+  "schema_version": "ao.icpc-samples-manifest/v1",
+  "benchmark_problem_count": 1,
+  "selected": 1,
+  "fetched": 0,
+  "existing": 1,
+  "errors": 0,
+  "dry_run": false,
+  "problems": [
+    {
+      "problem_id": "icpc_wf_2012_bottles",
+      "kattis_id": "bottles",
+      "status": "existing"
+    }
+  ]
+}

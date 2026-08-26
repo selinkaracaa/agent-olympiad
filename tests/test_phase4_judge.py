@@ -15,6 +15,7 @@ sys.path.insert(0, str(REPO_ROOT / "src"))
 
 from collectors.fetch_icpc_samples import collect, extract_samples_atomic
 from actions import build_action_instructions
+from collaboration import _agent_user_prompt
 from env import OlympiadEnvironment
 from evaluation.programming_judge import judge_programming_submission
 from judge import (
@@ -221,6 +222,29 @@ class EnvironmentSubmissionTests(unittest.TestCase):
         self.assertEqual(env.simulated_minutes, before + 20)
         observations = env.consume_agent_observations("Agent_1")
         self.assertEqual(observations[-1]["visibility"], "private")
+        self.assertEqual(env.action_log[-1]["visibility"], "private")
+        self.assertEqual(env.code_submissions, [])
+
+    def test_submit_code_is_team_visible_when_enforced(self):
+        env = OlympiadEnvironment(
+            "icpc",
+            "icpc_wf_2012_bottles",
+            max_turns=20,
+            rules_mode="enforced",
+        )
+        env.execute_action("Agent_2", "submit_code", "print('bad')")
+        self.assertEqual(env.action_log[-1]["visibility"], "team")
+        self.assertEqual(len(env.code_submissions), 1)
+        self.assertEqual(env.code_submissions[0]["agent"], "Agent_2")
+        self.assertTrue(
+            any(entry["sender"] == "Contest_Control" for entry in env.chat_history)
+        )
+        teammate_obs = env.consume_agent_observations("Agent_3")
+        self.assertTrue(teammate_obs)
+        self.assertEqual(teammate_obs[-1]["visibility"], "team")
+        prompt = _agent_user_prompt(env, "Agent_1", "centralized", extra="")
+        self.assertIn("TEAM CODE SUBMISSIONS", prompt)
+        self.assertIn("print('bad')", prompt)
 
     def test_final_prefers_official_secret_and_labels_sample_fallback(self):
         with tempfile.TemporaryDirectory() as temp:

@@ -65,7 +65,10 @@ def agent_roster(schema: str, team_size: int) -> list[str]:
         return ["Orchestrator", *[f"Worker_{i}" for i in range(1, team_size + 1)]]
     if schema == "centralized":
         return ["Group_Leader", *[f"Agent_{i}" for i in range(2, team_size + 1)]]
-    return [f"Agent_{i}" for i in range(1, team_size + 1)]
+    agents = [f"Agent_{i}" for i in range(1, team_size + 1)]
+    if schema == "open_table_coach":
+        return [*agents, "Coach"]
+    return agents
 
 
 def team_size_for(competition: str, problem_id: str) -> int:
@@ -91,11 +94,19 @@ def models_for_team(
         "single_agent", "self_consistency", "memory_solo", "liveoi_best_of_8", "subagent"
     }:
         agents = [role.name for role in env.rule_card.roster(env.team_size)]
+        if schema == "open_table_coach":
+            agents.append("Coach")
     else:
         agents = agent_roster(schema, env.team_size)
     if team == "hetero":
         cycle = [TEAM_MODELS[k] for k in HETERO_CYCLE]
-        return {name: cycle[i % len(cycle)] for i, name in enumerate(agents)}
+        roster = {
+            name: cycle[i % len(cycle)]
+            for i, name in enumerate(agent for agent in agents if agent != "Coach")
+        }
+        if "Coach" in agents:
+            roster["Coach"] = roster[agents[0]]
+        return roster
     model = TEAM_MODELS[team]
     return {name: model for name in agents}
 

@@ -204,6 +204,38 @@
     "max_turns": 26,
     "scheduler": "round_table_or_centralized",
     "turn_budget_basis": "official clock 9 turns vs floor 26 (6 teammates x 2 turns + 10 answer parts + 4 for synthesis)",
-    "eligibility_and_logistics_state": "specified_for_role_immersion_not_enforced"
+    "eligibility_and_logistics_state": "specified_for_role_immersion_not_enforced",
+    "open_table_coach": {
+      "enabled": true,
+      "status": "counterfactual_synthetic_baseline_not_official_arml_rule",
+      "may_submit": false,
+      "allowed_tools": [],
+      "counts_toward_shared_api_and_token_budget": true,
+      "precontest_brief": {
+        "turn": 1,
+        "problem_access": false,
+        "allowed_actions": [
+          "speak",
+          "sleep"
+        ],
+        "advice_scope": [
+          "time allocation",
+          "task triage",
+          "communication protocol",
+          "independent verification",
+          "final answer-sheet reconciliation"
+        ]
+      },
+      "opening_discussion": {
+        "turn": 2,
+        "problem_access": true,
+        "allowed_actions": [
+          "speak",
+          "sleep"
+        ],
+        "purpose": "summarize the contestants' opening discussion into priorities and checkpoints"
+      },
+      "after_opening_access": false
+    }
   }
 }
