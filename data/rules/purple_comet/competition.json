@@ -1,0 +1,185 @@
+{
+  "schema_version": "1.0",
+  "rule_id": "purple_comet:official_shared_answer",
+  "competition_id": "purple_comet",
+  "profile": "non_comparable",
+  "protocol": "shared_answer",
+  "team": {
+    "active_min": 1,
+    "active_default": 6,
+    "active_max": 6,
+    "roster_max": 6,
+    "collaboration": "One to six teammates may work together from the same or different locations and share one team answer form; an adult supervisor aged 21 or older is required and is not a contestant.",
+    "range_basis": "source_record",
+    "official_roster_note": "A team may have as few as one and as many as six students. An adult supervisor aged 21 or older must register the team, start the clock, and monitor rule-following, and must not help solve problems, supply definitions, or enter answers except where judges grant a disability accommodation. Competitive-category age, grade, and school-size rules, and the 244-hour window, are official identity and logistics obligations included for role immersion and are not runtime-enforced state machines."
+  },
+  "execution": {
+    "wall_clock_note": "HS usually 90 minutes / MS 60 minutes; max_turns is a safety budget.",
+    "official_minutes": 90,
+    "division_variants": {
+      "MS": {
+        "problem_count": 20,
+        "official_minutes": 60
+      },
+      "HS": {
+        "problem_count": 30,
+        "official_minutes": 90
+      }
+    },
+    "competition_window_hours": 244,
+    "supervisor_starts_clock": true,
+    "answer_form": "web_form_last_submission_per_problem_counts",
+    "partial_submissions_accumulate": true
+  },
+  "allowed_tools": [
+    "query_rules",
+    "use_calculator"
+  ],
+  "resources": {
+    "internet": "forbidden_for_solution_search",
+    "calculator": "allowed",
+    "computer_algebra": "allowed_for_calculation_only",
+    "ai_tools": "forbidden",
+    "solution_method_search": "forbidden",
+    "paper_pencil": "allowed",
+    "local_books_and_notes": "allowed",
+    "generative_ai": "forbidden",
+    "outside_help": "forbidden",
+    "remote_teammate_communication": "allowed"
+  },
+  "human_constraints": [
+    "Treat yourself as a Purple Comet! Math Meet contestant on one team of one to six students; do not invent a seventh solver or a second simultaneous team identity.",
+    "An adult supervisor aged 21 or older is required. The supervisor registers the team, reviews the rules with members, starts the team clock, and monitors compliance, and is not a contestant.",
+    "The supervisor must not help with mathematics, definitions, translation, or problem-solving, and must not enter answers except where contest judges grant a disability accommodation.",
+    "Competitive middle-school members have not yet completed the eighth grade or local equivalent and are under 16 on the date of the competition. Competitive high-school members have not graduated from secondary school or local equivalent and are under 20 on that date.",
+    "No student may participate on more than one middle-school team or more than one high-school team, although a middle-school-eligible student may compete on one middle-school team and one high-school team.",
+    "Small-school and large-school competitive teammates must be enrolled in the same school. Mixed-school teams are for home-schooled students, a regional mathematics club, or another non-school group. Non-competitive teams are open without those restrictions and are not posted in official results.",
+    "High schools qualify as small at no more than 1200 students and middle schools at no more than 400 students, counting the campus population from which teammates could be drawn.",
+    "Each team needs its own computer and Internet session. If two teams share a computer, one team must finish the entire competition before the other starts.",
+    "Age, grade, school-size, registration, and 244-hour window obligations are official identity and logistics rules carried as role immersion; they are not runtime-enforced workflows.",
+    "This card evaluates the high-school default: 30 problems in 90 minutes after the supervisor starts the clock. A middle-school team instead receives 20 problems and 60 minutes.",
+    "The supervisor may choose any period inside the 244-hour competition window. Official time is the time determined by the purplecomet.org server.",
+    "Answers are non-negative integers submitted through the contest web form. A team may submit multiple times; for each problem only the last answer received before the contest ends is graded, and partial submissions accumulate.",
+    "Students on the same team are encouraged to work together and may be in different geographic locations. Remote teammates may communicate by telephone, Internet, or other methods and may all log into the team account.",
+    "No help may be provided by persons not on the team, including the supervisor. Do not reveal, discuss, or post contest problems to anyone outside the immediate team until the contest officially ends.",
+    "Calculators, computer-algebra systems, spreadsheets, custom code, Desmos, WolframAlpha, Mathematica, Maple, GeoGebra, and similar tools may be used only to perform calculations or draw diagrams after the team has chosen the method.",
+    "Local books, class notes, and other reference materials at the contest location are allowed if teammates seek them without aid from outsiders.",
+    "Students may not use the Internet to find definitions, instructional materials, or solution methods, and may not query a browser about how to solve a problem.",
+    "Generative artificial intelligence tools, including ChatGPT, Gemini, Copilot, and Claude, are forbidden for producing, explaining, or verifying answers, interpreting problems, or generating computer code, text, or mathematical reasoning.",
+    "Students must decide how to solve the problems from their own knowledge and allowed local references; tools may compute or plot but may not invent the method.",
+    "The decision of the competition judges is final. Competitive-category results may be posted; non-competitive team results are not posted."
+  ],
+  "rules_text": "You are a Purple Comet! Math Meet contestant on a team of one to six students with an adult supervisor aged 21 or older who is not a contestant and gives no mathematics, definition, or translation help. This card uses the high-school default: 30 problems in 90 minutes after the supervisor starts the clock inside the 244-hour window (middle school is 20 problems in 60 minutes). Teammates may be remote and may communicate with one another; they share one web answer form. Answers are non-negative integers; only the last submission per problem counts, and partial submissions accumulate. Calculators, CAS, code, Desmos, WolframAlpha, and similar tools may calculate or draw diagrams only after you choose the method. Local books and notes are allowed. Internet search for solution methods, definitions, or instruction is forbidden. Generative AI—including ChatGPT, Gemini, Copilot, and Claude—must not produce, explain, or verify answers or code. Do not take outside help or post problems before the contest ends. Judges' decisions are final. Because the official AI ban forbids LLM solvers, this participation is non-comparable even when an answer sheet is numerically correct. Treat unexposed physical, oral, live-opponent, judge, timing, or environment mechanisms as unavailable rather than simulated facts.",
+  "provenance": {
+    "status": "source_grounded",
+    "sources": [
+      {
+        "title": "Purple Comet! Math Meet Official Rules",
+        "url": "https://purplecomet.org/rules",
+        "authority": "official",
+        "edition": "last updated January 24, 2026",
+        "sections": [
+          "How It Works",
+          "Rules For Supervisors",
+          "Rules For Team Formation",
+          "Rules For The Competition",
+          "Other Rules"
+        ],
+        "archive_status": "local_text_capture_available",
+        "local_text": "data/rules/sources/purple_comet/01_rules.txt"
+      },
+      {
+        "title": "Purple Comet! Math Meet Frequently Asked Questions",
+        "url": "https://purplecomet.org/faq",
+        "authority": "official",
+        "edition": "last updated January 24, 2026",
+        "sections": [
+          "Who May Participate?",
+          "How Many Students Can Compete On One Team?",
+          "Can Team Members Work Together To Solve Contest Problems?",
+          "Can Students Use Calculators Or Computers To Help Solve The Contest Problems?",
+          "Can Students Consult Books Or Notes During The Contest?",
+          "Can Students Ask The Adult Supervisor For Help During The Contest?",
+          "Can Students Search The Internet During The Contest To Find Information That Can Help Them Solve Contest Problems?",
+          "Can The Adult Supervisor Enter Answers For Students?",
+          "Do All Students On A Team Need To Be In The Same Location During The Contest?"
+        ],
+        "archive_status": "local_text_capture_available",
+        "local_text": "data/rules/sources/purple_comet/02_faq.txt"
+      }
+    ],
+    "adaptations": [
+      "official_minutes 90 and max_turns 24 follow the high-school default; a middle-school session would be 60 minutes and 20 problems",
+      "only the built-in calculator tool is exposed; CAS, Desmos, WolframAlpha, spreadsheets, and custom code are official calculation aids that are not separately instrumented",
+      "the 244-hour window, supervisor clock start, and last-answer-counts web form are specified but not enforced as runtime state",
+      "limited communication (18 team / 4 per agent / 1200 characters) is a coordination-pressure overlay, not an official message cap",
+      "structured deliberation actions are a coordination overlay, not an official Purple Comet meeting procedure",
+      "the official generative-AI prohibition makes LLM-agent participation non-comparable; a numerically correct sheet does not restore comparability"
+    ],
+    "official_time_note": "HS about 90 minutes / MS about 60 minutes (plus multi-day window historically).",
+    "research_confidence": "high",
+    "research_notes": [
+      "Supervisor registration, clock start, age/grade/school-size categories, and the 244-hour window are conscience and role text, not executable logistics.",
+      "Official scoring is last submitted non-negative integer per problem, accumulated across partial submits; no time-penalty formula is published.",
+      "The AI and method-search bans are the reason profile remains non_comparable for LLM agents."
+    ],
+    "proxy_limitations": [
+      "The runtime cannot enforce 'tools compute, humans choose methods' or the generative-AI ban against LLM participants.",
+      "The supervisor integrity model has no agent analogue; supervisor non-solving is role-immersion text.",
+      "CAS, Desmos, WolframAlpha, and custom calculation programs are official but not separately instrumented beyond use_calculator.",
+      "The 244-hour window, live web form with last-answer-counts, and multi-site login visibility are not implemented.",
+      "Competitive-category posting versus non-competitive exclusion is not simulated as standings state."
+    ],
+    "content_standard": {
+      "name": "icpc_three_component_content_standard",
+      "version": "1.1",
+      "applied_at": "2026-08-17",
+      "reference_card": "data/rules/icpc",
+      "official_facts_policy": "competition_specific_primary_sources_only",
+      "scope": [
+        "competition_constraints",
+        "collaboration_operations",
+        "evaluation_and_compliance",
+        "runtime_fidelity"
+      ]
+    },
+    "source_review": {
+      "reviewed_at": "2026-08-17",
+      "audit_report": "docs/rule_card_icpc_standard_gap_audit_2026-08-17.md",
+      "coverage_grade": "A",
+      "completion_status": "primary_rules_available_exact_scoring_may_still_need_runtime_support",
+      "claim_policy": "unknown_official_values_remain_null_or_explicitly_unresolved",
+      "known_gaps": []
+    }
+  },
+  "comparability": {
+    "overall": "non_comparable",
+    "dimensions": {
+      "roster": "official_one_to_six_supervisor_excluded",
+      "timing": "adapted_hs_90_minute_turn_budget",
+      "tools": "calculator_subset_cas_not_instrumented",
+      "submission": "single_sheet_proxy_for_last_answer_web_form",
+      "scoring": "gold_last_integer_per_problem",
+      "ai_policy": "fundamental_participant_waiver",
+      "method_vs_calculation": "specified_not_enforced",
+      "supervisor_clock": "specified_not_enforced",
+      "competition_window": "244_hour_window_not_implemented",
+      "communication": "adapted_coordination_budget",
+      "eligibility_and_logistics": "role_immersion_text_only"
+    }
+  },
+  "deliverable": {
+    "answer_format": "Ordered non-negative integers, one per problem:\n1. N\n2. N\n...\nUse the contest's required integer encoding (for example m+n).",
+    "shared": true,
+    "mime_types": [
+      "text/plain"
+    ],
+    "task_types": [
+      "team_contest"
+    ],
+    "official_deliverable": "answer_sheet",
+    "official_mime_types": [
+      "text/plain"
+    ]
+  }
+}

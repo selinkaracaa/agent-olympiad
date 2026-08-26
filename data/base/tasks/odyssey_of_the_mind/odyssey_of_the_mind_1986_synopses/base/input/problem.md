@@ -1,0 +1,16 @@
+# Long-Term Problem Synopses — 1986
+
+# Odyssey of the Mind — 1986 Long-Term Problem Synopses
+
+Source: https://odysseyofthemind.com/past-problems/
+
+Note: These are public synopses. Full problem packets require membership.
+
+---
+
+1. TechnocratsDivisions I, II & IIIDesign, develop and mass-produce a creative product. The design and production planning will be completed in advance, but the mass production will occur during competition. The team will produce ten reasonably identical items, package them, and place them on a shipping dock. The finished products must be user-ready and must work. Extra points may be earned by spending and by using multiple team-made components and different types of materials. Time limit: 10 min. Cost limit: $75 USD.
+2. History: The Way It WasDivisions I, II & IIISelect an historic event from a provided list and present a humorous interpretation of “how it really happened.?” The performance must be live but other media may be used also. Time limit: 10 min. Cost limit: $45 USD.
+3. Great Art LivesDivisions I, II & IIIPaint and/or sculpt two works by one of a given list of art masters, copying the original as accurately as possible. One work will serve as decoration. A second will be the subject of a live team performance in which the performers will begin or end in the position of the subjects of the work of art chosen. A third and original work will be created by the team in the style of the master. Time limit: 10 min. Cost limit: $45 USD.
+4. Treasure HuntersDivisions II & IIIPrepare a computer program that produces computer output for guiding team members in successfully retrieving and moving several items on a 49-square grid laid out on the floor. During competition, the team will randomly select a map indicating the location of the items and a hazard. The computer program must be developed in advance and modified during competition. Based on the output provided by a computer operator, two team members (Communicators) will direct two other team members (Hunters) in traveling from square to square, retrieving and moving the items as required. Communicators must direct the Hunters only by sight (no talking or touching). Each square may be entered only once, diagonal moves are prohibited, and each Hunter is limited to 25 moves total. Time limit: 10 min. Cost limit: $40 USD.
+5. Bridging the GapDivisions I, II & IIIDesign and build a pair of structures using strips of balsa wood glued to support the greatest weight. The structures will include a beam 12 to 18 inches in length and a load-bearing element, not more than 6 inches in length, which sits atop the beam. Each structure must be at least 2 inches high, and the pair of structures must be 8 to 8″ inches high. The pair must not weigh more than 25 grams. During competition, the beam rests on two 2-inch by 4-inch blocks placed 11 inches apart. Time limit: 8 min.
+6. Happy Birthday

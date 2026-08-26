@@ -3,9 +3,26 @@ __pycache__/
 *.pyc
 .env
 
+# Local Cursor rules — keep on disk, do not push
+.cursor/
+
 # Run logs only (result JSON/MD are kept under initial_experiments/results/)
 initial_experiments/results/logs/
 initial_experiments/results/**/*.log
 
 # Local meeting notes — not for GitHub
 MEETING_BRIEF.md
+
+# Local pipeline work and generated run outputs
+pipeline/
+results/
+
+# Paper is maintained separately in Overleaf
+paper/
+
+# Raw data lives on HF (akaaafk/multiagent_bench) — run download_data.py to fetch.
+# Only the READMEs are tracked in git.
+art/**
+!art/README.md
+olympiad/**
+!olympiad/README.md

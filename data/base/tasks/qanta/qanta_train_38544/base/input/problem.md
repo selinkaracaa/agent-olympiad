@@ -1,0 +1,3 @@
+# Religion
+
+During the sixteenth century, these people developed a partnership with the neighboring Maronites to increase their silk production. They refer to themselves as al-Hawim and al-Mawahhidun, people of one God and unity. Letters from their founders al-Hamza and al-Hakim are collected in their scripture, the Rasa'il al-Hikma, or Book of Wisdom. Their beliefs in universal soul, mind, and word and good and evil are represented in their five colored star symbol and forbid conversion to or from their faith. For 10 points, identify this breakaway unitarian sect of Shi'a Islam concentrated in Syria and Lebanon.

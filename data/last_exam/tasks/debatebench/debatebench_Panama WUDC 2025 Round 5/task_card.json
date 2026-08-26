@@ -1,0 +1,33 @@
+{
+  "task_id": "debatebench/debatebench_Panama WUDC 2025 Round 5",
+  "competition_id": "debatebench",
+  "problem_id": "debatebench_Panama WUDC 2025 Round 5",
+  "title": "Panama WUDC 2025 Round 5",
+  "year": 2025,
+  "team_size": 8,
+  "source_url": null,
+  "inherits_competition_pack": "competitions/debatebench",
+  "rule_card": "data/rules/debatebench",
+  "input": {
+    "visibility": "agent_at_start",
+    "files": [
+      {
+        "name": "problem.md",
+        "path": "base/input/problem.md"
+      },
+      {
+        "name": "Panama WUDC 2025 Round 5.txt.path",
+        "path": "base/input/Panama WUDC 2025 Round 5.txt.path"
+      }
+    ]
+  },
+  "method": {
+    "visibility": "agent_at_start",
+    "path": "competitions/debatebench/method"
+  },
+  "eval": {
+    "visibility": "hidden_until_grade",
+    "path": "eval/reference.json",
+    "competition_eval": "competitions/debatebench/eval"
+  }
+}

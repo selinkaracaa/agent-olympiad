@@ -1,0 +1,10 @@
+{
+  "visibility": "hidden_until_grade",
+  "gold_pointer": "data/benchmarks/debatebench/benchmark.json#debatebench_d_oxbridge_3_round_3_cvr_cr_box_df_4_vid2txt_Jan-08-2025_-13_full.gold_label",
+  "has_gold_answer": false,
+  "evaluator_id": null,
+  "evaluator_status": null,
+  "rubric_path": null,
+  "deliverable": null,
+  "solution_file": null
+}

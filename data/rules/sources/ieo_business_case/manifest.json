@@ -1,0 +1,28 @@
+{
+  "competition_id": "ieo_business_case",
+  "crawled_at": "2026-08-11T16:07:26.149128+00:00",
+  "sources": [
+    {
+      "title": "IEO Regulations",
+      "url": "https://files.ieo-official.org/IEO_Regulations_of_Competition.pdf",
+      "status": "ok",
+      "content_type": "application/pdf",
+      "bytes": 326476,
+      "raw_file": "data/rules/sources/ieo_business_case/01_IEO_Regulations_of_Competition.pdf",
+      "text_file": "data/rules/sources/ieo_business_case/01_IEO_Regulations_of_Competition.txt",
+      "text_chars": 30387,
+      "text_preview": " \nREGULATIONS  \nOF\n \nCOMPETITION \n \n  \nThis\n \nversion\n \nwas\n \napproved\n \nby\n \nthe\n \nInternational\n \nBoard\n \non\n \n30/06/2026.\n \n1.\n \nGENERAL\n \nSTATEMENT\n \n1.1.\n \nThe\n \noﬃcial\n \nlanguage\n \nof\n \nthe\n \nInternational\n \nEconomics\n \nOlympiad\n \nis\n \nEnglish.\n \nTasks,\n \nsolutions,\n \nand\n \nmarking\n \nschemes\n \nare\n \ncomposed\n \nin\n \nthe\n \noﬃcial\n \nlanguage\n \nof\n \nthe\n \nIEO;\n \nno\n \ntranslations\n \nare\n \nprovided.\n \nContestants\n \nare\n \nsupposed\n \nto\n \nsubmit\n \ntheir\n \nsolutions\n \nin\n \nEnglish.\n \n1.2.\n \nThe\n \nIEO\n \nis\n \norganized\n \nevery\n \nyear.\n \nNormally,\n \nthe\n \nIEO\n \nis\n \nan\n \non-site\n \nevent\n \nthat\n \ntakes\n \nplace\n \nin\n \nJuly\n \nor\n \nAugust.\n \nThe\n \nInternational\n \nBoard\n \n(IB)\n \ncan\n \ndecide\n \nto\n \norganize\n \nthe\n \nIEO\n \nentirely\n \nor\n \npartially\n \nonline\n \nin\n \nthe\n \nface\n \nof\n \nactive\n \ninternational\n \ntravel\n \nrestrictions\n \nor\n \nunder\n \nother\n \ncircumstances\n \npreventing\n \nthe\n \nevent\n \nfrom\n \nbeing\n \non-site.\n \nThe\n \nExecutive\n \nBoard\n \n(EB)\n \ncan\n \ndecide\n \nto\n \nconduct\n \nthe\n \nIEO\n \nin\n \nmonths\n \nother\n \nthan\n \nJuly\n \nand\n \nAugust.\n \nIn\n \ncase\n \nof\n \nsuch\n \na\n \ndecision,\n \nthe\n \nHost\n \nOrganization’s\n \nand\n \nthe\n \nInternational\n \nBoard’s\n \nopinions\n \nshould\n \nbe\n \ntaken\n \ninto\n \naccount.\n \n \n1.3.\n \nIf\n \nthe\n \nIEO\n \nis\n \norganized\n \nentirely\n \nor\n \npartially\n \nonline,\n \nall\n \nits\n \nrules\n \nand\n \nregulations\n \nare\n \nstill\n \nimplemented\n \nto\n \nthe\n \nfullest\n \npossible\n \nextent.\n \n1.4.\n \nThe\n \nmain\n \nIEO\n \nwebsite\n \n(from\n \nnow\n \non\n \nreferred\n \nto\n \nas\n \n“the\n \nIEO\n \nWebsite”)\n \nis\n"
+    },
+    {
+      "title": "IEO Syllabus",
+      "url": "https://files.ieo-official.org/IEO_Syllabus.pdf",
+      "status": "ok",
+      "content_type": "application/pdf",
+      "bytes": 1324697,
+      "raw_file": "data/rules/sources/ieo_business_case/02_IEO_Syllabus.pdf",
+      "text_file": "data/rules/sources/ieo_business_case/02_IEO_Syllabus.txt",
+      "text_chars": 21584,
+      "text_preview": "    \nSYLLABUS\n   \n \nThis  version  of  the  Syllabus  was  approved  by  the  International  Board  on  31/12/2025. \n1.  General  \n1.1.  National  education  systems  and  curricula  vary  in  terms  of  structure  and  \ncontent,\n \nbut\n \nthe\n \ntasks\n \nof\n \nthe\n \nIEO\n \nare\n \ncomposed\n \nin\n \na\n \nway\n \nthat\n \nfacilitates\n \nequal\n \ncompetition.\n \nThe\n \ntasks\n \nare\n \nnot\n \naimed\n \nprimarily\n \nat\n \ntesting\n \nthe\n \nknowledge\n \nof\n \ntheory.\n \nA\n \nsigniﬁcant\n \nshare\n \nof\n \nthe\n \ntasks\n \nis\n \npractical-oriented,\n \ntest\n \nanalytical\n \nskills\n \nand\n \ncuriosity.\n \nThe\n \nIEO\n \ntasks\n \nare\n \ncreated\n \nconsidering\n \nthat\n \nits\n \ncontestants\n \nare\n \npredominantly\n \nstudents\n \nof\n \n(senior)\n \nhigh\n \nschool,\n \nor\n \nlevel\n \n3\n \naccording\n \nto\n \nUNESCO\n \nInternational\n \nStandard\n \nClassiﬁcation\n \nof\n \nEducation\n \n(ISCED\n \n2011).\n \nYet,\n \nprovided\n \nthat\n \nthe\n \nIEO\n \nis\n \na\n \nworldwide\n \nselective\n \ncompetition\n \nfor\n \nnational\n \nteams,\n \nsome\n \ntasks\n \non\n \nthe\n \ntopics\n \nthat\n \nare\n \noutside\n \nthe\n \nscope\n \nof\n \na\n \ntraditional\n \nhigh\n \nschool\n \ncurriculum\n \nmay\n \nappear.\n \n1.2.  The  Economics  and  Finance  part  of  the  competition  is  individual.  The  \ncompetition\n \nin\n \nBusiness\n \nCase\n \nis\n \na\n \nteam\n \ncompetition.\n \n1.3.  The  maximum  ﬁnal  points  for  the  parts  of  the  competition  are:   \n●  150  for  the  Economics  and  Finance  part,   ●  50  for  the  Business  Case  part.  \n1.4.  In  every  part  of  the  competition,  the  result  is  ﬁrst  computed  in  raw  \npoints.\n \nR"
+    }
+  ]
+}

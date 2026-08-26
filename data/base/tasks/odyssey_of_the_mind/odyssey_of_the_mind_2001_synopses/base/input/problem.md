@@ -1,0 +1,16 @@
+# Long-Term Problem Synopses — 2001
+
+# Odyssey of the Mind — 2001 Long-Term Problem Synopses
+
+Source: https://odysseyofthemind.com/past-problems/
+
+Note: These are public synopses. Full problem packets require membership.
+
+---
+
+1. Techno-PetsDivisions II, III & IVThis problem requires teams to build two “pet” vehicles that operate differently from each other and perform tasks for score. The pets will perform a total of eight tasks, two of which will be determined by the team. The others include one pet chasing another, one raising and lowering its head, sounding a warning, retrieving something, entering a team-created home, and sleeping. Time limit: 8 min. Cost limit: $125 USD.
+2. Ody-SEE-ing SoundsDivisions I, II, III & IVFor this problem, teams will present a humorous performance that includes ten different sound effects performed “live” for the audience. Six of the sound effects will be produced by two team-created devices; the others will be created in any manner the team wishes. Time limit: 8 min. Cost limit: $110 USD.
+3. Wild.Winged.WondersDivisions I, II, III & IVThe team will identify three birds: one of a living species, one that is team-created, and one that is “classic,” that is, it is found in a documented work of art or literature. The team will discuss the merits of the birds, select one for special recognition, and present the rationale for choosing one bird over the others. The performance will include three original works of art depicting the birds and a commemorative memento designed by the team in honor of the occasion. One of the birds will fly, or appear to fly. Time limit: 8 min. Cost limit: $125 USD.
+4. Achilles’ HeelDivisions I, II, III & IVTeams will design and build a structure of balsa wood that will hold as much weight as possible while withstanding impacts from a free-wheeling vehicle designed and built by the team. After placing certain weight increments onto the structure, the team will roll its vehicle down a ramp so it crashes into part of the structure its Achilles’ Heel! All the while, the team will continue to add as much weight to the structure as it can hold. Time limit: 8 min. Cost limit: $85 USD.
+5. Idiom InspirationDivisions I & IILet the cat out of the bag does not mean to literally open a bag to release a cat. It’s an idiomatic phrase that means “to inadvertently reveal a secret.” In this problem, teams will present a humorous performance that includes four idioms. One idiom will be created by the team, along with a skit showing the team’s version of how it originated. The other idioms will be selected from a list. Two will be demonstrated “literally and figuratively” by the team, and another will be incorporated into an original poem. Time limit: 8 min. Cost limit: $100 USD.
+6. Game ShowPrimaryGame shows have been broadcast on TV since way back when. In this non-competitive problem, teams will create a made-for-television game show that includes a host, contestants, and prizes. Something good will happen to one contestant – winning a million dollars maybe? Time limit: 8 min. Cost limit: $60 USD.

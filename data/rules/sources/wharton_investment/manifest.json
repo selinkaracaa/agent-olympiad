@@ -1,0 +1,17 @@
+{
+  "competition_id": "wharton_investment",
+  "crawled_at": "2026-08-11T16:07:47.225746+00:00",
+  "sources": [
+    {
+      "title": "Wharton Global Youth",
+      "url": "https://globalyouth.wharton.upenn.edu/",
+      "status": "ok",
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 316453,
+      "raw_file": "data/rules/sources/wharton_investment/01_globalyouth.wharton.upenn.edu",
+      "text_file": "data/rules/sources/wharton_investment/01_globalyouth.wharton.upenn.txt",
+      "text_chars": 13106,
+      "text_preview": "Wharton Global Youth Program Home - Wharton Global Youth Program \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \r\n \n \n \n \n \n \n \n \n \n \n \n\n \n \n \n \r\n\r\n \r\n \n \n \n \r\n \r\n Skip to content \r\n Skip to main menu \r\n \r\n \r\n \r\n \n Faculty \n Youth Program \n Undergrad \n Jacobs MSQF \n MBA \n EMBA \n PhD \n Exec Ed \n Wharton Online \n \n \n Search Wharton \n \n \n Mobile menu toggle \n \n \r\n \r\n \r\n \r\n \r\n \n \n \n Wharton Global Youth Program \n \n \n \n \r\n \r\n \r\n \r\n \r\n Menu \r\n On-Campus \n \n Essentials of Finance \n Essentials of Entrepreneurship \n Leadership in the Business World \n Management &#038; Technology Summer Institute \n The Wharton One-Day High School Experience \n Moneyball Academy \n Data Science Academy \n Product Design Academy \n Application Information \n Costs &#038; Aid \n The Residential Experience \n On Campus FAQs \n Highlight Your Wharton Experience \n \n \n Online \n \n Future of the Business World \n Essentials of Leadership \n Sports Business Academy \n Financial Decision Making \n Understanding Your Money \n Moneyball: Training Camp \n Moneyball FLEX \n Understanding Investing \n Application Information \n Costs &#038; Aid \n The Online Experience \n Online Programs FAQs \n Wharton Youth Network \n Highlight Your Wharton Experience \n \n \n Location-based \n \n Cambridge, UK: Public Finance and Society \n Cambridge, UK: Strategy and International Management \n San Francisco, CA: AI Leadership \n San Francisco, CA: Innovation and Startup Culture \n San Francisco, CA: Mone"
+    }
+  ]
+}

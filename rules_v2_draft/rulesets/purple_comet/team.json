@@ -1,0 +1,154 @@
+{
+  "$schema": "../../schemas/ruleset.schema.json",
+  "schema_version": "2.0-draft",
+  "ruleset_id": "purple_comet:team:v2-draft",
+  "competition_id": "purple_comet",
+  "title": "Purple Comet Math Meet — AI-participant non-comparable draft",
+  "profile": "non_comparable",
+  "applicability": {
+    "selector": {},
+    "eval_unit": "session",
+    "effective_years": {"from": 2026, "through": 2026},
+    "notes": "Division-specific timing should become a selector when each row carries hs or ms explicitly."
+  },
+  "team": {
+    "active_min": 1,
+    "active_default": 6,
+    "active_max": 6,
+    "topology": "single_cooperative_team",
+    "required_roles": [
+      {
+        "role_id": "captain_solver",
+        "title": "captain and solver",
+        "duties": ["Coordinate problem allocation, verify answer formatting, and submit the shared answers."],
+        "may_submit": true
+      }
+    ],
+    "fill_role": {
+      "role_id": "solver",
+      "title": "team solver",
+      "duties": ["Solve assigned problems and communicate exact answers with a checkable derivation."],
+      "may_submit": false
+    }
+  },
+  "execution": {
+    "official_minutes": 90,
+    "turn_budget": {
+      "mode": "wall_clock_proxy",
+      "max_turns": 24,
+      "derivation": "The high-school 90-minute clock is represented by a fixed agent-turn budget; middle-school timing requires a separate selector."
+    },
+    "state_requirements": []
+  },
+  "resource_policy": {
+    "internet": {
+      "access": "conditional",
+      "conditions": "Internet access is limited to the contest platform; do not search for definitions, methods, or solutions.",
+      "enforced_by": "tool_policy",
+      "source_refs": ["purple-rules-2026"]
+    },
+    "calculator": {
+      "access": "allowed",
+      "enforced_by": "environment",
+      "source_refs": ["purple-rules-2026"]
+    },
+    "code_execution": {
+      "access": "conditional",
+      "conditions": "Computational tools may perform calculations but may not produce, explain, or verify a solution method.",
+      "enforced_by": "prompt_only",
+      "source_refs": ["purple-rules-2026"]
+    },
+    "generative_ai": {
+      "access": "forbidden",
+      "enforced_by": "not_enforceable",
+      "source_refs": ["purple-rules-2026"]
+    }
+  },
+  "constraints": [
+    {
+      "id": "purple.team_size",
+      "authority": "official",
+      "statement": "A team contains one to six students and has an adult supervisor.",
+      "source_refs": ["purple-rules-2026"],
+      "enforcement": {"mode": "runtime", "status": "enforced"}
+    },
+    {
+      "id": "purple.ai_ban",
+      "authority": "official",
+      "statement": "Generative AI tools may not produce, explain, or verify answers or code.",
+      "source_refs": ["purple-rules-2026"],
+      "enforcement": {"mode": "manual", "status": "unavailable"},
+      "waived_for_agents": true,
+      "waiver_reason": "The benchmark participants are themselves generative AI agents."
+    },
+    {
+      "id": "purple.answer_format",
+      "authority": "official",
+      "statement": "Submit non-negative integer answers through the contest interface.",
+      "source_refs": ["purple-rules-2026"],
+      "enforcement": {"mode": "evaluator", "status": "enforced"}
+    }
+  ],
+  "collaboration": {
+    "topology": "single_cooperative_team",
+    "opponent_model": "none",
+    "dynamic_role_rotation": true,
+    "coalitions": [],
+    "notes": "The roster generator supports every official size from one to six rather than only the default six."
+  },
+  "submission": {
+    "official_deliverable": "online integer answer form",
+    "runner_deliverable": "numbered plain-text integer answers",
+    "official_mime_types": ["text/plain"],
+    "runner_mime_types": ["text/plain"],
+    "adaptation": "The contest form is serialized as text.",
+    "max_count": 1
+  },
+  "evaluation": {
+    "status": "ready",
+    "evaluator_id": "gold_answer_v1",
+    "rubric_path": "data/rubrics/numerical_sheet_reference_40_v1.json",
+    "gold_available": true,
+    "notes": "Official answer lists support deterministic scoring."
+  },
+  "comparability": {
+    "overall": "non_comparable",
+    "dimensions": {
+      "roster": "equivalent",
+      "timing": "adapted",
+      "resources": "proxy",
+      "collaboration": "proxy",
+      "submission": "adapted",
+      "scoring": "equivalent",
+      "participant_identity": "unavailable"
+    },
+    "waivers": [
+      {
+        "id": "purple.ai_participant_waiver",
+        "official_rule": "Generative AI is forbidden from producing, explaining, or verifying answers.",
+        "benchmark_treatment": "Generative AI agents solve and explain the problems.",
+        "impact": "fundamental"
+      }
+    ],
+    "unsupported_mechanisms": ["human-student eligibility", "adult supervision"]
+  },
+  "provenance": {
+    "sources": [
+      {
+        "source_id": "purple-rules-2026",
+        "title": "Purple Comet official rules",
+        "url": "https://purplecomet.org/rules",
+        "authority": "official",
+        "retrieved_at": "2026-08-12",
+        "effective_year": 2026,
+        "local_path": "data/rules/sources/purple_comet/01_rules.html",
+        "sha256": "419ce621f2a94c3593672d010448cd9440d6a94d370414ee0f8bda4e7a0d8440",
+        "locator": "Team size, timing, permitted computation, answer format, and AI prohibition",
+        "snapshot_status": "archived"
+      }
+    ],
+    "generated_at": "2026-08-16T18:00:00Z",
+    "research_confidence": "high",
+    "notes": "The profile is deliberately non-comparable because the participant technology violates an explicit rule."
+  }
+}

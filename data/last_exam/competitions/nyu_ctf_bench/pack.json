@@ -1,0 +1,15 @@
+{
+  "competition_id": "nyu_ctf_bench",
+  "rule_id": "nyu_ctf_bench:draft_v1",
+  "profile": "benchmark_native",
+  "protocol": "ctf_sandbox",
+  "visibility": {
+    "agent_at_start": [
+      "input",
+      "method"
+    ],
+    "hidden_until_grade": [
+      "eval"
+    ]
+  }
+}

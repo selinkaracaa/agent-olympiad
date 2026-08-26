@@ -1,0 +1,3 @@
+# History
+
+When this man's native Kentucky refused to leave the Union, he signed up to fight for the state he had served in in the old army. He first gained distinction at Gaines' Mill, although he took little part in the Seven Days. His rapid attacks saved the Southern army from severe defeat first at South Mountain and then at [*] Antietam, after which he as promoted the army's youngest major general. Eventually he was transferred to the West, where after a time commanding a corps for Joseph Johnston, he took over the entire defense of Atlanta. FTP, name this Texan, who repeatedly destroyed his own army by recklessly attacking much larger Union forces first before Atlanta and later at Franklin.

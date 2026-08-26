@@ -1,0 +1,10 @@
+{
+  "visibility": "hidden_until_grade",
+  "gold_pointer": "data/benchmarks/wro/benchmark.json#wro_2024_robomission_elementary.gold_label",
+  "has_gold_answer": false,
+  "evaluator_id": null,
+  "evaluator_status": null,
+  "rubric_path": null,
+  "deliverable": null,
+  "solution_file": null
+}

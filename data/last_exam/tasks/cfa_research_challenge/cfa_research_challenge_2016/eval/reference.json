@@ -1,0 +1,10 @@
+{
+  "visibility": "hidden_until_grade",
+  "gold_pointer": "data/benchmarks/cfa_research_challenge/benchmark.json#cfa_research_challenge_2016.gold_label",
+  "has_gold_answer": true,
+  "evaluator_id": null,
+  "evaluator_status": null,
+  "rubric_path": null,
+  "deliverable": null,
+  "solution_file": "data/raw/cfa_research_challenge/rc-2016-winning-rpt-univ-of-waterloo.pdf"
+}

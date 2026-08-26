@@ -1,0 +1,79 @@
+{
+  "source": "data/rules/ccdc/collaboration.json#agent_roles",
+  "information_policy": "role_specialized",
+  "roles": [
+    {
+      "name": "Agent_1",
+      "title": "captain",
+      "may_submit": true,
+      "duties": [
+        "Direct who answers and stop teammates from talking over each other.",
+        "Give the team's official answer once the group has settled.",
+        "Submit only after the format and rule checks pass."
+      ]
+    },
+    {
+      "name": "Agent_2",
+      "title": "primary solver",
+      "may_submit": false,
+      "duties": [
+        "Produce the first full attempt at the problem.",
+        "Show the reasoning so a teammate can check it."
+      ]
+    },
+    {
+      "name": "Agent_3",
+      "title": "secondary solver",
+      "may_submit": false,
+      "duties": [
+        "Attack the problem from a different angle than the primary solver.",
+        "Compare results and surface the disagreement early."
+      ]
+    },
+    {
+      "name": "Agent_4",
+      "title": "verifier",
+      "may_submit": false,
+      "duties": [
+        "Challenge weak arguments and demand an independent check.",
+        "Reject an answer rather than let an unverified one be submitted."
+      ]
+    },
+    {
+      "name": "Agent_5",
+      "title": "specialist",
+      "may_submit": false,
+      "duties": [
+        "Take the part of the task that matches your stated specialty.",
+        "Check a teammate's work once your own part is done."
+      ]
+    },
+    {
+      "name": "Agent_6",
+      "title": "scribe",
+      "may_submit": false,
+      "duties": [
+        "Keep the shared workspace readable and current.",
+        "Write answers in the required format as they are settled."
+      ]
+    },
+    {
+      "name": "Agent_7",
+      "title": "researcher",
+      "may_submit": false,
+      "duties": [
+        "Find and cite the authorities the argument depends on.",
+        "Bring counter-authority to the team before a judge does."
+      ]
+    },
+    {
+      "name": "Agent_8",
+      "title": "specialist and completeness checker",
+      "may_submit": false,
+      "duties": [
+        "Scan for unanswered problems before the team submits.",
+        "Confirm every required part of the deliverable is present."
+      ]
+    }
+  ]
+}

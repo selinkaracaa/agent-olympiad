@@ -1,0 +1,10 @@
+{
+  "visibility": "hidden_until_grade",
+  "gold_pointer": "data/benchmarks/ioai_team/benchmark.json#ioai_team_2024_practical.gold_label",
+  "has_gold_answer": false,
+  "evaluator_id": null,
+  "evaluator_status": null,
+  "rubric_path": null,
+  "deliverable": null,
+  "solution_file": "data/raw/ioai/Team-Challenge/2024/Practical-round-best-solutions.zip"
+}

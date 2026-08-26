@@ -1,0 +1,13 @@
+{
+  "competition_id": "qanta",
+  "crawled_at": "2026-08-11T00:00:00+00:00",
+  "sources": [
+    {
+      "title": "QANTA fallback notes",
+      "url": "https://github.com/Pinafore/qb",
+      "status": "ok",
+      "text_file": "data/rules/sources/qanta/01_fallback_notes.txt",
+      "text_preview": "QANTA / Pinafore quiz-bowl AI project. Question-level corpus; no live buzzer harness. No electronic lookup during a match simulation. Short canonical answers."
+    }
+  ]
+}

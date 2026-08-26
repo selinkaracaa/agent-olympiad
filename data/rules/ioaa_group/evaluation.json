@@ -1,0 +1,148 @@
+{
+  "evaluation_guidance": "Report official performance, rule compliance, collaboration quality, and current repository availability separately. Official performance may encode statute 13 facts only as universal mechanics: host-designed international-team task, at least five students from different countries, separate classification, and an award for the best international team. Treat 2023 time-penalty ranking, the 90-minute maximum, exact size five, and the provided kit as an edition example, not a current universal official score. Repository gold scoring per problem_or_question by rubric_llm_v1 is ready as a proxy and is not official time-ranked scoring. Rule compliance covers other-team communication, personal calculators when a host kit is provided, formula collections, hidden-answer access, and invented universal clocks. Collaboration quality is a non-official research layer: assess allocation, evidence exchange, verification, handoffs, recovery, and communication efficiency. Do not reward fixed roles, equal airtime, or message volume by themselves, and do not treat five independent solo writes as good international-team collaboration. Never treat a text answer as proof that a telescope, envelope, instrument, or live clock was present.",
+  "scoring": {
+    "mode": "gold",
+    "unit": "problem_or_question",
+    "evaluator_id": "rubric_llm_v1",
+    "evaluator_status": "ready",
+    "rubric_path": "data/rubrics/worked_answer_100_v1.json",
+    "evaluator_strategy": "structured_rubric_llm_judge",
+    "official_performance": {
+      "source_status": "source_grounded",
+      "source_review_status": "primary_rules_partial_or_variant_selector_required",
+      "mechanics_completeness": "statute_identity_only_host_year_packet_required",
+      "mode": "gold",
+      "unit": "problem_or_question",
+      "criteria": [
+        "Universal official mechanics are limited to statute 13. Host-year packets supply duration, exact size, kit, and scoring for that year only."
+      ],
+      "mechanics": [
+        "The group event is classified separately from the individual theoretical and practical competitions.",
+        "The host designs the team task, which may include theoretical, practical, or observational work, or a combination.",
+        "The organizers prepare an award for the best international team."
+      ],
+      "tie_breakers": [],
+      "source_refs": [
+        "IOAA Statutes #13, IOAA 2026 host statutes page, retrieved 2026-08-19"
+      ],
+      "edition_example_2023": [
+        "Winning team is the one with the shortest total time after time penalties for incorrect or missing answers; penalties are explained per task.",
+        "Maximum time is 90 minutes; remaining sheets are handed in at the limit.",
+        "Dedicated boxed answer sheets; sealed envelopes opened on START; the guide records total time."
+      ],
+      "unresolved": [
+        "official_minutes for the current or unevaluated host year",
+        "exact active team size beyond the statute minimum of five",
+        "current host scoring formula, time penalties, and tie procedures",
+        "current host materials kit and instrument list",
+        "whether later host years retain 2023 time-ranked scoring"
+      ],
+      "repository_evaluator_id": "rubric_llm_v1",
+      "repository_evaluator_status": "ready"
+    },
+    "rule_compliance": {
+      "reported_separately_from_performance": true,
+      "violation_types": [
+        {
+          "id": "other_team_communication",
+          "condition": "A contestant communicates with a participant from another group team during the round."
+        },
+        {
+          "id": "personal_calculator_or_formula_collection",
+          "condition": "A contestant uses a personal calculator or a brought formula collection when the host has provided a table kit."
+        },
+        {
+          "id": "unauthorized_tool_or_resource",
+          "condition": "A contestant uses internet, code execution, or any material that was not provided with the problem."
+        },
+        {
+          "id": "outside_assistance",
+          "condition": "The team receives problem-solving help from a person or service outside the assigned international team and official channels."
+        },
+        {
+          "id": "hidden_solution_or_evaluator_access",
+          "condition": "A contestant accesses hidden answers, tests, rubrics, evaluator internals, or judge state not released by the event."
+        },
+        {
+          "id": "invented_host_rule",
+          "condition": "The team invents a universal clock, scoring formula, or kit that the host of the selected year has not issued."
+        },
+        {
+          "id": "unobserved_physical_action",
+          "condition": "The team claims a telescope pointing, envelope opening, video screen, or instrument reading that the current task did not expose."
+        }
+      ],
+      "reporting": [
+        "total_violations",
+        "violations_by_type",
+        "first_violation_turn",
+        "performance_with_illegal_actions",
+        "compliant_performance"
+      ]
+    },
+    "collaboration_quality": {
+      "official_ioaa_scoring": false,
+      "benchmark_diagnostic_only": true,
+      "reported_separately_from_performance": true,
+      "metric_groups": {
+        "task_allocation_and_coverage": [
+          "time_to_useful_task_allocation",
+          "duplicate_effort_before_coverage",
+          "workload_and_specialization_balance"
+        ],
+        "evidence_and_verification": [
+          "decision_relevant_evidence_shared",
+          "independent_checks",
+          "review_caused_corrections"
+        ],
+        "handoff_and_shared_state": [
+          "handoff_completeness",
+          "private_reasoning_loss",
+          "stale_state_decisions"
+        ],
+        "recovery_and_replanning": [
+          "failure_to_diagnosis_latency",
+          "new_evidence_before_retry",
+          "evidence_responsive_replanning"
+        ],
+        "communication_efficiency": [
+          "decision_relevant_communication",
+          "avoidable_message_overhead",
+          "unresolved_disagreement_at_submission"
+        ]
+      },
+      "anti_metrics": [
+        "Do not reward message count by itself.",
+        "Do not reward equal speaking time or fixed roles by itself.",
+        "Do not infer shared knowledge from private reasoning that was never communicated.",
+        "Do not let collaboration quality overwrite the official task score.",
+        "Do not treat five independent high-quality solo writes as good international-team collaboration."
+      ]
+    },
+    "current_repository_availability": {
+      "evaluator_ready": true,
+      "evaluator_status": "ready",
+      "official_environment_fully_reproduced": false,
+      "official_wall_clock_enforced": false,
+      "declared_unavailable_mechanisms": [
+        "host_year_physical_or_observational_apparatus",
+        "live_wall_clock_and_time_penalty_ranking",
+        "sealed_envelope_start_signal",
+        "cross_country_random_assignment_state",
+        "organizer_provided_instruments_and_video"
+      ],
+      "proxy_limitations": [
+        "Time-ranked scoring with penalties needs a real wall clock and answer-sheet workflow.",
+        "Star charts, geometric instruments, provided-calculator model quirks, sealed envelopes, and physical or observational apparatus are underspecified in text simulation.",
+        "Cross-country random assignment and other-team isolation are role text, not a runtime state machine."
+      ],
+      "required_selectors": [
+        "host_year"
+      ],
+      "submission_adaptation": "Official group work uses boxed paper answer sheets and, in some years, drawings or instrument readings; the runner accepts numbered worked-answer text."
+    }
+  },
+  "submission": {
+    "max_count": 1
+  }
+}

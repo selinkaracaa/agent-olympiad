@@ -1,0 +1,33 @@
+{
+  "task_id": "history_olympiad/history_olympiad_bowl_ihbb_championships_history_bowl_round_4_varsity_and_jv",
+  "competition_id": "history_olympiad",
+  "problem_id": "history_olympiad_bowl_ihbb_championships_history_bowl_round_4_varsity_and_jv",
+  "title": "IHBB-Championships-History-Bowl-Round-4-Varsity-and-JV",
+  "year": 2018,
+  "team_size": 4,
+  "source_url": "https://iacompetitionsasia.com/history-bee-bowl-practice-materials/",
+  "inherits_competition_pack": "competitions/history_olympiad",
+  "rule_card": "data/rules/history_olympiad",
+  "input": {
+    "visibility": "agent_at_start",
+    "files": [
+      {
+        "name": "problem.md",
+        "path": "base/input/problem.md"
+      },
+      {
+        "name": "IHBB-Championships-History-Bowl-Round-4-Varsity-and-JV.pdf.path",
+        "path": "base/input/IHBB-Championships-History-Bowl-Round-4-Varsity-and-JV.pdf.path"
+      }
+    ]
+  },
+  "method": {
+    "visibility": "agent_at_start",
+    "path": "competitions/history_olympiad/method"
+  },
+  "eval": {
+    "visibility": "hidden_until_grade",
+    "path": "eval/reference.json",
+    "competition_eval": "competitions/history_olympiad/eval"
+  }
+}

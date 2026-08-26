@@ -1,0 +1,116 @@
+{
+  "rubric_id": "ichto_2025_official_scoring_v1",
+  "dataset": "ichto",
+  "title": "International Chemistry Tournament 2025 official marking scheme",
+  "rubric_type": "official_structured_scoring",
+  "edition": 2025,
+  "jury_grades": ["2", "3-", "3", "3+", "4-", "4", "4+", "5-", "5", "5+"],
+  "subcriterion_scores": [0, 0.5, 1],
+  "grade_to_technical_points": {
+    "2": 2,
+    "3-": 5,
+    "3": 9,
+    "3+": 14,
+    "4-": 20,
+    "4": 27,
+    "4+": 34,
+    "5-": 42,
+    "5": 51,
+    "5+": 60
+  },
+  "role_rubrics": [
+    {
+      "id": "reporter_scientific",
+      "name": "Reporter — scientific part",
+      "criteria": [
+        {"name": "Solution model", "subcriteria": ["Task interpretation", "No task parts omitted to simplify the problem", "Suitable methodological framework"]},
+        {"name": "Scientific correctness and completeness", "subcriteria": ["Scientific correctness of solution parts and answers", "Scientific consistency of solution parts", "Completeness and feasibility details"]},
+        {"name": "Originality", "subcriteria": ["Use of multiple scientific sources", "Clear citation and distinction of literature from original contribution", "Novelty and creativity"]}
+      ]
+    },
+    {
+      "id": "reporter_presentational",
+      "name": "Reporter — presentational part",
+      "criteria": [
+        {"name": "Understandability", "subcriteria": ["Speech structure and time compliance", "Clarity of explanations", "Presentational style"]},
+        {"name": "Presentation", "subcriteria": ["Slide structure", "Balance of images, data, and text", "Organization and visibility of key points"]},
+        {"name": "Debate skills", "subcriteria": ["Relevance and scientific basis of arguments", "Convincing responses and oratory", "Time management"]}
+      ]
+    },
+    {
+      "id": "opponent",
+      "name": "Opponent",
+      "criteria": [
+        {"name": "Relevance", "subcriteria": ["Relevant errors and missing details raised", "Prioritization and structure", "Justification of impact on feasibility"]},
+        {"name": "Scientific correctness", "subcriteria": ["Scientific nature of points", "Correctness in the opposition monologue", "Correctness in the debate"]},
+        {"name": "Debate skills", "subcriteria": ["Credibility of arguments and answers", "Convincing power and oratory", "Time management"]}
+      ]
+    },
+    {
+      "id": "reviewer",
+      "name": "Reviewer",
+      "criteria": [
+        {"name": "Report reviewing", "subcriteria": ["Structure", "Identification of relevant strengths", "Identification of relevant weaknesses"]},
+        {"name": "Opposition reviewing", "subcriteria": ["Structure", "Identification of relevant strengths", "Identification of relevant weaknesses"]},
+        {"name": "Conclusion", "subcriteria": ["Understandability", "Concise length of 2–3 sentences", "Insightful and relevant content"]}
+      ]
+    }
+  ],
+  "technical_point_calculation": {
+    "discarding": "For each grade set, discard the highest and lowest jury grades.",
+    "aggregation": "Convert remaining grades to TPs, average them, and round to two decimal places.",
+    "multipliers": {
+      "reporter_scientific": 2,
+      "reporter_presentational": 2,
+      "opponent": 2,
+      "reviewer": 1
+    },
+    "role_maxima": {
+      "reporter": 240,
+      "opponent": 120,
+      "reviewer": 60,
+      "stage_team_total": 420
+    }
+  },
+  "rating_point_calculation": {
+    "formula": "RP = TP/105 + 10/(10 + delta_first) + 10/(10 + delta_second)",
+    "range": [0, 6],
+    "rounding_decimals": 2,
+    "delta_first": "Difference between the team's TP and the first-ranked team's TP; zero for first place.",
+    "delta_second": "Difference between the team's TP and the second-ranked team's TP; zero for first and second place."
+  },
+  "official_penalty_factors": {
+    "challenge_rejections": {
+      "0_to_2": 1,
+      "3": 0.8,
+      "4": 0.7,
+      "5": 0.6,
+      "6": 0.5,
+      "7_or_more": 0.4
+    },
+    "repeat_active_role_in_semifinals": 0.5
+  },
+  "applicability": {
+    "scope": "IChTo 2025 only.",
+    "benchmark_coverage": "The local IChTo benchmark contains open-ended problem sets from multiple editions; this scoring file applies only where 2025 rules govern.",
+    "other_editions": "Do not apply this conversion, RP formula, or criteria to another edition without that edition's official rule book."
+  },
+  "provenance": [
+    {
+      "source_type": "official_organizer",
+      "title": "IChTo 2025 Rule Book",
+      "url": "http://ichto.org/media/uploads/2025/04/IChTo-2025-rule-book.pdf",
+      "supports": ["Appendix 2 grading sheets", "grade scale", "grade-to-TP conversion", "multipliers and maxima", "RP formula", "penalty factors"]
+    },
+    {
+      "source_type": "local_benchmark_evidence",
+      "path": "data/benchmarks/ichto/benchmark.json",
+      "supports": ["2017–2026 problem-set coverage", "oral report plus opposition/review task format"]
+    }
+  ],
+  "limitations": [
+    "A complete score requires multiple jury grades and the other teams' stage TPs; a submitted written solution alone cannot produce official RPs.",
+    "The official grade is based on the nine subcriteria for each role component, not on independently weighted point dimensions.",
+    "PDF extraction artifacts were normalized only where the rule text and grading-sheet labels were clear."
+  ]
+}

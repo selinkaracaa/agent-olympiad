@@ -1,0 +1,10 @@
+{
+  "visibility": "hidden_until_grade",
+  "gold_pointer": "data/benchmarks/mystery_hunt/benchmark.json#mystery_hunt_00948.gold_label",
+  "has_gold_answer": true,
+  "evaluator_id": null,
+  "evaluator_status": null,
+  "rubric_path": null,
+  "deliverable": null,
+  "solution_file": null
+}

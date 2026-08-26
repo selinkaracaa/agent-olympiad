@@ -1,0 +1,3 @@
+# Science
+
+Their interactions typically proceed along two modes, the so-called "normal" processes and the "U" or Umklapp processes. Their dispersion relation give rises to branches known as acoustical and optical, and the Mossbauer effect occurs when an object recoils without emitting one of these. They obey Bose-Einstein statistics and obey the periodicity conditions set by Brillouin zones. Treating these particles as analogous to waves yields a quantity called the crystal momentum, and they explain such properties of solids as electrical and thermal conductivity. For ten points, identify these pseudo-particles, which represent the quantizations of lattice vibrations.

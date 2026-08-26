@@ -1,0 +1,33 @@
+{
+  "task_id": "icpc/icpc_wf_2024_whereaminow",
+  "competition_id": "icpc",
+  "problem_id": "icpc_wf_2024_whereaminow",
+  "title": "Where Am I Now?",
+  "year": 2024,
+  "team_size": 3,
+  "source_url": "https://open.kattis.com/problems/whereaminow",
+  "inherits_competition_pack": "competitions/icpc",
+  "rule_card": "data/rules/icpc",
+  "input": {
+    "visibility": "agent_at_start",
+    "files": [
+      {
+        "name": "problem.md",
+        "path": "base/input/problem.md"
+      },
+      {
+        "name": "whereaminow.txt.path",
+        "path": "base/input/whereaminow.txt.path"
+      }
+    ]
+  },
+  "method": {
+    "visibility": "agent_at_start",
+    "path": "competitions/icpc/method"
+  },
+  "eval": {
+    "visibility": "hidden_until_grade",
+    "path": "eval/reference.json",
+    "competition_eval": "competitions/icpc/eval"
+  }
+}

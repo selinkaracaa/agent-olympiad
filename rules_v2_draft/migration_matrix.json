@@ -1,0 +1,303 @@
+{
+  "schema_version": "2.0-draft",
+  "as_of": "2026-08-16",
+  "expected_track_count": 37,
+  "tracks": [
+    {
+      "competition_id": "arml_local",
+      "priority": "P1",
+      "proposed_profile": "proxy",
+      "draft_example": false,
+      "evaluator_plan": "keep gold_answer_v1",
+      "actions": ["Represent the benchmark's 10-of-15 problem coverage explicitly", "Downgrade official-equivalent labeling", "Pin the local-round edition"]
+    },
+    {
+      "competition_id": "arml_national_power",
+      "priority": "P1",
+      "proposed_profile": "proxy",
+      "draft_example": false,
+      "evaluator_plan": "keep rubric_llm_v1 and calibrate proof scoring",
+      "actions": ["Pin edition-specific proof and formatting rules", "Separate official rules from coordination overlays"]
+    },
+    {
+      "competition_id": "arml_national_team",
+      "priority": "P1",
+      "proposed_profile": "proxy",
+      "draft_example": false,
+      "evaluator_plan": "keep gold_answer_v1",
+      "actions": ["Add row-level roster and answer-part checks", "Record timing and submission adaptations"]
+    },
+    {
+      "competition_id": "arml_power",
+      "priority": "P1",
+      "proposed_profile": "proxy",
+      "draft_example": false,
+      "evaluator_plan": "keep rubric_llm_v1 after proof calibration",
+      "actions": ["Retrieve the standalone Power Contest administrivia", "Remove unsupported roster and timing assumptions", "Use task-specific resource policy"]
+    },
+    {
+      "competition_id": "ccdc",
+      "priority": "P1",
+      "proposed_profile": "non_comparable",
+      "draft_example": false,
+      "evaluator_plan": "defer until service and inject scoring exist",
+      "actions": ["Add a mutable defended-network environment", "Model red-team actions and inject lifecycle", "Separate service score from report score"]
+    },
+    {
+      "competition_id": "cfa_research_challenge",
+      "priority": "P1",
+      "proposed_profile": "proxy",
+      "draft_example": false,
+      "evaluator_plan": "add calibrated report and presentation rubric",
+      "actions": ["Model report and oral presentation as separate deliverables", "Record advisor and AI-disclosure adaptations", "Use reference reports only as calibration material"]
+    },
+    {
+      "competition_id": "cybench",
+      "priority": "P1",
+      "proposed_profile": "benchmark_native",
+      "draft_example": false,
+      "evaluator_plan": "add exact flag evaluator",
+      "actions": ["Pin each task's sandbox and Internet policy", "Remove unsupported human-contest equivalence claims", "Validate environment assets before runs"]
+    },
+    {
+      "competition_id": "debatebench",
+      "priority": "P0",
+      "proposed_profile": "non_comparable",
+      "draft_example": true,
+      "evaluator_plan": "defer oral four-team ranking evaluator",
+      "actions": ["Use four private two-speaker coalitions", "Enforce official speech order and public chamber state", "Record the fundamental AI-use waiver"]
+    },
+    {
+      "competition_id": "eoes",
+      "priority": "P1",
+      "proposed_profile": "non_comparable",
+      "draft_example": false,
+      "evaluator_plan": "report-only rubric with explicit physical-data limitation",
+      "actions": ["Do not invent measurements", "Add instrument-observation adapter before lab claims", "Pin task-specific materials"]
+    },
+    {
+      "competition_id": "ethics_bowl_appe",
+      "priority": "P1",
+      "proposed_profile": "proxy",
+      "draft_example": false,
+      "evaluator_plan": "add oral argument, commentary, and Q&A rubric",
+      "actions": ["Model opposing-team commentary separately", "Add stage clocks and judge questions", "Retrieve the complete current rules PDF"]
+    },
+    {
+      "competition_id": "ethics_bowl_nhseb",
+      "priority": "P1",
+      "proposed_profile": "proxy",
+      "draft_example": false,
+      "evaluator_plan": "add oral argument, commentary, and Q&A rubric",
+      "actions": ["Model presentation, commentary, response, and judge Q&A stages", "Keep case analysis separate from oral performance"]
+    },
+    {
+      "competition_id": "fyziklani",
+      "priority": "P0",
+      "proposed_profile": "non_comparable",
+      "draft_example": true,
+      "evaluator_plan": "assign gold_answer_v1 and score protocol separately",
+      "actions": ["Record the fundamental generative-AI prohibition", "Remove provided-materials-only contradiction", "Implement progressive series, penalties, and lockouts"]
+    },
+    {
+      "competition_id": "gcch_harvard",
+      "priority": "P0",
+      "proposed_profile": "non_comparable",
+      "draft_example": false,
+      "evaluator_plan": "defer until a defensible rubric and deliverable set exist",
+      "actions": ["Remove official-equivalent label", "Retain low-confidence status", "Separate deck, recorded pitch, and live Q&A"]
+    },
+    {
+      "competition_id": "history_olympiad",
+      "priority": "P1",
+      "proposed_profile": "proxy",
+      "draft_example": false,
+      "evaluator_plan": "assign normalized gold-answer evaluator",
+      "actions": ["Model buzzer recognition and neg penalties or stay question-level", "Pin Bowl rather than Bee rules"]
+    },
+    {
+      "competition_id": "hmmt_guts",
+      "priority": "P0",
+      "proposed_profile": "proxy",
+      "draft_example": true,
+      "evaluator_plan": "assign gold_answer_v1",
+      "actions": ["Select February and November rules by season", "Generate rosters for six and eight teammates", "Implement progressive batch release and finality"]
+    },
+    {
+      "competition_id": "ichto",
+      "priority": "P0",
+      "proposed_profile": "proxy",
+      "draft_example": true,
+      "evaluator_plan": "defer multi-juror oral evaluator",
+      "actions": ["Correct team size to four through six", "Remove Internet and code access", "Do not model Reporter, Opponent, and Reviewer as teammates"]
+    },
+    {
+      "competition_id": "icpc",
+      "priority": "P0",
+      "proposed_profile": "proxy",
+      "draft_example": false,
+      "evaluator_plan": "implement programming_judge",
+      "actions": ["Implement exclusive workstation leases", "Load multi-problem packets", "Add repeat verdicts, clarifications, contest time, and scoreboard state"]
+    },
+    {
+      "competition_id": "ieo_business_case",
+      "priority": "P1",
+      "proposed_profile": "proxy",
+      "draft_example": false,
+      "evaluator_plan": "keep slide_deck_v1 and calibrate against official scoring",
+      "actions": ["Represent preparation and presentation separately", "Pin year-specific allowed resources and clock"]
+    },
+    {
+      "competition_id": "iiot",
+      "priority": "P0",
+      "proposed_profile": "proxy",
+      "draft_example": true,
+      "evaluator_plan": "implement programming_judge",
+      "actions": ["Correct one-workstation text to two contest machines", "Implement two concurrent machine leases", "Add hidden-test verdict lifecycle"]
+    },
+    {
+      "competition_id": "ijso_practical",
+      "priority": "P1",
+      "proposed_profile": "proxy",
+      "draft_example": false,
+      "evaluator_plan": "retain report rubric with physical-observation limitation",
+      "actions": ["Distinguish organizer-provided calculators from personal devices", "Require supplied observations rather than fabricated measurements"]
+    },
+    {
+      "competition_id": "ioaa_group",
+      "priority": "P1",
+      "proposed_profile": "proxy",
+      "draft_example": false,
+      "evaluator_plan": "keep rubric_llm_v1 with answer checks",
+      "actions": ["Model randomized cross-country group composition", "Implement time-ranked answer-sheet workflow"]
+    },
+    {
+      "competition_id": "ioai_team",
+      "priority": "P1",
+      "proposed_profile": "proxy",
+      "draft_example": false,
+      "evaluator_plan": "assign per-edition evaluator",
+      "actions": ["Require year-specific ruleset_id", "Do not grant blanket Internet access", "Separate software, creative, and robot task environments"]
+    },
+    {
+      "competition_id": "iol_team",
+      "priority": "P1",
+      "proposed_profile": "proxy",
+      "draft_example": false,
+      "evaluator_plan": "keep rubric_llm_v1 with official solution checks",
+      "actions": ["Generate rosters for permitted team sizes", "Pin edition-specific language and material rules"]
+    },
+    {
+      "competition_id": "jessup",
+      "priority": "P1",
+      "proposed_profile": "proxy",
+      "draft_example": false,
+      "evaluator_plan": "keep memorial rubric; defer oral evaluator",
+      "actions": ["Separate Applicant and Respondent memorials", "Separate multi-month research from oral rounds", "Generate variable rosters"]
+    },
+    {
+      "competition_id": "mystery_hunt",
+      "priority": "P1",
+      "proposed_profile": "proxy",
+      "draft_example": false,
+      "evaluator_plan": "assign normalized gold-answer evaluator",
+      "actions": ["Do not present arbitrary 8–12 roster as official", "Keep puzzle rows distinct from a complete Hunt session", "Model answer validation and unlock graph if session claims are needed"]
+    },
+    {
+      "competition_id": "nyu_ctf_bench",
+      "priority": "P1",
+      "proposed_profile": "benchmark_native",
+      "draft_example": false,
+      "evaluator_plan": "assign exact flag evaluator",
+      "actions": ["Treat team size as benchmark modeling", "Pin task sandbox and network access", "Validate challenge assets"]
+    },
+    {
+      "competition_id": "odyssey_of_the_mind",
+      "priority": "P1",
+      "proposed_profile": "non_comparable",
+      "draft_example": false,
+      "evaluator_plan": "defer physical/creative performance evaluator",
+      "actions": ["Distinguish public synopsis from full problem", "Represent outside-assistance provenance", "Do not score physical performance from text alone"]
+    },
+    {
+      "competition_id": "pumac_power",
+      "priority": "P0",
+      "proposed_profile": "proxy",
+      "draft_example": false,
+      "evaluator_plan": "add calibrated proof rubric",
+      "actions": ["Default Internet and outside resources to forbidden", "Read computational-aid policy from each year's packet", "Model week-long proof production and formatting"]
+    },
+    {
+      "competition_id": "purple_comet",
+      "priority": "P0",
+      "proposed_profile": "non_comparable",
+      "draft_example": true,
+      "evaluator_plan": "assign gold_answer_v1",
+      "actions": ["Record the fundamental AI prohibition", "Generate rosters for one through six teammates", "Use division-specific timing"]
+    },
+    {
+      "competition_id": "qanta",
+      "priority": "P1",
+      "proposed_profile": "proxy",
+      "draft_example": false,
+      "evaluator_plan": "assign normalized gold-answer evaluator",
+      "actions": ["Keep standalone tossups distinct from a live match", "Add buzz position, recognition, and neg state before match claims"]
+    },
+    {
+      "competition_id": "science_bowl",
+      "priority": "P1",
+      "proposed_profile": "proxy",
+      "draft_example": false,
+      "evaluator_plan": "assign normalized gold-answer evaluator",
+      "actions": ["Keep standalone questions distinct from matches", "Implement tossup, bonus, lockout, recognition, and score state before match claims"]
+    },
+    {
+      "competition_id": "science_olympiad",
+      "priority": "P0",
+      "proposed_profile": "non_comparable",
+      "draft_example": false,
+      "evaluator_plan": "assign only after event-specific task selection",
+      "actions": ["Require event and season selectors", "Do not grant a blanket calculator policy", "Keep locked manual facts explicitly unavailable"]
+    },
+    {
+      "competition_id": "vis_moot",
+      "priority": "P1",
+      "proposed_profile": "proxy",
+      "draft_example": false,
+      "evaluator_plan": "add memorandum rubric; defer oral evaluator",
+      "actions": ["Do not encode an official maximum team size where none exists", "Separate memoranda from oral hearings", "Generate variable rosters"]
+    },
+    {
+      "competition_id": "wharton_investment",
+      "priority": "P0",
+      "proposed_profile": "non_comparable",
+      "draft_example": true,
+      "evaluator_plan": "defer calibrated investment-report evaluator",
+      "actions": ["Correct team range to four through six", "Record the AI-authorship conflict", "Represent the missing live market and multi-week state"]
+    },
+    {
+      "competition_id": "wmtc",
+      "priority": "P1",
+      "proposed_profile": "proxy",
+      "draft_example": false,
+      "evaluator_plan": "assign gold_answer_v1",
+      "actions": ["Pin the edition and team-round subsection", "Retrieve authoritative material restrictions", "Keep extracted mixed-PDF adaptation explicit"]
+    },
+    {
+      "competition_id": "wro",
+      "priority": "P0",
+      "proposed_profile": "non_comparable",
+      "draft_example": false,
+      "evaluator_plan": "defer robot and mission evaluator",
+      "actions": ["Require season, category, and age-group selectors", "Generate two- or three-person rosters", "Add robot build, run, and scoring environment"]
+    },
+    {
+      "competition_id": "wsc_writing",
+      "priority": "P0",
+      "proposed_profile": "proxy",
+      "draft_example": true,
+      "evaluator_plan": "keep rubric_llm_v1",
+      "actions": ["Assign all three teammates as writers", "Enforce preparation, individual writing, and peer-review stages", "Do not invent an official numeric schedule"]
+    }
+  ]
+}

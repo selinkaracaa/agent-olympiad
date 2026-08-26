@@ -1,0 +1,3 @@
+# 2001/phase4/01/index.html
+
+The Alchemist's Workshop Spookiness Rating: 0 The Alchemist's Workshop The Art of Transmuting Metals For centuries, alchemists toiled in their dark, secret laboratories, attempting to alter one metal into another metal, with their ever-greedy eye open for the secret of turning lead into gold. Although their quest was not successful, today we enjoy many wondrous inventions based on their work, such as Silly Putty, Pizza, Telephones, Light Bulbs, and of course, Karaoke. However, today we have succeeded where they failed. Check that link periodically for more information.

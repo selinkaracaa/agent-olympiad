@@ -1,0 +1,10 @@
+{
+  "visibility": "hidden_until_grade",
+  "gold_pointer": "data/benchmarks/debatebench/benchmark.json#debatebench_The Natolin European Round Robin Debating Championships Round 5.gold_label",
+  "has_gold_answer": false,
+  "evaluator_id": null,
+  "evaluator_status": null,
+  "rubric_path": null,
+  "deliverable": null,
+  "solution_file": null
+}

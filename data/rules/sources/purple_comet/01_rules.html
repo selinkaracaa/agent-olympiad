@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>PurpleComet</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
+
+    <!-- Styles / Scripts -->
+        <link rel="preload" as="style" href="https://purplecomet.org/build/assets/app-CLBTBlbv.css" /><link rel="modulepreload" href="https://purplecomet.org/build/assets/app-T1DpEqax.js" /><link rel="stylesheet" href="https://purplecomet.org/build/assets/app-CLBTBlbv.css" /><script type="module" src="https://purplecomet.org/build/assets/app-T1DpEqax.js"></script>        <!--script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script-->
+
+</head>
+
+<body class="font-sans antialiased ">
+    <div class="min-h-screen bg-white flex flex-col ">
+        <div class="flex-grow">
+            <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
+    <!-- Primary Navigation Menu -->
+    <div class="w-full px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-row">
+            <div class="my-2">
+                <img src='https://purplecomet.org/assets/images/Purple_Comet_Logo_2013.jpg' alt='Purple Comet'
+                    style='width: 100%; max-width: 200px;'>
+            </div>
+            <div class="align-middle">
+
+                <h1 class="text-left text-[4vw] text-purple-900  text-shadow-lg/30 ">
+                    Purple Comet<i>!</i> Math Meet
+                </h1>
+            </div>
+
+
+        </div>
+    </div>
+    <div class="flex justify-between h-16 bg-fuchsia-800">
+
+        <div class="flex">
+            <!-- Logo -->
+
+            <!-- Navigation Links -->
+            <div class="space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                <a class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-md font-medium leading-5 text-white hover:text-white hover:text-lg hover:border-gray-300 focus:outline-none focus:text-white focus:text-lg focus:border-gray-300 transition duration-150 ease-in-out" href="https://purplecomet.org">
+    Home
+</a>
+            </div>
+            <div class="space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                <a class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-md font-medium leading-5 text-white hover:text-white hover:text-lg hover:border-gray-300 focus:outline-none focus:text-white focus:text-lg focus:border-gray-300 transition duration-150 ease-in-out" href="https://purplecomet.org/supervisors">
+    Supervisor Login/Registration
+</a>
+            </div>
+	    <div class="space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                <a class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-md font-medium leading-5 text-white hover:text-white hover:text-lg hover:border-gray-300 focus:outline-none focus:text-white focus:text-lg focus:border-gray-300 transition duration-150 ease-in-out" href="https://purplecomet.org/teams">
+    Team Login
+</a>
+            </div>
+            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                <a class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-md font-medium leading-5 text-white hover:text-white hover:text-lg hover:border-gray-300 focus:outline-none focus:text-white focus:text-lg focus:border-gray-300 transition duration-150 ease-in-out" href="https://purplecomet.org/information">
+    Contest Information
+</a>
+	    </div>
+
+            
+            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                <a class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-md font-medium leading-5 text-white hover:text-white hover:text-lg hover:border-gray-300 focus:outline-none focus:text-white focus:text-lg focus:border-gray-300 transition duration-150 ease-in-out" href="https://purplecomet.org/contributions">
+    Donations
+</a>
+            </div>
+
+            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                <a class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-md font-medium leading-5 text-white hover:text-white hover:text-lg hover:border-gray-300 focus:outline-none focus:text-white focus:text-lg focus:border-gray-300 transition duration-150 ease-in-out" href="https://purplecomet.org/acknowledgments">
+    Acknowledgments
+</a>
+	    </div>
+            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                <a class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-md font-medium leading-5 text-white hover:text-white hover:text-lg hover:border-gray-300 focus:outline-none focus:text-white focus:text-lg focus:border-gray-300 transition duration-150 ease-in-out" href="https://purplecomet.org/contactus">
+    Contact Us
+</a>
+            </div>
+
+
+
+
+        </div>
+
+        <!-- Settings Dropdown -->
+        <div class="hidden sm:flex sm:items-center sm:ml-6">
+
+        </div>
+
+        <!-- Hamburger -->
+
+
+
+    </div>
+
+
+    <!-- Responsive Navigation Menu -->
+    <div class="sm:hidden">
+        <div class="hidden pt-2 pb-3 space-y-1">
+            <a class="block w-full ps-3 pe-4 py-2 border-l-4 border-transparent text-start text-base font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300 focus:outline-none focus:text-gray-800 focus:bg-gray-50 focus:border-gray-300 transition duration-150 ease-in-out" href="https://purplecomet.org">
+    Home
+</a>
+	</div>
+        <div class="pt-2 pb-3 space-y-1">
+            <a class="block w-full ps-3 pe-4 py-2 border-l-4 border-transparent text-start text-base font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300 focus:outline-none focus:text-gray-800 focus:bg-gray-50 focus:border-gray-300 transition duration-150 ease-in-out" href="https://purplecomet.org/information">
+    Contest Information
+</a>
+        </div>
+
+        <div class="pt-2 pb-3 space-y-1">
+            <a class="block w-full ps-3 pe-4 py-2 border-l-4 border-transparent text-start text-base font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300 focus:outline-none focus:text-gray-800 focus:bg-gray-50 focus:border-gray-300 transition duration-150 ease-in-out" href="https://purplecomet.org/results/2025">
+    Contest Results
+</a>
+        </div>
+        <div class="pt-2 pb-3 space-y-1">
+            <a class="block w-full ps-3 pe-4 py-2 border-l-4 border-transparent text-start text-base font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300 focus:outline-none focus:text-gray-800 focus:bg-gray-50 focus:border-gray-300 transition duration-150 ease-in-out" href="https://purplecomet.org/answers">
+    Old Contest Answers
+</a>
+	</div>
+
+        <div class="pt-2 pb-3 space-y-1">
+            <a class="block w-full ps-3 pe-4 py-2 border-l-4 border-transparent text-start text-base font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300 focus:outline-none focus:text-gray-800 focus:bg-gray-50 focus:border-gray-300 transition duration-150 ease-in-out" href="https://purplecomet.org/contributions">
+    Donations
+</a>
+        </div>
+
+        <div class="pt-2 pb-3 space-y-1">
+            <a class="block w-full ps-3 pe-4 py-2 border-l-4 border-transparent text-start text-base font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300 focus:outline-none focus:text-gray-800 focus:bg-gray-50 focus:border-gray-300 transition duration-150 ease-in-out" href="https://purplecomet.org/acknowledgments">
+    Acknowledgments
+</a>
+	</div>
+        <div class="pt-2 pb-3 space-y-1">
+            <a class="block w-full ps-3 pe-4 py-2 border-l-4 border-transparent text-start text-base font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300 focus:outline-none focus:text-gray-800 focus:bg-gray-50 focus:border-gray-300 transition duration-150 ease-in-out" href="https://purplecomet.org/contactus">
+    Contact Us
+</a>
+        </div>
+
+        <!-- Responsive Settings Options -->
+        <div class="pt-4 pb-1 border-t border-gray-200">
+
+        </div>
+    </div>
+</nav>
+
+            <!-- Page Heading -->
+            
+            <!-- Page Content -->
+            <main>
+                <div class="flex justify-between h-16 bg-white border-b-2 border-gray-200">
+
+        <div class="flex">
+            <!-- Logo -->
+
+            <!-- Navigation Links -->
+            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex text" >
+                <a class="inline-flex items-center px-1 pt-1 border-b-2 border-indigo-400 text-lg font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out" href="https://purplecomet.org/rules">
+    Contest Rules
+</a>
+            </div>
+
+            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex text" >
+                <a class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-lg font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out" href="https://purplecomet.org/instructions">
+    Instructions to Supervisors
+</a>
+            </div>
+
+
+
+            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex" >
+                <a class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-lg font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out" href="https://purplecomet.org/start/instructions">
+    Quick Start Instructions
+</a>
+            </div>
+            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex" >
+                <a class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-lg font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out" href="https://purplecomet.org/faq">
+    FAQ
+</a>
+            </div>
+
+            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                <a class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-lg font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out" href="https://purplecomet.org/results/2026">
+    Contest Results
+</a>
+            </div>
+            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                <a class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-lg font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out" href="https://purplecomet.org/answers">
+    Old Contest Answers
+</a>
+            </div>
+
+            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                <a class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-lg font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out" href="https://purplecomet.org/changes">
+    Changes To The 2026 Contest
+</a>
+            </div>
+
+
+	    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                <a class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-lg font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out" href="https://purplecomet.org/poster">
+    Poster &amp; Flyer
+</a>
+            </div>
+
+	<div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                <a class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-lg font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out" href="https://purplecomet.org/activeteams">
+    List of Teams
+</a>
+            </div>
+
+        </div>
+
+
+
+    </div>
+    <div class="w-8/10 mx-auto">
+
+
+
+
+        <p class="text-4xl my-4">Contest Rules</p>
+        <p class="text-lg my-4 font-bold">Official Rules</p>
+        <p class="my-2">The Purple Comet! Math Meet is a free, annual, international, online, team, mathematics
+            competition designed for middle and high school students that has been held every year since 2003. </p>
+        <p class="text-lg my-4 font-bold">How It Works</p>
+        <ul class="list-disc ml-10">
+            <li>The Purple Comet! Math Meet is a team competition.</li>
+            <li>Each team is required to have an adult supervisor.</li>
+            <li>Supervisors must register at the contest website by clicking on the SUPERVISOR LOGIN/REGISTRATION link.</li>
+            <li>Supervisors may register teams for the competition during the team registration period which begins
+                February 1 and continues through the end of the competition.</li>
+            <li>In the competition, middle school teams are given 60 minutes to work on 20 mathematics problems, and
+                high school teams are given 90 minutes to work on 30 mathematics problems.</li>
+            <li>The team supervisor may select any period during the 244 hour competition window for the team to
+                compete.</li>
+            <li>Supervisors of multiple teams may have all of their teams compete at the same time, or have some teams
+                compete at one time and other teams compete at other times. </li>
+            <li>Any time during the competition window the team supervisor may optionally download and print copies of
+                the competition problems so that the printed copies can be distributed to team members when it is time
+                for them to begin the competition.</li>
+            <li>The team supervisor starts the team's competition by logging onto the contest website and starting the
+                team clock.</li>
+            <li>The team logs into the contest website and sees a list of competition problems on the screen.</li>
+            <li>The team submits answers to the competition problems during the 60 minutes (middle school) or 90 minutes
+                (high school) of the competition.</li>
+            <li>A few days after the competition ends, the competition results are posted on the contest website.
+                Supervisors may then download participation certificates and award certificates from the contest
+                website.</li>
+        </ul>
+        <p class="text-lg my-4 font-bold">Rules For Supervisors</p>
+        <ul class="list-disc ml-10">
+            <li>Any adult aged 21 years or older may serve as a team supervisor.</li>
+            <li>Each supervisor must register as a supervisor at the contest website by clicking on the SUPERVISOR LOGIN/REGISTRATION
+                link.</li>
+            <li>Once registered, there is no need to register again; the contest website retains supervisor
+                registrations from year to year.</li>
+            <li>One supervisor may supervise as many teams as they like. For example, a teacher at a school could
+                supervise many teams from that school.</li>
+            <li>A school may have more than one person working as a team supervisor, although it is recommended that
+                these supervisors coordinate their activities to ensure that no student participates on two different
+                middle school teams or two different high school teams.</li>
+            <li>Supervisors are often teachers at a school, but this is not required. Parents, relatives, family
+                friends, or mathematics club advisors also work fine as supervisors.</li>
+            <li>Supervisors are responsible for ensuring that contest participants are following the rules of the
+                competition. This includes reviewing the competition rules with the team members before the start of the
+                competition.</li>
+        </ul>
+        <p class="text-lg my-4 font-bold">Rules For Team Formation</p>
+        <ul class="list-disc ml-10">
+            <li><b>The Purple Comet! Math Meet is a team competition. </b>Students on the same team are encouraged to work
+                together to solve contest problems.</li>
+            <li>The contest is designed for teams of students from anywhere in the world enrolled in middle school or high school (or local equivalent), or home-schooled students who are at a comparable level. Non-competitive teams are open to any participants regardless of grade or age, including adults.</li>
+            <li>A team may have as few as one student and as many as six students.</li>
+            <li>Teams may enter in one of <b>eight categories:</b>
+                <ul class="list-disc ml-10">
+                    <li>Middle School Level for small school teams</li>
+                    <li>Middle School Level for large school teams</li>
+                    <li>Middle School Level for mixed school teams</li>
+                    <li>Middle School Level for non-competitive teams</li>
+                    <li>High School Level for small school teams</li>
+                    <li>High School Level for large school teams</li>
+                    <li>High School Level for mixed school teams</li>
+                    <li>High School Level for non-competitive teams</li>
+                </ul>
+            </li>
+            <li>Small school teams, large school teams, and mixed school teams are competitive, and team members must
+                meet age, grade, and school size criteria. The contest results for the top teams in these categories are
+                posted on the contest website,
+                and special award certificates are provided to members of winning teams with other teams receiving
+                participation certificates. Membership on non-competitive teams is not restricted in any way. Contest
+                results for these teams are not posted,
+                and team members receive participation certificates. The non-competitive categories are designed for
+                teams that wish to participate in the Purple Comet! Math Meet but do not want their results compared to
+                other teams.</li>
+            <li>All competitive middle school team members must be students who have not yet completed the eighth grade
+                (or local equivalent), and who are under the age of 16 as of the date of the competition.</li>
+            <li>All competitive high school team members must be students who have not yet graduated from secondary
+                school (or local equivalent), and who are under the age of 20 as of the date of the competition.</li>
+            <li>Competitive teams may register in the <b>large school</b> category, the <b>small school </b>category, or the <b>mixed
+                team</b> category. All students from a large school team or a small school team must be enrolled as students in the same school. The school size should be determined from the size of the student population from which potential team members have been drawn. Some schools are spread out over a campus comprising several buildings. If a team could be comprised of students from across the entire campus, then the entire campus should be considered when calculating the school size. Mixed teams are designed for home schooled students, students who all attend the same regional mathematics club, or some other non-school organization.
+                </li>
+            <li>High schools qualify as small if they have no more than 1200 students. Middle schools qualify as small
+                if they have no more than 400 students.</li>
+            <li>No student may participate on more than one middle school team or one high school team, although a
+                student eligible for the middle school level may compete both on one middle school team and on one high
+                school team.</li>
+            <li>A school may enter as many teams as they like. Each team is required to have access to its own computer
+                with an Internet connection. If two teams at the same school need to share a computer, then the two
+                teams are required to compete at different times with one team completing the entire competition before
+                the other team starts.</li>
+            <li><b>Team members need not all be from the same school.</b> Mixed school teams are designed for teams made up of
+                students who do not attend the same school such as home schooled students, members of an area
+                mathematics club, or groups of friends.</li>
+            <li>Each team must have an adult supervisor (age 21 year or older) who is <b>able to monitor the team to ensure
+                that competition rules are being followed.</b> An adult supervisor may supervise more than one team.</li>
+            <li>Teams may enter either as a middle school team or a high school team. The competition problems for
+                middle school teams will be fewer in number and of a lower degree of difficulty than those for high
+                school teams.</li>
+        </ul>
+        <p class="text-lg my-4 font-bold">Rules For The Competition</p>
+        <ul class="list-disc ml-10">
+            <li>Each team is given a team name at the time that the team supervisor registers the team. Team names may be edited by the contest judges if deemed inappropriate or if there are two teams with the same name. Because team names are subject to approval, team names do not appear on the <b>List of Teams</b> for a period of time after the team is registered. Teams may begin the competition before their team name are approved. 
+                 </li>
+            <li>The contest is conducted via Internet web form. Teams may fill in answers to the contest problems during
+                the prescribed time for their team (60 minutes for middle school teams, 90 minutes for high school
+                teams) following the start of their
+                contest clock. At any time during the competition, contestants can click the SUBMIT button to submit
+                their team's entry. Answers may be submitted multiple times by the same team, but for each problem only
+                the last answer received before the contest
+                ends will be accepted and graded. Partial submissions are accumulated. Consequently, if a team submits
+                an answer to problem 1 and later wises to submit an answer to problem 2, there is no need to resubmit
+                the answer to problem 1.</li>
+            <li>Contestants are allowed to work on the contest problems as a team. No help may be provided by persons
+                not on their team.</li>
+            <li><b>Team members and team supervisors must not reveal or discuss contest problems with anyone other than
+                their immediate team members until the contest officially ends.</b></li>
+            <li><b>Team members and team supervisors must never post contest problems where they would be available to
+                others before the contest officially ends. </b>In particular, it is against the contest rules for anyone to
+                submit contest problems to a website
+                whether or not the website encourages students to submit challenging mathematics problems. Note that all contest problems are copyrighted.</li>
+	    <li>Although the problems in the Purple Comet! Math Meet are designed so that they can be worked without the use of calculators, students are welcome to use calculators or computers to help them perform computations. Students may write computer programs or use computer tools for the purpose of making calculations or drawing diagrams. These tools can include programs available on the students’ computers as well as calculating tools available online such as spreadsheet programs, WolframAlpha, Mathematica, Maple, Desmos, Derive, or GeoGebra</li>
+	    <li>Students may use books and other reference materials such as class notes as long as the materials are available to them at the location where they are participating in the competition. Students may not use the Internet to find needed definitions or instructional materials that tell them about how to solve problems.
+	    </li>
+	    <li>Team members may also refer to books, computer programs, or other reference materials available to them locally as long as the students seek this material without aid from persons not on their team.
+	    </li>
+	    <li>Students must use their own knowledge and reference materials to find methods to solve contest problems and can only use calculators and computer tools to make calculations.  In particular, students may not query an Internet browser about how to solve a particular problem or find an explanation of a solution method.<b> Nor may students use generative artificial intelligence tools (AI) including but not limited to ChatGPT, Gemini, Copilot, or Claude to produce, explain, or verify answers, interpret problems, or generate computer code, text, or mathematical reasoning.</b> That is, students must decide how to solve the problems, but they can use computer tools to aid their calculations. The Purple Comet! Math Meet does not allow any tools that inform students about the methods they should use to solve problems or allow students to solve problems without knowing the methods needed. For example, if the students know a method to solve a problem, they may use tools to do calculations, plot functions, or investigate the behavior of sequences to gain insight about a problem, but they may not use tools that explain how to solve the problem. 
+	    </li>
+	    <li>Students on the same team are not required to be in the same geographic location when their team competes. The students are welcome to communicate with each other using telephone, Internet, or other communication methods. Students from different locations may all log into their team account and submit answers. Each time students click on the SUBMIT button, they will see all the answers submitted by their team up to that time. Supervisors are responsible for ensuring that the rules of the competition are being followed, even if the students on their teams are competing from different locations.  Teams do need to register as being from a particular country and, within the United States, from a particular state or territory. Teams with members from different locations still need to choose a home location.
+	    </li>
+            <li><b>Participants may not use computers or any other communication devices to seek help with problem
+                solutions from people or Internet resources outside of their own team members.</b></li>
+            <li><b>The decision of the competition judges is final.</b></li>
+            <li><b>The official time is the time as determined by the purplecomet.org server.</b></li>
+        </ul>
+        <p class="text-lg my-4 font-bold">Other Rules</p>
+        <ul class="list-disc ml-10">
+            <li>Any circumstances not covered by these rules may be decided at the discretion of the competition
+                designers.</li>
+            <li>These rules may be amended from time to time without notice. The rules in effect at the start of the
+                competition are the official rules of the competition.</li>
+            <li>The contest is free to all participants, although your gifts to help cover the expenses of running the
+                event are encouraged. <a href="https://purplecomet.org/contributions" class="text-blue-600">Learn how you can help.</a> </li>
+        </ul>
+        <p class="text-lg my-4 font-bold">Designers/Judges</p>
+        <div class="ml-4">
+        <p class="my-1"><b>Dr. Jonathan Kane, Contest Coordinator and Primary Competition Designer</b></p>
+        <p class="mb-2">Professor of Mathematical and Computer Sciences, UW-Whitewater / Retired</p>
+        <p class="my-1"><b>Dr. Titu Andreescu, Competition Designer</b></p>
+        <p class="mb-2">Former Head Coach of the US Math Olympiad Team and Director of the MAA American Mathematics Competitions, and Associate Professor of Science/Mathematics Education, UT-Dallas</p>
+        <p class="my-1"><b>Dr. Sobitha Samaranayake, Technical Support and Website Design</b></p>
+        <p class="mb-1">Professor of Computer Science, UW-Whitewater </p>
+        </div>
+
+
+    </div>
+            </main>
+        </div>
+        <div class="flex-none justify-center mt-16 px-0 sm:items-center sm:justify-between h-4 bg-fuchsia-800"></div>
+
+        <div class='hidden sm:flex'>
+            <div class="w-xs flex-none p-4">
+
+                <a
+                    href="http://www.facebook.com/pages/Purple-Comet-Math-Meet/120628768005087?ref=ts&fref=ts">
+                    <img style="max-width: 60px" src="/assets/images/f_logo.jpg"></a>
+            </div>
+            <div class="flex-grow">
+
+                <p class='footer-text'>All content copyright &copy; 2003-2026 by Jonathan
+                    Kane, Titu Andreescu,
+                    Bennette Harris, and Sobitha Samaranayake.<br />
+
+                    For problems or questions regarding this website contact
+                    <a class='footer-text'
+                        href="mailto:webmaster@purplecomet.org">[webmaster@purplecomet.org]</a>.<br />
+                    Last updated: January 24, 2026.
+                </p>
+
+            </div>
+            <div class="flex-none">
+                <a href="https://www.awesomemath.org/"><img
+                        src="https://purplecomet.org/assets/images/AwesomeMath_logo_2013.gif"
+                        style="max-width: 80px" alt="Awesome Math logo"></a>
+            </div>
+        </div>
+    </div>
+
+
+    </div>
+</body>
+
+</html>

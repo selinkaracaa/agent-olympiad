@@ -1,0 +1,10 @@
+{
+  "visibility": "hidden_until_grade",
+  "gold_pointer": "data/benchmarks/science_bowl/benchmark.json#science_bowl_sample_set_10_13a_hs_reg_2016_toss_up_03.gold_label",
+  "has_gold_answer": true,
+  "evaluator_id": null,
+  "evaluator_status": null,
+  "rubric_path": null,
+  "deliverable": null,
+  "solution_file": null
+}

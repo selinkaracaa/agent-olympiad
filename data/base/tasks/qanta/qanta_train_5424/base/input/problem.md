@@ -1,0 +1,3 @@
+# Philosophy
+
+Nelson Goodman offered an "approach to a theory" of them in his Languages of Art.  Other theories of them are discussed in a book by Tzvetan Todorov, while "presentational" and "discursive" ones are considered in Philosophy in a New Key by Susanne Langer.  In a series of four books which includes The Phenomenology of Knowledge and Mythical Thought, Ernst Cassirer proposed a "philosophy" of this kind of form.  In the work of C. S. Peirce, these are distinguished from indices and icons.  FTP, give this term for the representation of a concept, which in the work of Herbert Blumer describes a form of interactionism.

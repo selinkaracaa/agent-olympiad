@@ -1,0 +1,33 @@
+{
+  "task_id": "eoes/eoes_Task_2_OCEAN",
+  "competition_id": "eoes",
+  "problem_id": "eoes_Task_2_OCEAN",
+  "title": "Task_2_OCEAN",
+  "year": 2017,
+  "team_size": 3,
+  "source_url": "https://www.eoes.science/Previous%20olympiads/previous.html",
+  "inherits_competition_pack": "competitions/eoes",
+  "rule_card": "data/rules/eoes",
+  "input": {
+    "visibility": "agent_at_start",
+    "files": [
+      {
+        "name": "problem.md",
+        "path": "base/input/problem.md"
+      },
+      {
+        "name": "Task_2_OCEAN.pdf.path",
+        "path": "base/input/Task_2_OCEAN.pdf.path"
+      }
+    ]
+  },
+  "method": {
+    "visibility": "agent_at_start",
+    "path": "competitions/eoes/method"
+  },
+  "eval": {
+    "visibility": "hidden_until_grade",
+    "path": "eval/reference.json",
+    "competition_eval": "competitions/eoes/eval"
+  }
+}

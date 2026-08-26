@@ -1,0 +1,5 @@
+# CSAW-Quals / crypto / DES2Bites
+
+You are taking too big of a bite.  Try to take a nibble.
+
+Hint: Both KEYs are  'Weak Keys' obtained from  and referenced by https://en.wikipedia.org/wiki/Weak_key

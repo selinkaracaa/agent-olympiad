@@ -1,0 +1,3 @@
+# Social Science
+
+In one work, this man became the first to describe the demand schedule. That same work sees him refute Say's law, claiming gluts can exist in the short-run, while this man contends rent only exists in cases of surplus in "An Inquiry into the Nature and Progress of Rent." Influential to Alfred Russell Wallace and Charles Darwin, some believe his theories point to a namesake (*) catastrophe. In his most famous work, he argues that food production grows arithmetically while population increases geometrically, as part of his namesake growth model. For 10 points, name this British economist who wrote "An Essay on the Principle of Population."

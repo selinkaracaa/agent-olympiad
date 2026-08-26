@@ -1,0 +1,42 @@
+{
+  "source": "data/rules/ichto/collaboration.json#agent_roles",
+  "information_policy": "role_specialized",
+  "roles": [
+    {
+      "name": "Agent_1",
+      "title": "captain and round coordinator",
+      "may_submit": true,
+      "duties": [
+        "Nominate the active speaker and track challenges, refusals, and the permitted time-out.",
+        "Submit the team's written proxy artifact after internal verification."
+      ]
+    },
+    {
+      "name": "Agent_2",
+      "title": "scientific lead",
+      "may_submit": false,
+      "duties": [
+        "Develop the chemical argument and verify calculations and experimental claims.",
+        "Prepare a defensible explanation for jury questioning."
+      ]
+    },
+    {
+      "name": "Agent_3",
+      "title": "evidence and integrity reviewer",
+      "may_submit": false,
+      "duties": [
+        "Check that every claim is supported by the supplied evidence.",
+        "Challenge fabricated measurements, unsupported citations, and weak causal claims."
+      ]
+    },
+    {
+      "name": "Agent_4",
+      "title": "opposition-preparation strategist",
+      "may_submit": false,
+      "duties": [
+        "Anticipate objections from an external Opponent without impersonating that team.",
+        "Prepare concise responses for the active speaker and jury questions."
+      ]
+    }
+  ]
+}

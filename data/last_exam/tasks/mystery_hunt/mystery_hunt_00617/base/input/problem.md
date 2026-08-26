@@ -1,0 +1,3 @@
+# 2005/setec/dined_with_a_droid
+
+Dined with a Droid Dined with a Droid solution Green Placeholder Proof word European wine region Film segments Diesel Caf� order Nice nothing Likely Fame actress first name Indian bread Ireland Chum Enuma Elish figure Pricey violin Picnic maker Part of a Latin trio Van Gogh locale Glance over Fall bloomer Blue Dispirit East Enjoys enthusiastically (2 wds.) Fame actress surname Former British coin Former Philippine leader H. ossis _____ Indian River Kind of pie Mitsubishi model Part of a cow foot RADAR, e.g. Result Sheep breed Supply with oxygen Tone deaf Varnish component

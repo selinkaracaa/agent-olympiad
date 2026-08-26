@@ -1,0 +1,179 @@
+# Eval — `history_olympiad` (hidden until grade)
+
+Do not stage this file to the agent at start.
+
+## Evaluator
+
+```json
+{
+  "evaluator_id": null,
+  "evaluator_status": "deferred_ruleset_and_match_engine",
+  "recommended_evaluator_id": "gold_answer_v1",
+  "mode": "edition_specific_match_score",
+  "unit": "session",
+  "rubric_path": null
+}
+```
+
+## Evaluation guidance
+
+Official scoring mechanics: Quarter 1 correct tossups are worth 10 points and incorrect answers incur no point deduction. Quarter 2 correct tossups and their bonuses are each worth 10 points; bonuses do not bounce back. Quarter 3 awards points for category answers and a 20-point bonus for a complete sweep under the published phase rules. Quarter 4 correct tossups are worth 30, 20, or 10 points according to the clue boundary reached. Unresolved official evaluation state: Historical benchmark rows require an edition selector before official match scoring is comparable. Task performance: evaluate the live four quarter buzzer match responses per session in edition_specific_match_score mode and enforce this answer contract: Return numbered answers for the exposed questions and identify the quarter or phase; do not claim a live buzz, opponent outcome, or moderator ruling. Repository status: the evaluator is deferred_ruleset_and_match_engine. Do not invent a completed benchmark grade or claim evaluator readiness. Rule compliance: report prohibited tools, outside assistance, hidden-answer access, unauthorized submission, and competition-specific violations separately from task performance. Collaboration quality: assess allocation, evidence exchange, verification, handoffs, recovery, replanning, and communication efficiency without rewarding fixed roles, equal airtime, or message volume by themselves. Fidelity: identify official mechanisms that the current runner does not reproduce; never treat a proxy action as proof that a physical, oral, live-opponent, judge, or mutable-environment event occurred.
+
+## Official performance
+
+```json
+{
+  "source_status": "source_enriched_v1",
+  "source_review_status": "primary_rules_available_exact_scoring_may_still_need_runtime_support",
+  "mechanics_completeness": "complete_for_2025_world_championship_summary",
+  "mode": "edition_specific_match_score",
+  "unit": "session",
+  "criteria": [
+    "Repository evaluation status: Task performance is specified per session in edition_specific_match_score mode, but the repository evaluator is deferred_ruleset_and_match_engine; do not invent a completed score.",
+    "Source-recorded competition rule: The third-quarter category round gives each team sixty seconds, permits conferral, allows passes without return, and may award a twenty-point sweep bonus.",
+    "Source-recorded competition rule: A tied first or second place is broken by zero-point tossup questions until one team answers correctly."
+  ],
+  "mechanics": [
+    "Quarter 1 correct tossups are worth 10 points and incorrect answers incur no point deduction.",
+    "Quarter 2 correct tossups and their bonuses are each worth 10 points; bonuses do not bounce back.",
+    "Quarter 3 awards points for category answers and a 20-point bonus for a complete sweep under the published phase rules.",
+    "Quarter 4 correct tossups are worth 30, 20, or 10 points according to the clue boundary reached."
+  ],
+  "tie_breakers": [
+    "A zero-point tossup breaks a tie for first or second; additional tossups continue until one team answers correctly."
+  ],
+  "source_refs": [
+    "2025 World Championship Official Rules Summary pp. 1-3"
+  ],
+  "unresolved": [
+    "Historical benchmark rows require an edition selector before official match scoring is comparable."
+  ],
+  "repository_evaluator_id": null,
+  "repository_evaluator_status": "deferred_ruleset_and_match_engine"
+}
+```
+
+## Rule compliance
+
+```json
+{
+  "reported_separately_from_performance": true,
+  "violation_types": [
+    {
+      "id": "unauthorized_tool_or_resource",
+      "condition": "A contestant uses a tool, material, device, website, machine, or execution surface forbidden by this competition."
+    },
+    {
+      "id": "outside_assistance",
+      "condition": "The team receives problem-solving help from a person or service outside the permitted team and official channels."
+    },
+    {
+      "id": "hidden_solution_or_evaluator_access",
+      "condition": "A contestant accesses hidden answers, tests, rubrics, evaluator internals, or judge state not released by the event."
+    },
+    {
+      "id": "unauthorized_submission",
+      "condition": "A non-submitter files or replaces the shared submission, or the team exceeds the declared submission contract."
+    },
+    {
+      "id": "competition_specific_constraint",
+      "condition": "The team violates a competition-specific constraint recorded in competition_format, timeline, resource_policy, collaboration_protocol, integrity_and_compliance, or deliverable_format."
+    },
+    {
+      "id": "illegal_tossup_conferral",
+      "condition": "Teammates confer verbally or in writing, or write notes, while a tossup is being read."
+    },
+    {
+      "id": "answer_without_buzz_or_wrong_speaker",
+      "condition": "A contestant answers without buzzing or a teammate answers for the contestant who buzzed."
+    },
+    {
+      "id": "outside_resource",
+      "condition": "A contestant uses a pre-existing resource during the match."
+    }
+  ],
+  "reporting": [
+    "total_violations",
+    "violations_by_type",
+    "first_violation_turn",
+    "performance_with_illegal_actions",
+    "compliant_performance"
+  ]
+}
+```
+
+## Collaboration quality
+
+```json
+{
+  "benchmark_diagnostic_only": true,
+  "reported_separately_from_performance": true,
+  "metric_groups": {
+    "task_allocation_and_coverage": [
+      "time_to_useful_task_allocation",
+      "duplicate_effort_before_coverage",
+      "workload_and_specialization_balance"
+    ],
+    "evidence_and_verification": [
+      "decision_relevant_evidence_shared",
+      "independent_checks",
+      "review_caused_corrections"
+    ],
+    "handoff_and_shared_state": [
+      "handoff_completeness",
+      "private_reasoning_loss",
+      "stale_state_decisions"
+    ],
+    "recovery_and_replanning": [
+      "failure_to_diagnosis_latency",
+      "new_evidence_before_retry",
+      "evidence_responsive_replanning"
+    ],
+    "communication_efficiency": [
+      "decision_relevant_communication",
+      "avoidable_message_overhead",
+      "unresolved_disagreement_at_submission"
+    ]
+  },
+  "anti_metrics": [
+    "Do not reward message count by itself.",
+    "Do not reward equal speaking time or fixed roles by itself.",
+    "Do not infer shared knowledge from private reasoning that was never communicated.",
+    "Do not let collaboration quality overwrite the competition's official task score unless the official rubric explicitly does so."
+  ]
+}
+```
+
+## Current repository availability
+
+```json
+{
+  "evaluator_ready": false,
+  "evaluator_status": "deferred_ruleset_and_match_engine",
+  "official_environment_fully_reproduced": false,
+  "official_wall_clock_enforced": false,
+  "declared_unavailable_mechanisms": [
+    "buzzer_opponents_and_moderator"
+  ],
+  "proxy_limitations": [
+    "Buzzer interrupt timing and neg penalties are central and hard to simulate from static packets.",
+    "Bee vs Bowl formats differ — benchmark excludes Bee/MS per collection notes.",
+    "Historical benchmark packets do not declare the governing rules edition, so the 2025 roster and gameplay rules cannot be silently applied to every row.",
+    "The runner lacks live opponents, buzzer lockout, moderator answer acceptance, phase clocks, protests, bouncebacks, and category selection state."
+  ],
+  "required_selectors": [
+    "rules_edition",
+    "division"
+  ],
+  "submission_adaptation": "The runner grades a text packet or session without live buzzer, opponent, moderator, or protest state."
+}
+```
+
+## Submission adaptation
+
+```json
+{
+  "max_count": 1,
+  "adaptation": "The runner grades a text packet or session without live buzzer, opponent, moderator, or protest state."
+}
+```

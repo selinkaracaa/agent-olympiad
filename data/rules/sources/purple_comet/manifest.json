@@ -1,0 +1,28 @@
+{
+  "competition_id": "purple_comet",
+  "crawled_at": "2026-08-11T16:08:11.792275+00:00",
+  "sources": [
+    {
+      "title": "Purple Comet Rules",
+      "url": "https://purplecomet.org/rules",
+      "status": "ok",
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 30244,
+      "raw_file": "data/rules/sources/purple_comet/01_rules.html",
+      "text_file": "data/rules/sources/purple_comet/01_rules.txt",
+      "text_chars": 14315,
+      "text_preview": "PurpleComet \n\n \n \n \n\n \n \n\n \n\n \n \n \n \n \n \n \n \n \n \n \n\n \n Purple Comet ! Math Meet\n \n \n\n \n \n \n\n \n \n\n \n \n \n Home\n \n \n \n \n Supervisor Login/Registration\n \n \n \n \n Team Login\n \n \n \n \n Contest Information\n \n \n\n \n \n \n Donations\n \n \n\n \n \n Acknowledgments\n \n \n \n \n Contact Us\n \n \n\n \n\n \n \n\n \n\n \n\n \n\n \n \n \n \n Home\n \n \n \n \n Contest Information\n \n \n\n \n \n Contest Results\n \n \n \n \n Old Contest Answers\n \n \n\n \n \n Donations\n \n \n\n \n \n Acknowledgments\n \n \n \n \n Contact Us\n \n \n\n \n \n\n \n \n \n\n \n \n \n \n \n\n \n \n\n \n \n \n Contest Rules\n \n \n\n \n \n Instructions to Supervisors\n \n \n\n \n \n Quick Start Instructions\n \n \n \n \n FAQ\n \n \n\n \n \n Contest Results\n \n \n \n \n Old Contest Answers\n \n \n\n \n \n Changes To The 2026 Contest\n \n \n\n \n \n Poster & Flyer\n \n \n\n \n \n List of Teams\n \n \n\n \n\n \n \n\n Contest Rules\n\n Official Rules\n\n The Purple Comet! Math Meet is a free, annual, international, online, team, mathematics\n competition designed for middle and high school students that has been held every year since 2003. \n\n How It Works\n\n \n The Purple Comet! Math Meet is a team competition. \n Each team is required to have an adult supervisor. \n Supervisors must register at the contest website by clicking on the SUPERVISOR LOGIN/REGISTRATION link. \n Supervisors may register teams for the competition during the team registration period which begins\n February 1 and continues through the end of the competition. \n In the competition, middle school teams are given 60 minutes to work on 20 mathematics problems, and\n high school teams are given 90 min"
+    },
+    {
+      "title": "Purple Comet FAQ",
+      "url": "https://purplecomet.org/faq",
+      "status": "ok",
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 26722,
+      "raw_file": "data/rules/sources/purple_comet/02_faq.html",
+      "text_file": "data/rules/sources/purple_comet/02_faq.txt",
+      "text_chars": 10787,
+      "text_preview": "PurpleComet \n\n \n \n \n\n \n \n\n \n\n \n \n \n \n \n \n \n \n \n \n \n\n \n Purple Comet ! Math Meet\n \n \n\n \n \n \n\n \n \n\n \n \n \n Home\n \n \n \n \n Supervisor Login/Registration\n \n \n \n \n Team Login\n \n \n \n \n Contest Information\n \n \n\n \n \n \n Donations\n \n \n\n \n \n Acknowledgments\n \n \n \n \n Contact Us\n \n \n\n \n\n \n \n\n \n\n \n\n \n\n \n \n \n \n Home\n \n \n \n \n Contest Information\n \n \n\n \n \n Contest Results\n \n \n \n \n Old Contest Answers\n \n \n\n \n \n Donations\n \n \n\n \n \n Acknowledgments\n \n \n \n \n Contact Us\n \n \n\n \n \n\n \n \n \n\n \n \n \n \n \n\n \n \n\n \n \n \n Contest Rules\n \n \n\n \n \n Instructions to Supervisors\n \n \n\n \n \n Quick Start Instructions\n \n \n \n \n FAQ\n \n \n\n \n \n Contest Results\n \n \n \n \n Old Contest Answers\n \n \n\n \n \n Changes To The 2026 Contest\n \n \n\n \n \n Poster & Flyer\n \n \n\n \n \n List of Teams\n \n \n\n \n\n \n \n Purple Comet! Math Meet Frequently Asked Questions\n\n What Is The Purple Comet! Math Meet?\n\n The Purple Comet! Math Meet is a free, on-line, international, team,\n mathematics competition designed for middle and high school students conducted annually since 2003.\n \n\n Where Does The Purple Comer! Math Meet Come From?\n\n The Purple Comet! Math Meet is a collaboration between Dr. Jonathan Kane and Dr. Titu Andreescu\n who together design\n the contest and write the contest problems. Dr. Bennette Harris wrote the original software that runs the\n contest website.\n Dr. Sobitha Samaranayake currently provides the web support for the Purple Comet! website.\n For many years the contest was housed at the University of Wisconsin - Whitewater where\n each of the "
+    }
+  ]
+}

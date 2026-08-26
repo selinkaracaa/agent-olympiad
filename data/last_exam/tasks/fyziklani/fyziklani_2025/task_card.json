@@ -1,0 +1,29 @@
+{
+  "task_id": "fyziklani/fyziklani_2025",
+  "competition_id": "fyziklani",
+  "problem_id": "fyziklani_2025",
+  "title": "Physics Brawl Online 2025",
+  "year": 2025,
+  "team_size": 5,
+  "source_url": "https://physicsbrawl.org/download/2025/solutions.pdf",
+  "inherits_competition_pack": "competitions/fyziklani",
+  "rule_card": "data/rules/fyziklani",
+  "input": {
+    "visibility": "agent_at_start",
+    "files": [
+      {
+        "name": "problem.md",
+        "path": "base/input/problem.md"
+      }
+    ]
+  },
+  "method": {
+    "visibility": "agent_at_start",
+    "path": "competitions/fyziklani/method"
+  },
+  "eval": {
+    "visibility": "hidden_until_grade",
+    "path": "eval/reference.json",
+    "competition_eval": "competitions/fyziklani/eval"
+  }
+}

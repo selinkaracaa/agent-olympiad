@@ -1,0 +1,15 @@
+{
+  "competition_id": "ethics_bowl_appe",
+  "rule_id": "ethics_bowl_appe:draft_v1",
+  "profile": "proxy",
+  "protocol": "presentation_and_cross_examination",
+  "visibility": {
+    "agent_at_start": [
+      "input",
+      "method"
+    ],
+    "hidden_until_grade": [
+      "eval"
+    ]
+  }
+}

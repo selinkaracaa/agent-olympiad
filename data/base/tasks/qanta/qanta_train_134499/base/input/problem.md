@@ -1,0 +1,3 @@
+# Fine Arts
+
+One performer from this nation nearly caused a riot when she fell sick before a performance of Anna Bolena at La Scala. She sang a duet with Freddy Mercury and made a historic premiere as the title character of Donizetti's Lucrezia Borgia. Another performer from this nation recorded West Side Story with Leonard Bernstein and most famously played (*) Don José from Carmen. Another man who hails from this nation that Montserrat Caballé calls home opened a record twenty-one seasons at the Metropolitan Opera and performed in three Football World Cups as part of a prestigious group with an Italian, Luciano Pavarotti. For 10 points, identify this nation, the home of two members of The Three Tenors, Jose Carreras and Placido Domingo

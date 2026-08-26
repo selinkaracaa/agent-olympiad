@@ -1,0 +1,163 @@
+{
+  "schema_version": "1.0",
+  "rule_id": "ioai_team:draft_v1",
+  "competition_id": "ioai_team",
+  "profile": "proxy",
+  "protocol": "research_artifact",
+  "team": {
+    "active_min": 4,
+    "active_default": 4,
+    "active_max": 4,
+    "collaboration": "Collaborate only within the team under contest rules.",
+    "range_basis": "source_record"
+  },
+  "execution": {
+    "official_minutes": null,
+    "rules_edition": "2026_version_4",
+    "required_selectors": [
+      "team_challenge_round",
+      "task_guide_version"
+    ],
+    "team_challenge_environment": "specified_by_separate_task_guide"
+  },
+  "allowed_tools": [
+    "query_rules",
+    "execute_code"
+  ],
+  "resources": {
+    "internet": "translation_site_only_unless_team_task_guide_allows_more",
+    "calculator": "forbidden",
+    "code_execution": "task_specific_environment_only",
+    "paper_pencil": "allowed",
+    "provided_materials_only": true
+  },
+  "human_constraints": [
+    "The Team Challenge is an official team event, but its format, environment, and scoring are task-specific.",
+    "Team Challenge tasks are provided in English, and contestants may use only the translation website designated by the organizers.",
+    "Contestants may not communicate with people outside the contest hall during the Team Challenge.",
+    "Approved and prohibited items follow the Team Challenge rules and task guide; permissions from the Individual Contest technical appendix do not automatically apply.",
+    "Team Challenge scoring is announced in the task statements and must not be inferred from the Individual Contest normalization formula.",
+    "The Team Challenge duration depends on its format and may range from a few hours to a full day; no single exact official duration is encoded here.",
+    "Appeals must be filed through Team Leaders within the organizer's announced window."
+  ],
+  "rules_text": "International Olympiad in Artificial Intelligence — Team Challenge. The team researches, authors, and defends a judged artifact. The source-recorded active team has 4 members. Collaborate only within the team under contest rules. Banned during the contest: calculators. Conditional: internet access is translation site only unless team task guide allows more and running code is task specific environment only. Paper and pencil are always available. Work only from the materials provided with the problem. Submit one shared code and predictions; Submit a structured report or slide outline covering analysis, recommendation, and evidence. Treat unexposed physical, oral, live-opponent, judge, timing, or environment mechanisms as unavailable rather than simulated facts.",
+  "provenance": {
+    "status": "source_enriched_v1",
+    "sources": [
+      {
+        "title": "IOAI 2026 Contest Rules and Technical Appendix",
+        "url": "https://ioai-official.org/wp-content/uploads/2026/06/IOAI2026-Contest-Rules-and-Tehnical-Appendix.pdf",
+        "authority": "official",
+        "edition": "Contest Rules v4 May 2026; Technical Appendix v4 June 2026",
+        "retrieved_at": "2026-08-17",
+        "sections": [
+          "Contest Rules section 3, pp. 8-9: Team Challenge",
+          "Technical Appendix p. 13: Team Challenge technical details are provided separately",
+          "Technical Appendix pp. 14-15 apply to Individual and GAITE, not automatically to Team Challenge"
+        ],
+        "archive_status": "archived",
+        "local_file": "data/rules/sources/ioai_team/2026_IOAI_Contest_Rules_Technical_Appendix.pdf"
+      }
+    ],
+    "adaptations": [
+      "max_turns is a safety budget, not necessarily the official wall-clock limit",
+      "specialist roles are a research roster overlay",
+      "physical/oral/live opponent fidelity may be incomplete in src/",
+      "role-specific rule expertise is a benchmark coordination overlay",
+      "structured deliberation actions are a benchmark traceability overlay"
+    ],
+    "crawl_status": "ok",
+    "crawled_excerpts": [
+      {
+        "url": "https://ioai-official.org/resources/",
+        "excerpt": "Education Hub &#8211; International Olympiad in AI Skip to content About Accreditation Countries & territories International Board International Scientific Committee Regulations Become an IOAI Host Regional Olympiads in AI Education Hub 2026 Kazakhstan Schedule International Jury and HSC Syllabus Contest Rules Registration Financial Aid 2026 Call for tasks Results 2026 AI Model Track Rules & Format FAQ IOAI GAITE GAITE Registration Sponsors Editions 2024 Bulgaria 2024 Participating teams 2024 Or"
+      }
+    ],
+    "enriched_at": "2026-08-12T16:53:55.317761+00:00",
+    "research_confidence": "high",
+    "proxy_limitations": [
+      "Allowed-tool surface is intentionally year-specific — freeze the year’s task appendix.",
+      "Physical robot tasks (2025-style) are non-comparable to pure software agents.",
+      "The exact 2026 Team Challenge guide, simulator task statement, submission surface, and physical final are not encoded by the general contest rules.",
+      "The runner cannot reproduce the physical robot final or official appeal process."
+    ],
+    "research_merged_at": "2026-08-12T17:04:21.096526+00:00",
+    "rules_text_source": "composed_from_card_fields_v2",
+    "research_reports": [
+      "docs/rules_crawl_2026-08-11.md"
+    ],
+    "research_graded_at": "2026-08-11",
+    "content_standard": {
+      "name": "icpc_three_component_content_standard",
+      "version": "1.1",
+      "applied_at": "2026-08-17",
+      "reference_card": "data/rules/icpc",
+      "official_facts_policy": "competition_specific_primary_sources_only",
+      "scope": [
+        "competition_constraints",
+        "collaboration_operations",
+        "evaluation_and_compliance",
+        "runtime_fidelity"
+      ]
+    },
+    "research_notes": [
+      "You must behave like a human teammate under official contest rules.",
+      "Do not claim tools, internet, or materials that the rule card forbids.",
+      "Do not look up answer keys or hidden solutions."
+    ],
+    "source_review": {
+      "reviewed_at": "2026-08-17",
+      "audit_report": "docs/rule_card_icpc_standard_gap_audit_2026-08-17.md",
+      "coverage_grade": "C",
+      "completion_status": "material_official_fields_remain_unverified",
+      "claim_policy": "unknown_official_values_remain_null_or_explicitly_unresolved",
+      "known_gaps": [
+        "The 2026 technical appendix explicitly excludes Team Challenge technical details; the exact task guide and environment remain required."
+      ]
+    },
+    "discovery_sources": [
+      {
+        "title": "IOAI",
+        "url": "https://ioai-official.org/resources/",
+        "retrieved_at": "2026-08-12",
+        "local_text": "data/rules/sources/ioai_team/01_resources.txt"
+      },
+      {
+        "title": "https://ioai-official.org/wp-content/uploads/2026/06/IOAI2026-Contest-Rules-and-Tehnical-Appendix.pdf",
+        "url": "https://ioai-official.org/wp-content/uploads/2026/06/IOAI2026-Contest-Rules-and-Tehnical-Appendix.pdf",
+        "retrieved_at": "2026-08-11",
+        "from_report": "docs/rules_crawl_2026-08-11.md"
+      }
+    ],
+    "discard_pre_source_review_rule_sections": true,
+    "source_correction_revision": "2026-08-17-v1"
+  },
+  "comparability": {
+    "overall": "proxy",
+    "dimensions": {
+      "roster": "approximate",
+      "timing": "adapted",
+      "tools": "src_tool_surface",
+      "scoring": "rubric",
+      "environment": "partial",
+      "deliberation": "structured_trace_overlay",
+      "information": "role_specialized_tracking_overlay",
+      "communication": "unlimited_runner_channel"
+    }
+  },
+  "deliverable": {
+    "answer_format": "Submit a structured report or slide outline covering analysis, recommendation, and evidence.",
+    "shared": true,
+    "mime_types": [
+      "text/plain"
+    ],
+    "task_types": [
+      "team_challenge"
+    ],
+    "official_deliverable": "code_and_predictions",
+    "official_mime_types": [
+      "text/x-python",
+      "text/plain"
+    ]
+  }
+}

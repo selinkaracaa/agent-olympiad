@@ -1,0 +1,309 @@
+Programming Environment &#8211; ICPC Documents 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Programming Environment 
+
+   
+
+ -->
+
+ 
+ Programming Environment 
+ 
+ 
+ This page describes current plans for the Programming Environment which will be available to each World Finals team.  Please note that these plans are subject to change .  See the &#8220;Update History&#8221; list at the bottom of this page for information on the currency of what is shown here. Additional updates will be posted soon.
+
+ Each team at the World Finals will be provided with one workstation , shared between team members.  Note that this is the traditional ICPC setup (not the unique setup of some previous World Finals where each team member was provided with a separate workstation).  The configuration of each workstation will be as follows:
+
+ Hardware 
+
+ 
+ System Unit 
+ 
+ To Be Determined 
+ 
+ 
+ External screen :
+ 
+ To Be Determined. 
+ 
+ 
+ External keyboard :
+ 
+ U.S. English layout; model to be determined.
+ 
+ Keyboard Image 
+ 
+ 
+ 
+ 
+ External Mouse: 
+ 
+ Wired 3-button mouse; model to be determined.
+ 
+ Mouse image . 
+ 
+ 
+ 
+ 
+ Webcam: 
+ 
+ To Be Determined (the webcam will be used to capture team member images and audio during the entire contest, and may not be redirected or blocked). 
+ 
+ 
+ 
+ No hardware substitutions will be allowed (that is, teams may not bring their own equipment onto the contest floor).  This includes that teams may not substitute keyboards or other peripherals; all teams will use identical equipment, as described above, during the contest.
+
+ Software 
+ The software configuration for the World Finals will consist of the following:
+
+ 
+ OS :
+ 
+ Ubuntu 24.04.03 LTS Linux (64-bit) with Linux kernel 6.8.0-45-generic. A list of packages included in the OS image can be found here . 
+ 
+ 
+ Desktop :
+ 
+ Xfce 
+ 
+ 
+ Editors 
+ 
+ vi/vim 
+ gvim 
+ emacs 
+ gedit 
+ geany 
+ kate 
+ 
+ 
+ Languages :
+ 
+ Java    (Openjdk version 21.0.4 ) 
+ 
+ 
+ 
+ compiler flags:  -encoding UTF-8 -sourcepath . -d . {files} 
+ runtime flags: -Dfile.encoding=UTF-8 -XX:+UseSerialGC -Xss64m -Xms{memlim}m -Xmx{memlim}m 
+ 
+ 
+ 
+ 
+ C    (gcc version 13.2.0)
+ 
+ 
+ 
+ compiler flags: -x c -g -O2 -std=gnu11 -static {files} -lm 
+ 
+ 
+ 
+ 
+ C++  (g++ version 13.2.0 ) 
+ 
+ 
+ 
+ compiler flags:  -x c++ -g -O2 -std=gnu++20 -static {files} 
+ 
+ 
+ 
+ 
+ Python 3    (PyPy3 version 7.3.15 with GCC 13.2.0 providing Python 3.9.18 )   A list of the installed Python modules is available here .
+ 
+ 
+ 
+ Note that Python 2 is no longer supported at the World Finals. 
+ 
+ 
+ 
+ 
+ Kotlin  (Version 1.9.24 ) 
+ 
+ 
+ 
+ compiler flags: -d . {files} 
+ runtime flags: -Dfile.encoding=UTF-8 -J-XX:+UseSerialGC -J-Xss64m -J-Xms{memlim}m -J-Xmx{memlim}m 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ IDEs :
+ 
+ Note regarding IDEs:  all IDEs will have any internal &#8220;AI&#8221; tools disabled. 
+ Eclipse (version 4.33.0 (2024-09)), configured with:
+ 
+ Java Development Tooling (JDT) version 3.19.600.v20240903-0240 using Java as listed above. 
+ C++ Development Tooling (CDT) version 11.0.0 using C++ as listed above. 
+ PyDev Python Development Tooling version 10.0.2 using Python3 as listed above. 
+ 
+ 
+ IntelliJ IDEA (Community Edition, version 2024.2.3), configured with:
+ 
+ Java as listed above 
+ Kotlin as listed above 
+ 
+ 
+ CLion (version 2024.2.2), configured with:
+ 
+ C/C++ as listed above 
+ 
+ 
+ Pycharm (Community Edition version 2024.2.3), configured with:
+ 
+ Python 3 as listed above 
+ 
+ 
+ Code::Blocks (version 20.03+svn13046-0.3build2), configured with:
+ 
+ C/C++ as listed above 
+ 
+ 
+ VS Code (version 1.93.1), configured with:
+ 
+ C/C++ as listed above 
+ NOTE:  the Judges will compile and execute C/C++ programs using C/C++ as listed under Languages , above, NOT using Microsoft C/C++. 
+ 
+ 
+ 
+ 
+ 
+ Compilation of Submissions 
+ During the contest, teams will submit proposed solutions to the contest problems to the Judges using the PC² contest  control system (CCS).  Check the  PC² Team Guide   for further details.
+
+ Source files submitted to the Judges will be compiled using the language systems and compiler flags described above.
+
+ 
+ The &#8220; {files} &#8221; notations in the descriptions above represents the list of source files from the submission which will actually be compiled. Files with the following suffixes (and only files with these suffixes) will be submitted to the compiler:
+
+ 
+ For C submissions: files ending with .c 
+ For C++ submissions: files ending with .cc, .cpp, .cxx, or .c++ 
+ For Java submissions: files ending with .java 
+ For Python submissions: files ending with .py 
+ For Kotlin submissions: files ending with .kt 
+ 
+ Execution of Submissions 
+ For each language, if the above compilation step is successful then the submission will be executed as follows:
+
+ 
+ For C/C++:  the executable file generated by the compiler will be executed to generate the output of the submission. 
+ For Python 3: the main source file will be executed by the PyPy3 Python3 interpreter to generate the output of the submission. 
+ For Java: the compiled main class will be executed using the java command with the runtime flags listed above. 
+ For Kotlin: the compiled main class will be executed using the kotlin command with the runtime flags listed above. 
+ 
+ Compilation and execution as described above will take place in a &#8220;sandbox&#8221; on a dedicated judging machine.  The judging machine will be as identical as possible to, and at least as powerful as, the machines used by teams.  The sandbox will allocate memory according to the memory limit specified in the problem statement; the entire program, including its runtime environment, must execute within this memory limit.  For interpreted languages (Java, Python, and Kotlin) the runtime environment includes the interpreter (that is, the JVM for Java/Kotlin and the Python interpreter for Python).
+
+ The sandbox memory allocation size will be the same for all languages.
+
+ Building Your Own World Finals Machine 
+ Instructions for building a system identical to what is planned for team use at the World Finals are posted HERE .  Please note that the image created by those instructions is a draft , subject to changes as we approach the World Finals.  See the Revised  list at the bottom of that page to determine the most recent change date.
+
+ IMPORTANT NOTE :  when you follow the above instructions to build your own World Finals machine, you will have sudo (&#8220;root&#8221;) access. This will allow you to apply local customizations to the machine and (if you have an Internet connection) will allow you to download/install packages from the Internet.  However, your machine at the World Finals will NOT have root access or an Internet connection.  If you want to practice with a machine like the one you will have at the World Finals, we strongly suggest you do NOT attempt to do any &#8220;customization&#8221; of the machine, as you won&#8217;t be able to do that at the World Finals.
+
+ Reference Materials 
+ The following packages will be available on team machines at the World Finals, and will be installed automatically as part of the steps listed under Building Your Own World Finals Machine , above.
+
+ 
+ JDK JavaDocs 
+ C++ STL docs 
+ PC² Team Guide (as linked above) 
+ Additional Information:
+ 
+ Judging Notes (TBD) 
+ Technical Notes (TBD) 
+ 
+ 
+ 
+ We welcome all suggestions and comments.  This configuration is subject to change until the final update.  All questions about the system configuration should be directed to John Clevenger, ICPC Technical Director ( clevenger@icpc.global ).
+
+ 
+ 
+ Update History 
+ 
+ 
+ 
+ 
+ Date 
+ Description 
+ 
+ 
+ 
+ 
+ July 28, 2026 
+ Initial version, cloned from 49th WF Baku description and updated with known 50th WF details.

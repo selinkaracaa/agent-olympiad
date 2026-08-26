@@ -1,0 +1,33 @@
+{
+  "task_id": "iol_team/iol_team_2008",
+  "competition_id": "iol_team",
+  "problem_id": "iol_team_2008",
+  "title": "Team Contest — Fanqie",
+  "year": 2008,
+  "team_size": 4,
+  "source_url": "https://ioling.org/problems/2008/",
+  "inherits_competition_pack": "competitions/iol_team",
+  "rule_card": "data/rules/iol_team",
+  "input": {
+    "visibility": "agent_at_start",
+    "files": [
+      {
+        "name": "problem.md",
+        "path": "base/input/problem.md"
+      },
+      {
+        "name": "iol-2008-team-prob.en.pdf.path",
+        "path": "base/input/iol-2008-team-prob.en.pdf.path"
+      }
+    ]
+  },
+  "method": {
+    "visibility": "agent_at_start",
+    "path": "competitions/iol_team/method"
+  },
+  "eval": {
+    "visibility": "hidden_until_grade",
+    "path": "eval/reference.json",
+    "competition_eval": "competitions/iol_team/eval"
+  }
+}

@@ -233,7 +233,7 @@ Artifact: `results/smoke_batch/20260812-191248/smoke_batch.json` — **20/20 ok*
 
 ### Earlier live wave (first 12 families, 2 turns)
 
-Before the last eight benchmarks were added: **12/12 ok** at 2 turns  
+Before the last eight benchmarks were added: **12/12 ok** at 2 turns
 Artifacts: `results/smoke_batch/20260812-182401/`, `…/20260812-182846/`
 
 | Competition | Turns | API | Tokens | Env grade |
@@ -282,10 +282,10 @@ Pilot only: small model, 2 turns, diagram problem often unsolved from text.
 
 ## 5. Evaluation-only smokes
 
-**Gold grader:** curated ARML Local 2009 sheet → **40/40** gradeable shorts  
+**Gold grader:** curated ARML Local 2009 sheet → **40/40** gradeable shorts
 `results/evaluations/gold_answer_v1_20260730-221142/evaluation.json`
 
-**Multimodal:** PDF pages → JPEG → Perplexity correctly read IEO 2024 business-case cover  
+**Multimodal:** PDF pages → JPEG → Perplexity correctly read IEO 2024 business-case cover
 `results/smoke_multimodal/20260730-225235/smoke.json`
 
 ---

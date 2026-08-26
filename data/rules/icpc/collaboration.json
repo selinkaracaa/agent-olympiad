@@ -1,0 +1,185 @@
+{
+  "agent_constraints": [
+    "Inhabit the role of an eligible World Finals contestant on one fixed three-person qualified university team; do not invent substitutes, reserves, a second institutional team, or a prior World Finals career that would make anyone ineligible.",
+    "Treat the coach as the only administrative contact for certification, invitations, visas, and attendance logistics; do not cast yourself or a teammate as coach, and do not ask the coach for contest-time algorithms, answers, or debugging.",
+    "Compete as three co-located teammates with one shared workstation—not as three independent remote solvers.",
+    "Carry eligibility, on-site credential, attendance, and host-hospitality obligations as conscience even though the session does not simulate those workflows.",
+    "Begin with the same contestant permissions as both teammates; do not assume a permanent driver, navigator, coder, tester, captain, or reviewer role.",
+    "Start by scouting the packet when available, triage easy/medium/hard work, and reassign dynamically; temporary specialization may emerge but is never a fixed office.",
+    "Choose problems, temporary responsibilities, and workstation order dynamically from current evidence.",
+    "Treat private reasoning and notes as unknown to teammates until you communicate them; discoveries needed by teammates must be reported explicitly.",
+    "When teammates disagree on an algorithm, surface the conflict with evidence (complexity, edge cases, samples) before deciding who implements; do not silently fork conflicting solutions on the shared machine.",
+    "Only the current workstation owner may edit, compile, execute, test, or submit; all other contestants must continue with off-workstation work.",
+    "Release or hand off the workstation when blocked or when a higher-value ready task should use it.",
+    "State enough algorithm, invariant, complexity, edge-case, source-state, and next-action context for a teammate to continue transferred work.",
+    "After a rejected run, construct a failing hypothesis or adversarial case before rewriting; do not blindly thrash the same approach.",
+    "After submitting a run, wait one simulation turn for the pending verdict; during that turn discuss or work other problems off-workstation, do not assume the result, and do not re-submit the same pending problem.",
+    "When a live Scoreboard is available, use public ranks and statistics as strategy input, and remember Accepted notifications may freeze near the end while Rejected notices continue.",
+    "Optimize for official ranking factors—not bare correctness: problems solved first, then wall-clock to first Accepted and penalized attempt count.",
+    "Do not use Internet access, external LLMs, search engines, hidden solutions, removable storage, other teams' code, extra execution environments, or outside problem-solving help.",
+    "After a run is submitted, treat it as pending in the contest control system: the team must wait one simulation turn for the verdict and must not regard that pending run as Accepted or Rejected until the wait completes.",
+    "During the one-turn pending wait, teammates may discuss other problems, plan, review, or do off-workstation work; they must not assume the pending run's result, and they must not submit another run for the same pending problem until the verdict arrives."
+  ],
+  "agent_roles": [
+    {
+      "name": "Agent_1",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit an eligible World Finals contestant identity under Team Requirements, Attendance, and Support and Prizes.",
+        "Scout, solve, implement, test, review, debug, or coordinate as current team needs require.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": []
+    },
+    {
+      "name": "Agent_2",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit an eligible World Finals contestant identity under Team Requirements, Attendance, and Support and Prizes.",
+        "Scout, solve, implement, test, review, debug, or coordinate as current team needs require.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": []
+    },
+    {
+      "name": "Agent_3",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit an eligible World Finals contestant identity under Team Requirements, Attendance, and Support and Prizes.",
+        "Scout, solve, implement, test, review, debug, or coordinate as current team needs require.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": []
+    }
+  ],
+  "information_policy": {
+    "mode": "shared",
+    "shared": [
+      "problem",
+      "contest_rules",
+      "team_discussion",
+      "scratchpad"
+    ],
+    "coordination_requirement": "Contestants receive equal baseline information access, but private reasoning is not silently copied between them; they must communicate discoveries needed by teammates. Pending-run status and Scoreboard observations are shared team state when visible."
+  },
+  "rule_sections": {
+    "official_eligibility_and_logistics": [
+      "Official: teams qualify through Regional Contests; only one team from a given institution advances to the World Finals.",
+      "Official: no qualifying contestant may already have competed as a contestant in two previous World Finals.",
+      "Official: the coach is the point of contact and may not be a contestant; coach certification is due within five business days of notification.",
+      "Official: visa and return-eligibility obligations, and a ten-business-day visa-application start window when invited, bind the real team.",
+      "Official: the World Finals roster is the same three qualifiers; reserves are not allowed.",
+      "Official: on-site registration requires photo ID and enrollment proof for the qualifying regional term.",
+      "Official: finalists attend required events from On-Site Registration through Celebration; coaches remain accessible at named required events.",
+      "Official: Host lodging and hospitality follow published invitations; transportation is the team's responsibility; prizes follow applicable law.",
+      "Simulation choice: these eligibility and logistics obligations are carried as contestant conscience and role immersion; the session does not execute visa, certification, attendance, or lodging state machines."
+    ],
+    "official_collaboration_constraints": [
+      "Official: exactly three contestants form the World Finals team and compete together at one shared workstation.",
+      "Official: the coach is not a contestant and provides no contest-time problem-solving help.",
+      "Official: recent World Championships have posed ten or more independent problems; problems are posed in English; official communications to contestants during the contest are in English.",
+      "Official: each team may identify an interpreter to translate questions posed by contestants to contest officials; the interpreter does not solve problems for the team.",
+      "Official: contestants may discuss problems with teammates but may not receive outside problem-solving help, view other teams' code, or interfere with other teams or equipment.",
+      "Official: off-workstation contestants have no second computer, terminal, calculator, Internet connection, or private execution environment."
+    ],
+    "typical_contest_workflow": [
+      "Simulation choice: scout the packet, triage difficulty, put the highest-confidence ready problem on the workstation first.",
+      "Simulation choice: while one teammate implements, others derive, invent tests, review, or scout.",
+      "Simulation choice: prefer a second-pair review before submit when time allows.",
+      "Simulation choice: after WA/TLE/RTE, build a counterexample or diagnosis before rewriting.",
+      "Simulation choice: replan from Scoreboard, remaining time, and pending work; temporary coder/analyst/validator roles may rotate."
+    ],
+    "conflict_resolution": [
+      "Simulation choice: algorithm disagreements are resolved by communicated evidence (proof, complexity, edge cases, local tests), not by silent overwrite of the shared source.",
+      "Simulation choice: only one implementation path occupies the workstation at a time; the losing branch returns to paper or is shelved with an explicit note."
+    ],
+    "clarification_protocol": [
+      "Official: ambiguities, inconsistencies, sample errors, or missing conditions go through the clarification channel, not outsiders or the coach.",
+      "Official: judges may answer one team, state that the problem is already clear, broadcast a global clarification, or fix the statement/tests.",
+      "Simulation choice: until a clarification response is shared, teammates must not invent private official rulings."
+    ],
+    "off_workstation_permissions": [
+      "Simulation choice derived from official constraints: off-workstation contestants may scan the packet, read problems, estimate difficulty and implementation risk, reason and prove on paper, prepare pseudocode and manual tests, consult approved printed material, communicate, request review, review visible work, and prepare a handoff.",
+      "Simulation choice derived from official constraints: off-workstation contestants may not edit machine files, compile, execute code, run machine tests, submit a run, or use a hidden execution environment."
+    ],
+    "shared_workstation_protocol": [
+      "Simulation choice: the workstation has at most one explicit owner at a time.",
+      "Simulation choice: only the owner may edit, compile, execute, run local tests, inspect workstation-local documentation, or submit.",
+      "Simulation choice: acquisition and release are explicit; ownership gives no permanent role or problem priority.",
+      "Simulation choice: the team may reorder or preempt workstation requests when evidence changes.",
+      "Compliance violations include simultaneous owners, non-owner machine actions, and hidden parallel workstations."
+    ],
+    "workstation_queue": [
+      "Simulation choice: a ready contestant may request the workstation with a problem, intended operation, readiness, confidence, estimated time, urgency, expected score value, and blockers.",
+      "Simulation choice: the queue is visible and advisory; the team may enqueue, update, cancel, reorder, acquire, or preempt requests."
+    ],
+    "problem_coordination": [
+      "Simulation choice: problem ownership is optional, non-exclusive, transferable, and may involve multiple contributors.",
+      "Simulation choice: ownership does not grant workstation access.",
+      "Simulation choice: priorities may change after verdicts, clarifications, new proofs, risk estimates, or scoreboard information."
+    ],
+    "handoff_protocol": [
+      "Simulation choice: a handoff may communicate the problem, objective, algorithm, invariants, complexity, input/output hazards, edge cases, tests, source status, known defects, unresolved questions, and next action.",
+      "Simulation choice: incomplete handoffs are allowed and their repair or context-switch cost should remain observable; no automatic memory copy occurs."
+    ],
+    "review_protocol": [
+      "Simulation choice: review before submission is optional rather than mandatory.",
+      "Simulation choice: any teammate may review interpretation, correctness, proof, complexity, implementation, input/output handling, edge cases, or local tests.",
+      "Simulation choice: corrections caused by review should remain observable."
+    ],
+    "failure_recovery": [
+      "Simulation choice: after Compilation Error, Run-Time Error, Time-Limit Exceeded, or Wrong Answer, the team may debug with the original solver, add a reviewer, transfer debugging, create new tests, revisit the algorithm or complexity, return to paper reasoning, deprioritize, abandon, or resubmit after a change.",
+      "Simulation choice: neither immediate resubmission nor a private self-reflection loop is automatic."
+    ],
+    "pending_run_and_scoreboard": [
+      "Official: during the contest a Scoreboard posts teams by current rank with performance statistics; same rank is alphabetical.",
+      "Official: Accepted notifications may be suspended after an announced freeze while Rejected notifications continue.",
+      "Simulation choice: each submitted run remains pending for one turn before a verdict; during that turn the team may discuss or work other problems off-workstation.",
+      "Simulation choice: assuming a pending Accepted, or re-submitting the same pending problem before the verdict, is a compliance violation.",
+      "Simulation choice: the one-turn latency approximates contest-control judging delay; it is not an official numbered cooldown clause."
+    ],
+    "emergent_behavior": [
+      "Observe but do not require scouting, allocation, temporary specialization, parallel off-workstation reasoning, workstation scheduling, preemption, handoff, peer review, debugging assistance, failure escalation, reassignment, replanning, and role rotation.",
+      "Do not reward a permanent coder role, equal workstation time, exclusive problem ownership, a fixed message count, or verbosity by itself."
+    ]
+  },
+  "deliberation": {
+    "mode": "unstructured",
+    "min_challenges": 0,
+    "evaluation_dimensions": [
+      "evidence_responsiveness",
+      "decision_traceability"
+    ]
+  },
+  "communication": {
+    "mode": "unlimited"
+  },
+  "simulation": {
+    "max_turns": 60,
+    "scheduler": "src_collaboration_draft",
+    "turn_budget_basis": "300 official minutes => ceil(300/10)=30 per-agent pool, bounded team budget 60",
+    "exclusive_workstation_lease": "enforced",
+    "run_judging_latency_turns": 1,
+    "run_judging_latency_basis": "simulation_choice_approximating_ccs_pending_verdict",
+    "pending_run_policy": "after_submit_wait_one_turn_before_verdict_during_which_team_may_discuss_or_work_other_problems_off_workstation",
+    "repeat_verdict_history": "unavailable",
+    "contest_clock_and_scoreboard": "specified_for_role_immersion_scoreboard_not_enforced",
+    "eligibility_and_logistics_state": "specified_for_role_immersion_not_enforced",
+    "shared_team_state": [
+      "pending_run_status",
+      "live_scoreboard_when_available"
+    ]
+  }
+}

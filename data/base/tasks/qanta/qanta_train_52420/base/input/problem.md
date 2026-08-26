@@ -1,0 +1,3 @@
+# Trash
+
+This film was Erin Cressida Wilson's first screenplay and also featured her in an uncredited role sitting in the waiting room. Director Steven Shainberg* also had an uncredited role as the voice of a sex therapist on tape. The film opens with a woman being released from a mental institution and returning to her unstable home. Attempting to genuinely improve, she seeks work and is hired by a lawyer, E. Edward Grey, as an administrative assistant. Eventually their relationship becomes more than professional in, FTP, what 2002 film about BDSM, starring Maggie Gyllenhaal and James Spader?

@@ -1,0 +1,33 @@
+{
+  "task_id": "debatebench/debatebench_Doxbridge Worlds 2021 West Round 4",
+  "competition_id": "debatebench",
+  "problem_id": "debatebench_Doxbridge Worlds 2021 West Round 4",
+  "title": "Doxbridge Worlds 2021 West Round 4",
+  "year": 2021,
+  "team_size": 8,
+  "source_url": null,
+  "inherits_competition_pack": "competitions/debatebench",
+  "rule_card": "data/rules/debatebench",
+  "input": {
+    "visibility": "agent_at_start",
+    "files": [
+      {
+        "name": "problem.md",
+        "path": "base/input/problem.md"
+      },
+      {
+        "name": "Doxbridge Worlds 2021 West Round 4.txt.path",
+        "path": "base/input/Doxbridge Worlds 2021 West Round 4.txt.path"
+      }
+    ]
+  },
+  "method": {
+    "visibility": "agent_at_start",
+    "path": "competitions/debatebench/method"
+  },
+  "eval": {
+    "visibility": "hidden_until_grade",
+    "path": "eval/reference.json",
+    "competition_eval": "competitions/debatebench/eval"
+  }
+}

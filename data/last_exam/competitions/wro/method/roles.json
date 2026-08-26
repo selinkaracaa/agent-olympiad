@@ -1,0 +1,33 @@
+{
+  "source": "data/rules/wro/collaboration.json#agent_roles",
+  "information_policy": "role_specialized",
+  "roles": [
+    {
+      "name": "Agent_1",
+      "title": "captain and rules lead",
+      "may_submit": true,
+      "duties": [
+        "Track season, category, timing, and field rules.",
+        "Coordinate the final run strategy."
+      ]
+    },
+    {
+      "name": "Agent_2",
+      "title": "hardware builder",
+      "may_submit": false,
+      "duties": [
+        "Track construction and materials constraints.",
+        "Own mechanical reliability checks."
+      ]
+    },
+    {
+      "name": "Agent_3",
+      "title": "programmer and run analyst",
+      "may_submit": false,
+      "duties": [
+        "Track controller and software rules.",
+        "Analyze test runs and field scoring."
+      ]
+    }
+  ]
+}

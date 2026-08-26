@@ -1,0 +1,33 @@
+{
+  "task_id": "purple_comet/purple_comet_2008_ms",
+  "competition_id": "purple_comet",
+  "problem_id": "purple_comet_2008_ms",
+  "title": "Purple Comet 2008 — Middle School",
+  "year": 2008,
+  "team_size": 6,
+  "source_url": "https://purplecomet.org/files/2008MS_English.pdf",
+  "inherits_competition_pack": "competitions/purple_comet",
+  "rule_card": "data/rules/purple_comet",
+  "input": {
+    "visibility": "agent_at_start",
+    "files": [
+      {
+        "name": "problem.md",
+        "path": "base/input/problem.md"
+      },
+      {
+        "name": "purple_comet_ms_2008.pdf.path",
+        "path": "base/input/purple_comet_ms_2008.pdf.path"
+      }
+    ]
+  },
+  "method": {
+    "visibility": "agent_at_start",
+    "path": "competitions/purple_comet/method"
+  },
+  "eval": {
+    "visibility": "hidden_until_grade",
+    "path": "eval/reference.json",
+    "competition_eval": "competitions/purple_comet/eval"
+  }
+}

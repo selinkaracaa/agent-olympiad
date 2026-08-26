@@ -1,0 +1,3 @@
+# 2009/puzzles/on_beyond_zyzzlvaria/PUZZLE
+
+On Beyond Zyzzlvaria On Beyond Zyzzlvaria The Midston Alienfish is from On Beyond Zyzzlvaria. It whiles away its days reading books by its favorite author, like the ones below. We could read them too, except that our loonical lexicallography chart has been ruined by a sudden downpour of oobleck. You see, in Midston Alienfishese, characters don’t stand for letters—they stand for rules that are true about the words they’re in. The books will help you build the chart, the chart will help you build the books, so figure out the missing words, and you won’t get such funny looks!

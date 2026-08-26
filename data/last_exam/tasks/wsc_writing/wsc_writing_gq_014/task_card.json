@@ -1,0 +1,29 @@
+{
+  "task_id": "wsc_writing/wsc_writing_gq_014",
+  "competition_id": "wsc_writing",
+  "problem_id": "wsc_writing_gq_014",
+  "title": "wsc_writing_gq_014",
+  "year": null,
+  "team_size": 3,
+  "source_url": "https://themes.scholarscup.org",
+  "inherits_competition_pack": "competitions/wsc_writing",
+  "rule_card": "data/rules/wsc_writing",
+  "input": {
+    "visibility": "agent_at_start",
+    "files": [
+      {
+        "name": "problem.md",
+        "path": "base/input/problem.md"
+      }
+    ]
+  },
+  "method": {
+    "visibility": "agent_at_start",
+    "path": "competitions/wsc_writing/method"
+  },
+  "eval": {
+    "visibility": "hidden_until_grade",
+    "path": "eval/reference.json",
+    "competition_eval": "competitions/wsc_writing/eval"
+  }
+}

@@ -1,0 +1,3 @@
+# Science
+
+This class of particles is not massless because they are pseudo-Goldstone bosons resulting from chiral symmetry being spontaneously broken. Many grand unification theories require protons to decay into a positron and the neutral form of this class of particles. The negative form of this usually decays into an muon and an anti-muon neutrino. It was wrongly predicted to be the carrier of the strong force by Yukawa. The neutral form of this type of particle can decay into a photon and an electron-positron pair in the Dalitz decay, though more commonly decays into just two photons. While the neutral form of this with zero spin weighs around 135MeV, the positive form of this is made of an up and a down antiquark. For 10 points, name these lightest mesons.

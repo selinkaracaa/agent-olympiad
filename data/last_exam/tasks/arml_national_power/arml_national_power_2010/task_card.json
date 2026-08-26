@@ -1,0 +1,33 @@
+{
+  "task_id": "arml_national_power/arml_national_power_2010",
+  "competition_id": "arml_national_power",
+  "problem_id": "arml_national_power_2010",
+  "title": "Power Round — 2010",
+  "year": 2010,
+  "team_size": 15,
+  "source_url": "https://www.arml.com/ARML/arml_2019/public_contest_files/2009_2014_book/ARML_2009_2014.pdf",
+  "inherits_competition_pack": "competitions/arml_national_power",
+  "rule_card": "data/rules/arml_national_power",
+  "input": {
+    "visibility": "agent_at_start",
+    "files": [
+      {
+        "name": "problem.md",
+        "path": "base/input/problem.md"
+      },
+      {
+        "name": "ARML_2009_2014.pdf.path",
+        "path": "base/input/ARML_2009_2014.pdf.path"
+      }
+    ]
+  },
+  "method": {
+    "visibility": "agent_at_start",
+    "path": "competitions/arml_national_power/method"
+  },
+  "eval": {
+    "visibility": "hidden_until_grade",
+    "path": "eval/reference.json",
+    "competition_eval": "competitions/arml_national_power/eval"
+  }
+}

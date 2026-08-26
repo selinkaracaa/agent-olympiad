@@ -1,0 +1,158 @@
+{
+  "schema_version": "1.0",
+  "rule_id": "jessup:draft_v1",
+  "competition_id": "jessup",
+  "profile": "proxy",
+  "protocol": "presentation_and_cross_examination",
+  "team": {
+    "active_min": 2,
+    "active_default": 5,
+    "active_max": 5,
+    "collaboration": "Collaborate only within the team under contest rules.",
+    "range_basis": "source_record"
+  },
+  "execution": {
+    "official_minutes": null
+  },
+  "allowed_tools": [
+    "query_rules",
+    "web_search"
+  ],
+  "resources": {
+    "internet": "allowed",
+    "calculator": "forbidden",
+    "code_execution": "forbidden",
+    "paper_pencil": "allowed",
+    "provided_materials_only": false
+  },
+  "human_constraints": [
+    "Legal research on public sources and provided databases is allowed.",
+    "No outside coaching that writes the memorial for the team.",
+    "Prepare Applicant and Respondent written memorials plus oral outlines.",
+    "Arguments must withstand judge questioning.",
+    "Team: 2–5 Team Members; only Team Members may contribute substantive work product.",
+    "Outside assistance tightly limited: research/write/edit of Memorials and oral arguments must be exclusive Team Member work; Advisors limited to general advice (research methods, writing/advocacy technique) not drafting arguments.",
+    "Memorials: Applicant + Respondent; hard submission deadline (disqualification if missing both by schedule time); formatting/content rules in Rule 5.",
+    "Season roughly Compromis in September → memorials ~January → oral Qualifying/International rounds.",
+    "No other-team assistance (notes, memorials, practice moots against competitors, etc.).",
+    "FAQ confirms max five contributors over the competition year."
+  ],
+  "rules_text": "Philip C. Jessup International Law Moot Court Competition. The team prepares a case, presents it, and responds to judges or opponents. The source-recorded active team may have 2 to 5 members; the runner default is 5. Collaborate only within the team under contest rules. Banned during the contest: calculators and running code. Permitted: internet access. Paper and pencil are always available. Submit one shared written memorial; Submit the written memorial/case analysis and a concise oral outline. Multi-month memorial preparation plus oral rounds. Treat unexposed physical, oral, live-opponent, judge, timing, or environment mechanisms as unavailable rather than simulated facts.",
+  "provenance": {
+    "status": "source_enriched_v1",
+    "sources": [
+      {
+        "title": "Jessup",
+        "url": "https://www.ilsa.org/jessup/",
+        "retrieved_at": "2026-08-12",
+        "local_text": "data/rules/sources/jessup/01_jessup.txt",
+        "authority": "unclassified",
+        "edition": "not_frozen",
+        "sections": [],
+        "archive_status": "local_capture_available"
+      },
+      {
+        "title": "https://www.ilsa.org/History/Jessup%202027/Jessup%202027%20Official%20Rules.pdf",
+        "url": "https://www.ilsa.org/History/Jessup%202027/Jessup%202027%20Official%20Rules.pdf",
+        "retrieved_at": "2026-08-11",
+        "from_report": "docs/rules_crawl_2026-08-11.md",
+        "authority": "unclassified",
+        "edition": "not_frozen",
+        "sections": [],
+        "archive_status": "locator_only_from_prior_report"
+      },
+      {
+        "title": "https://www.ilsa.org/jessup-competitors/jessup-faq/",
+        "url": "https://www.ilsa.org/jessup-competitors/jessup-faq/",
+        "retrieved_at": "2026-08-11",
+        "from_report": "docs/rules_crawl_2026-08-11.md",
+        "authority": "unclassified",
+        "edition": "not_frozen",
+        "sections": [],
+        "archive_status": "locator_only_from_prior_report"
+      }
+    ],
+    "adaptations": [
+      "max_turns is a safety budget, not necessarily the official wall-clock limit",
+      "specialist roles are a research roster overlay",
+      "physical/oral/live opponent fidelity may be incomplete in src/",
+      "role-specific rule expertise is a benchmark coordination overlay",
+      "structured deliberation actions are a benchmark traceability overlay",
+      "limited communication is a benchmark pressure overlay, not an official message cap"
+    ],
+    "crawl_status": "ok",
+    "crawled_excerpts": [
+      {
+        "url": "https://www.ilsa.org/jessup/",
+        "excerpt": "About the Jessup &#8211; International Law Students Association Skip to content Menu ILSA Latest News About ILSA Board of Directors ILSA Student Directors Student Deak Award Annual International Refugee Law Student Writing Competition Publications Jessup Compendium ILSA Guide to International Law Moot Court Competitions Policies Jessup About the Jessup Jessup 2027 Competition Materials Rules Competition Schedule National and Friendly Rounds White & Case International Rounds King & Spalding Unite"
+      }
+    ],
+    "enriched_at": "2026-08-12T16:53:55.311056+00:00",
+    "official_time_note": "Multi-month memorial preparation plus oral rounds.",
+    "research_confidence": "high",
+    "proxy_limitations": [
+      "Months-long research + proprietary legal databases (ILSA-provided) are not free-web equivalent.",
+      "Oral courtroom advocacy and anonymity rules are out of scope for written-memorial-only agent evals.",
+      "AI policy: not a blanket ban in the sections reviewed; still subordinate to exclusive Team Member work-product rule — do not invent a permission."
+    ],
+    "research_merged_at": "2026-08-12T17:04:20.812394+00:00",
+    "rules_text_source": "composed_from_card_fields_v2",
+    "research_reports": [
+      "docs/rules_crawl_2026-08-11.md"
+    ],
+    "research_graded_at": "2026-08-11",
+    "content_standard": {
+      "name": "icpc_three_component_content_standard",
+      "version": "1.1",
+      "applied_at": "2026-08-17",
+      "reference_card": "data/rules/icpc",
+      "official_facts_policy": "competition_specific_primary_sources_only",
+      "scope": [
+        "competition_constraints",
+        "collaboration_operations",
+        "evaluation_and_compliance",
+        "runtime_fidelity"
+      ]
+    },
+    "research_notes": [
+      "You must behave like a human teammate under official contest rules.",
+      "Do not claim tools, internet, or materials that the rule card forbids.",
+      "Do not look up answer keys or hidden solutions."
+    ],
+    "source_review": {
+      "reviewed_at": "2026-08-17",
+      "audit_report": "docs/rule_card_icpc_standard_gap_audit_2026-08-17.md",
+      "coverage_grade": "B",
+      "completion_status": "primary_rules_partial_or_variant_selector_required",
+      "claim_policy": "unknown_official_values_remain_null_or_explicitly_unresolved",
+      "known_gaps": []
+    }
+  },
+  "comparability": {
+    "overall": "proxy",
+    "dimensions": {
+      "roster": "approximate",
+      "timing": "adapted",
+      "tools": "src_tool_surface",
+      "scoring": "rubric",
+      "environment": "partial",
+      "communication": "adapted_coordination_budget",
+      "deliberation": "structured_trace_overlay",
+      "information": "role_specialized_tracking_overlay"
+    }
+  },
+  "deliverable": {
+    "answer_format": "Submit the written memorial/case analysis and a concise oral outline.",
+    "shared": true,
+    "mime_types": [
+      "text/plain"
+    ],
+    "task_types": [
+      "moot_court"
+    ],
+    "official_deliverable": "written_memorial",
+    "official_mime_types": [
+      "application/pdf"
+    ]
+  }
+}

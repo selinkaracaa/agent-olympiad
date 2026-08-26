@@ -1,0 +1,11 @@
+services:
+  webots:
+    image: cyberbotics/webots:R2025a-ubuntu22.04
+    command: ["webots", "--no-rendering", "--batch", "--mode=fast"]
+    environment:
+      DISPLAY: ":0"
+    volumes:
+      - ./worlds:/workspace/worlds:ro
+      - ./controllers:/workspace/controllers:ro
+    working_dir: /workspace
+    network_mode: none

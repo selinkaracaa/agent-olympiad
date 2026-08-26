@@ -1,0 +1,806 @@
+{
+  "rubric_id": "mystery_hunt_official_answer_key_v1",
+  "dataset": "mystery_hunt",
+  "kind": "upstream_answer_key",
+  "provenance": {
+    "authority": "MIT Mystery Hunt official puzzle archive",
+    "official_url": "https://puzzles.mit.edu/",
+    "benchmark_source": "data/benchmarks/mystery_hunt/benchmark.json",
+    "method": "Exact answer strings carried from the upstream answers.tsv into the promoted task-bearing puzzle records.",
+    "upstream_artifact": "benchmark/MIT_Mystery_Hunt/answers.tsv"
+  },
+  "coverage": {
+    "benchmark_records": 261,
+    "mapped_records": 261,
+    "unmapped_records": [],
+    "limitations": [
+      "Only the 261 task-bearing promoted records are covered; answer-only, solution-only, navigation, stub, empty, and image-only rows excluded upstream are not restored.",
+      "No punctuation, spacing, case-folding, extraction-stage, or alternate-answer aliases are asserted."
+    ]
+  },
+  "answers": {
+    "mystery_hunt_00002": {
+      "expected": "BOSTON UNIVERSITY"
+    },
+    "mystery_hunt_00003": {
+      "expected": "NET"
+    },
+    "mystery_hunt_00004": {
+      "expected": "TANGLE"
+    },
+    "mystery_hunt_00006": {
+      "expected": "LAST"
+    },
+    "mystery_hunt_00007": {
+      "expected": "HENCE"
+    },
+    "mystery_hunt_00009": {
+      "expected": "ARTIFICIAL INTELLIGENCE"
+    },
+    "mystery_hunt_00014": {
+      "expected": "STEREO"
+    },
+    "mystery_hunt_00015": {
+      "expected": "BILLIARDS"
+    },
+    "mystery_hunt_00028": {
+      "expected": "JAM"
+    },
+    "mystery_hunt_00032": {
+      "expected": "DAME"
+    },
+    "mystery_hunt_00033": {
+      "expected": "RUNE"
+    },
+    "mystery_hunt_00035": {
+      "expected": "GENERIC"
+    },
+    "mystery_hunt_00036": {
+      "expected": "VALERIE"
+    },
+    "mystery_hunt_00038": {
+      "expected": "PENULTIMATE MYSTERY HUNT COIN OF THIS MILLENIUM"
+    },
+    "mystery_hunt_00044": {
+      "expected": "LOW"
+    },
+    "mystery_hunt_00068": {
+      "expected": "APPROACH ROOM BAUM COIN BENEATH GREENERY"
+    },
+    "mystery_hunt_00078": {
+      "expected": "AGES"
+    },
+    "mystery_hunt_00080": {
+      "expected": "SIGNOR"
+    },
+    "mystery_hunt_00082": {
+      "expected": "ANGELA"
+    },
+    "mystery_hunt_00089": {
+      "expected": "COLUMN"
+    },
+    "mystery_hunt_00094": {
+      "expected": "BUTTON"
+    },
+    "mystery_hunt_00095": {
+      "expected": "DAY"
+    },
+    "mystery_hunt_00096": {
+      "expected": "COMPLEMENT"
+    },
+    "mystery_hunt_00102": {
+      "expected": "USABLE"
+    },
+    "mystery_hunt_00103": {
+      "expected": "RALLY"
+    },
+    "mystery_hunt_00105": {
+      "expected": "LEMMA"
+    },
+    "mystery_hunt_00106": {
+      "expected": "AROSE"
+    },
+    "mystery_hunt_00112": {
+      "expected": "ISOLATION"
+    },
+    "mystery_hunt_00113": {
+      "expected": "RISING"
+    },
+    "mystery_hunt_00116": {
+      "expected": "ON STAGE"
+    },
+    "mystery_hunt_00118": {
+      "expected": "FAHRENHEIT"
+    },
+    "mystery_hunt_00124": {
+      "expected": "DORADO"
+    },
+    "mystery_hunt_00136": {
+      "expected": "BLENCH"
+    },
+    "mystery_hunt_00137": {
+      "expected": "COEDIT"
+    },
+    "mystery_hunt_00138": {
+      "expected": "BENES"
+    },
+    "mystery_hunt_00140": {
+      "expected": "ANGLER"
+    },
+    "mystery_hunt_00144": {
+      "expected": "ABLAZE"
+    },
+    "mystery_hunt_00147": {
+      "expected": "ABBA"
+    },
+    "mystery_hunt_00155": {
+      "expected": "COVER"
+    },
+    "mystery_hunt_00160": {
+      "expected": "DEBTS"
+    },
+    "mystery_hunt_00165": {
+      "expected": "PUBLIC AFFAIRS"
+    },
+    "mystery_hunt_00166": {
+      "expected": "UNCEREMONIOUS"
+    },
+    "mystery_hunt_00169": {
+      "expected": "SENSORY CORTEX"
+    },
+    "mystery_hunt_00177": {
+      "expected": "SBARRO"
+    },
+    "mystery_hunt_00179": {
+      "expected": "SPIFFY"
+    },
+    "mystery_hunt_00182": {
+      "expected": "UNSAFE"
+    },
+    "mystery_hunt_00184": {
+      "expected": "NIGHER"
+    },
+    "mystery_hunt_00185": {
+      "expected": "UNTEAM"
+    },
+    "mystery_hunt_00196": {
+      "expected": "ONE SUN"
+    },
+    "mystery_hunt_00199": {
+      "expected": "THRONE"
+    },
+    "mystery_hunt_00201": {
+      "expected": "REFLEXIVE"
+    },
+    "mystery_hunt_00203": {
+      "expected": "SUBCLAVII"
+    },
+    "mystery_hunt_00215": {
+      "expected": "POMPEII"
+    },
+    "mystery_hunt_00220": {
+      "expected": "STARRY-EYED"
+    },
+    "mystery_hunt_00226": {
+      "expected": "MANSION"
+    },
+    "mystery_hunt_00356": {
+      "expected": "PIQUE"
+    },
+    "mystery_hunt_00358": {
+      "expected": "TASS"
+    },
+    "mystery_hunt_00368": {
+      "expected": "SQUIRM"
+    },
+    "mystery_hunt_00371": {
+      "expected": "SUM"
+    },
+    "mystery_hunt_00373": {
+      "expected": "BOYS"
+    },
+    "mystery_hunt_00377": {
+      "expected": "VOWELS"
+    },
+    "mystery_hunt_00383": {
+      "expected": "DOT"
+    },
+    "mystery_hunt_00384": {
+      "expected": "ANTACIDS"
+    },
+    "mystery_hunt_00398": {
+      "expected": "HEISENBERG"
+    },
+    "mystery_hunt_00405": {
+      "expected": "ONE HUNDRED FIFTY"
+    },
+    "mystery_hunt_00408": {
+      "expected": "SECOND PERSON PLURAL"
+    },
+    "mystery_hunt_00409": {
+      "expected": "JAYHAWKS"
+    },
+    "mystery_hunt_00412": {
+      "expected": "JAYHAWKS"
+    },
+    "mystery_hunt_00431": {
+      "expected": "TOLKIEN"
+    },
+    "mystery_hunt_00433": {
+      "expected": "REVIVAL"
+    },
+    "mystery_hunt_00451": {
+      "expected": "VIRGINIA COUNTY"
+    },
+    "mystery_hunt_00457": {
+      "expected": "DECRYPT"
+    },
+    "mystery_hunt_00529": {
+      "expected": "FOREFRONT"
+    },
+    "mystery_hunt_00586": {
+      "expected": "IO"
+    },
+    "mystery_hunt_00601": {
+      "expected": "HBOMB"
+    },
+    "mystery_hunt_00605": {
+      "expected": "DISTORTION BOX"
+    },
+    "mystery_hunt_00612": {
+      "expected": "VI"
+    },
+    "mystery_hunt_00617": {
+      "expected": "NEWER"
+    },
+    "mystery_hunt_00624": {
+      "expected": "REALER"
+    },
+    "mystery_hunt_00628": {
+      "expected": "MICROSOFT WINDOWS"
+    },
+    "mystery_hunt_00629": {
+      "expected": "TO REAP THE ANSWER PRESENT SEVERAL SNACK ITEMS WE DESIRE TWO BEARING THEMED SPECIAL NAMES"
+    },
+    "mystery_hunt_00645": {
+      "expected": "HEINZ"
+    },
+    "mystery_hunt_00652": {
+      "expected": "GLADIATOR"
+    },
+    "mystery_hunt_00653": {
+      "expected": "RIME"
+    },
+    "mystery_hunt_00656": {
+      "expected": "MOLDINESSES"
+    },
+    "mystery_hunt_00681": {
+      "expected": "FARGO"
+    },
+    "mystery_hunt_00686": {
+      "expected": "TROMBONES"
+    },
+    "mystery_hunt_00687": {
+      "expected": "LAMA"
+    },
+    "mystery_hunt_00691": {
+      "expected": "Z CENTER"
+    },
+    "mystery_hunt_00697": {
+      "expected": "PENISES"
+    },
+    "mystery_hunt_00698": {
+      "expected": "OCTROI"
+    },
+    "mystery_hunt_00708": {
+      "expected": "LEAD SINGER"
+    },
+    "mystery_hunt_00715": {
+      "expected": "WITTIG"
+    },
+    "mystery_hunt_00719": {
+      "expected": "CALL AHEAD AND BRING TO HEADQUARTERS AN ARTISTIC REPRESENTATION OF YOUR TEAM NAME MADE FROM TOOTHPICKS OR MATCHSTICKS. YOU ARE THEN PRESENTED WITH THE ANSWER."
+    },
+    "mystery_hunt_00743": {
+      "expected": "WYCLEF"
+    },
+    "mystery_hunt_00757": {
+      "expected": "ONEHUNDRED"
+    },
+    "mystery_hunt_00760": {
+      "expected": "SPEEDOFLIGHT"
+    },
+    "mystery_hunt_00766": {
+      "expected": "TAPIOCAPUDDING"
+    },
+    "mystery_hunt_00778": {
+      "expected": "COLLABORATIONS"
+    },
+    "mystery_hunt_00791": {
+      "expected": "PADLOCK"
+    },
+    "mystery_hunt_00793": {
+      "expected": "FALCONS"
+    },
+    "mystery_hunt_00805": {
+      "expected": "FRONTBURNER"
+    },
+    "mystery_hunt_00810": {
+      "expected": "COVALENTBOND"
+    },
+    "mystery_hunt_00819": {
+      "expected": "SNIFF"
+    },
+    "mystery_hunt_00833": {
+      "expected": "DEBAUCHERY"
+    },
+    "mystery_hunt_00836": {
+      "expected": "REGGAE"
+    },
+    "mystery_hunt_00843": {
+      "expected": "LEMON"
+    },
+    "mystery_hunt_00847": {
+      "expected": "GRISWOLD"
+    },
+    "mystery_hunt_00868": {
+      "expected": "BIKE"
+    },
+    "mystery_hunt_00869": {
+      "expected": "KENYA"
+    },
+    "mystery_hunt_00871": {
+      "expected": "YTTRIUM"
+    },
+    "mystery_hunt_00874": {
+      "expected": "HOTEL AT MIT"
+    },
+    "mystery_hunt_00882": {
+      "expected": "TRAGEDIENNE"
+    },
+    "mystery_hunt_00887": {
+      "expected": "FLASH"
+    },
+    "mystery_hunt_00896": {
+      "expected": "CHEAP SEATS"
+    },
+    "mystery_hunt_00913": {
+      "expected": "DEMOLITION"
+    },
+    "mystery_hunt_00916": {
+      "expected": "IN ODD LINES"
+    },
+    "mystery_hunt_00918": {
+      "expected": "HOMINESS"
+    },
+    "mystery_hunt_00926": {
+      "expected": "ZEN MASTER"
+    },
+    "mystery_hunt_00929": {
+      "expected": "SIDNEY LUMET"
+    },
+    "mystery_hunt_00930": {
+      "expected": "ORRIN HATCH"
+    },
+    "mystery_hunt_00941": {
+      "expected": "WEN HO LEE"
+    },
+    "mystery_hunt_00946": {
+      "expected": "RAINBOW SIX"
+    },
+    "mystery_hunt_00948": {
+      "expected": "WILLIAM ATHERTON"
+    },
+    "mystery_hunt_00956": {
+      "expected": "WASSERKIRCHE"
+    },
+    "mystery_hunt_00960": {
+      "expected": "KNOBBY-KNUCKLED"
+    },
+    "mystery_hunt_00961": {
+      "expected": "LAUREN HOLLY"
+    },
+    "mystery_hunt_00994": {
+      "expected": "SHE FANCIED HIS RED CAP"
+    },
+    "mystery_hunt_01099": {
+      "expected": "MEDS"
+    },
+    "mystery_hunt_01110": {
+      "expected": "TERN"
+    },
+    "mystery_hunt_01111": {
+      "expected": "NECESSARY EVIL"
+    },
+    "mystery_hunt_01112": {
+      "expected": "AMERICARES"
+    },
+    "mystery_hunt_01124": {
+      "expected": "NETWORKING"
+    },
+    "mystery_hunt_01150": {
+      "expected": "FETTUCCINE"
+    },
+    "mystery_hunt_01151": {
+      "expected": "SPAMALOT"
+    },
+    "mystery_hunt_01152": {
+      "expected": "BITTERROOTS"
+    },
+    "mystery_hunt_01157": {
+      "expected": "QUATTRO PRO"
+    },
+    "mystery_hunt_01173": {
+      "expected": "LINE DANCING"
+    },
+    "mystery_hunt_01180": {
+      "expected": "CHAI"
+    },
+    "mystery_hunt_01189": {
+      "expected": "REUNITES"
+    },
+    "mystery_hunt_01206": {
+      "expected": "TAR"
+    },
+    "mystery_hunt_01209": {
+      "expected": "VIRTUOSO"
+    },
+    "mystery_hunt_01226": {
+      "expected": "HARBOR SONG"
+    },
+    "mystery_hunt_01244": {
+      "expected": "ESKIMO NEBULA"
+    },
+    "mystery_hunt_01261": {
+      "expected": "SOWETO"
+    },
+    "mystery_hunt_01266": {
+      "expected": "THE GIFT OF THE MAGI"
+    },
+    "mystery_hunt_01271": {
+      "expected": "SMACK"
+    },
+    "mystery_hunt_01277": {
+      "expected": "HUNDREDTH"
+    },
+    "mystery_hunt_01278": {
+      "expected": "HURT"
+    },
+    "mystery_hunt_01286": {
+      "expected": "BROTHER JUNIPER"
+    },
+    "mystery_hunt_01301": {
+      "expected": "DAZED"
+    },
+    "mystery_hunt_01307": {
+      "expected": "CARBURETOR"
+    },
+    "mystery_hunt_01313": {
+      "expected": "JOE'S NAMED VP"
+    },
+    "mystery_hunt_01315": {
+      "expected": "CEO"
+    },
+    "mystery_hunt_01324": {
+      "expected": "DOGES"
+    },
+    "mystery_hunt_01337": {
+      "expected": "ISCI"
+    },
+    "mystery_hunt_01343": {
+      "expected": "OCD"
+    },
+    "mystery_hunt_01357": {
+      "expected": "PINOT BLANC"
+    },
+    "mystery_hunt_01358": {
+      "expected": "CLASSIFICATIONS"
+    },
+    "mystery_hunt_01361": {
+      "expected": "RUN UP A SCORE"
+    },
+    "mystery_hunt_01363": {
+      "expected": "BODY OF WORK"
+    },
+    "mystery_hunt_01372": {
+      "expected": "GENUINE ARTICLE"
+    },
+    "mystery_hunt_01374": {
+      "expected": "WEST FALLS CHURCH VT"
+    },
+    "mystery_hunt_01377": {
+      "expected": "REMAINS OF THE DAY"
+    },
+    "mystery_hunt_01395": {
+      "expected": "BURDEN"
+    },
+    "mystery_hunt_01398": {
+      "expected": "UPKEEP"
+    },
+    "mystery_hunt_01402": {
+      "expected": "CONRAD"
+    },
+    "mystery_hunt_01408": {
+      "expected": "FOUR IRON"
+    },
+    "mystery_hunt_01410": {
+      "expected": "INGRID"
+    },
+    "mystery_hunt_01418": {
+      "expected": "MOBILE SUIT GUNDAM"
+    },
+    "mystery_hunt_01429": {
+      "expected": "DIVERGED"
+    },
+    "mystery_hunt_01431": {
+      "expected": "WRITE HOW HE SOLVED WHO GRABBED PEACH"
+    },
+    "mystery_hunt_01432": {
+      "expected": "CUL DE SAC"
+    },
+    "mystery_hunt_01446": {
+      "expected": "FAMILY NAME"
+    },
+    "mystery_hunt_01454": {
+      "expected": "INEQUALITY"
+    },
+    "mystery_hunt_01469": {
+      "expected": "SING US A NERD PATTER SONG"
+    },
+    "mystery_hunt_01486": {
+      "expected": "ECHO"
+    },
+    "mystery_hunt_01491": {
+      "expected": "SALTAIR"
+    },
+    "mystery_hunt_01496": {
+      "expected": "WASATCH"
+    },
+    "mystery_hunt_01497": {
+      "expected": "DOMINIC SOREL"
+    },
+    "mystery_hunt_01501": {
+      "expected": "PANTHER"
+    },
+    "mystery_hunt_01520": {
+      "expected": "WEBISMS"
+    },
+    "mystery_hunt_01521": {
+      "expected": "KEGELSTATT TRIO"
+    },
+    "mystery_hunt_01523": {
+      "expected": "FLAG DAY"
+    },
+    "mystery_hunt_01543": {
+      "expected": "ELEPHANT IN A TUTU"
+    },
+    "mystery_hunt_01546": {
+      "expected": "BOOKWORM"
+    },
+    "mystery_hunt_01558": {
+      "expected": "THE UNEXPECTED DESTRUCTION OF ELABORATELY ENGINEERED ARTIFACTS"
+    },
+    "mystery_hunt_01566": {
+      "expected": "THROW GRAMMAR OUT THE WINDOW"
+    },
+    "mystery_hunt_01582": {
+      "expected": "REST STOP"
+    },
+    "mystery_hunt_01585": {
+      "expected": "RUSH HOUR"
+    },
+    "mystery_hunt_01591": {
+      "expected": "ARIGATO GOZAIMASU"
+    },
+    "mystery_hunt_01597": {
+      "expected": "PRINCE"
+    },
+    "mystery_hunt_01603": {
+      "expected": "TONY UNDER KRESGE POINT"
+    },
+    "mystery_hunt_01610": {
+      "expected": "CARSEAT"
+    },
+    "mystery_hunt_01616": {
+      "expected": "CASH COW"
+    },
+    "mystery_hunt_01618": {
+      "expected": "YOKEL"
+    },
+    "mystery_hunt_01640": {
+      "expected": "CHERRY"
+    },
+    "mystery_hunt_01642": {
+      "expected": "VALLEY"
+    },
+    "mystery_hunt_01645": {
+      "expected": "OVERWROUGHT"
+    },
+    "mystery_hunt_01647": {
+      "expected": "WRECK A VW BUG"
+    },
+    "mystery_hunt_01651": {
+      "expected": "EARTHENWARE"
+    },
+    "mystery_hunt_01659": {
+      "expected": "HAMBURGER"
+    },
+    "mystery_hunt_01666": {
+      "expected": "BRING DRESSED UP BERGMAN DOLL TO HQ"
+    },
+    "mystery_hunt_01667": {
+      "expected": "CRUSHED VELVET TUX"
+    },
+    "mystery_hunt_01684": {
+      "expected": "LANCED"
+    },
+    "mystery_hunt_01686": {
+      "expected": "ARREST"
+    },
+    "mystery_hunt_01687": {
+      "expected": "CHEATS"
+    },
+    "mystery_hunt_01689": {
+      "expected": "YANKS"
+    },
+    "mystery_hunt_01692": {
+      "expected": "SING ABOUT COINS"
+    },
+    "mystery_hunt_01702": {
+      "expected": "AD IN TECH"
+    },
+    "mystery_hunt_01712": {
+      "expected": "RAID MEETING AT LOCATION NINE"
+    },
+    "mystery_hunt_01719": {
+      "expected": "ONE FRAME"
+    },
+    "mystery_hunt_01727": {
+      "expected": "TURKMENHOWAYOLLARY"
+    },
+    "mystery_hunt_01732": {
+      "expected": "FINALE"
+    },
+    "mystery_hunt_01752": {
+      "expected": "GUNPOWDER"
+    },
+    "mystery_hunt_01775": {
+      "expected": "NIGHT"
+    },
+    "mystery_hunt_01794": {
+      "expected": "DAMP"
+    },
+    "mystery_hunt_01800": {
+      "expected": "UNARY"
+    },
+    "mystery_hunt_01802": {
+      "expected": "ALFRESCO"
+    },
+    "mystery_hunt_01807": {
+      "expected": "DARK BROODING"
+    },
+    "mystery_hunt_01810": {
+      "expected": "UNKNOWN TOOL"
+    },
+    "mystery_hunt_01820": {
+      "expected": "ACHTERBAHN"
+    },
+    "mystery_hunt_01821": {
+      "expected": "HANKEL FUNCTION"
+    },
+    "mystery_hunt_01824": {
+      "expected": "NIFTY METAL ROBOT NINJA"
+    },
+    "mystery_hunt_01970": {
+      "expected": "HERO"
+    },
+    "mystery_hunt_01985": {
+      "expected": "RUBLE"
+    },
+    "mystery_hunt_01994": {
+      "expected": "HIDEOUT"
+    },
+    "mystery_hunt_01995": {
+      "expected": "COOL FUEL"
+    },
+    "mystery_hunt_01997": {
+      "expected": "DRESDEN"
+    },
+    "mystery_hunt_02002": {
+      "expected": "MONO"
+    },
+    "mystery_hunt_02007": {
+      "expected": "LOOK BEHIND YOU"
+    },
+    "mystery_hunt_02008": {
+      "expected": "CARTWHEEL"
+    },
+    "mystery_hunt_02030": {
+      "expected": "BLAZER"
+    },
+    "mystery_hunt_02035": {
+      "expected": "DISLOCATED TAILBONE"
+    },
+    "mystery_hunt_02037": {
+      "expected": "HOLSTEIN"
+    },
+    "mystery_hunt_02040": {
+      "expected": "COMEDY"
+    },
+    "mystery_hunt_02044": {
+      "expected": "SMS POMMERN"
+    },
+    "mystery_hunt_02045": {
+      "expected": "LISTENING"
+    },
+    "mystery_hunt_02062": {
+      "expected": "PRISMATIC PERISCOPE"
+    },
+    "mystery_hunt_02080": {
+      "expected": "SARDINE CANNONS"
+    },
+    "mystery_hunt_02103": {
+      "expected": "BIG SUR"
+    },
+    "mystery_hunt_02107": {
+      "expected": "BLUE FINCH"
+    },
+    "mystery_hunt_02109": {
+      "expected": "SHOPWORKER"
+    },
+    "mystery_hunt_02124": {
+      "expected": "VAMPIRE"
+    },
+    "mystery_hunt_02133": {
+      "expected": "UNDERSTANDING"
+    },
+    "mystery_hunt_02144": {
+      "expected": "PARADOX"
+    },
+    "mystery_hunt_02146": {
+      "expected": "INDIGO BLUE"
+    },
+    "mystery_hunt_02156": {
+      "expected": "PLUM WINE"
+    },
+    "mystery_hunt_02166": {
+      "expected": "NERDS"
+    },
+    "mystery_hunt_02174": {
+      "expected": "LONG DOZEN"
+    },
+    "mystery_hunt_02185": {
+      "expected": "GEORGE WARD LINN"
+    },
+    "mystery_hunt_02186": {
+      "expected": "DOLLDOMS"
+    },
+    "mystery_hunt_02197": {
+      "expected": "GOOFPROOF BREEDERS"
+    },
+    "mystery_hunt_02200": {
+      "expected": "TRAIPSES"
+    },
+    "mystery_hunt_02203": {
+      "expected": "BIG WHEEL"
+    },
+    "mystery_hunt_02205": {
+      "expected": "NOSEEUM"
+    },
+    "mystery_hunt_02218": {
+      "expected": "CONTACT HQ TO SHOW US YOUR NEW RAP BATTLE"
+    },
+    "mystery_hunt_02220": {
+      "expected": "BUTTERY"
+    },
+    "mystery_hunt_02241": {
+      "expected": "REVENGE TRAGEDY"
+    },
+    "mystery_hunt_02258": {
+      "expected": "NICHE"
+    },
+    "mystery_hunt_02262": {
+      "expected": "PEMICAN"
+    }
+  }
+}

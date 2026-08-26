@@ -1,0 +1,34 @@
+{
+  "source": "data/rules/history_olympiad/collaboration.json#agent_roles",
+  "information_policy": "shared",
+  "roles": [
+    {
+      "name": "Agent_1",
+      "title": "captain",
+      "may_submit": true,
+      "duties": [
+        "Direct who answers and stop teammates from talking over each other.",
+        "Give the team's official answer once the group has settled.",
+        "Submit only after the format and rule checks pass."
+      ]
+    },
+    {
+      "name": "Agent_2",
+      "title": "history specialist",
+      "may_submit": false,
+      "duties": [
+        "Answer history and civilisation questions from memory alone.",
+        "Say when you are unsure instead of guessing over a teammate."
+      ]
+    },
+    {
+      "name": "Agent_3",
+      "title": "geography / arts specialist",
+      "may_submit": false,
+      "duties": [
+        "Answer geography, art, and literature questions from memory alone.",
+        "Say when you are unsure instead of guessing over a teammate."
+      ]
+    }
+  ]
+}

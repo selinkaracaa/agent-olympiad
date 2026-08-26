@@ -1,0 +1,10 @@
+{
+  "visibility": "hidden_until_grade",
+  "gold_pointer": "data/benchmarks/iol_team/benchmark.json#iol_team_2007.gold_label",
+  "has_gold_answer": false,
+  "evaluator_id": "rubric_llm_v1",
+  "evaluator_status": "ready",
+  "rubric_path": "data/rubrics/worked_answer_100_v1.json",
+  "deliverable": "worked_answers",
+  "solution_file": "data/raw/iol/iol-2007-team-sol.en.pdf"
+}

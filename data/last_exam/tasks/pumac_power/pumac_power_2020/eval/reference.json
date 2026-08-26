@@ -1,0 +1,10 @@
+{
+  "visibility": "hidden_until_grade",
+  "gold_pointer": "data/benchmarks/pumac_power/benchmark.json#pumac_power_2020.gold_label",
+  "has_gold_answer": false,
+  "evaluator_id": null,
+  "evaluator_status": null,
+  "rubric_path": null,
+  "deliverable": null,
+  "solution_file": "data/raw/pumac_power/PUMaC_2020__Power_Round___Solutions.pdf"
+}

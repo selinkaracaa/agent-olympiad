@@ -1,0 +1,10 @@
+{
+  "visibility": "hidden_until_grade",
+  "gold_pointer": "data/benchmarks/arml_national_team/benchmark.json#arml_national_team_2012.gold_label",
+  "has_gold_answer": true,
+  "evaluator_id": "gold_answer_v1",
+  "evaluator_status": "ready",
+  "rubric_path": "data/rubrics/numerical_sheet_reference_40_v1.json",
+  "deliverable": "answer_sheet",
+  "solution_file": null
+}

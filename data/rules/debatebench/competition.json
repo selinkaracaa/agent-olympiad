@@ -1,0 +1,217 @@
+{
+  "schema_version": "1.0",
+  "rule_id": "debatebench:draft_v1",
+  "competition_id": "debatebench",
+  "profile": "non_comparable",
+  "protocol": "presentation_and_cross_examination",
+  "team": {
+    "active_min": 8,
+    "active_default": 8,
+    "active_max": 8,
+    "collaboration": "Eight participants form four private two-speaker coalitions. Each speaker may prepare only with their partner; cross-coalition sharing is forbidden.",
+    "range_basis": "mixed_or_unresolved"
+  },
+  "execution": {
+    "official_minutes": null,
+    "coalition_privacy": "specified_only",
+    "coalitions": [
+      {
+        "id": "opening_government",
+        "members": [
+          "Agent_1",
+          "Agent_2"
+        ]
+      },
+      {
+        "id": "opening_opposition",
+        "members": [
+          "Agent_3",
+          "Agent_4"
+        ]
+      },
+      {
+        "id": "closing_government",
+        "members": [
+          "Agent_5",
+          "Agent_6"
+        ]
+      },
+      {
+        "id": "closing_opposition",
+        "members": [
+          "Agent_7",
+          "Agent_8"
+        ]
+      }
+    ]
+  },
+  "allowed_tools": [
+    "query_rules"
+  ],
+  "resources": {
+    "internet": "forbidden",
+    "calculator": "forbidden",
+    "code_execution": "forbidden",
+    "paper_pencil": "allowed",
+    "provided_materials_only": true
+  },
+  "human_constraints": [
+    "Follow British Parliamentary / WUDC role constraints implied by the transcript task.",
+    "Do not invent evidence that the materials do not support.",
+    "Respond as a debating team, not as an unconstrained essay writer.",
+    "BP/WUDC norms; secondary to official WUDC rules: 4 teams of 2 in a room; limited prep after motion release; no internet during prep in many championship settings.",
+    "Every debate has four teams of two speakers: Opening Government, Opening Opposition, Closing Government, and Closing Opposition.",
+    "Speeches are delivered in the order PM, LO, DPM, DLO, MG, MO, GW, OW, and each speaker gives exactly one speech.",
+    "After the motion is released you have 15 minutes to prepare, and during that time you may confer only with your partner.",
+    "Take no help from coaches, teammates outside your pair, institution-mates, or judges during preparation; doing so risks disqualification.",
+    "Do not use the Internet to research the motion, do not use generative AI for any purpose, and do not communicate with anyone other than your partner, the CA team, or the Organising Committee.",
+    "Electronic devices may be used only as stopwatches, as cameras to photograph the draw, motion, and info-slide, or as offline dictionaries; digital matter files and shared online documents are prohibited even for teams permitted laptops.",
+    "Be ready to enter the debate room the moment the 15 minutes elapse; a late team can be replaced by a swing team and scores zero for that round.",
+    "Speak for 7 minutes; you may finish your sentence or conclusion within roughly 15 seconds, and judges disregard everything said after 7 minutes 15 seconds.",
+    "The first and last minute of every speech is protected time in which no POI may be offered; POIs may be offered only between the 1- and 6-minute marks.",
+    "Take at least one POI during your speech or be penalised for failure to engage, and keep any POI you offer to 15 seconds or less.",
+    "After a POI is refused, wait 15 seconds before any debater on your side offers another; persistent rapid offers count as barracking and are not permitted.",
+    "The judging panel ranks all four teams first through fourth by persuasiveness; debates cannot end in a draw."
+  ],
+  "rules_text": "DebateBench (WUDC / BP). The team prepares a case, presents it, and responds to judges or opponents. Mixed or unresolved rulesets: the runner permits 8 to 8 active agents and defaults to 8. Eight participants form four private two-speaker coalitions. Each speaker may prepare only with their partner; cross-coalition sharing is forbidden. Banned during the contest: internet access, calculators and running code. Paper and pencil are always available. Work only from the materials provided with the problem. Submit one shared oral speech; Submit eight labeled speeches in official order: PM, LO, DPM, DLO, MG, MO, GW, OW. Preserve coalition privacy and identify POIs separately. Treat unexposed physical, oral, live-opponent, judge, timing, or environment mechanisms as unavailable rather than simulated facts.",
+  "provenance": {
+    "status": "source_enriched_v1",
+    "sources": [
+      {
+        "title": "DebateBench / BP",
+        "url": "https://huggingface.co/datasets",
+        "retrieved_at": "2026-08-12",
+        "local_text": "data/rules/sources/debatebench/01_datasets.txt",
+        "authority": "unclassified",
+        "edition": "not_frozen",
+        "sections": [],
+        "archive_status": "local_capture_available"
+      },
+      {
+        "title": "https://www.worlddebating.org/",
+        "url": "https://www.worlddebating.org/",
+        "retrieved_at": "2026-08-11",
+        "from_report": "docs/rules_crawl_2026-08-11.md",
+        "authority": "unclassified",
+        "edition": "not_frozen",
+        "sections": [],
+        "archive_status": "locator_only_from_prior_report"
+      },
+      {
+        "title": "https://www.worlddebating.org/wudc-manual",
+        "url": "https://www.worlddebating.org/wudc-manual",
+        "retrieved_at": "2026-08-12",
+        "from_report": "docs/rules_lowconf_2026-08-12.md",
+        "authority": "unclassified",
+        "edition": "not_frozen",
+        "sections": [],
+        "archive_status": "locator_only_from_prior_report"
+      },
+      {
+        "title": "https://www.nwforensics.org/su-debate/WUDC%20Manual%20Oct%2017%202025.pdf",
+        "url": "https://www.nwforensics.org/su-debate/WUDC%20Manual%20Oct%2017%202025.pdf",
+        "retrieved_at": "2026-08-12",
+        "from_report": "docs/rules_lowconf_2026-08-12.md",
+        "authority": "unclassified",
+        "edition": "not_frozen",
+        "sections": [],
+        "archive_status": "locator_only_from_prior_report"
+      },
+      {
+        "title": "https://esdachronos.nl/uploads/WUDC-2020.pdf",
+        "url": "https://esdachronos.nl/uploads/WUDC-2020.pdf",
+        "retrieved_at": "2026-08-12",
+        "from_report": "docs/rules_lowconf_2026-08-12.md",
+        "authority": "unclassified",
+        "edition": "not_frozen",
+        "sections": [],
+        "archive_status": "locator_only_from_prior_report"
+      }
+    ],
+    "adaptations": [
+      "max_turns is a safety budget, not necessarily the official wall-clock limit",
+      "specialist roles are a research roster overlay",
+      "physical/oral/live opponent fidelity may be incomplete in src/"
+    ],
+    "crawl_status": "ok",
+    "crawled_excerpts": [
+      {
+        "url": "https://huggingface.co/datasets",
+        "excerpt": "Datasets – Hugging Face Hugging Face Models Datasets Spaces Buckets new Docs Enterprise Pricing Website Tasks HuggingChat Collections Languages Organizations Community Blog Posts Daily Papers Hardware Learn Discord Forum GitHub Solutions Team & Enterprise Hugging Face PRO Enterprise Support Inference Providers Inference Endpoints Storage Buckets Log In Sign Up 1T&quot;,&quot;label&quot;:&quot;> 1T&quot;,&quot;type&quot;:&quot;size_categories&quot;}],&quot;format&quot;:[{&quot;id&quot;:&quot;form"
+      }
+    ],
+    "enriched_at": "2026-08-12T16:53:55.316488+00:00",
+    "research_confidence": "high",
+    "proxy_limitations": [
+      "Live interruption by POIs, protected time, and the 15-second offer window depend on real-time speech that turn-based text cannot reproduce.",
+      "Judging is a consensus deliberation among a human panel ranking four teams, not a gold-answer comparison.",
+      "Speaker points and the extension obligations of Closing teams depend on what earlier speakers actually said in the room."
+    ],
+    "research_merged_at": "2026-08-12T17:05:14.897589+00:00",
+    "rules_text_source": "composed_from_card_fields_v2",
+    "research_reports": [
+      "docs/rules_crawl_2026-08-11.md",
+      "docs/rules_lowconf_2026-08-12.md"
+    ],
+    "research_notes": [
+      "The manual text was read from the Sofia WUDC 2025 revision hosted on a mirror; worlddebating.org is the authoritative index and currently carries the Ottawa WUDC 2027 edition, whose PDF could not be fetched directly.",
+      "Every constraint above was cross-checked against the 2020 manual and is stable across editions, except the explicit generative-AI ban, which appears only from the 2025 revision.",
+      "Speaker-score scales and the equity and appeals processes were not extracted.",
+      "BP/WUDC norms (secondary to official WUDC rules): 4 teams of 2 in a room; limited prep after motion release; no internet during prep in many championship settings — verify against current WUDC Debating & Judging Rules for the simulated format.",
+      "You must behave like a human teammate under official contest rules.",
+      "Do not claim tools, internet, or materials that the rule card forbids.",
+      "Do not look up answer keys or hidden solutions.",
+      "Benchmark is a cleaned British Parliamentary debate corpus, not itself a governing body.",
+      "Repo provenance currently points at Hugging Face datasets — treat as benchmark-native, not official regulations."
+    ],
+    "research_graded_at": "2026-08-12",
+    "content_standard": {
+      "name": "icpc_three_component_content_standard",
+      "version": "1.1",
+      "applied_at": "2026-08-17",
+      "reference_card": "data/rules/icpc",
+      "official_facts_policy": "competition_specific_primary_sources_only",
+      "scope": [
+        "competition_constraints",
+        "collaboration_operations",
+        "evaluation_and_compliance",
+        "runtime_fidelity"
+      ]
+    },
+    "source_review": {
+      "reviewed_at": "2026-08-17",
+      "audit_report": "docs/rule_card_icpc_standard_gap_audit_2026-08-17.md",
+      "coverage_grade": "C",
+      "completion_status": "material_official_fields_remain_unverified",
+      "claim_policy": "unknown_official_values_remain_null_or_explicitly_unresolved",
+      "known_gaps": []
+    }
+  },
+  "comparability": {
+    "overall": "non_comparable",
+    "dimensions": {
+      "roster": "four_coalitions_of_two",
+      "timing": "adapted",
+      "tools": "equivalent_but_ai_participant_waiver",
+      "scoring": "deferred_four_team_ranking",
+      "environment": "coalition_privacy_and_live_pois_unavailable",
+      "information": "shared_public_rules",
+      "deliberation": "unstructured_observation",
+      "communication": "unlimited_runner_channel"
+    }
+  },
+  "deliverable": {
+    "answer_format": "Submit eight labeled speeches in official order: PM, LO, DPM, DLO, MG, MO, GW, OW. Preserve coalition privacy and identify POIs separately.",
+    "shared": true,
+    "mime_types": [
+      "text/plain"
+    ],
+    "task_types": [
+      "bp_debate_transcript"
+    ],
+    "official_deliverable": "oral_speech",
+    "official_mime_types": [
+      "text/plain"
+    ]
+  }
+}

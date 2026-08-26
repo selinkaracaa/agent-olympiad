@@ -1,0 +1,46 @@
+{
+  "source": "data/rules/iiot/collaboration.json#agent_roles",
+  "information_policy": "shared",
+  "roles": [
+    {
+      "name": "Agent_1",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit an eligible IIOT contestant identity under Teams, Competitions, and Host Country rules.",
+        "Scout, solve, implement, test, review, debug, or coordinate as current team needs require, including dual-machine contention.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ]
+    },
+    {
+      "name": "Agent_2",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit an eligible IIOT contestant identity under Teams, Competitions, and Host Country rules.",
+        "Scout, solve, implement, test, review, debug, or coordinate as current team needs require, including dual-machine contention.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ]
+    },
+    {
+      "name": "Agent_3",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit an eligible IIOT contestant identity under Teams, Competitions, and Host Country rules.",
+        "Scout, solve, implement, test, review, debug, or coordinate as current team needs require, including dual-machine contention.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ]
+    },
+    {
+      "name": "Agent_4",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit an eligible IIOT contestant identity under Teams, Competitions, and Host Country rules.",
+        "Scout, solve, implement, test, review, debug, or coordinate as current team needs require, including dual-machine contention.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "task_id": "gcch_harvard/gcch_harvard_gcch_04",
+  "competition_id": "gcch_harvard",
+  "problem_id": "gcch_harvard_gcch_04",
+  "title": "gcch_04",
+  "year": 2021,
+  "team_size": 4,
+  "source_url": null,
+  "inherits_competition_pack": "competitions/gcch_harvard",
+  "rule_card": "data/rules/gcch_harvard",
+  "input": {
+    "visibility": "agent_at_start",
+    "files": [
+      {
+        "name": "problem.md",
+        "path": "base/input/problem.md"
+      },
+      {
+        "name": "gcch_04.pdf.path",
+        "path": "base/input/gcch_04.pdf.path"
+      }
+    ]
+  },
+  "method": {
+    "visibility": "agent_at_start",
+    "path": "competitions/gcch_harvard/method"
+  },
+  "eval": {
+    "visibility": "hidden_until_grade",
+    "path": "eval/reference.json",
+    "competition_eval": "competitions/gcch_harvard/eval"
+  }
+}

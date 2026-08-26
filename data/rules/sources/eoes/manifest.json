@@ -1,0 +1,17 @@
+{
+  "competition_id": "eoes",
+  "crawled_at": "2026-08-11T16:07:41.253031+00:00",
+  "sources": [
+    {
+      "title": "EOES Previous Olympiads",
+      "url": "https://www.eoes.science/Previous%20olympiads/previous.html",
+      "status": "ok",
+      "content_type": "text/html",
+      "bytes": 30929,
+      "raw_file": "data/rules/sources/eoes/01_previous.html",
+      "text_file": "data/rules/sources/eoes/01_previous.txt",
+      "text_chars": 2633,
+      "text_preview": "Previous EOES | European Olympiad of Experimental Science \n\n \n \n\n \n \n\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n\n \n\n \n \n\n \n \n\n \n \n \n\n \n\n \n \n\n \n \n \n \n\n \n \n \n\n \n\n \n \n\n \n\n \n \n \n \n \n \n \n \n\n \n\n \n \n \n \n\n \n About us \n \n \n \n • EOES NPO \n • Executive Board \n • Countries and representatives \n • Articles of Association \n • Privacy policy \n • Contact \n\n \n\n \n \n \n The contest \n \n \n \n • Participation & selection \n • Syllabus, guidelines & rules \n • Olympiad week \n • Previous EOES \n • Next EOES \n\n \n\n \n \n \n News \n Media \n \n \n \n • 2021 Szeged \n • 2022 Hradec Králové \n • 2023 Riga \n • 2024 Luxembourg-City \n • 2025 Zagreb \n • 2026 Lund \n\n \n\n \n \n \n\n \n\n \n \n \n \n\n \n\n \n \n\n \n \n \n\n \n \n \n \n \n \n\n \n \n \n \n \n\n \n \n \n \n\n \n \n PREVIOUS EOES \n \n \n \n Until 2020, the European science Olympiads continued under the EUSO label.\n\nSince 2021, the organisation of the contest is in the hands of a NPO (EOES association), whose members consist of the participating countries, represented by a Country Representative (CR) who functions at the same time as Country Coordinator (CC).\n\nBy clicking on the emblem of a previous olympiad, you will be directed to an overview page of the contest, where you can also download the assignments. \n \n\n \n \n \n\n \n \n \n \n \n\n \n\n \n\n \n\n \n \n\n \n \n \n\n \n EOES 2021 \n \n SZEGED \n(Hungary)\n\n \n \n \n\n \n\n \n \n \n \n \n\n \n \n \n\n \n \n \n \n \n\n \n\n \n\n \n\n \n \n\n \n \n \n\n \n EOES 2022 \n \n HRADEC KR&Aacute;LOV&Eacute;\n(Czech Republic)\n\n \n \n \n\n \n\n \n \n \n \n \n\n \n \n \n\n \n \n \n\n \n \n \n \n \n\n \n\n \n\n \n\n \n \n\n \n \n \n\n \n E"
+    }
+  ]
+}

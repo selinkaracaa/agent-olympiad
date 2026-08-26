@@ -1,0 +1,3 @@
+# 2003/www.acme-corp.com/teamGuest/7/7_2.html
+
+When Johnny Comes Marching Home (Solution) Document 7.2: When Johnny Comes Marching Home "After a number of drinks," the bartender tells you, "your boss had to take a short trip to the back. When he returned, he told me that my facilities here were quite commodious, that he felt flushed with excitement. Then he showed me these photos he'd taken elsewhere--seems he was quite a connoisseur of water fixtures." Before you study the photos, you decide it might be prudent to visit the facilities yourself, not forgetting to shut the door. One: Two: Three: Four: Five: Six: Seven: Eight: Nine: Back to the index

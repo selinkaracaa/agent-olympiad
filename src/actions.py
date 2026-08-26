@@ -11,12 +11,16 @@ Respond with ONE of these formats:
 Available action types:
 - speak           — broadcast a message to the team
 - write_scratchpad — update the shared working notes
+- write_private_notes — save private working notes visible only to you
 - sleep           — pass this turn (optional reason in PAYLOAD)
+{programming_lines}
 - submit_final    — submit the team's final answer (only when ready)
+{deliberation_lines}
 {tool_lines}
 
 Rules:
 - Use only tools listed as allowed for this contest.
+- Obey the binding human contest rules in your system prompt.
 - Each turn you get at most ONE model call: act, or sleep.
 - submit_final must contain the complete team answer.
 - Be substantive; build on prior discussion."""
@@ -33,12 +37,34 @@ ACTION_LINE_RE = re.compile(
 )
 
 
-def build_action_instructions(allowed_tools: list[str]) -> str:
+def build_action_instructions(
+    allowed_tools: list[str],
+    *,
+    structured_deliberation: bool = False,
+    programming_contest: bool = False,
+) -> str:
     if allowed_tools:
         tool_lines = "\n".join(f"- {tool}" for tool in allowed_tools)
     else:
         tool_lines = "(no tools — paper and pencil only)"
-    return ACTION_INSTRUCTIONS.format(tool_lines=tool_lines)
+    deliberation_lines = ""
+    programming_lines = (
+        "- submit_code     — privately judge code on SAMPLE tests; does not finalize"
+        if programming_contest
+        else ""
+    )
+    if structured_deliberation:
+        deliberation_lines = """\
+- propose          — open a proposal; the ledger assigns P1, P2, ...
+- challenge        — PAYLOAD: P1 | evidence-based objection
+- provide_evidence — PAYLOAD: P1 | evidence relevant to the choice
+- revise           — proposal author only; PAYLOAD: P1 | revised claim
+- decide           — submitter only; PAYLOAD: P1 | accept/reject/defer | reason"""
+    return ACTION_INSTRUCTIONS.format(
+        deliberation_lines=deliberation_lines,
+        programming_lines=programming_lines,
+        tool_lines=tool_lines,
+    )
 
 
 def parse_agent_response(response: str) -> list[tuple[str, str]]:
@@ -64,10 +90,19 @@ def apply_agent_response(
     response: str,
     *,
     submitters: Optional[set[str]] = None,
+    allowed_actions: Optional[set[str]] = None,
 ) -> list[str]:
     """Parse and execute all actions from an agent response. Returns result strings."""
     results = []
     for action_type, payload in parse_agent_response(response):
+        if allowed_actions is not None and action_type not in allowed_actions:
+            result = env.execute_action(
+                agent_name,
+                "sleep",
+                f"blocked prohibited action '{action_type}'",
+            )
+            results.append(result)
+            continue
         if action_type == "submit_final" and submitters is not None and agent_name not in submitters:
             result = env.execute_action(agent_name, "write_scratchpad", payload)
             results.append(f"(redirected submit_final to scratchpad) {result}")

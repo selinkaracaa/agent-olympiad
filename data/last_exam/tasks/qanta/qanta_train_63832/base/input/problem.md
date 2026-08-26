@@ -1,0 +1,3 @@
+# Science
+
+Wheel factorization is often used first on the list to increase the speed before this algorithm is used. The highest factor one needs to check using it is the square root of the given number, rounded down. Starting with two lists, the first starts empty while the second consists of prime numbers that you have found. Every time you find a prime less than the square root of the given number, you proceed through the list and cross off all of its multiples. FTP, identify this method of determining all of the prime numbers up to a given number developed by an ancient Greek mathematician.

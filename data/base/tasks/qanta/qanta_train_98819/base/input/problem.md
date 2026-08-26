@@ -1,0 +1,3 @@
+# History
+
+This politician gained popularity after refusing to take cover during a riot at a Baptist Day parade. This man declared "there's no place for the state in the bedrooms of the nation" in reference to a bill he proposed that legalized homosexuality. When accused of mouthing profanity in the House, he unconvincingly claimed to have said "fuddle duddle." He was opposed by the Gang of Eight in his attempts to pass the Charter of Rights and Freedoms and to achieve Patriation. This leader invoked the War Measures Act after James Cross and Pierre Laporte were kidnapped by the FLQ during the October Crisis. For 10 points, name this French speaking, liberal Prime Minister of Canada who served in the 1970s.

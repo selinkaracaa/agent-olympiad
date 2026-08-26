@@ -1,0 +1,10 @@
+{
+  "visibility": "hidden_until_grade",
+  "gold_pointer": "data/benchmarks/hmmt_guts/benchmark.json#hmmt_guts_nov_2009.gold_label",
+  "has_gold_answer": true,
+  "evaluator_id": null,
+  "evaluator_status": null,
+  "rubric_path": null,
+  "deliverable": null,
+  "solution_file": "data/raw/hmmt_guts/nov/2009/solutions.pdf"
+}

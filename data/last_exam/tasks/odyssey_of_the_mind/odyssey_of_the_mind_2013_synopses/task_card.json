@@ -1,0 +1,33 @@
+{
+  "task_id": "odyssey_of_the_mind/odyssey_of_the_mind_2013_synopses",
+  "competition_id": "odyssey_of_the_mind",
+  "problem_id": "odyssey_of_the_mind_2013_synopses",
+  "title": "Long-Term Problem Synopses — 2013",
+  "year": 2013,
+  "team_size": 7,
+  "source_url": "https://odysseyofthemind.com/past-problems/",
+  "inherits_competition_pack": "competitions/odyssey_of_the_mind",
+  "rule_card": "data/rules/odyssey_of_the_mind",
+  "input": {
+    "visibility": "agent_at_start",
+    "files": [
+      {
+        "name": "problem.md",
+        "path": "base/input/problem.md"
+      },
+      {
+        "name": "long_term_synopses.md.path",
+        "path": "base/input/long_term_synopses.md.path"
+      }
+    ]
+  },
+  "method": {
+    "visibility": "agent_at_start",
+    "path": "competitions/odyssey_of_the_mind/method"
+  },
+  "eval": {
+    "visibility": "hidden_until_grade",
+    "path": "eval/reference.json",
+    "competition_eval": "competitions/odyssey_of_the_mind/eval"
+  }
+}

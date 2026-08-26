@@ -1,0 +1,15 @@
+{
+  "competition_id": "history_olympiad",
+  "rule_id": "history_olympiad:draft_v1",
+  "profile": "non_comparable",
+  "protocol": "buzzer_match_session_proxy",
+  "visibility": {
+    "agent_at_start": [
+      "input",
+      "method"
+    ],
+    "hidden_until_grade": [
+      "eval"
+    ]
+  }
+}

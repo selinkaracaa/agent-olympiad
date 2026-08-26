@@ -1,0 +1,33 @@
+{
+  "task_id": "ioai_team/ioai_team_2025_factory",
+  "competition_id": "ioai_team",
+  "problem_id": "ioai_team_2025_factory",
+  "title": "Team Challenge — Factory of the Future (Galbot)",
+  "year": 2025,
+  "team_size": 4,
+  "source_url": "https://ioai-official.org/team-challenge/",
+  "inherits_competition_pack": "competitions/ioai_team",
+  "rule_card": "data/rules/ioai_team",
+  "input": {
+    "visibility": "agent_at_start",
+    "files": [
+      {
+        "name": "problem.md",
+        "path": "base/input/problem.md"
+      },
+      {
+        "name": "2025_IOAI_Team_Challenge_Factory_of_the_Future.pdf.path",
+        "path": "base/input/2025_IOAI_Team_Challenge_Factory_of_the_Future.pdf.path"
+      }
+    ]
+  },
+  "method": {
+    "visibility": "agent_at_start",
+    "path": "competitions/ioai_team/method"
+  },
+  "eval": {
+    "visibility": "hidden_until_grade",
+    "path": "eval/reference.json",
+    "competition_eval": "competitions/ioai_team/eval"
+  }
+}

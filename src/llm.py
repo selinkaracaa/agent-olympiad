@@ -259,6 +259,18 @@ def mock_agent_llm(system_prompt: str, user_prompt: str) -> str:
     if "group leader" in combined.lower() and "assign" in combined.lower():
         return "Agent_2 handles problems 1-3. Agent_3 handles problems 4-6. I will synthesize."
 
+    if "you are coach" in combined.lower() and "unseen problem" in combined.lower():
+        return (
+            "ACTION: speak | PAYLOAD: Triage first, assign independent checks, "
+            "and reserve the final quarter for integration and verification."
+        )
+
+    if "you are coach" in combined.lower() and "final participation" in combined.lower():
+        return (
+            "ACTION: speak | PAYLOAD: Follow the agreed priorities, report blockers "
+            "early, and switch to final cross-checking at the planned checkpoint."
+        )
+
     if "your assigned slice" in combined.lower():
         return "ACTION: speak | PAYLOAD: My slice is complete. Key results attached in scratchpad notes."
 

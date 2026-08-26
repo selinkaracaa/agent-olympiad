@@ -1,0 +1,8 @@
+Odyssey of the Mind (fallback notes).
+
+Public past-problem synopses are available; full scoring packets are often membership-locked.
+Agent simulation should:
+- Treat the team as solving a creative long-term / spontaneous problem.
+- Avoid outside adults producing the solution for the team.
+- Stay faithful to public problem synopses when full scoring docs are unavailable.
+- Mark runs as proxy when physical performance / style judging cannot be reproduced.

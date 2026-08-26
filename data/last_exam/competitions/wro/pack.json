@@ -1,0 +1,15 @@
+{
+  "competition_id": "wro",
+  "rule_id": "wro:draft_v1",
+  "profile": "non_comparable",
+  "protocol": "robotics_rules_proxy",
+  "visibility": {
+    "agent_at_start": [
+      "input",
+      "method"
+    ],
+    "hidden_until_grade": [
+      "eval"
+    ]
+  }
+}

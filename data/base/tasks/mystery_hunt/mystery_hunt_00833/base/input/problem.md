@@ -1,0 +1,3 @@
+# 2006/puzzles/paris/sacred_and_profane
+
+Paris: Sacred and Profane Pair up the text descriptions with the music, and apply the indices to the corresponding title from the opposite list. Sacred: Profane: 1 (9) A man wins a young lady to his bed by answering her riddles. (21) 2 (1) A merchant seduces a maid with his wealth, but she runs off with her true love. (7) 3 (9) A peddler who defies Robin Hood and holds his own in a fight turns out to be Robin's cousin. (29) 4 (13) Newborn children are murdered with a penknife and come back to curse their mother. (12) 5 (2) The King of France sends Henry tennis balls, and consequently gets his country invaded. (9)

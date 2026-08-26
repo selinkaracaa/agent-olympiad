@@ -1,0 +1,52 @@
+{
+  "source": "data/rules/jessup/collaboration.json#agent_roles",
+  "information_policy": "role_specialized",
+  "roles": [
+    {
+      "name": "Agent_1",
+      "title": "captain / oralist",
+      "may_submit": true,
+      "duties": [
+        "Own the spoken case: opening, structure, and closing.",
+        "Absorb teammates' research into one line of argument rather than a list.",
+        "Submit only after the format and rule checks pass."
+      ]
+    },
+    {
+      "name": "Agent_2",
+      "title": "researcher",
+      "may_submit": false,
+      "duties": [
+        "Find and cite the authorities the argument depends on.",
+        "Bring counter-authority to the team before a judge does."
+      ]
+    },
+    {
+      "name": "Agent_3",
+      "title": "writer",
+      "may_submit": false,
+      "duties": [
+        "Draft the assigned section in full prose, not notes.",
+        "Keep the section within its word or time budget."
+      ]
+    },
+    {
+      "name": "Agent_4",
+      "title": "opponent prep",
+      "may_submit": false,
+      "duties": [
+        "Argue the other side hard enough to expose weak reasoning.",
+        "Prepare answers to the strongest objection the team will face."
+      ]
+    },
+    {
+      "name": "Agent_5",
+      "title": "judge-question specialist",
+      "may_submit": false,
+      "duties": [
+        "Anticipate judge questions and prepare short, direct answers.",
+        "Flag any claim the team cannot defend under questioning."
+      ]
+    }
+  ]
+}

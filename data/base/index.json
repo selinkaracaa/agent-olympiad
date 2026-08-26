@@ -1,0 +1,307 @@
+{
+  "description": "Competition-level catalog of ALE-style task inputs under data/base. Per-task records live in task_cards.json.",
+  "layout": "tasks/<competition_id>/<problem_id>/base/{input,software}",
+  "source_benchmarks": "data/benchmarks",
+  "source_index": "data/benchmarks/index.json",
+  "task_cards_path": "data/base/task_cards.json",
+  "n_competitions": 37,
+  "n_tasks": 1663,
+  "competitions": [
+    {
+      "id": "ijso_practical",
+      "name": "International Junior Science Olympiad — Practical (Team)",
+      "base_path": "data/base/tasks/ijso_practical",
+      "benchmark_path": "data/benchmarks/ijso_practical/benchmark.json",
+      "n_tasks": 22,
+      "eval_unit": "session"
+    },
+    {
+      "id": "ieo_business_case",
+      "name": "International Economics Olympiad — Business Case",
+      "base_path": "data/base/tasks/ieo_business_case",
+      "benchmark_path": "data/benchmarks/ieo_business_case/benchmark.json",
+      "n_tasks": 5,
+      "eval_unit": "session"
+    },
+    {
+      "id": "iol_team",
+      "name": "International Linguistics Olympiad — Team Contest",
+      "base_path": "data/base/tasks/iol_team",
+      "benchmark_path": "data/benchmarks/iol_team/benchmark.json",
+      "n_tasks": 21,
+      "eval_unit": "session"
+    },
+    {
+      "id": "ioaa_group",
+      "name": "International Olympiad on Astronomy and Astrophysics — Group Competition",
+      "base_path": "data/base/tasks/ioaa_group",
+      "benchmark_path": "data/benchmarks/ioaa_group/benchmark.json",
+      "n_tasks": 9,
+      "eval_unit": "session"
+    },
+    {
+      "id": "arml_power",
+      "name": "ARML Power Contest",
+      "base_path": "data/base/tasks/arml_power",
+      "benchmark_path": "data/benchmarks/arml_power/benchmark.json",
+      "n_tasks": 15,
+      "eval_unit": "session"
+    },
+    {
+      "id": "arml_national_team",
+      "name": "ARML National Meet — Team Round",
+      "base_path": "data/base/tasks/arml_national_team",
+      "benchmark_path": "data/benchmarks/arml_national_team/benchmark.json",
+      "n_tasks": 11,
+      "eval_unit": "session"
+    },
+    {
+      "id": "arml_national_power",
+      "name": "ARML National Meet — Power Round",
+      "base_path": "data/base/tasks/arml_national_power",
+      "benchmark_path": "data/benchmarks/arml_national_power/benchmark.json",
+      "n_tasks": 11,
+      "eval_unit": "session"
+    },
+    {
+      "id": "arml_local",
+      "name": "ARML Local",
+      "base_path": "data/base/tasks/arml_local",
+      "benchmark_path": "data/benchmarks/arml_local/benchmark.json",
+      "n_tasks": 6,
+      "eval_unit": "session"
+    },
+    {
+      "id": "wsc_writing",
+      "name": "World Scholar's Cup — Collaborative Writing",
+      "base_path": "data/base/tasks/wsc_writing",
+      "benchmark_path": "data/benchmarks/wsc_writing/benchmark.json",
+      "n_tasks": 42,
+      "eval_unit": "session"
+    },
+    {
+      "id": "jessup",
+      "name": "Philip C. Jessup International Law Moot Court Competition",
+      "base_path": "data/base/tasks/jessup",
+      "benchmark_path": "data/benchmarks/jessup/benchmark.json",
+      "n_tasks": 1,
+      "eval_unit": "session"
+    },
+    {
+      "id": "iiot",
+      "name": "International Informatics Olympiad in Teams (IIOT)",
+      "base_path": "data/base/tasks/iiot",
+      "benchmark_path": "data/benchmarks/iiot/benchmark.json",
+      "n_tasks": 38,
+      "eval_unit": "session"
+    },
+    {
+      "id": "icpc",
+      "name": "ICPC — International Collegiate Programming Contest",
+      "base_path": "data/base/tasks/icpc",
+      "benchmark_path": "data/benchmarks/icpc/benchmark.json",
+      "n_tasks": 158,
+      "eval_unit": "session"
+    },
+    {
+      "id": "cfa_research_challenge",
+      "name": "CFA Institute Research Challenge",
+      "base_path": "data/base/tasks/cfa_research_challenge",
+      "benchmark_path": "data/benchmarks/cfa_research_challenge/benchmark.json",
+      "n_tasks": 19,
+      "eval_unit": "session"
+    },
+    {
+      "id": "eoes",
+      "name": "European Olympiad of Experimental Science (EOES / EUSO)",
+      "base_path": "data/base/tasks/eoes",
+      "benchmark_path": "data/benchmarks/eoes/benchmark.json",
+      "n_tasks": 32,
+      "eval_unit": "session"
+    },
+    {
+      "id": "ethics_bowl_appe",
+      "name": "APPE Intercollegiate Ethics Bowl",
+      "base_path": "data/base/tasks/ethics_bowl_appe",
+      "benchmark_path": "data/benchmarks/ethics_bowl_appe/benchmark.json",
+      "n_tasks": 9,
+      "eval_unit": "session"
+    },
+    {
+      "id": "ethics_bowl_nhseb",
+      "name": "National High School Ethics Bowl",
+      "base_path": "data/base/tasks/ethics_bowl_nhseb",
+      "benchmark_path": "data/benchmarks/ethics_bowl_nhseb/benchmark.json",
+      "n_tasks": 14,
+      "eval_unit": "session"
+    },
+    {
+      "id": "ichto",
+      "name": "International Chemistry Tournament (IChTo)",
+      "base_path": "data/base/tasks/ichto",
+      "benchmark_path": "data/benchmarks/ichto/benchmark.json",
+      "n_tasks": 9,
+      "eval_unit": "session"
+    },
+    {
+      "id": "pumac_power",
+      "name": "PUMaC Power Round",
+      "base_path": "data/base/tasks/pumac_power",
+      "benchmark_path": "data/benchmarks/pumac_power/benchmark.json",
+      "n_tasks": 18,
+      "eval_unit": "session"
+    },
+    {
+      "id": "vis_moot",
+      "name": "Willem C. Vis International Commercial Arbitration Moot",
+      "base_path": "data/base/tasks/vis_moot",
+      "benchmark_path": "data/benchmarks/vis_moot/benchmark.json",
+      "n_tasks": 7,
+      "eval_unit": "session"
+    },
+    {
+      "id": "wharton_investment",
+      "name": "Wharton Global High School Investment Competition",
+      "base_path": "data/base/tasks/wharton_investment",
+      "benchmark_path": "data/benchmarks/wharton_investment/benchmark.json",
+      "n_tasks": 4,
+      "eval_unit": "session"
+    },
+    {
+      "id": "ccdc",
+      "name": "National Collegiate Cyber Defense Competition (NCCDC)",
+      "base_path": "data/base/tasks/ccdc",
+      "benchmark_path": "data/benchmarks/ccdc/benchmark.json",
+      "n_tasks": 16,
+      "eval_unit": "session"
+    },
+    {
+      "id": "debatebench",
+      "name": "DebateBench (WUDC / BP)",
+      "base_path": "data/base/tasks/debatebench",
+      "benchmark_path": "data/benchmarks/debatebench/benchmark.json",
+      "n_tasks": 32,
+      "eval_unit": "session"
+    },
+    {
+      "id": "gcch_harvard",
+      "name": "Global Case Competition at Harvard",
+      "base_path": "data/base/tasks/gcch_harvard",
+      "benchmark_path": "data/benchmarks/gcch_harvard/benchmark.json",
+      "n_tasks": 16,
+      "eval_unit": "session"
+    },
+    {
+      "id": "history_olympiad",
+      "name": "International History Olympiad / IHBB — History Bowl",
+      "base_path": "data/base/tasks/history_olympiad",
+      "benchmark_path": "data/benchmarks/history_olympiad/benchmark.json",
+      "n_tasks": 95,
+      "eval_unit": "session"
+    },
+    {
+      "id": "ioai_team",
+      "name": "International Olympiad in Artificial Intelligence — Team Challenge",
+      "base_path": "data/base/tasks/ioai_team",
+      "benchmark_path": "data/benchmarks/ioai_team/benchmark.json",
+      "n_tasks": 2,
+      "eval_unit": "session"
+    },
+    {
+      "id": "science_olympiad",
+      "name": "Science Olympiad (USA)",
+      "base_path": "data/base/tasks/science_olympiad",
+      "benchmark_path": "data/benchmarks/science_olympiad/benchmark.json",
+      "n_tasks": 1,
+      "eval_unit": "session"
+    },
+    {
+      "id": "wro",
+      "name": "World Robot Olympiad",
+      "base_path": "data/base/tasks/wro",
+      "benchmark_path": "data/benchmarks/wro/benchmark.json",
+      "n_tasks": 20,
+      "eval_unit": "session"
+    },
+    {
+      "id": "odyssey_of_the_mind",
+      "name": "Odyssey of the Mind",
+      "base_path": "data/base/tasks/odyssey_of_the_mind",
+      "benchmark_path": "data/benchmarks/odyssey_of_the_mind/benchmark.json",
+      "n_tasks": 50,
+      "eval_unit": "session"
+    },
+    {
+      "id": "wmtc",
+      "name": "World Mathematics Team Championship",
+      "base_path": "data/base/tasks/wmtc",
+      "benchmark_path": "data/benchmarks/wmtc/benchmark.json",
+      "n_tasks": 3,
+      "eval_unit": "session"
+    },
+    {
+      "id": "fyziklani",
+      "name": "Physics Brawl Online (Fyziklání)",
+      "base_path": "data/base/tasks/fyziklani",
+      "benchmark_path": "data/benchmarks/fyziklani/benchmark.json",
+      "n_tasks": 14,
+      "eval_unit": "session"
+    },
+    {
+      "id": "hmmt_guts",
+      "name": "HMMT Guts Round (February and November)",
+      "base_path": "data/base/tasks/hmmt_guts",
+      "benchmark_path": "data/benchmarks/hmmt_guts/benchmark.json",
+      "n_tasks": 45,
+      "eval_unit": "session"
+    },
+    {
+      "id": "purple_comet",
+      "name": "Purple Comet! Math Meet",
+      "base_path": "data/base/tasks/purple_comet",
+      "benchmark_path": "data/benchmarks/purple_comet/benchmark.json",
+      "n_tasks": 44,
+      "eval_unit": "session"
+    },
+    {
+      "id": "qanta",
+      "name": "QANTA Quiz Bowl",
+      "base_path": "data/base/tasks/qanta",
+      "benchmark_path": "data/benchmarks/qanta/benchmark.json",
+      "n_tasks": 240,
+      "eval_unit": "question"
+    },
+    {
+      "id": "science_bowl",
+      "name": "DOE Science Bowl",
+      "base_path": "data/base/tasks/science_bowl",
+      "benchmark_path": "data/benchmarks/science_bowl/benchmark.json",
+      "n_tasks": 140,
+      "eval_unit": "question"
+    },
+    {
+      "id": "mystery_hunt",
+      "name": "MIT Mystery Hunt",
+      "base_path": "data/base/tasks/mystery_hunt",
+      "benchmark_path": "data/benchmarks/mystery_hunt/benchmark.json",
+      "n_tasks": 261,
+      "eval_unit": "question"
+    },
+    {
+      "id": "nyu_ctf_bench",
+      "name": "NYU CTF Bench (CSAW)",
+      "base_path": "data/base/tasks/nyu_ctf_bench",
+      "benchmark_path": "data/benchmarks/nyu_ctf_bench/benchmark.json",
+      "n_tasks": 194,
+      "eval_unit": "question"
+    },
+    {
+      "id": "cybench",
+      "name": "Cybench",
+      "base_path": "data/base/tasks/cybench",
+      "benchmark_path": "data/benchmarks/cybench/benchmark.json",
+      "n_tasks": 39,
+      "eval_unit": "question"
+    }
+  ]
+}

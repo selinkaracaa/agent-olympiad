@@ -1,0 +1,3 @@
+# Science
+
+An experiment verifying one form of this phenomenon involved measuring the frequencies of gamma rays being produced by a spinning centrifuge. Another experiment testing this phenomenon involved looking for longer wavelengths on a spectrograph because of a relativistic term. Those experiments, verifying the transverse and relativistic forms of this effect, were performed by Kundig and by Ives and Stillwell. Astronomical objects may appear red or blue because of this effect. For 10 points, name this effect in which the motion of a wave-emitting source relative to an observer causes an apparent change in the wave's frequency.

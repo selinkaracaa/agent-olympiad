@@ -1,0 +1,215 @@
+{
+  "$schema": "../../schemas/ruleset.schema.json",
+  "schema_version": "2.0-draft",
+  "ruleset_id": "wharton_investment:team:v2-draft",
+  "competition_id": "wharton_investment",
+  "title": "Wharton Investment Competition — long-horizon non-comparable draft",
+  "profile": "non_comparable",
+  "applicability": {
+    "selector": {},
+    "eval_unit": "session",
+    "effective_years": {"from": 2025, "through": 2026},
+    "notes": "Season-specific client briefs, trading requirements, and deadlines should be pinned by a future season selector."
+  },
+  "team": {
+    "active_min": 4,
+    "active_default": 5,
+    "active_max": 6,
+    "topology": "single_cooperative_team",
+    "required_roles": [
+      {
+        "role_id": "student_leader",
+        "title": "student team leader and submitter",
+        "duties": ["Coordinate the team, own official communications, and submit required deliverables."],
+        "may_submit": true
+      },
+      {
+        "role_id": "strategy_lead",
+        "title": "investment strategy lead",
+        "duties": ["Translate the client's objectives and risk tolerance into a coherent investment policy."],
+        "may_submit": false
+      },
+      {
+        "role_id": "research_lead",
+        "title": "market and company research lead",
+        "duties": ["Gather public evidence, maintain citations, and challenge unsupported claims."],
+        "may_submit": false
+      },
+      {
+        "role_id": "portfolio_analyst",
+        "title": "portfolio and quantitative analyst",
+        "duties": ["Analyze trades, portfolio behavior, and consistency with the investment policy."],
+        "may_submit": false
+      }
+    ],
+    "fill_role": {
+      "role_id": "report_contributor",
+      "title": "report and presentation contributor",
+      "duties": ["Develop evidence-backed sections and improve the final report's clarity and defensibility."],
+      "may_submit": false
+    }
+  },
+  "execution": {
+    "official_minutes": null,
+    "turn_budget": {
+      "mode": "wall_clock_proxy",
+      "max_turns": 32,
+      "derivation": "A short agent run cannot reproduce a competition lasting more than ten weeks."
+    },
+    "state_requirements": [
+      {
+        "id": "live_market_simulator",
+        "description": "Teams share a WInS account and manage a portfolio through real market movement over the season.",
+        "status": "unavailable",
+        "required_for_official_equivalence": true
+      },
+      {
+        "id": "long_horizon_schedule",
+        "description": "Trading activity, interim work, and deliverables unfold across the published season schedule.",
+        "status": "unavailable",
+        "required_for_official_equivalence": true
+      },
+      {
+        "id": "advisor_relationship",
+        "description": "A registered educator may guide the team within official limits but may not trade or decide strategy.",
+        "status": "unavailable",
+        "required_for_official_equivalence": true
+      }
+    ]
+  },
+  "resource_policy": {
+    "internet": {
+      "access": "allowed",
+      "conditions": "Research must use public information and may not contact the client.",
+      "enforced_by": "prompt_only",
+      "source_refs": ["wharton-rules-roles"]
+    },
+    "calculator": {
+      "access": "allowed",
+      "enforced_by": "environment",
+      "source_refs": ["wharton-rules-roles"]
+    },
+    "code_execution": {
+      "access": "allowed",
+      "conditions": "Analysis code may support research but cannot fabricate trades or market history.",
+      "enforced_by": "environment",
+      "source_refs": ["wharton-rules-roles"]
+    },
+    "generative_ai": {
+      "access": "conditional",
+      "conditions": "AI may support brainstorming only; AI-derived material must be cited and may not be submitted as the team's own work.",
+      "enforced_by": "not_enforceable",
+      "source_refs": ["wharton-rules-roles"]
+    }
+  },
+  "constraints": [
+    {
+      "id": "wharton.team_size",
+      "authority": "official",
+      "statement": "A team contains four to six students from the same school or campus and designates one student team leader.",
+      "source_refs": ["wharton-rules-roles"],
+      "enforcement": {"mode": "runtime", "status": "enforced"}
+    },
+    {
+      "id": "wharton.shared_account",
+      "authority": "official",
+      "statement": "The team shares one WInS account and places all official trades through it.",
+      "source_refs": ["wharton-rules-roles"],
+      "enforcement": {"mode": "runtime", "status": "unavailable"}
+    },
+    {
+      "id": "wharton.ai_authorship",
+      "authority": "official",
+      "statement": "Generative AI may be used for brainstorming, but the team may not submit AI-generated work as its own and must cite AI-derived material.",
+      "source_refs": ["wharton-rules-roles"],
+      "enforcement": {"mode": "manual", "status": "unavailable"},
+      "waived_for_agents": true,
+      "waiver_reason": "An LLM-agent benchmark necessarily uses generated analysis and prose as the submission."
+    },
+    {
+      "id": "wharton.short_run",
+      "authority": "benchmark_adaptation",
+      "statement": "The draft evaluates a static case response without real trading, portfolio drift, or advisor interaction.",
+      "source_refs": [],
+      "enforcement": {"mode": "runtime", "status": "enforced"}
+    }
+  ],
+  "collaboration": {
+    "topology": "single_cooperative_team",
+    "opponent_model": "none",
+    "dynamic_role_rotation": true,
+    "coalitions": [],
+    "notes": "The student leader remains the official submission channel, while analytical responsibilities may rotate."
+  },
+  "submission": {
+    "official_deliverable": "Investment Policy Statement and Comprehensive Final Report",
+    "runner_deliverable": "plain-text static investment report",
+    "official_mime_types": ["application/pdf"],
+    "runner_mime_types": ["text/plain"],
+    "adaptation": "The draft omits the live portfolio record and serializes the report as text.",
+    "max_count": 1
+  },
+  "evaluation": {
+    "status": "deferred",
+    "evaluator_id": "rubric_llm_v1",
+    "rubric_path": null,
+    "gold_available": false,
+    "notes": "Create and calibrate a benchmark rubric before treating automated scores as valid."
+  },
+  "comparability": {
+    "overall": "non_comparable",
+    "dimensions": {
+      "roster": "equivalent",
+      "timing": "unavailable",
+      "resources": "proxy",
+      "collaboration": "proxy",
+      "submission": "proxy",
+      "scoring": "unavailable",
+      "participant_identity": "unavailable"
+    },
+    "waivers": [
+      {
+        "id": "wharton.ai_authorship_waiver",
+        "official_rule": "Teams may not submit AI-generated work as their own.",
+        "benchmark_treatment": "LLM agents generate the analysis and prose being evaluated.",
+        "impact": "fundamental"
+      },
+      {
+        "id": "wharton.static_market",
+        "official_rule": "Teams trade and manage a portfolio over a live multi-week market period.",
+        "benchmark_treatment": "The benchmark provides a static case and no live trading account.",
+        "impact": "fundamental"
+      }
+    ],
+    "unsupported_mechanisms": ["live market simulator", "multi-week portfolio history", "advisor relationship", "oral finals"]
+  },
+  "provenance": {
+    "sources": [
+      {
+        "source_id": "wharton-portal",
+        "title": "Wharton Global Youth",
+        "url": "https://globalyouth.wharton.upenn.edu/",
+        "authority": "official",
+        "retrieved_at": "2026-08-12",
+        "effective_year": 2026,
+        "local_path": "data/rules/sources/wharton_investment/01_globalyouth.wharton.upenn.edu",
+        "sha256": "6f4d23f51d6b0dcf0e8292ac540684235ae07ae2e66eed01207545fbd958055b",
+        "locator": "Competition portal",
+        "snapshot_status": "archived"
+      },
+      {
+        "source_id": "wharton-rules-roles",
+        "title": "Wharton Investment Competition rules and roles",
+        "url": "https://globalyouth.wharton.upenn.edu/competitions/investment-competition/rules-roles/",
+        "authority": "official",
+        "retrieved_at": "2026-08-12",
+        "effective_year": 2026,
+        "locator": "Team size, advisor, account, deliverable, and AI rules",
+        "snapshot_status": "linked_only"
+      }
+    ],
+    "generated_at": "2026-08-16T18:00:00Z",
+    "research_confidence": "medium",
+    "notes": "The current benchmark's team range and profile must be corrected before migration."
+  }
+}

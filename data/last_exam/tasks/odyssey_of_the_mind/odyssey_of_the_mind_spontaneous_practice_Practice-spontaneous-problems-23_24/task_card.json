@@ -1,0 +1,33 @@
+{
+  "task_id": "odyssey_of_the_mind/odyssey_of_the_mind_spontaneous_practice_Practice-spontaneous-problems-23_24",
+  "competition_id": "odyssey_of_the_mind",
+  "problem_id": "odyssey_of_the_mind_spontaneous_practice_Practice-spontaneous-problems-23_24",
+  "title": "Spontaneous practice problems",
+  "year": 2024,
+  "team_size": 7,
+  "source_url": "https://odysseyofthemind.com/spontaneous/",
+  "inherits_competition_pack": "competitions/odyssey_of_the_mind",
+  "rule_card": "data/rules/odyssey_of_the_mind",
+  "input": {
+    "visibility": "agent_at_start",
+    "files": [
+      {
+        "name": "problem.md",
+        "path": "base/input/problem.md"
+      },
+      {
+        "name": "Practice-spontaneous-problems-23_24.pdf.path",
+        "path": "base/input/Practice-spontaneous-problems-23_24.pdf.path"
+      }
+    ]
+  },
+  "method": {
+    "visibility": "agent_at_start",
+    "path": "competitions/odyssey_of_the_mind/method"
+  },
+  "eval": {
+    "visibility": "hidden_until_grade",
+    "path": "eval/reference.json",
+    "competition_eval": "competitions/odyssey_of_the_mind/eval"
+  }
+}

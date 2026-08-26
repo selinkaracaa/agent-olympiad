@@ -1,0 +1,15 @@
+{
+  "competition_id": "ijso_practical",
+  "rule_id": "ijso_practical:draft_v1",
+  "profile": "proxy",
+  "protocol": "lab_practical_proxy",
+  "visibility": {
+    "agent_at_start": [
+      "input",
+      "method"
+    ],
+    "hidden_until_grade": [
+      "eval"
+    ]
+  }
+}

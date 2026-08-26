@@ -1,0 +1,3 @@
+# Science
+
+Four equivalents of this compound are bound to an ethylene diamine center in a famouscalcium-binding hexadentate ligand. The protecting groups in solid-phase peptide synthesis are oftenremoved using a trifluorinated derivative of this compound. One process for producing thiscompound uses a rhodium dicarbonyl diiodide catalyst; that process proceeds via carbonylation ofmethanol and is the (*) Monsanto process. An anhydrous form of this compound is commonly called"glacial." This compound can be produced by oxidizing ethanol twice, and it is the second simplestcarboxylic acid, after formic acid. For 10 points, name this acid with formula CH3COOH, which iscommonly found in vinegar.

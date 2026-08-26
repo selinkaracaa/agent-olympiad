@@ -1,0 +1,24 @@
+{
+  "task_id": "iol_team/iol_team_2003",
+  "competition_id": "iol_team",
+  "problem_id": "iol_team_2003",
+  "title": "Team Contest — Tocharian, Subscripts, Verbs",
+  "year": 2003,
+  "team_size": 4,
+  "source_url": "https://ioling.org/problems/2003/",
+  "inherits_competition_pack": "competitions/iol_team",
+  "rule_card": "data/rules/iol_team",
+  "input": {
+    "visibility": "agent_at_start",
+    "files": []
+  },
+  "method": {
+    "visibility": "agent_at_start",
+    "path": "competitions/iol_team/method"
+  },
+  "eval": {
+    "visibility": "hidden_until_grade",
+    "path": "eval/reference.json",
+    "competition_eval": "competitions/iol_team/eval"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "visibility": "hidden_until_grade",
+  "gold_pointer": "data/benchmarks/arml_power/benchmark.json#arml_power_spring_2022.gold_label",
+  "has_gold_answer": false,
+  "evaluator_id": "rubric_llm_v1",
+  "evaluator_status": "ready",
+  "rubric_path": "data/rubrics/team_power_proof_40_v1.json",
+  "deliverable": "proof_packet",
+  "solution_file": null
+}

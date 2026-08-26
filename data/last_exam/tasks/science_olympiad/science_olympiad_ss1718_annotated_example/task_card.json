@@ -1,0 +1,33 @@
+{
+  "task_id": "science_olympiad/science_olympiad_ss1718_annotated_example",
+  "competition_id": "science_olympiad",
+  "problem_id": "science_olympiad_ss1718_annotated_example",
+  "title": "Solar System — Annotated Example Exam (Div B)",
+  "year": 2018,
+  "team_size": 15,
+  "source_url": "https://www.soinc.org/",
+  "inherits_competition_pack": "competitions/science_olympiad",
+  "rule_card": "data/rules/science_olympiad",
+  "input": {
+    "visibility": "agent_at_start",
+    "files": [
+      {
+        "name": "problem.md",
+        "path": "base/input/problem.md"
+      },
+      {
+        "name": "082317_SS1718_AnnotatedExampleExam.pdf.path",
+        "path": "base/input/082317_SS1718_AnnotatedExampleExam.pdf.path"
+      }
+    ]
+  },
+  "method": {
+    "visibility": "agent_at_start",
+    "path": "competitions/science_olympiad/method"
+  },
+  "eval": {
+    "visibility": "hidden_until_grade",
+    "path": "eval/reference.json",
+    "competition_eval": "competitions/science_olympiad/eval"
+  }
+}

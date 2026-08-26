@@ -1,0 +1,13 @@
+# Odyssey of the Mind — 1984 Long-Term Problem Synopses
+
+Source: https://odysseyofthemind.com/past-problems/
+
+Note: These are public synopses. Full problem packets require membership.
+
+---
+
+1. Chariots of RescueDivisions I, II & IIIDesign and construct a Chariot of Rescue. The weight and limited body movements of the driver will be the only sources of energy permitted to propel the chariot (no pedaling except in the elementary division). The driver of the chariot must rescue ten inanimate “endangered subjects” without touching them by hand and then deposit them in a “safe” area. (Three different rescue methods must be designed to do this.) Immediately following the rescue, a team member must race the chariot over a prescribed course. Cost limit: $40 USD.
+2. CamelotDivisions I & IIAccomplish a number of “brave things” and “Good deeds” on a prescribed course while being blindfolded. Team members ” King Arthur, Guenever, Sir Lancelot, Sir Gawain and Sir Galahad ” must communicate with one another with methods other than language. The specific tasks are: (1) King Arthur must pull the sword, Excalibur, from a stone; (2) Sir Gawain must joust the Green Knight; (3) Sir Lancelot must remove a dragon’s fire; and (4) Sir Galahad must rescue a damsel in distress. King Arthur and the Knights must also rid the world of “evil.”
+3. Moby DickDivisions I, II & IIICreate and act out a new chapter to Herman Melville’s Moby Dick in which Ishmael, the only sailor to survive Moby Dick’s sinking of a whaling ship, describes to his rescuer a part of the story of Moby Dick. The object will be to artistically include color slides illustrating the “flashback” being discussed, a sculpture of a whale, a drawing or painting of a whale scene, and an article of scrimshaw. The team will create a script, a playbill, and, a background or props.
+4. Mousemobile RelaysDivisions II & IIIDesign and construct five vehicles each of which will use a mousetrap as its only source of energy. The vehicles will compete in a relay race with other teams’ vehicles to stay within its boundaries and break a balloon after it crosses its finish line. Each raceway segment will be 20- to 30- feet-long.
+5. Strategy StructureDivisions I, II & IIIDesign and construct a structure of balsa wood and glue that will bear the greatest weight. A section of the structure, at least ¾ in length, must be removed after each 25 pounds of weight is added. This process will continue until the structure is broken or time runs out. The structure must be within 8″ and 8″ high and must not exceed 18 grams in weight. Time limit: 12 min.

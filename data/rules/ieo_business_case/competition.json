@@ -1,0 +1,155 @@
+{
+  "schema_version": "1.0",
+  "rule_id": "ieo_business_case:draft_v1",
+  "competition_id": "ieo_business_case",
+  "profile": "proxy",
+  "protocol": "research_artifact",
+  "team": {
+    "active_min": 3,
+    "active_default": 5,
+    "active_max": 5,
+    "collaboration": "Collaborate only within the team under contest rules.",
+    "range_basis": "source_record"
+  },
+  "execution": {
+    "official_minutes": null
+  },
+  "allowed_tools": [
+    "query_rules",
+    "use_calculator",
+    "execute_code",
+    "web_search"
+  ],
+  "resources": {
+    "internet": "allowed",
+    "calculator": "allowed",
+    "code_execution": "allowed",
+    "paper_pencil": "allowed",
+    "provided_materials_only": false
+  },
+  "human_constraints": [
+    "Online and offline research materials and ordinary software are allowed.",
+    "No contact with anyone outside the team during the case window.",
+    "Deliver a slide deck / strategic report suitable for oral presentation.",
+    "Do not modify the submission after the lock/deadline.",
+    "Team size: ≤5 contestants (+1–2 leaders).",
+    "Business Case is a team competition; communication only with IEO officials and teammates (no outsiders).",
+    "Business Case lasts two days: preparation day + presentation day; presentations must be English slide-supported oral talks.",
+    "During preparation: any online and offline materials allowed; contacting other people for help is prohibited.",
+    "All teams submit slides by Steering Committee deadline before Opening Ceremony; no slide changes afterward.",
+    "Business Case contributes 50 final points (raw then Z-normalized); group stage then Finals for group winners; criterion scores use median of judges.",
+    "Contrast: Economics/Finance individual exams ban smartphones/electronics; permitted instruments listed ≤1 month ahead (not the Business Case tools regime)."
+  ],
+  "rules_text": "International Economics Olympiad — Business Case. The team researches, authors, and defends a judged artifact. The source-recorded active team may have 3 to 5 members; the runner default is 5. Collaborate only within the team under contest rules. Permitted: internet access, calculators and running code. Paper and pencil are always available. Submit one shared slide deck; Submit a structured report or slide outline covering analysis, recommendation, and evidence. The regulations establish preparation and presentation days but not one exact continuous 1,440-minute official clock. Treat unexposed physical, oral, live-opponent, judge, timing, or environment mechanisms as unavailable rather than simulated facts.",
+  "provenance": {
+    "status": "source_enriched_v1",
+    "sources": [
+      {
+        "title": "IEO Regulations",
+        "url": "https://files.ieo-official.org/IEO_Regulations_of_Competition.pdf",
+        "retrieved_at": "2026-08-12",
+        "local_text": "data/rules/sources/ieo_business_case/01_IEO_Regulations_of_Competition.txt",
+        "authority": "unclassified",
+        "edition": "not_frozen",
+        "sections": [],
+        "archive_status": "local_capture_available"
+      },
+      {
+        "title": "https://files.ieo-official.org/IEO_Syllabus.pdf",
+        "url": "https://files.ieo-official.org/IEO_Syllabus.pdf",
+        "retrieved_at": "2026-08-12",
+        "local_text": "data/rules/sources/ieo_business_case/01_IEO_Regulations_of_Competition.txt",
+        "authority": "unclassified",
+        "edition": "not_frozen",
+        "sections": [],
+        "archive_status": "local_capture_available"
+      }
+    ],
+    "adaptations": [
+      "max_turns is a safety budget, not necessarily the official wall-clock limit",
+      "specialist roles are a research roster overlay",
+      "physical/oral/live opponent fidelity may be incomplete in src/",
+      "role-specific rule expertise is a benchmark coordination overlay",
+      "structured deliberation actions are a benchmark traceability overlay",
+      "limited communication is a benchmark pressure overlay, not an official message cap"
+    ],
+    "crawl_status": "ok",
+    "crawled_excerpts": [
+      {
+        "url": "https://files.ieo-official.org/IEO_Regulations_of_Competition.pdf",
+        "excerpt": "REGULATIONS OF COMPETITION This version was approved by the International Board on 30/06/2026. 1. GENERAL STATEMENT 1.1. The oﬃcial language of the International Economics Olympiad is English. Tasks, solutions, and marking schemes are composed in the oﬃcial language of the IEO; no translations are provided. Contestants are supposed to submit their solutions in English. 1.2. The IEO is organized every year. Normally, the IEO is an on-site event that takes place in July or August. The Internationa"
+      },
+      {
+        "url": "https://files.ieo-official.org/IEO_Syllabus.pdf",
+        "excerpt": "SYLLABUS This version of the Syllabus was approved by the International Board on 31/12/2025. 1. General 1.1. National education systems and curricula vary in terms of structure and content, but the tasks of the IEO are composed in a way that facilitates equal competition. The tasks are not aimed primarily at testing the knowledge of theory. A signiﬁcant share of the tasks is practical-oriented, test analytical skills and curiosity. The IEO tasks are created considering that its contestants are p"
+      }
+    ],
+    "enriched_at": "2026-08-12T16:53:55.307109+00:00",
+    "official_time_note": "The regulations establish preparation and presentation days but not one exact continuous 1,440-minute official clock.",
+    "research_confidence": "high",
+    "proxy_limitations": [
+      "Oral Q&A with live judge panels and slide-lock social dynamics are weak under text-only multi-agent simulation.",
+      "Case partner / host-specific scoring guide is not universal across years."
+    ],
+    "research_merged_at": "2026-08-12T17:04:20.708901+00:00",
+    "rules_text_source": "composed_from_card_fields_v2",
+    "research_reports": [
+      "docs/rules_crawl_2026-08-11.md"
+    ],
+    "research_graded_at": "2026-08-11",
+    "content_standard": {
+      "name": "icpc_three_component_content_standard",
+      "version": "1.1",
+      "applied_at": "2026-08-17",
+      "reference_card": "data/rules/icpc",
+      "official_facts_policy": "competition_specific_primary_sources_only",
+      "scope": [
+        "competition_constraints",
+        "collaboration_operations",
+        "evaluation_and_compliance",
+        "runtime_fidelity"
+      ]
+    },
+    "research_notes": [
+      "You must behave like a human teammate under official contest rules.",
+      "Do not claim tools, internet, or materials that the rule card forbids.",
+      "Do not look up answer keys or hidden solutions."
+    ],
+    "source_review": {
+      "reviewed_at": "2026-08-17",
+      "audit_report": "docs/rule_card_icpc_standard_gap_audit_2026-08-17.md",
+      "coverage_grade": "B",
+      "completion_status": "primary_rules_partial_or_variant_selector_required",
+      "claim_policy": "unknown_official_values_remain_null_or_explicitly_unresolved",
+      "known_gaps": []
+    }
+  },
+  "comparability": {
+    "overall": "proxy",
+    "dimensions": {
+      "roster": "approximate",
+      "timing": "adapted",
+      "tools": "src_tool_surface",
+      "scoring": "rubric",
+      "environment": "partial",
+      "communication": "adapted_coordination_budget",
+      "deliberation": "structured_trace_overlay",
+      "information": "role_specialized_tracking_overlay"
+    }
+  },
+  "deliverable": {
+    "answer_format": "Submit a structured report or slide outline covering analysis, recommendation, and evidence.",
+    "shared": true,
+    "mime_types": [
+      "text/plain"
+    ],
+    "task_types": [
+      "business_case"
+    ],
+    "official_deliverable": "slide_deck",
+    "official_mime_types": [
+      "text/html",
+      "application/pdf"
+    ]
+  }
+}

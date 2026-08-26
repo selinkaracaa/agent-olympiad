@@ -1,0 +1,3 @@
+# Mythology
+
+In the poem The Curse of Agade, this figure refuses to support Naram-Sin after allowing his predecessor to rise to power, and this figure stole the me prior to making a journey in which she was required to shed an article of clothing at each of a series of seven gates. This goddess was included with Sin and Shamash in a celestial triad when identified with Venus, and she journeyed to the underworld to rescue her lover Tammuz. Symbolized by a lion, this goddess sent the Bull of Heaven to attack Enkidu after unsuccessfully attempting to seduce Gilgamesh. For 10 points, name this Mesopotamian goddess of war and love.

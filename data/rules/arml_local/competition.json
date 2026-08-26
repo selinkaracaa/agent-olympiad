@@ -1,0 +1,183 @@
+{
+  "schema_version": "1.0",
+  "rule_id": "arml_local:official_shared_answer",
+  "competition_id": "arml_local",
+  "profile": "proxy",
+  "protocol": "shared_answer",
+  "team": {
+    "active_min": 6,
+    "active_default": 6,
+    "active_max": 6,
+    "roster_max": 6,
+    "range_basis": "source_record",
+    "official_roster_note": "ARML Local is open to middle schools, high schools, and homeschool groups. Each school or group may field one or more teams of six students.",
+    "collaboration": "The entire six-person team works the Team Round together and files one shared short-answer sheet."
+  },
+  "execution": {
+    "wall_clock_note": "Official ARML Local team round is about 45 minutes; max_turns is a safety budget.",
+    "official_minutes": 45,
+    "session_track": "team_round_only"
+  },
+  "allowed_tools": [
+    "query_rules"
+  ],
+  "resources": {
+    "internet": "forbidden",
+    "calculator": "forbidden",
+    "electronic_devices": "forbidden",
+    "books_notes": "forbidden",
+    "paper_pencil": "allowed",
+    "provided_materials_only": true,
+    "outside_communication": "forbidden"
+  },
+  "human_constraints": [
+    "Treat yourself as an eligible ARML Local contestant: a middle-school, high-school, or homeschool student on one six-person school or group team.",
+    "A school or homeschool group may field more than one team of six; do not invent a seventh teammate on this team or borrow a student from another team.",
+    "This sitting is the Team Round: 45 minutes, 15 short-answer questions of various types, worked together by the entire team.",
+    "The same meet also has Individual (five pairs, 10 minutes per pair, 10 independent short-answer questions) and Relay (three rounds of 6, 8, and 10 minutes: three pairs, then two triples, then an all-six super relay); those rounds are not this team's current work.",
+    "The Local meet can be completed in about 2.5 hours, allowing for breaks.",
+    "Coaches and local contest coordinators grade the papers on contest day and submit team scores.",
+    "Calculators are not allowed on any ARML part; work with paper and pencil only.",
+    "Phones, computers, internet, books, and notes are forbidden; work only from the materials provided with the problem.",
+    "Submit one shared short-answer sheet; use exact values when a question asks for them.",
+    "Do not look up contest archives, answer keys, or outside problem-solving help."
+  ],
+  "rules_text": "You are an eligible ARML Local contestant on a six-person middle-school, high-school, or homeschool team. A school may field more than one team of six. This sitting is the Team Round: 45 minutes, 15 short-answer questions, worked together, one shared sheet. The same meet also has Individual (five 10-minute pairs) and Relay (6/8/10 minutes; three pairs, two triples, then an all-six super relay) and finishes in about 2.5 hours with breaks; those rounds are not your current work. Coaches or local coordinators grade and submit scores. Calculators are banned on every ARML part; phones, computers, internet, books, and notes are forbidden; paper and pencil only. Use exact values when asked. Do not look up archives or keys. Treat unexposed physical, oral, live-opponent, judge, timing, or environment mechanisms as unavailable rather than simulated facts.",
+  "provenance": {
+    "status": "source_grounded",
+    "sources": [
+      {
+        "title": "ARML Local",
+        "url": "https://arml.com/ARML/arml_2019/page/index.php?page=6&page_type=public&show_page=main_page",
+        "authority": "official",
+        "edition": "ARML Local public page on the official ARML 2019 site",
+        "archive_status": "official_url_verified_not_locally_archived",
+        "sections": [
+          "open to middle schools, high schools, and homeschool groups",
+          "one or more teams of six per school",
+          "about 2.5 hours with breaks",
+          "Team Round 45 minutes, 15 short-answer questions",
+          "Individual 5 pairs, 10 minutes per pair",
+          "Relay 6/8/10 minutes with 3x2, 2x3, then all-six super relay",
+          "coaches or local coordinators grade and submit scores"
+        ]
+      },
+      {
+        "title": "ARML/IRML Competition Rules",
+        "url": "https://arml.com/ARML/arml_2019/page/index.php?page=competition_rules&page_type=public",
+        "authority": "official",
+        "edition": "ARML/IRML Competition Rules as published on the official ARML 2019 site; team-seeding and division clauses revised April 2017",
+        "archive_status": "local_text_capture_available",
+        "sections": [
+          "team of 15 and coach seeding A1/A2 or B1/B2",
+          "age and graduation eligibility",
+          "contiguous non-intersecting regions",
+          "calculator ban on every ARML part",
+          "Individual, Team, Power, and Relay scoring",
+          "team-score tie-break order",
+          "no substitutions after Team Round starts",
+          "short-handed Relay handling",
+          "paper dictionary for non-native English speakers",
+          "electronic-device ban and Team/Power collection",
+          "exactly one Power solution packet",
+          "cheating and property sanctions"
+        ],
+        "local_text": "data/rules/sources/arml_local/01_index.txt"
+      },
+      {
+        "title": "ARML/IRML Competition Rules (arml2.com official mirror)",
+        "url": "https://arml2.com/ARML/arml_2019/page/index.php?page=competition_rules&page_type=public",
+        "authority": "official",
+        "edition": "ARML/IRML Competition Rules as published on the official ARML 2019 site; team-seeding and division clauses revised April 2017",
+        "archive_status": "official_url_verified_not_locally_archived",
+        "sections": [
+          "team of 15 and coach seeding A1/A2 or B1/B2",
+          "age and graduation eligibility",
+          "contiguous non-intersecting regions",
+          "calculator ban on every ARML part",
+          "Individual, Team, Power, and Relay scoring",
+          "team-score tie-break order",
+          "no substitutions after Team Round starts",
+          "short-handed Relay handling",
+          "paper dictionary for non-native English speakers",
+          "electronic-device ban and Team/Power collection",
+          "exactly one Power solution packet",
+          "cheating and property sanctions"
+        ]
+      }
+    ],
+    "adaptations": [
+      "max_turns is a safety budget rather than the official 45-minute hard stop",
+      "benchmark rows carry 10 short answers; the official team round has 15 questions",
+      "structured deliberation actions are a benchmark traceability overlay",
+      "limited communication is a benchmark pressure overlay, not an official message cap",
+      "Individual and Relay exist at the official Local meet and are specified for role immersion; this card does not run those rounds",
+      "Eligibility, multi-team school identity, and coach grading logistics are contestant-facing role-immersion text; they are not runtime enrollment or scoring-portal state machines"
+    ],
+    "official_time_note": "About 45 minutes.",
+    "research_confidence": "high",
+    "research_notes": [
+      "The official Local page does not state a numeric point value per Team Round question; do not encode regional-mirror 4-point claims as official.",
+      "Local award ties mentioned on the page (individual first, then team plus theme, then drawing) are meet-prize rules, not this Team Round session's score."
+    ],
+    "proxy_limitations": [
+      "The runner does not enforce a 45-minute hard stop.",
+      "Current benchmark rows serialize 10 of the official 15 Team Round answers.",
+      "Coach or coordinator grading, nationwide score compilation, and prize fulfillment are not simulated.",
+      "Individual and Relay rounds, live proctors, and physical answer papers are not reproduced."
+    ],
+    "content_standard": {
+      "name": "icpc_three_component_content_standard",
+      "version": "1.1",
+      "applied_at": "2026-08-17",
+      "reference_card": "data/rules/icpc",
+      "official_facts_policy": "competition_specific_primary_sources_only",
+      "scope": [
+        "competition_constraints",
+        "collaboration_operations",
+        "evaluation_and_compliance",
+        "runtime_fidelity"
+      ]
+    },
+    "source_review": {
+      "reviewed_at": "2026-08-17",
+      "audit_report": "docs/rule_card_icpc_standard_gap_audit_2026-08-17.md",
+      "coverage_grade": "B",
+      "completion_status": "primary_rules_partial_or_variant_selector_required",
+      "claim_policy": "unknown_official_values_remain_null_or_explicitly_unresolved",
+      "known_gaps": [
+        "The official Local page does not state a numeric point value per Team Round question; coaches and local coordinators grade and submit scores."
+      ]
+    }
+  },
+  "comparability": {
+    "overall": "proxy",
+    "dimensions": {
+      "roster": "official",
+      "timing": "adapted_turn_budget",
+      "tools": "equivalent",
+      "scoring": "gold_proxy_without_official_point_formula",
+      "environment": "partial",
+      "collaboration": "observable_proxy",
+      "information": "shared_public_rules",
+      "communication": "adapted_coordination_budget",
+      "deliberation": "structured_trace_overlay",
+      "eligibility_and_logistics": "role_immersion_text_only",
+      "individual_and_relay": "specified_not_run"
+    }
+  },
+  "deliverable": {
+    "answer_format": "Numbered team answer sheet:\n1. [answer]\n2. [answer]\n...\n10. [answer]\nUse exact values when the problem asks for them.",
+    "shared": true,
+    "mime_types": [
+      "text/plain"
+    ],
+    "task_types": [
+      "team_contest"
+    ],
+    "official_deliverable": "answer_sheet",
+    "official_mime_types": [
+      "text/plain"
+    ]
+  }
+}

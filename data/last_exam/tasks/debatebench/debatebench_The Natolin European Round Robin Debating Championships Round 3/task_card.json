@@ -1,0 +1,33 @@
+{
+  "task_id": "debatebench/debatebench_The Natolin European Round Robin Debating Championships Round 3",
+  "competition_id": "debatebench",
+  "problem_id": "debatebench_The Natolin European Round Robin Debating Championships Round 3",
+  "title": "The Natolin European Round Robin Debating Championships Round 3",
+  "year": 2017,
+  "team_size": 8,
+  "source_url": null,
+  "inherits_competition_pack": "competitions/debatebench",
+  "rule_card": "data/rules/debatebench",
+  "input": {
+    "visibility": "agent_at_start",
+    "files": [
+      {
+        "name": "problem.md",
+        "path": "base/input/problem.md"
+      },
+      {
+        "name": "The Natolin European Round Robin Debating Championships Round 3.txt.path",
+        "path": "base/input/The Natolin European Round Robin Debating Championships Round 3.txt.path"
+      }
+    ]
+  },
+  "method": {
+    "visibility": "agent_at_start",
+    "path": "competitions/debatebench/method"
+  },
+  "eval": {
+    "visibility": "hidden_until_grade",
+    "path": "eval/reference.json",
+    "competition_eval": "competitions/debatebench/eval"
+  }
+}

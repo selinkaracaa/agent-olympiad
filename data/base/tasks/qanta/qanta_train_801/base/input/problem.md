@@ -1,0 +1,3 @@
+# Philosophy
+
+One work by this author examines the reforms of Samuel Tuke and uses the "ship of fools" to compare the title state with leprosy in the Middle Ages. Another of his works studies systems of knowledge, which he called "epistemes," throughout history with his "archeological" method. He described ways in which governments take advantage of human functions, known as "biopower". This author of Madness and Civilization wrote a work which uses Bentham's Panopticon as a model for society and its prisons. For 10 points, name this postmodernist author of The Order of Things, The History of Sexuality and Discipline and Punish.

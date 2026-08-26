@@ -18,6 +18,10 @@ CHROME_CANDIDATES = (
     Path("/Applications/Chromium.app/Contents/MacOS/Chromium"),
     Path("/usr/bin/google-chrome"),
     Path("/usr/bin/chromium"),
+    Path(r"C:\Program Files\Google\Chrome\Application\chrome.exe"),
+    Path(r"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"),
+    Path(r"C:\Program Files\Microsoft\Edge\Application\msedge.exe"),
+    Path(r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"),
 )
 
 PRINT_CSS = """

@@ -1,0 +1,183 @@
+{
+  "agent_roles": [
+    {
+      "name": "Agent_1",
+      "title": "captain",
+      "may_submit": true,
+      "duties": [
+        "State the final short answer.",
+        "Resolve disagreements quickly."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": []
+    },
+    {
+      "name": "Agent_2",
+      "title": "literature and arts specialist",
+      "may_submit": false,
+      "duties": [
+        "Track literary, arts, and culture clues."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": []
+    },
+    {
+      "name": "Agent_3",
+      "title": "history and social science specialist",
+      "may_submit": false,
+      "duties": [
+        "Track history, politics, and social-science clues."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": []
+    },
+    {
+      "name": "Agent_4",
+      "title": "science and misc specialist",
+      "may_submit": false,
+      "duties": [
+        "Track science, geography, and miscellaneous clues.",
+        "Challenge unsupported guesses."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": []
+    }
+  ],
+  "agent_constraints": [
+    "Apply this competition's own roster, timing, tool, collaboration, submission, and scoring rules; do not import rules from another contest.",
+    "Quiz bowl teams confer on bonuses; tossups are normally individual after a buzz.",
+    "Banned during the contest: internet access, calculators and personal electronics. Work only from the materials provided with the problem.",
+    "Treat private reasoning and notes as unknown to teammates until you communicate the decision-relevant content.",
+    "Do not access hidden solutions, answer keys, evaluator internals, or unauthorized outside problem-solving help.",
+    "Follow phase-specific buzzer, recognition, speaker, and conferral rules; do not communicate an answer during a phase in which teammate consultation is forbidden.",
+    "Do not claim an interrupt, opponent response, moderator ruling, or bonus opportunity unless the current task exposes that state.",
+    "Only designated submitters may make the shared submission: Agent_1.",
+    "Use only the official mechanisms that the current task actually exposes; do not claim physical, oral, live-opponent, judge, or environment actions that were not observed."
+  ],
+  "rule_sections": {
+    "competition_format": [
+      "Competition model: The task represents a quiz-bowl question without a complete live buzzer match.",
+      "Benchmark adaptation: the runner uses 4 active agents.",
+      "Source-recorded competition rule: Do not invent later clues or buzzer timing advantages.",
+      "Source-recorded competition rule: Collaborate only as the prompt structure allows.",
+      "Source-recorded competition rule: Under ACF rules a match is 20 untimed tossup-bonus cycles; under NAQT it is two timed halves of 10 minutes for high school or 11 for college.",
+      "Do not invent later clues or buzzer timing advantages.",
+      "Collaborate only as the prompt structure allows.",
+      "Under ACF rules a match is 20 untimed tossup-bonus cycles; under NAQT it is two timed halves of 10 minutes for high school or 11 for college.",
+      "QANTA is a research quiz-bowl dataset/project; not a live tournament rulebook.",
+      "Benchmark rows are question-level (eval_unit=question), not full matches."
+    ],
+    "timeline": [
+      "Source-recorded timing: Question-level quiz-bowl proxy.",
+      "Source-recorded competition rule: At most four players from a team are active at any one time, and only an active player may buzz or answer.",
+      "Source-recorded competition rule: A tossup answered correctly is worth 10 points and earns your team a three-part bonus totaling 30 points; NAQT additionally awards 15 for a correct answer before the power mark.",
+      "Source-recorded competition rule: Interrupting a tossup before it is fully read and answering incorrectly costs your team 5 points; there is no penalty for a wrong answer after the question has been read in full.",
+      "Source-recorded competition rule: Coaches, substitutes, and spectators may not communicate with active players during gameplay, and substitutions happen only at designated breaks such as halftime, a timeout, or before overtime.",
+      "At most four players from a team are active at any one time, and only an active player may buzz or answer.",
+      "A tossup answered correctly is worth 10 points and earns your team a three-part bonus totaling 30 points; NAQT additionally awards 15 for a correct answer before the power mark.",
+      "Interrupting a tossup before it is fully read and answering incorrectly costs your team 5 points; there is no penalty for a wrong answer after the question has been read in full.",
+      "Coaches, substitutes, and spectators may not communicate with active players during gameplay, and substitutions happen only at designated breaks such as halftime, a timeout, or before overtime."
+    ],
+    "resource_policy": [
+      "Source-recorded resource policy: Banned during the contest: internet access, calculators and personal electronics. Work only from the materials provided with the problem.",
+      "Source-recorded competition rule: No internet lookups or notes databases.",
+      "Source-recorded competition rule: Do not use reference materials or electronic devices at any point during play, and keep none on your table, in your lap, in view, or on your person.",
+      "Source-recorded competition rule: Notes you write during the game may be used and shared with teammates on bonuses under NAQT rules, but prepared notes and study aids brought from outside are never allowed; ACF play permits only writing implements and completely blank paper.",
+      "No internet lookups or notes databases.",
+      "Do not use reference materials or electronic devices at any point during play, and keep none on your table, in your lap, in view, or on your person.",
+      "Notes you write during the game may be used and shared with teammates on bonuses under NAQT rules, but prepared notes and study aids brought from outside are never allowed; ACF play permits only writing implements and completely blank paper.",
+      "Do not claim tools, internet, or materials that the rule card forbids."
+    ],
+    "collaboration_protocol": [
+      "Source-recorded collaboration rule: Quiz bowl teams confer on bonuses; tossups are normally individual after a buzz.",
+      "Source-recorded competition rule: Underlying quiz bowl norms; NAQT/ACF-style: 4 active players, tossup interruptible reading, bonuses to scoring team.",
+      "Source-recorded competition rule: At most four players from a team are active at any one time, and only an active player may buzz or answer.",
+      "Source-recorded competition rule: Do not confer in any way while a tossup is live; verbal, written, or signed communication conveying anything about the answer is treated as an incorrect answer for your team.",
+      "Source-recorded competition rule: Confer freely with your active teammates on a bonus, where your team's answer is the first one clearly directed at the moderator.",
+      "Source-recorded competition rule: A tossup answered correctly is worth 10 points and earns your team a three-part bonus totaling 30 points; NAQT additionally awards 15 for a correct answer before the power mark.",
+      "Source-recorded competition rule: Interrupting a tossup before it is fully read and answering incorrectly costs your team 5 points; there is no penalty for a wrong answer after the question has been read in full.",
+      "Source-recorded competition rule: Bonus parts do not bounce back to the other team, and each part must be answered within 5 seconds of being read unless the question specifies otherwise.",
+      "Underlying quiz bowl norms; NAQT/ACF-style: 4 active players, tossup interruptible reading, bonuses to scoring team.",
+      "At most four players from a team are active at any one time, and only an active player may buzz or answer.",
+      "Do not confer in any way while a tossup is live; verbal, written, or signed communication conveying anything about the answer is treated as an incorrect answer for your team.",
+      "Confer freely with your active teammates on a bonus, where your team's answer is the first one clearly directed at the moderator.",
+      "A tossup answered correctly is worth 10 points and earns your team a three-part bonus totaling 30 points; NAQT additionally awards 15 for a correct answer before the power mark.",
+      "Interrupting a tossup before it is fully read and answering incorrectly costs your team 5 points; there is no penalty for a wrong answer after the question has been read in full.",
+      "Bonus parts do not bounce back to the other team, and each part must be answered within 5 seconds of being read unless the question specifies otherwise.",
+      "You must behave like a human teammate under official contest rules."
+    ],
+    "integrity_and_compliance": [
+      "Benchmark safety rule: do not use hidden solutions, evaluator internals, unauthorized outside assistance, or resources forbidden by this competition.",
+      "Source-recorded competition rule: Notes you write during the game may be used and shared with teammates on bonuses under NAQT rules, but prepared notes and study aids brought from outside are never allowed; ACF play permits only writing implements and completely blank paper.",
+      "Notes you write during the game may be used and shared with teammates on bonuses under NAQT rules, but prepared notes and study aids brought from outside are never allowed; ACF play permits only writing implements and completely blank paper."
+    ],
+    "deliverable_format": [
+      "Runner answer contract: A short quiz-bowl style answer line. Prefer the canonical name; avoid sentences unless needed for disambiguation.",
+      "Official deliverable: spoken answer.",
+      "Source-recorded competition rule: Give a short canonical quiz-bowl answer, not an essay.",
+      "Source-recorded competition rule: At most four players from a team are active at any one time, and only an active player may buzz or answer.",
+      "Source-recorded competition rule: Do not confer in any way while a tossup is live; verbal, written, or signed communication conveying anything about the answer is treated as an incorrect answer for your team.",
+      "Source-recorded competition rule: Confer freely with your active teammates on a bonus, where your team's answer is the first one clearly directed at the moderator.",
+      "Source-recorded competition rule: Notes you write during the game may be used and shared with teammates on bonuses under NAQT rules, but prepared notes and study aids brought from outside are never allowed; ACF play permits only writing implements and completely blank paper.",
+      "Source-recorded competition rule: Buzz first to earn the right to answer, then give your answer within 3 seconds of being recognized.",
+      "Source-recorded competition rule: A tossup answered correctly is worth 10 points and earns your team a three-part bonus totaling 30 points; NAQT additionally awards 15 for a correct answer before the power mark.",
+      "Source-recorded competition rule: Interrupting a tossup before it is fully read and answering incorrectly costs your team 5 points; there is no penalty for a wrong answer after the question has been read in full.",
+      "Give a short canonical quiz-bowl answer, not an essay.",
+      "At most four players from a team are active at any one time, and only an active player may buzz or answer.",
+      "Do not confer in any way while a tossup is live; verbal, written, or signed communication conveying anything about the answer is treated as an incorrect answer for your team.",
+      "Confer freely with your active teammates on a bonus, where your team's answer is the first one clearly directed at the moderator.",
+      "Notes you write during the game may be used and shared with teammates on bonuses under NAQT rules, but prepared notes and study aids brought from outside are never allowed; ACF play permits only writing implements and completely blank paper.",
+      "Buzz first to earn the right to answer, then give your answer within 3 seconds of being recognized.",
+      "A tossup answered correctly is worth 10 points and earns your team a three-part bonus totaling 30 points; NAQT additionally awards 15 for a correct answer before the power mark.",
+      "Interrupting a tossup before it is fully read and answering incorrectly costs your team 5 points; there is no penalty for a wrong answer after the question has been read in full.",
+      "Do not look up answer keys or hidden solutions."
+    ],
+    "evaluation_criteria": [
+      "Repository evaluation status: Task performance is specified per question in gold mode, but the repository evaluator is unassigned; do not invent a completed score.",
+      "Source-recorded competition rule: Do not use reference materials or electronic devices at any point during play, and keep none on your table, in your lap, in view, or on your person.",
+      "Source-recorded competition rule: A tossup answered correctly is worth 10 points and earns your team a three-part bonus totaling 30 points; NAQT additionally awards 15 for a correct answer before the power mark.",
+      "Source-recorded competition rule: Interrupting a tossup before it is fully read and answering incorrectly costs your team 5 points; there is no penalty for a wrong answer after the question has been read in full.",
+      "Do not use reference materials or electronic devices at any point during play, and keep none on your table, in your lap, in view, or on your person.",
+      "A tossup answered correctly is worth 10 points and earns your team a three-part bonus totaling 30 points; NAQT additionally awards 15 for a correct answer before the power mark.",
+      "Interrupting a tossup before it is fully read and answering incorrectly costs your team 5 points; there is no penalty for a wrong answer after the question has been read in full."
+    ],
+    "runtime_limitations": [
+      "Runtime limitation: Pyramidal tossups are a real-time buzz race against an opposing team; without a live opponent and a buzzer clock, the core scoring mechanic (early buzz versus neg risk) does not exist.",
+      "Runtime limitation: Power marks, 3-second answer windows, and 5-second bonus windows are wall-clock mechanisms with no turn-based equivalent.",
+      "Runtime limitation: Moderator prompting and answer-acceptability judgments are human calls that a string matcher approximates poorly."
+    ]
+  },
+  "information_policy": {
+    "mode": "shared",
+    "shared": [
+      "problem",
+      "contest_rules",
+      "team_discussion",
+      "scratchpad"
+    ],
+    "coordination_requirement": "All teammates may consult the complete public contest rules. Private reasoning becomes shared state only when communicated; assigned rule expertise creates tracking responsibility, not exclusive access."
+  },
+  "deliberation": {
+    "mode": "unstructured",
+    "min_challenges": 0,
+    "evaluation_dimensions": [
+      "evidence_responsiveness",
+      "decision_traceability"
+    ]
+  },
+  "communication": {
+    "mode": "unlimited"
+  },
+  "simulation": {
+    "max_turns": 24,
+    "scheduler": "round_table_proxy"
+  }
+}
