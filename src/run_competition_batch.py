@@ -19,6 +19,7 @@ import argparse
 import json
 import os
 import sys
+import tempfile
 import traceback
 from datetime import datetime, timezone
 from pathlib import Path
@@ -37,7 +38,34 @@ from run_smoke_batch import SMOKE_CASES
 DEFAULT_MODEL = "openai/gpt-5.4-mini"
 
 
+def _write_json_atomic(path: Path, payload: dict) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temp_path: Path | None = None
+    try:
+        with tempfile.NamedTemporaryFile(
+            mode="w",
+            encoding="utf-8",
+            dir=path.parent,
+            prefix=f".{path.name}.",
+            suffix=".tmp",
+            delete=False,
+        ) as handle:
+            json.dump(payload, handle, ensure_ascii=False, indent=2)
+            handle.flush()
+            os.fsync(handle.fileno())
+            temp_path = Path(handle.name)
+        os.replace(temp_path, path)
+        temp_path = None
+    finally:
+        if temp_path is not None:
+            temp_path.unlink(missing_ok=True)
+
+
 def _agent_names(env: OlympiadEnvironment, schema: str) -> list[str]:
+    if schema in {"single_agent", "self_consistency", "memory_solo", "liveoi_best_of_8"}:
+        return ["Solo"]
+    if schema == "subagent":
+        return ["Orchestrator", *[f"Worker_{i}" for i in range(1, env.team_size + 1)]]
     if schema == "centralized":
         workers = [f"Agent_{i}" for i in range(2, env.team_size + 1)]
         return ["Group_Leader", *workers]
@@ -107,6 +135,20 @@ def run_one(
             task_results=task_results,
         ).to_dict()
 
+    transcript_path = (
+        out_dir
+        / "transcripts"
+        / f"{competition}__{problem_id}__{schema}.json"
+    )
+    transcript = env.to_transcript()
+    transcript["run"] = {
+        "schema": schema,
+        "task_type": env.problem_data.get("task_type"),
+        "grade": grade,
+        "coordination": coordination,
+    }
+    _write_json_atomic(transcript_path, transcript)
+
     return {
         "competition": competition,
         "problem_id": problem_id,
@@ -132,8 +174,8 @@ def run_one(
         "communication_score": (coordination or {}).get("communication_score"),
         "planning_score": (coordination or {}).get("planning_score"),
         "coordination": coordination,
-        "final_answer": result.get("final_answer") or "",
-        "final_answer_preview": (result.get("final_answer") or "")[:2000],
+        "transcript_path": str(transcript_path),
+        "final_answer_preview": (result.get("final_answer") or "")[-2000:],
         "chat_history": list(env.chat_history)[-80:],
         "action_log_tail": list(env.action_log)[-40:],
         "status": "ok",

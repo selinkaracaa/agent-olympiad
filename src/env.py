@@ -64,10 +64,16 @@ COMPETITION_TOOL_REGISTRY = {
     "wsc_writing": [],
 }
 
+COMPETITION_ACTION_REGISTRY = {
+    "icpc": ["submit_code"],
+    "iiot": ["submit_code"],
+}
+
 ALL_ACTIONS = {
     "speak",
     "write_scratchpad",
     "submit_final",
+    "submit_code",
     "sleep",
     "use_calculator",
     "execute_code",
@@ -76,7 +82,13 @@ ALL_ACTIONS = {
     "read_star_chart",
 }
 
-TOOL_ACTIONS = ALL_ACTIONS - {"speak", "write_scratchpad", "submit_final", "sleep"}
+TOOL_ACTIONS = ALL_ACTIONS - {
+    "speak",
+    "write_scratchpad",
+    "submit_final",
+    "submit_code",
+    "sleep",
+}
 
 _SAFE_BINOPS = {
     ast.Add: operator.add,
@@ -135,6 +147,8 @@ class OlympiadEnvironment:
 
         self.chat_history: list[dict[str, str]] = []
         self.action_log: list[dict[str, Any]] = []
+        self.agent_observations: dict[str, list[dict[str, Any]]] = {}
+        self.budget_snapshots: list[dict[str, Any]] = []
         self.workspace = {"scratchpad": "", "final_answer": ""}
         self.current_turn = 0  # collaboration turns completed
         self.action_count = 0  # env actions executed (speak/tools/etc.)
@@ -143,6 +157,7 @@ class OlympiadEnvironment:
         self.submitted = False
         self.submitted_by: Optional[str] = None
         self.wrong_submissions = 0
+        self.submission_attempts = 0
         self.rule_violations: list[str] = []
         self.contest_rules = get_contest_rules(competition_id)
 
@@ -155,6 +170,7 @@ class OlympiadEnvironment:
 
         problem_team_size = self.problem_data.get("team_size")
         self.team_size = self._resolve_team_size(problem_team_size, competition_id)
+        self.record_budget_snapshot("initialized")
 
     @staticmethod
     def _resolve_team_size(raw: Any, competition_id: str) -> int:
@@ -270,6 +286,61 @@ class OlympiadEnvironment:
             ),
         }
 
+    def record_budget_snapshot(self, event: str) -> None:
+        self.budget_snapshots.append(
+            {
+                "event": event,
+                "turn": self.current_turn,
+                "api_calls": self.api_calls,
+                "tokens_used": self.tokens_used,
+                "simulated_minutes": self.simulated_minutes,
+                "wrong_submissions": self.wrong_submissions,
+            }
+        )
+
+    def consume_agent_observations(self, agent_name: str) -> list[dict[str, Any]]:
+        return self.agent_observations.pop(agent_name, [])
+
+    def to_transcript(self) -> dict[str, Any]:
+        agents = sorted(
+            {
+                str(item.get("sender") or item.get("agent"))
+                for item in [*self.chat_history, *self.action_log]
+                if item.get("sender") or item.get("agent")
+            }
+        )
+        return {
+            "schema_version": "agent-olympiad.transcript/v1",
+            "metadata": {
+                **self.get_metadata(),
+                "agents": agents,
+            },
+            "chat_history": list(self.chat_history),
+            "action_log": list(self.action_log),
+            "budget_snapshots": list(self.budget_snapshots),
+            "budget": {
+                "used": {
+                    "turns": self.current_turn,
+                    "api_calls": self.api_calls,
+                    "tokens": self.tokens_used,
+                },
+                "limits": {
+                    "turns": self.max_turns,
+                    "api_calls": self.max_api_calls,
+                    "tokens": self.max_total_tokens,
+                },
+            },
+            "submission": {
+                "submitted": self.submitted,
+                "submitted_by": self.submitted_by,
+                "final_answer": self.workspace.get("final_answer", ""),
+                "attempts": self.submission_attempts,
+                "wrong_submissions": self.wrong_submissions,
+            },
+            "workspace": dict(self.workspace),
+            "rule_violations": list(self.rule_violations),
+        }
+
     def turns_exhausted(self) -> bool:
         """True when no further collaboration turns may be started."""
         return self.current_turn >= self.max_turns
@@ -312,6 +383,7 @@ class OlympiadEnvironment:
         # Advance by turn schedule, but never rewind time already burned by WA.
         turn_clock = self.budget.simulated_minutes_for_turns(self.current_turn)
         self.simulated_minutes = max(self.simulated_minutes, turn_clock)
+        self.record_budget_snapshot("turn_started")
         return self.current_turn
 
     def record_api_call(self) -> None:
@@ -321,17 +393,31 @@ class OlympiadEnvironment:
                 f"API call budget reached ({self.max_api_calls}) for {self.problem_id}"
             )
         self.api_calls += 1
+        self.record_budget_snapshot("api_call")
 
     def _log_action(self, agent_name: str, action_type: str, payload: str, result: str) -> None:
-        self.action_log.append(
-            {
-                "turn": self.current_turn,
-                "agent": agent_name,
-                "action": action_type,
-                "payload": payload,
-                "result": result,
-            }
+        visibility = (
+            "private" if action_type in TOOL_ACTIONS or action_type == "submit_code" else "team"
         )
+        entry = {
+            "turn": self.current_turn,
+            "agent": agent_name,
+            "sender": agent_name,
+            "action": action_type,
+            "payload": payload,
+            "result": result,
+            "visibility": visibility,
+        }
+        self.action_log.append(entry)
+        if visibility == "private":
+            self.agent_observations.setdefault(agent_name, []).append(
+                {
+                    "turn": self.current_turn,
+                    "action": action_type,
+                    "result": result,
+                    "visibility": visibility,
+                }
+            )
 
     def validate_action(self, action_type: str) -> Optional[str]:
         if action_type not in ALL_ACTIONS:
@@ -341,6 +427,10 @@ class OlympiadEnvironment:
                 f"RULE VIOLATION: Tool '{action_type}' is banned in {self.competition_id}. "
                 f"Allowed tools: {self.allowed_tools or 'none (paper and pencil only)'}"
             )
+        if action_type == "submit_code" and action_type not in COMPETITION_ACTION_REGISTRY.get(
+            self.competition_id, []
+        ):
+            return f"RULE VIOLATION: submit_code is unavailable in {self.competition_id}."
         if action_type == "submit_final" and self.submitted:
             return "Submission already finalized; further submit_final actions are ignored."
         return None
@@ -371,6 +461,8 @@ class OlympiadEnvironment:
                 self.submitted = True
                 self.submitted_by = agent_name
                 result = f"Submission finalized by {agent_name}."
+        elif action_type == "submit_code":
+            result = self._submit_code(payload)
         elif action_type == "use_calculator":
             result = self._run_calculator(payload)
         elif action_type == "execute_code":
@@ -457,6 +549,38 @@ class OlympiadEnvironment:
             return str(fixtures[role_substring])[:8000]
         return None
 
+    def _submit_code(self, payload: str) -> str:
+        """Judge a non-final programming attempt on public sample tests."""
+        from evaluation.programming_judge import judge_programming_submission
+
+        self.submission_attempts += 1
+        judged = judge_programming_submission(
+            self.problem_data,
+            payload,
+            competition_id=self.competition_id,
+            repo_root=Path(REPO_ROOT),
+            fetch_kattis=False,
+            test_scope="sample",
+        )
+        if judged.wrong_submission:
+            self.record_wrong_submission()
+        feedback = judged.to_dict()
+        feedback.update(
+            {
+                "action": "submit_code",
+                "attempt": self.submission_attempts,
+                "finalized": False,
+                "penalty_minutes": self.penalty_minutes(),
+                "simulated_minutes": self.simulated_minutes,
+                "continue_allowed": self.can_begin_turn(),
+            }
+        )
+        if judged.verdict == "AC":
+            feedback["note"] = (
+                "Sample AC only; final hidden tests may still reject this solution."
+            )
+        return json.dumps(feedback, sort_keys=True)
+
     def record_wrong_submission(self) -> None:
         """WA/TLE/RE: burn contest clock (remove remaining time), don't stack a bonus.
 
@@ -467,6 +591,7 @@ class OlympiadEnvironment:
         self.wrong_submissions += 1
         rules = self.contest_rules
         if not rules or rules.wrong_submission_penalty_minutes is None:
+            self.record_budget_snapshot("wrong_submission")
             return
         burn = float(rules.wrong_submission_penalty_minutes)
         self.simulated_minutes += burn
@@ -478,6 +603,7 @@ class OlympiadEnvironment:
         if step > 0:
             turns_burned = max(1, int(math.ceil(burn / step)))
             self.current_turn = min(self.max_turns, self.current_turn + turns_burned)
+        self.record_budget_snapshot("wrong_submission")
 
     def penalty_minutes(self) -> int | None:
         """Minutes of contest clock burned by wrong submissions so far."""
@@ -644,6 +770,8 @@ class OlympiadEnvironment:
     def reset(self) -> None:
         self.chat_history.clear()
         self.action_log.clear()
+        self.agent_observations.clear()
+        self.budget_snapshots.clear()
         self.workspace = {"scratchpad": "", "final_answer": ""}
         self.current_turn = 0
         self.simulated_minutes = 0.0
@@ -653,4 +781,6 @@ class OlympiadEnvironment:
         self.submitted = False
         self.submitted_by = None
         self.wrong_submissions = 0
+        self.submission_attempts = 0
         self.rule_violations.clear()
+        self.record_budget_snapshot("reset")

@@ -1,12 +1,27 @@
+import re
+from collections import Counter
 from dataclasses import dataclass, field
-from typing import Callable, Literal
+from typing import Any, Callable, Literal
 
 from actions import apply_agent_response, build_action_instructions, extract_final_answer_from_text, parse_agent_response
 from contest_budget import resolve_contest_budget
 from env import TurnLimitExceededError
+from memory import MemoryStore
 
-SchemaName = Literal["round_table", "centralized", "decentralized", "single_agent"]
+SchemaName = Literal[
+    "round_table",
+    "centralized",
+    "decentralized",
+    "single_agent",
+    "open_table_coach",
+    "debate",
+    "self_consistency",
+    "memory_solo",
+    "subagent",
+    "liveoi_best_of_8",
+]
 QueryFn = Callable[[str, str], str]
+JudgeFn = Callable[[str], float]
 
 
 @dataclass
@@ -30,6 +45,11 @@ class CollabConfig:
     progress: Callable[[str], None] | None = None
     # Equal-resource solo baseline: calls allowed per turn (= team size by default).
     solo_calls_per_turn: int | None = None
+    sample_count: int = 5
+    memory_bound: int = 8
+    debate_rounds: int = 2
+    self_consistency_tie_behavior: Literal["first", "lexicographic"] = "first"
+    deterministic_judge: JudgeFn | None = None
 
     def resolved_max_turns(self, competition_id: str) -> int:
         if self.rounds is not None:
@@ -54,11 +74,20 @@ def _apply_budget_config(env, config: CollabConfig) -> None:
     env.max_api_calls = budget.max_api_calls
     env.max_output_tokens_per_call = budget.max_output_tokens_per_call
     env.max_total_tokens = budget.max_total_tokens
+    env.record_budget_snapshot("budget_configured")
 
 
 def _system_prompt(env, role: str) -> str:
     meta = env.get_metadata()
-    tools = build_action_instructions(env.get_available_tools())
+    task_type = str(env.problem_data.get("task_type") or "")
+    programming_contest = task_type in {"algorithmic_programming", "programming"} or (
+        (env.problem_data.get("evaluation") or {}).get("evaluator_id")
+        == "programming_judge"
+    )
+    tools = build_action_instructions(
+        env.get_available_tools(),
+        programming_contest=programming_contest,
+    )
     return (
         f"You are {role} on a {meta['competition_id']} team of {meta['team_size']} agents.\n"
         f"Problem: {meta.get('title') or meta['problem_id']} ({meta.get('year', 'n/a')})\n"
@@ -79,7 +108,21 @@ def _discussion_history(env) -> str:
 def _agent_user_prompt(env, agent_name: str, schema_note: str, extra: str = "") -> str:
     state = env.get_state()
     scratchpad = state["shared_workspace"].get("scratchpad") or "(empty)"
-    return f"""=== SCHEMA ===
+    observations = env.consume_agent_observations(agent_name)
+    private_result = ""
+    if observations:
+        heading = (
+            "=== YOUR LAST TOOL RESULT ==="
+            if len(observations) == 1
+            else "=== YOUR LAST TOOL RESULTS ==="
+        )
+        rendered = "\n\n".join(
+            f"Turn {item['turn']} | action={item['action']} | "
+            f"visibility={item['visibility']}\n{item['result']}"
+            for item in observations
+        )
+        private_result = f"{heading}\n{rendered}\n\n"
+    return f"""{private_result}=== SCHEMA ===
 {schema_note}
 
 === PROBLEM ===
@@ -474,7 +517,336 @@ def run_single_agent(env, query_llm_fn: QueryFn, config: CollabConfig | None = N
     return result
 
 
+def _isolated_prompt(
+    env,
+    agent_name: str,
+    instruction: str,
+    extra: str = "",
+) -> tuple[str, str]:
+    """Build a prompt without team history, scratchpad, or other candidates."""
+    system = _system_prompt(env, agent_name)
+    user = (
+        f"=== PROBLEM ===\n{env._problem_statement()}\n\n"
+        f"=== ASSIGNMENT ===\n{instruction}"
+    )
+    if extra:
+        user += f"\n\n{extra}"
+    return system, user
+
+
+def _numbered_answers(text: str) -> dict[int, str]:
+    matches = list(re.finditer(r"(?m)^\s*(\d+)\s*[\.\)]\s*(.+?)\s*$", text))
+    return {int(match.group(1)): match.group(2).strip() for match in matches}
+
+
+def aggregate_numbered_answers(
+    candidates: list[str],
+    *,
+    tie_behavior: Literal["first", "lexicographic"] = "first",
+) -> str:
+    parsed = [_numbered_answers(candidate) for candidate in candidates]
+    part_numbers = sorted({number for answer in parsed for number in answer})
+    rows: list[str] = []
+    for number in part_numbers:
+        values = [answer[number] for answer in parsed if number in answer]
+        counts = Counter(values)
+        best_count = max(counts.values())
+        tied = [value for value, count in counts.items() if count == best_count]
+        selected = min(tied) if tie_behavior == "lexicographic" else next(
+            value for value in values if value in tied
+        )
+        rows.append(f"{number}. {selected}")
+    if rows:
+        return "\n".join(rows)
+    if not candidates:
+        return ""
+    counts = Counter(candidate.strip() for candidate in candidates)
+    best_count = max(counts.values())
+    tied = [value for value, count in counts.items() if count == best_count]
+    return min(tied) if tie_behavior == "lexicographic" else next(
+        candidate.strip() for candidate in candidates if candidate.strip() in tied
+    )
+
+
+def run_self_consistency(
+    env, query_llm_fn: QueryFn, config: CollabConfig | None = None
+) -> dict:
+    """Generate isolated candidates and aggregate numbered answers deterministically."""
+    config = config or CollabConfig()
+    if config.sample_count < 1:
+        raise ValueError("sample_count must be positive")
+    _apply_budget_config(env, config)
+    query = _budgeted_query(env, query_llm_fn, config)
+    env.begin_turn()
+    candidates: list[str] = []
+    for index in range(config.sample_count):
+        if _should_stop(env):
+            break
+        system, user = _isolated_prompt(
+            env,
+            "Solo",
+            "Independently solve the complete task. Return a numbered answer sheet.",
+            f"Independent sample {index + 1}/{config.sample_count}.",
+        )
+        candidates.append(query(system, user))
+    final = aggregate_numbered_answers(
+        candidates,
+        tie_behavior=config.self_consistency_tie_behavior,
+    )
+    if final:
+        env.execute_action("Solo", "submit_final", final)
+    result = _result(env, "self_consistency")
+    result.update({"candidates": candidates, "aggregation": "per_part_majority"})
+    return result
+
+
+def run_memory_solo(
+    env, query_llm_fn: QueryFn, config: CollabConfig | None = None
+) -> dict:
+    """Solo baseline with bounded private memory and no shared team state."""
+    config = config or CollabConfig()
+    if config.memory_bound < 1:
+        raise ValueError("memory_bound must be positive")
+    _apply_budget_config(env, config)
+    query = _budgeted_query(env, query_llm_fn, config)
+    memory = MemoryStore(["Solo"])
+    candidates: list[str] = []
+    while not _should_stop(env) and env.can_begin_turn():
+        turn = env.begin_turn()
+        recalled = memory.recall("Solo", scope="private", top_k=config.memory_bound)
+        system, user = _isolated_prompt(
+            env,
+            "Solo",
+            "Solve alone and refine a complete answer using only your bounded notes.",
+            f"Turn {turn}. YOUR PERSISTENT NOTES:\n{memory.render(recalled)}",
+        )
+        try:
+            response = query(system, user)
+        except TurnLimitExceededError:
+            break
+        candidates.append(response)
+        memory.add("Solo", response, turn=turn)
+    final = candidates[-1].strip() if candidates else ""
+    if final:
+        env.execute_action("Solo", "submit_final", final)
+    snapshot = memory.snapshot()
+    snapshot["private"]["Solo"] = snapshot["private"]["Solo"][-config.memory_bound :]
+    result = _result(env, "memory_solo")
+    result.update(
+        {
+            "memory": snapshot,
+            "memory_bound": config.memory_bound,
+            "candidates": candidates,
+        }
+    )
+    return result
+
+
+def run_subagent(
+    env, query_llm_fn: QueryFn, config: CollabConfig | None = None
+) -> dict:
+    """Fixed orchestrator with stateless, mutually invisible workers."""
+    config = config or CollabConfig()
+    _apply_budget_config(env, config)
+    query = _budgeted_query(env, query_llm_fn, config)
+    env.begin_turn()
+    orchestrator = "Orchestrator"
+    system, user = _isolated_prompt(
+        env,
+        orchestrator,
+        f"Decompose the task into exactly {env.team_size} independent assignments.",
+    )
+    plan = query(system, user)
+    assignments = _numbered_answers(plan)
+    worker_outputs: list[dict[str, str]] = []
+    for index in range(1, env.team_size + 1):
+        if _should_stop(env):
+            break
+        worker = f"Worker_{index}"
+        assignment = assignments.get(index, f"Solve slice {index} of {env.team_size}.")
+        system, user = _isolated_prompt(
+            env,
+            worker,
+            "Solve only the assigned slice. You cannot see or contact other workers.",
+            f"ORCHESTRATOR ASSIGNMENT:\n{assignment}",
+        )
+        try:
+            output = query(system, user)
+        except TurnLimitExceededError:
+            break
+        worker_outputs.append(
+            {"worker": worker, "assignment": assignment, "output": output}
+        )
+    final = ""
+    if not _should_stop(env):
+        context = "\n\n".join(
+            f"{item['worker']} ({item['assignment']}):\n{item['output']}"
+            for item in worker_outputs
+        )
+        system, user = _isolated_prompt(
+            env,
+            orchestrator,
+            "Aggregate the worker returns into the complete final answer only.",
+            f"DECOMPOSITION:\n{plan}\n\nWORKER RETURNS:\n{context}",
+        )
+        final = query(system, user)
+        env.execute_action(orchestrator, "submit_final", final)
+    result = _result(env, "subagent")
+    result.update(
+        {
+            "decomposition": plan,
+            "worker_outputs": worker_outputs,
+            "worker_isolation": True,
+        }
+    )
+    return result
+
+
+def run_debate(
+    env, query_llm_fn: QueryFn, config: CollabConfig | None = None
+) -> dict:
+    """Independent proposals followed by challenge, revision, and decision."""
+    config = config or CollabConfig()
+    if config.debate_rounds < 1:
+        raise ValueError("debate_rounds must be positive")
+    _apply_budget_config(env, config)
+    query = _budgeted_query(env, query_llm_fn, config)
+    agents = [f"Agent_{index + 1}" for index in range(env.team_size)]
+    events: list[dict[str, Any]] = []
+    proposals: dict[str, str] = {}
+    env.begin_turn()
+    for index, agent in enumerate(agents, start=1):
+        system, user = _isolated_prompt(
+            env,
+            agent,
+            "Produce an independent substantive solution proposal.",
+        )
+        proposals[f"P{index}"] = query(system, user)
+        events.append({"phase": "propose", "agent": agent, "proposal_id": f"P{index}"})
+    for round_index in range(config.debate_rounds):
+        if _should_stop(env):
+            break
+        if env.can_begin_turn():
+            env.begin_turn()
+        for index, agent in enumerate(agents):
+            target = f"P{(index + round_index + 1) % len(agents) + 1}"
+            system, user = _isolated_prompt(
+                env,
+                agent,
+                f"Challenge {target} with concise evidence.",
+                f"PROPOSAL:\n{proposals[target]}",
+            )
+            query(system, user)
+            events.append({"phase": "challenge", "agent": agent, "proposal_id": target})
+        for index, agent in enumerate(agents, start=1):
+            proposal_id = f"P{index}"
+            system, user = _isolated_prompt(
+                env,
+                agent,
+                f"Revise your proposal {proposal_id} after the challenge round.",
+                f"ORIGINAL:\n{proposals[proposal_id]}",
+            )
+            proposals[proposal_id] = query(system, user)
+            events.append(
+                {"phase": "revise", "agent": agent, "proposal_id": proposal_id}
+            )
+    for proposal_id in proposals:
+        events.append(
+            {"phase": "decide", "agent": agents[0], "proposal_id": proposal_id}
+        )
+    if not _should_stop(env):
+        rendered = "\n\n".join(
+            f"{proposal_id}: {proposal}" for proposal_id, proposal in proposals.items()
+        )
+        system, user = _isolated_prompt(
+            env,
+            agents[0],
+            "Synthesize the decided proposals into the final answer only.",
+            rendered,
+        )
+        env.execute_action(agents[0], "submit_final", query(system, user))
+    counts = Counter(event["phase"] for event in events)
+    result = _result(env, "debate")
+    result.update(
+        {
+            "debate": {"counts": dict(counts), "proposals": proposals},
+            "structured_events": events,
+            "synthesizer": agents[0],
+        }
+    )
+    return result
+
+
+def run_liveoi_best_of_8(
+    env, query_llm_fn: QueryFn, config: CollabConfig | None = None
+) -> dict:
+    """Generate eight isolated candidates and select only with an explicit judge."""
+    config = config or CollabConfig()
+    _apply_budget_config(env, config)
+    query = _budgeted_query(env, query_llm_fn, config)
+    env.begin_turn()
+    candidates: list[str] = []
+    for index in range(8):
+        if _should_stop(env):
+            break
+        system, user = _isolated_prompt(
+            env,
+            "Solo",
+            "Independently produce one complete final answer or source file.",
+            f"Candidate {index + 1}/8.",
+        )
+        candidates.append(query(system, user))
+    scores: list[float] | None = None
+    selected_index: int | None = None
+    if config.deterministic_judge is not None and candidates:
+        scores = [float(config.deterministic_judge(item)) for item in candidates]
+        selected_index = max(
+            range(len(candidates)),
+            key=lambda index: (scores[index], -index),
+        )
+        env.execute_action("Solo", "submit_final", candidates[selected_index])
+    result = _result(env, "liveoi_best_of_8")
+    result.update(
+        {
+            "candidates": candidates,
+            "selection_available": selected_index is not None,
+            "selected_index": selected_index,
+            "judge_scores": scores,
+        }
+    )
+    return result
+
+
+def run_open_table_coach(
+    env, query_llm_fn: QueryFn, config: CollabConfig | None = None
+) -> dict:
+    """Round table with one non-submitting coach message before competition turns."""
+    config = config or CollabConfig()
+    _apply_budget_config(env, config)
+    if not env.api_budget_exhausted():
+        env.record_api_call()
+        advice = env.apply_output_token_budget(
+            query_llm_fn(
+                "You are a non-competing coach. Give concise strategic advice only.",
+                f"Problem:\n{env._problem_statement()}",
+            )
+        )
+        env.execute_action("Coach", "speak", advice)
+    result = run_round_table(env, query_llm_fn, config)
+    result["schema"] = "open_table_coach"
+    result["coach_advice"] = advice if "advice" in locals() else ""
+    return result
+
+
 def _result(env, schema: str) -> dict:
+    roster = [
+        {
+            "name": f"Agent_{index + 1}",
+            "title": "captain and synthesizer" if index == 0 else "team specialist",
+            "may_submit": index == 0,
+        }
+        for index in range(env.team_size)
+    ]
     return {
         "schema": schema,
         "problem_id": env.problem_id,
@@ -492,6 +864,7 @@ def _result(env, schema: str) -> dict:
         "chat_messages": len(env.chat_history),
         "final_answer": env.workspace.get("final_answer", ""),
         "grade": env.grade_submission(),
+        "roster": roster,
     }
 
 
@@ -500,6 +873,12 @@ SCHEMAS: dict[SchemaName, Callable] = {
     "centralized": run_centralized,
     "decentralized": run_decentralized,
     "single_agent": run_single_agent,
+    "open_table_coach": run_open_table_coach,
+    "debate": run_debate,
+    "self_consistency": run_self_consistency,
+    "memory_solo": run_memory_solo,
+    "subagent": run_subagent,
+    "liveoi_best_of_8": run_liveoi_best_of_8,
 }
 
 

@@ -12,6 +12,7 @@ Available action types:
 - speak           — broadcast a message to the team
 - write_scratchpad — update the shared working notes
 - sleep           — pass this turn (optional reason in PAYLOAD)
+{programming_lines}
 - submit_final    — submit the team's final answer (only when ready)
 {tool_lines}
 
@@ -33,12 +34,24 @@ ACTION_LINE_RE = re.compile(
 )
 
 
-def build_action_instructions(allowed_tools: list[str]) -> str:
+def build_action_instructions(
+    allowed_tools: list[str],
+    *,
+    programming_contest: bool = False,
+) -> str:
     if allowed_tools:
         tool_lines = "\n".join(f"- {tool}" for tool in allowed_tools)
     else:
         tool_lines = "(no tools — paper and pencil only)"
-    return ACTION_INSTRUCTIONS.format(tool_lines=tool_lines)
+    programming_lines = (
+        "- submit_code     — privately judge code on SAMPLE tests; does not finalize"
+        if programming_contest
+        else ""
+    )
+    return ACTION_INSTRUCTIONS.format(
+        programming_lines=programming_lines,
+        tool_lines=tool_lines,
+    )
 
 
 def parse_agent_response(response: str) -> list[tuple[str, str]]:

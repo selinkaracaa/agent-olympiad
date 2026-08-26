@@ -27,6 +27,22 @@ def _truncate(text: str, limit: int = 12000) -> str:
 
 
 def format_agent_profiles(agents: list[str], schema: str) -> str:
+    if schema in {"single_agent", "self_consistency", "memory_solo", "liveoi_best_of_8"}:
+        return "- Solo: single logical solver; no team collaboration"
+    if schema == "subagent":
+        return "\n".join(
+            (
+                "- Orchestrator: decomposes and aggregates isolated worker returns"
+                if name == "Orchestrator"
+                else f"- {name}: stateless isolated worker; no worker-to-worker visibility"
+            )
+            for name in agents
+        )
+    if schema == "debate":
+        return "\n".join(
+            f"- {name}: independent proposer and structured debate participant"
+            for name in agents
+        )
     if schema == "centralized" and "Group_Leader" in agents:
         lines = []
         for name in agents:

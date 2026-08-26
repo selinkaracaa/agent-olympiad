@@ -31,6 +31,18 @@ Benchmark **multi-agent AI teams** on olympiad-style **team tasks**. Part of the
     └── results/
 ```
 
+## Programming leaderboards
+
+`src/leaderboard.py` provides deterministic ICPC standings and the
+LiveOIBench three-stage ranking pipeline: explicit oracle best-of-8 selection,
+contest-local score totals, then normalized global aggregation. Human
+baselines are read only from local JSON/CSV files; missing data is reported
+rather than downloaded.
+
+`src/liveoibench_adapter.py` exports code predictions, validates a locally
+mounted LiveOIBench problem tree, and imports local contestant data. It has no
+network behavior and never runs LiveOIBench host-judge or setup scripts.
+
 ## Refresh benchmarks from PDFs
 
 ```bash
