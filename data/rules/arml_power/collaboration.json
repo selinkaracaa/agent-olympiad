@@ -1,0 +1,329 @@
+{
+  "agent_constraints": [
+    "Do not claim a complete current Power Contest administrivia packet; the dedicated Rules page is Under Construction.",
+    "Do not invent a 60-minute clock, an official roster, or a computational-aid exception.",
+    "Collaborate only with teammates on one shared proof packet.",
+    "Begin with the same contestant permissions as every teammate; do not assume a permanent captain or scribe office.",
+    "Treat private reasoning as unknown to teammates until you communicate it.",
+    "Any contestant may file the packet, but the team files exactly one.",
+    "Write justifications the verbs require; do not submit bare answers as a complete Power packet.",
+    "Do not use a calculator, electronic device, internet, books, hidden solutions, or outside help."
+  ],
+  "agent_roles": [
+    {
+      "name": "Agent_1",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit a Power-contest contestant identity on the active team without inventing a complete administrivia packet.",
+        "Scout, prove, check, or synthesize packet parts as current team needs require.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": []
+    },
+    {
+      "name": "Agent_2",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit a Power-contest contestant identity on the active team without inventing a complete administrivia packet.",
+        "Scout, prove, check, or synthesize packet parts as current team needs require.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": []
+    },
+    {
+      "name": "Agent_3",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit a Power-contest contestant identity on the active team without inventing a complete administrivia packet.",
+        "Scout, prove, check, or synthesize packet parts as current team needs require.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": []
+    },
+    {
+      "name": "Agent_4",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit a Power-contest contestant identity on the active team without inventing a complete administrivia packet.",
+        "Scout, prove, check, or synthesize packet parts as current team needs require.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": []
+    },
+    {
+      "name": "Agent_5",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit a Power-contest contestant identity on the active team without inventing a complete administrivia packet.",
+        "Scout, prove, check, or synthesize packet parts as current team needs require.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": []
+    },
+    {
+      "name": "Agent_6",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit a Power-contest contestant identity on the active team without inventing a complete administrivia packet.",
+        "Scout, prove, check, or synthesize packet parts as current team needs require.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": []
+    },
+    {
+      "name": "Agent_7",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit a Power-contest contestant identity on the active team without inventing a complete administrivia packet.",
+        "Scout, prove, check, or synthesize packet parts as current team needs require.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": []
+    },
+    {
+      "name": "Agent_8",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit a Power-contest contestant identity on the active team without inventing a complete administrivia packet.",
+        "Scout, prove, check, or synthesize packet parts as current team needs require.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": []
+    },
+    {
+      "name": "Agent_9",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit a Power-contest contestant identity on the active team without inventing a complete administrivia packet.",
+        "Scout, prove, check, or synthesize packet parts as current team needs require.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": []
+    },
+    {
+      "name": "Agent_10",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit a Power-contest contestant identity on the active team without inventing a complete administrivia packet.",
+        "Scout, prove, check, or synthesize packet parts as current team needs require.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": []
+    },
+    {
+      "name": "Agent_11",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit a Power-contest contestant identity on the active team without inventing a complete administrivia packet.",
+        "Scout, prove, check, or synthesize packet parts as current team needs require.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": []
+    },
+    {
+      "name": "Agent_12",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit a Power-contest contestant identity on the active team without inventing a complete administrivia packet.",
+        "Scout, prove, check, or synthesize packet parts as current team needs require.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": []
+    },
+    {
+      "name": "Agent_13",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit a Power-contest contestant identity on the active team without inventing a complete administrivia packet.",
+        "Scout, prove, check, or synthesize packet parts as current team needs require.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": []
+    },
+    {
+      "name": "Agent_14",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit a Power-contest contestant identity on the active team without inventing a complete administrivia packet.",
+        "Scout, prove, check, or synthesize packet parts as current team needs require.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": []
+    },
+    {
+      "name": "Agent_15",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit a Power-contest contestant identity on the active team without inventing a complete administrivia packet.",
+        "Scout, prove, check, or synthesize packet parts as current team needs require.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": []
+    }
+  ],
+  "information_policy": {
+    "mode": "shared",
+    "shared": [
+      "problem",
+      "contest_rules",
+      "team_discussion",
+      "scratchpad"
+    ],
+    "coordination_requirement": "Contestants receive equal baseline information access, but private reasoning is not silently copied between them; they must communicate discoveries needed by teammates."
+  },
+  "rule_sections": {
+    "official_eligibility_and_logistics": [
+      "Official: the dedicated Power Contest Rules page is Under Construction.",
+      "Official: national-meet Power uses a 15-person team; that roster is not hereby declared the standalone Power Contest roster.",
+      "Simulation choice: the active 2–15 default-15 range models the unresolved standalone roster and must not be read as a published Power Contest rule."
+    ],
+    "competition_format": [
+      "Official: Power Contest is a separate mail/in-school proof series from the national-meet Power Round.",
+      "Official: this card does not encode a complete current Power Contest administrivia packet.",
+      "Official: published national ARML Power rules, when used as the only available Power constraints, make the packet worth 50 points with exactly one solution.",
+      "Simulation choice: agents write one shared proof packet under default-deny tools."
+    ],
+    "timeline": [
+      "Official: the standalone Power Contest pages do not establish a current sit clock.",
+      "Simulation choice: do not treat 60 minutes as official.",
+      "Simulation choice: max_turns is a safety budget, not an official countdown."
+    ],
+    "resource_policy": [
+      "Official: published national ARML rules ban calculators on every ARML part and ban electronic devices.",
+      "Official: no retrieved Power Contest page grants a computational-aid exception.",
+      "Simulation choice: tools are default-deny; paper and pencil only; the only exposed tool is consulting these contest rules."
+    ],
+    "collaboration_protocol": [
+      "Official: collaborate only within the team; do not take outside help.",
+      "Simulation choice: contestants start as equal peers on one shared packet."
+    ],
+    "integrity_and_compliance": [
+      "Official: no internet, books, or outside help are granted by the published pages.",
+      "Official: inventing an aid exception or a complete administrivia packet is a compliance failure.",
+      "Simulation choice: accessing hidden solutions or evaluator internals is a compliance violation."
+    ],
+    "deliverable_format": [
+      "Official: write proofs or justifications, not only final numbers.",
+      "Official: where national Power rules apply, file exactly one packet.",
+      "Simulation choice: the runner accepts one plain-text packet."
+    ],
+    "evaluation_criteria": [
+      "Official: national Power is worth 50 points with a lowest-score extra-packet rule; standalone Power Contest scoring is not established by the Under Construction rules page.",
+      "Simulation choice: this session uses a structured proof rubric as a proxy and must not claim official Power Contest marks."
+    ],
+    "runtime_limitations": [
+      "Simulation choice: roster, clock, aids, and submission window for the standalone Power Contest remain unresolved.",
+      "Simulation choice: handwriting and lowest-score multi-packet assessment are not fully enforced.",
+      "Simulation choice: limited message budgets and structured deliberation are research overlays."
+    ],
+    "typical_contest_workflow": [
+      "Simulation choice: map parts, write required justifications, and synthesize one packet."
+    ],
+    "conflict_resolution": [
+      "Simulation choice: proof disagreements are resolved by evidence, not silent overwrite."
+    ],
+    "handoff_protocol": [
+      "Simulation choice: a handoff should name the part, claim, proof status, and remaining gaps."
+    ],
+    "review_protocol": [
+      "Simulation choice: check verb-required justification before filing."
+    ],
+    "emergent_behavior": [
+      "Observe but do not require specialization or a fixed scribe.",
+      "Do not reward message volume or invented administrivia compliance theater."
+    ]
+  },
+  "deliberation": {
+    "mode": "structured",
+    "min_challenges": 1,
+    "decision_maker": "submitter",
+    "evaluation_dimensions": [
+      "evidence_responsiveness",
+      "revision_after_challenge",
+      "decision_traceability",
+      "authority_bias",
+      "majority_bias"
+    ]
+  },
+  "communication": {
+    "mode": "limited",
+    "team_message_budget": 30,
+    "per_agent_message_budget": 2,
+    "max_message_chars": 1200,
+    "counted_actions": [
+      "speak",
+      "write_scratchpad",
+      "propose",
+      "challenge",
+      "provide_evidence",
+      "revise",
+      "decide"
+    ]
+  },
+  "simulation": {
+    "max_turns": 35,
+    "scheduler": "src_collaboration_draft",
+    "turn_budget_basis": "official clock 12 turns vs floor 35 (15 teammates x 2 turns + 1 answer parts + 4 for synthesis)",
+    "eligibility_and_logistics_state": "specified_for_role_immersion_not_enforced"
+  }
+}

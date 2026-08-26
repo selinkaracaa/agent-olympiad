@@ -1,0 +1,133 @@
+{
+  "schema_version": "1.0",
+  "rule_id": "nyu_ctf_bench:draft_v1",
+  "competition_id": "nyu_ctf_bench",
+  "profile": "benchmark_native",
+  "protocol": "ctf_sandbox",
+  "team": {
+    "active_min": 4,
+    "active_default": 5,
+    "active_max": 6,
+    "collaboration": "Collaborate only within the team under contest rules.",
+    "range_basis": "benchmark_adaptation"
+  },
+  "execution": {
+    "official_minutes": null
+  },
+  "allowed_tools": [
+    "query_rules",
+    "execute_code",
+    "web_search"
+  ],
+  "resources": {
+    "internet": "allowed",
+    "calculator": "forbidden",
+    "code_execution": "allowed",
+    "paper_pencil": "allowed",
+    "provided_materials_only": false
+  },
+  "human_constraints": [
+    "Treat each row as one CTF challenge.",
+    "Use only authorized challenge assets and tools.",
+    "Do not consult writeups for the same challenge if aiming for fair evaluation.",
+    "Submit the flag string clearly.",
+    "Underlying CSAW CTF: Jeopardy-style flags; team collaboration on shared challenges; tooling unconstrained except fair-play / no attacking infra.",
+    "Rows are challenge-level (eval_unit=question)."
+  ],
+  "rules_text": "NYU CTF Bench (CSAW). The team solves a capture-the-flag task inside the authorized challenge boundary. Benchmark adaptation: the runner permits 4 to 6 active agents and defaults to 5. Collaborate only within the team under contest rules. Banned during the contest: calculators. Permitted: internet access and running code. Paper and pencil are always available. Submit one shared flag; Submit the recovered flag(s) / subtask answers clearly labeled. Challenge-level CTF proxy. Treat unexposed physical, oral, live-opponent, judge, timing, or environment mechanisms as unavailable rather than simulated facts.",
+  "provenance": {
+    "status": "source_enriched_v1",
+    "sources": [
+      {
+        "title": "NYU CTF Bench",
+        "url": "https://github.com/NYU-LLM-CTF/NYU_CTF_Bench",
+        "retrieved_at": "2026-08-12",
+        "local_text": "data/rules/sources/nyu_ctf_bench/01_NYU_CTF_Bench.txt",
+        "authority": "unclassified",
+        "edition": "not_frozen",
+        "sections": [],
+        "archive_status": "local_capture_available"
+      }
+    ],
+    "adaptations": [
+      "max_turns is a safety budget, not necessarily the official wall-clock limit",
+      "specialist roles are a research roster overlay",
+      "physical/oral/live opponent fidelity may be incomplete in src/"
+    ],
+    "crawl_status": "ok",
+    "crawled_excerpts": [
+      {
+        "url": "https://github.com/NYU-LLM-CTF/NYU_CTF_Bench",
+        "excerpt": "GitHub - NYU-LLM-CTF/NYU_CTF_Bench · GitHub Skip to content Navigation Menu Sign in Appearance settings Platform AI CODE CREATION GitHub Copilot Write better code with AI GitHub Copilot app Direct agents from issue to merge MCP Registry Integrate external tools DEVELOPER WORKFLOWS Actions Automate any workflow Codespaces Instant dev environments Issues Plan and track work Code Review Manage code changes Code Quality Enforce quality at merge APPLICATION SECURITY GitHub Advanced Security Find and "
+      }
+    ],
+    "enriched_at": "2026-08-12T16:53:55.322741+00:00",
+    "official_time_note": "Challenge-level CTF proxy.",
+    "research_confidence": "medium",
+    "proxy_limitations": [
+      "Sandbox/tool access in the bench may differ from live CTF networks.",
+      "Team size 5 in index is modeling, not an extracted CSAW hard cap from this crawl."
+    ],
+    "research_merged_at": "2026-08-12T17:04:21.319464+00:00",
+    "rules_text_source": "composed_from_card_fields_v2",
+    "research_reports": [
+      "docs/rules_crawl_2026-08-11.md"
+    ],
+    "research_notes": [
+      "Underlying CSAW CTF: Jeopardy-style flags; team collaboration on shared challenges; tooling unconstrained except fair-play / no attacking infra — confirm on year CSAW rules.",
+      "You must behave like a human teammate under official contest rules.",
+      "Do not claim tools, internet, or materials that the rule card forbids.",
+      "Do not look up answer keys or hidden solutions.",
+      "Benchmark packaging of CSAW CTF challenges for LLM agents — not CSAW’s live contest rulebook."
+    ],
+    "research_graded_at": "2026-08-11",
+    "content_standard": {
+      "name": "icpc_three_component_content_standard",
+      "version": "1.1",
+      "applied_at": "2026-08-17",
+      "reference_card": "data/rules/icpc",
+      "official_facts_policy": "competition_specific_primary_sources_only",
+      "scope": [
+        "competition_constraints",
+        "collaboration_operations",
+        "evaluation_and_compliance",
+        "runtime_fidelity"
+      ]
+    },
+    "source_review": {
+      "reviewed_at": "2026-08-17",
+      "audit_report": "docs/rule_card_icpc_standard_gap_audit_2026-08-17.md",
+      "coverage_grade": "B",
+      "completion_status": "primary_rules_partial_or_variant_selector_required",
+      "claim_policy": "unknown_official_values_remain_null_or_explicitly_unresolved",
+      "known_gaps": []
+    }
+  },
+  "comparability": {
+    "overall": "benchmark_native",
+    "dimensions": {
+      "roster": "approximate",
+      "timing": "adapted",
+      "tools": "src_tool_surface",
+      "scoring": "gold",
+      "environment": "proxy",
+      "information": "shared_public_rules",
+      "deliberation": "unstructured_observation",
+      "communication": "unlimited_runner_channel"
+    }
+  },
+  "deliverable": {
+    "answer_format": "Submit the recovered flag(s) / subtask answers clearly labeled.",
+    "shared": true,
+    "mime_types": [
+      "text/plain"
+    ],
+    "task_types": [
+      "ctf"
+    ],
+    "official_deliverable": "flag",
+    "official_mime_types": [
+      "text/plain"
+    ]
+  }
+}

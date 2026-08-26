@@ -1,0 +1,154 @@
+{
+  "schema_version": "1.0",
+  "rule_id": "eoes:draft_v1",
+  "competition_id": "eoes",
+  "profile": "non_comparable",
+  "protocol": "lab_practical_proxy",
+  "team": {
+    "active_min": 3,
+    "active_default": 3,
+    "active_max": 3,
+    "collaboration": "Collaborate only within the team under contest rules.",
+    "range_basis": "source_record"
+  },
+  "execution": {
+    "official_minutes": null
+  },
+  "allowed_tools": [
+    "query_rules",
+    "use_calculator",
+    "inspect_environment"
+  ],
+  "resources": {
+    "internet": "forbidden",
+    "calculator": "allowed",
+    "code_execution": "forbidden",
+    "paper_pencil": "allowed",
+    "provided_materials_only": true,
+    "physical_lab": "proxy_unavailable"
+  },
+  "human_constraints": [
+    "Team experimental science practical packet.",
+    "Use organizer-style calculator / lab constraints; no internet.",
+    "Physical instruments may be proxied; do not invent unavailable readings.",
+    "Official home page: each country sends two teams of three; two experimental assignments spanning biology/chemistry/physics skills.",
+    "Age: may only turn 17 during the EOES year (never older than 17).",
+    "Emphasis on team division of labor; ~4 hours per assignment described on home page."
+  ],
+  "rules_text": "European Olympiad of Experimental Science (EOES / EUSO). The task represents a practical or laboratory event through the available interface. The source-recorded active team has 3 members. Collaborate only within the team under contest rules. Banned during the contest: internet access and running code. Permitted: calculators. Conditional: physical lab equipment is not available in this simulation. Paper and pencil are always available. Work only from the materials provided with the problem. Submit one shared lab report; Submit a lab-style report: data, calculations, tables/graphs description, and conclusions. Treat unexposed physical, oral, live-opponent, judge, timing, or environment mechanisms as unavailable rather than simulated facts.",
+  "provenance": {
+    "status": "source_enriched_v1",
+    "sources": [
+      {
+        "title": "EOES",
+        "url": "https://www.eoes.science/Previous%20olympiads/previous.html",
+        "retrieved_at": "2026-08-12",
+        "local_text": "data/rules/sources/eoes/01_previous.txt",
+        "authority": "unclassified",
+        "edition": "not_frozen",
+        "sections": [],
+        "archive_status": "local_capture_available"
+      },
+      {
+        "title": "https://www.eoes.science/index.html",
+        "url": "https://www.eoes.science/index.html",
+        "retrieved_at": "2026-08-11",
+        "from_report": "docs/rules_crawl_2026-08-11.md",
+        "authority": "unclassified",
+        "edition": "not_frozen",
+        "sections": [],
+        "archive_status": "locator_only_from_prior_report"
+      },
+      {
+        "title": "https://www.eoes.science/page/documentsEOES.html",
+        "url": "https://www.eoes.science/page/documentsEOES.html",
+        "retrieved_at": "2026-08-11",
+        "from_report": "docs/rules_crawl_2026-08-11.md",
+        "authority": "unclassified",
+        "edition": "not_frozen",
+        "sections": [],
+        "archive_status": "locator_only_from_prior_report"
+      }
+    ],
+    "adaptations": [
+      "max_turns is a safety budget, not necessarily the official wall-clock limit",
+      "specialist roles are a research roster overlay",
+      "physical/oral/live opponent fidelity may be incomplete in src/",
+      "role-specific rule expertise is a benchmark coordination overlay",
+      "structured deliberation actions are a benchmark traceability overlay"
+    ],
+    "crawl_status": "ok",
+    "crawled_excerpts": [
+      {
+        "url": "https://www.eoes.science/Previous%20olympiads/previous.html",
+        "excerpt": "Previous EOES | European Olympiad of Experimental Science About us • EOES NPO • Executive Board • Countries and representatives • Articles of Association • Privacy policy • Contact The contest • Participation & selection • Syllabus, guidelines & rules • Olympiad week • Previous EOES • Next EOES News Media • 2021 Szeged • 2022 Hradec Králové • 2023 Riga • 2024 Luxembourg-City • 2025 Zagreb • 2026 Lund PREVIOUS EOES Until 2020, the European science Olympiads continued under the EUSO label. Since 2"
+      }
+    ],
+    "enriched_at": "2026-08-12T16:53:55.312929+00:00",
+    "research_confidence": "medium",
+    "proxy_limitations": [
+      "Wet-lab / instrument practicals are non-comparable to PDF reading agents without a lab proxy.",
+      "Rules PDF content not fully retrieved here."
+    ],
+    "research_merged_at": "2026-08-12T17:04:20.880163+00:00",
+    "rules_text_source": "composed_from_card_fields_v2",
+    "research_reports": [
+      "docs/rules_crawl_2026-08-11.md"
+    ],
+    "research_notes": [
+      "GB-adopted Rules & Regulations / Guidelines / Syllabus documents are linked from documents page but the fetch did not return downloadable PDF bodies in this crawl — open those PDFs from the documents page for instrument bans and exact timing.",
+      "You must behave like a human teammate under official contest rules.",
+      "Do not claim tools, internet, or materials that the rule card forbids.",
+      "Do not look up answer keys or hidden solutions."
+    ],
+    "research_graded_at": "2026-08-11",
+    "content_standard": {
+      "name": "icpc_three_component_content_standard",
+      "version": "1.1",
+      "applied_at": "2026-08-17",
+      "reference_card": "data/rules/icpc",
+      "official_facts_policy": "competition_specific_primary_sources_only",
+      "scope": [
+        "competition_constraints",
+        "collaboration_operations",
+        "evaluation_and_compliance",
+        "runtime_fidelity"
+      ]
+    },
+    "source_review": {
+      "reviewed_at": "2026-08-17",
+      "audit_report": "docs/rule_card_icpc_standard_gap_audit_2026-08-17.md",
+      "coverage_grade": "C",
+      "completion_status": "material_official_fields_remain_unverified",
+      "claim_policy": "unknown_official_values_remain_null_or_explicitly_unresolved",
+      "known_gaps": []
+    }
+  },
+  "comparability": {
+    "overall": "non_comparable",
+    "dimensions": {
+      "roster": "approximate",
+      "timing": "adapted",
+      "tools": "src_tool_surface",
+      "scoring": "gold_or_judge",
+      "environment": "physical_observations_unavailable",
+      "deliberation": "structured_trace_overlay",
+      "information": "role_specialized_tracking_overlay",
+      "communication": "unlimited_runner_channel"
+    }
+  },
+  "deliverable": {
+    "answer_format": "Submit a lab-style report: data, calculations, tables/graphs description, and conclusions.",
+    "shared": true,
+    "mime_types": [
+      "text/plain"
+    ],
+    "task_types": [
+      "lab_experiment"
+    ],
+    "official_deliverable": "lab_report",
+    "official_mime_types": [
+      "text/plain"
+    ]
+  }
+}

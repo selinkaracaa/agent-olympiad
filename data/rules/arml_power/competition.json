@@ -1,0 +1,184 @@
+{
+  "schema_version": "1.0",
+  "rule_id": "arml_power:draft_v1",
+  "competition_id": "arml_power",
+  "profile": "proxy",
+  "protocol": "shared_answer",
+  "team": {
+    "active_min": 2,
+    "active_default": 15,
+    "active_max": 15,
+    "roster_max": 15,
+    "range_basis": "mixed_or_unresolved",
+    "official_roster_note": "National-meet Power uses a 15-person team. The separate mail/in-school Power Contest has a dedicated Rules page marked Under Construction and does not establish a current official roster on the archived pages. This card therefore keeps an unresolved 2–15 active range and defaults to 15.",
+    "collaboration": "Contestants collaborate only with teammates on one shared proof packet. This card does not claim a complete current Power Contest administrivia package."
+  },
+  "execution": {
+    "official_minutes": null,
+    "session_track": "standalone_or_national_power_unresolved",
+    "administrivia_packet": "not_encoded"
+  },
+  "allowed_tools": [
+    "query_rules"
+  ],
+  "resources": {
+    "internet": "forbidden",
+    "calculator": "forbidden",
+    "code_execution": "forbidden",
+    "electronic_devices": "forbidden",
+    "books_notes": "forbidden",
+    "paper_pencil": "allowed",
+    "provided_materials_only": true,
+    "computational_aids": "default_deny_no_published_exception",
+    "outside_communication": "forbidden"
+  },
+  "human_constraints": [
+    "Treat this sitting as a team Power proof packet, not as a complete current ARML Power Contest administrivia package.",
+    "The dedicated Power Contest Rules page is published as Under Construction; do not invent a sit clock, official roster, computational-aid exception, or mail/in-school window from that missing packet.",
+    "Where published national ARML Power rules are the only available Power constraints, the packet is worth 50 points and the team may file exactly one solution; extra solutions are all scored and the lowest is kept.",
+    "Write proofs or justifications, not only final numbers, matching the verbs on the packet.",
+    "Calculators are not allowed on any published ARML part; do not grant a Power Contest calculator or computer-algebra exception the pages do not give.",
+    "Electronic devices, internet, books, and outside help are forbidden; paper and pencil only.",
+    "Collaborate only with teammates on one shared packet.",
+    "Do not look up hidden solutions or contest archives."
+  ],
+  "rules_text": "This sitting is a team Power proof packet. It is not a complete current ARML Power Contest administrivia package: the dedicated Rules page is Under Construction, and you must not invent a sit clock, official roster, or computational-aid exception. Where published national ARML Power rules are the only available Power constraints, the packet is worth 50 points and the team files exactly one solution; extra packets are all scored and the lowest is kept. Write the justifications the verbs require. Calculators and electronic devices are banned; paper and pencil only; no internet, books, or outside help. Do not treat a list of bare answers as a complete Power packet. Treat unexposed physical, oral, live-opponent, judge, timing, or environment mechanisms as unavailable rather than simulated facts.",
+  "provenance": {
+    "status": "source_grounded",
+    "sources": [
+      {
+        "title": "ARML/IRML Competition Rules",
+        "url": "https://arml.com/ARML/arml_2019/page/index.php?page=competition_rules&page_type=public",
+        "authority": "official",
+        "edition": "ARML/IRML Competition Rules as published on the official ARML 2019 site; team-seeding and division clauses revised April 2017",
+        "archive_status": "local_text_capture_available",
+        "sections": [
+          "team of 15 and coach seeding A1/A2 or B1/B2",
+          "age and graduation eligibility",
+          "contiguous non-intersecting regions",
+          "calculator ban on every ARML part",
+          "Individual, Team, Power, and Relay scoring",
+          "team-score tie-break order",
+          "no substitutions after Team Round starts",
+          "short-handed Relay handling",
+          "paper dictionary for non-native English speakers",
+          "electronic-device ban and Team/Power collection",
+          "exactly one Power solution packet",
+          "cheating and property sanctions"
+        ],
+        "local_text": "data/rules/sources/arml_power/01_index.txt"
+      },
+      {
+        "title": "ARML/IRML Competition Rules (arml2.com official mirror)",
+        "url": "https://arml2.com/ARML/arml_2019/page/index.php?page=competition_rules&page_type=public",
+        "authority": "official",
+        "edition": "ARML/IRML Competition Rules as published on the official ARML 2019 site; team-seeding and division clauses revised April 2017",
+        "archive_status": "official_url_verified_not_locally_archived",
+        "sections": [
+          "team of 15 and coach seeding A1/A2 or B1/B2",
+          "age and graduation eligibility",
+          "contiguous non-intersecting regions",
+          "calculator ban on every ARML part",
+          "Individual, Team, Power, and Relay scoring",
+          "team-score tie-break order",
+          "no substitutions after Team Round starts",
+          "short-handed Relay handling",
+          "paper dictionary for non-native English speakers",
+          "electronic-device ban and Team/Power collection",
+          "exactly one Power solution packet",
+          "cheating and property sanctions"
+        ]
+      },
+      {
+        "title": "ARML Power Contest Rules",
+        "url": "https://www.arml.com/ARML/arml_2019/page/index.php?page=5&page_type=public&show_page=rules",
+        "authority": "official",
+        "edition": "ARML Power Contest Rules page as published, labeled Under Construction",
+        "archive_status": "official_url_verified_not_locally_archived",
+        "sections": [
+          "Under Construction notice"
+        ]
+      },
+      {
+        "title": "ARML Power Contest samples and season archive index",
+        "url": "https://www.arml.com/ARML/arml_2019/page/index.php?page=5&page_type=public&show_page=samples",
+        "authority": "official",
+        "edition": "2025–2026 ARML Power Contests sample index",
+        "archive_status": "official_url_verified_not_locally_archived",
+        "sections": [
+          "Fall and spring contest PDF listings",
+          "Fall 2025 administrivia PDF listed but not encoded as a complete rules packet"
+        ]
+      }
+    ],
+    "adaptations": [
+      "max_turns is a safety budget; no official standalone Power Contest clock is encoded",
+      "active 2–15 default 15 is an unresolved-roster modeling range, not a published Power Contest roster",
+      "structured deliberation actions are a benchmark traceability overlay",
+      "limited communication is a benchmark pressure overlay, not an official message cap",
+      "National-meet one-packet and calculator bans are applied as the only published ARML Power constraints, without claiming they complete Power Contest administrivia"
+    ],
+    "official_time_note": "The standalone Power Contest page does not establish a current 60-minute clock; no exact official duration is encoded.",
+    "research_confidence": "medium",
+    "research_notes": [
+      "A Fall 2025 administrivia PDF is listed on the samples page and is not treated as retrieved or complete for this card.",
+      "Do not import a 60-minute clock, a 15-person requirement, or a computational-aid exception as official standalone Power Contest rules."
+    ],
+    "proxy_limitations": [
+      "Without an encoded Power Contest administrivia packet, roster, sit time, aids, and submission window remain unresolved.",
+      "Proof handwriting and lowest-score multi-packet assessment are easy to under-enforce."
+    ],
+    "content_standard": {
+      "name": "icpc_three_component_content_standard",
+      "version": "1.1",
+      "applied_at": "2026-08-17",
+      "reference_card": "data/rules/icpc",
+      "official_facts_policy": "competition_specific_primary_sources_only",
+      "scope": [
+        "competition_constraints",
+        "collaboration_operations",
+        "evaluation_and_compliance",
+        "runtime_fidelity"
+      ]
+    },
+    "source_review": {
+      "reviewed_at": "2026-08-17",
+      "audit_report": "docs/rule_card_icpc_standard_gap_audit_2026-08-17.md",
+      "coverage_grade": "C",
+      "completion_status": "material_official_fields_remain_unverified",
+      "claim_policy": "unknown_official_values_remain_null_or_explicitly_unresolved",
+      "known_gaps": [
+        "The standalone Power Contest roster, clock, aids policy, and submission window are not established by the archived primary material."
+      ]
+    }
+  },
+  "comparability": {
+    "overall": "proxy",
+    "dimensions": {
+      "roster": "mixed_or_unresolved",
+      "timing": "adapted_turn_budget_clock_unspecified",
+      "tools": "default_deny",
+      "scoring": "rubric_proxy_without_complete_administrivia",
+      "environment": "partial",
+      "collaboration": "observable_proxy",
+      "information": "shared_public_rules",
+      "communication": "adapted_coordination_budget",
+      "deliberation": "structured_trace_overlay",
+      "power_contest_administrivia": "not_encoded"
+    }
+  },
+  "deliverable": {
+    "answer_format": "Submit the team's final answers in numbered order, using exact values when required.",
+    "shared": true,
+    "mime_types": [
+      "text/plain"
+    ],
+    "task_types": [
+      "team_power"
+    ],
+    "official_deliverable": "proof_packet",
+    "official_mime_types": [
+      "text/plain"
+    ]
+  }
+}

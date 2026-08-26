@@ -62,7 +62,15 @@ def _condition(row: dict[str, Any]) -> str | None:
 def _comparable_key(row: dict[str, Any]) -> tuple[Any, ...]:
     return tuple(
         row.get(key)
-        for key in ("competition", "problem_id", "task_id", "team", "model_label", "model")
+        for key in (
+            "competition",
+            "problem_id",
+            "task_id",
+            "team",
+            "model_label",
+            "model",
+            "rules_mode",
+        )
     )
 
 
@@ -136,7 +144,15 @@ def compute_decompositions(rows: Iterable[dict[str, Any]]) -> list[dict[str, Any
             {
                 "comparison": dict(
                     zip(
-                        ("competition", "problem_id", "task_id", "team", "model_label", "model"),
+                        (
+                            "competition",
+                            "problem_id",
+                            "task_id",
+                            "team",
+                            "model_label",
+                            "model",
+                            "rules_mode",
+                        ),
                         key,
                     )
                 ),
@@ -154,10 +170,15 @@ def compute_decompositions(rows: Iterable[dict[str, Any]]) -> list[dict[str, Any
 def group_summaries(rows: Iterable[dict[str, Any]]) -> list[dict[str, Any]]:
     """Mean normalized score by competition/schema/team over available scores."""
 
-    groups: dict[tuple[Any, Any, Any], list[float]] = defaultdict(list)
-    counts: dict[tuple[Any, Any, Any], int] = defaultdict(int)
+    groups: dict[tuple[Any, Any, Any, Any], list[float]] = defaultdict(list)
+    counts: dict[tuple[Any, Any, Any, Any], int] = defaultdict(int)
     for row in rows:
-        key = (row.get("competition"), row.get("schema"), row.get("team"))
+        key = (
+            row.get("competition"),
+            row.get("schema"),
+            row.get("team"),
+            row.get("rules_mode", "off"),
+        )
         counts[key] += 1
         score = normalized_task_score(row)
         if score is not None:
@@ -167,6 +188,7 @@ def group_summaries(rows: Iterable[dict[str, Any]]) -> list[dict[str, Any]]:
             "competition": key[0],
             "schema": key[1],
             "team": key[2],
+            "rules_mode": key[3],
             "runs": counts[key],
             "scored_runs": len(groups[key]),
             "mean_normalized_task_score": (

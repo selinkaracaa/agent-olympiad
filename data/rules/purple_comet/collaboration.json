@@ -1,0 +1,225 @@
+{
+  "agent_constraints": [
+    "Inhabit the role of an eligible Purple Comet contestant on one team of one to six students; do not invent a seventh solver, a second simultaneous team, or a contestant-as-supervisor role.",
+    "Treat the adult supervisor as registrar, clock-starter, and rule monitor only; do not ask the supervisor for mathematics, definitions, translation, or answer entry.",
+    "Work as one team sharing one answer form—whether co-located or remote—not as independent published solvers and not as a one-workstation programming team.",
+    "Carry age, grade, school-size, registration, and 244-hour-window obligations as conscience even though the session does not simulate those workflows.",
+    "Begin with the same contestant permissions as every teammate; do not assume a permanent algebra, geometry, counting, or calculator office.",
+    "Scout the packet, triage easy and hard items, and reassign dynamically; temporary specialization may emerge but is never a fixed office.",
+    "Treat private reasoning and notes as unknown to teammates until you communicate them; discoveries needed by teammates must be reported explicitly.",
+    "Choose the mathematical method from your own knowledge and allowed local references before using a calculator or computer tool; tools may compute or draw diagrams only.",
+    "Do not use Internet search for definitions, instructional materials, or solution methods, and do not use generative AI to produce, explain, or verify answers or code.",
+    "Do not import another contest's device ban, language list, or programming-judge topology.",
+    "Reconcile one shared non-negative integer per problem; remember that only the last submission for that problem counts.",
+    "Do not post or discuss problems with anyone outside the immediate team until the contest officially ends."
+  ],
+  "agent_roles": [
+    {
+      "name": "Agent_1",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit an eligible Purple Comet contestant identity under team-formation and competition rules.",
+        "Scout, solve, calculate, review, or coordinate as current team needs require.",
+        "Share decision-relevant methods and transfer work with explicit context before the shared form is updated."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": []
+    },
+    {
+      "name": "Agent_2",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit an eligible Purple Comet contestant identity under team-formation and competition rules.",
+        "Scout, solve, calculate, review, or coordinate as current team needs require.",
+        "Share decision-relevant methods and transfer work with explicit context before the shared form is updated."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": []
+    },
+    {
+      "name": "Agent_3",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit an eligible Purple Comet contestant identity under team-formation and competition rules.",
+        "Scout, solve, calculate, review, or coordinate as current team needs require.",
+        "Share decision-relevant methods and transfer work with explicit context before the shared form is updated."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": []
+    },
+    {
+      "name": "Agent_4",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit an eligible Purple Comet contestant identity under team-formation and competition rules.",
+        "Scout, solve, calculate, review, or coordinate as current team needs require.",
+        "Share decision-relevant methods and transfer work with explicit context before the shared form is updated."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": []
+    },
+    {
+      "name": "Agent_5",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit an eligible Purple Comet contestant identity under team-formation and competition rules.",
+        "Scout, solve, calculate, review, or coordinate as current team needs require.",
+        "Share decision-relevant methods and transfer work with explicit context before the shared form is updated."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": []
+    },
+    {
+      "name": "Agent_6",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit an eligible Purple Comet contestant identity under team-formation and competition rules.",
+        "Scout, solve, calculate, review, or coordinate as current team needs require.",
+        "Share decision-relevant methods and transfer work with explicit context before the shared form is updated."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": []
+    }
+  ],
+  "information_policy": {
+    "mode": "shared",
+    "shared": [
+      "problem",
+      "contest_rules",
+      "team_discussion",
+      "scratchpad"
+    ],
+    "coordination_requirement": "Contestants receive equal baseline information access, but private reasoning is not silently copied between them; they must communicate methods, integer encodings, and form updates that teammates need, including last-submitted values visible on the shared account."
+  },
+  "rule_sections": {
+    "competition_format": [
+      "Official: Purple Comet! Math Meet is a free annual online team mathematics competition for middle- and high-school students.",
+      "Official: a team has one to six students and one adult supervisor aged 21 or older who is not a contestant.",
+      "Official: middle school is 20 problems in 60 minutes; high school is 30 problems in 90 minutes.",
+      "Official: answers are non-negative integers via the contest web form; last submission per problem counts; partial submissions accumulate.",
+      "Simulation choice: this card evaluates the high-school default of 30 problems and 90 minutes."
+    ],
+    "timeline": [
+      "Official: the supervisor starts the team clock inside the 244-hour competition window.",
+      "Official: official time is the time determined by the purplecomet.org server.",
+      "Official: a team whose clock started before the window ends may finish its allotted 60 or 90 minutes even if that interval crosses the window end.",
+      "Simulation choice: max_turns 24 is a safety budget approximating the 90-minute high-school clock, not the 244-hour window."
+    ],
+    "resource_policy": [
+      "Official: calculators, CAS, spreadsheets, custom code, Desmos, WolframAlpha, Mathematica, Maple, and GeoGebra may calculate or draw diagrams only.",
+      "Official: local books and notes at the contest site are allowed if sought without outsider aid.",
+      "Official: Internet search for definitions, instructional materials, or solution methods is forbidden.",
+      "Official: generative AI including ChatGPT, Gemini, Copilot, and Claude is forbidden for producing, explaining, or verifying answers or code.",
+      "Simulation choice: only the built-in calculator tool is exposed; other official calculation aids are not separately instrumented."
+    ],
+    "collaboration_protocol": [
+      "Official: teammates are encouraged to work together and may combine dividing problems with joint solving.",
+      "Official: teammates need not be in the same place; they may communicate and may all log into the team account.",
+      "Official: no help from persons not on the team, including the supervisor.",
+      "Official: do not reveal or post problems outside the immediate team until the contest officially ends.",
+      "Simulation choice: limited message budgets are a coordination overlay, not an official speech cap.",
+      "Simulation choice: private notes are unshared until communicated; last-form values must be stated if a teammate must rely on them."
+    ],
+    "integrity_and_compliance": [
+      "Official: students must decide the method; tools must not invent the method.",
+      "Official: generative AI and Internet solution-method search are forbidden.",
+      "Official: supervisors monitor rule-following, including for remote teammates, and do not solve.",
+      "Official: the decision of the competition judges is final.",
+      "Simulation choice: LLM participation is a compliance failure under the AI ban even when integers match gold answers."
+    ],
+    "deliverable_format": [
+      "Official: submit non-negative integers through the web form; only the last answer per problem is graded.",
+      "Official: partial submissions accumulate, so a later submit need not repeat already-accepted fields.",
+      "Official: students enter their own answers unless judges grant a disability accommodation.",
+      "Simulation choice: the session accepts one ordered integer sheet as a proxy for the live last-answer form."
+    ],
+    "evaluation_criteria": [
+      "Official: each problem is right or wrong by exact match of the last submitted non-negative integer to the official answer.",
+      "Official: supervisors later receive team scores; competitive-category top teams may be posted; non-competitive results are not posted.",
+      "Official: no published time-penalty or tie-break formula is stated; judges' decisions are final.",
+      "Simulation choice: gold matching is recommended but the assigned evaluator remains deferred; do not invent a completed official standing."
+    ],
+    "runtime_limitations": [
+      "Simulation choice: the 244-hour window, supervisor clock, and last-answer web form are specified, not enforced.",
+      "Simulation choice: the method-versus-calculation rule and generative-AI ban cannot be mechanically enforced against LLM agents.",
+      "Simulation choice: CAS and diagram tools beyond the calculator are official but unavailable as distinct instruments."
+    ],
+    "official_eligibility_and_logistics": [
+      "Official: competitive middle-school members are under 16 and not past eighth grade; competitive high-school members are under 20 and not past secondary graduation.",
+      "Official: same-school teams use small or large categories; mixed teams cover home-school or club groups; non-competitive teams are unrestricted and unposted.",
+      "Official: each team needs its own computer session; shared computers require sequential team starts.",
+      "Simulation choice: these obligations are contestant conscience; the session does not execute registration or school-size checks."
+    ],
+    "supervisor_protocol": [
+      "Official: any adult 21 or older may supervise; one supervisor may supervise many teams.",
+      "Official: the supervisor starts the clock and may optionally print problems in advance for distribution at start.",
+      "Official: the supervisor may not help with mathematics, definitions, or translation, and may not enter answers except by granted accommodation.",
+      "Simulation choice: no supervisor agent exists; contestants must not cast a teammate as supervisor-solver."
+    ],
+    "method_vs_calculation": [
+      "Official: if the team knows a method, tools may calculate, plot, or inspect sequences for insight.",
+      "Official: tools must not explain how to solve the problem or allow solving without knowing the method.",
+      "Simulation choice: using the calculator before stating a method, or treating a tool output as a discovered method, is a compliance violation."
+    ],
+    "answer_form_protocol": [
+      "Official: any teammate may submit; each submit shows all answers received so far.",
+      "Official: overwriting a problem replaces the graded value for that problem only.",
+      "Simulation choice: reconcile encodings (for example m+n style) before the shared sheet is treated as final."
+    ],
+    "emergent_behavior": [
+      "Simulation choice: observe but do not require packet triage, mixed solo-and-joint solving, independent numeric checks, and form-hygiene review.",
+      "Simulation choice: do not reward a fixed specialist split, equal airtime, message count, or calculator use that invents methods."
+    ]
+  },
+  "deliberation": {
+    "mode": "structured",
+    "min_challenges": 1,
+    "decision_maker": "submitter",
+    "evaluation_dimensions": [
+      "evidence_responsiveness",
+      "revision_after_challenge",
+      "decision_traceability",
+      "authority_bias",
+      "majority_bias"
+    ]
+  },
+  "communication": {
+    "mode": "limited",
+    "team_message_budget": 18,
+    "per_agent_message_budget": 4,
+    "max_message_chars": 1200,
+    "counted_actions": [
+      "speak",
+      "write_scratchpad",
+      "propose",
+      "challenge",
+      "provide_evidence",
+      "revise",
+      "decide"
+    ]
+  },
+  "simulation": {
+    "max_turns": 24,
+    "scheduler": "round_table_or_centralized",
+    "turn_budget_basis": "official clock 18 turns vs floor 17 (6 teammates x 2 turns + 1 answer parts + 4 for synthesis)",
+    "eligibility_and_logistics_state": "specified_for_role_immersion_not_enforced"
+  }
+}

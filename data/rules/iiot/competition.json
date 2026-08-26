@@ -1,0 +1,202 @@
+{
+  "schema_version": "1.0",
+  "rule_id": "iiot:draft_v1",
+  "competition_id": "iiot",
+  "profile": "proxy",
+  "protocol": "two_workstation_programming",
+  "team": {
+    "active_min": 4,
+    "active_default": 4,
+    "active_max": 4,
+    "roster_max": 6,
+    "collaboration": "Four contestants collaborate throughout the contest while sharing two organizer-provided computers; the team leader coordinates but is not a contestant.",
+    "range_basis": "source_record",
+    "official_roster_note": "The official team is four contestants plus two reserves for replacement if needed. One team leader coordinates and registers the team and is not a contestant during the contest. Eligibility, same-school or same-institution/region composition, national qualification, visas, host lodging, and ceremonies are official identity and logistics rules included for role immersion and are not runtime-enforced state machines."
+  },
+  "execution": {
+    "official_minutes": null,
+    "evaluated_edition": "international_final_regulations_2024_10_03_plus_2026_online_cpp_two_computer_overlay",
+    "edition_duration_note": "The International Final lasts 4 hours; execution.official_minutes stays null because this card does not encode that duration as the runtime clock.",
+    "exclusive_machine_lease": "two_specified_only",
+    "shared_machine_count": 2,
+    "multi_problem_packet": "unavailable",
+    "official_packet_size_note": "The International Final involves solving at least seven problems; the exact count is an event parameter.",
+    "problem_language": "English",
+    "official_contest_communications_language": "English",
+    "allowed_languages_regulations": [
+      "C",
+      "C++",
+      "Pascal"
+    ],
+    "allowed_languages_evaluated_overlay": [
+      "C++"
+    ],
+    "problems_independent": true,
+    "clarification_channel": "written_questions_to_host_scientific_committee_initial_period_specified_not_enforced",
+    "automatic_evaluator": "specified_deferred",
+    "leader_appeal": "specified_not_enforced"
+  },
+  "allowed_tools": [
+    "query_rules",
+    "execute_code"
+  ],
+  "resources": {
+    "internet": "judge_only_or_forbidden",
+    "calculator": "forbidden",
+    "code_execution": "organizer_machines_only",
+    "paper_pencil": "allowed",
+    "provided_materials_only": true,
+    "contest_machine_capacity": 2,
+    "machine_lease_enforcement": "specified_only",
+    "organizer_computers_and_software_only": true,
+    "personal_mouse_keyboard": "allowed_if_host_scientific_committee_approves",
+    "usb_ports": "disabled",
+    "personal_electronic_devices": "forbidden",
+    "textbooks_and_translators": "forbidden",
+    "language_documentation": "organizer_provided_allowed",
+    "external_llms_and_search_engines": "forbidden",
+    "outside_communication": "forbidden",
+    "other_teams_code_or_materials": "forbidden",
+    "inter_team_communication": "forbidden"
+  },
+  "human_constraints": [
+    "Treat yourself as an eligible IIOT contestant: you are enrolled in secondary or high school in the country you represent for at least September through December of the year before the International Final, and you are not older than 20 on 1 July of the Final year.",
+    "Students studying abroad may represent the country of their nationality. A team whose members all have a nationality other than that of their school, or who represent a linguistic-minority school, may represent the foreign country only if that country allows it, and only after choosing one country's qualifying contest before the preliminary online competitions begin.",
+    "The four contestants must come from the same school, except that if a national organization runs the entire national management, they must come from the same institution or region.",
+    "The official team is four contestants plus two reserves for replacement if needed; there cannot be student exchanges between teams, and a team may include no more than one awarded contestant of the previous year's National Individual Olympiad in Programming.",
+    "One team leader coordinates the team and registers it; the leader is not a contestant during the contest and must not solve, code, or debug for the team.",
+    "Eligibility, national qualification, visas, host lodging, and ceremony attendance are official identity and logistics obligations carried as role immersion; they are not runtime-enforced workflows.",
+    "Guest teams invited by the host may compete, but their results are not placed in the official ranking, which presents only regular participants.",
+    "The International Final lasts four hours and involves writing programs that solve at least seven problems; problem statements are given and solved in English.",
+    "Contestants should enter the contest room half an hour before the start to check that everything works; besides contestants, only the host scientific and technical staff may enter that room.",
+    "The four contestants share exactly two organizer-provided contest computers; they may not add a third machine, substitute their own computers, or treat the contest as four independent remote solves.",
+    "Only the computers and software provided by the organizers, including built-in help facilities, may be used; a team may bring its own mouse and keyboard if the host scientific committee approves them.",
+    "USB ports are disabled. Internet access is limited to the contest or grading platform. The public web, search engines, and external LLMs are forbidden.",
+    "Documentation of the allowed languages is available during the contest; use organizer-provided language references rather than outside manuals.",
+    "The 3 October 2024 regulations list C, C++, and Pascal as allowed languages. Under the 2026 online-participation overlay frozen for this card, only C++ is accepted for submissions.",
+    "The host publishes the operating system, editors, IDEs, and compilers at least one month ahead; do not assume a different environment.",
+    "Contestants may submit written questions to the host Scientific Committee about formulation and interpretation of the problems during the initial period of the round.",
+    "All communication between IIOT committees and contestants is in written form. English is the official language for documents, problem texts, the website, emails, and appeals.",
+    "Solutions are source programs checked by an automatic evaluator. After working time ends, results are published on the official website, and a team leader who does not accept the evaluation may appeal to the International Scientific Committee.",
+    "The General Assembly sets gold, silver, and bronze cutoffs in approximately a 1:2:3 proportion, and at least 50 percent of contestants should receive medals; each contestant receives a participation certificate.",
+    "A contestant may be disqualified by the General Assembly for unethical behavior during or outside the contest that may ruin individuals, countries, or IIOT reputation.",
+    "National-contest checks that also bind contestant conscience: no mobile phones, tablets, or other personal electronic devices; no textbooks or translators; no communication between teams.",
+    "Under the 2026 online-participation overlay, a team uses two computers, Internet is limited to the grading system, only C++ is accepted, and guest online teams must be co-located with a proctor.",
+    "Paper may be used for reasoning. Personal removable storage, unapproved software, hidden tests, and other teams' code or materials are forbidden.",
+    "Coordinate contention for the two machine leases; do not import a one-workstation programming contest's topology."
+  ],
+  "rules_text": "You are an eligible IIOT contestant on a four-person school team (two reserves exist only as replacements) coordinated by a team leader who is not a contestant. Contestants are secondary students, not older than 20 on 1 July of the Final year, enrolled at least September–December of the year before the Final, and from the same school—or the same institution or region if a national organization runs the event. Eligibility, visas, and host logistics are part of your team identity. On contest day the International Final lasts four hours with at least seven independent English programming problems. This card freezes the 3 October 2024 regulations plus the 2026 online overlay: two organizer computers per team, Internet only to the grading system, and C++-only submissions (regulations also list C and Pascal for on-site editions). Only organizer PCs and software may be used; an approved personal mouse or keyboard is allowed; USB is disabled. Written questions about formulation or interpretation go to the host Scientific Committee during the initial period. An automatic evaluator scores programs; the team leader may appeal. Official ranking lists regular participants only; guest teams are excluded. Medals are gold:silver:bronze about 1:2:3, and at least half the contestants should receive medals. Phones, textbooks, translators, other teams, public Internet, and external LLMs are forbidden. Treat unexposed physical, oral, live-opponent, judge, timing, or environment mechanisms as unavailable rather than simulated facts.",
+  "provenance": {
+    "status": "source_grounded",
+    "sources": [
+      {
+        "title": "International Informatics Olympiad in Teams Regulations",
+        "url": "https://iio.team/documents/Regulations.pdf",
+        "authority": "official",
+        "edition": "version 3, 3 October 2024, approved by the International Committee IIOT (Egypt, Hungary, Italy, Romania, Syria)",
+        "sections": [
+          "Introduction",
+          "General regulations",
+          "Teams",
+          "The Scientific Committee",
+          "Competitions",
+          "Problems",
+          "Evaluation",
+          "Results and prizes",
+          "Host Country"
+        ],
+        "archive_status": "local_text_capture_available",
+        "local_text": "data/rules/sources/iiot/01_Regulations.txt"
+      },
+      {
+        "title": "IIOT 2026 online participation rules",
+        "url": "http://iiot2026.cni.nt.edu.ro/online-participation-rules/",
+        "authority": "official",
+        "edition": "IIOT 2026 host online-participation overlay: two computers per team, Internet limited to the grading system, C++ only, guest online teams co-located with a proctor",
+        "sections": [
+          "online participation computers",
+          "grading-system network restriction",
+          "C++ submission restriction",
+          "guest online proctoring and co-location"
+        ],
+        "archive_status": "official_url_cited_not_locally_archived"
+      }
+    ],
+    "adaptations": [
+      "max_turns 24 is a safety budget; the International Final lasts 4 hours, but execution.official_minutes remains null so the turn budget is not rewritten from that clock",
+      "machine execution currently uses the repository execute_code proxy rather than two host virtual machines with the published OS/IDE",
+      "two-machine ownership, packet state, written clarifications, automatic-evaluator verdicts, leader appeals, and official ranking publication are specified but not enforced as runtime state",
+      "Team composition, age and enrollment eligibility, team-leader non-participation, guest ranking exclusion, visas, and host ceremonies are contestant-facing role-immersion constraints; they are not implemented as eligibility or lodging checks",
+      "The 2026 C++-only and two-computer overlay is frozen as the evaluated submission and machine topology even though the 2024 regulations still list C, C++, and Pascal for on-site editions",
+      "Structured deliberation actions are a coordination overlay, not an official IIOT meeting procedure"
+    ],
+    "official_time_note": "The archived regulations describe the contest but the exact evaluated-edition duration has not been frozen here.",
+    "research_confidence": "high",
+    "research_notes": [
+      "Eligibility, same-school composition, reserves, team-leader non-participation, guest ranking, visas, and host ceremonies are conscience and role text for agents, not executable logistics.",
+      "The International Final duration is four hours in the 3 October 2024 regulations; this card keeps execution.official_minutes null and max_turns 24.",
+      "Do not invent an ICPC-style 20-minute time penalty; the regulations specify automatic evaluation, leader appeal, General Assembly medal cutoffs, and guest exclusion, not a published penalty formula.",
+      "National-contest device and textbook bans are included because the regulations require those checks for national competitions and they bind contestant conscience at the Final as well."
+    ],
+    "proxy_limitations": [
+      "The runtime does not lease two contest machines to named contestants or enforce dual-machine contention.",
+      "The current task loads one programming problem rather than an International Final packet of at least seven English problems.",
+      "The programming judge, per-problem verdict history, written Scientific Committee questions, leader appeals, and published official ranking remain deferred.",
+      "Host OS/IDE publication, USB disablement, language-documentation browsers, and 2026 online proctoring are not simulated as state.",
+      "Age, enrollment, school, reserve, and guest-versus-regular ranking workflows are not simulated as state."
+    ],
+    "content_standard": {
+      "name": "icpc_three_component_content_standard",
+      "version": "1.1",
+      "applied_at": "2026-08-17",
+      "reference_card": "data/rules/icpc",
+      "official_facts_policy": "competition_specific_primary_sources_only",
+      "scope": [
+        "competition_constraints",
+        "collaboration_operations",
+        "evaluation_and_compliance",
+        "runtime_fidelity"
+      ]
+    },
+    "source_review": {
+      "reviewed_at": "2026-08-17",
+      "audit_report": "docs/rule_card_icpc_standard_gap_audit_2026-08-17.md",
+      "coverage_grade": "B",
+      "completion_status": "primary_rules_partial_or_variant_selector_required",
+      "claim_policy": "unknown_official_values_remain_null_or_explicitly_unresolved",
+      "known_gaps": []
+    }
+  },
+  "comparability": {
+    "overall": "proxy",
+    "dimensions": {
+      "roster": "official_four_contestants_leader_excluded",
+      "timing": "adapted_turn_budget_final_duration_not_frozen_as_clock",
+      "tools": "src_tool_surface",
+      "scoring": "specified_but_deferred",
+      "environment": "partial_without_host_vm",
+      "workstation": "two_leases_specified_not_enforced",
+      "packet": "not_implemented",
+      "judge_state": "not_implemented",
+      "clarification": "written_sc_questions_specified_not_enforced",
+      "language": "2026_cpp_overlay_over_regulations_c_cpp_pascal",
+      "collaboration": "observable_proxy",
+      "eligibility_and_logistics": "role_immersion_text_only"
+    }
+  },
+  "deliverable": {
+    "answer_format": "Submit source code or the required program output for the programming judge.",
+    "shared": true,
+    "mime_types": [
+      "text/plain"
+    ],
+    "task_types": [
+      "algorithmic_programming"
+    ],
+    "official_deliverable": "source_code",
+    "official_mime_types": [
+      "text/x-c++src",
+      "text/x-python"
+    ]
+  }
+}

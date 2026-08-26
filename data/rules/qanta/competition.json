@@ -1,0 +1,201 @@
+{
+  "schema_version": "1.0",
+  "rule_id": "qanta:question_proxy",
+  "competition_id": "qanta",
+  "profile": "proxy",
+  "protocol": "buzzer_match_question_proxy",
+  "team": {
+    "active_min": 4,
+    "active_default": 4,
+    "active_max": 4,
+    "collaboration": "Quiz bowl teams confer on bonuses; tossups are normally individual after a buzz.",
+    "range_basis": "benchmark_adaptation"
+  },
+  "execution": {},
+  "allowed_tools": [
+    "query_rules"
+  ],
+  "resources": {
+    "internet": "forbidden",
+    "calculator": "forbidden",
+    "electronic_devices": "forbidden",
+    "provided_materials_only": true
+  },
+  "human_constraints": [
+    "No internet lookups or notes databases.",
+    "Give a short canonical quiz-bowl answer, not an essay.",
+    "Do not invent later clues or buzzer timing advantages.",
+    "Collaborate only as the prompt structure allows.",
+    "Underlying quiz bowl norms; NAQT/ACF-style: 4 active players, tossup interruptible reading, bonuses to scoring team.",
+    "At most four players from a team are active at any one time, and only an active player may buzz or answer.",
+    "Do not confer in any way while a tossup is live; verbal, written, or signed communication conveying anything about the answer is treated as an incorrect answer for your team.",
+    "Confer freely with your active teammates on a bonus, where your team's answer is the first one clearly directed at the moderator.",
+    "Do not use reference materials or electronic devices at any point during play, and keep none on your table, in your lap, in view, or on your person.",
+    "Notes you write during the game may be used and shared with teammates on bonuses under NAQT rules, but prepared notes and study aids brought from outside are never allowed; ACF play permits only writing implements and completely blank paper.",
+    "Buzz first to earn the right to answer, then give your answer within 3 seconds of being recognized.",
+    "A tossup answered correctly is worth 10 points and earns your team a three-part bonus totaling 30 points; NAQT additionally awards 15 for a correct answer before the power mark.",
+    "Interrupting a tossup before it is fully read and answering incorrectly costs your team 5 points; there is no penalty for a wrong answer after the question has been read in full.",
+    "Bonus parts do not bounce back to the other team, and each part must be answered within 5 seconds of being read unless the question specifies otherwise.",
+    "Coaches, substitutes, and spectators may not communicate with active players during gameplay, and substitutions happen only at designated breaks such as halftime, a timeout, or before overtime.",
+    "Under ACF rules a match is 20 untimed tossup-bonus cycles; under NAQT it is two timed halves of 10 minutes for high school or 11 for college."
+  ],
+  "rules_text": "QANTA Quiz Bowl. The task represents a quiz-bowl question without a complete live buzzer match. Benchmark adaptation: the runner uses 4 active agents. Quiz bowl teams confer on bonuses; tossups are normally individual after a buzz. Banned during the contest: internet access, calculators and personal electronics. Work only from the materials provided with the problem. Submit one shared spoken answer; A short quiz-bowl style answer line. Prefer the canonical name; avoid sentences unless needed for disambiguation. Question-level quiz-bowl proxy. Treat unexposed physical, oral, live-opponent, judge, timing, or environment mechanisms as unavailable rather than simulated facts.",
+  "provenance": {
+    "status": "hand_written_fallback_v1",
+    "sources": [
+      {
+        "title": "https://github.com/Pinafore/qb",
+        "url": "https://github.com/Pinafore/qb",
+        "retrieved_at": "2026-08-12",
+        "local_text": "data/rules/sources/qanta/01_fallback_notes.txt",
+        "authority": "unclassified",
+        "edition": "not_frozen",
+        "sections": [],
+        "archive_status": "local_capture_available"
+      },
+      {
+        "title": "https://github.com/Pinafore/qanta",
+        "url": "https://github.com/Pinafore/qanta",
+        "retrieved_at": "2026-08-11",
+        "local_text": null,
+        "authority": "unclassified",
+        "edition": "not_frozen",
+        "sections": [],
+        "archive_status": "not_locally_archived"
+      },
+      {
+        "title": "QANTA",
+        "url": "https://www.qanta.org/",
+        "retrieved_at": "2026-08-10",
+        "authority": "unclassified",
+        "edition": "not_frozen",
+        "sections": [],
+        "archive_status": "not_locally_archived"
+      },
+      {
+        "title": "https://www.naqt.com/rules/",
+        "url": "https://www.naqt.com/rules/",
+        "retrieved_at": "2026-08-12",
+        "from_report": "docs/rules_lowconf_2026-08-12.md",
+        "authority": "unclassified",
+        "edition": "not_frozen",
+        "sections": [],
+        "archive_status": "locator_only_from_prior_report"
+      },
+      {
+        "title": "https://www.naqt.com/downloads/rules.pdf",
+        "url": "https://www.naqt.com/downloads/rules.pdf",
+        "retrieved_at": "2026-08-12",
+        "from_report": "docs/rules_lowconf_2026-08-12.md",
+        "authority": "unclassified",
+        "edition": "not_frozen",
+        "sections": [],
+        "archive_status": "locator_only_from_prior_report"
+      },
+      {
+        "title": "https://acf-quizbowl.com/rules/gameplay/",
+        "url": "https://acf-quizbowl.com/rules/gameplay/",
+        "retrieved_at": "2026-08-12",
+        "from_report": "docs/rules_lowconf_2026-08-12.md",
+        "authority": "unclassified",
+        "edition": "not_frozen",
+        "sections": [],
+        "archive_status": "locator_only_from_prior_report"
+      },
+      {
+        "title": "https://www.naqt.com/downloads/brief-rules.pdf",
+        "url": "https://www.naqt.com/downloads/brief-rules.pdf",
+        "retrieved_at": "2026-08-12",
+        "from_report": "docs/rules_lowconf_2026-08-12.md",
+        "authority": "unclassified",
+        "edition": "not_frozen",
+        "sections": [],
+        "archive_status": "locator_only_from_prior_report"
+      }
+    ],
+    "adaptations": [
+      "question-level evaluation only",
+      "no opposing team or buzzer hardware"
+    ],
+    "crawl_status": "fallback_notes",
+    "crawled_excerpts": [
+      {
+        "url": "https://github.com/Pinafore/qb",
+        "excerpt": "QANTA / Pinafore quiz-bowl AI project. Question-level corpus; no live buzzer harness. No electronic lookup during a match simulation. Short canonical answers."
+      }
+    ],
+    "enriched_at": "2026-08-12T16:53:55.321373+00:00",
+    "official_time_note": "Question-level quiz-bowl proxy.",
+    "research_confidence": "high",
+    "proxy_limitations": [
+      "Pyramidal tossups are a real-time buzz race against an opposing team; without a live opponent and a buzzer clock, the core scoring mechanic (early buzz versus neg risk) does not exist.",
+      "Power marks, 3-second answer windows, and 5-second bonus windows are wall-clock mechanisms with no turn-based equivalent.",
+      "Moderator prompting and answer-acceptability judgments are human calls that a string matcher approximates poorly."
+    ],
+    "research_merged_at": "2026-08-12T17:05:15.033129+00:00",
+    "research_reports": [
+      "docs/rules_crawl_2026-08-11.md",
+      "docs/rules_lowconf_2026-08-12.md"
+    ],
+    "research_notes": [
+      "QANTA is a research dataset over quiz bowl packets and publishes no contest rules of its own; the constraints above are the NAQT and ACF gameplay rules that govern the tournaments those packets come from.",
+      "Which ruleset applies to any particular QANTA question cannot be determined from the dataset, since the packets span many tournaments and formats.",
+      "Where the two bodies differ — powers, timed halves versus 20 untimed cycles, in-game note-taking, and substitution windows — the constraints record the shared rule or name both rather than picking one.",
+      "Underlying quiz bowl norms (NAQT/ACF-style): 4 active players, tossup interruptible reading, bonuses to scoring team — take from the packet’s governing organization rules when simulating.",
+      "You must behave like a human teammate under official contest rules.",
+      "Do not claim tools, internet, or materials that the rule card forbids.",
+      "Do not look up answer keys or hidden solutions.",
+      "QANTA is a research quiz-bowl dataset/project; not a live tournament rulebook.",
+      "Benchmark rows are question-level (eval_unit=question), not full matches."
+    ],
+    "research_graded_at": "2026-08-12",
+    "content_standard": {
+      "name": "icpc_three_component_content_standard",
+      "version": "1.1",
+      "applied_at": "2026-08-17",
+      "reference_card": "data/rules/icpc",
+      "official_facts_policy": "competition_specific_primary_sources_only",
+      "scope": [
+        "competition_constraints",
+        "collaboration_operations",
+        "evaluation_and_compliance",
+        "runtime_fidelity"
+      ]
+    },
+    "source_review": {
+      "reviewed_at": "2026-08-17",
+      "audit_report": "docs/rule_card_icpc_standard_gap_audit_2026-08-17.md",
+      "coverage_grade": "C",
+      "completion_status": "material_official_fields_remain_unverified",
+      "claim_policy": "unknown_official_values_remain_null_or_explicitly_unresolved",
+      "known_gaps": []
+    }
+  },
+  "comparability": {
+    "overall": "non_comparable",
+    "dimensions": {
+      "roster": "proxy",
+      "buzzer": "not_simulated",
+      "opponent": "not_simulated",
+      "tools": "equivalent",
+      "scoring": "gold",
+      "information": "shared_public_rules",
+      "deliberation": "unstructured_observation",
+      "communication": "unlimited_runner_channel"
+    }
+  },
+  "deliverable": {
+    "answer_format": "A short quiz-bowl style answer line. Prefer the canonical name; avoid sentences unless needed for disambiguation.",
+    "shared": true,
+    "mime_types": [
+      "text/plain"
+    ],
+    "task_types": [
+      "quizbowl"
+    ],
+    "official_deliverable": "spoken_answer",
+    "official_mime_types": [
+      "text/plain"
+    ]
+  }
+}

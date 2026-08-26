@@ -1,0 +1,205 @@
+{
+  "agent_roles": [
+    {
+      "name": "Agent_1",
+      "title": "captain",
+      "may_submit": true,
+      "duties": [
+        "Direct who answers and stop teammates from talking over each other.",
+        "Give the team's official answer once the group has settled.",
+        "Submit only after the format and rule checks pass."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "timeline",
+        "collaboration_protocol",
+        "deliverable_format"
+      ]
+    },
+    {
+      "name": "Agent_2",
+      "title": "primary solver",
+      "may_submit": false,
+      "duties": [
+        "Produce the first full attempt at the problem.",
+        "Show the reasoning so a teammate can check it."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "timeline"
+      ]
+    },
+    {
+      "name": "Agent_3",
+      "title": "secondary solver",
+      "may_submit": false,
+      "duties": [
+        "Attack the problem from a different angle than the primary solver.",
+        "Compare results and surface the disagreement early."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "resource_policy"
+      ]
+    },
+    {
+      "name": "Agent_4",
+      "title": "verifier",
+      "may_submit": false,
+      "duties": [
+        "Challenge weak arguments and demand an independent check.",
+        "Reject an answer rather than let an unverified one be submitted."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "evaluation_criteria",
+        "deliverable_format"
+      ]
+    },
+    {
+      "name": "Agent_5",
+      "title": "specialist",
+      "may_submit": false,
+      "duties": [
+        "Take the part of the task that matches your stated specialty.",
+        "Check a teammate's work once your own part is done."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "integrity_and_compliance"
+      ]
+    },
+    {
+      "name": "Agent_6",
+      "title": "scribe",
+      "may_submit": false,
+      "duties": [
+        "Keep the shared workspace readable and current.",
+        "Write answers in the required format as they are settled."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "deliverable_format",
+        "evaluation_criteria"
+      ]
+    },
+    {
+      "name": "Agent_7",
+      "title": "researcher",
+      "may_submit": false,
+      "duties": [
+        "Find and cite the authorities the argument depends on.",
+        "Bring counter-authority to the team before a judge does."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "integrity_and_compliance",
+        "resource_policy"
+      ]
+    }
+  ],
+  "rule_sections": {
+    "competition_format": [
+      "Competition model: The task represents a judged creative performance through a written proxy.",
+      "Mixed or unresolved rulesets: the runner permits 5 to 7 active agents and defaults to 7.",
+      "Source-recorded competition rule: Creative long-term / spontaneous problem solving under OM constraints.",
+      "Source-recorded competition rule: Scoring packets may be incomplete in public data; stay faithful to the public synopsis.",
+      "Source-recorded competition rule: Teams of up to 7 members under an adult coach; recommend ≥5; all who contributed stay on roster.",
+      "Source-recorded competition rule: Long-Term problems solved over weeks/months; Spontaneous solved on-site; Style scoring component.",
+      "Source-recorded competition rule: Full scoring packets / long-term specifics often membership-gated; public synopses only for many past problems.",
+      "Creative long-term / spontaneous problem solving under OM constraints.",
+      "Scoring packets may be incomplete in public data; stay faithful to the public synopsis.",
+      "Teams of up to 7 members under an adult coach; recommend ≥5; all who contributed stay on roster.",
+      "Long-Term problems solved over weeks/months; Spontaneous solved on-site; Style scoring component.",
+      "Full scoring packets / long-term specifics often membership-gated; public synopses only for many past problems."
+    ],
+    "timeline": [
+      "Benchmark adaptation: no official numeric duration is encoded in the available primary-source record; simulation.max_turns is only a runner safety budget."
+    ],
+    "resource_policy": [
+      "Source-recorded resource policy: Banned during the contest: internet access, calculators and running code. Paper and pencil are always available. Work only from the materials provided with the problem.",
+      "Do not claim tools, internet, or materials that the rule card forbids."
+    ],
+    "collaboration_protocol": [
+      "Source-recorded collaboration rule: Collaborate only within the team under contest rules.",
+      "Source-recorded competition rule: No outside assistance producing the solution for the team.",
+      "No outside assistance producing the solution for the team.",
+      "You must behave like a human teammate under official contest rules."
+    ],
+    "integrity_and_compliance": [
+      "Benchmark safety rule: do not use hidden solutions, evaluator internals, unauthorized outside assistance, or resources forbidden by this competition.",
+      "Source-recorded competition rule: No outside assistance producing the solution for the team.",
+      "Source-recorded competition rule: Outside assistance restrictions are central (coaches may not contribute ideas to the solution — details in Program Guide).",
+      "No outside assistance producing the solution for the team.",
+      "Outside assistance restrictions are central (coaches may not contribute ideas to the solution — details in Program Guide)."
+    ],
+    "deliverable_format": [
+      "Runner answer contract: Submit the complete team deliverable requested by the problem statement.",
+      "Official deliverable: long term performance.",
+      "Do not look up answer keys or hidden solutions."
+    ],
+    "evaluation_criteria": [
+      "Repository evaluation status: Task performance is specified per artifact in rubric mode, but the repository evaluator is unassigned; do not invent a completed score."
+    ],
+    "runtime_limitations": [
+      "Runtime limitation: Physical props, vehicles, structures, and live Spontaneous cannot be PDF-synopses-evaluated as equivalent.",
+      "Runtime limitation: Outside-assistance edge cases need the full Program Guide sections."
+    ]
+  },
+  "information_policy": {
+    "mode": "role_specialized",
+    "shared": [
+      "problem",
+      "contest_rules",
+      "team_discussion",
+      "scratchpad"
+    ],
+    "coordination_requirement": "All teammates may consult the complete public contest rules. Private reasoning becomes shared state only when communicated; assigned rule expertise creates tracking responsibility, not exclusive access."
+  },
+  "deliberation": {
+    "mode": "structured",
+    "min_challenges": 1,
+    "decision_maker": "submitter",
+    "evaluation_dimensions": [
+      "evidence_responsiveness",
+      "revision_after_challenge",
+      "decision_traceability",
+      "authority_bias",
+      "majority_bias"
+    ]
+  },
+  "agent_constraints": [
+    "Apply this competition's own roster, timing, tool, collaboration, submission, and scoring rules; do not import rules from another contest.",
+    "Collaborate only within the team under contest rules.",
+    "Banned during the contest: internet access, calculators and running code. Paper and pencil are always available. Work only from the materials provided with the problem.",
+    "Treat private reasoning and notes as unknown to teammates until you communicate the decision-relevant content.",
+    "Do not access hidden solutions, answer keys, evaluator internals, or unauthorized outside problem-solving help.",
+    "Separate authored text from physical props, staging, improvisation, and judge state, and do not claim that unexposed performance elements occurred.",
+    "Only designated submitters may make the shared submission: Agent_1.",
+    "Use only the official mechanisms that the current task actually exposes; do not claim physical, oral, live-opponent, judge, or environment actions that were not observed."
+  ],
+  "communication": {
+    "mode": "unlimited"
+  },
+  "simulation": {
+    "max_turns": 24,
+    "scheduler": "src_collaboration_draft",
+    "turn_budget_basis": "official clock n/a turns vs floor 19 (7 teammates x 2 turns + 1 answer parts + 4 for synthesis)",
+    "physical_performance_environment": "unavailable",
+    "outside_assistance_provenance": "specified_only"
+  }
+}

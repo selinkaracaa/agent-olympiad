@@ -31,6 +31,7 @@ sys.path.insert(0, str(REPO_ROOT / "src"))
 from collaboration import SCHEMAS
 from env import OlympiadEnvironment, TEAM_SIZE_MATRIX
 from llm import make_perplexity_caller, make_roster_caller, resolve_request_fn
+from rules import RulesMode
 from run_competition_batch import run_one
 from run_phase_a import PHASE_A_CASES
 
@@ -75,9 +76,23 @@ def team_size_for(competition: str, problem_id: str) -> int:
 
 
 def models_for_team(
-    team: str, schema: str, competition: str, problem_id: str
+    team: str,
+    schema: str,
+    competition: str,
+    problem_id: str,
+    *,
+    rules_mode: RulesMode | str = RulesMode.OFF,
+    rules_root: Path | None = None,
 ) -> dict[str, str]:
-    agents = agent_roster(schema, team_size_for(competition, problem_id))
+    env = OlympiadEnvironment(
+        competition, problem_id, rules_mode=rules_mode, rules_root=rules_root
+    )
+    if env.rule_card is not None and schema not in {
+        "single_agent", "self_consistency", "memory_solo", "liveoi_best_of_8", "subagent"
+    }:
+        agents = [role.name for role in env.rule_card.roster(env.team_size)]
+    else:
+        agents = agent_roster(schema, env.team_size)
     if team == "hetero":
         cycle = [TEAM_MODELS[k] for k in HETERO_CYCLE]
         return {name: cycle[i % len(cycle)] for i, name in enumerate(agents)}
@@ -85,8 +100,23 @@ def models_for_team(
     return {name: model for name in agents}
 
 
-def build_query_fn(team: str, schema: str, competition: str, problem_id: str):
-    roster = models_for_team(team, schema, competition, problem_id)
+def build_query_fn(
+    team: str,
+    schema: str,
+    competition: str,
+    problem_id: str,
+    *,
+    rules_mode: RulesMode | str = RulesMode.OFF,
+    rules_root: Path | None = None,
+):
+    roster = models_for_team(
+        team,
+        schema,
+        competition,
+        problem_id,
+        rules_mode=rules_mode,
+        rules_root=rules_root,
+    )
     default = TEAM_MODELS.get(team, TEAM_MODELS["gpt"])
     if team == "hetero":
         default = TEAM_MODELS["gpt"]
@@ -128,6 +158,13 @@ def main() -> None:
     parser.add_argument("--no-synthesize", action="store_true")
     parser.add_argument("--output", type=Path, default=None)
     parser.add_argument(
+        "--rules-mode",
+        default=RulesMode.OFF.value,
+        choices=[mode.value for mode in RulesMode],
+    )
+    parser.add_argument("--rules-root", type=Path, default=None)
+    parser.add_argument("--rules-strict", action="store_true")
+    parser.add_argument(
         "--resume",
         type=Path,
         default=None,
@@ -159,14 +196,20 @@ def main() -> None:
     out_path = out_dir / "phase_b_matrix.json"
 
     rows: list[dict] = []
-    done_keys: set[tuple[str, str, str, str]] = set()
+    done_keys: set[tuple[str, str, str, str, str]] = set()
     if args.resume and args.resume.exists():
         prior = json.loads(args.resume.read_text(encoding="utf-8"))
         rows = list(prior.get("results") or [])
         for r in rows:
             if r.get("status") == "ok":
                 done_keys.add(
-                    (r["team"], r["competition"], r["problem_id"], r["schema"])
+                    (
+                        r["team"],
+                        r["competition"],
+                        r["problem_id"],
+                        r["schema"],
+                        r.get("rules_mode", "off"),
+                    )
                 )
         out_path = args.resume
         out_dir = out_path.parent
@@ -195,7 +238,7 @@ def main() -> None:
         for team in teams:
             for schema in schemas:
                 cell_i += 1
-                key = (team, competition, problem_id, schema)
+                key = (team, competition, problem_id, schema, args.rules_mode)
                 label = (
                     f"[{cell_i}/{total_cells}] {competition}/{problem_id} · "
                     f"{team} · {schema}"
@@ -212,7 +255,12 @@ def main() -> None:
                     if not args.live:
                         raise SystemExit("Phase B matrix is live-only (needs API models).")
                     query_fn, roster = build_query_fn(
-                        team, schema, competition, problem_id
+                        team,
+                        schema,
+                        competition,
+                        problem_id,
+                        rules_mode=args.rules_mode,
+                        rules_root=args.rules_root,
                     )
                     row = run_one(
                         competition,
@@ -226,6 +274,9 @@ def main() -> None:
                         judge_collab=bool(args.judge_collab and args.live),
                         out_dir=out_dir,
                         progress=_progress,
+                        rules_mode=args.rules_mode,
+                        rules_root=args.rules_root,
+                        rules_strict=args.rules_strict,
                     )
                     row["team"] = team
                     row["agent_models"] = roster
@@ -270,6 +321,7 @@ def main() -> None:
                     "schemas": schemas,
                     "max_turns": args.max_turns,
                     "judge_collab": bool(args.judge_collab and args.live),
+                    "rules_mode": args.rules_mode,
                     "cases": [
                         {"competition": c, "problem_id": p} for c, p in cases
                     ],

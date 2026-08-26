@@ -1,0 +1,159 @@
+{
+  "schema_version": "1.0",
+  "rule_id": "cfa_research_challenge:draft_v1",
+  "competition_id": "cfa_research_challenge",
+  "profile": "proxy",
+  "protocol": "research_artifact",
+  "team": {
+    "active_min": 3,
+    "active_default": 4,
+    "active_max": 5,
+    "collaboration": "Collaborate only within the team under contest rules.",
+    "range_basis": "source_record"
+  },
+  "execution": {
+    "official_minutes": null
+  },
+  "allowed_tools": [
+    "query_rules",
+    "use_calculator",
+    "execute_code",
+    "web_search"
+  ],
+  "resources": {
+    "internet": "allowed",
+    "calculator": "allowed",
+    "code_execution": "allowed",
+    "paper_pencil": "allowed",
+    "provided_materials_only": false
+  },
+  "human_constraints": [
+    "Use only publicly available information.",
+    "Produce an equity research report / presentation artifact.",
+    "Advisor/mentor guidance is limited; outsiders must not write the report.",
+    "Support recommendations with evidence and valuation reasoning.",
+    "Team: 3–5 students at local kickoff; no alternates; undergrad/grad mix allowed.",
+    "Only team members may research the subject company; publicly available information only.",
+    "May use faculty advisor + industry mentor within timed caps (faculty ≤10h advisory before written report; mentor time capped in Rule 3.4); may not enlist other professionals to do the analysis.",
+    "AI allowed only with reflective/responsible disclosure (Appendix B); misrepresenting AI output as own analysis prohibited.",
+    "Deliverables: written equity research report + oral presentation to judges; local scoring often 50% written / 50% presentation.",
+    "Plagiarism ban; cite sources; IP/copyright obligations on third-party materials."
+  ],
+  "rules_text": "CFA Institute Research Challenge. The team researches, authors, and defends a judged artifact. The source-recorded active team may have 3 to 5 members; the runner default is 4. Collaborate only within the team under contest rules. Permitted: internet access, calculators and running code. Paper and pencil are always available. Submit one shared research report and deck; Submit a structured report or slide outline covering analysis, recommendation, and evidence. Treat unexposed physical, oral, live-opponent, judge, timing, or environment mechanisms as unavailable rather than simulated facts.",
+  "provenance": {
+    "status": "source_enriched_v1",
+    "sources": [
+      {
+        "title": "CFA Research Challenge",
+        "url": "https://www.cfainstitute.org/insights/events/research-challenge",
+        "retrieved_at": "2026-08-12",
+        "local_text": "data/rules/sources/cfa_research_challenge/01_research-challenge.txt",
+        "authority": "unclassified",
+        "edition": "not_frozen",
+        "sections": [],
+        "archive_status": "local_capture_available"
+      },
+      {
+        "title": "https://www.cfainstitute.org/sites/default/files/-/media/documents/support/research-challenge/challenge/research-challenge-official-rules.pdf",
+        "url": "https://www.cfainstitute.org/sites/default/files/-/media/documents/support/research-challenge/challenge/research-challenge-official-rules.pdf",
+        "retrieved_at": "2026-08-11",
+        "from_report": "docs/rules_crawl_2026-08-11.md",
+        "authority": "unclassified",
+        "edition": "not_frozen",
+        "sections": [],
+        "archive_status": "locator_only_from_prior_report"
+      },
+      {
+        "title": "https://www.cfainstitute.org/sites/default/files/docs/insights/events/rc-faculty-advisor-guidelines.pdf",
+        "url": "https://www.cfainstitute.org/sites/default/files/docs/insights/events/rc-faculty-advisor-guidelines.pdf",
+        "retrieved_at": "2026-08-11",
+        "from_report": "docs/rules_crawl_2026-08-11.md",
+        "authority": "unclassified",
+        "edition": "not_frozen",
+        "sections": [],
+        "archive_status": "locator_only_from_prior_report"
+      }
+    ],
+    "adaptations": [
+      "max_turns is a safety budget, not necessarily the official wall-clock limit",
+      "specialist roles are a research roster overlay",
+      "physical/oral/live opponent fidelity may be incomplete in src/",
+      "role-specific rule expertise is a benchmark coordination overlay",
+      "structured deliberation actions are a benchmark traceability overlay",
+      "limited communication is a benchmark pressure overlay, not an official message cap"
+    ],
+    "crawl_status": "ok",
+    "crawled_excerpts": [
+      {
+        "url": "https://www.cfainstitute.org/insights/events/research-challenge",
+        "excerpt": "Research Challenge | CFA Institute Skip to main content Employers Universities University students Sign In Create Account Open Search Overlay Close Search Overlay I'm looking for: Sign In Create Account Programs CFA® Program Overview Exam Dates & fees Curriculum Learning Ecosystem Career prospects Policies Registered candidate resources Enroll and register Other programs CIPM® Program Sustainable Investing Principles of Sustainable Investing (Chinese) 可持续投资基础证书 Climate Investing Private Markets "
+      }
+    ],
+    "enriched_at": "2026-08-12T16:53:55.312482+00:00",
+    "research_confidence": "high",
+    "proxy_limitations": [
+      "Paid terminals (Bloomberg etc.) and company info sessions are not freely replicable.",
+      "Mentor hour caps and oral defense Q&A are hard to simulate honestly."
+    ],
+    "research_merged_at": "2026-08-12T17:04:20.874219+00:00",
+    "rules_text_source": "composed_from_card_fields_v2",
+    "research_reports": [
+      "docs/rules_crawl_2026-08-11.md"
+    ],
+    "research_graded_at": "2026-08-11",
+    "content_standard": {
+      "name": "icpc_three_component_content_standard",
+      "version": "1.1",
+      "applied_at": "2026-08-17",
+      "reference_card": "data/rules/icpc",
+      "official_facts_policy": "competition_specific_primary_sources_only",
+      "scope": [
+        "competition_constraints",
+        "collaboration_operations",
+        "evaluation_and_compliance",
+        "runtime_fidelity"
+      ]
+    },
+    "research_notes": [
+      "You must behave like a human teammate under official contest rules.",
+      "Do not claim tools, internet, or materials that the rule card forbids.",
+      "Do not look up answer keys or hidden solutions."
+    ],
+    "source_review": {
+      "reviewed_at": "2026-08-17",
+      "audit_report": "docs/rule_card_icpc_standard_gap_audit_2026-08-17.md",
+      "coverage_grade": "B",
+      "completion_status": "primary_rules_partial_or_variant_selector_required",
+      "claim_policy": "unknown_official_values_remain_null_or_explicitly_unresolved",
+      "known_gaps": []
+    }
+  },
+  "comparability": {
+    "overall": "proxy",
+    "dimensions": {
+      "roster": "approximate",
+      "timing": "adapted",
+      "tools": "src_tool_surface",
+      "scoring": "rubric",
+      "environment": "partial",
+      "communication": "adapted_coordination_budget",
+      "deliberation": "structured_trace_overlay",
+      "information": "role_specialized_tracking_overlay"
+    }
+  },
+  "deliverable": {
+    "answer_format": "Submit a structured report or slide outline covering analysis, recommendation, and evidence.",
+    "shared": true,
+    "mime_types": [
+      "text/plain"
+    ],
+    "task_types": [
+      "equity_research"
+    ],
+    "official_deliverable": "research_report_and_deck",
+    "official_mime_types": [
+      "application/pdf",
+      "text/html"
+    ]
+  }
+}

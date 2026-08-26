@@ -7,6 +7,8 @@ from actions import apply_agent_response, build_action_instructions, extract_fin
 from contest_budget import resolve_contest_budget
 from env import TurnLimitExceededError
 from memory import MemoryStore
+from rules import AgentRole, RulesMode, agent_view
+from rules.describe import describe_resources
 
 SchemaName = Literal[
     "round_table",
@@ -62,12 +64,33 @@ class CollabConfig:
 
 
 def _apply_budget_config(env, config: CollabConfig) -> None:
+    configured_turns = (
+        config.rounds
+        if config.rounds is not None
+        else config.decentralized_events
+        if config.decentralized_events is not None
+        else config.max_turns
+        if config.max_turns is not None
+        else env.max_turns
+    )
     budget = resolve_contest_budget(
         env.competition_id,
-        max_turns=config.resolved_max_turns(env.competition_id),
-        max_api_calls=config.max_api_calls,
-        max_output_tokens_per_call=config.max_output_tokens_per_call,
-        max_total_tokens=config.max_total_tokens,
+        max_turns=configured_turns,
+        max_api_calls=(
+            config.max_api_calls
+            if config.max_api_calls is not None
+            else env.max_api_calls
+        ),
+        max_output_tokens_per_call=(
+            config.max_output_tokens_per_call
+            if config.max_output_tokens_per_call is not None
+            else env.max_output_tokens_per_call
+        ),
+        max_total_tokens=(
+            config.max_total_tokens
+            if config.max_total_tokens is not None
+            else env.max_total_tokens
+        ),
     )
     env.budget = budget
     env.max_turns = budget.max_turns
@@ -75,6 +98,31 @@ def _apply_budget_config(env, config: CollabConfig) -> None:
     env.max_output_tokens_per_call = budget.max_output_tokens_per_call
     env.max_total_tokens = budget.max_total_tokens
     env.record_budget_snapshot("budget_configured")
+
+
+def _roster(env) -> list[AgentRole]:
+    if getattr(env, "rule_card", None) is not None:
+        return env.rule_card.roster(env.team_size)
+    return [
+        AgentRole(
+            name=f"Agent_{index + 1}",
+            title="captain and synthesizer" if index == 0 else "team specialist",
+            duties=(),
+            may_submit=index == 0,
+        )
+        for index in range(env.team_size)
+    ]
+
+
+def _role_lookup(env, agent_name: str) -> AgentRole:
+    return next(
+        (role for role in _roster(env) if role.name == agent_name),
+        AgentRole(agent_name, agent_name, (), False),
+    )
+
+
+def _format_constraints(values: list[str]) -> str:
+    return "\n".join(f"- {value}" for value in values) or "(none listed)"
 
 
 def _system_prompt(env, role: str) -> str:
@@ -87,7 +135,49 @@ def _system_prompt(env, role: str) -> str:
     tools = build_action_instructions(
         env.get_available_tools(),
         programming_contest=programming_contest,
+        structured_deliberation=bool(
+            env.rules_mode is RulesMode.ENFORCED
+            and env.rule_card
+            and env.rule_card.deliberation.get("mode") == "structured"
+        ),
+        private_notes=env.rules_mode is RulesMode.ENFORCED,
     )
+    if env.rule_card is not None:
+        card = env.rule_card
+        visible = agent_view(card, team_size=env.team_size)
+        assigned = _role_lookup(env, role)
+        expertise = []
+        for category in assigned.rule_expertise:
+            expertise.append(f"{category.replace('_', ' ').title()}:")
+            expertise.extend(f"- {item}" for item in card.rule_sections.get(category, []))
+        resources = describe_resources(visible["resources"])
+        return (
+            f"You are {assigned.name}, title: {assigned.title}.\n"
+            f"You are a contestant on a {meta['competition_id']} team of "
+            f"{meta['team_size']} agents.\n"
+            f"Problem: {meta.get('title') or meta['problem_id']} "
+            f"({meta.get('year', 'n/a')})\n"
+            f"Runtime tools: {meta['allowed_tools'] or 'none'}\n\n"
+            f"Competition rule profile: {card.profile} ({card.protocol}).\n"
+            f"{card.rules_text}\n\n"
+            "=== CONTESTANT-VISIBLE COMPETITION RULES ===\n"
+            f"{_format_constraints(list(card.human_constraints))}\n"
+            f"{resources}\n\n"
+            "=== COLLABORATION AND RESOURCE RULES ===\n"
+            f"{_format_constraints(list(card.agent_constraints))}\n"
+            f"Declared tools: {list(card.allowed_tools) or 'none'}\n"
+            f"Communication policy: {card.communication}\n"
+            f"Deliberation policy: {card.deliberation}\n\n"
+            "=== YOUR ROLE DUTIES ===\n"
+            f"{_format_constraints(list(assigned.duties))}\n"
+            f"May submit final answer: {'yes' if assigned.may_submit else 'no'}\n"
+            + (
+                "\n=== YOUR RULE EXPERTISE ===\n" + "\n".join(expertise) + "\n"
+                if expertise
+                else ""
+            )
+            + f"\n{tools}"
+        )
     return (
         f"You are {role} on a {meta['competition_id']} team of {meta['team_size']} agents.\n"
         f"Problem: {meta.get('title') or meta['problem_id']} ({meta.get('year', 'n/a')})\n"
@@ -108,6 +198,11 @@ def _discussion_history(env) -> str:
 def _agent_user_prompt(env, agent_name: str, schema_note: str, extra: str = "") -> str:
     state = env.get_state()
     scratchpad = state["shared_workspace"].get("scratchpad") or "(empty)"
+    private_notes = (
+        env.get_private_notes(agent_name) or "(empty)"
+        if env.rules_mode is RulesMode.ENFORCED
+        else None
+    )
     observations = env.consume_agent_observations(agent_name)
     private_result = ""
     if observations:
@@ -122,6 +217,11 @@ def _agent_user_prompt(env, agent_name: str, schema_note: str, extra: str = "") 
             for item in observations
         )
         private_result = f"{heading}\n{rendered}\n\n"
+    private_section = (
+        f"=== YOUR PRIVATE NOTES ===\n{private_notes}\n\n"
+        if private_notes is not None
+        else ""
+    )
     return f"""{private_result}=== SCHEMA ===
 {schema_note}
 
@@ -134,6 +234,7 @@ def _agent_user_prompt(env, agent_name: str, schema_note: str, extra: str = "") 
 === SHARED SCRATCHPAD ===
 {scratchpad}
 
+{private_section}\
 === YOUR TURN ===
 You are {agent_name}.
 Turn budget (time): {state['turn_status']}
@@ -337,7 +438,7 @@ def run_round_table(env, query_llm_fn: QueryFn, config: CollabConfig | None = No
         "Round Table: all agents see full history; strict order within each turn. "
         "At most one LLM call per agent per turn (or sleep)."
     )
-    agents = [f"Agent_{i + 1}" for i in range(env.team_size)]
+    agents = [role.name for role in _roster(env)]
 
     while not _should_stop(env):
         if not env.can_begin_turn():
@@ -356,7 +457,15 @@ def run_round_table(env, query_llm_fn: QueryFn, config: CollabConfig | None = No
                 break
 
     if config.synthesize:
-        _run_synthesis(env, query, schema_note, "Agent_1", progress=config.progress)
+        submitters = {role.name for role in _roster(env) if role.may_submit}
+        _run_synthesis(
+            env,
+            query,
+            schema_note,
+            next(iter(submitters), agents[0]),
+            submitters=submitters,
+            progress=config.progress,
+        )
 
     return _result(env, "round_table")
 
@@ -373,8 +482,10 @@ def run_centralized(env, query_llm_fn: QueryFn, config: CollabConfig | None = No
         "Centralized: Group_Leader delegates; only leader submits final answer. "
         "At most one LLM call per agent per turn (or sleep)."
     )
-    leader = "Group_Leader"
-    workers = [f"Agent_{i + 1}" for i in range(1, env.team_size)]
+    roster = _roster(env)
+    leader_role = next((role for role in roster if role.may_submit), roster[0])
+    leader = leader_role.name if env.rule_card is not None else "Group_Leader"
+    workers = [role.name for role in roster if role.name != leader]
 
     plan = ""
     while not _should_stop(env):
@@ -388,8 +499,8 @@ def run_centralized(env, query_llm_fn: QueryFn, config: CollabConfig | None = No
             system = _system_prompt(env, leader)
             user = (
                 f"=== PROBLEM ===\n{state['problem_statement']}\n\n"
-                "You are the Group Leader. Assign sub-tasks to Agent_2 .. "
-                f"Agent_{env.team_size}. Output your delegation plan."
+                f"You are the coordinator. Assign sub-tasks to {workers}. "
+                "Output your delegation plan."
             )
             try:
                 plan = query(system, user)
@@ -421,7 +532,7 @@ def run_centralized(env, query_llm_fn: QueryFn, config: CollabConfig | None = No
             query,
             schema_note,
             leader,
-            submitters={"Group_Leader"},
+            submitters={leader},
             progress=config.progress,
         )
 
@@ -440,7 +551,7 @@ def run_decentralized(env, query_llm_fn: QueryFn, config: CollabConfig | None = 
         "Decentralized: no leader; peers update scratchpad/tools directly. "
         "At most one LLM call per agent per turn (or sleep)."
     )
-    agents = [f"Agent_{i + 1}" for i in range(env.team_size)]
+    agents = [role.name for role in _roster(env)]
 
     while not _should_stop(env):
         if not env.can_begin_turn():
@@ -462,7 +573,15 @@ def run_decentralized(env, query_llm_fn: QueryFn, config: CollabConfig | None = 
                 break
 
     if config.synthesize and not env.submitted:
-        _run_synthesis(env, query, schema_note, agents[0], progress=config.progress)
+        submitters = {role.name for role in _roster(env) if role.may_submit}
+        _run_synthesis(
+            env,
+            query,
+            schema_note,
+            next(iter(submitters), agents[0]),
+            submitters=submitters,
+            progress=config.progress,
+        )
 
     return _result(env, "decentralized")
 
@@ -839,7 +958,7 @@ def run_open_table_coach(
 
 
 def _result(env, schema: str) -> dict:
-    roster = [
+    fallback_roster = [
         {
             "name": f"Agent_{index + 1}",
             "title": "captain and synthesizer" if index == 0 else "team specialist",
@@ -864,7 +983,19 @@ def _result(env, schema: str) -> dict:
         "chat_messages": len(env.chat_history),
         "final_answer": env.workspace.get("final_answer", ""),
         "grade": env.grade_submission(),
-        "roster": roster,
+        "roster": (
+            [
+                {
+                    "name": role.name,
+                    "title": role.title,
+                    "may_submit": role.may_submit,
+                }
+                for role in _roster(env)
+            ]
+            if env.rule_card is not None
+            else fallback_roster
+        ),
+        **env.rules_metadata(),
     }
 
 

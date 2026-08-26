@@ -1,0 +1,170 @@
+{
+  "schema_version": "1.0",
+  "rule_id": "mystery_hunt:draft_v1",
+  "competition_id": "mystery_hunt",
+  "profile": "proxy",
+  "protocol": "progressive_release",
+  "team": {
+    "active_min": 8,
+    "active_default": 12,
+    "active_max": 12,
+    "collaboration": "The configured agents may freely coordinate inside their benchmark team; they may not obtain answers from another competing team.",
+    "range_basis": "benchmark_adaptation",
+    "official_roster_note": "The 2026 FAQ states no official team-size recommendation; 8-12 is only the runner's configured range."
+  },
+  "execution": {
+    "official_minutes": null,
+    "rules_edition": "2026"
+  },
+  "allowed_tools": [
+    "query_rules",
+    "execute_code",
+    "web_search"
+  ],
+  "resources": {
+    "internet": "allowed",
+    "calculator": "forbidden",
+    "code_execution": "allowed",
+    "paper_pencil": "allowed",
+    "provided_materials_only": false,
+    "external_teams": "forbidden"
+  },
+  "human_constraints": [
+    "The MIT Mystery Hunt does not publish an official team-size recommendation or an 8-12 person maximum.",
+    "Teams may coordinate internally and use ordinary solving tools and internet resources unless the current hunt or puzzle states a narrower rule.",
+    "A team must not ask another competing team for puzzle answers.",
+    "Answers must be submitted in the canonical answer form accepted by the current hunt's answer mechanism.",
+    "Remote participation does not reproduce every in-person interaction, and the in-person runaround is required to win the 2026 hunt.",
+    "The 2026 winner must satisfy the hunt's MIT-student eligibility requirement and is expected to write the following year's hunt."
+  ],
+  "rules_text": "MIT Mystery Hunt. The team works through material released in stages and commits answers under the event sequence. Benchmark adaptation: the runner permits 8 to 12 active agents and defaults to 12; official roster note: The 2026 FAQ states no official team-size recommendation; 8-12 is only the runner's configured range. The configured agents may freely coordinate inside their benchmark team; they may not obtain answers from another competing team. Banned during the contest: calculators and help from other teams. Permitted: internet access and running code. Paper and pencil are always available. Submit one shared puzzle answer; Submit the team's final answers in numbered order, using exact values when required. Open-ended hunt timing; this row is one puzzle. Treat unexposed physical, oral, live-opponent, judge, timing, or environment mechanisms as unavailable rather than simulated facts.",
+  "provenance": {
+    "status": "source_enriched_v1",
+    "sources": [
+      {
+        "title": "MIT Mystery Hunt 2026 official site and FAQ",
+        "url": "https://mitmh2026.com/",
+        "authority": "official",
+        "edition": "2026",
+        "retrieved_at": "2026-08-17",
+        "sections": [
+          "FAQ: team size, remote play, schedule, and win eligibility"
+        ],
+        "archive_status": "url_verified_local_binding_text_not_archived"
+      },
+      {
+        "title": "MIT Mystery Hunt and Puzzle Club official archive",
+        "url": "https://puzzles.mit.edu/",
+        "authority": "official",
+        "edition": "living archive",
+        "retrieved_at": "2026-08-17",
+        "sections": [
+          "Hunt identity, annual structure, coin, and winning-team responsibility"
+        ],
+        "archive_status": "archived",
+        "local_file": "data/rules/sources/mystery_hunt/01_puzzles.mit.txt"
+      }
+    ],
+    "adaptations": [
+      "max_turns is a safety budget, not necessarily the official wall-clock limit",
+      "specialist roles are a research roster overlay",
+      "physical/oral/live opponent fidelity may be incomplete in src/",
+      "role-specific rule expertise is a benchmark coordination overlay"
+    ],
+    "crawl_status": "ok",
+    "crawled_excerpts": [
+      {
+        "url": "https://puzzles.mit.edu/",
+        "excerpt": "MIT Mystery Hunt / Puzzle Club The MIT Mystery Hunt is a puzzlehunt competition that takes place on the MIT campus every year during the Martin Luther King, Jr. Day weekend . The hunt challenges each participating team to solve a large number of puzzles which lead to an object (called a \"coin\") hidden somewhere on campus. The winning team gets to write the subsequent year's hunt. Mystery Hunt was launched in 1981 and is widely regarded as one of the oldest and most complex puzzlehunts in the wor"
+      }
+    ],
+    "enriched_at": "2026-08-12T16:53:55.322283+00:00",
+    "official_time_note": "Open-ended hunt timing; this row is one puzzle.",
+    "research_confidence": "high",
+    "proxy_limitations": [
+      "Index team_size 12 is a modeling stub vs real 30–100+ teams.",
+      "Physical runarounds, interactions, and meta structure are out of scope for isolated puzzle rows.",
+      "Unrestricted web/tools make 'fair human comparison' poorly defined for LLM agents.",
+      "The configured 8-12-agent range is a benchmark capacity choice, not an official roster limit.",
+      "Question-level rows omit full-hunt unlocking, metas, hints, interactions, rate limits, runaround, and coin verification."
+    ],
+    "research_merged_at": "2026-08-12T17:04:21.282836+00:00",
+    "rules_text_source": "composed_from_card_fields_v2",
+    "research_reports": [
+      "docs/rules_crawl_2026-08-11.md"
+    ],
+    "research_graded_at": "2026-08-11",
+    "content_standard": {
+      "name": "icpc_three_component_content_standard",
+      "version": "1.1",
+      "applied_at": "2026-08-17",
+      "reference_card": "data/rules/icpc",
+      "official_facts_policy": "competition_specific_primary_sources_only",
+      "scope": [
+        "competition_constraints",
+        "collaboration_operations",
+        "evaluation_and_compliance",
+        "runtime_fidelity"
+      ]
+    },
+    "research_notes": [
+      "You must behave like a human teammate under official contest rules.",
+      "Do not claim tools, internet, or materials that the rule card forbids.",
+      "Do not look up answer keys or hidden solutions.",
+      "Benchmark is question-level puzzle subsample with answers, not a full hunt."
+    ],
+    "source_review": {
+      "reviewed_at": "2026-08-17",
+      "audit_report": "docs/rule_card_icpc_standard_gap_audit_2026-08-17.md",
+      "coverage_grade": "B",
+      "completion_status": "primary_rules_partial_or_variant_selector_required",
+      "claim_policy": "unknown_official_values_remain_null_or_explicitly_unresolved",
+      "known_gaps": [
+        "Annual hunt mechanics, hints, interactions, metas, runaround state, and coin-finding are not reproduced by the question-level benchmark."
+      ]
+    },
+    "discovery_sources": [
+      {
+        "title": "MIT Mystery Hunt",
+        "url": "https://puzzles.mit.edu/",
+        "retrieved_at": "2026-08-12",
+        "local_text": "data/rules/sources/mystery_hunt/01_puzzles.mit.txt"
+      },
+      {
+        "title": "https://mitmh2026.com/",
+        "url": "https://mitmh2026.com/",
+        "retrieved_at": "2026-08-11",
+        "from_report": "docs/rules_crawl_2026-08-11.md"
+      }
+    ],
+    "discard_pre_source_review_rule_sections": true,
+    "source_correction_revision": "2026-08-17-v1"
+  },
+  "comparability": {
+    "overall": "proxy",
+    "dimensions": {
+      "roster": "approximate",
+      "timing": "adapted",
+      "tools": "src_tool_surface",
+      "scoring": "gold",
+      "environment": "proxy",
+      "information": "role_specialized_tracking_overlay",
+      "deliberation": "unstructured_observation",
+      "communication": "unlimited_runner_channel"
+    }
+  },
+  "deliverable": {
+    "answer_format": "Submit the team's final answers in numbered order, using exact values when required.",
+    "shared": true,
+    "mime_types": [
+      "text/plain"
+    ],
+    "task_types": [
+      "puzzle"
+    ],
+    "official_deliverable": "puzzle_answer",
+    "official_mime_types": [
+      "text/plain"
+    ]
+  }
+}

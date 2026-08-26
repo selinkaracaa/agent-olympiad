@@ -1,0 +1,176 @@
+{
+  "schema_version": "1.0",
+  "rule_id": "pumac_power:draft_v1",
+  "competition_id": "pumac_power",
+  "profile": "proxy",
+  "protocol": "proof_packet",
+  "team": {
+    "active_min": 8,
+    "active_default": 8,
+    "active_max": 8,
+    "roster_max": 8,
+    "range_basis": "source_record",
+    "official_roster_note": "A full PUMaC team is exactly eight high-school students. Power-Only teams are also exactly eight; individuals may not apply to Power-Only. Members must be under 20 before the contest date and must not have been enrolled full-time in a post-secondary institution before that date.",
+    "collaboration": "All eight students on the team may collaborate freely on the Power Round; no one outside those eight may help."
+  },
+  "execution": {
+    "official_minutes": null,
+    "week_long_workflow": "official_not_reproduced_by_turn_budget",
+    "packet_instructions_control": "official_packet_overrides_card_on_conflict",
+    "computational_aids": "year_packet_dependent_default_deny"
+  },
+  "allowed_tools": [
+    "query_rules"
+  ],
+  "resources": {
+    "internet": "forbidden_unless_year_packet_explicitly_allows",
+    "calculator": "year_packet_dependent_not_exposed_by_default",
+    "code_execution": "year_packet_dependent_not_exposed_by_default",
+    "paper_pencil": "allowed",
+    "provided_materials_only": true,
+    "outside_resources": "forbidden_unless_test_says_otherwise",
+    "books": "forbidden_unless_test_says_otherwise",
+    "people_outside_the_eight": "forbidden"
+  },
+  "human_constraints": [
+    "Treat yourself as an eligible high-school PUMaC Power contestant: you have not reached your 20th birthday before the contest date and you have not been enrolled full-time in a post-secondary institution before that date.",
+    "A full team is exactly eight students; Power-Only teams are also exactly eight, and individuals may not apply to Power-Only.",
+    "Do not invent a ninth teammate, a half-team, or an outside collaborator.",
+    "Generally teams come from one high school, though a well-defined distant geographical team may be allowed; the PUMaC Director decides legitimacy and division placement.",
+    "All eight students may collaborate freely on the Power Round.",
+    "The Power Round is released online about a week before the competition; the due time is the time printed on the test.",
+    "As of 2023, solutions are submitted online at the time on the test, not handed in on competition day.",
+    "The official Power Round is a week-long take-home; this session's turn budget does not reproduce that week.",
+    "Use no outside resources unless the test says otherwise: no books, no internet searches, and no people outside your eight teammates.",
+    "Computational-aid rules vary by year and are only those printed in that year's Power Round instructions; do not import Individual Test or Team Test tool bans onto Power, and do not assume a calculator or other aid is allowed.",
+    "If these rules and the instructions printed on the Power Round conflict, follow the Power Round's own instructions.",
+    "Write full solutions with justification; an answer given without justification earns no credit unless the test states otherwise.",
+    "You may use an earlier part's result even if you could not prove it, but you must cite it explicitly, for example 'From Part II, Question 1'.",
+    "Contact organizers if you are unsure whether a major theorem may be stated without justification; the Power Test lists theorems that may be assumed.",
+    "Solutions may be handwritten or typed and must be printed on one side of the paper only.",
+    "Every page must show the team number and the problem number; the team name must not appear anywhere in the submission.",
+    "Submit exactly once; if multiple sets of solutions arrive, only the first received is graded.",
+    "Power-Only teams submit one file, PDF preferred, by the official channel and deadline for that year; Main Competition teams follow the submission path printed on that year's test."
+  ],
+  "rules_text": "You are an eligible high-school contestant on a fixed eight-person PUMaC Power team. You are under 20 and not a full-time post-secondary student before the contest date. Power-Only teams are also exactly eight people; individuals may not enter Power-Only. All eight of you may collaborate. The Power Round is released about a week before its due time, which is printed on the test; as of 2023 you submit online at that printed time, not on competition day. This session's turn budget does not reproduce that week. Use no books, internet, or people outside the eight unless the test says otherwise. Computational aids are only those the year's Power packet allows—default deny—and Individual or Team no-calculator rules do not apply here. If this briefing conflicts with the packet, follow the packet. Write full justifications; bare answers earn no credit unless the test says so. You may cite an earlier part you could not prove. Handwrite or type on one side of the page; label every page with team number and problem number; never print the team name. Submit exactly once; the first set received is graded. Treat unexposed physical, oral, live-opponent, judge, timing, or environment mechanisms as unavailable rather than simulated facts.",
+  "provenance": {
+    "status": "source_grounded",
+    "sources": [
+      {
+        "title": "PUMaC Competition Rules",
+        "url": "https://pumac.princeton.edu/competition-rules",
+        "authority": "official",
+        "edition": "current published Competition Rules, including the 2023+ online due-time note",
+        "archive_status": "official_url_verified_not_locally_archived",
+        "sections": [
+          "Eligibility - Full Teams",
+          "The Power Round",
+          "The Power-Only Competition",
+          "ELIGIBILITY",
+          "TEST RULES",
+          "SUBMISSION",
+          "SCORING"
+        ]
+      },
+      {
+        "title": "PUMaC Registration Info",
+        "url": "https://pumac.princeton.edu/registration-info",
+        "authority": "official",
+        "edition": "current published Registration Info, including PUMaC 2025 dates",
+        "archive_status": "official_url_verified_not_locally_archived",
+        "sections": [
+          "Basic Information",
+          "Important Dates for PUMaC 2025",
+          "Registration Types",
+          "Power Competition (full teams only)"
+        ]
+      },
+      {
+        "title": "PUMaC Problem and Result Archive",
+        "url": "https://jason-shi-f9dm.squarespace.com/archives",
+        "authority": "official",
+        "edition": "public Power Round archive directory",
+        "archive_status": "local_text_capture_available",
+        "local_text": "data/rules/sources/pumac_power/01_archives.txt",
+        "sections": [
+          "Directory",
+          "Power Round problem and solution listings by year"
+        ]
+      }
+    ],
+    "adaptations": [
+      "max_turns is a safety budget; the official Power Round is about one week and has no encoded minute clock",
+      "The week-long asynchronous eight-person workflow is not reproduced by the turn budget",
+      "Computational aids stay default-deny because the evaluated year's packet is the only authority and is not frozen here",
+      "Structured deliberation actions are a benchmark traceability overlay",
+      "Proof partial credit remains deferred without an attached year rubric"
+    ],
+    "official_time_note": null,
+    "research_confidence": "high",
+    "research_notes": [
+      "Do not import Individual Test or Team Test no-calculator / no-tools rules onto Power.",
+      "Year-specific computational-aid language and the exact due timestamp live on that year's Power packet.",
+      "2025 registration info lists Power released Thursday 13 November 2025 and due Thursday 20 November 2025; those dates are season examples, not a frozen clock for every benchmark row.",
+      "Eligibility, Director division placement, and payment or no-show sanctions are role-immersion text, not executable logistics."
+    ],
+    "proxy_limitations": [
+      "A week-long take-home by eight people is not mapped onto 24 turns.",
+      "Hand-graded proof partial credit is not reproduced by a gold-answer matcher.",
+      "One-sided pages, team-number labels, and name-anonymity deductions have no physical analogue in a plain-text submission.",
+      "The evaluated year's Power packet is not archived as the computational-aid authority."
+    ],
+    "content_standard": {
+      "name": "icpc_three_component_content_standard",
+      "version": "1.1",
+      "applied_at": "2026-08-17",
+      "reference_card": "data/rules/icpc",
+      "official_facts_policy": "competition_specific_primary_sources_only",
+      "scope": [
+        "competition_constraints",
+        "collaboration_operations",
+        "evaluation_and_compliance",
+        "runtime_fidelity"
+      ]
+    },
+    "source_review": {
+      "reviewed_at": "2026-08-17",
+      "audit_report": "docs/rule_card_icpc_standard_gap_audit_2026-08-17.md",
+      "coverage_grade": "B",
+      "completion_status": "primary_rules_partial_or_variant_selector_required",
+      "claim_policy": "unknown_official_values_remain_null_or_explicitly_unresolved",
+      "known_gaps": [
+        "The evaluated year's Power packet, which controls computational aids and the exact due time, is not locally archived as a rules source.",
+        "Official proof partial-credit rubrics remain deferred.",
+        "The 24-turn run is an adaptation of a week-long take-home."
+      ]
+    }
+  },
+  "comparability": {
+    "overall": "proxy",
+    "dimensions": {
+      "roster": "official",
+      "timing": "adapted_turn_budget",
+      "tools": "year_packet_dependent_default_deny",
+      "scoring": "deferred_proof_rubric",
+      "environment": "week_long_workflow_not_reproduced",
+      "deliberation": "structured_trace_overlay",
+      "information": "shared_equal_contestants",
+      "communication": "unlimited_runner_channel",
+      "eligibility_and_logistics": "role_immersion_text_only"
+    }
+  },
+  "deliverable": {
+    "answer_format": "Submit a numbered proof packet with a complete justification for every claimed result, explicit references to earlier parts, and the required anonymous page labels.",
+    "shared": true,
+    "mime_types": [
+      "text/plain"
+    ],
+    "task_types": [
+      "proof_packet"
+    ],
+    "official_deliverable": "proof_packet",
+    "official_mime_types": [
+      "text/plain"
+    ]
+  }
+}

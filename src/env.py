@@ -7,6 +7,7 @@ import subprocess
 from pathlib import Path
 from typing import Any, Optional
 
+from communication import CommunicationBudget
 from contest_budget import (
     ContestBudget,
     estimate_tokens,
@@ -14,6 +15,8 @@ from contest_budget import (
     truncate_to_token_budget,
 )
 from contest_rules import get_contest_rules
+from deliberation import DELIBERATION_ACTIONS, DeliberationLedger
+from rules import RulesBaseline, RulesMode
 from tools_search import live_web_search, looks_like_answer_lookup
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -72,6 +75,7 @@ COMPETITION_ACTION_REGISTRY = {
 ALL_ACTIONS = {
     "speak",
     "write_scratchpad",
+    "write_private_notes",
     "submit_final",
     "submit_code",
     "sleep",
@@ -80,14 +84,17 @@ ALL_ACTIONS = {
     "web_search",
     "read_lab_equipment",
     "read_star_chart",
-}
+    "query_rules",
+} | DELIBERATION_ACTIONS
 
 TOOL_ACTIONS = ALL_ACTIONS - {
     "speak",
     "write_scratchpad",
+    "write_private_notes",
     "submit_final",
     "submit_code",
     "sleep",
+    *DELIBERATION_ACTIONS,
 }
 
 _SAFE_BINOPS = {
@@ -124,14 +131,31 @@ class OlympiadEnvironment:
         max_api_calls: int | None = None,
         max_output_tokens_per_call: int | None = None,
         max_total_tokens: int | None = None,
+        rules_mode: RulesMode | str = RulesMode.OFF,
+        rules_root: str | Path | None = None,
+        rules_strict: bool = False,
     ):
         self.competition_id = competition_id
         self.problem_id = problem_id
         self.base_path = base_path
+        self.rules_baseline = RulesBaseline.resolve(
+            competition_id,
+            mode=rules_mode,
+            rules_root=rules_root,
+            strict=rules_strict,
+        )
+        self.rules_mode = self.rules_baseline.mode
+        self.rule_card = self.rules_baseline.card
 
         budget = resolve_contest_budget(
             competition_id,
-            max_turns=max_turns,
+            max_turns=(
+                max_turns
+                if max_turns is not None
+                else self.rule_card.max_turns
+                if self.rule_card is not None
+                else None
+            ),
             max_api_calls=max_api_calls,
             max_output_tokens_per_call=max_output_tokens_per_call,
             max_total_tokens=max_total_tokens,
@@ -149,6 +173,13 @@ class OlympiadEnvironment:
         self.action_log: list[dict[str, Any]] = []
         self.agent_observations: dict[str, list[dict[str, Any]]] = {}
         self.budget_snapshots: list[dict[str, Any]] = []
+        self.deliberation = DeliberationLedger()
+        self.communication = CommunicationBudget(
+            self.rule_card.communication
+            if self.rule_card is not None and self.rules_mode is RulesMode.ENFORCED
+            else {}
+        )
+        self.private_notes: dict[str, str] = {}
         self.workspace = {"scratchpad": "", "final_answer": ""}
         self.current_turn = 0  # collaboration turns completed
         self.action_count = 0  # env actions executed (speak/tools/etc.)
@@ -161,37 +192,64 @@ class OlympiadEnvironment:
         self.rule_violations: list[str] = []
         self.contest_rules = get_contest_rules(competition_id)
 
-        self.allowed_tools = list(COMPETITION_TOOL_REGISTRY.get(competition_id, []))
+        if self.rule_card is not None and self.rules_mode is RulesMode.ENFORCED:
+            self.unavailable_declared_tools = sorted(
+                set(self.rule_card.allowed_tools) - TOOL_ACTIONS
+            )
+            self.allowed_tools = [
+                tool for tool in self.rule_card.allowed_tools if tool in TOOL_ACTIONS
+            ]
+        else:
+            self.unavailable_declared_tools = []
+            self.allowed_tools = list(COMPETITION_TOOL_REGISTRY.get(competition_id, []))
         # Prefer tools declared in the rules audit when registry is empty but
         # rules list encoded tools (keeps DATA_COLLECTION + contest_rules aligned).
-        if not self.allowed_tools and self.contest_rules and self.contest_rules.encoded_tools:
+        if (
+            self.rules_mode is not RulesMode.ENFORCED
+            and not self.allowed_tools
+            and self.contest_rules
+            and self.contest_rules.encoded_tools
+        ):
             self.allowed_tools = list(self.contest_rules.encoded_tools)
         self.problem_data = self._load_problem()
 
         problem_team_size = self.problem_data.get("team_size")
-        self.team_size = self._resolve_team_size(problem_team_size, competition_id)
+        self.team_size = self._resolve_team_size(
+            problem_team_size,
+            competition_id,
+            default_size=self.rule_card.team_size_default if self.rule_card else None,
+        )
+        if self.rule_card is not None and not (
+            self.rule_card.team_size_min <= self.team_size <= self.rule_card.team_size_max
+        ):
+            raise RuleCardError(
+                f"Problem {problem_id!r} team_size={self.team_size} is outside rule-card "
+                f"range {self.rule_card.team_size_min}-{self.rule_card.team_size_max}."
+            )
         self.record_budget_snapshot("initialized")
 
     @staticmethod
-    def _resolve_team_size(raw: Any, competition_id: str) -> int:
+    def _resolve_team_size(
+        raw: Any, competition_id: str, *, default_size: int | None = None
+    ) -> int:
         if raw is None:
-            return TEAM_SIZE_MATRIX.get(competition_id, 3)
+            return default_size or TEAM_SIZE_MATRIX.get(competition_id, 3)
         if isinstance(raw, int):
             return raw
         text = str(raw).strip()
         if not text:
-            return TEAM_SIZE_MATRIX.get(competition_id, 3)
+            return default_size or TEAM_SIZE_MATRIX.get(competition_id, 3)
         if "-" in text:
             # Ranges like "2-5" → use upper bound for agent count.
             parts = text.split("-", 1)
             try:
                 return int(parts[1].strip())
             except ValueError:
-                return TEAM_SIZE_MATRIX.get(competition_id, 3)
+                return default_size or TEAM_SIZE_MATRIX.get(competition_id, 3)
         try:
             return int(text)
         except ValueError:
-            return TEAM_SIZE_MATRIX.get(competition_id, 3)
+            return default_size or TEAM_SIZE_MATRIX.get(competition_id, 3)
 
     def _problem_statement(self) -> str:
         for key in ("problem_description", "description", "prompt", "topic"):
@@ -225,9 +283,49 @@ class OlympiadEnvironment:
     def get_available_tools(self) -> list[str]:
         return list(self.allowed_tools)
 
+    def rules_metadata(self) -> dict[str, Any]:
+        metadata = self.rules_baseline.metadata()
+        metadata["declared_tool_availability"] = {
+            tool: (
+                "unavailable"
+                if tool in self.unavailable_declared_tools
+                else "enforced"
+                if self.rules_mode is RulesMode.ENFORCED
+                else "prompt_only"
+            )
+            for tool in (self.rule_card.allowed_tools if self.rule_card else ())
+        }
+        return metadata
+
+    def query_rules(self, agent_name: str | None = None) -> str:
+        if self.rule_card is None:
+            return json.dumps(
+                {
+                    "competition_id": self.competition_id,
+                    "allowed_tools": self.get_available_tools(),
+                    "note": "No rule-aware baseline card is active.",
+                },
+                ensure_ascii=False,
+                indent=2,
+            )
+        from rules import agent_view
+
+        visible = agent_view(self.rule_card, team_size=self.team_size)
+        if agent_name:
+            role = self.rule_card.role_for(agent_name)
+            if role:
+                visible["your_role"] = {
+                    "name": role.name,
+                    "title": role.title,
+                    "duties": list(role.duties),
+                    "may_submit": role.may_submit,
+                    "rule_expertise": list(role.rule_expertise),
+                }
+        return json.dumps(visible, ensure_ascii=False, indent=2)
+
     def get_metadata(self) -> dict:
         rules = self.contest_rules
-        return {
+        metadata = {
             "competition_id": self.competition_id,
             "problem_id": self.problem_id,
             "title": self.problem_data.get("title"),
@@ -244,7 +342,13 @@ class OlympiadEnvironment:
             "duration_minutes": self.duration_minutes,
             "max_turns": self.max_turns,
             "minutes_per_turn": self.minutes_per_turn,
+            **self.rules_metadata(),
         }
+        if self.rule_card is not None:
+            from rules import agent_view
+
+            metadata["rule"] = agent_view(self.rule_card, team_size=self.team_size)
+        return metadata
 
     def get_state(self) -> dict:
         api_status = (
@@ -270,6 +374,8 @@ class OlympiadEnvironment:
             "problem_statement": self._problem_statement(),
             "chat_logs": list(self.chat_history),
             "shared_workspace": dict(self.workspace),
+            "deliberation": self.deliberation.report(),
+            "communication": self.communication.report(),
             "turn_status": f"{self.current_turn}/{self.max_turns}",
             "api_call_status": api_status,
             "token_status": token_status,
@@ -339,6 +445,9 @@ class OlympiadEnvironment:
             },
             "workspace": dict(self.workspace),
             "rule_violations": list(self.rule_violations),
+            "deliberation": self.deliberation.report(),
+            "communication": self.communication.report(),
+            "rules_baseline": self.rules_metadata(),
         }
 
     def turns_exhausted(self) -> bool:
@@ -397,7 +506,10 @@ class OlympiadEnvironment:
 
     def _log_action(self, agent_name: str, action_type: str, payload: str, result: str) -> None:
         visibility = (
-            "private" if action_type in TOOL_ACTIONS or action_type == "submit_code" else "team"
+            "private"
+            if action_type in TOOL_ACTIONS
+            or action_type in {"submit_code", "write_private_notes"}
+            else "team"
         )
         entry = {
             "turn": self.current_turn,
@@ -419,10 +531,19 @@ class OlympiadEnvironment:
                 }
             )
 
-    def validate_action(self, action_type: str) -> Optional[str]:
+    def validate_action(self, action_type: str, agent_name: str | None = None) -> Optional[str]:
         if action_type not in ALL_ACTIONS:
             return f"Unrecognized action '{action_type}'."
-        if action_type in TOOL_ACTIONS and action_type not in self.allowed_tools:
+        if (
+            self.rules_mode is not RulesMode.ENFORCED
+            and action_type in DELIBERATION_ACTIONS | {"write_private_notes"}
+        ):
+            return f"Unrecognized action '{action_type}'."
+        if (
+            self.rules_mode is not RulesMode.PROMPT_ONLY
+            and action_type in TOOL_ACTIONS
+            and action_type not in self.allowed_tools
+        ):
             return (
                 f"RULE VIOLATION: Tool '{action_type}' is banned in {self.competition_id}. "
                 f"Allowed tools: {self.allowed_tools or 'none (paper and pencil only)'}"
@@ -431,6 +552,27 @@ class OlympiadEnvironment:
             self.competition_id, []
         ):
             return f"RULE VIOLATION: submit_code is unavailable in {self.competition_id}."
+        if (
+            self.rules_mode is RulesMode.ENFORCED
+            and action_type in DELIBERATION_ACTIONS
+            and not (
+                self.rule_card
+                and self.rule_card.deliberation.get("mode") == "structured"
+            )
+        ):
+            return (
+                f"RULE VIOLATION: Structured deliberation action '{action_type}' "
+                f"is not enabled for {self.competition_id}."
+            )
+        if (
+            self.rules_mode is RulesMode.ENFORCED
+            and action_type == "submit_final"
+            and agent_name is not None
+            and self.rule_card is not None
+        ):
+            role = self.rule_card.role_for(agent_name)
+            if role is None or not role.may_submit:
+                return f"RULE VIOLATION: {agent_name} is not authorized to submit."
         if action_type == "submit_final" and self.submitted:
             return "Submission already finalized; further submit_final actions are ignored."
         return None
@@ -438,10 +580,22 @@ class OlympiadEnvironment:
     def execute_action(self, agent_name: str, action_type: str, payload: str) -> str:
         self.action_count += 1
 
-        violation = self.validate_action(action_type)
+        violation = self.validate_action(action_type, agent_name)
         if violation:
+            self.rule_violations.append(violation)
             self._log_action(agent_name, action_type, payload, violation)
             return violation
+
+        communication_violation = self.communication.check(
+            agent_name=agent_name,
+            action_type=action_type,
+            payload=payload,
+            turn=self.current_turn,
+        )
+        if communication_violation:
+            self.rule_violations.append(communication_violation)
+            self._log_action(agent_name, action_type, payload, communication_violation)
+            return communication_violation
 
         if action_type == "speak":
             self.chat_history.append({"sender": agent_name, "message": payload})
@@ -449,6 +603,18 @@ class OlympiadEnvironment:
         elif action_type == "write_scratchpad":
             self.workspace["scratchpad"] = payload
             result = "Shared scratchpad updated."
+        elif action_type == "write_private_notes":
+            self.private_notes[agent_name] = payload
+            result = "Private notes updated; no communication budget used."
+        elif action_type in DELIBERATION_ACTIONS:
+            role = self.rule_card.role_for(agent_name) if self.rule_card else None
+            result = self.deliberation.record(
+                agent_name=agent_name,
+                action_type=action_type,
+                payload=payload,
+                turn=self.current_turn,
+                may_decide=bool(role and role.may_submit),
+            )
         elif action_type == "sleep":
             reason = payload.strip() or "passing this turn"
             result = f"{agent_name} sleeps ({reason})."
@@ -489,11 +655,20 @@ class OlympiadEnvironment:
                     "Add problem assets/tool_fixtures with chart data."
                 )
             )
+        elif action_type == "query_rules":
+            result = self.query_rules(agent_name)
         else:
             result = f"Operational error: action '{action_type}' not implemented."
 
+        if not result.startswith("Deliberation error:"):
+            self.communication.record(agent_name=agent_name, action_type=action_type)
+        else:
+            self.rule_violations.append(result)
         self._log_action(agent_name, action_type, payload, result)
         return result
+
+    def get_private_notes(self, agent_name: str) -> str:
+        return self.private_notes.get(agent_name, "")
 
     def _run_web_search(self, payload: str) -> str:
         """Live search with contest policy + answer-key anti-cheat."""
@@ -632,8 +807,6 @@ class OlympiadEnvironment:
     def _eval_ast(node: ast.AST) -> float:
         if isinstance(node, ast.Constant) and isinstance(node.value, (int, float)):
             return float(node.value)
-        if isinstance(node, ast.Num):
-            return float(node.n)
         if isinstance(node, ast.BinOp) and type(node.op) in _SAFE_BINOPS:
             left = OlympiadEnvironment._eval_ast(node.left)
             right = OlympiadEnvironment._eval_ast(node.right)
@@ -772,6 +945,9 @@ class OlympiadEnvironment:
         self.action_log.clear()
         self.agent_observations.clear()
         self.budget_snapshots.clear()
+        self.deliberation.reset()
+        self.communication.reset()
+        self.private_notes.clear()
         self.workspace = {"scratchpad": "", "final_answer": ""}
         self.current_turn = 0
         self.simulated_minutes = 0.0

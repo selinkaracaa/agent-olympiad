@@ -1,0 +1,161 @@
+{
+  "schema_version": "1.0",
+  "rule_id": "ioaa_group:draft_v1",
+  "competition_id": "ioaa_group",
+  "profile": "proxy",
+  "protocol": "shared_answer",
+  "team": {
+    "active_min": 5,
+    "active_default": 5,
+    "active_max": 5,
+    "collaboration": "Equal contestants assigned to one international group team collaborate on the host-designed task and produce one shared answer.",
+    "range_basis": "mixed_or_unresolved",
+    "official_roster_note": "Statute 13 requires at least five students from different countries, randomized when possible. Exact size is host-year specific; the 2023 packet used five-person asteroid teams. This card models five active contestants and does not freeze five as a universal official maximum."
+  },
+  "execution": {
+    "official_minutes": null,
+    "required_selectors": [
+      "host_year"
+    ],
+    "host_year_packet": "required",
+    "edition_example_note": "The 2023 Group Competition packet is an edition example only: random 5-person asteroid teams; sealed envelopes opened on START; 90-minute maximum; shortest total time after task-specific time penalties; organizer-provided calculator, office supplies, geometrical instruments, paper, and constants table. Those values are not a current universal official clock, roster, or scoring rule."
+  },
+  "allowed_tools": [
+    "query_rules",
+    "use_calculator",
+    "read_star_chart"
+  ],
+  "resources": {
+    "internet": "forbidden",
+    "calculator": "allowed",
+    "personal_calculator": "forbidden",
+    "code_execution": "forbidden",
+    "paper_pencil": "allowed",
+    "provided_materials_only": true
+  },
+  "human_constraints": [
+    "Treat yourself as an IOAA contestant assigned to an international group team, classified separately from the individual theoretical and practical competitions.",
+    "Your team has at least five students, each from a different country; members are selected randomly when possible.",
+    "The host designs the group task; it may include theoretical, practical, or observational work, or a combination.",
+    "Collaborate only with your assigned international teammates; do not communicate with other teams.",
+    "When the host provides a table kit, use only that kit—organizer calculator, office supplies, geometry instruments, paper, and constants—and do not bring a personal calculator or a formula collection.",
+    "Treat star charts and data tables as official provided materials only.",
+    "Enter final answers in the marked boxes on the dedicated answer sheets, with units when the sheet requires them.",
+    "This year's exact clock, scoring, and kit are issued by the host; do not invent a universal time limit or scoring formula from another year's packet."
+  ],
+  "rules_text": "You are an IOAA contestant assigned to an international group team. Your teammates come from different countries, and the team has at least five students, chosen randomly when possible. The host designs this year's group task; it may be theoretical, practical, observational, or a combination, and it is classified separately from the individual theory and practical papers. Work only with your assigned teammates at the shared table. Use organizer-provided materials when the host supplies a kit; do not bring a personal calculator or a formula collection. Box final answers as the answer sheet requires. This year's exact clock, scoring, and kit are issued by the host; a past year's packet is only an example. Do not invent a universal time limit or scoring formula. Treat unexposed physical, oral, live-opponent, judge, timing, or environment mechanisms as unavailable rather than simulated facts.",
+  "provenance": {
+    "status": "source_grounded",
+    "sources": [
+      {
+        "title": "Statutes of the International Olympiad on Astronomy and Astrophysics",
+        "url": "https://www.ioaa2026.vn/en/ioaa-statutes",
+        "authority": "official",
+        "edition": "current page retrieved 2026-08-19; binding booklet not archived",
+        "retrieved_at": "2026-08-19",
+        "sections": [
+          "#4 regular national team of at most five students",
+          "#9 individual theoretical and practical materials (drawing materials and contestant-brought non-programmable calculators; formula collections forbidden)",
+          "#13 international-team / group event: at least five students from different countries, randomized when possible, host-designed task, separate classification, award for the best international team"
+        ],
+        "archive_status": "official_url_verified_not_locally_archived"
+      },
+      {
+        "title": "16th IOAA 2023 Group Competition packet",
+        "url": "https://cdn.ioaastrophysics.org/assets/IOAA%20problems/16th%20IOAA%202023/Group%20Competition%202023%20IOAA.pdf",
+        "authority": "official",
+        "edition": "2023 host packet; edition example only, not a universal current ruleset",
+        "retrieved_at": "2026-08-19",
+        "sections": [
+          "Instructions, English official I0-1 (5-person asteroid teams; sealed envelopes; START clock; 90-minute maximum; shortest total time after time penalties; no communication with other teams; provided kit; boxed answers)",
+          "Table of constants C0-1 to C0-4",
+          "Questions 1-6 with task-specific time penalties"
+        ],
+        "archive_status": "official_url_verified_not_locally_archived"
+      },
+      {
+        "title": "IOAA organisation and governance",
+        "url": "https://ioaastrophysics.org/about-ioaa/organisation-and-governance",
+        "authority": "official",
+        "edition": "current page retrieved 2026-08-12; does not bind group-task mechanics",
+        "retrieved_at": "2026-08-12",
+        "sections": [
+          "organisation overview"
+        ],
+        "archive_status": "local_text_capture_available",
+        "local_text": "data/rules/sources/ioaa_group/01_organisation-and-governance.txt"
+      }
+    ],
+    "adaptations": [
+      "max_turns is a safety budget rather than an official wall-clock limit",
+      "five equal contestants is a modeled size meeting the statute minimum; it is not a frozen universal official maximum",
+      "use_calculator and read_star_chart stand in for organizer-provided calculator and chart materials",
+      "a personal calculator is banned in this session when a host kit is provided",
+      "structured deliberation actions are a benchmark traceability overlay",
+      "limited communication is a benchmark pressure overlay, not an official message cap"
+    ],
+    "official_time_note": "The group task is host-designed; the 90-minute 2023 example is not a universal current duration.",
+    "research_confidence": "medium",
+    "research_notes": [
+      "Statute 9 (drawing materials and contestant-brought non-programmable calculators; no formula collections) governs the individual theoretical and practical papers. It is not automatically the group-event kit rule.",
+      "The 2023 packet is an edition example: random 5-person asteroid teams; sealed envelopes opened on START; 90-minute maximum; shortest total time after task-specific time penalties; calculator, office supplies, geometrical instruments, paper, and constants provided on the table; dedicated boxed answer sheets; no communication with other teams.",
+      "2023 task-specific penalties included, among others, +1 minute for a wrong crossword entry and +15 minutes for a missing or incorrect Arecibo-message answer. Those penalties are 2023 task text, not a universal official formula.",
+      "Collected 2025 group material involves physical radio-telescope work, which shows that host-year tasks can differ sharply from the 2023 paper packet.",
+      "A host-year selector is required before treating duration, exact size, kit, or scoring as official for a given benchmark row."
+    ],
+    "proxy_limitations": [
+      "Time-ranked scoring with penalties needs a real wall clock and answer-sheet workflow.",
+      "Star charts, geometric instruments, provided-calculator model quirks, sealed envelopes, and physical or observational apparatus are underspecified in text simulation.",
+      "Cross-country random assignment and other-team isolation are role text, not a runtime state machine."
+    ],
+    "content_standard": {
+      "name": "icpc_three_component_content_standard",
+      "version": "1.1",
+      "applied_at": "2026-08-17",
+      "reference_card": "data/rules/icpc",
+      "official_facts_policy": "competition_specific_primary_sources_only",
+      "scope": [
+        "competition_constraints",
+        "collaboration_operations",
+        "evaluation_and_compliance",
+        "runtime_fidelity"
+      ]
+    },
+    "source_review": {
+      "reviewed_at": "2026-08-17",
+      "audit_report": "docs/rule_card_icpc_standard_gap_audit_2026-08-17.md",
+      "coverage_grade": "B",
+      "completion_status": "primary_rules_partial_or_variant_selector_required",
+      "claim_policy": "unknown_official_values_remain_null_or_explicitly_unresolved",
+      "known_gaps": []
+    }
+  },
+  "comparability": {
+    "overall": "proxy",
+    "dimensions": {
+      "roster": "statute_minimum_five_modeled",
+      "timing": "adapted_turn_budget",
+      "tools": "src_tool_surface",
+      "scoring": "gold_proxy_not_time_ranked",
+      "environment": "host_year_packet_required",
+      "communication": "adapted_coordination_budget",
+      "deliberation": "structured_trace_overlay",
+      "information": "shared_equal_contestants",
+      "host_year": "selector_required"
+    }
+  },
+  "deliverable": {
+    "answer_format": "Submit the team's final answers in numbered order, using exact values when required.",
+    "shared": true,
+    "mime_types": [
+      "text/plain"
+    ],
+    "task_types": [
+      "team_contest"
+    ],
+    "official_deliverable": "worked_answers",
+    "official_mime_types": [
+      "text/plain"
+    ]
+  }
+}

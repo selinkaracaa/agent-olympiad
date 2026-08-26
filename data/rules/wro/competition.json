@@ -1,0 +1,198 @@
+{
+  "schema_version": "1.0",
+  "rule_id": "wro:draft_v1",
+  "competition_id": "wro",
+  "profile": "non_comparable",
+  "protocol": "robotics_rules_proxy",
+  "team": {
+    "active_min": 2,
+    "active_default": 3,
+    "active_max": 3,
+    "collaboration": "The two or three student members design, build, and program the robot; a coach may guide learning but may not build or program it for the team.",
+    "range_basis": "source_record",
+    "official_roster_note": "A 2026 RoboMission team consists of two or three students and is guided by a coach."
+  },
+  "execution": {
+    "official_minutes": null,
+    "required_selectors": [
+      "season",
+      "category",
+      "age_group",
+      "jurisdiction",
+      "game_document",
+      "q_and_a_snapshot"
+    ],
+    "rules_edition": "2026_robomission_general",
+    "robot_attempt_seconds": 120
+  },
+  "allowed_tools": [
+    "query_rules",
+    "inspect_environment"
+  ],
+  "resources": {
+    "internet": "forbidden",
+    "calculator": "forbidden",
+    "code_execution": "forbidden",
+    "paper_pencil": "allowed",
+    "provided_materials_only": true
+  },
+  "human_constraints": [
+    "Under the 2026 RoboMission General Rules, a team consists of two or three students and one student with a coach is not a team.",
+    "A student may participate in only one team and one WRO category during the season.",
+    "Adults may guide and inspire but may not build, code, or program the robot for the team.",
+    "The selected national organizer combines the General Rules, age-group game document, local rules, and binding official Q&A into the operative competition rules.",
+    "A robot attempt ends after two minutes or earlier upon an official stop condition such as prohibited touching, leaving the table, or a rule violation.",
+    "At the end of an attempt the judge scores the observed field state, records full seconds, and the team signs the score sheet; after sign-off no further complaint is allowed.",
+    "A disqualified attempt receives the worst possible score and the maximum time of 120 seconds.",
+    "Exact mission points, number of rounds, ranking, tie breakers, practice, quarantine, and optional competition elements depend on the selected game and organizer rules."
+  ],
+  "rules_text": "World Robot Olympiad. The task represents a physical robotics event through design, rules, and program text. The source-recorded active team may have 2 to 3 members; the runner default is 3; official roster note: A 2026 RoboMission team consists of two or three students and is guided by a coach. The two or three student members design, build, and program the robot; a coach may guide learning but may not build or program it for the team. Banned during the contest: internet access, calculators and running code. Paper and pencil are always available. Work only from the materials provided with the problem. Submit one shared inspected robot program and scored field attempt; Submit the program and a structured design/run analysis; label simulated or hypothetical behavior and do not report an unobserved physical score. Treat unexposed physical, oral, live-opponent, judge, timing, or environment mechanisms as unavailable rather than simulated facts.",
+  "provenance": {
+    "status": "source_enriched_v1",
+    "sources": [
+      {
+        "title": "WRO RoboMission Category General Rules",
+        "url": "https://wro-association.org/wp-content/uploads/WRO-2026-RoboMission-General-Rules.pdf",
+        "authority": "official",
+        "edition": "2026",
+        "retrieved_at": "2026-08-17",
+        "sections": [
+          "pp. 2-4 scope, national assembly, team, and age groups",
+          "pp. 5-14 responsibilities, robot rules, event elements, and robot attempt",
+          "pp. 15-16 International Final format and glossary",
+          "p. 19 Appendix D is explicitly non-binding example material"
+        ],
+        "archive_status": "archived",
+        "local_file": "data/rules/sources/wro/2026_WRO_RoboMission_General_Rules.pdf"
+      },
+      {
+        "title": "WRO 2026 season documents",
+        "url": "https://wro-association.org/competition/2026-season/",
+        "authority": "official",
+        "edition": "2026",
+        "retrieved_at": "2026-08-17",
+        "sections": [
+          "Category-specific General and Game Rules"
+        ],
+        "archive_status": "selected_game_document_not_archived"
+      },
+      {
+        "title": "WRO official Questions and Answers",
+        "url": "https://wro-association.org/competition/questions-answers/",
+        "authority": "official",
+        "edition": "2026 season snapshot required",
+        "retrieved_at": "2026-08-17",
+        "sections": [
+          "Binding clarifications and additions"
+        ],
+        "archive_status": "snapshot_not_selected"
+      }
+    ],
+    "adaptations": [
+      "max_turns is a safety budget, not necessarily the official wall-clock limit",
+      "specialist roles are a research roster overlay",
+      "physical/oral/live opponent fidelity may be incomplete in src/",
+      "role-specific rule expertise is a benchmark coordination overlay"
+    ],
+    "crawl_status": "ok",
+    "crawled_excerpts": [
+      {
+        "url": "https://wro-association.org/",
+        "excerpt": "Home - WRO Association Skip to content Toggle Navigation About WRO WRO is for Everyone Association Member Countries Partners Join &#038; Support Support WRO ® Join the competition Volunteering at WRO Projects WRO Learn RoboStarter Growing Future Innovators Competition Categories 2026 Season Aramco Innovation Award Questions &#038; Answers International Events Previous Challenges Newsroom Annual Report 2025 WRO ® Story Hub Media Archive Loading... World Robot Olympiad™ A truly global competition "
+      }
+    ],
+    "enriched_at": "2026-08-12T16:53:55.318710+00:00",
+    "research_confidence": "high",
+    "proxy_limitations": [
+      "Physical robot construction, sensors, and table runs are outside software-agent fidelity.",
+      "Always pair General Rules with the year’s Game PDF + Q&A.",
+      "The runner has no physical robot, inspection, quarantine, randomized field, judge, score sheet, or national tournament state.",
+      "The selected age-group game document, jurisdiction rules, and Q&A snapshot are absent, so exact mission score and ranking are deferred."
+    ],
+    "research_merged_at": "2026-08-12T17:04:21.146651+00:00",
+    "rules_text_source": "composed_from_card_fields_v2",
+    "research_reports": [
+      "docs/rules_crawl_2026-08-11.md"
+    ],
+    "research_graded_at": "2026-08-11",
+    "content_standard": {
+      "name": "icpc_three_component_content_standard",
+      "version": "1.1",
+      "applied_at": "2026-08-17",
+      "reference_card": "data/rules/icpc",
+      "official_facts_policy": "competition_specific_primary_sources_only",
+      "scope": [
+        "competition_constraints",
+        "collaboration_operations",
+        "evaluation_and_compliance",
+        "runtime_fidelity"
+      ]
+    },
+    "research_notes": [
+      "You must behave like a human teammate under official contest rules.",
+      "Do not claim tools, internet, or materials that the rule card forbids.",
+      "Do not look up answer keys or hidden solutions.",
+      "Robot construction and run scoring are physical; software is a proxy unless a simulator exists."
+    ],
+    "source_review": {
+      "reviewed_at": "2026-08-17",
+      "audit_report": "docs/rule_card_icpc_standard_gap_audit_2026-08-17.md",
+      "coverage_grade": "B",
+      "completion_status": "primary_rules_partial_or_variant_selector_required",
+      "claim_policy": "unknown_official_values_remain_null_or_explicitly_unresolved",
+      "known_gaps": [
+        "The 2026 General Rules are not a ready-to-use national game ruleset; category, age group, game document, national adaptation, and Q&A snapshot remain required."
+      ]
+    },
+    "discovery_sources": [
+      {
+        "title": "WRO",
+        "url": "https://wro-association.org/",
+        "retrieved_at": "2026-08-12",
+        "local_text": "data/rules/sources/wro/01_wro-association.txt"
+      },
+      {
+        "title": "https://wro-association.org/wp-content/uploads/WRO-2025-RoboMission-General-Rules.pdf",
+        "url": "https://wro-association.org/wp-content/uploads/WRO-2025-RoboMission-General-Rules.pdf",
+        "retrieved_at": "2026-08-11",
+        "from_report": "docs/rules_crawl_2026-08-11.md"
+      },
+      {
+        "title": "https://wro-association.org/competition/2025-season/",
+        "url": "https://wro-association.org/competition/2025-season/",
+        "retrieved_at": "2026-08-11",
+        "from_report": "docs/rules_crawl_2026-08-11.md"
+      }
+    ],
+    "discard_pre_source_review_rule_sections": true,
+    "source_correction_revision": "2026-08-17-v1"
+  },
+  "comparability": {
+    "overall": "non_comparable",
+    "dimensions": {
+      "roster": "two_or_three",
+      "timing": "adapted",
+      "tools": "src_tool_surface",
+      "scoring": "rubric",
+      "environment": "robot_and_mission_state_unavailable",
+      "information": "role_specialized_tracking_overlay",
+      "deliberation": "unstructured_observation",
+      "communication": "unlimited_runner_channel"
+    }
+  },
+  "deliverable": {
+    "answer_format": "Submit the program and a structured design/run analysis; label simulated or hypothetical behavior and do not report an unobserved physical score.",
+    "shared": true,
+    "mime_types": [
+      "text/plain"
+    ],
+    "task_types": [
+      "robotics_mission",
+      "robotics_project"
+    ],
+    "official_deliverable": "inspected_robot_program_and_scored_field_attempt",
+    "official_mime_types": [
+      "application/x-physical-robot-attempt"
+    ]
+  }
+}

@@ -43,6 +43,24 @@ rather than downloaded.
 mounted LiveOIBench problem tree, and imports local contestant data. It has no
 network behavior and never runs LiveOIBench host-judge or setup scripts.
 
+## Rule-aware baseline
+
+Competition runs accept `--rules-mode off|prompt_only|enforced` (default:
+`off`). `off` preserves the current-main collaboration and tool behavior.
+`prompt_only` loads a canonical card from `data/rules/` and gives contestants
+the public competition, resource, collaboration, roster, and role-duty rules
+without enforcing them. `enforced` additionally applies card communication
+budgets, submission authority, tool allowlists, private notes, and structured
+deliberation invariants.
+
+Use `--rules-root PATH` to select another canonical card root and
+`--rules-strict` to raise a typed resolution error when a competition has no
+card. Without strict mode, such runs return `rules_baseline_unavailable`; no
+fallback card is fabricated. Run summaries and transcripts record card
+coverage, schema/rule identifiers, a deterministic SHA-256 content hash, and
+the status of each baseline capability. Analysis groups include `rules_mode`,
+so baseline conditions are never pooled.
+
 ## Refresh benchmarks from PDFs
 
 ```bash

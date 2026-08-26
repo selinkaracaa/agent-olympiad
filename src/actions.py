@@ -38,6 +38,8 @@ def build_action_instructions(
     allowed_tools: list[str],
     *,
     programming_contest: bool = False,
+    structured_deliberation: bool = False,
+    private_notes: bool = False,
 ) -> str:
     if allowed_tools:
         tool_lines = "\n".join(f"- {tool}" for tool in allowed_tools)
@@ -48,10 +50,23 @@ def build_action_instructions(
         if programming_contest
         else ""
     )
-    return ACTION_INSTRUCTIONS.format(
+    rendered = ACTION_INSTRUCTIONS.format(
         programming_lines=programming_lines,
         tool_lines=tool_lines,
     )
+    additions = []
+    if private_notes:
+        additions.append(
+            "- write_private_notes — update notes visible only to you"
+        )
+    if structured_deliberation:
+        additions.append(
+            "- propose/challenge/provide_evidence/revise/decide — structured "
+            "deliberation; targeted payloads use 'P<number> | <content>'"
+        )
+    if additions:
+        rendered += "\n" + "\n".join(additions)
+    return rendered
 
 
 def parse_agent_response(response: str) -> list[tuple[str, str]]:
@@ -82,6 +97,10 @@ def apply_agent_response(
     results = []
     for action_type, payload in parse_agent_response(response):
         if action_type == "submit_final" and submitters is not None and agent_name not in submitters:
+            if getattr(getattr(env, "rules_mode", None), "value", None) == "enforced":
+                result = env.execute_action(agent_name, action_type, payload)
+                results.append(result)
+                continue
             result = env.execute_action(agent_name, "write_scratchpad", payload)
             results.append(f"(redirected submit_final to scratchpad) {result}")
             continue

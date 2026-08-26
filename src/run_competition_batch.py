@@ -33,6 +33,7 @@ from env import OlympiadEnvironment, ProblemNotFoundError
 from evaluation.collaboration_score import score_coordination
 from evaluation.finalize import apply_registered_judge
 from llm import make_perplexity_caller, resolve_query_fn, resolve_request_fn
+from rules import RulesMode
 from run_smoke_batch import SMOKE_CASES
 
 DEFAULT_MODEL = "openai/gpt-5.4-mini"
@@ -85,8 +86,30 @@ def run_one(
     judge_collab: bool,
     out_dir: Path,
     progress=None,
+    rules_mode: RulesMode | str = RulesMode.OFF,
+    rules_root: Path | None = None,
+    rules_strict: bool = False,
 ) -> dict:
-    env = OlympiadEnvironment(competition, problem_id, max_turns=rounds)
+    env = OlympiadEnvironment(
+        competition,
+        problem_id,
+        max_turns=rounds,
+        rules_mode=rules_mode,
+        rules_root=rules_root,
+        rules_strict=rules_strict,
+    )
+    baseline = env.rules_metadata()
+    if not env.rules_baseline.available:
+        return {
+            "competition": competition,
+            "problem_id": problem_id,
+            "schema": schema,
+            "status": "rules_baseline_unavailable",
+            "error": (
+                f"rules_baseline_unavailable: no canonical card for {competition!r}"
+            ),
+            **baseline,
+        }
     rules = get_contest_rules(competition)
     config = CollabConfig(
         max_turns=rounds,
@@ -138,7 +161,7 @@ def run_one(
     transcript_path = (
         out_dir
         / "transcripts"
-        / f"{competition}__{problem_id}__{schema}.json"
+        / f"{competition}__{problem_id}__{schema}__{env.rules_mode.value}.json"
     )
     transcript = env.to_transcript()
     transcript["run"] = {
@@ -146,6 +169,7 @@ def run_one(
         "task_type": env.problem_data.get("task_type"),
         "grade": grade,
         "coordination": coordination,
+        **baseline,
     }
     _write_json_atomic(transcript_path, transcript)
 
@@ -153,6 +177,7 @@ def run_one(
         "competition": competition,
         "problem_id": problem_id,
         "schema": schema,
+        **baseline,
         "task_type": env.problem_data.get("task_type"),
         "team_size": env.team_size,
         "search_policy": rules.search_policy if rules else None,
@@ -214,6 +239,13 @@ def main() -> None:
         help="Comma-separated competition ids (default: all smoke representatives)",
     )
     parser.add_argument("--output", type=Path, default=None)
+    parser.add_argument(
+        "--rules-mode",
+        default=RulesMode.OFF.value,
+        choices=[mode.value for mode in RulesMode],
+    )
+    parser.add_argument("--rules-root", type=Path, default=None)
+    parser.add_argument("--rules-strict", action="store_true")
     args = parser.parse_args()
 
     if args.live and not os.environ.get("PERPLEXITY_API_KEY"):
@@ -267,7 +299,14 @@ def main() -> None:
                 judge_task=judge_task,
                 judge_collab=judge_collab,
                 out_dir=out_dir,
+                rules_mode=args.rules_mode,
+                rules_root=args.rules_root,
+                rules_strict=args.rules_strict,
             )
+            if row.get("status") == "rules_baseline_unavailable":
+                print(f"  UNAVAILABLE: {row['error']}", flush=True)
+                rows.append(row)
+                continue
             bits = [
                 f"turns={row['turns_used']}/{row['max_turns']}",
                 f"api={row['api_calls']}",
@@ -302,12 +341,22 @@ def main() -> None:
         "mode": "live" if args.live else "mock",
         "model": args.model if args.live else "mock",
         "schema": args.schema,
+        "rules_mode": args.rules_mode,
+        "rules_coverage": {
+            "covered": sum(1 for row in rows if row.get("rules_coverage") == "covered"),
+            "missing_card": sum(
+                1 for row in rows if row.get("rules_coverage") == "missing_card"
+            ),
+        },
         "max_turns": args.max_turns,
         "judge_task": judge_task,
         "judge_collab": judge_collab,
         "total": len(rows),
         "ok": sum(1 for r in rows if r.get("status") == "ok"),
         "errors": sum(1 for r in rows if r.get("status") == "error"),
+        "rules_baseline_unavailable": sum(
+            1 for r in rows if r.get("status") == "rules_baseline_unavailable"
+        ),
         "submitted": sum(1 for r in rows if r.get("submitted")),
         "graded": sum(1 for r in rows if r.get("graded")),
         "with_coordination": sum(
