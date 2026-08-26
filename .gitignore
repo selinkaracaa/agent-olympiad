@@ -17,6 +17,9 @@ MEETING_BRIEF.md
 pipeline/
 results/
 
+# Paper is maintained separately in Overleaf
+paper/
+
 # Raw data lives on HF (akaaafk/multiagent_bench) — run download_data.py to fetch.
 # Only the READMEs are tracked in git.
 art/**
