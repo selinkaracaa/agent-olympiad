@@ -1,5 +1,5 @@
 {
-  "timestamp": "20260826-184239",
+  "timestamp": "20260828-175736",
   "phase": "B",
   "mode": "live",
   "schedule": "contest_first",
@@ -49,9 +49,9 @@
       "problem_id": "icpc_wf_2012_bottles"
     }
   ],
-  "total": 55,
+  "total": 77,
   "ok": 55,
-  "errors": 0,
+  "errors": 22,
   "with_coordination": 55,
   "results": [
     {
@@ -16238,6 +16238,204 @@
         "Agent_8": "anthropic/claude-sonnet-4-6"
       },
       "model_label": "anthropic/claude-sonnet-4-6"
+    },
+    {
+      "team": "claude",
+      "competition": "hmmt_guts",
+      "problem_id": "hmmt_guts_2024",
+      "schema": "decentralized",
+      "status": "error",
+      "error": "401 Unauthorized: {\"error\":{\"message\":\"Invalid API key provided. Ensure your API key is correct and active.\",\"type\":\"invalid_api_key\",\"code\":401}}\n",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/run_phase_b_matrix.py\", line 213, in main\n    row = run_one(\n          ^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/run_competition_batch.py\", line 73, in run_one\n    result = run_collaboration(schema, env, query_fn, config)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 515, in run_collaboration\n    return SCHEMAS[schema](env, query_llm_fn, config)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 407, in run_decentralized\n    _run_agent_once(\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 215, in _run_agent_once\n    response = query(\n               ^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 190, in call\n    response = query_llm_fn(system, user)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/llm.py\", line 309, in call_agent\n    raise requests.exceptions.HTTPError(\nrequests.exceptions.HTTPError: 401 Unauthorized: {\"error\":{\"message\":\"Invalid API key provided. Ensure your API key is correct and active.\",\"type\":\"invalid_api_key\",\"code\":401}}\n\n"
+    },
+    {
+      "team": "gemini",
+      "competition": "hmmt_guts",
+      "problem_id": "hmmt_guts_2024",
+      "schema": "single_agent",
+      "status": "error",
+      "error": "401 Unauthorized: {\"error\":{\"message\":\"Invalid API key provided. Ensure your API key is correct and active.\",\"type\":\"invalid_api_key\",\"code\":401}}\n",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/run_phase_b_matrix.py\", line 213, in main\n    row = run_one(\n          ^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/run_competition_batch.py\", line 73, in run_one\n    result = run_collaboration(schema, env, query_fn, config)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 515, in run_collaboration\n    return SCHEMAS[schema](env, query_llm_fn, config)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 457, in run_single_agent\n    _run_agent_once(\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 215, in _run_agent_once\n    response = query(\n               ^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 190, in call\n    response = query_llm_fn(system, user)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/llm.py\", line 309, in call_agent\n    raise requests.exceptions.HTTPError(\nrequests.exceptions.HTTPError: 401 Unauthorized: {\"error\":{\"message\":\"Invalid API key provided. Ensure your API key is correct and active.\",\"type\":\"invalid_api_key\",\"code\":401}}\n\n"
+    },
+    {
+      "team": "gemini",
+      "competition": "hmmt_guts",
+      "problem_id": "hmmt_guts_2024",
+      "schema": "centralized",
+      "status": "error",
+      "error": "401 Unauthorized: {\"error\":{\"message\":\"Invalid API key provided. Ensure your API key is correct and active.\",\"type\":\"invalid_api_key\",\"code\":401}}\n",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/run_phase_b_matrix.py\", line 213, in main\n    row = run_one(\n          ^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/run_competition_batch.py\", line 73, in run_one\n    result = run_collaboration(schema, env, query_fn, config)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 515, in run_collaboration\n    return SCHEMAS[schema](env, query_llm_fn, config)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 352, in run_centralized\n    plan = query(system, user)\n           ^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 190, in call\n    response = query_llm_fn(system, user)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/llm.py\", line 309, in call_agent\n    raise requests.exceptions.HTTPError(\nrequests.exceptions.HTTPError: 401 Unauthorized: {\"error\":{\"message\":\"Invalid API key provided. Ensure your API key is correct and active.\",\"type\":\"invalid_api_key\",\"code\":401}}\n\n"
+    },
+    {
+      "team": "gemini",
+      "competition": "hmmt_guts",
+      "problem_id": "hmmt_guts_2024",
+      "schema": "round_table",
+      "status": "error",
+      "error": "401 Unauthorized: {\"error\":{\"message\":\"Invalid API key provided. Ensure your API key is correct and active.\",\"type\":\"invalid_api_key\",\"code\":401}}\n",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/run_phase_b_matrix.py\", line 213, in main\n    row = run_one(\n          ^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/run_competition_batch.py\", line 73, in run_one\n    result = run_collaboration(schema, env, query_fn, config)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 515, in run_collaboration\n    return SCHEMAS[schema](env, query_llm_fn, config)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 304, in run_round_table\n    _run_agent_once(\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 215, in _run_agent_once\n    response = query(\n               ^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 190, in call\n    response = query_llm_fn(system, user)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/llm.py\", line 309, in call_agent\n    raise requests.exceptions.HTTPError(\nrequests.exceptions.HTTPError: 401 Unauthorized: {\"error\":{\"message\":\"Invalid API key provided. Ensure your API key is correct and active.\",\"type\":\"invalid_api_key\",\"code\":401}}\n\n"
+    },
+    {
+      "team": "gemini",
+      "competition": "hmmt_guts",
+      "problem_id": "hmmt_guts_2024",
+      "schema": "decentralized",
+      "status": "error",
+      "error": "401 Unauthorized: {\"error\":{\"message\":\"Invalid API key provided. Ensure your API key is correct and active.\",\"type\":\"invalid_api_key\",\"code\":401}}\n",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/run_phase_b_matrix.py\", line 213, in main\n    row = run_one(\n          ^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/run_competition_batch.py\", line 73, in run_one\n    result = run_collaboration(schema, env, query_fn, config)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 515, in run_collaboration\n    return SCHEMAS[schema](env, query_llm_fn, config)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 407, in run_decentralized\n    _run_agent_once(\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 215, in _run_agent_once\n    response = query(\n               ^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 190, in call\n    response = query_llm_fn(system, user)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/llm.py\", line 309, in call_agent\n    raise requests.exceptions.HTTPError(\nrequests.exceptions.HTTPError: 401 Unauthorized: {\"error\":{\"message\":\"Invalid API key provided. Ensure your API key is correct and active.\",\"type\":\"invalid_api_key\",\"code\":401}}\n\n"
+    },
+    {
+      "team": "hetero",
+      "competition": "hmmt_guts",
+      "problem_id": "hmmt_guts_2024",
+      "schema": "single_agent",
+      "status": "error",
+      "error": "401 Unauthorized: {\"error\":{\"message\":\"Invalid API key provided. Ensure your API key is correct and active.\",\"type\":\"invalid_api_key\",\"code\":401}}\n",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/run_phase_b_matrix.py\", line 213, in main\n    row = run_one(\n          ^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/run_competition_batch.py\", line 73, in run_one\n    result = run_collaboration(schema, env, query_fn, config)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 515, in run_collaboration\n    return SCHEMAS[schema](env, query_llm_fn, config)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 457, in run_single_agent\n    _run_agent_once(\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 215, in _run_agent_once\n    response = query(\n               ^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 190, in call\n    response = query_llm_fn(system, user)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/llm.py\", line 309, in call_agent\n    raise requests.exceptions.HTTPError(\nrequests.exceptions.HTTPError: 401 Unauthorized: {\"error\":{\"message\":\"Invalid API key provided. Ensure your API key is correct and active.\",\"type\":\"invalid_api_key\",\"code\":401}}\n\n"
+    },
+    {
+      "team": "hetero",
+      "competition": "hmmt_guts",
+      "problem_id": "hmmt_guts_2024",
+      "schema": "centralized",
+      "status": "error",
+      "error": "401 Unauthorized: {\"error\":{\"message\":\"Invalid API key provided. Ensure your API key is correct and active.\",\"type\":\"invalid_api_key\",\"code\":401}}\n",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/run_phase_b_matrix.py\", line 213, in main\n    row = run_one(\n          ^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/run_competition_batch.py\", line 73, in run_one\n    result = run_collaboration(schema, env, query_fn, config)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 515, in run_collaboration\n    return SCHEMAS[schema](env, query_llm_fn, config)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 352, in run_centralized\n    plan = query(system, user)\n           ^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 190, in call\n    response = query_llm_fn(system, user)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/llm.py\", line 390, in call\n    return _caller_for(model)(system_prompt, user_prompt)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/llm.py\", line 309, in call_agent\n    raise requests.exceptions.HTTPError(\nrequests.exceptions.HTTPError: 401 Unauthorized: {\"error\":{\"message\":\"Invalid API key provided. Ensure your API key is correct and active.\",\"type\":\"invalid_api_key\",\"code\":401}}\n\n"
+    },
+    {
+      "team": "hetero",
+      "competition": "hmmt_guts",
+      "problem_id": "hmmt_guts_2024",
+      "schema": "round_table",
+      "status": "error",
+      "error": "401 Unauthorized: {\"error\":{\"message\":\"Invalid API key provided. Ensure your API key is correct and active.\",\"type\":\"invalid_api_key\",\"code\":401}}\n",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/run_phase_b_matrix.py\", line 213, in main\n    row = run_one(\n          ^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/run_competition_batch.py\", line 73, in run_one\n    result = run_collaboration(schema, env, query_fn, config)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 515, in run_collaboration\n    return SCHEMAS[schema](env, query_llm_fn, config)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 304, in run_round_table\n    _run_agent_once(\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 215, in _run_agent_once\n    response = query(\n               ^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 190, in call\n    response = query_llm_fn(system, user)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/llm.py\", line 390, in call\n    return _caller_for(model)(system_prompt, user_prompt)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/llm.py\", line 309, in call_agent\n    raise requests.exceptions.HTTPError(\nrequests.exceptions.HTTPError: 401 Unauthorized: {\"error\":{\"message\":\"Invalid API key provided. Ensure your API key is correct and active.\",\"type\":\"invalid_api_key\",\"code\":401}}\n\n"
+    },
+    {
+      "team": "hetero",
+      "competition": "hmmt_guts",
+      "problem_id": "hmmt_guts_2024",
+      "schema": "decentralized",
+      "status": "error",
+      "error": "401 Unauthorized: {\"error\":{\"message\":\"Invalid API key provided. Ensure your API key is correct and active.\",\"type\":\"invalid_api_key\",\"code\":401}}\n",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/run_phase_b_matrix.py\", line 213, in main\n    row = run_one(\n          ^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/run_competition_batch.py\", line 73, in run_one\n    result = run_collaboration(schema, env, query_fn, config)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 515, in run_collaboration\n    return SCHEMAS[schema](env, query_llm_fn, config)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 407, in run_decentralized\n    _run_agent_once(\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 215, in _run_agent_once\n    response = query(\n               ^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 190, in call\n    response = query_llm_fn(system, user)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/llm.py\", line 390, in call\n    return _caller_for(model)(system_prompt, user_prompt)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/llm.py\", line 309, in call_agent\n    raise requests.exceptions.HTTPError(\nrequests.exceptions.HTTPError: 401 Unauthorized: {\"error\":{\"message\":\"Invalid API key provided. Ensure your API key is correct and active.\",\"type\":\"invalid_api_key\",\"code\":401}}\n\n"
+    },
+    {
+      "team": "gpt",
+      "competition": "icpc",
+      "problem_id": "icpc_wf_2012_bottles",
+      "schema": "single_agent",
+      "status": "error",
+      "error": "401 Unauthorized: {\"error\":{\"message\":\"Invalid API key provided. Ensure your API key is correct and active.\",\"type\":\"invalid_api_key\",\"code\":401}}\n",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/run_phase_b_matrix.py\", line 213, in main\n    row = run_one(\n          ^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/run_competition_batch.py\", line 73, in run_one\n    result = run_collaboration(schema, env, query_fn, config)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 515, in run_collaboration\n    return SCHEMAS[schema](env, query_llm_fn, config)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 457, in run_single_agent\n    _run_agent_once(\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 215, in _run_agent_once\n    response = query(\n               ^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 190, in call\n    response = query_llm_fn(system, user)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/llm.py\", line 309, in call_agent\n    raise requests.exceptions.HTTPError(\nrequests.exceptions.HTTPError: 401 Unauthorized: {\"error\":{\"message\":\"Invalid API key provided. Ensure your API key is correct and active.\",\"type\":\"invalid_api_key\",\"code\":401}}\n\n"
+    },
+    {
+      "team": "gpt",
+      "competition": "icpc",
+      "problem_id": "icpc_wf_2012_bottles",
+      "schema": "centralized",
+      "status": "error",
+      "error": "401 Unauthorized: {\"error\":{\"message\":\"Invalid API key provided. Ensure your API key is correct and active.\",\"type\":\"invalid_api_key\",\"code\":401}}\n",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/run_phase_b_matrix.py\", line 213, in main\n    row = run_one(\n          ^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/run_competition_batch.py\", line 73, in run_one\n    result = run_collaboration(schema, env, query_fn, config)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 515, in run_collaboration\n    return SCHEMAS[schema](env, query_llm_fn, config)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 352, in run_centralized\n    plan = query(system, user)\n           ^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 190, in call\n    response = query_llm_fn(system, user)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/llm.py\", line 309, in call_agent\n    raise requests.exceptions.HTTPError(\nrequests.exceptions.HTTPError: 401 Unauthorized: {\"error\":{\"message\":\"Invalid API key provided. Ensure your API key is correct and active.\",\"type\":\"invalid_api_key\",\"code\":401}}\n\n"
+    },
+    {
+      "team": "gpt",
+      "competition": "icpc",
+      "problem_id": "icpc_wf_2012_bottles",
+      "schema": "round_table",
+      "status": "error",
+      "error": "401 Unauthorized: {\"error\":{\"message\":\"Invalid API key provided. Ensure your API key is correct and active.\",\"type\":\"invalid_api_key\",\"code\":401}}\n",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/run_phase_b_matrix.py\", line 213, in main\n    row = run_one(\n          ^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/run_competition_batch.py\", line 73, in run_one\n    result = run_collaboration(schema, env, query_fn, config)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 515, in run_collaboration\n    return SCHEMAS[schema](env, query_llm_fn, config)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 304, in run_round_table\n    _run_agent_once(\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 215, in _run_agent_once\n    response = query(\n               ^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 190, in call\n    response = query_llm_fn(system, user)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/llm.py\", line 309, in call_agent\n    raise requests.exceptions.HTTPError(\nrequests.exceptions.HTTPError: 401 Unauthorized: {\"error\":{\"message\":\"Invalid API key provided. Ensure your API key is correct and active.\",\"type\":\"invalid_api_key\",\"code\":401}}\n\n"
+    },
+    {
+      "team": "gpt",
+      "competition": "icpc",
+      "problem_id": "icpc_wf_2012_bottles",
+      "schema": "decentralized",
+      "status": "error",
+      "error": "401 Unauthorized: {\"error\":{\"message\":\"Invalid API key provided. Ensure your API key is correct and active.\",\"type\":\"invalid_api_key\",\"code\":401}}\n",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/run_phase_b_matrix.py\", line 213, in main\n    row = run_one(\n          ^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/run_competition_batch.py\", line 73, in run_one\n    result = run_collaboration(schema, env, query_fn, config)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 515, in run_collaboration\n    return SCHEMAS[schema](env, query_llm_fn, config)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 407, in run_decentralized\n    _run_agent_once(\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 215, in _run_agent_once\n    response = query(\n               ^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 190, in call\n    response = query_llm_fn(system, user)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/llm.py\", line 309, in call_agent\n    raise requests.exceptions.HTTPError(\nrequests.exceptions.HTTPError: 401 Unauthorized: {\"error\":{\"message\":\"Invalid API key provided. Ensure your API key is correct and active.\",\"type\":\"invalid_api_key\",\"code\":401}}\n\n"
+    },
+    {
+      "team": "claude",
+      "competition": "icpc",
+      "problem_id": "icpc_wf_2012_bottles",
+      "schema": "single_agent",
+      "status": "error",
+      "error": "401 Unauthorized: {\"error\":{\"message\":\"Invalid API key provided. Ensure your API key is correct and active.\",\"type\":\"invalid_api_key\",\"code\":401}}\n",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/run_phase_b_matrix.py\", line 213, in main\n    row = run_one(\n          ^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/run_competition_batch.py\", line 73, in run_one\n    result = run_collaboration(schema, env, query_fn, config)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 515, in run_collaboration\n    return SCHEMAS[schema](env, query_llm_fn, config)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 457, in run_single_agent\n    _run_agent_once(\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 215, in _run_agent_once\n    response = query(\n               ^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 190, in call\n    response = query_llm_fn(system, user)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/llm.py\", line 309, in call_agent\n    raise requests.exceptions.HTTPError(\nrequests.exceptions.HTTPError: 401 Unauthorized: {\"error\":{\"message\":\"Invalid API key provided. Ensure your API key is correct and active.\",\"type\":\"invalid_api_key\",\"code\":401}}\n\n"
+    },
+    {
+      "team": "claude",
+      "competition": "icpc",
+      "problem_id": "icpc_wf_2012_bottles",
+      "schema": "centralized",
+      "status": "error",
+      "error": "401 Unauthorized: {\"error\":{\"message\":\"Invalid API key provided. Ensure your API key is correct and active.\",\"type\":\"invalid_api_key\",\"code\":401}}\n",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/run_phase_b_matrix.py\", line 213, in main\n    row = run_one(\n          ^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/run_competition_batch.py\", line 73, in run_one\n    result = run_collaboration(schema, env, query_fn, config)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 515, in run_collaboration\n    return SCHEMAS[schema](env, query_llm_fn, config)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 352, in run_centralized\n    plan = query(system, user)\n           ^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 190, in call\n    response = query_llm_fn(system, user)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/llm.py\", line 309, in call_agent\n    raise requests.exceptions.HTTPError(\nrequests.exceptions.HTTPError: 401 Unauthorized: {\"error\":{\"message\":\"Invalid API key provided. Ensure your API key is correct and active.\",\"type\":\"invalid_api_key\",\"code\":401}}\n\n"
+    },
+    {
+      "team": "claude",
+      "competition": "icpc",
+      "problem_id": "icpc_wf_2012_bottles",
+      "schema": "round_table",
+      "status": "error",
+      "error": "401 Unauthorized: {\"error\":{\"message\":\"Invalid API key provided. Ensure your API key is correct and active.\",\"type\":\"invalid_api_key\",\"code\":401}}\n",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/run_phase_b_matrix.py\", line 213, in main\n    row = run_one(\n          ^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/run_competition_batch.py\", line 73, in run_one\n    result = run_collaboration(schema, env, query_fn, config)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 515, in run_collaboration\n    return SCHEMAS[schema](env, query_llm_fn, config)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 304, in run_round_table\n    _run_agent_once(\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 215, in _run_agent_once\n    response = query(\n               ^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 190, in call\n    response = query_llm_fn(system, user)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/llm.py\", line 309, in call_agent\n    raise requests.exceptions.HTTPError(\nrequests.exceptions.HTTPError: 401 Unauthorized: {\"error\":{\"message\":\"Invalid API key provided. Ensure your API key is correct and active.\",\"type\":\"invalid_api_key\",\"code\":401}}\n\n"
+    },
+    {
+      "team": "claude",
+      "competition": "icpc",
+      "problem_id": "icpc_wf_2012_bottles",
+      "schema": "decentralized",
+      "status": "error",
+      "error": "401 Unauthorized: {\"error\":{\"message\":\"Invalid API key provided. Ensure your API key is correct and active.\",\"type\":\"invalid_api_key\",\"code\":401}}\n",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/run_phase_b_matrix.py\", line 213, in main\n    row = run_one(\n          ^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/run_competition_batch.py\", line 73, in run_one\n    result = run_collaboration(schema, env, query_fn, config)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 515, in run_collaboration\n    return SCHEMAS[schema](env, query_llm_fn, config)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 407, in run_decentralized\n    _run_agent_once(\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 215, in _run_agent_once\n    response = query(\n               ^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 190, in call\n    response = query_llm_fn(system, user)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/llm.py\", line 309, in call_agent\n    raise requests.exceptions.HTTPError(\nrequests.exceptions.HTTPError: 401 Unauthorized: {\"error\":{\"message\":\"Invalid API key provided. Ensure your API key is correct and active.\",\"type\":\"invalid_api_key\",\"code\":401}}\n\n"
+    },
+    {
+      "team": "gemini",
+      "competition": "icpc",
+      "problem_id": "icpc_wf_2012_bottles",
+      "schema": "single_agent",
+      "status": "error",
+      "error": "401 Unauthorized: {\"error\":{\"message\":\"Invalid API key provided. Ensure your API key is correct and active.\",\"type\":\"invalid_api_key\",\"code\":401}}\n",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/run_phase_b_matrix.py\", line 213, in main\n    row = run_one(\n          ^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/run_competition_batch.py\", line 73, in run_one\n    result = run_collaboration(schema, env, query_fn, config)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 515, in run_collaboration\n    return SCHEMAS[schema](env, query_llm_fn, config)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 457, in run_single_agent\n    _run_agent_once(\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 215, in _run_agent_once\n    response = query(\n               ^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 190, in call\n    response = query_llm_fn(system, user)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/llm.py\", line 309, in call_agent\n    raise requests.exceptions.HTTPError(\nrequests.exceptions.HTTPError: 401 Unauthorized: {\"error\":{\"message\":\"Invalid API key provided. Ensure your API key is correct and active.\",\"type\":\"invalid_api_key\",\"code\":401}}\n\n"
+    },
+    {
+      "team": "gemini",
+      "competition": "icpc",
+      "problem_id": "icpc_wf_2012_bottles",
+      "schema": "centralized",
+      "status": "error",
+      "error": "401 Unauthorized: {\"error\":{\"message\":\"Invalid API key provided. Ensure your API key is correct and active.\",\"type\":\"invalid_api_key\",\"code\":401}}\n",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/run_phase_b_matrix.py\", line 213, in main\n    row = run_one(\n          ^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/run_competition_batch.py\", line 73, in run_one\n    result = run_collaboration(schema, env, query_fn, config)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 515, in run_collaboration\n    return SCHEMAS[schema](env, query_llm_fn, config)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 352, in run_centralized\n    plan = query(system, user)\n           ^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 190, in call\n    response = query_llm_fn(system, user)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/llm.py\", line 309, in call_agent\n    raise requests.exceptions.HTTPError(\nrequests.exceptions.HTTPError: 401 Unauthorized: {\"error\":{\"message\":\"Invalid API key provided. Ensure your API key is correct and active.\",\"type\":\"invalid_api_key\",\"code\":401}}\n\n"
+    },
+    {
+      "team": "gemini",
+      "competition": "icpc",
+      "problem_id": "icpc_wf_2012_bottles",
+      "schema": "round_table",
+      "status": "error",
+      "error": "401 Unauthorized: {\"error\":{\"message\":\"Invalid API key provided. Ensure your API key is correct and active.\",\"type\":\"invalid_api_key\",\"code\":401}}\n",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/run_phase_b_matrix.py\", line 213, in main\n    row = run_one(\n          ^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/run_competition_batch.py\", line 73, in run_one\n    result = run_collaboration(schema, env, query_fn, config)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 515, in run_collaboration\n    return SCHEMAS[schema](env, query_llm_fn, config)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 304, in run_round_table\n    _run_agent_once(\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 215, in _run_agent_once\n    response = query(\n               ^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 190, in call\n    response = query_llm_fn(system, user)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/llm.py\", line 309, in call_agent\n    raise requests.exceptions.HTTPError(\nrequests.exceptions.HTTPError: 401 Unauthorized: {\"error\":{\"message\":\"Invalid API key provided. Ensure your API key is correct and active.\",\"type\":\"invalid_api_key\",\"code\":401}}\n\n"
+    },
+    {
+      "team": "gemini",
+      "competition": "icpc",
+      "problem_id": "icpc_wf_2012_bottles",
+      "schema": "decentralized",
+      "status": "error",
+      "error": "401 Unauthorized: {\"error\":{\"message\":\"Invalid API key provided. Ensure your API key is correct and active.\",\"type\":\"invalid_api_key\",\"code\":401}}\n",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/run_phase_b_matrix.py\", line 213, in main\n    row = run_one(\n          ^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/run_competition_batch.py\", line 73, in run_one\n    result = run_collaboration(schema, env, query_fn, config)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 515, in run_collaboration\n    return SCHEMAS[schema](env, query_llm_fn, config)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 407, in run_decentralized\n    _run_agent_once(\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 215, in _run_agent_once\n    response = query(\n               ^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 190, in call\n    response = query_llm_fn(system, user)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/llm.py\", line 309, in call_agent\n    raise requests.exceptions.HTTPError(\nrequests.exceptions.HTTPError: 401 Unauthorized: {\"error\":{\"message\":\"Invalid API key provided. Ensure your API key is correct and active.\",\"type\":\"invalid_api_key\",\"code\":401}}\n\n"
+    },
+    {
+      "team": "hetero",
+      "competition": "icpc",
+      "problem_id": "icpc_wf_2012_bottles",
+      "schema": "single_agent",
+      "status": "error",
+      "error": "401 Unauthorized: {\"error\":{\"message\":\"Invalid API key provided. Ensure your API key is correct and active.\",\"type\":\"invalid_api_key\",\"code\":401}}\n",
+      "traceback": "Traceback (most recent call last):\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/run_phase_b_matrix.py\", line 213, in main\n    row = run_one(\n          ^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/run_competition_batch.py\", line 73, in run_one\n    result = run_collaboration(schema, env, query_fn, config)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 515, in run_collaboration\n    return SCHEMAS[schema](env, query_llm_fn, config)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 457, in run_single_agent\n    _run_agent_once(\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 215, in _run_agent_once\n    response = query(\n               ^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/collaboration.py\", line 190, in call\n    response = query_llm_fn(system, user)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/selinkaraca/Desktop/agent_olympiad_econ/src/llm.py\", line 309, in call_agent\n    raise requests.exceptions.HTTPError(\nrequests.exceptions.HTTPError: 401 Unauthorized: {\"error\":{\"message\":\"Invalid API key provided. Ensure your API key is correct and active.\",\"type\":\"invalid_api_key\",\"code\":401}}\n\n"
     }
   ]
 }
