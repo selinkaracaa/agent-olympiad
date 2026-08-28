@@ -144,7 +144,7 @@ def make_perplexity_responses_caller(
 
     headers = {"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"}
 
-    def call(request: LLMRequest, max_retries: int = 3) -> LLMResponse:
+    def call(request: LLMRequest, max_retries: int = 5) -> LLMResponse:
         content = _openai_style_content(request)
         # Prepend system guidance into the first text block for Agent API.
         if request.system_prompt.strip():
@@ -167,7 +167,7 @@ def make_perplexity_responses_caller(
                     "https://api.perplexity.ai/v1/agent",
                     headers=headers,
                     json=payload,
-                    timeout=180,
+                    timeout=300,
                 )
                 if not resp.ok:
                     detail = resp.text[:800]
@@ -197,7 +197,7 @@ def make_perplexity_responses_caller(
             except requests.exceptions.RequestException as exc:
                 last_error = exc
                 if attempt < max_retries - 1:
-                    time.sleep(10 * (attempt + 1))
+                    time.sleep(15 * (attempt + 1))
                 else:
                     raise
         raise RuntimeError(f"Perplexity multimodal call failed: {last_error}")
@@ -294,7 +294,7 @@ def make_perplexity_caller(
 
     headers = {"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"}
 
-    def call_agent(system_prompt: str, user_prompt: str, max_retries: int = 3) -> str:
+    def call_agent(system_prompt: str, user_prompt: str, max_retries: int = 5) -> str:
         full_input = f"{system_prompt}\n\n{user_prompt}"
         for attempt in range(max_retries):
             try:
@@ -302,7 +302,7 @@ def make_perplexity_caller(
                     "https://api.perplexity.ai/v1/agent",
                     headers=headers,
                     json={"model": model, "input": full_input, "max_output_tokens": max_output_tokens},
-                    timeout=180,
+                    timeout=300,
                 )
                 if not resp.ok:
                     detail = resp.text[:500]
@@ -318,11 +318,11 @@ def make_perplexity_caller(
                 return str(data)
             except requests.exceptions.RequestException:
                 if attempt < max_retries - 1:
-                    time.sleep(10 * (attempt + 1))
+                    time.sleep(15 * (attempt + 1))
                 else:
                     raise
 
-    def call_sonar(system_prompt: str, user_prompt: str, max_retries: int = 3) -> str:
+    def call_sonar(system_prompt: str, user_prompt: str, max_retries: int = 5) -> str:
         from openai import OpenAI
 
         client = OpenAI(api_key=api_key, base_url="https://api.perplexity.ai")

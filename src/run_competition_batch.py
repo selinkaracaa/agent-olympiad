@@ -29,7 +29,10 @@ sys.path.insert(0, str(REPO_ROOT / "src"))
 from collaboration import CollabConfig, SCHEMAS, run_collaboration
 from contest_rules import get_contest_rules
 from env import OlympiadEnvironment, ProblemNotFoundError
-from evaluation.collaboration_score import score_coordination
+from evaluation.collaboration_score import (
+    score_coordination,
+    score_interaction_helpfulness,
+)
 from evaluation.finalize import apply_registered_judge
 from llm import make_perplexity_caller, resolve_query_fn, resolve_request_fn
 from run_smoke_batch import SMOKE_CASES
@@ -82,6 +85,7 @@ def run_one(
         result["grade"] = grade
 
     coordination = None
+    interaction = None
     if judge_collab and request_fn is not None:
         agents = _agent_names(env, schema)
         # Prefer names observed in the chat log when available.
@@ -97,13 +101,24 @@ def run_one(
             f"grade_method={grade.get('method')} "
             f"score={grade.get('score')}/{grade.get('max_score')}"
         )
+        task_text = str(env.problem_data.get("problem_description") or env.problem_id)
         coordination = score_coordination(
             request_fn=request_fn,
-            task_text=str(env.problem_data.get("problem_description") or env.problem_id),
+            task_text=task_text,
             agents=agents,
             schema=schema,
             chat_history=env.chat_history,
             action_log=env.action_log,
+            task_results=task_results,
+        ).to_dict()
+        interaction = score_interaction_helpfulness(
+            request_fn=request_fn,
+            task_text=task_text,
+            agents=agents,
+            schema=schema,
+            chat_history=env.chat_history,
+            action_log=env.action_log,
+            final_answer=str(result.get("final_answer") or ""),
             task_results=task_results,
         ).to_dict()
 
@@ -121,6 +136,7 @@ def run_one(
         "max_turns": result.get("max_turns"),
         "api_calls": result.get("api_calls"),
         "tokens_used": result.get("tokens_used"),
+        "tokens_by_turn": result.get("tokens_by_turn") or [],
         "wrong_submissions": env.wrong_submissions,
         "penalty_minutes": env.penalty_minutes(),
         "rule_violations": list(env.rule_violations),
@@ -132,6 +148,11 @@ def run_one(
         "communication_score": (coordination or {}).get("communication_score"),
         "planning_score": (coordination or {}).get("planning_score"),
         "coordination": coordination,
+        "interaction_helpfulness_score": (interaction or {}).get(
+            "interaction_helpfulness_score"
+        ),
+        "interaction_helpful_fraction": (interaction or {}).get("helpful_fraction"),
+        "interaction": interaction,
         "final_answer": result.get("final_answer") or "",
         "final_answer_preview": (result.get("final_answer") or "")[:2000],
         "chat_history": list(env.chat_history)[-80:],

@@ -69,5 +69,26 @@ class ContestBudgetTests(unittest.TestCase):
         self.assertLessEqual(result["tokens_used"], 50)
         self.assertFalse(result["submitted"])
 
+    def test_tokens_tracked_per_turn(self):
+        def short(_s, _u):
+            return "ACTION: sleep | PAYLOAD: done"
+
+        env = OlympiadEnvironment(
+            "arml_local",
+            "arml_local_2009",
+            max_turns=2,
+        )
+        result = run_round_table(
+            env,
+            short,
+            CollabConfig(rounds=2, synthesize=False),
+        )
+        by_turn = result["tokens_by_turn"]
+        self.assertEqual(len(by_turn), 2)
+        self.assertEqual([row["turn"] for row in by_turn], [1, 2])
+        self.assertEqual(sum(row["tokens"] for row in by_turn), result["tokens_used"])
+        self.assertEqual(sum(row["api_calls"] for row in by_turn), result["api_calls"])
+        self.assertGreater(by_turn[0]["tokens"], 0)
+
 if __name__ == "__main__":
     unittest.main()

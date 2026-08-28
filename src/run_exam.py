@@ -126,6 +126,13 @@ def run_one_schema(
     print(f"  Turns used:   {result['turns_used']}/{result.get('max_turns', '?')}")
     print(f"  API calls:    {result.get('api_calls', '?')}")
     print(f"  Tokens used:  {result.get('tokens_used', '?')}")
+    by_turn = result.get("tokens_by_turn") or []
+    if by_turn:
+        breakdown = ", ".join(
+            f"t{row['turn']}={row['tokens']} ({row['api_calls']} api)"
+            for row in by_turn
+        )
+        print(f"  Tokens/turn:  {breakdown}")
     print(f"  Answer parts: {parts} numbered problems")
     print(f"  Chat msgs:    {result['chat_messages']}")
 

@@ -21,6 +21,7 @@ import argparse
 import json
 import os
 import sys
+import time
 import traceback
 from datetime import datetime, timezone
 from pathlib import Path
@@ -149,15 +150,19 @@ def main() -> None:
     done_keys: set[tuple[str, str, str, str]] = set()
     if args.resume and args.resume.exists():
         prior = json.loads(args.resume.read_text(encoding="utf-8"))
-        rows = list(prior.get("results") or [])
+        # Keep only successful cells so prior timeouts/errors are retried.
+        rows = [r for r in (prior.get("results") or []) if r.get("status") == "ok"]
         for r in rows:
-            if r.get("status") == "ok":
-                done_keys.add(
-                    (r["team"], r["competition"], r["problem_id"], r["schema"])
-                )
+            done_keys.add(
+                (r["team"], r["competition"], r["problem_id"], r["schema"])
+            )
         out_path = args.resume
         out_dir = out_path.parent
-        print(f"Resuming: {len(done_keys)} completed cells from {args.resume}")
+        dropped = len(prior.get("results") or []) - len(rows)
+        print(
+            f"Resuming: {len(done_keys)} completed cells from {args.resume}"
+            + (f" (dropped {dropped} failed rows for retry)" if dropped else "")
+        )
 
     request_fn = (
         resolve_request_fn(provider="perplexity", model=JUDGE_MODEL) if args.live else None
@@ -201,19 +206,48 @@ def main() -> None:
                     query_fn, roster = build_query_fn(
                         team, schema, competition, problem_id
                     )
-                    row = run_one(
-                        competition,
-                        problem_id,
-                        schema=schema,
-                        query_fn=query_fn,
-                        request_fn=request_fn,
-                        rounds=args.max_turns,
-                        synthesize=not args.no_synthesize,
-                        judge_task=True,
-                        judge_collab=bool(args.judge_collab and args.live),
-                        out_dir=out_dir,
-                        progress=_progress,
-                    )
+                    row = None
+                    last_exc: Exception | None = None
+                    for attempt in range(1, 3):
+                        try:
+                            row = run_one(
+                                competition,
+                                problem_id,
+                                schema=schema,
+                                query_fn=query_fn,
+                                request_fn=request_fn,
+                                rounds=args.max_turns,
+                                synthesize=not args.no_synthesize,
+                                judge_task=True,
+                                judge_collab=bool(args.judge_collab and args.live),
+                                out_dir=out_dir,
+                                progress=_progress,
+                            )
+                            last_exc = None
+                            break
+                        except Exception as exc:
+                            last_exc = exc
+                            msg = str(exc).lower()
+                            retryable = any(
+                                s in msg
+                                for s in (
+                                    "timed out",
+                                    "timeout",
+                                    "max retries",
+                                    "nameresolution",
+                                    "connection",
+                                    "temporarily",
+                                )
+                            )
+                            if attempt < 2 and retryable:
+                                print(
+                                    f"  retry {attempt}/2 after: {exc}",
+                                    flush=True,
+                                )
+                                time.sleep(20 * attempt)
+                                continue
+                            raise
+                    assert row is not None
                     row["team"] = team
                     row["agent_models"] = roster
                     row["model_label"] = (

@@ -2,7 +2,12 @@
 
 from .default_rubrics import ensure_default_rubrics
 from .finalize import apply_registered_judge
-from .collaboration_score import CoordinationScoreResult, score_coordination
+from .collaboration_score import (
+    CoordinationScoreResult,
+    InteractionHelpfulnessResult,
+    score_coordination,
+    score_interaction_helpfulness,
+)
 from .gold import GoldAnswerEvaluator, load_gold_parts
 from .modes import (
     EvalMode,

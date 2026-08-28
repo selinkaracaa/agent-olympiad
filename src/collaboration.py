@@ -486,6 +486,7 @@ def _result(env, schema: str) -> dict:
         "api_calls": env.api_calls,
         "max_api_calls": env.max_api_calls,
         "tokens_used": env.tokens_used,
+        "tokens_by_turn": env.token_usage_by_turn(),
         "max_total_tokens": env.max_total_tokens,
         "max_output_tokens_per_call": env.max_output_tokens_per_call,
         "action_count": env.action_count,

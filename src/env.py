@@ -140,6 +140,8 @@ class OlympiadEnvironment:
         self.action_count = 0  # env actions executed (speak/tools/etc.)
         self.api_calls = 0  # LLM calls made by collaboration layer
         self.tokens_used = 0  # estimated output tokens consumed
+        self.api_calls_by_turn: dict[int, int] = {}
+        self.tokens_by_turn: dict[int, int] = {}
         self.submitted = False
         self.submitted_by: Optional[str] = None
         self.wrong_submissions = 0
@@ -299,8 +301,23 @@ class OlympiadEnvironment:
         if self.max_total_tokens is not None:
             remaining = self.max_total_tokens - self.tokens_used
             capped = truncate_to_token_budget(capped, remaining)
-        self.tokens_used += estimate_tokens(capped)
+        used = estimate_tokens(capped)
+        self.tokens_used += used
+        turn = self.current_turn
+        self.tokens_by_turn[turn] = self.tokens_by_turn.get(turn, 0) + used
         return capped
+
+    def token_usage_by_turn(self) -> list[dict[str, int]]:
+        """Per-turn estimated output tokens and API calls (sorted by turn)."""
+        turns = sorted(set(self.tokens_by_turn) | set(self.api_calls_by_turn))
+        return [
+            {
+                "turn": turn,
+                "tokens": self.tokens_by_turn.get(turn, 0),
+                "api_calls": self.api_calls_by_turn.get(turn, 0),
+            }
+            for turn in turns
+        ]
 
     def begin_turn(self) -> int:
         """Start a collaboration turn (time step). Raises if turn budget is spent."""
@@ -321,6 +338,8 @@ class OlympiadEnvironment:
                 f"API call budget reached ({self.max_api_calls}) for {self.problem_id}"
             )
         self.api_calls += 1
+        turn = self.current_turn
+        self.api_calls_by_turn[turn] = self.api_calls_by_turn.get(turn, 0) + 1
 
     def _log_action(self, agent_name: str, action_type: str, payload: str, result: str) -> None:
         self.action_log.append(
@@ -650,6 +669,8 @@ class OlympiadEnvironment:
         self.action_count = 0
         self.api_calls = 0
         self.tokens_used = 0
+        self.api_calls_by_turn.clear()
+        self.tokens_by_turn.clear()
         self.submitted = False
         self.submitted_by = None
         self.wrong_submissions = 0

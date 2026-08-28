@@ -100,6 +100,7 @@ def run_one(
         "max_turns": result.get("max_turns"),
         "api_calls": result.get("api_calls"),
         "tokens_used": result.get("tokens_used"),
+        "tokens_by_turn": result.get("tokens_by_turn") or [],
         "chat_messages": result.get("chat_messages"),
         "grade_method": grade.get("method"),
         "grade_reason": grade.get("reason"),
