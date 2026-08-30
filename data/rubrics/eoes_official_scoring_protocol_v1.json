@@ -1,0 +1,78 @@
+{
+  "rubric_id": "eoes_official_scoring_protocol_v1",
+  "dataset": "eoes",
+  "title": "EOES official task-marking and ranking protocol",
+  "rubric_type": "official_scoring_protocol",
+  "scoring_direction": "higher_is_better",
+  "evaluation_unit": "team",
+  "team_composition": 3,
+  "competition_format": {
+    "tasks": 2,
+    "duration_each_hours": 4,
+    "task_character": "integrated experimental assignments emphasizing biology, chemistry, physics, practical work, measurements, analysis, and teamwork"
+  },
+  "scoring_protocol": [
+    "Score each task against its edition-specific official marking scheme and answer sheet.",
+    "Add the two task scores to obtain the team total.",
+    "Rank official teams by descending total score.",
+    "Apply only the medal decisions and guest-team status published for that edition."
+  ],
+  "verified_edition_totals": [
+    {
+      "edition": 2022,
+      "task_1_max": 150,
+      "task_2_max": 150,
+      "total_max": 300,
+      "source_url": "https://www.eoes.science/EOES%202022/EOES_2022.html"
+    },
+    {
+      "edition": 2023,
+      "task_1_max": 126.5,
+      "task_2_max": 184,
+      "total_max": 310.5,
+      "source_url": "https://www.eoes.science/EOES%202023/EOES_2023.html"
+    }
+  ],
+  "applicability": {
+    "scope": "EOES and predecessor EUSO tasks represented in the local dataset.",
+    "task_specificity": "Question-level criteria and points are edition- and task-specific; the matching official marking scheme controls.",
+    "guest_teams": "Guest teams may be outside the official ranking, as stated in the applicable edition results."
+  },
+  "provenance": [
+    {
+      "source_type": "official_organizer",
+      "title": "EOES home",
+      "url": "https://www.eoes.science/",
+      "supports": ["two integrated assignments", "team of three", "four-hour task duration", "experimental emphasis"]
+    },
+    {
+      "source_type": "official_organizer",
+      "title": "EOES documents",
+      "url": "https://www.eoes.science/page/documentsEOES.html",
+      "supports": ["official rules, regulations, guidelines, and syllabus provenance"]
+    },
+    {
+      "source_type": "official_organizer",
+      "title": "EOES 2022 results and task resources",
+      "url": "https://www.eoes.science/EOES%202022/EOES_2022.html",
+      "supports": ["official marking schemes", "150 + 150 task maxima", "300 total"]
+    },
+    {
+      "source_type": "official_organizer",
+      "title": "EOES 2023 results and task resources",
+      "url": "https://www.eoes.science/EOES%202023/EOES_2023.html",
+      "supports": ["official marking schemes", "126.5 + 184 task maxima", "310.5 total"]
+    },
+    {
+      "source_type": "local_benchmark_evidence",
+      "path": "data/benchmarks/eoes/benchmark.json",
+      "supports": ["task and answer-sheet extracts", "question-level point labels for some editions", "edition-specific source-file mapping"]
+    }
+  ],
+  "limitations": [
+    "There is no edition-independent numeric rubric for EOES; each official marking scheme defines its own question-level points.",
+    "Exact totals are recorded only for editions verified from official published result tables.",
+    "The local benchmark does not consistently include every official marking scheme, and benchmark total_points fields are null.",
+    "Medal cutoffs or quotas are not inferred from result tables."
+  ]
+}

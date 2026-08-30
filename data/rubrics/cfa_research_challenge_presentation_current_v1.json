@@ -1,0 +1,66 @@
+{
+  "rubric_id": "cfa_research_challenge_presentation_current_v1",
+  "type": "structured_rubric",
+  "title": "CFA Institute Research Challenge Presentation Scoring Sheet",
+  "competition_id": "cfa_research_challenge",
+  "deliverable": "presentation_and_questions",
+  "rules_edition": "2026-2027",
+  "total_points": 100,
+  "criteria": [
+    {
+      "id": "financial_analysis",
+      "name": "Financial Analysis",
+      "max_score": 20,
+      "official_prompt": "How thorough was their analysis of the industry, company, and competitors?"
+    },
+    {
+      "id": "valuation",
+      "name": "Valuation",
+      "max_score": 20,
+      "official_prompt": "Were the valuation methodologies appropriate and detailed?"
+    },
+    {
+      "id": "esg",
+      "name": "Environmental, Social, and Governance",
+      "max_score": 10,
+      "official_prompt": "Did the analysis thoroughly incorporate conservation of the natural world, consideration of people and relationships, and standards for running a company?"
+    },
+    {
+      "id": "presentation",
+      "name": "Presentation",
+      "max_score": 20,
+      "official_prompt": "How effective/convincing was their presentation? Was it logical and did the facts support the recommendation?"
+    },
+    {
+      "id": "question_answer",
+      "name": "Question & Answer",
+      "max_score": 20,
+      "official_prompt": "Were they able to answer the questions effectively and with confidence?"
+    },
+    {
+      "id": "team_involvement",
+      "name": "Team Involvement",
+      "max_score": 5,
+      "official_prompt": "Team involvement in the presentation/questions and answers"
+    },
+    {
+      "id": "materials",
+      "name": "Materials",
+      "max_score": 5,
+      "official_prompt": "Quality of slides"
+    }
+  ],
+  "provenance": {
+    "official_only": true,
+    "publisher": "CFA Institute",
+    "accessed_on": "2026-07-31",
+    "sources": [
+      {
+        "title": "CFA Institute Research Challenge Official Rules 2026-2027",
+        "url": "https://www.cfainstitute.org/sites/default/files/-/media/documents/support/research-challenge/challenge/research-challenge-official-rules.pdf",
+        "evidence": "Appendix E publishes the seven criteria, prompts, maximum scores, and 100-point total."
+      }
+    ],
+    "applicability_note": "Used for local, regional semifinal, regional, and global presentations in the cited rules edition. Sub-regional scoring differs because Question & Answer is omitted."
+  }
+}

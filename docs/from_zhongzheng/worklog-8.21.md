@@ -8,11 +8,6 @@
 
 New collaboration baseline **`open_table_coach`**: a Coach prepares the team before the contest, joins one opening discussion turn, then exits; remaining turns are contestant-only round-table.
 
-| Stage | Where | What |
-|-------|-------|------|
-| **Prototype** (Aug 21) | `agent-olympiad/` | Cursor session [Open Table + Coach baseline](e4ac37bc-1f71-4b8f-8b24-6e05381c9fcb): `run_open_table_coach()`, action allowlists, runner wiring; Coach policy **hardcoded in Python** |
-| **Production + experiment** (Aug 25–26) | **`agent-team-features-main`** (this repo) | Port + `_open_table_coach_policy()` reading `collaboration.json` → `simulation.open_table_coach`; ARML Local 2009 Tinker run → **§12** |
-
 **Code touched (this repo):**
 
 - `src/collaboration.py` — three-stage state machine, Coach prompts, rule-card policy loader
@@ -508,24 +503,69 @@ data/rules/{competition_id}/*.json
 
 ---
 
-## 12. Qwen3.6-35B · ARML Local 2009 · open_table_coach (2026-08-26)
+## 12. Qwen3.6-35B · ARML Local 2009 · schema comparison (2026-08-26)
 
-`Qwen/Qwen3.6-35B-A3B` · Tinker · `rules_mode=enforced` · `results/open_table_coach_arml_local_2009_tinker.json/`
+`Qwen/Qwen3.6-35B-A3B` · Tinker · `rules_mode=enforced` · `max_turns=12` (open_table_coach used 8) · no CS judge
 
 ### Task score (/40)
 
-| | open_table_coach |
-|---|---:|
-| **qwen** | **35.6** |
+| | open_table_coach | centralized | decentralized |
+|---|---:|---:|---:|
+| **qwen** | **35.6** | **0** | **0** |
 
 ### Coordination score CS (0–5)
 
-| | open_table_coach |
-|---|---:|
-| **qwen** | — (`judge_collab` not run) |
+| | open_table_coach | centralized | decentralized |
+|---|---:|---:|---:|
+| **qwen** | — | — | — |
 
 ### Effort used (turns / API calls)
 
-| qwen · open_table_coach | Turns | API | Note |
+| Schema | Turns | API | Note |
 |---|---:|---:|---|
-| | 5/8 | 26 | Q4 wrong; 24 speaks blocked over 1200-char limit |
+| open_table_coach | 5/8 | 26 | Q4 wrong; 24 speaks blocked over 1200-char limit |
+| centralized | 9/12 | 41 | Smoke test overwrote concurrent full run (was 4.4/40 @ 12/12); heavy speak violations |
+| decentralized | 1/12 | 5 | Agent_5 submitted turn 1 with truncated answer `P1: (-6, 13); P` |
+
+**Paths:** `results/open_table_coach_arml_local_2009_tinker.json/` · `results/qwen_arml_centralized_enforced/` · `results/qwen_arml_decentralized_enforced/`
+
+---
+
+## 13. Open Table Coach single-action protocol (2026-08-26)
+
+The first constrained-action implementation applies only to
+`open_table_coach`; other collaboration schemas retain their existing action
+and prompt behavior.
+
+Each contestant receives one model call per global turn and must choose exactly
+one structured action:
+
+- `think`: private analysis stored in a per-agent ledger; excluded from team
+  prompts, `chat_history`, ordinary `action_log`, and existing collaboration
+  metrics.
+- `work`: durable written solution work appended to shared team artifacts.
+- `speak`: a conclusion, risk, request, or next step broadcast to the team.
+- `rest`: a private one-turn decision; the contestant may act again next turn.
+
+The ARML Local rule card configures action visibility and character limits:
+2,400 characters for private think and shared work, 320 for speak, and 80 for
+rest. Overlong payloads are compacted deterministically at a sentence boundary
+instead of rejecting the whole turn and wasting its API call. Only `speak`
+consumes the existing team/per-agent communication message budget.
+
+Contestant turns do not accept `submit_final`; the existing final synthesis
+uses public discussion plus shared written artifacts. Coach access remains
+problem-blind on turn 1, problem-aware for the opening summary on turn 2, and
+absent afterward.
+
+New transcript/result signals:
+
+- `private_thoughts`
+- `workspace.work_artifacts`
+- `protocol_action_counts`
+- `communication.compacted`
+- `shared_work_artifacts`
+
+Recommended experiment comparisons are task score, API calls, public message
+count and characters, compaction count, shared-work count, per-action mix, and
+protocol violations.

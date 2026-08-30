@@ -612,7 +612,7 @@
         {
           "id": "1",
           "expected": "0",
-          "points": 1.3888888888888888,
+          "points": 1.0,
           "reference": "Official short answer: 0",
           "match_mode": "normalized",
           "aliases": []
@@ -620,7 +620,7 @@
         {
           "id": "2",
           "expected": "11/18",
-          "points": 1.3888888888888888,
+          "points": 1.0,
           "reference": "Official short answer: 11/18",
           "match_mode": "normalized",
           "aliases": [
@@ -630,7 +630,7 @@
         {
           "id": "3",
           "expected": "675",
-          "points": 1.3888888888888888,
+          "points": 1.0,
           "reference": "Official short answer: 675",
           "match_mode": "normalized",
           "aliases": []
@@ -638,7 +638,7 @@
         {
           "id": "4",
           "expected": "48°",
-          "points": 1.3888888888888888,
+          "points": 1.0,
           "reference": "Official short answer: 48°",
           "match_mode": "normalized",
           "aliases": [
@@ -652,7 +652,7 @@
         {
           "id": "5",
           "expected": "224, -176",
-          "points": 1.3888888888888888,
+          "points": 1.0,
           "reference": "Official short answer: 224, -176",
           "match_mode": "normalized",
           "aliases": [
@@ -664,7 +664,7 @@
         {
           "id": "6",
           "expected": "√7/12",
-          "points": 1.3888888888888888,
+          "points": 1.0,
           "reference": "Official short answer: √7/12",
           "match_mode": "normalized",
           "aliases": [
@@ -675,7 +675,7 @@
         {
           "id": "7",
           "expected": "17",
-          "points": 1.3888888888888888,
+          "points": 1.0,
           "reference": "Official short answer: 17",
           "match_mode": "normalized",
           "aliases": []
@@ -683,7 +683,7 @@
         {
           "id": "8",
           "expected": "60°",
-          "points": 1.3888888888888888,
+          "points": 1.0,
           "reference": "Official short answer: 60°",
           "match_mode": "normalized",
           "aliases": [
@@ -695,7 +695,7 @@
         {
           "id": "9",
           "expected": "1872",
-          "points": 1.3888888888888888,
+          "points": 1.0,
           "reference": "Official short answer: 1872",
           "match_mode": "normalized",
           "aliases": []
@@ -703,7 +703,7 @@
         {
           "id": "10",
           "expected": "2/15",
-          "points": 1.3888888888888888,
+          "points": 1.0,
           "reference": "Official short answer: 2/15",
           "match_mode": "normalized",
           "aliases": [
@@ -713,7 +713,7 @@
         {
           "id": "11",
           "expected": "98, 118, 122, 142",
-          "points": 1.3888888888888888,
+          "points": 1.0,
           "reference": "Official short answer: 98, 118, 122, 142",
           "match_mode": "normalized",
           "aliases": [
@@ -723,7 +723,7 @@
         {
           "id": "12",
           "expected": "2024",
-          "points": 1.3888888888888888,
+          "points": 1.0,
           "reference": "Official short answer: 2024",
           "match_mode": "normalized",
           "aliases": []
@@ -731,7 +731,7 @@
         {
           "id": "13",
           "expected": "149/12",
-          "points": 1.3888888888888888,
+          "points": 1.0,
           "reference": "Official short answer: 149/12",
           "match_mode": "normalized",
           "aliases": [
@@ -741,7 +741,7 @@
         {
           "id": "14",
           "expected": "111888",
-          "points": 1.3888888888888888,
+          "points": 1.0,
           "reference": "Official short answer: 111888",
           "match_mode": "normalized",
           "aliases": [
@@ -752,7 +752,7 @@
         {
           "id": "15",
           "expected": "29",
-          "points": 1.3888888888888888,
+          "points": 1.0,
           "reference": "Official short answer: 29",
           "match_mode": "normalized",
           "aliases": []
@@ -760,7 +760,7 @@
         {
           "id": "16",
           "expected": "2(√17-1)",
-          "points": 1.3888888888888888,
+          "points": 1.0,
           "reference": "Official short answer: 2(√17-1)",
           "match_mode": "normalized",
           "aliases": [
@@ -771,7 +771,7 @@
         {
           "id": "17",
           "expected": "181/361",
-          "points": 1.3888888888888888,
+          "points": 1.0,
           "reference": "Official short answer: 181/361",
           "match_mode": "normalized",
           "aliases": [
@@ -781,7 +781,7 @@
         {
           "id": "18",
           "expected": "96/595",
-          "points": 1.3888888888888888,
+          "points": 1.0,
           "reference": "Official short answer: 96/595",
           "match_mode": "normalized",
           "aliases": [
@@ -791,7 +791,7 @@
         {
           "id": "19",
           "expected": "1170/19",
-          "points": 1.3888888888888888,
+          "points": 1.0,
           "reference": "Official short answer: 1170/19",
           "match_mode": "normalized",
           "aliases": [
@@ -801,7 +801,7 @@
         {
           "id": "20",
           "expected": "855",
-          "points": 1.3888888888888888,
+          "points": 1.0,
           "reference": "Official short answer: 855",
           "match_mode": "normalized",
           "aliases": []
@@ -809,7 +809,7 @@
         {
           "id": "21",
           "expected": "1831830",
-          "points": 1.3888888888888888,
+          "points": 1.0,
           "reference": "Official short answer: 1831830",
           "match_mode": "normalized",
           "aliases": [
@@ -820,7 +820,7 @@
         {
           "id": "22",
           "expected": "49/36",
-          "points": 1.3888888888888888,
+          "points": 1.0,
           "reference": "Official short answer: 49/36",
           "match_mode": "normalized",
           "aliases": [
@@ -830,7 +830,7 @@
         {
           "id": "23",
           "expected": "√39/4",
-          "points": 1.3888888888888888,
+          "points": 1.0,
           "reference": "Official short answer: √39/4",
           "match_mode": "normalized",
           "aliases": [
@@ -841,7 +841,7 @@
         {
           "id": "24",
           "expected": "504π",
-          "points": 1.3888888888888888,
+          "points": 1.0,
           "reference": "Official short answer: 504π",
           "match_mode": "normalized",
           "aliases": [
@@ -851,7 +851,7 @@
         {
           "id": "25",
           "expected": "123+6√119",
-          "points": 1.3888888888888888,
+          "points": 1.0,
           "reference": "Official short answer: 123+6√119",
           "match_mode": "normalized",
           "aliases": [
@@ -862,7 +862,7 @@
         {
           "id": "26",
           "expected": "-2445",
-          "points": 1.3888888888888888,
+          "points": 1.0,
           "reference": "Official short answer: -2445",
           "match_mode": "normalized",
           "aliases": [
@@ -872,7 +872,7 @@
         {
           "id": "27",
           "expected": "467/8",
-          "points": 1.3888888888888888,
+          "points": 1.0,
           "reference": "Official short answer: 467/8",
           "match_mode": "normalized",
           "aliases": [
@@ -882,7 +882,7 @@
         {
           "id": "28",
           "expected": "1200974",
-          "points": 1.3888888888888888,
+          "points": 1.0,
           "reference": "Official short answer: 1200974",
           "match_mode": "normalized",
           "aliases": []
@@ -890,7 +890,7 @@
         {
           "id": "29",
           "expected": "12",
-          "points": 1.3888888888888888,
+          "points": 1.0,
           "reference": "Official short answer: 12",
           "match_mode": "normalized",
           "aliases": []
@@ -898,7 +898,7 @@
         {
           "id": "30",
           "expected": "1/(1+∛2)",
-          "points": 1.3888888888888888,
+          "points": 1.0,
           "reference": "Official short answer: 1/(1+∛2)",
           "match_mode": "normalized",
           "aliases": [
@@ -909,7 +909,7 @@
         {
           "id": "31",
           "expected": "1-2^15/3^15",
-          "points": 1.3888888888888888,
+          "points": 1.0,
           "reference": "Official short answer: 1-2^15/3^15",
           "match_mode": "normalized",
           "aliases": [
@@ -920,7 +920,7 @@
         {
           "id": "32",
           "expected": "∛((1-√33)/2)",
-          "points": 1.3888888888888888,
+          "points": 1.0,
           "reference": "Official short answer: ∛((1-√33)/2)",
           "match_mode": "normalized",
           "aliases": [
@@ -930,7 +930,7 @@
         {
           "id": "33",
           "expected": "5568",
-          "points": 1.3888888888888888,
+          "points": 1.0,
           "reference": "Official short answer: 5568",
           "match_mode": "normalized",
           "aliases": []
@@ -938,7 +938,7 @@
         {
           "id": "34",
           "expected": "757575",
-          "points": 1.3888888888888888,
+          "points": 1.0,
           "reference": "Official short answer: 757575",
           "match_mode": "normalized",
           "aliases": []
@@ -946,7 +946,7 @@
         {
           "id": "35",
           "expected": "6.54",
-          "points": 1.3888888888888888,
+          "points": 1.0,
           "reference": "Official short answer: 6.54",
           "match_mode": "normalized",
           "aliases": []
@@ -954,7 +954,7 @@
         {
           "id": "36",
           "expected": "KOLIN GH",
-          "points": 1.3888888888888888,
+          "points": 1.0,
           "reference": "Official short answer: KOLIN GH",
           "match_mode": "normalized",
           "aliases": [
@@ -979,7 +979,7 @@
       "rubric_path": "data/rubrics/worked_answer_100_v1.json",
       "deliverable": "answer_sheet",
       "fallback_evaluator_id": "rubric_llm_v1",
-      "short_answer_source": "data/rubrics/hmmt_guts_short_answers.json"
+      "short_answer_source": "data\\rubrics\\hmmt_guts_short_answers.json"
     }
   },
   {

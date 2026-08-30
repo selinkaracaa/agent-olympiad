@@ -1,0 +1,15 @@
+{
+  "evaluation_guidance": "Report local sample verdicts and optional remote VJudge verdicts separately from collaboration quality. Prefer Accepted with diagnosis-backed recovery after rejects. Do not reward message volume alone.",
+  "scoring": {
+    "mode": "gold_or_judge",
+    "unit": "problem",
+    "evaluator_id": "programming_judge",
+    "evaluator_status": "sample_tests_ready",
+    "evaluator_strategy": "local_sample_then_optional_vjudge_gateway",
+    "rubric_path": "data/rubrics/codeforces_programming_judge_v1.json"
+  },
+  "submission": {
+    "max_count": null,
+    "adaptation": "submit_code judges samples locally and may forward to the VJudge gateway when configured; remote AC finalizes."
+  }
+}

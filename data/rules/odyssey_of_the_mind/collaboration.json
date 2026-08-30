@@ -196,9 +196,9 @@
     "mode": "unlimited"
   },
   "simulation": {
-    "max_turns": 24,
+    "max_turns": 30,
     "scheduler": "src_collaboration_draft",
-    "turn_budget_basis": "official clock n/a turns vs floor 19 (7 teammates x 2 turns + 1 answer parts + 4 for synthesis)",
+    "turn_budget_basis": "standardized experiment budget: 30 global turns; official contest timing is recorded separately",
     "physical_performance_environment": "unavailable",
     "outside_assistance_provenance": "specified_only"
   }

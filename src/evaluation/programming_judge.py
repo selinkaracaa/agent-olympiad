@@ -113,7 +113,14 @@ def _extract_source(submission: str) -> tuple[str, str]:
         re.IGNORECASE | re.DOTALL,
     )
     if not fence:
-        return submission.strip(), "python3"
+        source = submission.strip()
+        if (
+            "#include" in source
+            or "using namespace std" in source
+            or re.search(r"\bint\s+main\s*\(", source)
+        ):
+            return source, "cpp17"
+        return source, "python3"
     language = (fence.group("language") or "python3").lower()
     if language in {"cpp", "c++", "cpp17", "c++17"}:
         language = "cpp17"

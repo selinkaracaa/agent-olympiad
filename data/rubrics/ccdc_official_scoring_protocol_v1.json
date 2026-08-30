@@ -1,0 +1,65 @@
+{
+  "rubric_id": "ccdc_official_scoring_protocol_v1",
+  "dataset": "ccdc",
+  "title": "National CCDC official scoring protocol",
+  "rubric_type": "official_scoring_protocol",
+  "scoring_direction": "higher_is_better",
+  "official_scoring_components": [
+    {
+      "id": "service_points",
+      "name": "Service points",
+      "basis": "Operating and maintaining identified critical network services."
+    },
+    {
+      "id": "inject_points",
+      "name": "Inject points",
+      "basis": "Timely and satisfactory completion of business tasks delivered during the competition."
+    }
+  ],
+  "official_deductions": [
+    "Service-level-agreement violations on critical services",
+    "Use of recovery services",
+    "Successful Red Team penetrations"
+  ],
+  "other_official_rules": [
+    "A team's interruption of the scoring system is the team's responsibility and results in a lower score.",
+    "Manipulating a system to mislead the scoring engine may cause penalties or disqualification.",
+    "Official scores are maintained by competition officials; running totals are not provided."
+  ],
+  "published_weight_information": {
+    "service_points": "roughly half of possible points at regional events",
+    "inject_points": "roughly half of possible points at regional events",
+    "is_exact_weight": false
+  },
+  "applicability": {
+    "scope": "National CCDC rules and the regional-event scoring model described by the national organizer.",
+    "benchmark_years": [2007, 2011, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2025, 2026],
+    "qualifiers": "Qualifier scoring varies; the official FAQ describes challenge completion, malware removal, and correction of misconfigurations rather than the regional two-component model.",
+    "local_variation": "Regional and local event rules may vary."
+  },
+  "provenance": [
+    {
+      "source_type": "official_organizer",
+      "title": "NCCDC Frequently Asked Questions — How are CCDC events scored?",
+      "url": "https://www.nationalccdc.org/faq.html",
+      "supports": ["two major regional scoring categories", "roughly half allocation", "SLA and Red Team deductions", "qualifier variation"]
+    },
+    {
+      "source_type": "official_organizer",
+      "title": "NCCDC Rules and Requirements — Scoring",
+      "url": "https://nationalccdc.org/rules.html",
+      "supports": ["service and inject accumulation", "recovery-service and penetration deductions", "scoring-system rules"]
+    },
+    {
+      "source_type": "local_benchmark_evidence",
+      "path": "data/benchmarks/ccdc/benchmark.json",
+      "supports": ["published team packets identify scored services and the live operational scenario", "all benchmark records leave total_points null"]
+    }
+  ],
+  "limitations": [
+    "No exact service weights, inject weights, penetration deductions, SLA values, recovery-service costs, or total possible score are published in the cited national sources.",
+    "This file must not be used to claim or reconstruct hidden CCDC scoring.",
+    "The archived team packets are scenario briefs, not complete live inject sets, scoring-engine configurations, or official score sheets.",
+    "No numeric synthetic rubric is supplied because doing so would invent official criteria or weights."
+  ]
+}

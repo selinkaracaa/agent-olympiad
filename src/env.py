@@ -17,7 +17,7 @@ from contest_budget import (
 )
 from contest_rules import get_contest_rules
 from deliberation import DELIBERATION_ACTIONS, DeliberationLedger
-from rules import RulesBaseline, RulesMode
+from rules import RuleCardError, RulesBaseline, RulesMode
 from tools_search import live_web_search, looks_like_answer_lookup
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -44,7 +44,7 @@ TEAM_SIZE_MATRIX = {
     "jessup": 5,
     "iiot": 4,
     "icpc": 3,
-    "codeforces": 1,
+    "codeforces": 3,
 }
 
 COMPETITION_TOOL_REGISTRY = {
@@ -174,9 +174,12 @@ class OlympiadEnvironment:
         self.simulated_minutes = 0.0
 
         self.chat_history: list[dict[str, str]] = []
+        self.group_messages: list[dict[str, Any]] = []
         self.action_log: list[dict[str, Any]] = []
         self.agent_observations: dict[str, list[dict[str, Any]]] = {}
         self.code_submissions: list[dict[str, Any]] = []
+        self.private_thoughts: dict[str, list[dict[str, Any]]] = {}
+        self.protocol_action_counts: dict[str, dict[str, int]] = {}
         self.budget_snapshots: list[dict[str, Any]] = []
         self.deliberation = DeliberationLedger()
         self.communication = CommunicationBudget(
@@ -185,7 +188,11 @@ class OlympiadEnvironment:
             else {}
         )
         self.private_notes: dict[str, str] = {}
-        self.workspace = {"scratchpad": "", "final_answer": ""}
+        self.workspace = {
+            "scratchpad": "",
+            "final_answer": "",
+            "work_artifacts": [],
+        }
         self.current_turn = 0  # collaboration turns completed
         self.action_count = 0  # env actions executed (speak/tools/etc.)
         self.api_calls = 0  # LLM calls made by collaboration layer
@@ -194,6 +201,8 @@ class OlympiadEnvironment:
         self.submitted_by: Optional[str] = None
         self.wrong_submissions = 0
         self.submission_attempts = 0
+        self.remote_submission: dict[str, Any] | None = None
+        self.remote_submission_source: str | None = None
         self.rule_violations: list[str] = []
         self.contest_rules = get_contest_rules(competition_id)
 
@@ -412,6 +421,229 @@ class OlympiadEnvironment:
     def consume_agent_observations(self, agent_name: str) -> list[dict[str, Any]]:
         return self.agent_observations.pop(agent_name, [])
 
+    def _count_protocol_action(self, agent_name: str, action_type: str) -> None:
+        by_action = self.protocol_action_counts.setdefault(agent_name, {})
+        by_action[action_type] = by_action.get(action_type, 0) + 1
+
+    def record_private_thought(
+        self,
+        agent_name: str,
+        payload: str,
+        *,
+        metadata: dict[str, Any] | None = None,
+        count_as_action: bool = True,
+    ) -> str:
+        """Store explicit private reasoning outside public action history."""
+        if count_as_action:
+            self.action_count += 1
+        self._count_protocol_action(agent_name, "think")
+        entry = {
+            "turn": self.current_turn,
+            "agent": agent_name,
+            "content": payload,
+            "visibility": "private",
+            **(metadata or {}),
+        }
+        self.private_thoughts.setdefault(agent_name, []).append(entry)
+        return "Private thought stored for this contestant only."
+
+    def record_work_artifact(
+        self,
+        agent_name: str,
+        payload: str,
+        *,
+        recipients: list[str] | None = None,
+        metadata: dict[str, Any] | None = None,
+    ) -> str:
+        """Append durable work to public or recipient-scoped team state."""
+        self.action_count += 1
+        self._count_protocol_action(agent_name, "work")
+        audience = sorted(set(recipients or []))
+        visibility = "group" if audience else "team"
+        entry = {
+            "turn": self.current_turn,
+            "agent": agent_name,
+            "content": payload,
+            "visibility": visibility,
+            "recipients": audience,
+            **(metadata or {}),
+        }
+        artifacts = self.workspace.setdefault("work_artifacts", [])
+        artifacts.append(entry)
+        result = (
+            f"Work shared with {', '.join(audience)}."
+            if audience
+            else "Public written work appended."
+        )
+        self._log_action(
+            agent_name,
+            "work",
+            payload,
+            result,
+            metadata={
+                **(metadata or {}),
+                "visibility": visibility,
+                "recipients": audience,
+            },
+        )
+        return result
+
+    def record_scoped_message(
+        self,
+        agent_name: str,
+        payload: str,
+        *,
+        recipients: list[str],
+        metadata: dict[str, Any] | None = None,
+    ) -> str:
+        """Send one message visible only to its sender and named recipients."""
+        self.action_count += 1
+        max_chars = self.communication.max_message_chars
+        if max_chars and len(payload) > max_chars:
+            payload, compacted = self.communication.compact_payload(
+                agent_name=agent_name,
+                action_type="speak",
+                payload=payload,
+                turn=self.current_turn,
+                max_chars=max_chars,
+            )
+            metadata = {**(metadata or {}), **compacted}
+        violation = self.communication.check(
+            agent_name=agent_name,
+            action_type="speak",
+            payload=payload,
+            turn=self.current_turn,
+        )
+        audience = sorted(set(recipients))
+        scoped_metadata = {
+            **(metadata or {}),
+            "visibility": "group",
+            "recipients": audience,
+        }
+        if violation:
+            self.rule_violations.append(violation)
+            self._log_action(
+                agent_name,
+                "speak",
+                payload,
+                violation,
+                metadata=scoped_metadata,
+            )
+            return violation
+        self.communication.record(agent_name=agent_name, action_type="speak")
+        entry = {
+            "turn": self.current_turn,
+            "sender": agent_name,
+            "recipients": audience,
+            "message": payload,
+            "visibility": "group",
+        }
+        self.group_messages.append(entry)
+        result = f"Message sent to {', '.join(audience)}."
+        self._log_action(
+            agent_name,
+            "speak",
+            payload,
+            result,
+            metadata=scoped_metadata,
+        )
+        return result
+
+    def record_rest(
+        self,
+        agent_name: str,
+        reason: str = "",
+        *,
+        metadata: dict[str, Any] | None = None,
+    ) -> str:
+        """Record a private one-turn rest decision."""
+        self.action_count += 1
+        self._count_protocol_action(agent_name, "rest")
+        payload = reason.strip()
+        result = f"{agent_name} rests" + (f" ({payload})." if payload else ".")
+        self._log_action(
+            agent_name,
+            "rest",
+            payload,
+            result,
+            metadata=metadata,
+        )
+        return result
+
+    def record_protocol_speak(self, agent_name: str) -> None:
+        self._count_protocol_action(agent_name, "speak")
+
+    def format_private_thoughts(
+        self,
+        agent_name: str,
+        *,
+        max_entries: int | None = None,
+    ) -> str:
+        entries = self.private_thoughts.get(agent_name, [])
+        if max_entries is not None and max_entries > 0:
+            entries = entries[-max_entries:]
+        if not entries:
+            return ""
+        lines = ["=== YOUR PRIVATE THINK LEDGER ==="]
+        for item in entries:
+            lines.append(f"Turn {item['turn']}: {item['content']}")
+        return "\n".join(lines)
+
+    def format_shared_work(
+        self,
+        *,
+        agent_name: str | None = None,
+        max_entries: int | None = None,
+    ) -> str:
+        entries = list(self.workspace.get("work_artifacts") or [])
+        if agent_name is None:
+            entries = [item for item in entries if not item.get("recipients")]
+        else:
+            entries = [
+                item
+                for item in entries
+                if not item.get("recipients")
+                or item.get("agent") == agent_name
+                or agent_name in item.get("recipients", [])
+            ]
+        if max_entries is not None and max_entries > 0:
+            entries = entries[-max_entries:]
+        if not entries:
+            return ""
+        lines = ["=== SHARED WRITTEN WORK ==="]
+        for item in entries:
+            audience = item.get("recipients") or []
+            scope = f" | private group: {', '.join(audience)}" if audience else ""
+            lines.append(
+                f"Turn {item['turn']} | {item['agent']}{scope}:\n{item['content']}"
+            )
+        return "\n\n".join(lines)
+
+    def format_group_memory(
+        self,
+        agent_name: str,
+        *,
+        max_entries: int | None = None,
+    ) -> str:
+        """Render only private-group/direct messages this agent may read."""
+        entries = [
+            item
+            for item in self.group_messages
+            if item.get("sender") == agent_name
+            or agent_name in item.get("recipients", [])
+        ]
+        if max_entries is not None and max_entries > 0:
+            entries = entries[-max_entries:]
+        if not entries:
+            return ""
+        lines = ["=== YOUR GROUP / DIRECT MEMORY ==="]
+        for item in entries:
+            lines.append(
+                f"Turn {item['turn']} | {item['sender']} -> "
+                f"{', '.join(item['recipients'])}: {item['message']}"
+            )
+        return "\n".join(lines)
+
     def _shared_team_state_keys(self) -> set[str]:
         if self.rules_mode is not RulesMode.ENFORCED or self.rule_card is None:
             return set()
@@ -424,7 +656,7 @@ class OlympiadEnvironment:
         return "pending_run_status" in self._shared_team_state_keys()
 
     def _action_visibility(self, action_type: str) -> str:
-        if action_type in {"write_private_notes", *TOOL_ACTIONS}:
+        if action_type in {"write_private_notes", "rest", *TOOL_ACTIONS}:
             return "private"
         if action_type == "submit_code":
             return "team" if self.submit_code_is_team_visible() else "private"
@@ -439,13 +671,20 @@ class OlympiadEnvironment:
             feedback = json.loads(result)
         except json.JSONDecodeError:
             return
+        remote = feedback.get("remote") or {}
+        effective_verdict = remote.get("verdict") or feedback.get("verdict")
+        effective_reason = (
+            remote.get("message")
+            or remote.get("status")
+            or feedback.get("reason")
+        )
         entry = {
             "turn": self.current_turn,
             "agent": agent_name,
-            "verdict": feedback.get("verdict"),
+            "verdict": effective_verdict,
             "test_scope": feedback.get("test_scope"),
             "grading_scope_label": feedback.get("grading_scope_label"),
-            "reason": feedback.get("reason"),
+            "reason": effective_reason,
             "passed": feedback.get("passed"),
             "total": feedback.get("total"),
             "finalized": bool(feedback.get("finalized")),
@@ -494,6 +733,7 @@ class OlympiadEnvironment:
                 "agents": agents,
             },
             "chat_history": list(self.chat_history),
+            "group_messages": list(self.group_messages),
             "action_log": list(self.action_log),
             "budget_snapshots": list(self.budget_snapshots),
             "budget": {
@@ -517,6 +757,14 @@ class OlympiadEnvironment:
             },
             "workspace": dict(self.workspace),
             "code_submissions": list(self.code_submissions),
+            "private_thoughts": {
+                agent: list(entries)
+                for agent, entries in self.private_thoughts.items()
+            },
+            "protocol_action_counts": {
+                agent: dict(counts)
+                for agent, counts in self.protocol_action_counts.items()
+            },
             "rule_violations": list(self.rule_violations),
             "deliberation": self.deliberation.report(),
             "communication": self.communication.report(),
@@ -528,15 +776,7 @@ class OlympiadEnvironment:
         return self.current_turn >= self.max_turns
 
     def can_begin_turn(self) -> bool:
-        if self.current_turn >= self.max_turns:
-            return False
-        # WA penalties burn remaining contest clock; stop when duration is spent.
-        if (
-            self.duration_minutes is not None
-            and self.simulated_minutes >= float(self.duration_minutes)
-        ):
-            return False
-        return True
+        return self.current_turn < self.max_turns
 
     def api_budget_exhausted(self) -> bool:
         return self.max_api_calls is not None and self.api_calls >= self.max_api_calls
@@ -577,7 +817,15 @@ class OlympiadEnvironment:
         self.api_calls += 1
         self.record_budget_snapshot("api_call")
 
-    def _log_action(self, agent_name: str, action_type: str, payload: str, result: str) -> None:
+    def _log_action(
+        self,
+        agent_name: str,
+        action_type: str,
+        payload: str,
+        result: str,
+        *,
+        metadata: dict[str, Any] | None = None,
+    ) -> None:
         visibility = self._action_visibility(action_type)
         entry = {
             "turn": self.current_turn,
@@ -587,6 +835,7 @@ class OlympiadEnvironment:
             "payload": payload,
             "result": result,
             "visibility": visibility,
+            **(metadata or {}),
         }
         self.action_log.append(entry)
         observation = {
@@ -652,14 +901,42 @@ class OlympiadEnvironment:
             return "Submission already finalized; further submit_final actions are ignored."
         return None
 
-    def execute_action(self, agent_name: str, action_type: str, payload: str) -> str:
+    def execute_action(
+        self,
+        agent_name: str,
+        action_type: str,
+        payload: str,
+        *,
+        metadata: dict[str, Any] | None = None,
+    ) -> str:
         self.action_count += 1
 
         violation = self.validate_action(action_type, agent_name)
         if violation:
             self.rule_violations.append(violation)
-            self._log_action(agent_name, action_type, payload, violation)
+            self._log_action(
+                agent_name,
+                action_type,
+                payload,
+                violation,
+                metadata=metadata,
+            )
             return violation
+
+        max_message_chars = self.communication.max_message_chars
+        if (
+            self.communication.is_counted(action_type)
+            and max_message_chars
+            and len(payload.strip()) > max_message_chars
+        ):
+            payload, compacted_metadata = self.communication.compact_payload(
+                agent_name=agent_name,
+                action_type=action_type,
+                payload=payload,
+                turn=self.current_turn,
+                max_chars=max_message_chars,
+            )
+            metadata = {**(metadata or {}), **compacted_metadata}
 
         communication_violation = self.communication.check(
             agent_name=agent_name,
@@ -669,7 +946,13 @@ class OlympiadEnvironment:
         )
         if communication_violation:
             self.rule_violations.append(communication_violation)
-            self._log_action(agent_name, action_type, payload, communication_violation)
+            self._log_action(
+                agent_name,
+                action_type,
+                payload,
+                communication_violation,
+                metadata=metadata,
+            )
             return communication_violation
 
         if action_type == "speak":
@@ -698,12 +981,23 @@ class OlympiadEnvironment:
             if error:
                 result = error
             else:
-                self.workspace["final_answer"] = payload.strip()
-                self.submitted = True
-                self.submitted_by = agent_name
-                result = f"Submission finalized by {agent_name}."
+                evaluation = self.problem_data.get("evaluation") or {}
+                is_programming = self.problem_data.get("task_type") in {
+                    "algorithmic_programming",
+                    "programming",
+                } or evaluation.get("evaluator_id") == "programming_judge"
+                from judge.vjudge_gateway_client import gateway_enabled
+
+                if is_programming and gateway_enabled():
+                    result = self._submit_code(payload, agent_name=agent_name)
+                    self._record_shared_code_submission(agent_name, payload, result)
+                else:
+                    self.workspace["final_answer"] = payload.strip()
+                    self.submitted = True
+                    self.submitted_by = agent_name
+                    result = f"Submission finalized by {agent_name}."
         elif action_type == "submit_code":
-            result = self._submit_code(payload)
+            result = self._submit_code(payload, agent_name=agent_name)
             if not result.startswith("RULE VIOLATION"):
                 self._record_shared_code_submission(agent_name, payload, result)
         elif action_type == "use_calculator":
@@ -741,7 +1035,13 @@ class OlympiadEnvironment:
             self.communication.record(agent_name=agent_name, action_type=action_type)
         else:
             self.rule_violations.append(result)
-        self._log_action(agent_name, action_type, payload, result)
+        self._log_action(
+            agent_name,
+            action_type,
+            payload,
+            result,
+            metadata=metadata,
+        )
         return result
 
     def get_private_notes(self, agent_name: str) -> str:
@@ -801,8 +1101,8 @@ class OlympiadEnvironment:
             return str(fixtures[role_substring])[:8000]
         return None
 
-    def _submit_code(self, payload: str) -> str:
-        """Judge a non-final programming attempt on public sample tests."""
+    def _submit_code(self, payload: str, *, agent_name: str) -> str:
+        """Judge locally, then remotely when the VJudge gateway is enabled."""
         from evaluation.programming_judge import judge_programming_submission
 
         self.submission_attempts += 1
@@ -814,24 +1114,129 @@ class OlympiadEnvironment:
             fetch_kattis=False,
             test_scope="sample",
         )
+        remote = None
         if judged.wrong_submission:
             self.record_wrong_submission()
+        elif judged.verdict == "AC":
+            remote = self._maybe_vjudge_remote_submit(
+                payload, local_language=judged.language
+            )
+            if remote is not None:
+                self.remote_submission = remote
+                self.remote_submission_source = payload.strip()
+                remote_status = str(remote.get("status") or "")
+                remote_verdict = str(remote.get("verdict") or "")
+                if remote_status == "final" and remote_verdict == "AC":
+                    self.workspace["final_answer"] = payload.strip()
+                    self.submitted = True
+                    self.submitted_by = agent_name
+                elif remote_status == "final":
+                    self.record_wrong_submission()
+                elif remote_status == "needs_human":
+                    # Preserve the exact candidate and pause the run. A browser
+                    # must resolve Turnstile; synthesis must not replace it.
+                    self.workspace["final_answer"] = payload.strip()
+                    self.submitted = True
+                    self.submitted_by = agent_name
         feedback = judged.to_dict()
         feedback.update(
             {
                 "action": "submit_code",
                 "attempt": self.submission_attempts,
-                "finalized": False,
+                "finalized": self.submitted,
                 "penalty_minutes": self.penalty_minutes(),
                 "simulated_minutes": self.simulated_minutes,
-                "continue_allowed": self.can_begin_turn(),
+                "continue_allowed": not self.submitted and self.can_begin_turn(),
             }
         )
-        if judged.verdict == "AC":
+        if remote is not None:
+            feedback["remote"] = remote
+        if self.submitted and remote and remote.get("verdict") == "AC":
+            feedback["note"] = "Remote judge AC; submission finalized."
+        elif self.submitted and remote and remote.get("status") == "needs_human":
+            feedback["note"] = (
+                "Remote judge requires human verification; run paused with this "
+                "candidate preserved."
+            )
+        elif judged.verdict == "AC" and remote is None:
             feedback["note"] = (
                 "Sample AC only; final hidden tests may still reject this solution."
             )
         return json.dumps(feedback, sort_keys=True)
+
+    def _maybe_vjudge_remote_submit(
+        self, answer: str, *, local_language: str
+    ) -> dict[str, Any] | None:
+        """Optionally forward the final source to the local VJudge gateway."""
+        from judge.vjudge_gateway_client import (
+            extract_source_and_language,
+            gateway_enabled,
+            submit_via_gateway,
+        )
+
+        if not gateway_enabled():
+            return None
+        evaluation = self.problem_data.get("evaluation") or {}
+        mode = (
+            os.environ.get("VJUDGE_SUBMIT_MODE")
+            or str(evaluation.get("vjudge_submit_mode") or "problem")
+        ).strip().lower()
+        oj = (
+            str(evaluation.get("vjudge_oj") or "").strip()
+            or os.environ.get("VJUDGE_OJ", "").strip()
+        )
+        prob_num = (
+            str(evaluation.get("vjudge_prob_num") or "").strip()
+            or str(self.problem_data.get("codeforces_id") or "").strip()
+            or str(self.problem_data.get("kattis_id") or "").strip()
+        )
+        if not oj:
+            if self.problem_data.get("codeforces_id"):
+                oj = "CodeForces"
+            elif self.problem_data.get("kattis_id"):
+                oj = "Kattis"
+            else:
+                oj = "CodeForces"
+        contest_id = (
+            str(evaluation.get("vjudge_contest_id") or "").strip()
+            or os.environ.get("VJUDGE_CONTEST_ID", "").strip()
+        )
+        contest_letter = (
+            str(evaluation.get("vjudge_problem") or "").strip()
+            or os.environ.get("VJUDGE_PROBLEM", "").strip()
+        )
+        # Default: submit by OJ problem id (no private contest).
+        use_contest = mode == "contest" and bool(contest_id)
+        if use_contest:
+            problem = contest_letter or "A"
+            oj_for_request = oj
+            contest_for_request = contest_id
+        else:
+            problem = prob_num or contest_letter
+            oj_for_request = oj
+            contest_for_request = ""
+            if not problem:
+                return {
+                    "status": "failed",
+                    "error": (
+                        "VJudge problem-mode needs evaluation.vjudge_prob_num "
+                        "or codeforces_id on the benchmark record"
+                    ),
+                }
+        source, language = extract_source_and_language(answer, fallback=local_language)
+        key = (
+            f"{id(self)}:{self.competition_id}:{self.problem_id}:"
+            f"{self.submission_attempts}"
+        )
+        return submit_via_gateway(
+            contest_id=contest_for_request,
+            oj=oj_for_request,
+            problem=problem,
+            language=language,
+            source=source,
+            idempotency_key=key,
+            poll=True,
+        )
 
     def record_wrong_submission(self) -> None:
         """WA/TLE/RE: burn contest clock (remove remaining time), don't stack a bonus.
@@ -980,6 +1385,15 @@ class OlympiadEnvironment:
             if judged.verdict == "AC":
                 # Clock already includes any prior WA burns; do not add again.
                 grade["icpc_time_score"] = int(self.simulated_minutes)
+            remote = (
+                self.remote_submission
+                if self.remote_submission_source == answer.strip()
+                else self._maybe_vjudge_remote_submit(
+                    answer, local_language=judged.language
+                )
+            )
+            if remote is not None:
+                grade["remote"] = remote
             return grade
 
         if expected:
@@ -1019,14 +1433,21 @@ class OlympiadEnvironment:
 
     def reset(self) -> None:
         self.chat_history.clear()
+        self.group_messages.clear()
         self.action_log.clear()
         self.agent_observations.clear()
         self.code_submissions.clear()
+        self.private_thoughts.clear()
+        self.protocol_action_counts.clear()
         self.budget_snapshots.clear()
         self.deliberation.reset()
         self.communication.reset()
         self.private_notes.clear()
-        self.workspace = {"scratchpad": "", "final_answer": ""}
+        self.workspace = {
+            "scratchpad": "",
+            "final_answer": "",
+            "work_artifacts": [],
+        }
         self.current_turn = 0
         self.simulated_minutes = 0.0
         self.action_count = 0
@@ -1036,5 +1457,7 @@ class OlympiadEnvironment:
         self.submitted_by = None
         self.wrong_submissions = 0
         self.submission_attempts = 0
+        self.remote_submission = None
+        self.remote_submission_source = None
         self.rule_violations.clear()
         self.record_budget_snapshot("reset")

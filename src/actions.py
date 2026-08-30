@@ -1,3 +1,4 @@
+import json
 import re
 from typing import Optional
 
@@ -33,6 +34,20 @@ ACTION_LINE_RE = re.compile(
     re.IGNORECASE | re.MULTILINE,
 )
 
+SCOPED_ACTION_RE = re.compile(
+    r"^\s*ACTION:\s*(?P<action>[\w_]+)\s*"
+    r"(?:\|\s*TARGET:\s*(?P<target>.*?)\s*)?"
+    r"\|\s*PAYLOAD:\s*(?P<payload>.*)\s*$",
+    re.IGNORECASE | re.DOTALL,
+)
+
+TOLERANT_SCOPED_ACTION_RE = re.compile(
+    r"^\s*ACTION:\s*(?P<action>[\w_]+)\s*"
+    r"(?:(?:\||\r?\n)\s*TARGET:\s*(?P<target>.*?))?"
+    r"(?:\||\r?\n)\s*PAYLOAD:\s*(?P<payload>.*)\s*$",
+    re.IGNORECASE | re.DOTALL,
+)
+
 
 def build_action_instructions(
     allowed_tools: list[str],
@@ -46,7 +61,8 @@ def build_action_instructions(
     else:
         tool_lines = "(no tools — paper and pencil only)"
     programming_lines = (
-        "- submit_code     — privately judge code on SAMPLE tests; does not finalize"
+        "- submit_code     — judge code; when a remote gateway is configured, "
+        "submit after local sample AC and return its verdict (remote AC finalizes)"
         if programming_contest
         else ""
     )
@@ -84,6 +100,103 @@ def parse_agent_response(response: str) -> list[tuple[str, str]]:
         payload = match.group("payload").strip()
         actions.append((action, payload))
     return actions
+
+
+def parse_single_structured_action(
+    response: str,
+    *,
+    allowed_actions: set[str],
+) -> tuple[str | None, str, str | None]:
+    """Parse exactly one explicit action for strict collaboration protocols."""
+    text = (response or "").strip()
+    if not text:
+        return None, "", "empty response"
+    matches = list(ACTION_BLOCK_RE.finditer(text))
+    if len(matches) != 1:
+        return None, "", (
+            "response must contain exactly one structured ACTION block; "
+            f"received {len(matches)}"
+        )
+    match = matches[0]
+    if match.start() != 0 or match.end() != len(text):
+        return None, "", "response must contain only one structured ACTION block"
+    action = match.group("action").strip().lower()
+    payload = match.group("payload").strip()
+    if action not in allowed_actions:
+        return None, "", (
+            f"action '{action}' is not allowed; choose one of "
+            f"{sorted(allowed_actions)}"
+        )
+    return action, payload, None
+
+
+def parse_scoped_single_action(
+    response: str,
+    *,
+    allowed_actions: set[str],
+) -> tuple[str | None, str, str, str | None]:
+    """Parse one action, tolerating wrappers while rejecting multiple actions."""
+    text = (response or "").strip()
+    if not text:
+        return None, "", "", "empty response"
+
+    if text.startswith("```") and text.endswith("```"):
+        lines = text.splitlines()
+        text = "\n".join(lines[1:-1]).strip()
+
+    if text.startswith("{") and text.endswith("}"):
+        try:
+            payload_obj = json.loads(text)
+        except json.JSONDecodeError:
+            payload_obj = None
+        if isinstance(payload_obj, dict):
+            action = str(payload_obj.get("action") or "").strip().lower()
+            target = str(payload_obj.get("target") or "public").strip()
+            payload = str(payload_obj.get("payload") or "").strip()
+            if action not in allowed_actions:
+                return (
+                    None,
+                    "",
+                    "",
+                    f"action '{action}' is not allowed; choose one of "
+                    f"{sorted(allowed_actions)}",
+                )
+            return action, target, payload, None
+
+    markers = list(re.finditer(r"(?i)\bACTION\s*:", text))
+    if len(markers) != 1:
+        return (
+            None,
+            "",
+            "",
+            "response must contain exactly one structured ACTION block",
+        )
+    candidate = text[markers[0].start() :].strip()
+    candidate = re.sub(r"\n?```\s*$", "", candidate).strip()
+    bare_rest = re.fullmatch(r"(?i)ACTION\s*:\s*rest", candidate)
+    if bare_rest is not None and "rest" in allowed_actions:
+        return "rest", "public", "", None
+    match = SCOPED_ACTION_RE.fullmatch(candidate)
+    if match is None:
+        match = TOLERANT_SCOPED_ACTION_RE.fullmatch(candidate)
+    if match is None:
+        return (
+            None,
+            "",
+            "",
+            "response must contain exactly one structured ACTION block",
+        )
+    action = match.group("action").strip().lower()
+    if action not in allowed_actions:
+        return (
+            None,
+            "",
+            "",
+            f"action '{action}' is not allowed; choose one of {sorted(allowed_actions)}",
+        )
+    target = (match.group("target") or "public").strip()
+    payload = match.group("payload").strip()
+    return action, target, payload, None
 
 
 def apply_agent_response(

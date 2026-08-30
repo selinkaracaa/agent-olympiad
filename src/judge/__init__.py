@@ -14,6 +14,7 @@ from .models import (
     TestGroup,
 )
 from .package import load_problem_package, package_from_sample_directory
+from .remote import RemoteRun, RemoteSubmitRequest
 from .runners import BackendUnavailable, DockerProgrammingJudge, NativePythonRunner
 
 # Compatibility names from evaluation.programming.
@@ -32,6 +33,8 @@ __all__ = [
     "ProblemPackage",
     "ProgrammingJudgeError",
     "ProgrammingJudgeResult",
+    "RemoteRun",
+    "RemoteSubmitRequest",
     "Subtask",
     "SubtaskResult",
     "TestCase",

@@ -1,59 +1,244 @@
 {
   "_comment": "Hand-curated short answers for ARML Local Team Rounds where the official final is a clear short value. Problems that need diagrams or are ambiguous stay omitted (left as reference_llm).",
   "arml_local_2009": {
-    "1": {"expected": "(-6, 13)", "aliases": ["(-6,13)", "(-6, 13)", "(-6,13)"]},
-    "2": {"expected": "-21", "aliases": ["slope -21", "−21"]},
-    "3": {"expected": "52", "aliases": ["$52", "52 dollars"]},
-    "4": {"expected": "5√11", "aliases": ["5\\sqrt{11}", "5sqrt(11)"]},
-    "5": {"expected": "49√3/2", "aliases": ["\\frac{49\\sqrt{3}}{2}", "49\\sqrt{3}/2"]},
-    "6": {"expected": "8"},
-    "7": {"expected": "25/42", "aliases": ["\\frac{25}{42}", "75/126"]},
-    "8": {"expected": "1350"},
-    "9": {"expected": "3√3/10", "aliases": ["\\frac{3\\sqrt{3}}{10}", "3\\sqrt{3}/10"]}
+    "1": {
+      "expected": "(-6, 13)",
+      "aliases": [
+        "(-6,13)",
+        "(-6, 13)",
+        "(-6,13)"
+      ]
+    },
+    "2": {
+      "expected": "-21",
+      "aliases": [
+        "slope -21",
+        "−21"
+      ]
+    },
+    "3": {
+      "expected": "52",
+      "aliases": [
+        "$52",
+        "52 dollars"
+      ]
+    },
+    "4": {
+      "expected": "5√11",
+      "aliases": [
+        "5\\sqrt{11}",
+        "5sqrt(11)"
+      ]
+    },
+    "5": {
+      "expected": "49√3/2",
+      "aliases": [
+        "\\frac{49\\sqrt{3}}{2}",
+        "49\\sqrt{3}/2"
+      ]
+    },
+    "6": {
+      "expected": "8"
+    },
+    "7": {
+      "expected": "25/42",
+      "aliases": [
+        "\\frac{25}{42}",
+        "75/126"
+      ]
+    },
+    "8": {
+      "expected": "1350"
+    },
+    "9": {
+      "expected": "3√3/10",
+      "aliases": [
+        "\\frac{3\\sqrt{3}}{10}",
+        "3\\sqrt{3}/10"
+      ]
+    }
   },
   "arml_local_2010": {
-    "1": {"expected": "48.5", "aliases": ["97/2", "\\frac{97}{2}"]},
-    "2": {"expected": "60"},
-    "3": {"expected": "0.63", "aliases": ["63/100", "\\frac{63}{100}"]},
-    "5": {"expected": "3535"},
-    "9": {"expected": "3√2", "aliases": ["3\\sqrt{2}"]},
-    "10": {"expected": "125378"}
+    "1": {
+      "expected": "48.5",
+      "aliases": [
+        "97/2",
+        "\\frac{97}{2}"
+      ]
+    },
+    "2": {
+      "expected": "60"
+    },
+    "3": {
+      "expected": "0.63",
+      "aliases": [
+        "63/100",
+        "\\frac{63}{100}"
+      ]
+    },
+    "5": {
+      "expected": "3535"
+    },
+    "9": {
+      "expected": "3√2",
+      "aliases": [
+        "3\\sqrt{2}"
+      ]
+    },
+    "10": {
+      "expected": "125378"
+    }
   },
   "arml_local_2011": {
-    "1": {"expected": "31", "aliases": ["N+D=31", "20/11"]},
-    "2": {"expected": "7/90", "aliases": ["\\frac{7}{90}"]},
-    "3": {"expected": "27√3", "aliases": ["27\\sqrt{3}"]},
-    "4": {"expected": "176"},
-    "5": {"expected": "132"},
-    "6": {"expected": "2/3", "aliases": ["\\frac{2}{3}"]},
-    "7": {"expected": "10", "aliases": ["a+c=10"]},
-    "10": {"expected": "55"}
+    "1": {
+      "expected": "31",
+      "aliases": [
+        "N+D=31",
+        "20/11"
+      ]
+    },
+    "2": {
+      "expected": "7/90",
+      "aliases": [
+        "\\frac{7}{90}"
+      ]
+    },
+    "3": {
+      "expected": "27√3",
+      "aliases": [
+        "27\\sqrt{3}"
+      ]
+    },
+    "4": {
+      "expected": "176"
+    },
+    "5": {
+      "expected": "132"
+    },
+    "6": {
+      "expected": "2/3",
+      "aliases": [
+        "\\frac{2}{3}"
+      ]
+    },
+    "7": {
+      "expected": "10",
+      "aliases": [
+        "a+c=10"
+      ]
+    },
+    "10": {
+      "expected": "55"
+    }
   },
   "arml_local_2012": {
-    "1": {"expected": "268"},
-    "2": {"expected": "144"},
-    "3": {"expected": "6/25", "aliases": ["\\frac{6}{25}"]},
-    "4": {"expected": "21", "aliases": ["4884"]},
-    "5": {"expected": "(8, 10, 12, 13, 16)", "aliases": ["(8,10,12,13,16)"]},
-    "7": {"expected": "2880"},
-    "8": {"expected": "744"},
-    "9": {"expected": "(6+√3)/2", "aliases": ["\\frac{6+\\sqrt{3}}{2}", "3+√3/2"]},
-    "10": {"expected": "7.5", "aliases": ["15/2", "\\frac{15}{2}"]}
+    "1": {
+      "expected": "268"
+    },
+    "2": {
+      "expected": "144"
+    },
+    "3": {
+      "expected": "6/25",
+      "aliases": [
+        "\\frac{6}{25}"
+      ]
+    },
+    "4": {
+      "expected": "21",
+      "aliases": [
+        "4884"
+      ]
+    },
+    "5": {
+      "expected": "(8, 10, 12, 13, 16)",
+      "aliases": [
+        "(8,10,12,13,16)"
+      ]
+    },
+    "7": {
+      "expected": "2880"
+    },
+    "8": {
+      "expected": "744"
+    },
+    "9": {
+      "expected": "(6+√3)/2",
+      "aliases": [
+        "\\frac{6+\\sqrt{3}}{2}",
+        "3+√3/2"
+      ]
+    },
+    "10": {
+      "expected": "7.5",
+      "aliases": [
+        "15/2",
+        "\\frac{15}{2}"
+      ]
+    }
   },
   "arml_local_2013": {
-    "1": {"expected": "11"},
-    "2": {"expected": "3-2√2", "aliases": ["3-2\\sqrt{2}", "3 − 2√2"]},
-    "3": {"expected": "1/4", "aliases": ["\\frac{1}{4}"]},
-    "4": {"expected": "60"},
-    "5": {"expected": "0.194", "aliases": ["97/500", "\\frac{97}{500}", "194/1000"]},
-    "10": {"expected": "10"}
+    "1": {
+      "expected": "11"
+    },
+    "2": {
+      "expected": "3-2√2",
+      "aliases": [
+        "3-2\\sqrt{2}",
+        "3 − 2√2"
+      ]
+    },
+    "3": {
+      "expected": "1/4",
+      "aliases": [
+        "\\frac{1}{4}"
+      ]
+    },
+    "4": {
+      "expected": "60"
+    },
+    "5": {
+      "expected": "0.194",
+      "aliases": [
+        "97/500",
+        "\\frac{97}{500}",
+        "194/1000"
+      ]
+    },
+    "10": {
+      "expected": "10"
+    }
   },
   "arml_local_2014": {
-    "1": {"expected": "360/11", "aliases": ["\\frac{360}{11}", "180/5.5"]},
-    "2": {"expected": "3", "aliases": ["q=3", "q = 3"]},
-    "3": {"expected": "5"},
-    "4": {"expected": "2"},
-    "5": {"expected": "125"},
-    "9": {"expected": "91/128", "aliases": ["\\frac{91}{128}", "182/256"]}
+    "1": {
+      "expected": "360/11",
+      "aliases": [
+        "\\frac{360}{11}",
+        "180/5.5"
+      ]
+    },
+    "2": {
+      "expected": "3",
+      "aliases": [
+        "q=3",
+        "q = 3"
+      ]
+    },
+    "3": {
+      "expected": "5"
+    },
+    "4": {
+      "expected": "2"
+    },
+    "5": {
+      "expected": "125"
+    },
+    "9": {
+      "expected": "91/128",
+      "aliases": [
+        "\\frac{91}{128}",
+        "182/256"
+      ]
+    }
   }
 }

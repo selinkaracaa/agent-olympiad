@@ -287,10 +287,6 @@
     ],
     "review_protocol": [
       "Simulation choice: check verb-required justification before filing."
-    ],
-    "emergent_behavior": [
-      "Observe but do not require specialization or a fixed scribe.",
-      "Do not reward message volume or invented administrivia compliance theater."
     ]
   },
   "deliberation": {
@@ -321,9 +317,9 @@
     ]
   },
   "simulation": {
-    "max_turns": 35,
+    "max_turns": 30,
     "scheduler": "src_collaboration_draft",
-    "turn_budget_basis": "official clock 12 turns vs floor 35 (15 teammates x 2 turns + 1 answer parts + 4 for synthesis)",
+    "turn_budget_basis": "standardized experiment budget: 30 global turns; official contest timing is recorded separately",
     "eligibility_and_logistics_state": "specified_for_role_immersion_not_enforced"
   }
 }

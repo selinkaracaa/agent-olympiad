@@ -5,7 +5,7 @@
     "unit": "artifact",
     "evaluator_id": "slide_deck_v1",
     "evaluator_status": "ready",
-    "rubric_path": "data/rubrics/business_case_slides_50.json",
+    "rubric_path": "data/rubrics/ieo_business_case_slides_50_v1.json",
     "evaluator_strategy": "deterministic_artifact_checks_plus_multimodal_rubric",
     "competition_specific_criteria": "Judges reward a clear recommendation supported by economic reasoning, credible evidence, quantitative analysis, feasibility, and a coherent slide-supported presentation. This is contestant-facing guidance, not the hidden evaluator rubric.",
     "official_performance": {

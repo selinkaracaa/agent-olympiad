@@ -11,6 +11,7 @@ sys.path.insert(0, str(REPO_ROOT / "src"))
 from codeforces_adapter import (
     build_benchmark_record,
     extract_limits_from_html,
+    extract_problem_description_from_html,
     extract_samples_from_html,
     load_codeforces_package,
     materialize_problem,
@@ -46,6 +47,9 @@ class CodeforcesAdapterTests(unittest.TestCase):
         time_ms, memory_mb = extract_limits_from_html(page)
         self.assertEqual(time_ms, 1000)
         self.assertEqual(memory_mb, 64)
+        description = extract_problem_description_from_html(page)
+        self.assertIn("divide the watermelon", description)
+        self.assertIn("Input", description)
 
     def test_write_package_and_judge_ac_solution(self):
         ref = parse_problem_id("4A")

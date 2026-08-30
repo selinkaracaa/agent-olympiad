@@ -4,7 +4,7 @@
     "unit": "problem_or_question",
     "evaluator_id": "rubric_llm_v1",
     "evaluator_status": "ready_with_limitations",
-    "rubric_path": "data/rubrics/practical_report_40_v1.json",
+    "rubric_path": "data/rubrics/ijso_practical_report_40_v1.json",
     "evaluator_strategy": "structured_rubric_llm_judge",
     "official_performance": {
       "source_status": "source_enriched_v1",

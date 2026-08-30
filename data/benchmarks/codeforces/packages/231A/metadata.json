@@ -1,0 +1,12 @@
+{
+  "contestId": 231,
+  "index": "A",
+  "name": "Team",
+  "type": "PROGRAMMING",
+  "points": 500.0,
+  "rating": 800,
+  "tags": [
+    "brute force",
+    "greedy"
+  ]
+}

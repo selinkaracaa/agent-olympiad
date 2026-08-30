@@ -1,0 +1,533 @@
+{
+  "rubric_id": "wro_official_rubrics",
+  "dataset": "wro",
+  "title": "World Robot Olympiad 2022-2026 official dataset-level rubrics",
+  "rubric_type": "official_dataset_rubric_collection",
+  "version": 1,
+  "scope": {
+    "benchmark_file": "data/benchmarks/wro/benchmark.json",
+    "problem_variants": 20,
+    "editions": [2022, 2023, 2024, 2025, 2026],
+    "categories": ["Future Innovators", "RoboMission"],
+    "robomission_numeric_variants": 15,
+    "future_innovators_numeric_variants": 1
+  },
+  "authority_and_limitations": [
+    "This file transcribes the international season documents preserved in the local WRO archive. A National Organizer may adapt international rules, missions, scoring, robot restrictions, and tournament format; local competitors must use the organizer's local rules.",
+    "General Rules govern procedure, run adjudication, rule hierarchy, and ranking. Exact mission points and mutually exclusive scoring states come only from each edition-and-age-group Game Rules.",
+    "Official season Q&A can clarify, extend, redefine, or overwrite the archived General Rules and Game Rules; the judging team has the final word at an event.",
+    "The listed RoboMission maximum is the printed Season Challenge maximum before any surprise task/rule, extra task, technical-summary points, or International Final extra/day challenge. Such additions can change a run total or overall ranking.",
+    "Future Innovators mission documents define the season theme but not numeric judging weights. Numeric criteria are included only for 2024, for which an official General Rules scoring sheet was verified; no other year's weights are inferred."
+  ],
+  "general_rules_by_year": {
+    "2022": {
+      "source": "e:/agent_olympiad/benchmark/WRO/2022/WRO-2022-RoboMission-General-Rules.pdf",
+      "version": "January 15, 2022",
+      "age_groups": {
+        "Elementary": {"ages": "8-12", "birth_years": "2010-2014"},
+        "Junior": {"ages": "11-15", "birth_years": "2007-2011"},
+        "Senior": {"ages": "14-19", "birth_years": "2003-2008"}
+      },
+      "run": {"duration_seconds": 120, "score_time": "End-of-run field state; time is stopped and the signed score sheet becomes final.", "fields": ["game_score", "surprise_rule", "total_score", "time_in_full_seconds"]},
+      "tiebreak_and_ranking": "Local format is set by the National Organizer. A typical ranking uses the best run, then time. International Final ranking uses the sum of the best Day 1 and day-challenge points, then summed time, then the stated challenge/run point and time sequence.",
+      "surprise_rule": "Announced at opening; may change or extend tasks and add positive or penalty points. It does not count as a regular mission for conditions requiring regular positive mission points."
+    },
+    "2023": {
+      "source": "e:/agent_olympiad/benchmark/WRO/2023/WRO-2023-RoboMission-General-Rules.pdf",
+      "version": "January 15, 2023",
+      "age_groups": {
+        "Elementary": {"ages": "8-12", "birth_years": "2011-2015"},
+        "Junior": {"ages": "11-15", "birth_years": "2008-2012"},
+        "Senior": {"ages": "14-19", "birth_years": "2004-2009"}
+      },
+      "run": {"duration_seconds": 120, "score_time": "End-of-run field state; damaged objects do not score unless Game Rules say otherwise.", "fields": ["game_score", "surprise_rule", "total_score", "time_in_full_seconds"]},
+      "tiebreak_and_ranking": "Local format is set by the National Organizer. A typical ranking uses the best run, then time. International Final ranking uses summed best regular/day-challenge points and time followed by the published run-level tiebreak sequence.",
+      "surprise_rule": "Announced at opening; may change or extend tasks and add positive or penalty points. It is separate from regular missions."
+    },
+    "2024": {
+      "source": "e:/agent_olympiad/benchmark/WRO/2024/WRO-2024-RoboMission-General-Rules.pdf",
+      "version": "January 15, 2024",
+      "age_groups": {
+        "Elementary": {"ages": "8-12", "birth_years": "2012-2016"},
+        "Junior": {"ages": "11-15", "birth_years": "2009-2013"},
+        "Senior": {"ages": "14-19", "birth_years": "2005-2010"}
+      },
+      "run": {"duration_seconds": 120, "score_time": "Judge scores the field state at the end of the run against the initial randomization.", "fields": ["game_score", "surprise_rule", "total_score", "time_in_full_seconds"]},
+      "tiebreak_and_ranking": "Local format is set by the National Organizer. A typical ranking uses the best run, then time. International Final ranking combines best regular and second-day challenge results with the published points/time sequence.",
+      "surprise_rule": "Announced at opening; may change or extend tasks and add positive or penalty points. It is treated as bonus, not a regular mission. The Game Rules also announce an International Final extra mission."
+    },
+    "2025": {
+      "source": "e:/agent_olympiad/benchmark/WRO/2025/WRO-2025-RoboMission-General-Rules.pdf",
+      "version": "January 15, 2025 (archived document labels itself Draft Version)",
+      "age_groups": {
+        "Elementary": {"ages": "8-12", "birth_years": "2013-2017"},
+        "Junior": {"ages": "11-15", "birth_years": "2010-2014"},
+        "Senior": {"ages": "14-19", "birth_years": "2006-2011"}
+      },
+      "run": {"duration_seconds": 120, "score_time": "Judge scores the end-of-run field state against the initial randomization; time is recorded in full seconds.", "fields": ["season_challenge_score", "competition_additions_if_any", "total_score", "time_in_full_seconds"]},
+      "tiebreak_and_ranking": "National Organizer selects the format. Typical season-only ranking compares best-run points then time and subsequent runs. International Final combines best Season Challenge and Extra-Day-Challenge points, then summed time, then the published challenge/run sequence.",
+      "surprise_rule": "A Surprise Task may add an object and points; a Surprise Rule may change the Season Challenge. National Organizers select competition elements. Technical-summary points may add up to 5 locally, but are excluded from Game Rules maxima."
+    },
+    "2026": {
+      "source": "e:/agent_olympiad/benchmark/WRO/2026/WRO-2026-RoboMission-General-Rules.pdf",
+      "version": "January 15, 2026",
+      "age_groups": {
+        "Elementary": {"ages": "8-12", "birth_years": "2014-2018"},
+        "Junior": {"ages": "11-15", "birth_years": "2011-2015"},
+        "Senior": {"ages": "14-19", "birth_years": "2007-2012"}
+      },
+      "run": {"duration_seconds": 120, "score_time": "Judge scores the end-of-run field state against the initial randomization; time is recorded in full seconds.", "fields": ["season_challenge_score", "competition_additions_if_any", "total_score", "time_in_full_seconds"]},
+      "tiebreak_and_ranking": "National Organizer assembles the format. Typical season-only ranking compares best-run points then time and subsequent runs. International Final combines best Season Challenge and Extra-Day-Challenge points, then summed time, then the published challenge/run sequence.",
+      "surprise_rule": "A Surprise Task may add points; a Surprise Rule may alter the Season Challenge. Technical-summary points may add up to 5 locally and International Final late submission can cause percentage deductions; neither changes the printed Game Rules maximum."
+    }
+  },
+  "variants": {
+    "wro_2022_future_innovators": {
+      "edition": 2022,
+      "category": "Future Innovators",
+      "age_group": "Elementary / Junior / Senior",
+      "theme": "My Robot My Friend",
+      "numeric_rubric": {"available": false, "reason": "The archived source is the official Mission text; no applicable official General Rules judging sheet was verified locally."},
+      "provenance": [{"type": "official_mission", "local_archive_path": "e:/agent_olympiad/benchmark/WRO/2022/WRO-2022-Future-Innovators-Mission.pdf", "benchmark_source": "data/raw/wro/2022/WRO-2022-Future-Innovators-Mission.pdf"}]
+    },
+    "wro_2022_robomission_elementary": {
+      "edition": 2022,
+      "category": "RoboMission",
+      "age_group": "Elementary",
+      "ages": "8-12",
+      "title": "The Garden Robot",
+      "maximum_score_before_surprise_rule": 125,
+      "scoring_items": [
+        {"mission": "Save ladybugs", "condition": "Ladybug completely outside route area and standing upright", "points_each": 5, "max_points": 15},
+        {"mission": "Cut high grass", "condition": "Grass top no longer on top of/touching the grass element and base still touching grey area", "points_each": 7, "max_points": 21},
+        {"mission": "Collect bad weeds", "condition": "Bad weed completely inside collection point 1", "points_each": 9, "max_points": 27, "state_group": "weed destination", "relationship": "exclusive alternative per weed"},
+        {"mission": "Collect bad weeds", "condition": "Bad weed completely inside collection point 2", "points_each": 12, "max_points": 36, "state_group": "weed destination", "relationship": "exclusive alternative per weed"},
+        {"mission": "Activate service point", "condition": "Service point correctly set, at least 9 fences standing, and service-point base completely in grey area", "points": 17},
+        {"mission": "Park robot", "condition": "Robot stops completely in Start & Finish Area; only if non-bonus points were scored", "points": 14},
+        {"mission": "Bonus", "condition": "Fence not moved or damaged", "points_each": 2, "max_points": 22}
+      ],
+      "run_fields": ["sum_of_game_score", "surprise_rule", "total_score_in_this_run", "time_in_full_seconds", "team_signature", "judge_signature"],
+      "tiebreak_notes": "General Rules: tournament-dependent; a typical tie on points is decided by recorded time.",
+      "provenance": [{"type": "official_game_rules", "local_archive_path": "e:/agent_olympiad/benchmark/WRO/2022/WRO-2022-RoboMission-Elementary.pdf", "benchmark_source": "data/raw/wro/2022/WRO-2022-RoboMission-Elementary.pdf", "version": "January 15, 2022"}]
+    },
+    "wro_2022_robomission_junior": {
+      "edition": 2022,
+      "category": "RoboMission",
+      "age_group": "Junior",
+      "ages": "11-15",
+      "title": "The Rescue Robot",
+      "maximum_score_before_surprise_rule": 155,
+      "scoring_items": [
+        {"mission": "Find and extinguish fire", "condition": "Water object completely in a room with a fire object; maximum one water object per room", "points_each": 15, "max_points": 30},
+        {"mission": "Find and extinguish fire", "condition": "Water object in a room without fire, or more water objects than fires in that room", "points_each": -3, "min_points": -6},
+        {"mission": "Move chemicals", "condition": "Chemical object completely outside factory and not in secure storage", "points": 8, "state_group": "chemical placement", "relationship": "exclusive alternative"},
+        {"mission": "Move chemicals", "condition": "Chemical object completely inside secure storage", "points": 12, "state_group": "chemical placement", "relationship": "exclusive alternative"},
+        {"mission": "Find people", "condition": "Marking block completely inside correct map square for a person in the corresponding-coloured room", "points_each": 19, "max_points": 38},
+        {"mission": "Cross uneven ground", "condition": "Completely cross A or B; once per crossing and only if obstacle wall was not moved or damaged", "points_each": 15, "max_points": 30},
+        {"mission": "Park robot", "condition": "Robot completely in the Start & Finish Area that was not the day's start area; only if non-bonus points were scored", "points": 13},
+        {"mission": "Bonus", "condition": "Fire or person object not moved or damaged", "points_each": 5, "max_points": 20},
+        {"mission": "Bonus", "condition": "Factory wall not moved or damaged", "points_each": 6, "max_points": 12},
+        {"mission": "Penalty", "condition": "Obstacle wall moved or damaged", "points": -12}
+      ],
+      "run_fields": ["game_score", "surprise_rule", "total_score_in_this_run", "time_in_full_seconds", "team_signature", "judge_signature"],
+      "tiebreak_notes": "General Rules: tournament-dependent; a typical tie on points is decided by recorded time.",
+      "provenance": [{"type": "official_game_rules", "local_archive_path": "e:/agent_olympiad/benchmark/WRO/2022/WRO-2022-RoboMission-Junior.pdf", "benchmark_source": "data/raw/wro/2022/WRO-2022-RoboMission-Junior.pdf", "version": "January 15, 2022"}]
+    },
+    "wro_2022_robomission_senior": {
+      "edition": 2022,
+      "category": "RoboMission",
+      "age_group": "Senior",
+      "ages": "14-19",
+      "title": "The Care Robot",
+      "maximum_score_before_surprise_rule": 155,
+      "scoring_items": [
+        {"mission": "Doing the laundry", "condition": "Laundry block completely in laundry area, not in or on a container", "points_each": 6, "max_points": 18, "state_group": "laundry placement", "relationship": "exclusive alternative per block"},
+        {"mission": "Doing the laundry", "condition": "Laundry block inside non-matching-colour container and container completely inside laundry area", "points_each": 10, "max_points": 30, "state_group": "laundry placement", "relationship": "exclusive alternative per block"},
+        {"mission": "Doing the laundry", "condition": "Laundry block inside matching-colour container and container completely inside laundry area", "points_each": 16, "max_points": 48, "state_group": "laundry placement", "relationship": "exclusive alternative per block"},
+        {"mission": "Bring water", "condition": "Water completely in correct white-marked room but not on table; maximum one per room", "points_each": 6, "max_points": 12, "state_group": "water placement", "relationship": "exclusive positive alternative per water"},
+        {"mission": "Bring water", "condition": "Water partly or completely in a wrong room", "points_each": -6, "min_points": -12},
+        {"mission": "Bring water", "condition": "Water on table in correct room, not standing, undamaged, table still in dark grey area", "points_each": 10, "max_points": 20, "state_group": "water placement", "relationship": "exclusive positive alternative per water"},
+        {"mission": "Bring water", "condition": "Water on table in correct room, standing, undamaged, table still in dark grey area", "points_each": 14, "max_points": 28, "state_group": "water placement", "relationship": "exclusive positive alternative per water"},
+        {"mission": "Play a game", "condition": "Ball inside game net in a green-marked room; maximum one ball per net", "points_each": 13, "max_points": 26},
+        {"mission": "Park robot", "condition": "Robot completely in Start & Finish Area; only if non-bonus points were scored", "points": 13},
+        {"mission": "Bonus", "condition": "Person not moved or damaged", "points_each": 4, "max_points": 24},
+        {"mission": "Bonus", "condition": "Game net not moved or damaged", "points_each": 2, "max_points": 8},
+        {"mission": "Bonus", "condition": "Table not moved or damaged", "points_each": 2, "max_points": 8}
+      ],
+      "run_fields": ["game_score", "surprise_rule", "total_score_in_this_run", "time_in_full_seconds", "team_signature", "judge_signature"],
+      "tiebreak_notes": "General Rules: tournament-dependent; a typical tie on points is decided by recorded time.",
+      "provenance": [{"type": "official_game_rules", "local_archive_path": "e:/agent_olympiad/benchmark/WRO/2022/WRO-2022-RoboMission-Senior.pdf", "benchmark_source": "data/raw/wro/2022/WRO-2022-RoboMission-Senior.pdf", "version": "January 15, 2022"}]
+    },
+    "wro_2023_future_innovators": {
+      "edition": 2023,
+      "category": "Future Innovators",
+      "age_group": "Elementary / Junior / Senior",
+      "theme": "Connecting the World",
+      "numeric_rubric": {"available": false, "reason": "The archived source is the official Mission text; no applicable official General Rules judging sheet was verified locally."},
+      "provenance": [{"type": "official_mission", "local_archive_path": "e:/agent_olympiad/benchmark/WRO/2023/WRO-2023-Future-Innovators-Mission.pdf", "benchmark_source": "data/raw/wro/2023/WRO-2023-Future-Innovators-Mission.pdf"}]
+    },
+    "wro_2023_robomission_elementary": {
+      "edition": 2023,
+      "category": "RoboMission",
+      "age_group": "Elementary",
+      "ages": "8-12",
+      "title": "Marine Life Preservation",
+      "maximum_score_before_surprise_rule": 124,
+      "scoring_items": [
+        {"mission": "Manage ship waste", "condition": "Red/black/white/blue waste completely inside corresponding recycling area", "points_each": 10, "max_points": 20, "state_group": "ordinary waste placement", "relationship": "exclusive alternative per object"},
+        {"mission": "Manage ship waste", "condition": "Red/black/white/blue waste touching corresponding recycling area", "points_each": 5, "state_group": "ordinary waste placement", "relationship": "exclusive alternative per object"},
+        {"mission": "Manage ship waste", "condition": "Yellow/green waste completely inside corresponding recycling area and its fence not moved or damaged", "points_each": 16, "max_points": 32, "state_group": "hatch waste placement", "relationship": "exclusive placement alternative per object"},
+        {"mission": "Manage ship waste", "condition": "Yellow/green waste touching corresponding recycling area and its fence not moved or damaged", "points_each": 12, "state_group": "hatch waste placement", "relationship": "exclusive placement alternative per object"},
+        {"mission": "Manage ship waste", "condition": "Yellow/green waste outside hatch and no longer touching hatch", "points_each": 4, "max_points": 8, "relationship": "additive to recycling-area score"},
+        {"mission": "Rescue whale", "condition": "Whale projection completely in watching area and whale undamaged", "points": 19, "state_group": "whale placement", "relationship": "exclusive alternative"},
+        {"mission": "Rescue whale", "condition": "Whale projection partly in watching area and whale undamaged", "points": 8, "state_group": "whale placement", "relationship": "exclusive alternative"},
+        {"mission": "Restore coral reef", "condition": "Coral completely inside a reef; maximum one per reef", "points_each": 6, "max_points": 24, "state_group": "coral placement", "relationship": "exclusive alternative per coral"},
+        {"mission": "Restore coral reef", "condition": "Coral touching a reef; maximum one per reef", "points_each": 3, "state_group": "coral placement", "relationship": "exclusive alternative per coral"},
+        {"mission": "Bonus", "condition": "Fence pillars touch grey circles and fence is undamaged", "points_each": 3, "max_points": 6},
+        {"mission": "Park robot", "condition": "Robot projection partly in Start & Finish Area; only if non-bonus points were scored", "points": 15}
+      ],
+      "run_fields": ["game_score", "surprise_rule", "total_score_in_this_run", "time_in_full_seconds"],
+      "tiebreak_notes": "General Rules: tournament-dependent; a typical tie on points is decided by recorded time.",
+      "provenance": [{"type": "official_game_rules", "local_archive_path": "e:/agent_olympiad/benchmark/WRO/2023/WRO-2023-RoboMission-Elementary.pdf", "benchmark_source": "data/raw/wro/2023/WRO-2023-RoboMission-Elementary.pdf", "version": "January 15, 2023"}]
+    },
+    "wro_2023_robomission_junior": {
+      "edition": 2023,
+      "category": "RoboMission",
+      "age_group": "Junior",
+      "ages": "11-15",
+      "title": "Underwater Infrastructure",
+      "maximum_score_before_surprise_rule": 120,
+      "scoring_items": [
+        {"mission": "Underwater deployment", "condition": "Submarine cable completely inside correct connection slot", "points_each": 12, "max_points": 24, "state_group": "cable slot", "relationship": "exclusive alternative per cable"},
+        {"mission": "Underwater deployment", "condition": "Submarine cable touching correct connection slot", "points_each": 7, "state_group": "cable slot", "relationship": "exclusive alternative per cable"},
+        {"mission": "Underwater deployment", "condition": "Server object completely inside correct connection slot", "points_each": 12, "max_points": 24, "state_group": "server slot", "relationship": "exclusive alternative per server"},
+        {"mission": "Underwater deployment", "condition": "Server object touching correct connection slot", "points_each": 7, "state_group": "server slot", "relationship": "exclusive alternative per server"},
+        {"mission": "Underwater deployment", "condition": "Server or submarine cable touching or inside wrong connection slot; maximum one object per slot", "points_each": 4, "state_group": "deployment object slot", "relationship": "fallback alternative"},
+        {"mission": "Underwater deployment", "condition": "Both cable and server on Caribbean and/or Pacific side completely inside their correct slots", "points_each": 6, "max_points": 12, "relationship": "additive completion bonus"},
+        {"mission": "Find broken cable", "condition": "Broken cable completely inside repair facility", "points": 13, "state_group": "broken cable placement", "relationship": "exclusive alternative"},
+        {"mission": "Find broken cable", "condition": "Broken cable touching repair facility", "points": 9, "state_group": "broken cable placement", "relationship": "exclusive alternative"},
+        {"mission": "Activate solar farm", "condition": "Solar panel activated", "points_each": 11, "max_points": 22},
+        {"mission": "Bonus", "condition": "Island barrier not moved or damaged", "points_each": 6, "max_points": 12},
+        {"mission": "Park robot", "condition": "Robot projection partly in Start & Finish Area; only if non-bonus points were scored", "points": 13}
+      ],
+      "run_fields": ["game_score", "surprise_rule", "total_score_in_this_run", "time_in_full_seconds"],
+      "tiebreak_notes": "General Rules: tournament-dependent; a typical tie on points is decided by recorded time.",
+      "provenance": [{"type": "official_game_rules", "local_archive_path": "e:/agent_olympiad/benchmark/WRO/2023/WRO-2023-RoboMission-Junior.pdf", "benchmark_source": "data/raw/wro/2023/WRO-2023-RoboMission-Junior.pdf", "version": "January 15, 2023"}]
+    },
+    "wro_2023_robomission_senior": {
+      "edition": 2023,
+      "category": "RoboMission",
+      "age_group": "Senior",
+      "ages": "14-19",
+      "title": "Autonomous Port",
+      "maximum_score_before_surprise_rule": 165,
+      "scoring_items": [
+        {"mission": "Load small ship", "condition": "Any container loaded onto small ship; entire task scores zero if more than two containers are loaded", "points_each": 10, "max_points": 20},
+        {"mission": "Load small ship", "condition": "Exactly two containers are on small ship", "points": 9, "relationship": "additive completion bonus"},
+        {"mission": "Fuel big ship", "condition": "Fuel block in/on big ship", "points": 11},
+        {"mission": "Load big ship", "condition": "White container loaded onto big ship", "points": 10},
+        {"mission": "Load big ship", "condition": "Correct-colour container selected by marking blocks loaded onto big ship", "points_each": 11, "max_points": 22},
+        {"mission": "Load big ship", "condition": "One white and two correct-colour containers loaded; red special container excluded; entire loading task scores zero if more than three non-red containers are loaded", "points": 9, "relationship": "additive completion bonus"},
+        {"mission": "Unload special container", "condition": "Robot holds red container, which touches neither big ship nor mat", "points": 10, "state_group": "special container base state", "relationship": "exclusive alternative"},
+        {"mission": "Unload special container", "condition": "Crane A tip through red-container loop", "points": 14, "state_group": "special container base state", "relationship": "exclusive alternative"},
+        {"mission": "Unload special container", "condition": "Crane B tip through red-container loop", "points": 20, "state_group": "special container base state", "relationship": "exclusive alternative"},
+        {"mission": "Unload special container", "condition": "Crane holding red container is activated and container touches neither robot, ship, nor mat", "points": 11, "relationship": "additive to a crane base state"},
+        {"mission": "Pilot ships", "condition": "Ship completely crossed dotted line and carries at least one non-red container", "points_each": 12, "max_points": 24},
+        {"mission": "Bonus", "condition": "Harbour wall element not moved or damaged", "points_each": 3, "max_points": 12},
+        {"mission": "Moor robot", "condition": "Robot projection partly in Start & Finish Area; only if non-bonus points were scored", "points": 10, "state_group": "robot mooring", "relationship": "exclusive alternative"},
+        {"mission": "Moor robot", "condition": "Robot projection partly in open-sea mooring station; only if non-bonus points were scored", "points": 17, "state_group": "robot mooring", "relationship": "exclusive alternative"}
+      ],
+      "run_fields": ["game_score", "surprise_rule", "total_score_in_this_run", "time_in_full_seconds"],
+      "tiebreak_notes": "General Rules: tournament-dependent; a typical tie on points is decided by recorded time.",
+      "provenance": [{"type": "official_game_rules", "local_archive_path": "e:/agent_olympiad/benchmark/WRO/2023/WRO-2023-RoboMission-Senior.pdf", "benchmark_source": "data/raw/wro/2023/WRO-2023-RoboMission-Senior.pdf", "version": "January 15, 2023"}]
+    },
+    "wro_2024_future_innovators": {
+      "edition": 2024,
+      "category": "Future Innovators",
+      "age_group": "Elementary / Junior / Senior",
+      "theme": "Earth Allies",
+      "numeric_rubric": {
+        "available": true,
+        "total_points": 200,
+        "judge_scale": {"min": 0, "max": 10},
+        "formula": "judge_score / 10 * criterion_max_points",
+        "sheets": {
+          "Elementary": {
+            "criteria": [
+              {"section": "Project and innovation", "criterion": "Idea, Quality & Creativity", "max_points": 30},
+              {"section": "Project and innovation", "criterion": "Research & Report", "max_points": 15},
+              {"section": "Project and innovation", "criterion": "Usage of the idea", "max_points": 15},
+              {"section": "Project and innovation", "criterion": "Key Innovation & Slogan", "max_points": 10},
+              {"section": "Robotic solution", "criterion": "Robotic Solution", "max_points": 30},
+              {"section": "Robotic solution", "criterion": "Meaningful use of engineering concepts", "max_points": 10},
+              {"section": "Robotic solution", "criterion": "Code Efficiency & Software Automation", "max_points": 10},
+              {"section": "Robotic solution", "criterion": "Demonstration of Robotic Solution", "max_points": 15},
+              {"section": "Presentation and team spirit", "criterion": "Presentation & Project booth", "max_points": 30},
+              {"section": "Presentation and team spirit", "criterion": "Technical Understanding & Quick Thinking", "max_points": 15},
+              {"section": "Presentation and team spirit", "criterion": "Team Spirit", "max_points": 20}
+            ],
+            "section_maxima": {"project_and_innovation": 70, "robotic_solution": 65, "presentation_and_team_spirit": 65}
+          },
+          "Junior": {
+            "criteria": [
+              {"section": "Project and innovation", "criterion": "Idea, Quality & Creativity", "max_points": 30},
+              {"section": "Project and innovation", "criterion": "Research & Report", "max_points": 15},
+              {"section": "Project and innovation", "criterion": "Social Impact & Need", "max_points": 10},
+              {"section": "Project and innovation", "criterion": "Key Innovation & Slogan", "max_points": 10},
+              {"section": "Project and innovation", "criterion": "Extra element of entrepreneurship", "max_points": 10},
+              {"section": "Robotic solution", "criterion": "Robotic Solution", "max_points": 30},
+              {"section": "Robotic solution", "criterion": "Meaningful use of engineering concepts", "max_points": 15},
+              {"section": "Robotic solution", "criterion": "Code Efficiency & Software Automation", "max_points": 10},
+              {"section": "Robotic solution", "criterion": "Demonstration of Robotic Solution", "max_points": 15},
+              {"section": "Presentation and team spirit", "criterion": "Presentation & Project booth", "max_points": 25},
+              {"section": "Presentation and team spirit", "criterion": "Technical Understanding & Quick Thinking", "max_points": 15},
+              {"section": "Presentation and team spirit", "criterion": "Team Spirit", "max_points": 15}
+            ],
+            "section_maxima": {"project_and_innovation": 75, "robotic_solution": 70, "presentation_and_team_spirit": 55}
+          },
+          "Senior": {
+            "criteria": [
+              {"section": "Project and innovation", "criterion": "Idea, Quality & Creativity", "max_points": 20},
+              {"section": "Project and innovation", "criterion": "Research & Report", "max_points": 15},
+              {"section": "Project and innovation", "criterion": "Social Impact & Need", "max_points": 10},
+              {"section": "Project and innovation", "criterion": "Key Innovation & Slogan", "max_points": 10},
+              {"section": "Project and innovation", "criterion": "Extra element of entrepreneurship", "max_points": 10},
+              {"section": "Project and innovation", "criterion": "Next Steps & Prototype Development", "max_points": 10},
+              {"section": "Robotic solution", "criterion": "Robotic Solution", "max_points": 30},
+              {"section": "Robotic solution", "criterion": "Meaningful use of engineering concepts", "max_points": 15},
+              {"section": "Robotic solution", "criterion": "Code Efficiency & Software Automation", "max_points": 10},
+              {"section": "Robotic solution", "criterion": "Demonstration of Robotic Solution", "max_points": 15},
+              {"section": "Presentation and team spirit", "criterion": "Presentation & Project booth", "max_points": 25},
+              {"section": "Presentation and team spirit", "criterion": "Technical Understanding & Quick Thinking", "max_points": 15},
+              {"section": "Presentation and team spirit", "criterion": "Team Spirit", "max_points": 15}
+            ],
+            "section_maxima": {"project_and_innovation": 75, "robotic_solution": 70, "presentation_and_team_spirit": 55}
+          }
+        },
+        "judging_notes": "At the International Final judges work in pairs or small groups, each team is visited by at least two judge groups, and winners are selected using judge scores plus judge-meeting discussion."
+      },
+      "provenance": [
+        {"type": "official_mission", "local_archive_path": "e:/agent_olympiad/benchmark/WRO/2024/WRO-2024-Future-Innovators-Mission.pdf", "benchmark_source": "data/raw/wro/2024/WRO-2024-Future-Innovators-Mission.pdf"},
+        {"type": "official_general_rules_scoring_sheet", "url": "https://wro-association.org/wp-content/uploads/WRO-2024-Future-Innovators-General-Rules.pdf", "supports": "All criteria, weights, 0-10 conversion, 200-point total, and judging procedure"}
+      ]
+    },
+    "wro_2024_robomission_elementary": {
+      "edition": 2024,
+      "category": "RoboMission",
+      "age_group": "Elementary",
+      "ages": "8-12",
+      "title": "Sustainable Farming",
+      "maximum_score_before_surprise_rule": 142,
+      "scoring_items": [
+        {"mission": "Collect vegetables", "condition": "Red vegetable completely in market area", "points_each": 11, "max_points": 44, "state_group": "red vegetable placement", "relationship": "exclusive alternative per vegetable"},
+        {"mission": "Collect vegetables", "condition": "Red vegetable partly in market area", "points_each": 4, "state_group": "red vegetable placement", "relationship": "exclusive alternative per vegetable"},
+        {"mission": "Collect vegetables", "condition": "Yellow vegetable completely in compost area", "points_each": 11, "max_points": 44, "state_group": "yellow vegetable placement", "relationship": "exclusive alternative per vegetable"},
+        {"mission": "Collect vegetables", "condition": "Yellow vegetable partly in compost area", "points_each": 4, "state_group": "yellow vegetable placement", "relationship": "exclusive alternative per vegetable"},
+        {"mission": "Water and prepare farming", "condition": "Water touches green square around green vegetable while vegetable still touches square; maximum one water per square", "points_each": 10, "max_points": 30},
+        {"mission": "Water and prepare farming", "condition": "Earth block no longer touching any green square", "points_each": 3, "max_points": 9},
+        {"mission": "Bonus", "condition": "Chicken not damaged or moved", "points": 3},
+        {"mission": "Bonus", "condition": "Fence not damaged or moved", "points_each": 3, "max_points": 12}
+      ],
+      "run_fields": ["game_score", "surprise_rule", "total_score_in_this_run", "time_in_full_seconds"],
+      "tiebreak_notes": "General Rules: tournament-dependent; a typical tie on points is decided by recorded time.",
+      "provenance": [{"type": "official_game_rules", "local_archive_path": "e:/agent_olympiad/benchmark/WRO/2024/WRO-2024-RoboMission-Elementary.pdf", "benchmark_source": "data/raw/wro/2024/WRO-2024-RoboMission-Elementary.pdf", "version": "January 15, 2024"}]
+    },
+    "wro_2024_robomission_junior": {
+      "edition": 2024,
+      "category": "RoboMission",
+      "age_group": "Junior",
+      "ages": "11-15",
+      "title": "Green City",
+      "maximum_score_before_surprise_rule": 120,
+      "scoring_items": [
+        {"mission": "Create green areas", "condition": "Lake or green element partly in park and upright", "points_each": 4, "state_group": "park element placement", "relationship": "exclusive alternative per element"},
+        {"mission": "Create green areas", "condition": "Lake or green element completely in park and upright", "points_each": 8, "max_points": 48, "state_group": "park element placement", "relationship": "exclusive alternative per element", "constraint": "Maximum one lake and two green elements per park."},
+        {"mission": "Greening houses", "condition": "Starter set partly in house grey area", "points_each": 4, "state_group": "starter-set placement", "relationship": "exclusive placement alternative per set"},
+        {"mission": "Greening houses", "condition": "Starter set completely in house grey area", "points_each": 8, "max_points": 24, "state_group": "starter-set placement", "relationship": "exclusive placement alternative per set", "constraint": "Maximum one set per area."},
+        {"mission": "Greening houses", "condition": "Starter set inside family house and door closed", "points": 8, "relationship": "additive to family-house placement score"},
+        {"mission": "Charging", "condition": "E-bike completely inside charging area A", "points_each": 7, "max_points": 14},
+        {"mission": "Charging", "condition": "Cable touching charging area B", "points": 5, "state_group": "cable placement", "relationship": "exclusive alternative"},
+        {"mission": "Charging", "condition": "Cable completely in charging area B", "points": 11, "state_group": "cable placement", "relationship": "exclusive alternative"},
+        {"mission": "Bonus", "condition": "Apartment house not damaged or moved", "points_each": 3, "max_points": 6},
+        {"mission": "Bonus", "condition": "Fence not damaged or moved", "points_each": 3, "max_points": 9}
+      ],
+      "run_fields": ["game_score", "surprise_rule", "total_score_in_this_run", "time_in_full_seconds"],
+      "tiebreak_notes": "General Rules: tournament-dependent; a typical tie on points is decided by recorded time.",
+      "provenance": [{"type": "official_game_rules", "local_archive_path": "e:/agent_olympiad/benchmark/WRO/2024/WRO-2024-RoboMission-Junior.pdf", "benchmark_source": "data/raw/wro/2024/WRO-2024-RoboMission-Junior.pdf", "version": "February 16, 2024"}]
+    },
+    "wro_2024_robomission_senior": {
+      "edition": 2024,
+      "category": "RoboMission",
+      "age_group": "Senior",
+      "ages": "14-19",
+      "title": "Force of Nature",
+      "maximum_score_before_surprise_rule": 145,
+      "scoring_items": [
+        {"mission": "Rebuild houses", "condition": "Valid house with one floor", "points_each": 3, "state_group": "house floor count", "relationship": "exclusive alternative per house"},
+        {"mission": "Rebuild houses", "condition": "Valid house with two floors", "points_each": 6, "state_group": "house floor count", "relationship": "exclusive alternative per house"},
+        {"mission": "Rebuild houses", "condition": "Valid house with three floors", "points_each": 10, "state_group": "house floor count", "relationship": "exclusive alternative per house"},
+        {"mission": "Rebuild houses", "condition": "Valid house with four floors", "points_each": 14, "max_points": 56, "state_group": "house floor count", "relationship": "exclusive alternative per house", "constraint": "Lowest floor completely in matching-colour area, studs up, supported only from below; only highest-scoring house per area."},
+        {"mission": "Rebuild houses", "condition": "Exactly four floors and every element matches area colour", "points_each": 8, "max_points": 32, "relationship": "additive"},
+        {"mission": "Clear debris", "condition": "Debris no longer touches original coloured area and does not touch collection area", "points_each": 2, "state_group": "debris placement", "relationship": "exclusive alternative per debris"},
+        {"mission": "Clear debris", "condition": "Debris touches collection area", "points_each": 5, "max_points": 20, "state_group": "debris placement", "relationship": "exclusive alternative per debris"},
+        {"mission": "Water pipes", "condition": "Pipe repaired so one element touches the other", "points_each": 8, "max_points": 16},
+        {"mission": "Bonus", "condition": "Barrier not moved or damaged", "points_each": 7, "max_points": 21}
+      ],
+      "run_fields": ["game_score", "surprise_rule", "total_score_in_this_run", "time_in_full_seconds"],
+      "tiebreak_notes": "General Rules: tournament-dependent; a typical tie on points is decided by recorded time.",
+      "provenance": [{"type": "official_game_rules", "local_archive_path": "e:/agent_olympiad/benchmark/WRO/2024/WRO-2024-RoboMission-Senior.pdf", "benchmark_source": "data/raw/wro/2024/WRO-2024-RoboMission-Senior.pdf", "version": "January 15, 2024"}]
+    },
+    "wro_2025_future_innovators": {
+      "edition": 2025,
+      "category": "Future Innovators",
+      "age_group": "Elementary / Junior / Senior",
+      "theme": "The Future of Robots",
+      "numeric_rubric": {"available": false, "reason": "The archived source is the official Mission text; no applicable official General Rules judging sheet was verified locally."},
+      "provenance": [{"type": "official_mission", "local_archive_path": "e:/agent_olympiad/benchmark/WRO/2025/WRO-2025-Future-Innovators-Mission.pdf", "benchmark_source": "data/raw/wro/2025/WRO-2025-Future-Innovators-Mission.pdf"}]
+    },
+    "wro_2025_robomission_elementary": {
+      "edition": 2025,
+      "category": "RoboMission",
+      "age_group": "Elementary",
+      "ages": "8-12",
+      "title": "Satellites at Work",
+      "maximum_score_before_surprise_rule": 155,
+      "scoring_items": [
+        {"mission": "Fuel rocket", "condition": "Fuel completely in rocket-fuel area", "points": 10, "state_group": "fuel placement", "relationship": "exclusive alternative"},
+        {"mission": "Fuel rocket", "condition": "Fuel touching rocket-fuel area", "points": 5, "state_group": "fuel placement", "relationship": "exclusive alternative"},
+        {"mission": "Launch rocket", "condition": "Rocket beyond second red marker and correctly on rail", "points": 15, "state_group": "rocket position", "relationship": "exclusive alternative"},
+        {"mission": "Launch rocket", "condition": "Rocket beyond first but not second red marker and correctly on rail", "points": 5, "state_group": "rocket position", "relationship": "exclusive alternative"},
+        {"mission": "Place satellites", "condition": "Satellite completely in same-colour orbit", "points_each": 20, "max_points": 80, "state_group": "satellite placement", "relationship": "exclusive alternative per satellite"},
+        {"mission": "Place satellites", "condition": "Satellite partly touching any orbit or completely in wrong-colour orbit", "points_each": 5, "state_group": "satellite placement", "relationship": "exclusive alternative per satellite", "constraint": "Only highest-scoring satellite per orbit counts."},
+        {"mission": "Collect debris", "condition": "Space debris touching start area", "points_each": 10, "max_points": 30},
+        {"mission": "Bonus", "condition": "Astronaut not damaged or moved", "points_each": 5, "max_points": 10},
+        {"mission": "Bonus", "condition": "Barrier not damaged or moved", "points": 10}
+      ],
+      "run_fields": ["season_challenge_score", "total_score_in_this_run", "time_in_full_seconds"],
+      "tiebreak_notes": "General Rules: format selected by organizer; typical ranking compares run points, then full-second time, then subsequent runs.",
+      "provenance": [{"type": "official_game_rules", "local_archive_path": "e:/agent_olympiad/benchmark/WRO/2025/WRO-2025-RoboMission-Elementary-Game-Rules.pdf", "benchmark_source": "data/raw/wro/2025/WRO-2025-RoboMission-Elementary-Game-Rules.pdf", "version": "January 15, 2025"}]
+    },
+    "wro_2025_robomission_junior": {
+      "edition": 2025,
+      "category": "RoboMission",
+      "age_group": "Junior",
+      "ages": "11-15",
+      "title": "Mars Exploration",
+      "maximum_score_before_surprise_rule": 166,
+      "scoring_items": [
+        {"mission": "Collect drone", "condition": "Drone completely in start area", "points": 10, "state_group": "drone placement", "relationship": "exclusive alternative"},
+        {"mission": "Collect drone", "condition": "Drone touching start area", "points": 5, "state_group": "drone placement", "relationship": "exclusive alternative"},
+        {"mission": "Help rover", "condition": "Solar panel fully unfolded and rover still touching its area; rover undamaged", "points": 10},
+        {"mission": "Research", "condition": "Sample completely in corresponding-colour lab", "points_each": 15, "max_points": 60, "state_group": "sample placement", "relationship": "exclusive alternative per sample"},
+        {"mission": "Research", "condition": "Sample touching any lab or completely in wrong-colour lab", "points_each": 10, "state_group": "sample placement", "relationship": "exclusive alternative per sample", "constraint": "Only one element scores per target area."},
+        {"mission": "Water supply", "condition": "Water tank in box, touching only box or another water tank", "points_each": 20, "max_points": 40},
+        {"mission": "Cross terrain", "condition": "Robot completely in target area at end of run", "points": 12},
+        {"mission": "Bonus", "condition": "Barrier not damaged or moved", "points_each": 8, "max_points": 16},
+        {"mission": "Bonus", "condition": "Rock not damaged or moved", "points_each": 3, "max_points": 18}
+      ],
+      "run_fields": ["season_challenge_score", "total_score_in_this_run", "time_in_full_seconds"],
+      "tiebreak_notes": "General Rules: format selected by organizer; typical ranking compares run points, then full-second time, then subsequent runs.",
+      "provenance": [{"type": "official_game_rules", "local_archive_path": "e:/agent_olympiad/benchmark/WRO/2025/WRO-2025-RoboMission-Junior-Game-Rules.pdf", "benchmark_source": "data/raw/wro/2025/WRO-2025-RoboMission-Junior-Game-Rules.pdf", "version": "January 15, 2025"}]
+    },
+    "wro_2025_robomission_senior": {
+      "edition": 2025,
+      "category": "RoboMission",
+      "age_group": "Senior",
+      "ages": "14-19",
+      "title": "Rocket Assembly",
+      "maximum_score_before_surprise_rule": 158,
+      "scoring_items": [
+        {"mission": "Assemble nose", "condition": "Nose part completely and upright in correct-colour target", "points_each": 10, "max_points": 20, "state_group": "nose-part placement", "relationship": "exclusive alternative per part"},
+        {"mission": "Assemble nose", "condition": "Nose part completely and upright in wrong-colour target", "points_each": 5, "state_group": "nose-part placement", "relationship": "exclusive alternative per part"},
+        {"mission": "Integrate sections", "condition": "Bolt completely in integration area and colour matches corresponding marking block", "points_each": 12, "max_points": 48, "state_group": "bolt placement", "relationship": "exclusive alternative per bolt"},
+        {"mission": "Integrate sections", "condition": "Bolt partly touching any integration area, or completely in but wrong colour", "points_each": 5, "state_group": "bolt placement", "relationship": "exclusive alternative per bolt", "constraint": "Only one element scores per target area."},
+        {"mission": "Load rocket", "condition": "Payload fully in area with correct orientation", "points": 28, "state_group": "payload placement", "relationship": "exclusive alternative"},
+        {"mission": "Load rocket", "condition": "Payload partly touching area in any orientation, or fully in with wrong orientation", "points": 14, "state_group": "payload placement", "relationship": "exclusive alternative"},
+        {"mission": "Check systems", "condition": "System-console flag upright", "points_each": 15, "max_points": 30},
+        {"mission": "Close hatches", "condition": "Hatch fully closed: yellow swinging part completely in yellow area; red sliding part touches red rectangle", "points_each": 9, "max_points": 18},
+        {"mission": "Bonus", "condition": "Barrier not damaged or moved", "points_each": 7, "max_points": 14}
+      ],
+      "run_fields": ["season_challenge_score", "total_score_in_this_run", "time_in_full_seconds"],
+      "tiebreak_notes": "General Rules: format selected by organizer; typical ranking compares run points, then full-second time, then subsequent runs.",
+      "provenance": [{"type": "official_game_rules", "local_archive_path": "e:/agent_olympiad/benchmark/WRO/2025/WRO-2025-RoboMission-Senior-Game-Rules.pdf", "benchmark_source": "data/raw/wro/2025/WRO-2025-RoboMission-Senior-Game-Rules.pdf", "version": "January 15, 2025"}]
+    },
+    "wro_2026_future_innovators": {
+      "edition": 2026,
+      "category": "Future Innovators",
+      "age_group": "Elementary / Junior / Senior",
+      "theme": "Robots Meet Culture",
+      "numeric_rubric": {"available": false, "reason": "The archived source is the official Mission text; no applicable official General Rules judging sheet was verified locally."},
+      "provenance": [{"type": "official_mission", "local_archive_path": "e:/agent_olympiad/benchmark/WRO/2026/WRO-2026-Future-Innovators-Mission.pdf", "benchmark_source": "data/raw/wro/2026/WRO-2026-Future-Innovators-Mission.pdf"}]
+    },
+    "wro_2026_robomission_elementary": {
+      "edition": 2026,
+      "category": "RoboMission",
+      "age_group": "Elementary",
+      "ages": "8-12",
+      "title": "Robot Rockstars",
+      "maximum_score_before_surprise_rule": 255,
+      "scoring_items": [
+        {"mission": "Connect amplifier", "condition": "Cable completely in grey area and upright", "points_each": 15, "max_points": 30, "state_group": "cable placement", "relationship": "exclusive alternative per cable"},
+        {"mission": "Connect amplifier", "condition": "Cable partly in grey area or not upright", "points_each": 5, "state_group": "cable placement", "relationship": "exclusive alternative per cable", "constraint": "Only one cable per area scores."},
+        {"mission": "Prepare show", "condition": "Microphone completely in target and upright", "points": 20, "state_group": "microphone placement", "relationship": "exclusive alternative"},
+        {"mission": "Prepare show", "condition": "Microphone partly in target or not upright", "points": 10, "state_group": "microphone placement", "relationship": "exclusive alternative"},
+        {"mission": "Prepare show", "condition": "Instrument completely in backstage area", "points_each": 15, "max_points": 45},
+        {"mission": "Play song", "condition": "Note completely in corresponding-colour target including grey border and upright", "points_each": 20, "max_points": 120, "state_group": "note placement", "relationship": "exclusive alternative per note"},
+        {"mission": "Play song", "condition": "Note partly in corresponding-colour target or not upright", "points_each": 10, "state_group": "note placement", "relationship": "exclusive alternative per note"},
+        {"mission": "Bonus", "condition": "Clef not damaged or moved", "points": 10},
+        {"mission": "Bonus", "condition": "Speaker not damaged or moved", "points_each": 10, "max_points": 20},
+        {"mission": "Bonus", "condition": "Amplifier not damaged or moved", "points": 10}
+      ],
+      "run_fields": ["season_challenge_score", "total_score_in_this_run", "time_in_full_seconds"],
+      "tiebreak_notes": "General Rules: format selected by organizer; typical ranking compares run points, then full-second time, then subsequent runs.",
+      "provenance": [{"type": "official_game_rules", "local_archive_path": "e:/agent_olympiad/benchmark/WRO/2026/WRO-2026-RoboMission-Elementary-Game-Rules.pdf", "benchmark_source": "data/raw/wro/2026/WRO-2026-RoboMission-Elementary-Game-Rules.pdf", "version": "January 15, 2026"}]
+    },
+    "wro_2026_robomission_junior": {
+      "edition": 2026,
+      "category": "RoboMission",
+      "age_group": "Junior",
+      "ages": "11-15",
+      "title": "Heritage Heroes",
+      "maximum_score_before_surprise_rule": 230,
+      "scoring_items": [
+        {"mission": "Show visitors around", "condition": "Visitor completely in corresponding-colour area and upright", "points_each": 10, "max_points": 40, "state_group": "visitor placement", "relationship": "exclusive alternative per visitor"},
+        {"mission": "Show visitors around", "condition": "Visitor partly in corresponding-colour area or not upright", "points_each": 5, "state_group": "visitor placement", "relationship": "exclusive alternative per visitor"},
+        {"mission": "Rebuild red towers", "condition": "Red tower completely in target including orange border and upright", "points_each": 15, "max_points": 30, "state_group": "red tower placement", "relationship": "exclusive alternative per tower"},
+        {"mission": "Rebuild red towers", "condition": "Red tower partly in target including orange border and upright", "points_each": 10, "state_group": "red tower placement", "relationship": "exclusive alternative per tower"},
+        {"mission": "Rebuild yellow towers", "condition": "Top correctly placed on base and base completely in yellow target including orange border", "points_each": 25, "max_points": 50, "state_group": "yellow tower placement", "relationship": "exclusive alternative per tower"},
+        {"mission": "Rebuild yellow towers", "condition": "Top correctly placed on base and base partly in yellow target including orange border", "points_each": 15, "state_group": "yellow tower placement", "relationship": "exclusive alternative per tower"},
+        {"mission": "Museum artefacts", "condition": "Artefact completely in corresponding-colour exhibition spot and upright", "points_each": 15, "max_points": 60, "state_group": "artefact placement", "relationship": "exclusive alternative per artefact"},
+        {"mission": "Museum artefacts", "condition": "Artefact partly in corresponding-colour spot or not upright", "points_each": 5, "state_group": "artefact placement", "relationship": "exclusive alternative per artefact"},
+        {"mission": "Clear cobblestone", "condition": "Dirt particle not touching cobblestone area", "points_each": 2, "max_points": 20},
+        {"mission": "Bonus", "condition": "Barrier not damaged or moved", "points_each": 10, "max_points": 20},
+        {"mission": "Bonus", "condition": "Parrot not damaged or moved", "points": 10}
+      ],
+      "run_fields": ["season_challenge_score", "total_score_in_this_run", "time_in_full_seconds"],
+      "tiebreak_notes": "General Rules: format selected by organizer; typical ranking compares run points, then full-second time, then subsequent runs.",
+      "provenance": [{"type": "official_game_rules", "local_archive_path": "e:/agent_olympiad/benchmark/WRO/2026/WRO-2026-RoboMission-Junior-Game-Rules.pdf", "benchmark_source": "data/raw/wro/2026/WRO-2026-RoboMission-Junior-Game-Rules.pdf", "version": "January 15, 2026"}]
+    },
+    "wro_2026_robomission_senior": {
+      "edition": 2026,
+      "category": "RoboMission",
+      "age_group": "Senior",
+      "ages": "14-19",
+      "title": "Mosaic Masters",
+      "maximum_score_before_surprise_rule": 233,
+      "scoring_items": [
+        {"mission": "Provide tools", "condition": "Rectangular trowel completely in sponsor area", "points": 15, "state_group": "rectangular trowel placement", "relationship": "exclusive alternative"},
+        {"mission": "Provide tools", "condition": "Rectangular trowel partly in sponsor area", "points": 5, "state_group": "rectangular trowel placement", "relationship": "exclusive alternative"},
+        {"mission": "Provide tools", "condition": "Cement bowl completely in parking space", "points": 15, "state_group": "cement bowl placement", "relationship": "exclusive alternative"},
+        {"mission": "Provide tools", "condition": "Cement bowl partly in parking space", "points": 5, "state_group": "cement bowl placement", "relationship": "exclusive alternative"},
+        {"mission": "Provide tools", "condition": "Masonry trowel completely in start area", "points": 15, "state_group": "masonry trowel placement", "relationship": "exclusive alternative"},
+        {"mission": "Provide tools", "condition": "Masonry trowel partly in start area", "points": 5, "state_group": "masonry trowel placement", "relationship": "exclusive alternative"},
+        {"mission": "Place mosaic", "condition": "Tile correctly placed: only touching corresponding-colour frame area and evenly on ground", "points_each": 10, "max_points": 120, "state_group": "mosaic spot", "relationship": "exclusive alternative per spot"},
+        {"mission": "Place mosaic", "condition": "Tile incorrectly placed: wrong colour or uneven, but touching ground", "points_each": 5, "state_group": "mosaic spot", "relationship": "exclusive alternative per spot", "constraint": "Only one element scores per spot."},
+        {"mission": "Deliver cement", "condition": "Cement element completely in corresponding-colour target; stacked elements count only when every supporting element is completely in", "points_each": 1, "max_points": 40},
+        {"mission": "Bonus", "condition": "Barrier not damaged or moved", "points_each": 7, "max_points": 28}
+      ],
+      "run_fields": ["season_challenge_score", "total_score_in_this_run", "time_in_full_seconds"],
+      "tiebreak_notes": "General Rules: format selected by organizer; typical ranking compares run points, then full-second time, then subsequent runs.",
+      "provenance": [{"type": "official_game_rules", "local_archive_path": "e:/agent_olympiad/benchmark/WRO/2026/WRO-2026-RoboMission-Senior-Game-Rules.pdf", "benchmark_source": "data/raw/wro/2026/WRO-2026-RoboMission-Senior-Game-Rules.pdf", "version": "January 15, 2026"}]
+    }
+  }
+}

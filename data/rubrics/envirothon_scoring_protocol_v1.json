@@ -1,0 +1,22 @@
+{
+  "rubric_id": "envirothon_scoring_protocol_v1",
+  "dataset": "envirothon",
+  "title": "Envirothon scoring protocol placeholder",
+  "rubric_type": "official_scoring_protocol",
+  "scoring_direction": "higher_is_better",
+  "official_scoring_components": [
+    {
+      "id": "station_scores",
+      "name": "Station / test scores",
+      "basis": "Official station or written-test scoring when packet materials are promoted."
+    }
+  ],
+  "applicability": {
+    "scope": "Benchmark shell exists but currently has zero promoted tasks.",
+    "repository_status": "deferred_until_benchmark_records_exist"
+  },
+  "coverage": {
+    "promoted_benchmark_records": 0,
+    "mapped_records": 0
+  }
+}

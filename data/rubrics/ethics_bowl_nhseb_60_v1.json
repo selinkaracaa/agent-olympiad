@@ -1,0 +1,95 @@
+{
+  "rubric_id": "ethics_bowl_nhseb_60_v1",
+  "title": "National High School Ethics Bowl official match scoring",
+  "total_points": 60,
+  "criteria": [
+    {
+      "id": "presentation_clarity",
+      "name": "Presentation: clarity and systematic response",
+      "max_score": 5,
+      "observable": true,
+      "description": "Whether the initial presentation clearly and systematically addresses the moderator's question."
+    },
+    {
+      "id": "presentation_moral_dimensions",
+      "name": "Presentation: central moral dimensions",
+      "max_score": 5,
+      "observable": true,
+      "description": "Whether the initial presentation clearly identifies and thoroughly discusses the central moral dimensions of the case."
+    },
+    {
+      "id": "presentation_viewpoints",
+      "name": "Presentation: consideration of different viewpoints",
+      "max_score": 5,
+      "observable": true,
+      "description": "Whether the initial presentation shows awareness and thoughtful consideration of different viewpoints, especially views important to those who disagree with the team."
+    },
+    {
+      "id": "commentary",
+      "name": "Responding team's commentary",
+      "max_score": 10,
+      "observable": false,
+      "description": "How effectively and directly the responding team engages the presenting team's argument and advances the conversation constructively."
+    },
+    {
+      "id": "response_to_commentary",
+      "name": "Presenting team's response to commentary",
+      "max_score": 10,
+      "observable": false,
+      "description": "How seriously, insightfully, completely, and composedly the presenting team responds to the opposing team's commentary."
+    },
+    {
+      "id": "response_to_judges",
+      "name": "Presenting team's response to judges' questions",
+      "max_score": 20,
+      "observable": false,
+      "description": "How effectively, clearly, responsibly, insightfully, completely, and composedly the presenting team answers the judges' questions."
+    },
+    {
+      "id": "respectful_dialogue",
+      "name": "Respectful dialogue",
+      "max_score": 5,
+      "observable": false,
+      "description": "Whether the team engages all parties respectfully and collaboratively in the pursuit of truth rather than using combative or belittling rhetoric."
+    }
+  ],
+  "not_observable_from_deck": [
+    "commentary on the opposing team's live presentation",
+    "response to opposing-team commentary",
+    "response to judges' questions",
+    "respectful dialogue across the live match"
+  ],
+  "provenance": {
+    "official_urls": [
+      "https://nhseb.org/how",
+      "https://nhseb.org/one",
+      "https://parrcenter.unc.edu/wp-content/uploads/sites/813/2014/11/2016-17-Scoring-Criteria.pdf"
+    ],
+    "local_source_paths": [
+      "data/raw/ethics_bowl_nhseb/2016-17-national-case-set.pdf",
+      "data/raw/ethics_bowl_nhseb/2017-18-national-case-set.pdf",
+      "data/raw/ethics_bowl_nhseb/2018-19-national-case-set.pdf",
+      "data/raw/ethics_bowl_nhseb/2019-20-national-case-set.pdf",
+      "data/raw/ethics_bowl_nhseb/2020-21-national-case-set.pdf",
+      "data/raw/ethics_bowl_nhseb/2021-22-national-case-set.pdf",
+      "data/raw/ethics_bowl_nhseb/2022-23-national-case-set.pdf",
+      "data/raw/ethics_bowl_nhseb/2023-24-national-case-set.pdf",
+      "data/raw/ethics_bowl_nhseb/2024-25-national-case-set.pdf",
+      "data/raw/ethics_bowl_nhseb/2025-26-national-case-set.pdf",
+      "data/benchmarks/ethics_bowl_nhseb/benchmark.json"
+    ],
+    "applicable_years": [
+      "2016-2017",
+      "2017-2018",
+      "2018-2019",
+      "2019-2020",
+      "2020-2021",
+      "2021-2022",
+      "2022-2023",
+      "2023-2024",
+      "2024-2025",
+      "2025-2026"
+    ],
+    "notes": "The organizer's official scoring criteria allocate 15 points to the initial presentation (three 5-point questions), 10 to commentary, 10 to response to commentary, 20 to responses to judges, and 5 to respectful dialogue. NHSEB's current official pages confirm the same five scoring components and a 60-point total. The local benchmark also contains 2012-2013 through 2015-2016 case sets, but those seasons are excluded from applicable_years because no official scoring document for them was located."
+  }
+}

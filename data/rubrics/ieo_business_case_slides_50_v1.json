@@ -1,0 +1,44 @@
+{
+  "rubric_id": "ieo_business_case_slides_50_v1",
+  "title": "IEO business-case slide-deck rubric",
+  "total_points": 50,
+  "criteria": [
+    {
+      "id": "analytical",
+      "name": "Analytical thinking",
+      "max_score": 15,
+      "observable": true,
+      "description": "Identify the client problem and goals, synthesize relevant information, and analyze the case with sufficient scope, depth, and stakeholder awareness."
+    },
+    {
+      "id": "conceptual",
+      "name": "Conceptual thinking",
+      "max_score": 15,
+      "observable": true,
+      "description": "Use a relevant and clearly structured model, justify realistic assumptions, produce a complete and feasible strategy, and demonstrate useful creativity."
+    },
+    {
+      "id": "quantitative",
+      "name": "Quantitative thinking",
+      "max_score": 10,
+      "observable": true,
+      "description": "Use correct, transparent, and decision-relevant calculations, projections, sensitivities, and financial or operational analysis."
+    },
+    {
+      "id": "communication",
+      "name": "Written and visual communication",
+      "max_score": 10,
+      "observable": true,
+      "description": "Present a clear, persuasive, professional, and visually legible slide narrative that supports the recommendation. Score only what is visible in the submitted deck."
+    }
+  ],
+  "not_observable_from_deck": [
+    "oral delivery",
+    "presentation timing",
+    "question-and-answer performance",
+    "on-stage participation",
+    "visible teamwork during presentation"
+  ],
+  "dataset": "ieo_business_case",
+  "derived_from": "data/rubrics/business_case_slides_50.json"
+}

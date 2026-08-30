@@ -227,7 +227,8 @@
         "Only icpc_wf_2012_bottles currently declares a hidden problem package.",
         "The pilot package uses benchmark-native tests and Python 3, not official ICPC judge data or the full official language set."
       ]
-    }
+    },
+    "rubric_path": "data/rubrics/icpc_programming_judge_v1.json"
   },
   "submission": {
     "max_count": null,

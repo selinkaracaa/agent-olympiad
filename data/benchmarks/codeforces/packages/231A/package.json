@@ -1,0 +1,36 @@
+{
+  "schema_version": "ao.icpc-package/v1",
+  "problem_id": "cf_231A",
+  "source": "codeforces",
+  "limits": {
+    "time_ms": 2000,
+    "memory_mb": 256,
+    "output_kb": 1024
+  },
+  "checker": {
+    "mode": "token"
+  },
+  "groups": [
+    {
+      "id": "sample",
+      "scope": "sample",
+      "tests": "tests/sample"
+    }
+  ],
+  "subtasks": [
+    {
+      "id": "sample",
+      "points": 0.0,
+      "groups": [
+        "sample"
+      ]
+    }
+  ],
+  "grading_scope_labels": {
+    "sample": "codeforces-public-sample",
+    "secret": "authorized-local-secret"
+  },
+  "codeforces_id": "231A",
+  "contest_id": 231,
+  "problem_index": "A"
+}

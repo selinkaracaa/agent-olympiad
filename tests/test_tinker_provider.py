@@ -70,7 +70,7 @@ class TinkerCallerTests(unittest.TestCase):
             clear=True,
         ), patch.dict(sys.modules, {"tinker": sdk}):
             llm.make_tinker_caller(MODEL)
-        self.assertEqual(os.environ["TINKER_API_KEY"], "tml-abc123")
+            self.assertEqual(os.environ["TINKER_API_KEY"], "tml-abc123")
 
     def test_native_request_supports_batch_encoding_and_list_outputs(self):
         for encoded in ({"input_ids": [1, 2, 3]}, [1, 2, 3]):
@@ -171,6 +171,33 @@ class TinkerCallerTests(unittest.TestCase):
                     caller = llm.make_tinker_caller(MODEL)
                     with self.assertRaisesRegex(RuntimeError, error):
                         caller("s", "u")
+
+
+class TinkerRequestFnTests(unittest.TestCase):
+    def test_make_tinker_request_fn_adapts_to_request_interface(self):
+        sdk, *_ = _native_sdk([1, 2])
+        with patch.dict(os.environ, {"TINKER_API_KEY": "secret"}, clear=True), patch.dict(
+            sys.modules, {"tinker": sdk}
+        ):
+            request_fn = llm.make_tinker_request_fn(MODEL)
+            response = request_fn(
+                llm.LLMRequest(system_prompt="sys", user_prompt="user")
+            )
+        self.assertEqual(response.text, "exact response")
+        self.assertEqual(response.provider, "tinker")
+        self.assertEqual(response.model, MODEL)
+
+    def test_resolve_request_fn_supports_tinker(self):
+        sdk, *_ = _native_sdk([1, 2])
+        with patch.dict(os.environ, {"TINKER_API_KEY": "secret"}, clear=True), patch.dict(
+            sys.modules, {"tinker": sdk}
+        ):
+            request_fn = llm.resolve_request_fn(provider="tinker", model=MODEL)
+            response = request_fn(
+                llm.LLMRequest(system_prompt="sys", user_prompt="user")
+            )
+        self.assertEqual(response.provider, "tinker")
+        self.assertEqual(response.text, "exact response")
 
 
 class CompetitionProviderTests(unittest.TestCase):
@@ -276,6 +303,68 @@ class CompetitionProviderTests(unittest.TestCase):
         self.assertFalse(summary["judge_task"])
         self.assertFalse(summary["judge_collab"])
         self.assertEqual(captured[0][:2], ("icpc", "icpc_wf_2012_bottles"))
+
+    def test_tinker_judge_collab_uses_tinker_without_perplexity_key(self):
+        captured = {}
+
+        def fake_resolve_request_fn(**kwargs):
+            captured.update(kwargs)
+            return Mock(return_value=llm.LLMResponse(text="{}", provider="tinker", model=MODEL))
+
+        with tempfile.TemporaryDirectory() as directory, patch.dict(
+            os.environ,
+            {"TINKER_API_KEY": "secret"},
+            clear=True,
+        ), patch.object(batch, "_make_live_query", return_value=Mock()), patch.object(
+            batch, "run_one",
+            return_value={
+                "status": "ok",
+                "turns_used": 2,
+                "max_turns": 2,
+                "api_calls": 6,
+                "grade_method": "sample_io",
+                "grade_score": 1,
+                "grade_max_score": 1,
+                "coordination_score": 0.8,
+                "submitted": True,
+                "graded": True,
+                "rules_coverage": "covered",
+            },
+        ), patch.object(
+            batch, "resolve_request_fn", side_effect=fake_resolve_request_fn
+        ), patch.object(
+            sys,
+            "argv",
+            [
+                "run_competition_batch.py",
+                "--live",
+                "--provider",
+                "tinker",
+                "--model",
+                MODEL,
+                "--competitions",
+                "icpc",
+                "--problem-id",
+                "icpc_wf_2012_bottles",
+                "--no-judge-task",
+                "--max-turns",
+                "2",
+                "--output",
+                directory,
+            ],
+        ):
+            batch.main()
+
+            summary = json.loads(
+                (Path(directory) / "competition_batch.json").read_text(
+                    encoding="utf-8"
+                )
+            )
+
+        self.assertEqual(captured["provider"], "tinker")
+        self.assertEqual(captured["model"], MODEL)
+        self.assertTrue(summary["judge_collab"])
+        self.assertEqual(summary["judge_provider"], "tinker")
 
     def test_midrun_failure_still_writes_complete_sanitized_transcript(self):
         with tempfile.TemporaryDirectory() as directory, patch.dict(

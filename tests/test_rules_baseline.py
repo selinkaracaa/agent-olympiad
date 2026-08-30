@@ -29,9 +29,9 @@ MISSING_CURRENT = {"hmmt_team", "icm", "itym", "iypt", "mcm"}
 
 
 class RuleBundleTests(unittest.TestCase):
-    def test_exactly_37_canonical_three_file_bundles_load(self):
+    def test_exactly_38_canonical_three_file_bundles_load(self):
         ids = iter_rule_card_ids(RULES_ROOT)
-        self.assertEqual(len(ids), 37)
+        self.assertEqual(len(ids), 38)
         for competition_id in ids:
             with self.subTest(competition_id=competition_id):
                 directory = RULES_ROOT / competition_id

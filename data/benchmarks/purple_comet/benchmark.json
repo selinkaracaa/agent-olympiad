@@ -1130,7 +1130,7 @@
       "rubric_path": "data/rubrics/worked_answer_100_v1.json",
       "deliverable": "answer_sheet",
       "fallback_evaluator_id": "rubric_llm_v1",
-      "short_answer_source": "data/rubrics/purple_comet_short_answers.json"
+      "short_answer_source": "data\\rubrics\\purple_comet_short_answers.json"
     }
   },
   {
@@ -1326,7 +1326,7 @@
       "rubric_path": "data/rubrics/worked_answer_100_v1.json",
       "deliverable": "answer_sheet",
       "fallback_evaluator_id": "rubric_llm_v1",
-      "short_answer_source": "data/rubrics/purple_comet_short_answers.json"
+      "short_answer_source": "data\\rubrics\\purple_comet_short_answers.json"
     }
   },
   {
@@ -1602,7 +1602,7 @@
       "rubric_path": "data/rubrics/worked_answer_100_v1.json",
       "deliverable": "answer_sheet",
       "fallback_evaluator_id": "rubric_llm_v1",
-      "short_answer_source": "data/rubrics/purple_comet_short_answers.json"
+      "short_answer_source": "data\\rubrics\\purple_comet_short_answers.json"
     }
   },
   {
@@ -1798,7 +1798,7 @@
       "rubric_path": "data/rubrics/worked_answer_100_v1.json",
       "deliverable": "answer_sheet",
       "fallback_evaluator_id": "rubric_llm_v1",
-      "short_answer_source": "data/rubrics/purple_comet_short_answers.json"
+      "short_answer_source": "data\\rubrics\\purple_comet_short_answers.json"
     }
   },
   {
@@ -2074,7 +2074,7 @@
       "rubric_path": "data/rubrics/worked_answer_100_v1.json",
       "deliverable": "answer_sheet",
       "fallback_evaluator_id": "rubric_llm_v1",
-      "short_answer_source": "data/rubrics/purple_comet_short_answers.json"
+      "short_answer_source": "data\\rubrics\\purple_comet_short_answers.json"
     }
   },
   {
@@ -2270,7 +2270,7 @@
       "rubric_path": "data/rubrics/worked_answer_100_v1.json",
       "deliverable": "answer_sheet",
       "fallback_evaluator_id": "rubric_llm_v1",
-      "short_answer_source": "data/rubrics/purple_comet_short_answers.json"
+      "short_answer_source": "data\\rubrics\\purple_comet_short_answers.json"
     }
   },
   {
@@ -2546,7 +2546,7 @@
       "rubric_path": "data/rubrics/worked_answer_100_v1.json",
       "deliverable": "answer_sheet",
       "fallback_evaluator_id": "rubric_llm_v1",
-      "short_answer_source": "data/rubrics/purple_comet_short_answers.json"
+      "short_answer_source": "data\\rubrics\\purple_comet_short_answers.json"
     }
   },
   {
@@ -2742,7 +2742,7 @@
       "rubric_path": "data/rubrics/worked_answer_100_v1.json",
       "deliverable": "answer_sheet",
       "fallback_evaluator_id": "rubric_llm_v1",
-      "short_answer_source": "data/rubrics/purple_comet_short_answers.json"
+      "short_answer_source": "data\\rubrics\\purple_comet_short_answers.json"
     }
   },
   {
@@ -3018,7 +3018,7 @@
       "rubric_path": "data/rubrics/worked_answer_100_v1.json",
       "deliverable": "answer_sheet",
       "fallback_evaluator_id": "rubric_llm_v1",
-      "short_answer_source": "data/rubrics/purple_comet_short_answers.json"
+      "short_answer_source": "data\\rubrics\\purple_comet_short_answers.json"
     }
   },
   {
@@ -3214,7 +3214,7 @@
       "rubric_path": "data/rubrics/worked_answer_100_v1.json",
       "deliverable": "answer_sheet",
       "fallback_evaluator_id": "rubric_llm_v1",
-      "short_answer_source": "data/rubrics/purple_comet_short_answers.json"
+      "short_answer_source": "data\\rubrics\\purple_comet_short_answers.json"
     }
   },
   {
@@ -3490,7 +3490,7 @@
       "rubric_path": "data/rubrics/worked_answer_100_v1.json",
       "deliverable": "answer_sheet",
       "fallback_evaluator_id": "rubric_llm_v1",
-      "short_answer_source": "data/rubrics/purple_comet_short_answers.json"
+      "short_answer_source": "data\\rubrics\\purple_comet_short_answers.json"
     }
   },
   {
@@ -3686,7 +3686,7 @@
       "rubric_path": "data/rubrics/worked_answer_100_v1.json",
       "deliverable": "answer_sheet",
       "fallback_evaluator_id": "rubric_llm_v1",
-      "short_answer_source": "data/rubrics/purple_comet_short_answers.json"
+      "short_answer_source": "data\\rubrics\\purple_comet_short_answers.json"
     }
   },
   {
@@ -3962,7 +3962,7 @@
       "rubric_path": "data/rubrics/worked_answer_100_v1.json",
       "deliverable": "answer_sheet",
       "fallback_evaluator_id": "rubric_llm_v1",
-      "short_answer_source": "data/rubrics/purple_comet_short_answers.json"
+      "short_answer_source": "data\\rubrics\\purple_comet_short_answers.json"
     }
   },
   {
@@ -4158,7 +4158,7 @@
       "rubric_path": "data/rubrics/worked_answer_100_v1.json",
       "deliverable": "answer_sheet",
       "fallback_evaluator_id": "rubric_llm_v1",
-      "short_answer_source": "data/rubrics/purple_comet_short_answers.json"
+      "short_answer_source": "data\\rubrics\\purple_comet_short_answers.json"
     }
   },
   {

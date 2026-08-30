@@ -5,7 +5,7 @@
     "unit": "problem_or_question",
     "evaluator_id": "rubric_llm_v1",
     "evaluator_status": "ready",
-    "rubric_path": "data/rubrics/worked_answer_100_v1.json",
+    "rubric_path": "data/rubrics/iol_team_worked_answer_100_v1.json",
     "evaluator_strategy": "structured_rubric_llm_judge",
     "official_performance": {
       "ranking_order": [

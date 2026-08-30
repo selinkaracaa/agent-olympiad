@@ -162,10 +162,6 @@
     "handoff_protocol": [
       "Simulation choice: a handoff may communicate the problem, algorithm, invariants, complexity, edge cases, tests, source status, and next action.",
       "Simulation choice: incomplete handoffs are allowed and their repair cost should remain observable; no automatic memory copy occurs."
-    ],
-    "emergent_behavior": [
-      "Simulation choice: observe but do not require packet triage, dual-machine scheduling, temporary specialization, parallel off-machine reasoning, handoff, peer review, and role rotation.",
-      "Simulation choice: do not reward a permanent coder role, equal keyboard time, exclusive problem ownership, a fixed message count, or verbosity by itself."
     ]
   },
   "deliberation": {
@@ -184,9 +180,9 @@
     "mode": "unlimited"
   },
   "simulation": {
-    "max_turns": 24,
+    "max_turns": 30,
     "scheduler": "src_collaboration_draft",
-    "turn_budget_basis": "official clock n/a turns vs floor 13 (4 teammates x 2 turns + 1 answer parts + 4 for synthesis)",
+    "turn_budget_basis": "standardized experiment budget: 30 global turns; official contest timing is recorded separately",
     "eligibility_and_logistics_state": "specified_for_role_immersion_not_enforced"
   }
 }

@@ -4,7 +4,7 @@
     "unit": "artifact",
     "evaluator_id": "rubric_llm_v1",
     "evaluator_status": "ready",
-    "rubric_path": "data/rubrics/moot_memorial_100_v1.json",
+    "rubric_path": "data/rubrics/jessup_memorial_100_v1.json",
     "evaluator_strategy": "structured_rubric_llm_judge",
     "official_performance": {
       "source_status": "source_enriched_v1",

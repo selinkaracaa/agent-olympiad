@@ -1,0 +1,83 @@
+{
+  "rubric_id": "odyssey_of_the_mind_official_scoring_protocol_v1",
+  "dataset": "odyssey_of_the_mind",
+  "title": "Odyssey of the Mind official score calculation protocol",
+  "rubric_type": "official_scoring_protocol",
+  "total_calculated_points_before_penalties": 350,
+  "components": [
+    {
+      "id": "long_term",
+      "name": "Long-Term problem",
+      "calculated_max": 200,
+      "formula": "team_raw_long_term / highest_raw_long_term_in_same_problem_and_division * 200",
+      "exception": "Unless the problem states otherwise; structure problems may use problem-specific scoring."
+    },
+    {
+      "id": "style",
+      "name": "Style",
+      "calculated_max": 50,
+      "raw_max": 50,
+      "formula": "team_raw_style / highest_raw_style_in_same_problem_and_division * 50",
+      "raw_categories": [
+        {"category": 1, "range": [1, 10]},
+        {"category": 2, "range": [1, 10]},
+        {"category": 3, "range": [1, 10]},
+        {"category": 4, "range": [1, 10]},
+        {"category": 5, "name": "Overall effect of the four Style elements", "range": [1, 10]}
+      ]
+    },
+    {
+      "id": "spontaneous",
+      "name": "Spontaneous",
+      "calculated_max": 100,
+      "formula": "team_raw_spontaneous / highest_raw_spontaneous_in_same_problem_and_division * 100",
+      "raw_scoring": "Defined by the specific verbal, hands-on, or verbal/hands-on problem read in the competition room."
+    }
+  ],
+  "final_score": {
+    "formula": "calculated_long_term + calculated_style + calculated_spontaneous - penalties",
+    "long_term_floor": 0,
+    "penalty_timing": "Penalties are deducted after component scores are calculated."
+  },
+  "placement": {
+    "direction": "higher_is_better",
+    "tie_rule": "A tie is declared when a team's score is less than 1.00 point below the highest score assigned to that place.",
+    "ranking_requirement": "A team must present a Long-Term solution to receive Long-Term and Style scores and to be ranked."
+  },
+  "applicability": {
+    "scope": "Current standard Odyssey of the Mind tournament score calculation.",
+    "benchmark_coverage": "Public spontaneous examples and historical Long-Term problem synopses.",
+    "problem_specific_control": "The applicable full Long-Term problem and current Program Guide control whenever they specify different scoring."
+  },
+  "provenance": [
+    {
+      "source_type": "official_organizer",
+      "title": "Odyssey of the Mind Program Guide",
+      "url": "https://odysseyofthemind.com/program-guide/",
+      "supports": ["200/50/100 component maxima", "percentage scaling", "Style categories", "penalties", "ranking requirement"]
+    },
+    {
+      "source_type": "official_organizer",
+      "title": "Score Calculation and Team Placement",
+      "url": "https://www.odysseyofthemind.com/downloads/tournament_manager/htmlhelpfiles/OotMScore/hs1461.htm",
+      "supports": ["component formulas", "final-score formula", "less-than-one-point tie rule"]
+    },
+    {
+      "source_type": "official_organizer",
+      "title": "Spontaneous",
+      "url": "https://odysseyofthemind.com/spontaneous/",
+      "supports": ["spontaneous types", "problem-specific raw criteria", "public examples"]
+    },
+    {
+      "source_type": "local_raw_evidence",
+      "path": "data/raw/odyssey_of_the_mind/spontaneous/spontaneous_examples.md",
+      "supports": ["official public example scoring instructions"]
+    }
+  ],
+  "limitations": [
+    "Historical synopsis pages do not contain the complete problem-specific scoring categories or penalties.",
+    "Raw Long-Term and Spontaneous dimensions cannot be generalized across problems.",
+    "Calculated scores depend on the highest raw score in the same problem and division, so an isolated submission cannot receive an official calculated score.",
+    "Structure-problem scoring has changed over time and requires the specific edition's full problem."
+  ]
+}

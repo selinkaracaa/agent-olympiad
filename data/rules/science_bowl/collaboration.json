@@ -128,8 +128,76 @@
     "mode": "unlimited"
   },
   "simulation": {
-    "max_turns": 24,
+    "max_turns": 30,
     "scheduler": "src_collaboration_proxy",
-    "live_opponent_buzzer_moderator_and_clock": "unavailable"
+    "live_opponent_buzzer_moderator_and_clock": "unavailable",
+    "open_table_coach": {
+      "enabled": true,
+      "status": "counterfactual_synthetic_baseline_not_official_contest_rule",
+      "may_submit": false,
+      "allowed_tools": [],
+      "counts_toward_shared_api_and_token_budget": true,
+      "contestant_turn_policy": {
+        "mode": "private_deliberation_then_single_action",
+        "allowed_actions": [
+          "work",
+          "speak",
+          "rest"
+        ],
+        "exactly_one_action": true,
+        "unstructured_response": "rest",
+        "final_submission": "synthesis_only",
+        "visibility": {
+          "think": "private",
+          "work": "shared",
+          "speak": "team",
+          "rest": "private"
+        },
+        "max_chars_by_action": {
+          "think": 2400,
+          "work": 2400,
+          "speak": 320,
+          "rest": 80
+        },
+        "memory_entries": {
+          "private_think_per_agent": 3,
+          "shared_work": 18,
+          "group_messages": 12,
+          "public_messages": 24
+        },
+        "private_think_calls_per_turn": 1,
+        "discussion_policy": {
+          "report_after_work": true,
+          "silent_work_turn_requires_discussion": true,
+          "conflicts_require_targeted_speak": true
+        }
+      },
+      "precontest_brief": {
+        "turn": 1,
+        "problem_access": false,
+        "allowed_actions": [
+          "speak",
+          "sleep"
+        ],
+        "advice_scope": [
+          "time allocation",
+          "task triage",
+          "communication protocol",
+          "independent verification",
+          "final answer-sheet reconciliation"
+        ]
+      },
+      "opening_discussion": {
+        "turn": 2,
+        "problem_access": true,
+        "allowed_actions": [
+          "speak",
+          "sleep"
+        ],
+        "purpose": "summarize the contestants' opening discussion into priorities and checkpoints, and suggest temporary working groups that contestants may later change"
+      },
+      "after_opening_access": false,
+      "min_turns": 10
+    }
   }
 }

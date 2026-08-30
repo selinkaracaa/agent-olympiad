@@ -1,0 +1,55 @@
+{
+  "rubric_id": "wharton_investment_current_v1",
+  "type": "official_scoring_protocol",
+  "title": "Wharton Global High School Investment Competition evaluation protocol",
+  "competition_id": "wharton_investment",
+  "deliverables": ["Investment Policy Statement", "Comprehensive Final Report", "Semifinal and Global Finale presentation if selected"],
+  "criteria": [
+    {
+      "id": "investment_strategy_quality",
+      "name": "Quality of the investment strategy"
+    },
+    {
+      "id": "client_alignment",
+      "name": "Alignment with the client's objectives"
+    },
+    {
+      "id": "research_analysis",
+      "name": "Strength of research and analysis"
+    },
+    {
+      "id": "communication_defense",
+      "name": "Ability to clearly communicate and defend recommendations"
+    }
+  ],
+  "scoring": {
+    "published_numeric_weights": false,
+    "portfolio_performance_rule": "Success is not determined by portfolio performance.",
+    "selection_process": "Judges review final reports to select 50 semifinalist teams; semifinal presentations determine the ten Global Finale teams.",
+    "note": "No total or criterion weights are published; none is inferred."
+  },
+  "provenance": {
+    "official_only": true,
+    "publisher": "Wharton Global Youth Program, The Wharton School",
+    "accessed_on": "2026-07-31",
+    "sources": [
+      {
+        "title": "Wharton Global High School Investment Competition",
+        "url": "https://globalyouth.wharton.upenn.edu/competitions/investment-competition/",
+        "evidence": "Official current competition page states the deliverables, four evaluation considerations, non-use of portfolio performance, and advancement process."
+      },
+      {
+        "title": "Frequently Asked Questions — Deliverables and Judging",
+        "url": "https://globalyouth.wharton.upenn.edu/competitions/investment-competition/faq/",
+        "evidence": "Official FAQ confirms that standings and percentage portfolio growth have little bearing and that organizer scoring details are not provided to teams."
+      },
+      {
+        "title": "Current locally archived organizer page",
+        "local_evidence": "data/raw/wharton_investment/case-study-current.html",
+        "evidence": "Organizer page states that winners are selected on the strength and articulation of team strategies, not portfolio growth."
+      }
+    ],
+    "applicability_note": "This is the currently published protocol. The public pages do not establish that these exact four labels governed the archived 2019-2022 seasons.",
+    "unsupported_gap": "Private season materials distributed through SurveyMonkey Apply and any undisclosed judge scorecards are unavailable; no numeric rubric is claimed."
+  }
+}

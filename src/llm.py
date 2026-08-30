@@ -205,9 +205,32 @@ def make_perplexity_responses_caller(
     return call
 
 
+def make_tinker_request_fn(
+    model: str,
+    *,
+    max_output_tokens: int = 8192,
+    temperature: float = 0.2,
+) -> RequestFn:
+    """Adapt native Tinker sampling to the RequestFn judge interface."""
+    caller = make_tinker_caller(
+        model,
+        max_output_tokens=max_output_tokens,
+        temperature=temperature,
+    )
+
+    def call(request: LLMRequest) -> LLMResponse:
+        text = caller(request.system_prompt, request.user_prompt)
+        return LLMResponse(text=text, provider="tinker", model=model)
+
+    return call
+
+
 def resolve_request_fn(
     provider: str = "perplexity",
     model: str | None = None,
+    *,
+    max_output_tokens: int = 8192,
+    temperature: float = 0.2,
 ) -> RequestFn:
     """Factory for multimodal judges/agents."""
     provider = provider.lower().strip()
@@ -215,6 +238,15 @@ def resolve_request_fn(
         return make_perplexity_responses_caller(model=model or "openai/gpt-5.4")
     if provider in {"openai", "oai"}:
         return make_openai_responses_caller(model=model or "gpt-4.1")
+    if provider in {"tinker", "tml"}:
+        resolved_model = (
+            model or os.environ.get("TINKER_MODEL") or "Qwen/Qwen3.6-35B-A3B"
+        )
+        return make_tinker_request_fn(
+            resolved_model,
+            max_output_tokens=max_output_tokens,
+            temperature=temperature,
+        )
     raise ValueError(f"Unknown multimodal provider: {provider}")
 
 

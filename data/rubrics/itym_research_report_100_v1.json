@@ -1,0 +1,41 @@
+{
+  "rubric_id": "itym_research_report_100_v1",
+  "dataset": "itym",
+  "title": "ITYM research report rubric",
+  "total_points": 100,
+  "criteria": [
+    {
+      "id": "physics_or_theory",
+      "name": "Scientific / theoretical quality",
+      "max_score": 35,
+      "observable": true,
+      "description": "Core theory, models, and claims are sound against the problem statement."
+    },
+    {
+      "id": "investigation",
+      "name": "Investigation design",
+      "max_score": 25,
+      "observable": true,
+      "description": "Experiments, analysis plan, or research protocol are appropriate and complete."
+    },
+    {
+      "id": "evidence",
+      "name": "Evidence & results",
+      "max_score": 20,
+      "observable": true,
+      "description": "Reported evidence supports the conclusions."
+    },
+    {
+      "id": "presentation",
+      "name": "Report / fight materials",
+      "max_score": 20,
+      "observable": true,
+      "description": "Written materials are clear enough for a jury or opponent team."
+    }
+  ],
+  "not_observable_from_deck": [
+    "live oral fight",
+    "physical experiment fidelity",
+    "months-long preparation process"
+  ]
+}

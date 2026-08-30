@@ -1,0 +1,49 @@
+{
+  "rubric_id": "gcch_harvard_2024_2026_v1",
+  "type": "official_scoring_protocol",
+  "title": "Global Case Competition at Harvard judging protocol",
+  "competition_id": "gcch_harvard",
+  "applicable_editions": ["2024-2025", "2026"],
+  "criteria": [
+    {
+      "id": "case_solution_deck",
+      "name": "Case solution deck",
+      "stage": "Round 1"
+    },
+    {
+      "id": "video_pitch",
+      "name": "Video pitch",
+      "stage": "Round 2",
+      "official_purpose": "Assess clarity, synthesis, and presentation quality."
+    },
+    {
+      "id": "finale_performance",
+      "name": "Team performance during the finale with the Judge panel",
+      "stage": "Round 3",
+      "official_focus": ["the case", "the submitted deck", "general M&A knowledge"]
+    }
+  ],
+  "scoring": {
+    "published_numeric_weights": false,
+    "winner_selection": "Judges select the winners taking into consideration the case solution deck, video pitch, and team performance during the finale with the Judge panel.",
+    "note": "No total or relative weighting is published; none is inferred."
+  },
+  "provenance": {
+    "official_only": true,
+    "publisher": "Global Case Competition at Harvard",
+    "accessed_on": "2026-07-31",
+    "sources": [
+      {
+        "title": "GCCH 2026",
+        "url": "https://www.thecasecompetition.org/gcch-2026",
+        "evidence": "Official competition structure and the three components considered by judges."
+      },
+      {
+        "title": "GCCH 2024/25",
+        "url": "https://www.thecasecompetition.org/event-details-registration/gcch-2024-25",
+        "evidence": "Official edition page states that judges use the case solution, video pitch, and panel questions."
+      }
+    ],
+    "unsupported_gap": "No public official point rubric was found. Historical case packets for 2018-2023 publish recommended solution guidelines and submission rules, not judging weights; they are not converted into grading criteria."
+  }
+}

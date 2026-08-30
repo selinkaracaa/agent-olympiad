@@ -5,7 +5,7 @@
     "unit": "problem_or_question",
     "evaluator_id": "rubric_llm_v1",
     "evaluator_status": "ready",
-    "rubric_path": "data/rubrics/team_power_proof_40_v1.json",
+    "rubric_path": "data/rubrics/arml_power_proof_40_v1.json",
     "evaluator_strategy": "structured_rubric_llm_judge",
     "official_performance": {
       "track_identity": "mixed_national_power_rules_vs_standalone_power_contest",

@@ -169,10 +169,6 @@
     "review_protocol": [
       "Simulation choice: review before submission is optional rather than mandatory.",
       "Simulation choice: any teammate may recompute a contested numerical result or check required boxes."
-    ],
-    "emergent_behavior": [
-      "Observe but do not require partitioning, independent numerical checks, handoff, peer review, and role rotation.",
-      "Do not reward a permanent editor role, equal speaking time, exclusive task ownership, or message volume by itself."
     ]
   },
   "deliberation": {
@@ -203,8 +199,8 @@
     ]
   },
   "simulation": {
-    "max_turns": 24,
+    "max_turns": 30,
     "scheduler": "src_collaboration_draft",
-    "turn_budget_basis": "official clock 18 turns vs floor 15 (5 teammates x 2 turns + 1 answer parts + 4 for synthesis)"
+    "turn_budget_basis": "standardized experiment budget: 30 global turns; official contest timing is recorded separately"
   }
 }

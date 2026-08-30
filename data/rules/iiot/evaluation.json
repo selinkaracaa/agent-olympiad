@@ -202,7 +202,8 @@
       "evaluator_status": "deferred",
       "official_environment_fully_reproduced": false,
       "official_wall_clock_enforced": false
-    }
+    },
+    "rubric_path": "data/rubrics/iiot_programming_judge_v1.json"
   },
   "submission": {
     "max_count": 1,

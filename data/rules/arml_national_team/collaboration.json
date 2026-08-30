@@ -299,10 +299,6 @@
     ],
     "review_protocol": [
       "Simulation choice: review before filing is optional; corrections caused by review should remain observable."
-    ],
-    "emergent_behavior": [
-      "Observe but do not require scouting, allocation, temporary specialization, independent checks, or role rotation.",
-      "Do not reward a permanent captain, equal speaking time, exclusive question ownership, or message volume by itself."
     ]
   },
   "deliberation": {
@@ -319,8 +315,8 @@
   },
   "communication": {
     "mode": "limited",
-    "team_message_budget": 30,
-    "per_agent_message_budget": 2,
+    "team_message_budget": 60,
+    "per_agent_message_budget": 10,
     "max_message_chars": 1200,
     "counted_actions": [
       "speak",
@@ -333,9 +329,77 @@
     ]
   },
   "simulation": {
-    "max_turns": 44,
+    "max_turns": 30,
     "scheduler": "src_collaboration_draft",
-    "turn_budget_basis": "official clock 4 turns vs floor 44 (15 teammates x 2 turns + 10 answer parts + 4 for synthesis)",
-    "eligibility_and_logistics_state": "specified_for_role_immersion_not_enforced"
+    "turn_budget_basis": "standardized experiment budget: 30 global turns; official contest timing is recorded separately",
+    "eligibility_and_logistics_state": "specified_for_role_immersion_not_enforced",
+    "open_table_coach": {
+      "enabled": true,
+      "status": "counterfactual_synthetic_baseline_not_official_arml_rule",
+      "may_submit": false,
+      "allowed_tools": [],
+      "counts_toward_shared_api_and_token_budget": true,
+      "contestant_turn_policy": {
+        "mode": "private_deliberation_then_single_action",
+        "allowed_actions": [
+          "work",
+          "speak",
+          "rest"
+        ],
+        "exactly_one_action": true,
+        "unstructured_response": "rest",
+        "final_submission": "synthesis_only",
+        "visibility": {
+          "think": "private",
+          "work": "shared",
+          "speak": "team",
+          "rest": "private"
+        },
+        "max_chars_by_action": {
+          "think": 2400,
+          "work": 2400,
+          "speak": 320,
+          "rest": 80
+        },
+        "memory_entries": {
+          "private_think_per_agent": 3,
+          "shared_work": 30,
+          "group_messages": 12,
+          "public_messages": 24
+        },
+        "private_think_calls_per_turn": 1,
+        "discussion_policy": {
+          "report_after_work": true,
+          "silent_work_turn_requires_discussion": true,
+          "conflicts_require_targeted_speak": true
+        }
+      },
+      "precontest_brief": {
+        "turn": 1,
+        "problem_access": false,
+        "allowed_actions": [
+          "speak",
+          "sleep"
+        ],
+        "advice_scope": [
+          "time allocation",
+          "task triage",
+          "communication protocol",
+          "independent verification",
+          "final answer-sheet reconciliation"
+        ]
+      },
+      "opening_discussion": {
+        "turn": 2,
+        "problem_access": true,
+        "allowed_actions": [
+          "speak",
+          "sleep"
+        ],
+        "purpose": "summarize the contestants' opening discussion into priorities and checkpoints, and suggest temporary working groups that contestants may later change"
+      },
+      "after_opening_access": false,
+      "min_turns": 10
+    }
   }
 }

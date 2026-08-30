@@ -87,6 +87,8 @@ class Phase3BaselineTests(unittest.TestCase):
 
         def query(system: str, user: str) -> str:
             calls.append((system, user))
+            if "PRIVATE DELIBERATION ONLY" in system:
+                return "Private working note."
             return "ACTION: speak | PAYLOAD: phase contribution"
 
         result = run_collaboration(
@@ -99,7 +101,7 @@ class Phase3BaselineTests(unittest.TestCase):
         self.assertNotIn(env._problem_statement(), calls[0][1])
         self.assertNotIn("evaluation_guidance", calls[0][1])
         self.assertIn("pre-contest brief", calls[0][0].lower())
-        opening_coach_call = 1 + env.team_size
+        opening_coach_call = 1 + (2 * env.team_size)
         self.assertIn("opening discussion", calls[opening_coach_call][0].lower())
         self.assertIn(env._problem_statement(), calls[opening_coach_call][1])
         self.assertTrue(
@@ -116,6 +118,97 @@ class Phase3BaselineTests(unittest.TestCase):
         self.assertEqual(result["turns_used"], 3)
         self.assertEqual(result["schema"], "open_table_coach")
         self.assertEqual(result["coach_exit_after_turn"], 2)
+
+    def test_core_team_schemas_stop_at_communication_budget(self) -> None:
+        expectations = {
+            "centralized": (
+                51,
+                "participant_communication_budgets_exhausted",
+            ),
+            "decentralized": (60, "team_communication_budget_exhausted"),
+        }
+        for schema, (expected_calls, expected_reason) in expectations.items():
+            with self.subTest(schema=schema):
+                env = rule_environment(12)
+                result = run_collaboration(
+                    schema,
+                    env,
+                    lambda _system, _user: "ACTION: speak | PAYLOAD: " + ("X" * 5000),
+                    CollabConfig(max_turns=12, synthesize=False),
+                )
+
+                self.assertEqual(env.communication.team_used, expected_calls)
+                self.assertEqual(result["api_calls"], expected_calls)
+                self.assertLess(result["turns_used"], 12)
+                self.assertEqual(result["stop_reason"], expected_reason)
+                self.assertFalse(env.communication.rejected)
+                self.assertTrue(env.communication.compacted)
+                self.assertTrue(
+                    all(
+                        len(item["payload"]) <= 1200
+                        for item in env.action_log
+                        if item["action"] == "speak"
+                    )
+                )
+
+    def test_core_team_schemas_treat_unanimous_sleep_as_ready(self) -> None:
+        expectations = {
+            "centralized": (2, 6),
+            "decentralized": (1, 6),
+        }
+        for schema, (expected_turns, expected_calls) in expectations.items():
+            with self.subTest(schema=schema):
+                result = run_collaboration(
+                    schema,
+                    rule_environment(12),
+                    lambda _system, _user: "ACTION: sleep | PAYLOAD: done",
+                    CollabConfig(max_turns=12, synthesize=False),
+                )
+
+                self.assertEqual(result["turns_used"], expected_turns)
+                self.assertEqual(result["api_calls"], expected_calls)
+                self.assertEqual(result["stop_reason"], "all_participants_ready")
+
+    def test_single_agent_uses_private_work_protocol(self) -> None:
+        env = rule_environment(12)
+        systems: list[str] = []
+
+        def query(system: str, _user: str) -> str:
+            systems.append(system)
+            return "ACTION: sleep | PAYLOAD: ready"
+
+        result = run_collaboration(
+            "single_agent",
+            env,
+            query,
+            CollabConfig(max_turns=12, synthesize=False),
+        )
+
+        self.assertEqual(result["turns_used"], 1)
+        self.assertEqual(result["api_calls"], 1)
+        self.assertEqual(result["stop_reason"], "all_participants_ready")
+        self.assertIn("ACTION: write_private_notes", systems[0])
+        self.assertIn("ACTION: submit_final", systems[0])
+        self.assertNotIn("ACTION: speak", systems[0])
+        self.assertNotIn("ACTION: write_scratchpad", systems[0])
+        self.assertEqual(env.communication.team_used, 0)
+        self.assertFalse(env.communication.rejected)
+
+    def test_single_agent_enforced_synthesis_uses_authorized_contestant(self) -> None:
+        def query(system: str, _user: str) -> str:
+            if "official final answer sheet" in system:
+                return "\n".join(f"{index}. answer" for index in range(1, 11))
+            return "ACTION: sleep | PAYLOAD: ready"
+
+        result = run_collaboration(
+            "single_agent",
+            rule_environment(12),
+            query,
+            CollabConfig(max_turns=12, synthesize=True),
+        )
+
+        self.assertTrue(result["submitted"])
+        self.assertEqual(result["submitted_by"], "Agent_1")
 
     def test_open_table_coach_output_cannot_execute_actions(self) -> None:
         env = rule_environment(1)
@@ -140,8 +233,8 @@ class Phase3BaselineTests(unittest.TestCase):
 
     def test_open_table_coach_requires_explicit_rule_card_policy(self) -> None:
         env = OlympiadEnvironment(
-            "icpc",
-            "icpc_wf_2012_bottles",
+            "iiot",
+            "iiot_2017_01",
             max_turns=1,
             rules_mode="enforced",
         )

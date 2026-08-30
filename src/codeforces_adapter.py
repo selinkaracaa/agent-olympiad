@@ -59,6 +59,11 @@ MEMORY_FALLBACK_RE = re.compile(
     r"memory limit.*?(\d+)\s*megabytes?",
     re.IGNORECASE | re.DOTALL,
 )
+PROBLEM_STATEMENT_START_RE = re.compile(
+    r'<div[^>]*class="[^"]*\bproblem-statement\b[^"]*"[^>]*>',
+    re.IGNORECASE,
+)
+DIV_TOKEN_RE = re.compile(r"<div\b[^>]*>|</div\s*>", re.IGNORECASE)
 
 
 @dataclass(frozen=True)
@@ -103,6 +108,49 @@ def _normalize_pre(raw: str) -> str:
     text = re.sub(r"<[^>]+>", "", text)
     text = html.unescape(text).replace("\r\n", "\n").replace("\r", "\n")
     return text.strip("\n")
+
+
+def extract_problem_description_from_html(page_html: str) -> str:
+    """Extract the balanced Codeforces problem-statement div as readable text."""
+    start_match = PROBLEM_STATEMENT_START_RE.search(page_html)
+    if not start_match:
+        raise JudgeError("Could not find Codeforces problem statement in HTML.")
+
+    depth = 1
+    end = None
+    for token in DIV_TOKEN_RE.finditer(page_html, start_match.end()):
+        if token.group(0).lower().startswith("</div"):
+            depth -= 1
+            if depth == 0:
+                end = token.start()
+                break
+        else:
+            depth += 1
+    if end is None:
+        raise JudgeError("Codeforces problem statement div is unbalanced.")
+
+    statement = page_html[start_match.end() : end]
+    statement = re.sub(
+        r"<(script|style)\b[^>]*>.*?</\1\s*>",
+        "",
+        statement,
+        flags=re.IGNORECASE | re.DOTALL,
+    )
+    statement = re.sub(
+        r"</?(?:p|pre|li|h[1-6]|br|div|ul|ol|table|tr)\b[^>]*>",
+        "\n",
+        statement,
+        flags=re.IGNORECASE,
+    )
+    statement = re.sub(r"<[^>]+>", "", statement)
+    statement = html.unescape(statement).replace("\r\n", "\n").replace("\r", "\n")
+    statement = re.sub(r"[ \t]+", " ", statement)
+    statement = re.sub(r" *\n *", "\n", statement)
+    statement = re.sub(r"\n{3,}", "\n\n", statement)
+    text = statement.strip()
+    if len(text) < 100:
+        raise JudgeError("Extracted Codeforces problem statement is unexpectedly short.")
+    return text
 
 
 def extract_samples_from_html(page_html: str) -> list[SampleCase]:
@@ -150,18 +198,76 @@ def fetch_problem_html(ref: CodeforcesProblemRef, *, timeout: float = 30.0) -> s
     return payload.decode("utf-8", errors="replace")
 
 
-def fetch_problem_metadata(ref: CodeforcesProblemRef, *, timeout: float = 30.0) -> dict[str, Any]:
+def fetch_problemset_catalog(*, timeout: float = 60.0) -> list[dict[str, Any]]:
+    """Return raw ``problemset.problems`` entries from the Codeforces API."""
     request = Request(API_URL, headers={"User-Agent": UA})
     try:
         with urlopen(request, timeout=timeout) as response:
             payload = json.loads(response.read().decode("utf-8"))
     except (HTTPError, URLError, TimeoutError, json.JSONDecodeError) as exc:
-        raise RuntimeError(
-            f"Failed to fetch Codeforces API metadata for {ref.canonical_id}: {exc}"
-        ) from exc
+        raise RuntimeError(f"Failed to fetch Codeforces problemset catalog: {exc}") from exc
     if payload.get("status") != "OK":
         raise RuntimeError(payload.get("comment", "Codeforces API error"))
     problems = payload.get("result", {}).get("problems", [])
+    if not isinstance(problems, list):
+        raise RuntimeError("Codeforces API returned an unexpected problems payload.")
+    return [dict(item) for item in problems]
+
+
+def filter_problemset_catalog(
+    problems: list[dict[str, Any]],
+    *,
+    min_rating: int | None = None,
+    max_rating: int | None = None,
+    tags: list[str] | None = None,
+    contest_ids: set[int] | None = None,
+    indexes: set[str] | None = None,
+    problem_ids: set[str] | None = None,
+) -> list[dict[str, Any]]:
+    """Filter API problem rows for batch collection."""
+    wanted_tags = {tag.strip().lower() for tag in (tags or []) if tag.strip()}
+    wanted_indexes = {index.upper() for index in (indexes or set())}
+    wanted_ids = {
+        parse_problem_id(item).canonical_id.upper() for item in (problem_ids or set())
+    }
+    filtered: list[dict[str, Any]] = []
+    for item in problems:
+        try:
+            contest_id = int(item.get("contestId"))
+            index = str(item.get("index") or "").upper()
+        except (TypeError, ValueError):
+            continue
+        if not index:
+            continue
+        canonical = f"{contest_id}{index}".upper()
+        if wanted_ids and canonical not in wanted_ids:
+            continue
+        if contest_ids is not None and contest_id not in contest_ids:
+            continue
+        if wanted_indexes and index not in wanted_indexes:
+            continue
+        rating = item.get("rating")
+        if min_rating is not None:
+            if not isinstance(rating, int) or rating < min_rating:
+                continue
+        if max_rating is not None:
+            if not isinstance(rating, int) or rating > max_rating:
+                continue
+        item_tags = {str(tag).lower() for tag in (item.get("tags") or [])}
+        if wanted_tags and not wanted_tags.issubset(item_tags):
+            continue
+        filtered.append(item)
+    filtered.sort(
+        key=lambda row: (
+            int(row.get("contestId") or 0),
+            str(row.get("index") or ""),
+        )
+    )
+    return filtered
+
+
+def fetch_problem_metadata(ref: CodeforcesProblemRef, *, timeout: float = 30.0) -> dict[str, Any]:
+    problems = fetch_problemset_catalog(timeout=timeout)
     for item in problems:
         if int(item.get("contestId", -1)) == ref.contest_id and str(
             item.get("index", "")
@@ -258,6 +364,7 @@ def build_benchmark_record(
     memory_mb: int,
     package_path: Path,
     repo_root: Path | None = None,
+    problem_description: str | None = None,
 ) -> dict[str, Any]:
     root = repo_root or REPO_ROOT
     rel_package = package_path.resolve().relative_to(root.resolve()).as_posix()
@@ -272,11 +379,12 @@ def build_benchmark_record(
         "problem_index": ref.index,
         "title": str(metadata.get("name") or ref.canonical_id),
         "task_type": "algorithmic_programming",
-        "team_size": 1,
+        "team_size": 3,
         "rating": metadata.get("rating"),
         "tags": tags,
         "source_url": ref.problemset_url,
-        "problem_description": (
+        "problem_description": problem_description
+        or (
             f"Codeforces problem {ref.canonical_id}. "
             "Statement is cached locally in the generated package. "
             "Judging uses public samples by default; mount authorized secret tests "
@@ -300,9 +408,13 @@ def build_benchmark_record(
             "reason": "Public Codeforces samples materialized locally.",
             "official_bundle_path": rel_package,
             "sample_tests_path": f"{rel_package}/tests/sample",
+            "vjudge_oj": "CodeForces",
+            "vjudge_prob_num": ref.canonical_id,
             "notes": (
                 "Automatic judging is available for sample scope immediately. "
-                "Add tests/secret/*.in/*.ans and rebuild package.json to grade secrets."
+                "Add tests/secret/*.in/*.ans and rebuild package.json to grade secrets. "
+                "Remote upload uses VJudge problem mode CodeForces-{probNum} "
+                "(no private contest required)."
             ),
         },
     }
@@ -354,6 +466,7 @@ def materialize_problem(
     page_html = html if html is not None else fetch_problem_html(ref)
     api_metadata = metadata if metadata is not None else fetch_problem_metadata(ref)
     samples = extract_samples_from_html(page_html)
+    problem_description = extract_problem_description_from_html(page_html)
     time_ms, memory_mb = extract_limits_from_html(page_html)
     write_problem_package(
         ref,
@@ -373,6 +486,7 @@ def materialize_problem(
         memory_mb=memory_mb,
         package_path=destination,
         repo_root=root,
+        problem_description=problem_description,
     )
     _upsert_benchmark_record(record, repo_root=root)
     return {

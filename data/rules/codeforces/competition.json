@@ -1,0 +1,95 @@
+{
+  "schema_version": "1.0",
+  "rule_id": "codeforces:vjudge_team_sim_v1",
+  "competition_id": "codeforces",
+  "profile": "proxy",
+  "protocol": "human_team_shared_workstation_programming",
+  "team": {
+    "active_min": 3,
+    "active_default": 3,
+    "active_max": 3,
+    "collaboration": "Three contestants collaborate on one shared programming workstation for a Codeforces problem proxied through VJudge.",
+    "coach_role": "open_table_preparation_only_not_a_contestant",
+    "coach_during_contest": "no_problem_solving_help_after_opening",
+    "co_location": "three_contestants_share_one_team_workstation"
+  },
+  "execution": {
+    "official_minutes": 120,
+    "multi_problem_packet": "unavailable",
+    "problem_language": "English",
+    "allowed_languages": [
+      "C++",
+      "Python3"
+    ],
+    "program_io_model": "stdin_to_stdout",
+    "problems_independent": true,
+    "live_scoreboard": "unavailable",
+    "clarification_channel": "unavailable"
+  },
+  "allowed_tools": [
+    "query_rules",
+    "execute_code"
+  ],
+  "resources": {
+    "internet": "forbidden",
+    "calculator": "forbidden",
+    "code_execution": "shared_workstation_only",
+    "paper_pencil": "allowed",
+    "unapproved_materials": "forbidden",
+    "shared_workstation": true,
+    "shared_workstation_count": 1,
+    "extra_computers": "forbidden",
+    "external_llms_and_search_engines": "forbidden",
+    "outside_communication": "forbidden"
+  },
+  "human_constraints": [
+    "Compete as three co-located teammates on one shared workstation for this Codeforces problem.",
+    "Only one contestant at a time may edit, execute local tests, or submit a run.",
+    "Do not use the public Internet, external LLMs, search engines, or outside help.",
+    "Submit a complete stdin/stdout program; only an Accepted remote/local judge result solves the problem.",
+    "After a rejected run, diagnose before thrashing the same approach."
+  ],
+  "rules_text": "You are one of three teammates sharing one workstation on a Codeforces problem (VJudge-proxied). Allowed languages include C++ and Python 3 with stdin/stdout. Internet, external LLMs, and outside help are forbidden. Prefer evidence-backed debugging after WA/TLE/RE/CE.",
+  "provenance": {
+    "status": "proxy",
+    "sources": [
+      {
+        "title": "Codeforces problem statements",
+        "url": "https://codeforces.com/",
+        "authority": "official",
+        "archive_status": "problem_packages_cached_locally"
+      }
+    ],
+    "adaptations": [
+      "Team size is a simulation choice for collaboration schemas; Codeforces problems are normally individual.",
+      "Remote judging uses an experimental local VJudge gateway when configured."
+    ],
+    "research_confidence": "medium"
+  },
+  "comparability": {
+    "overall": "proxy",
+    "dimensions": {
+      "roster": "adapted_team_of_3",
+      "timing": "adapted_turn_budget",
+      "tools": "src_tool_surface",
+      "scoring": "sample_plus_optional_vjudge",
+      "collaboration": "observable_proxy"
+    }
+  },
+  "deliverable": {
+    "answer_format": "Submit a complete stdin/stdout program through submit_code / submit_final.",
+    "shared": true,
+    "mime_types": [
+      "text/plain"
+    ],
+    "task_types": [
+      "algorithmic_programming"
+    ],
+    "official_deliverable": "source_code",
+    "official_languages": [
+      "C++",
+      "Python3"
+    ],
+    "io_model": "stdin_stdout"
+  }
+}
