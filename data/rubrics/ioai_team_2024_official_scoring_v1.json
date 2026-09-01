@@ -1,0 +1,69 @@
+{
+  "rubric_id": "ioai_team_2024_official_scoring_v1",
+  "dataset": "ioai_team",
+  "title": "IOAI 2024 Practical Round official task rubric",
+  "rubric_type": "official_structured_scoring",
+  "edition": 2024,
+  "total_points": 80,
+  "task_weights": {
+    "image_cover": 40,
+    "music_video": 40
+  },
+  "criteria": [
+    {"id": "image_visual_impact", "task": "image_cover", "name": "Visual impact and clarity", "max_score": 5},
+    {"id": "image_thematic_relevance", "task": "image_cover", "name": "Thematic relevance", "max_score": 5},
+    {"id": "image_composition", "task": "image_cover", "name": "Composition and balance", "max_score": 5},
+    {"id": "image_objects", "task": "image_cover", "name": "Predefined object inclusion", "max_score": 7, "scoring": "1 point for each of the first five included objects; 0.25 for each additional object, capped at 7."},
+    {"id": "image_palette", "task": "image_cover", "name": "Color palette adherence", "max_score": 5},
+    {"id": "image_originality", "task": "image_cover", "name": "Originality and creativity", "max_score": 5},
+    {"id": "image_ai_tools", "task": "image_cover", "name": "Effective use of AI tools", "max_score": 5},
+    {"id": "image_delivery", "task": "image_cover", "name": "Delivery", "max_score": 3, "scoring": "Image is at least 1024×1024 and appropriately sized and placed in the provided frame."},
+    {"id": "video_artist_likeness", "task": "music_video", "name": "Artist likeness", "max_score": 5},
+    {"id": "video_objects", "task": "music_video", "name": "Predefined object inclusion", "max_score": 7, "scoring": "1 point for each of the first five included objects; 0.25 for each additional object, capped at 7."},
+    {"id": "video_style", "task": "music_video", "name": "Homogeneous art style", "max_score": 5},
+    {"id": "video_sync", "task": "music_video", "name": "Music synchronization", "max_score": 5},
+    {"id": "video_accuracy", "task": "music_video", "name": "Generation accuracy", "max_score": 5},
+    {"id": "video_prompting", "task": "music_video", "name": "Prompting strategies", "max_score": 5},
+    {"id": "video_duration", "task": "music_video", "name": "Video duration", "max_score": 3, "levels": [{"condition": "shorter than 37 seconds", "score": 1}, {"condition": "at least 37 but shorter than 47 seconds", "score": 2}, {"condition": "full 47 seconds", "score": 3}]},
+    {"id": "video_neuralframes", "task": "music_video", "name": "Effective use of NeuralFrames", "max_score": 5}
+  ],
+  "ordinal_criterion_scale": {
+    "applies_to": "Criteria marked 1–5 in the task statement",
+    "anchors": {
+      "1": "low-performance anchor stated for the criterion",
+      "3": "middle-performance anchor stated for the criterion",
+      "5": "high-performance anchor stated for the criterion"
+    }
+  },
+  "published_results_note": "Official results publish a jury score and, for some ranked teams, a peer-voting score. The results page does not publish a formula combining those columns into rank.",
+  "applicability": {
+    "scope": "The 2024 IOAI Practical Round only, later renamed Team Challenge.",
+    "benchmark_problem_id": "ioai_team_2024_practical",
+    "other_editions": "IOAI rules state that Team Challenge scoring is task-specific and announced in each task statement."
+  },
+  "provenance": [
+    {
+      "source_type": "official_task_statement_via_local_archive",
+      "path": "data/raw/ioai/Team-Challenge/2024/problems/IOAI Practical Round/IOAI_ Practical round assignment.pdf",
+      "mirrored_in": "data/benchmarks/ioai_team/benchmark.json",
+      "supports": ["all criteria", "criterion maxima", "80-point total", "40:60 image-to-video weight statement and 40-point task tables"]
+    },
+    {
+      "source_type": "official_organizer",
+      "title": "IOAI 2024 Tasks",
+      "url": "https://ioai-official.org/2024-tasks/",
+      "supports": ["two practical tasks", "official downloadable assignment", "four-hour round"]
+    },
+    {
+      "source_type": "official_organizer",
+      "title": "IOAI 2024 Results & Awards",
+      "url": "https://ioai-official.org/bulgaria-2024/results/",
+      "supports": ["published jury score", "published peer-voting score", "final rank"]
+    }
+  ],
+  "limitations": [
+    "The task text says the image/video weighting is 40:60 but presents two official 40-point rubrics and the local benchmark records total_points as 80. This file preserves the explicit rubric maxima and flags the inconsistency rather than inventing a reconciliation.",
+    "The official final-ranking formula involving jury and peer voting is not stated in the cited public results page.",
+    "Do not reuse these creative-media criteria for the 2025 robotics Team Challenge."
+  ]
+}

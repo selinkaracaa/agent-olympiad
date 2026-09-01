@@ -49,9 +49,10 @@ class EnvRulesHookTests(unittest.TestCase):
         self.assertEqual(env.penalty_minutes(), 40)
         self.assertEqual(env.simulated_minutes, before + 40)
         self.assertGreater(env.current_turn, turn_before)
-        # Clock burn can exhaust the contest even with turns left on paper.
+        # Official clock metadata is tracked separately from the standardized
+        # collaboration-turn budget.
         env.simulated_minutes = float(env.duration_minutes or 300)
-        self.assertFalse(env.can_begin_turn())
+        self.assertTrue(env.can_begin_turn())
 
 
 if __name__ == "__main__":

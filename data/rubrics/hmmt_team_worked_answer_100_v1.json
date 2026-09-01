@@ -1,0 +1,31 @@
+{
+  "rubric_id": "hmmt_team_worked_answer_100_v1",
+  "title": "HMMT team round worked-answer rubric",
+  "total_points": 100,
+  "criteria": [
+    {
+      "id": "accuracy",
+      "name": "Answer accuracy",
+      "max_score": 50,
+      "observable": true,
+      "description": "Final answers and key intermediate claims match the official marking scheme."
+    },
+    {
+      "id": "method",
+      "name": "Method & justification",
+      "max_score": 30,
+      "observable": true,
+      "description": "Methods are valid and sufficiently justified for the awarded marks."
+    },
+    {
+      "id": "coverage",
+      "name": "Part coverage",
+      "max_score": 20,
+      "observable": true,
+      "description": "Required sub-questions are addressed."
+    }
+  ],
+  "not_observable_from_deck": [],
+  "dataset": "hmmt_team",
+  "derived_from": "data/rubrics/worked_answer_100_v1.json"
+}

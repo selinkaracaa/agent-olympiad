@@ -116,7 +116,7 @@ Problems load from `data/benchmarks/{competition_id}/benchmark.json`.
 
 ---
 
-## `collaboration.py` — three coordination schemas + synthesis
+## `collaboration.py` — coordination schemas + baselines
 
 **What it is:** Defines *how* agents talk to each other, on top of the same env. Swap schema → same problem, same model, different team structure.
 
@@ -161,6 +161,15 @@ Separate from discussion. After all rounds, one agent is prompted to write the *
 - Prefers full response text over truncated `ACTION: submit_final` payloads (this fix took scores from 4/40 → 17–20/40)
 
 **`CollabConfig`:** `max_turns` (time), `max_api_calls` (cost), `rounds` / `decentralized_events` (aliases for smoke), `synthesize`, `progress`.
+
+Phase 3 also registers:
+- `debate` — independent proposals followed by ledger-backed challenge, evidence/revision, and designated synthesis.
+- `self_consistency` — independent Solo samples with deterministic per-answer majority voting.
+- `memory_solo` — one Solo solver with bounded private notes recalled across turns.
+- `subagent` — orchestrator decomposition and aggregation around mutually isolated stateless workers.
+- `liveoi_best_of_8` — eight isolated one-shot candidates; selection occurs only when an explicit deterministic judge callback is supplied.
+
+`CollabConfig` exposes `sample_count`, `memory_bound`, and `debate_rounds` for these baselines. `run_handicap_sweep.py` varies one Solo resource axis per cell and writes atomic crossover-analysis JSON; it defaults to offline mock mode.
 
 ---
 

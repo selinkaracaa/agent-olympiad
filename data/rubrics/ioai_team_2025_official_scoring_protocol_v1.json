@@ -1,0 +1,31 @@
+{
+  "rubric_id": "ioai_team_2025_official_scoring_protocol_v1",
+  "dataset": "ioai_team",
+  "title": "IOAI 2025 Team Challenge official scoring protocol",
+  "rubric_type": "official_scoring_protocol",
+  "edition": 2025,
+  "official_rule": "Team Challenge scoring is task-specific and is announced in the task statement.",
+  "task": "Factory of the Future — Galbot",
+  "applicability": {
+    "scope": "IOAI 2025 Team Challenge.",
+    "benchmark_problem_id": "ioai_team_2025_factory"
+  },
+  "provenance": [
+    {
+      "source_type": "official_organizer",
+      "title": "Contest Rules for IOAI 2025, version 2.3",
+      "url": "https://ioai-official.org/wp-content/uploads/2025/08/Contest-Rules-for-IOAI-2025-version-2.3-1.pdf",
+      "supports": ["task-specific scoring rule", "team awards"]
+    },
+    {
+      "source_type": "local_benchmark_evidence",
+      "path": "data/benchmarks/ioai_team/benchmark.json",
+      "supports": ["Factory of the Future task statement", "simulation platform and task context", "null total_points"]
+    }
+  ],
+  "limitations": [
+    "The local task extract does not contain a numeric scoring table, task weights, penalties, tie-breakers, or total maximum.",
+    "No numeric dimensions are supplied because they would be invented.",
+    "The 2024 Practical Round rubric is not applicable to this robotics challenge."
+  ]
+}

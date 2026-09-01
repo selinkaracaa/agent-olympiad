@@ -1,0 +1,28 @@
+{
+  "rubric_id": "icpc_programming_judge_v1",
+  "dataset": "icpc",
+  "title": "ICPC programming judge protocol",
+  "rubric_type": "programming_judge_protocol",
+  "scoring_direction": "higher_is_better",
+  "evaluator_id": "programming_judge",
+  "official_scoring_components": [
+    {
+      "id": "accepted_submissions",
+      "name": "Accepted problems / tests",
+      "basis": "Official or local judge accept on required tests."
+    },
+    {
+      "id": "penalty",
+      "name": "Time / wrong-submission penalty",
+      "basis": "Contest penalty rules when the judge and packet support them."
+    }
+  ],
+  "other_official_rules": [
+    "Score from the programming judge, not from free-form text similarity.",
+    "Unauthorized tool use or judge bypass is a compliance failure."
+  ],
+  "applicability": {
+    "scope": "icpc programming tasks promoted in data/benchmarks/icpc/benchmark.json",
+    "repository_status": "programming_judge when tests/sandbox are available; otherwise deferred"
+  }
+}

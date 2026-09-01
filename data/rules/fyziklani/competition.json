@@ -1,0 +1,174 @@
+{
+  "schema_version": "1.0",
+  "rule_id": "fyziklani:draft_v1",
+  "competition_id": "fyziklani",
+  "profile": "non_comparable",
+  "protocol": "progressive_release",
+  "team": {
+    "active_min": 1,
+    "active_default": 5,
+    "active_max": 5,
+    "roster_max": 5,
+    "range_basis": "source_record",
+    "official_roster_note": "Physics Brawl Online teams consist of 1–5 competitors. Categories A, B, and C require school students or equivalents; Open is a non-competitive category for people who do not meet A/B/C criteria. Each contestant may be on only one team and in only one category.",
+    "collaboration": "Team members may communicate with one another and with organizers about wording or the contest environment; teachers and other teams are forbidden."
+  },
+  "execution": {
+    "official_minutes": 180,
+    "rules_edition": "physics_brawl_online_2025",
+    "progressive_series": "specified_only",
+    "incorrect_attempt_penalty": "specified_only",
+    "series_lockout": "specified_only",
+    "skip_state": "specified_only",
+    "live_scoreboard": "official_during_contest_specified_not_enforced",
+    "scoreboard_hide": "official_final_20_minutes_unavailable",
+    "fairness_video_calls": "official_specified_unavailable"
+  },
+  "allowed_tools": [
+    "query_rules",
+    "use_calculator"
+  ],
+  "resources": {
+    "internet": "allowed",
+    "calculator": "allowed",
+    "code_execution": "forbidden",
+    "paper_pencil": "allowed",
+    "provided_materials_only": false,
+    "generative_ai": "forbidden",
+    "literature": "allowed",
+    "drafting_supplies": "allowed",
+    "outside_communication": "teammates_or_organizers_only"
+  },
+  "human_constraints": [
+    "Treat yourself as a Physics Brawl Online 2025 contestant on one pre-registered team; this is the online edition, not in-person Fyziklání.",
+    "A team has 1–5 competitors; do not invent a sixth member, a second team, or a parallel category roster.",
+    "Each contestant competes in only one category and on only one team.",
+    "Categories A, B, and C are for high-school students, primary-school students, or their equivalents, placed by the official year-of-graduation coefficient rules; Open is a non-competitive category for people who do not meet those criteria.",
+    "All categories share the same problems and keep separate results lists.",
+    "The contest lasts 3 hours in the official online environment; log in with the team password and follow the online board.",
+    "Answers must be sent through the competition environment; results sent by email or other means are not accepted.",
+    "The competition has four parallel series: the Main series plus three Hurry-up series.",
+    "At the start of Main, the team receives 7 problems; a correct answer unlocks another Main problem unless that series is finished.",
+    "The Main series contains approximately 50 problems; the exact count is not published in advance, so do not invent a fixed remaining-packet size.",
+    "Hurry-up becomes available one hour after the start, with one opening problem in each of three categories, usually mechanics M, electromagnetism E, and others X; a correct answer unlocks the next problem in that category.",
+    "An incorrect attempt lowers the points still available for that problem (100%, then 60%, then 40%, then 20%, then the published remainder table) and locks that series against new answers for 1 minute.",
+    "After 90 minutes the team may skip an unsolved problem: each skip costs 1 point, unlocks a new problem, and permanently bars answering the skipped problem; at most 10 skips are allowed.",
+    "During the first 30 minutes of Hurry-up, completing a same-number triplet (for example M.1, E.1, and X.1) doubles the points earned for that triplet; after skips become available, Hurry-up remains open but those bonuses stop.",
+    "Every answer is a number; use the significant figures and units required by the statement, and use listed constants unless the statement gives a different value.",
+    "Internet access and literature are allowed as information sources; calculators and writing or drafting supplies are allowed.",
+    "Generative artificial intelligence tools, including ChatGPT-class systems that generate complex coherent answers, are strictly prohibited and are a severe breach.",
+    "During the contest communicate only with teammates or organizers; any interaction with teachers or other teams is forbidden.",
+    "The in-environment chat is only for wording, environment, or contest issues; organizers may answer publicly, and hints, solution talk, spam, or other misconduct in official channels may be penalized.",
+    "Keep all paper and electronic solution materials until final results are announced, and present them if organizers ask.",
+    "Live results of all teams are displayed during the contest and are hidden 20 minutes before the end.",
+    "After the contest, selected teams—typically higher-scoring teams—may be invited to a recorded fairness video call; failure to join is not automatically a penalty but may be considered when assessing fairness.",
+    "The winner is the team with the most points; a tie is broken by the earlier last correct answer, then by drawing lots if needed.",
+    "Contestants may appeal to organizers for 60 minutes after the contest; preliminary results become final only after remarks and fairness investigations."
+  ],
+  "rules_text": "You are a Physics Brawl Online 2025 contestant on one team of 1–5 people in a single category. This is the online edition: internet and literature are allowed, calculators and drafting supplies are allowed, and in-person Fyziklání's no-internet rules do not apply. Generative AI, including ChatGPT-class tools, is strictly prohibited. Communicate only with teammates or organizers about wording or the environment; teachers and other teams are forbidden. The contest lasts 3 hours in the official environment. You work four parallel series: Main, which opens with 7 problems and continues after each correct answer through approximately 50 problems whose exact count is unpublished, and Hurry-up, which opens after one hour with one problem in each of three categories. A wrong answer reduces that problem's remaining points (100/60/40/20 percent, then the published table) and locks that series for 1 minute. After 90 minutes you may skip at most 10 unsolved problems at −1 point each; a skipped problem cannot be answered. The winner is the team with the most points; ties go to the earlier last correct answer. Live results hide for the final 20 minutes; post-contest fairness video calls may be requested. Keep your solution notes. Answers are numbers with the statement's significant figures and units. Treat unexposed physical, oral, live-opponent, judge, timing, or environment mechanisms as unavailable rather than simulated facts.",
+  "provenance": {
+    "status": "source_grounded",
+    "sources": [
+      {
+        "title": "Rules of Physics Brawl Online",
+        "url": "https://physicsbrawl.org/download/2025/rules-en-250901.pdf",
+        "authority": "official",
+        "edition": "ratified by the Central Committee on 1 September 2025; in effect 1 September 2025",
+        "archive_status": "local_text_capture_available",
+        "local_text": "data/rules/sources/fyziklani/01_rules-en-250901.txt",
+        "sections": [
+          "Participating in the Competition",
+          "Designation into Categories",
+          "Competition Environment",
+          "The Competition System and Awarding of Points",
+          "The Main Series",
+          "The Hurry-up Series",
+          "Format of the Results",
+          "Video Calls after the Competition",
+          "Conclusion of the Competition and Announcement of Winners",
+          "Breach of Rules",
+          "Final Remarks"
+        ]
+      }
+    ],
+    "adaptations": [
+      "This card freezes the 2025 Physics Brawl Online ruleset and does not apply in-person Fyziklání resource bans",
+      "max_turns is a safety budget rather than the official 3-hour clock",
+      "Progressive series unlock, incorrect-attempt decay, 1-minute series lockout, skips, scoreboard hide, and fairness video calls are specified but not enforced by src",
+      "Limited communication is a benchmark pressure overlay, not an official message cap",
+      "LLM agents competing under an official generative-AI ban make the track non_comparable even if numeric answers can be gold-matched"
+    ],
+    "official_time_note": "3 hours.",
+    "research_confidence": "high",
+    "research_notes": [
+      "Do not use in-person Fyziklání rules (no internet / printed materials) for this card.",
+      "Exact Main-series length is officially unpublished; the rules say approximately 50 problems.",
+      "Scoreboard hide in the last 20 minutes and post-contest video calls are official and unavailable in the runner.",
+      "Category coefficients, registration, and video-call logistics are role-immersion text, not executable state."
+    ],
+    "proxy_limitations": [
+      "The runtime does not unlock the next series problem after a correct answer.",
+      "Incorrect-attempt point decay and the 1-minute series lockout are not executed.",
+      "Skip availability after 90 minutes is not executed.",
+      "The live scoreboard and its final-20-minute hide are not published.",
+      "Fairness video calls are not conducted.",
+      "Official generative-AI prohibition conflicts with LLM contestants."
+    ],
+    "content_standard": {
+      "name": "icpc_three_component_content_standard",
+      "version": "1.1",
+      "applied_at": "2026-08-17",
+      "reference_card": "data/rules/icpc",
+      "official_facts_policy": "competition_specific_primary_sources_only",
+      "scope": [
+        "competition_constraints",
+        "collaboration_operations",
+        "evaluation_and_compliance",
+        "runtime_fidelity"
+      ]
+    },
+    "source_review": {
+      "reviewed_at": "2026-08-17",
+      "audit_report": "docs/rule_card_icpc_standard_gap_audit_2026-08-17.md",
+      "coverage_grade": "A",
+      "completion_status": "primary_rules_online_edition_frozen",
+      "claim_policy": "unknown_official_values_remain_null_or_explicitly_unresolved",
+      "known_gaps": [
+        "In-person Fyziklání is a different ruleset and is out of scope.",
+        "Progressive release, attempt penalties, lockout, skips, scoreboard hide, and video calls remain official state that is currently unavailable.",
+        "Exact Main-series problem count is unpublished by design."
+      ]
+    }
+  },
+  "comparability": {
+    "overall": "non_comparable",
+    "dimensions": {
+      "roster": "official",
+      "timing": "adapted_turn_budget",
+      "tools": "human_resources_allowed_but_generative_ai_forbidden",
+      "scoring": "specified_but_deferred",
+      "environment": "progressive_penalty_state_specified_only",
+      "ai_policy": "fundamental_participant_waiver",
+      "communication": "adapted_coordination_budget",
+      "information": "shared_equal_contestants",
+      "deliberation": "unstructured_observation",
+      "scoreboard_hide": "official_specified_unavailable",
+      "fairness_video_calls": "official_specified_unavailable",
+      "eligibility_and_logistics": "role_immersion_text_only"
+    }
+  },
+  "deliverable": {
+    "answer_format": "Submit the team's final answers in numbered order, using exact values when required.",
+    "shared": true,
+    "mime_types": [
+      "text/plain"
+    ],
+    "task_types": [
+      "team_contest"
+    ],
+    "official_deliverable": "answer_sheet",
+    "official_mime_types": [
+      "text/plain"
+    ]
+  }
+}

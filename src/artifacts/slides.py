@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import os
 import re
 import shutil
 import subprocess
@@ -18,6 +19,10 @@ CHROME_CANDIDATES = (
     Path("/Applications/Chromium.app/Contents/MacOS/Chromium"),
     Path("/usr/bin/google-chrome"),
     Path("/usr/bin/chromium"),
+    Path(os.environ.get("PROGRAMFILES", "")) / "Google/Chrome/Application/chrome.exe",
+    Path(os.environ.get("PROGRAMFILES(X86)", ""))
+    / "Microsoft/Edge/Application/msedge.exe",
+    Path(os.environ.get("LOCALAPPDATA", "")) / "Google/Chrome/Application/chrome.exe",
 )
 
 PRINT_CSS = """

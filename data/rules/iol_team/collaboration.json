@@ -1,0 +1,193 @@
+{
+  "agent_constraints": [
+    "Inhabit the role of an eligible IOL contestant on one delegation of at most four pre-university students; do not invent a fifth contestant, a substitute mid-contest, or a contestant-as-leader role.",
+    "Treat the team leader as adult escort and administrative contact only; do not ask the leader for linguistic analyses, answers, or explanation text during the contest.",
+    "Compete as one team in one allocated room on one problem and one script—not as independent individual-contest solvers and not as a programming-team sharing machines.",
+    "Carry age, pre-university, accreditation, visa, and host-hospitality obligations as conscience even though the session does not simulate those workflows.",
+    "Begin with the same contestant permissions as every teammate; do not assume a permanent captain, pattern-analyst, tester, or explanation-editor office.",
+    "Read the shared problem, propose mappings, hunt counterexamples, and reassign dynamically; temporary specialization may emerge but is never a fixed office.",
+    "Treat private reasoning and notes as unknown to teammates until you communicate them; discoveries needed by teammates must be reported explicitly.",
+    "Use one team working language for the script. Do not import another contest's device policy, programming languages, or medal formula.",
+    "Do not use dictionaries, own paper, calculators, phones, laptops, tablets, smartwatches, Internet, external LLMs, hidden keys, or outside help.",
+    "Write explanations unless the question says otherwise; do not leave alternative conflicting answers or explanations on the script.",
+    "Reconcile one envelope-ready script before time ends; incomplete private drafts that were never merged are not the team solution."
+  ],
+  "agent_roles": [
+    {
+      "name": "Agent_1",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit an eligible IOL contestant identity under Delegations, Contests, and team-competition guidelines.",
+        "Scout data, propose analyses, test counterexamples, draft explanations, or coordinate as current team needs require.",
+        "Share decision-relevant mappings and merge them into the single script in the team's working language."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": []
+    },
+    {
+      "name": "Agent_2",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit an eligible IOL contestant identity under Delegations, Contests, and team-competition guidelines.",
+        "Scout data, propose analyses, test counterexamples, draft explanations, or coordinate as current team needs require.",
+        "Share decision-relevant mappings and merge them into the single script in the team's working language."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": []
+    },
+    {
+      "name": "Agent_3",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit an eligible IOL contestant identity under Delegations, Contests, and team-competition guidelines.",
+        "Scout data, propose analyses, test counterexamples, draft explanations, or coordinate as current team needs require.",
+        "Share decision-relevant mappings and merge them into the single script in the team's working language."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": []
+    },
+    {
+      "name": "Agent_4",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit an eligible IOL contestant identity under Delegations, Contests, and team-competition guidelines.",
+        "Scout data, propose analyses, test counterexamples, draft explanations, or coordinate as current team needs require.",
+        "Share decision-relevant mappings and merge them into the single script in the team's working language."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": []
+    }
+  ],
+  "information_policy": {
+    "mode": "shared",
+    "shared": [
+      "problem",
+      "contest_rules",
+      "team_discussion",
+      "scratchpad"
+    ],
+    "coordination_requirement": "Contestants receive equal baseline information access, but private reasoning is not silently copied between them; they must communicate mappings, counterexamples, and wording that must appear on the single script."
+  },
+  "rule_sections": {
+    "competition_format": [
+      "Official: the Olympiad includes an individual contest and a team contest on different days; this card is the team contest only.",
+      "Official: team members work jointly on a single problem set, share the work as they choose, and hand in a single script.",
+      "Official: each member receives a copy of the problem; the team receives and writes in one working language only.",
+      "Official: a participating team has no more than four contestants plus a team leader who is not a contestant.",
+      "Simulation choice: the session models the team contest, not the six-hour five-problem individual contest."
+    ],
+    "timeline": [
+      "Official: the Problem Committee sets team-contest time at three or four hours.",
+      "Official: contestant guidelines say the length is normally four hours and will be clearly indicated; the invigilator records start and finish.",
+      "Official: unlike the individual contest, no food is provided during the team contest; contestants may bring their own.",
+      "Simulation choice: official_minutes 240 and max_turns 48 follow the four-hour guideline default."
+    ],
+    "resource_policy": [
+      "Official: writing paper is provided by the Local Organising Committee; no other paper shall be used.",
+      "Official: no printed matter or dictionaries; no own paper; no phones, laptops, tablets, smartwatches, or other outside-world devices.",
+      "Official: artificial aids such as pocket calculators and calendars must not be used.",
+      "Official: pen is preferred; avoid red ink reserved for the Jury; spare pens and extra organizer paper may be requested.",
+      "Simulation choice: the session has no physical paper or invigilator; do not claim a device search or paper handout that was not observed."
+    ],
+    "collaboration_protocol": [
+      "Official: teammates are free to talk together while solving the team problem in their allocated room.",
+      "Official: keep noise down; nearby teams may hear you or be disturbed, especially if windows are open.",
+      "Official: the same material and device bans as the individual contest apply to the team contest.",
+      "Official: the team leader must not solve and must not have served on this Olympiad's Problem Committee or Jury.",
+      "Simulation choice: limited message budgets stand in for free verbal room talk; they are not an official speech cap.",
+      "Simulation choice: private notes are unshared until communicated; only the merged script is the official deliverable."
+    ],
+    "integrity_and_compliance": [
+      "Official: any contestant found with a forbidden communication or Internet device during the contest will be immediately disqualified.",
+      "Official: the IOL must be free from bullying, sexual harassment, and other discrimination.",
+      "Official: Jury decisions are final; no appeal or challenge will be accepted.",
+      "Simulation choice: hidden keys, published solutions, and evaluator internals are not contestant-visible."
+    ],
+    "deliverable_format": [
+      "Official: submit one team script in the team's working language.",
+      "Official: explanations are required unless the question instructs otherwise; unexplained correct answers score lower.",
+      "Official: do not give alternative answers or conflicting explanations; cross out anything not to be marked.",
+      "Official: the explanation is a systematic summary of discovered facts, not a discovery diary.",
+      "Simulation choice: the session accepts numbered plain-text worked answers as a proxy for the sealed envelope."
+    ],
+    "evaluation_criteria": [
+      "Official: the International Jury marks the scripts and produces the ranking from which medals are awarded.",
+      "Official: team medals are at most one gold, two silver, and three bronze, plus Honourable Mentions at Jury discretion.",
+      "Official: team leaders receive a problem-by-problem breakdown for their own team; unmarked contestants' public listing is limited.",
+      "Official: Jury decisions are final.",
+      "Simulation choice: rubric_llm_v1 is a ready proxy for Jury marking, not the live International Jury."
+    ],
+    "runtime_limitations": [
+      "Simulation choice: the allocated quiet team room, invigilators, envelopes, and handwritten diagrams are not reproduced.",
+      "Simulation choice: the Problem Committee's three-versus-four-hour choice is frozen to four hours.",
+      "Simulation choice: eligibility, leader adult-status, and visa workflows are role-immersion text only."
+    ],
+    "official_eligibility_and_logistics": [
+      "Official: contestants are pre-university and less than 20 on the first day, chosen through an open country-wide qualifying contest.",
+      "Official: a contestant eligible for multiple qualifying contests may enter only one.",
+      "Official: the team leader is a legal adult in both countries and has a common language with local organisers.",
+      "Simulation choice: these obligations are contestant conscience; the session does not execute accreditation or visa checks."
+    ],
+    "team_room_protocol": [
+      "Official: each team is allocated its own room for the team competition.",
+      "Official: temporary exit requires asking the invigilator; a helper may need to accompany you.",
+      "Official: remember a neighbouring team may have started later and still be working when you finish.",
+      "Simulation choice: room assignment, invigilator accompaniment, and acoustic isolation are not enforced."
+    ],
+    "script_reconciliation": [
+      "Official: there is one submitted solution even though each member has a copy of the problem.",
+      "Simulation choice: conflicting private analyses must be resolved with evidence before they occupy the script.",
+      "Simulation choice: unmerged draft fragments are not the official deliverable."
+    ],
+    "clarification_protocol": [
+      "Official: during contests the Jury answers questions on problem statements; individual-contest questions are written.",
+      "Official: you may request explanation of an unfamiliar word; the Jury may refuse if it would give an unfair advantage and will not normally translate into another language.",
+      "Simulation choice: until a Jury reply is shared, teammates must not invent a private official ruling."
+    ]
+  },
+  "deliberation": {
+    "mode": "structured",
+    "min_challenges": 1,
+    "decision_maker": "submitter",
+    "evaluation_dimensions": [
+      "evidence_responsiveness",
+      "revision_after_challenge",
+      "decision_traceability",
+      "authority_bias",
+      "majority_bias"
+    ]
+  },
+  "communication": {
+    "mode": "limited",
+    "team_message_budget": 18,
+    "per_agent_message_budget": 4,
+    "max_message_chars": 1200,
+    "counted_actions": [
+      "speak",
+      "write_scratchpad",
+      "propose",
+      "challenge",
+      "provide_evidence",
+      "revise",
+      "decide"
+    ]
+  },
+  "simulation": {
+    "max_turns": 30,
+    "scheduler": "src_collaboration_draft",
+    "turn_budget_basis": "standardized experiment budget: 30 global turns; official contest timing is recorded separately",
+    "eligibility_and_logistics_state": "specified_for_role_immersion_not_enforced"
+  }
+}

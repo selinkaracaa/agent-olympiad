@@ -1,0 +1,167 @@
+{
+  "schema_version": "1.0",
+  "rule_id": "iol_team:draft_v1",
+  "competition_id": "iol_team",
+  "profile": "proxy",
+  "protocol": "shared_answer",
+  "team": {
+    "active_min": 2,
+    "active_default": 4,
+    "active_max": 4,
+    "roster_max": 4,
+    "collaboration": "Up to four contestants work jointly in an allocated team room on one problem set and hand in one script; the team leader is not a contestant.",
+    "range_basis": "source_record",
+    "official_roster_note": "A participating team consists of no more than four contestants accompanied by a team leader who is a legal adult in both countries, is not a contestant, and must not have served on this Olympiad's Problem Committee or Jury. Eligibility, accreditation, visas, and host lodging are official identity and logistics rules included for role immersion and are not runtime-enforced state machines."
+  },
+  "execution": {
+    "official_minutes": 240,
+    "team_contest_duration": "three_or_four_hours_at_problem_committee_discretion_guidelines_normally_four",
+    "working_language": "one_language_for_the_whole_team",
+    "problem_copies_per_member": 1,
+    "scripts_submitted": 1,
+    "team_room": "allocated_specified_not_enforced"
+  },
+  "allowed_tools": [
+    "query_rules"
+  ],
+  "resources": {
+    "internet": "forbidden",
+    "calculator": "forbidden",
+    "code_execution": "forbidden",
+    "paper_pencil": "organizer_paper_only",
+    "provided_materials_only": true,
+    "printed_matter_and_dictionaries": "forbidden",
+    "own_paper": "forbidden",
+    "phones_laptops_tablets_smartwatches": "forbidden",
+    "pens_preferred": true,
+    "outside_world_devices": "forbidden"
+  },
+  "human_constraints": [
+    "Treat yourself as an eligible IOL contestant: you are a pre-university student less than 20 years old on the first day of the competition, chosen through a country-wide qualifying contest held by a recognised national organisation.",
+    "A contestant eligible for multiple qualifying contests may compete in only one. Citizens living in another country may be included at national-organiser discretion; the norm is that contestants represent the country where they live or are educated.",
+    "The delegation is at most four contestants plus a team leader. The leader is not a contestant, must be a legal adult in both the team's country and the host country, and must not have taken part in this Olympiad's Problem Committee or Jury.",
+    "Eligibility, accreditation, visas, travel, medical insurance, and host lodging are official identity and logistics obligations carried as role immersion; they are not runtime-enforced workflows.",
+    "The team contest is held on a different day from the individual contest. Members work jointly on a single problem set, share the work as they choose, and hand in a single script.",
+    "The Problem Committee sets the team-contest time at three or four hours. Contestant guidelines say the length is normally four hours and will be clearly indicated; this card uses that four-hour default.",
+    "Each team member receives their own copy of the problem. The team submits one solution. The team receives the problem and writes the solution in one working language only.",
+    "One or more members may have used a different language in the individual contest, but for the team contest everyone must work in the same language.",
+    "You are free to talk together while solving the team problem in the allocated team room. Keep noise down so nearby rooms are not disturbed and cannot easily overhear you.",
+    "The same material and device bans as the individual contest apply: no printed matter or dictionaries; no own paper, even blank; no phones, laptops, tablets, smartwatches, or other devices that contact the outside world or the Internet.",
+    "Writing paper is provided by the Local Organising Committee; no other paper shall be used. Bring pens or pencils—pen is preferred; avoid red, which is reserved for the Jury.",
+    "Artificial aids such as pocket calculators and calendars must not be used. Any equipment essential for solving the problems must be supplied to all by the Local Organising Committee.",
+    "Answers must be well supported by explanation unless the question explicitly instructs otherwise. Even a perfectly correct answer scores lower without explanation.",
+    "Do not offer alternative answers hoping one is correct, and do not offer alternative conflicting explanations; delete or cross out anything you do not want marked.",
+    "The explanation should be a detailed, systematic summary of the facts discovered, not a diary of how you discovered them.",
+    "Place the team's answer sheets in the envelope for the invigilator to seal and deliver to the Jury. The contests are not anonymous.",
+    "In the team contest, up to one gold, two silver, and three bronze medals may be awarded, plus any number of Honourable Mentions at the Jury's discretion. Jury decisions are final and no appeal or challenge will be accepted.",
+    "The IOL must be free from bullying, sexual harassment, and other discrimination; all participants must conduct themselves with dignity and show respect."
+  ],
+  "rules_text": "You are an eligible IOL contestant on a team of at most four pre-university students, each less than 20 on the first day, accompanied by a team leader who is not a contestant and gives no contest-time solving help. Eligibility, visas, and host logistics are part of your delegation identity. On team-contest day you sit together in an allocated room, each with a copy of one problem, and produce one script in one working language. The Problem Committee may set three or four hours; guidelines say the time is normally four hours, which this card uses. Free verbal collaboration is allowed. Organizer paper only; pens preferred; no dictionaries, own paper, calculators, phones, laptops, tablets, or smartwatches. Explanations are required unless the question says otherwise; do not leave alternative conflicting answers. The Jury marks the script; team medals are at most one gold, two silver, and three bronze, plus Honourable Mentions at Jury discretion. Jury decisions are final. Treat unexposed physical, oral, live-opponent, judge, timing, or environment mechanisms as unavailable rather than simulated facts.",
+  "provenance": {
+    "status": "source_grounded",
+    "sources": [
+      {
+        "title": "Regulations of the International Linguistics Olympiad (IOL)",
+        "url": "https://ioling.org/rules/rules.pdf",
+        "authority": "official",
+        "edition": "11th revision, 2025",
+        "sections": [
+          "2.3 Delegations",
+          "2.3.1 Eligibility",
+          "2.5 Contests",
+          "2.6 Languages",
+          "2.7 Awards",
+          "4.2 Team Leaders"
+        ],
+        "archive_status": "local_text_capture_available",
+        "local_text": "data/rules/sources/iol_team/01_rules.txt"
+      },
+      {
+        "title": "IOL rules and guidelines for contestants",
+        "url": "https://ioling.org/guidelines/en/",
+        "authority": "official",
+        "edition": "approved by Dan-Mircea Mirea, 20 July 2026",
+        "sections": [
+          "Rules for the individual competition — What you MUST NOT bring",
+          "Rules for the team competition — Working language",
+          "Rules for the team competition — The problem",
+          "Rules for the team competition — Collaboration",
+          "Your answer sheets — explanations and alternative answers"
+        ],
+        "archive_status": "local_text_capture_available",
+        "local_text": "data/rules/sources/iol_team/02_en.txt"
+      }
+    ],
+    "adaptations": [
+      "official_minutes 240 and max_turns 48 follow the guidelines' normal four-hour team contest; regulations still allow the Problem Committee to set three hours",
+      "limited communication (18 team / 4 per agent / 1200 characters) is a coordination-pressure overlay, not an official speech cap in the team room",
+      "structured deliberation actions are a coordination overlay, not an official IOL meeting procedure",
+      "the session accepts one shared plain-text script; handwritten diagrams, stickers, and envelopes are not reproduced",
+      "eligibility, leader adult-status, visas, and host lodging are contestant-facing role-immersion constraints, not runtime checks"
+    ],
+    "official_time_note": "About 4 hours for the team contest.",
+    "research_confidence": "high",
+    "research_notes": [
+      "Eligibility, accreditation, visas, and leader non-participation are conscience and role text, not executable logistics.",
+      "Team-contest scoring is Jury marking of one explained script; medal counts are caps (1 gold, 2 silver, 3 bronze) plus Honourable Mentions, not a published numeric cutoff formula.",
+      "Individual-contest six-hour / five-problem rules are out of scope except where the team guidelines reuse material and device bans."
+    ],
+    "proxy_limitations": [
+      "A quiet allocated team room with free verbal collaboration maps poorly to a limited text-message budget.",
+      "Handwritten diagrams, scripts, and non-Latin orthography lose fidelity in plain text.",
+      "Invigilator accompaniment, envelopes, and Jury handwriting or translation assistance are not simulated.",
+      "The three-versus-four-hour Problem Committee choice is frozen to the four-hour guideline default.",
+      "Age, pre-university status, and leader eligibility workflows are not simulated as state."
+    ],
+    "content_standard": {
+      "name": "icpc_three_component_content_standard",
+      "version": "1.1",
+      "applied_at": "2026-08-17",
+      "reference_card": "data/rules/icpc",
+      "official_facts_policy": "competition_specific_primary_sources_only",
+      "scope": [
+        "competition_constraints",
+        "collaboration_operations",
+        "evaluation_and_compliance",
+        "runtime_fidelity"
+      ]
+    },
+    "source_review": {
+      "reviewed_at": "2026-08-17",
+      "audit_report": "docs/rule_card_icpc_standard_gap_audit_2026-08-17.md",
+      "coverage_grade": "A",
+      "completion_status": "primary_rules_available_exact_scoring_may_still_need_runtime_support",
+      "claim_policy": "unknown_official_values_remain_null_or_explicitly_unresolved",
+      "known_gaps": []
+    }
+  },
+  "comparability": {
+    "overall": "proxy",
+    "dimensions": {
+      "roster": "official_up_to_four_leader_excluded",
+      "timing": "adapted_four_hour_turn_budget",
+      "tools": "src_tool_surface",
+      "scoring": "jury_script_proxy_via_rubric_llm",
+      "environment": "plain_text_without_team_room",
+      "team_room": "specified_not_enforced",
+      "packet": "single_team_problem_specified",
+      "handwritten_script": "plain_text_adaptation",
+      "communication": "adapted_coordination_budget",
+      "eligibility_and_logistics": "role_immersion_text_only"
+    }
+  },
+  "deliverable": {
+    "answer_format": "Submit the team's final answers in numbered order, using exact values when required.",
+    "shared": true,
+    "mime_types": [
+      "text/plain"
+    ],
+    "task_types": [
+      "team_contest"
+    ],
+    "official_deliverable": "worked_answers",
+    "official_mime_types": [
+      "text/plain"
+    ]
+  }
+}

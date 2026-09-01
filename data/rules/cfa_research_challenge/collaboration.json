@@ -1,0 +1,260 @@
+{
+  "agent_roles": [
+    {
+      "name": "Agent_1",
+      "title": "captain / editor",
+      "may_submit": true,
+      "duties": [
+        "Own the deliverable's structure and cut material that does not earn points.",
+        "Resolve disagreements between analysts before they reach the final text.",
+        "Submit only after the format and rule checks pass."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "timeline",
+        "collaboration_protocol",
+        "deliverable_format"
+      ]
+    },
+    {
+      "name": "Agent_2",
+      "title": "analyst",
+      "may_submit": false,
+      "duties": [
+        "Gather the evidence the recommendation rests on.",
+        "Separate what the sources say from what the team infers."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "integrity_and_compliance",
+        "evaluation_criteria"
+      ]
+    },
+    {
+      "name": "Agent_3",
+      "title": "quant / modeler",
+      "may_submit": false,
+      "duties": [
+        "Build the numbers: valuation, models, and sensitivity checks.",
+        "State assumptions explicitly and show which results depend on them."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "resource_policy",
+        "deliverable_format"
+      ]
+    },
+    {
+      "name": "Agent_4",
+      "title": "research lead",
+      "may_submit": false,
+      "duties": [
+        "Decide which questions the research must answer and in what order.",
+        "Kill lines of inquiry that will not change the recommendation."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "timeline",
+        "collaboration_protocol",
+        "deliverable_format"
+      ]
+    }
+  ],
+  "information_policy": {
+    "mode": "role_specialized",
+    "shared": [
+      "problem",
+      "contest_rules",
+      "team_discussion",
+      "scratchpad"
+    ],
+    "coordination_requirement": "All teammates may consult the complete public contest rules. Private reasoning becomes shared state only when communicated; assigned rule expertise creates tracking responsibility, not exclusive access."
+  },
+  "deliberation": {
+    "mode": "structured",
+    "min_challenges": 1,
+    "decision_maker": "submitter",
+    "evaluation_dimensions": [
+      "evidence_responsiveness",
+      "revision_after_challenge",
+      "decision_traceability",
+      "authority_bias",
+      "majority_bias"
+    ]
+  },
+  "rule_sections": {
+    "competition_format": [
+      "Competition model: The team researches, authors, and defends a judged artifact.",
+      "The source-recorded active team may have 3 to 5 members; the runner default is 4.",
+      "Source-recorded competition rule: Use only publicly available information.",
+      "Source-recorded competition rule: Support recommendations with evidence and valuation reasoning.",
+      "Use only publicly available information.",
+      "Support recommendations with evidence and valuation reasoning."
+    ],
+    "timeline": [
+      "Benchmark adaptation: no official numeric duration is encoded in the available primary-source record; simulation.max_turns is only a runner safety budget.",
+      "Source-recorded competition rule: May use faculty advisor + industry mentor within timed caps (faculty ≤10h advisory before written report; mentor time capped in Rule 3.4); may not enlist other professionals to do the analysis.",
+      "May use faculty advisor + industry mentor within timed caps (faculty ≤10h advisory before written report; mentor time capped in Rule 3.4); may not enlist other professionals to do the analysis.",
+      "Track local kickoff, written-report, and presentation deadlines.",
+      "Faculty and mentor assistance is subject to timed caps."
+    ],
+    "resource_policy": [
+      "Source-recorded resource policy: Permitted: internet access, calculators and running code. Paper and pencil are always available.",
+      "Do not claim tools, internet, or materials that the rule card forbids.",
+      "Research must use publicly available information only.",
+      "AI use requires responsible disclosure and may not replace the team’s own analysis."
+    ],
+    "collaboration_protocol": [
+      "Source-recorded collaboration rule: Collaborate only within the team under contest rules.",
+      "Source-recorded competition rule: Team: 3–5 students at local kickoff; no alternates; undergrad/grad mix allowed.",
+      "Source-recorded competition rule: Only team members may research the subject company; publicly available information only.",
+      "Team: 3–5 students at local kickoff; no alternates; undergrad/grad mix allowed.",
+      "Only team members may research the subject company; publicly available information only.",
+      "You must behave like a human teammate under official contest rules."
+    ],
+    "integrity_and_compliance": [
+      "Benchmark safety rule: do not use hidden solutions, evaluator internals, unauthorized outside assistance, or resources forbidden by this competition.",
+      "Source-recorded competition rule: Advisor/mentor guidance is limited; outsiders must not write the report.",
+      "Source-recorded competition rule: May use faculty advisor + industry mentor within timed caps (faculty ≤10h advisory before written report; mentor time capped in Rule 3.4); may not enlist other professionals to do the analysis.",
+      "Source-recorded competition rule: AI allowed only with reflective/responsible disclosure (Appendix B); misrepresenting AI output as own analysis prohibited.",
+      "Source-recorded competition rule: Plagiarism ban; cite sources; IP/copyright obligations on third-party materials.",
+      "Advisor/mentor guidance is limited; outsiders must not write the report.",
+      "May use faculty advisor + industry mentor within timed caps (faculty ≤10h advisory before written report; mentor time capped in Rule 3.4); may not enlist other professionals to do the analysis.",
+      "AI allowed only with reflective/responsible disclosure (Appendix B); misrepresenting AI output as own analysis prohibited.",
+      "Plagiarism ban; cite sources; IP/copyright obligations on third-party materials.",
+      "Only team members may research the company; outsiders may advise only within official limits.",
+      "Cite sources, avoid plagiarism, and respect third-party copyright."
+    ],
+    "deliverable_format": [
+      "Runner answer contract: Submit a structured report or slide outline covering analysis, recommendation, and evidence.",
+      "Official deliverable: research report and deck.",
+      "Benchmark adaptation: Official entries are a written report plus a deck; the runner submits both as text.",
+      "Source-recorded competition rule: Produce an equity research report / presentation artifact.",
+      "Source-recorded competition rule: Advisor/mentor guidance is limited; outsiders must not write the report.",
+      "Source-recorded competition rule: May use faculty advisor + industry mentor within timed caps (faculty ≤10h advisory before written report; mentor time capped in Rule 3.4); may not enlist other professionals to do the analysis.",
+      "Source-recorded competition rule: Deliverables: written equity research report + oral presentation to judges; local scoring often 50% written / 50% presentation.",
+      "Produce an equity research report / presentation artifact.",
+      "Advisor/mentor guidance is limited; outsiders must not write the report.",
+      "May use faculty advisor + industry mentor within timed caps (faculty ≤10h advisory before written report; mentor time capped in Rule 3.4); may not enlist other professionals to do the analysis.",
+      "Deliverables: written equity research report + oral presentation to judges; local scoring often 50% written / 50% presentation.",
+      "Do not look up answer keys or hidden solutions.",
+      "Produce a written equity-research report and an oral presentation to judges."
+    ],
+    "evaluation_criteria": [
+      "Repository evaluation status: Task performance is specified per artifact in rubric mode, but the repository evaluator is unassigned; do not invent a completed score.",
+      "Local scoring commonly balances the written report and presentation equally.",
+      "Recommendations need evidence and defensible valuation reasoning."
+    ],
+    "runtime_limitations": [
+      "Runtime limitation: Paid terminals (Bloomberg etc.) and company info sessions are not freely replicable.",
+      "Runtime limitation: Mentor hour caps and oral defense Q&A are hard to simulate honestly."
+    ]
+  },
+  "communication": {
+    "mode": "limited",
+    "team_message_budget": 60,
+    "per_agent_message_budget": 10,
+    "max_message_chars": 1200,
+    "counted_actions": [
+      "speak",
+      "write_scratchpad",
+      "propose",
+      "challenge",
+      "provide_evidence",
+      "revise",
+      "decide"
+    ]
+  },
+  "agent_constraints": [
+    "Apply this competition's own roster, timing, tool, collaboration, submission, and scoring rules; do not import rules from another contest.",
+    "Collaborate only within the team under contest rules.",
+    "Permitted: internet access, calculators and running code. Paper and pencil are always available.",
+    "Treat private reasoning and notes as unknown to teammates until you communicate the decision-relevant content.",
+    "Do not access hidden solutions, answer keys, evaluator internals, or unauthorized outside problem-solving help.",
+    "Keep sourced evidence, analysis, recommendations, and presentation claims distinct, then reconcile them into one internally consistent artifact.",
+    "Do not cite a source, experiment, market action, or judge interaction unless it was actually available and observed in the task environment.",
+    "Only designated submitters may make the shared submission: Agent_1.",
+    "Use only the official mechanisms that the current task actually exposes; do not claim physical, oral, live-opponent, judge, or environment actions that were not observed."
+  ],
+  "simulation": {
+    "max_turns": 30,
+    "scheduler": "src_collaboration_draft",
+    "turn_budget_basis": "standardized experiment budget: 30 global turns; official contest timing is recorded separately",
+    "open_table_coach": {
+      "enabled": true,
+      "status": "counterfactual_synthetic_baseline_not_official_contest_rule",
+      "may_submit": false,
+      "allowed_tools": [],
+      "counts_toward_shared_api_and_token_budget": true,
+      "contestant_turn_policy": {
+        "mode": "private_deliberation_then_single_action",
+        "allowed_actions": [
+          "work",
+          "speak",
+          "rest"
+        ],
+        "exactly_one_action": true,
+        "unstructured_response": "rest",
+        "final_submission": "synthesis_only",
+        "visibility": {
+          "think": "private",
+          "work": "shared",
+          "speak": "team",
+          "rest": "private"
+        },
+        "max_chars_by_action": {
+          "think": 2400,
+          "work": 2400,
+          "speak": 320,
+          "rest": 80
+        },
+        "memory_entries": {
+          "private_think_per_agent": 3,
+          "shared_work": 18,
+          "group_messages": 12,
+          "public_messages": 24
+        },
+        "private_think_calls_per_turn": 1,
+        "discussion_policy": {
+          "report_after_work": true,
+          "silent_work_turn_requires_discussion": true,
+          "conflicts_require_targeted_speak": true
+        }
+      },
+      "precontest_brief": {
+        "turn": 1,
+        "problem_access": false,
+        "allowed_actions": [
+          "speak",
+          "sleep"
+        ],
+        "advice_scope": [
+          "time allocation",
+          "task triage",
+          "communication protocol",
+          "independent verification",
+          "final answer-sheet reconciliation"
+        ]
+      },
+      "opening_discussion": {
+        "turn": 2,
+        "problem_access": true,
+        "allowed_actions": [
+          "speak",
+          "sleep"
+        ],
+        "purpose": "summarize the contestants' opening discussion into priorities and checkpoints, and suggest temporary working groups that contestants may later change"
+      },
+      "after_opening_access": false,
+      "min_turns": 10
+    }
+  }
+}

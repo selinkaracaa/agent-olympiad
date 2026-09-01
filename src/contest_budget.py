@@ -1,16 +1,15 @@
 """Per-competition time / API / token budgets.
 
-Turns approximate wall-clock using:
-  max_turns ≈ ceil(duration_minutes / minutes_per_turn)
-
-Default minutes_per_turn=5 (one collaboration round ≈ 5 contest minutes).
-Override with explicit max_turns for smoke / ablation runs.
+All competitions use a standardized 30-turn experimental budget. Official
+durations remain metadata for simulated-clock reporting, not a second stop.
+An explicit max_turns still overrides the standardized default.
 """
 
 from __future__ import annotations
 
-import math
 from dataclasses import dataclass, replace
+
+STANDARD_MAX_TURNS = 30
 
 
 @dataclass(frozen=True)
@@ -19,7 +18,7 @@ class ContestBudget:
 
     duration_minutes: int | None = None
     minutes_per_turn: float = 5.0
-    max_turns: int = 50
+    max_turns: int = STANDARD_MAX_TURNS
     max_api_calls: int | None = None
     max_output_tokens_per_call: int | None = None
     max_total_tokens: int | None = None
@@ -30,12 +29,6 @@ class ContestBudget:
     def simulated_minutes_for_turns(self, turns: int) -> float:
         step = self.clock_minutes_per_turn or self.minutes_per_turn
         return turns * step
-
-
-def _turns_from_duration(duration_minutes: int, minutes_per_turn: float) -> int:
-    if minutes_per_turn <= 0:
-        return 50
-    return max(1, int(math.ceil(duration_minutes / minutes_per_turn)))
 
 
 def _budget(
@@ -49,7 +42,7 @@ def _budget(
     return ContestBudget(
         duration_minutes=duration_minutes,
         minutes_per_turn=minutes_per_turn,
-        max_turns=_turns_from_duration(duration_minutes, minutes_per_turn),
+        max_turns=STANDARD_MAX_TURNS,
         max_api_calls=max_api_calls,
         max_output_tokens_per_call=max_output_tokens_per_call,
         max_total_tokens=max_total_tokens,
@@ -57,7 +50,10 @@ def _budget(
     )
 
 
-DEFAULT_CONTEST_BUDGET = ContestBudget(duration_minutes=60, max_turns=12)
+DEFAULT_CONTEST_BUDGET = ContestBudget(
+    duration_minutes=60,
+    max_turns=STANDARD_MAX_TURNS,
+)
 
 # Durations from docs/DATA_COLLECTION.md (official contest clocks).
 COMPETITION_BUDGET_REGISTRY: dict[str, ContestBudget] = {

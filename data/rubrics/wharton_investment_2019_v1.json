@@ -1,0 +1,40 @@
+{
+  "rubric_id": "wharton_investment_2019_v1",
+  "type": "official_scoring_protocol",
+  "title": "Wharton/KWHS Investment Competition 2019 judging considerations",
+  "competition_id": "wharton_investment",
+  "applicable_years": [2019],
+  "criteria": [
+    {"id": "client_understanding", "name": "Understanding of the client"},
+    {"id": "strategy_articulation", "name": "Strategy articulation"},
+    {"id": "analysis", "name": "Analysis"},
+    {"id": "teamwork", "name": "Teamwork"}
+  ],
+  "additional_official_considerations": [
+    "Addressing the client's short- and long-term needs",
+    "Detail in the research process and team experience",
+    "Creativity or going beyond the basics by developing original methods"
+  ],
+  "scoring": {
+    "published_numeric_weights": false,
+    "note": "The organizer's account identifies criteria and pillars of strength but publishes no score values or total."
+  },
+  "provenance": {
+    "official_only": true,
+    "publisher": "Wharton Global Youth Program, The Wharton School",
+    "accessed_on": "2026-07-31",
+    "sources": [
+      {
+        "title": "The 2019 KWHS Investment Competition Finalists Are Ready for the Regionals",
+        "url": "https://globalyouth.wharton.upenn.edu/news/2019-kwhs-investment-competition-finalists-ready-regionals/",
+        "evidence": "Official organizer article quotes the judging team and names the criteria, pillars of strength, and standout considerations."
+      },
+      {
+        "title": "2019-2020 archived case study",
+        "local_evidence": "data/raw/wharton_investment/case-study-2019-2020.html",
+        "evidence": "Official archived page confirms the client-driven long-term strategy task and final proposal."
+      }
+    ],
+    "unsupported_gap": "No public official numerical scorecard was found."
+  }
+}

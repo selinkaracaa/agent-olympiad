@@ -15,7 +15,7 @@ sys.path.insert(0, str(REPO_ROOT / "src"))
 from artifacts.pdf_ingest import PdfIngestError, parse_pdf, slice_pdf
 from evaluation.default_rubrics import ensure_default_rubrics
 from evaluation.finalize import apply_registered_judge
-from evaluation.gold import GoldAnswerEvaluator, load_gold_parts, parse_numbered_answers
+from evaluation.gold import GoldAnswerEvaluator, answers_match, load_gold_parts, parse_numbered_answers
 from evaluation.modes import QuestionSpec, build_competition_packet, build_question_packet
 from evaluation.registry import RegistryError, resolve_evaluator_spec, strategy_kind
 import json
@@ -103,6 +103,30 @@ class GoldEvaluatorTests(unittest.TestCase):
     def test_missing_structured_gold_raises(self):
         with self.assertRaises(Exception):
             load_gold_parts({"expected_answer": "only a blob"})
+
+    def test_negative_answers_keep_sign_when_parsed(self):
+        parsed = parse_numbered_answers("1. (-6, 13)\n2. -21\n3. 52\n")
+        self.assertEqual(parsed["2"], "-21")
+
+    def test_answers_match_rejects_digit_prefix_substrings(self):
+        self.assertFalse(
+            answers_match("5sqrt(11)", r"\log_3(125\sqrt{11})")
+        )
+        self.assertFalse(answers_match("-21", "21"))
+        self.assertTrue(answers_match("-21", "slope -21"))
+        self.assertTrue(answers_match("-21", "-21"))
+
+    def test_arml_q4_log_form_does_not_score_against_radical_gold(self):
+        parts = load_gold_parts(
+            {
+                "parts": [
+                    {"id": "4", "expected": "5√11", "points": 4, "aliases": ["5\\sqrt{11}"]},
+                ]
+            }
+        )
+        submission = "4. \\log_3(125\\sqrt{11})"
+        result = GoldAnswerEvaluator(parts=parts, submission_text=submission).evaluate()
+        self.assertEqual(result.total_score, 0)
 
 
 class RegistryAndModeTests(unittest.TestCase):

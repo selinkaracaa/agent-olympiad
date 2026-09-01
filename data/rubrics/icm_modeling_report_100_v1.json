@@ -1,0 +1,47 @@
+{
+  "rubric_id": "icm_modeling_report_100_v1",
+  "dataset": "icm",
+  "title": "ICM modeling report rubric",
+  "total_points": 100,
+  "criteria": [
+    {
+      "id": "problem_framing",
+      "name": "Problem framing",
+      "max_score": 15,
+      "observable": true,
+      "description": "Clarifies the modeling question, scope, and success criteria."
+    },
+    {
+      "id": "model_design",
+      "name": "Model design",
+      "max_score": 25,
+      "observable": true,
+      "description": "Builds an appropriate model with justified assumptions and structure."
+    },
+    {
+      "id": "analysis",
+      "name": "Analysis & results",
+      "max_score": 25,
+      "observable": true,
+      "description": "Computations, sensitivity, and results are coherent and decision-relevant."
+    },
+    {
+      "id": "validation",
+      "name": "Validation & limitations",
+      "max_score": 15,
+      "observable": true,
+      "description": "Checks model quality and discusses limitations honestly."
+    },
+    {
+      "id": "communication",
+      "name": "Report communication",
+      "max_score": 20,
+      "observable": true,
+      "description": "Clear written report suitable for a judging panel."
+    }
+  ],
+  "not_observable_from_deck": [
+    "live presentation",
+    "99-hour process fidelity"
+  ]
+}

@@ -31,6 +31,49 @@ Benchmark **multi-agent AI teams** on olympiad-style **team tasks**. Part of the
     └── results/
 ```
 
+## Programming leaderboards
+
+`src/leaderboard.py` provides deterministic ICPC standings and the
+LiveOIBench three-stage ranking pipeline: explicit oracle best-of-8 selection,
+contest-local score totals, then normalized global aggregation. Human
+baselines are read only from local JSON/CSV files; missing data is reported
+rather than downloaded.
+
+`src/liveoibench_adapter.py` exports code predictions, validates a locally
+mounted LiveOIBench problem tree, and imports local contestant data. It has no
+network behavior and never runs LiveOIBench host-judge or setup scripts.
+
+## Rule-aware baseline
+
+Competition runs accept `--rules-mode off|prompt_only|enforced` (default:
+`off`). `off` preserves the current-main collaboration and tool behavior.
+`prompt_only` loads a canonical card from `data/rules/` and gives contestants
+the public competition, resource, collaboration, roster, and role-duty rules
+without enforcing them. `enforced` additionally applies card communication
+budgets, submission authority, tool allowlists, private notes, and structured
+deliberation invariants.
+
+Use `--rules-root PATH` to select another canonical card root and
+`--rules-strict` to raise a typed resolution error when a competition has no
+card. Without strict mode, such runs return `rules_baseline_unavailable`; no
+fallback card is fabricated. Run summaries and transcripts record card
+coverage, schema/rule identifiers, a deterministic SHA-256 content hash, and
+the status of each baseline capability. Analysis groups include `rules_mode`,
+so baseline conditions are never pooled.
+
+### Tinker live ICPC run
+
+Install dependencies, set `TINKER_API_KEY`, then run:
+
+```bash
+python src/run_competition_batch.py --live --provider tinker --model Qwen/Qwen3.6-35B-A3B --max-output-tokens 8192 --temperature 0.2 --competitions icpc --problem-id icpc_wf_2012_bottles --schema centralized --max-turns 2 --rules-mode enforced --no-judge-task --no-judge-collab --output results/icpc_tinker_qwen
+```
+
+This uses three agents because the enforced ICPC rule-card roster has three
+members. The complete atomic transcript is written under
+`results/icpc_tinker_qwen/transcripts/`; the batch summary and final result are
+in `results/icpc_tinker_qwen/competition_batch.json`.
+
 ## Refresh benchmarks from PDFs
 
 ```bash

@@ -1,0 +1,156 @@
+{
+  "schema_version": "1.0",
+  "rule_id": "wmtc:team_round_shared_answer",
+  "competition_id": "wmtc",
+  "profile": "proxy",
+  "protocol": "shared_answer",
+  "team": {
+    "active_min": 6,
+    "active_default": 6,
+    "active_max": 6,
+    "collaboration": "Six equal contestants may collaborate throughout the Team Round and produce one shared answer sheet.",
+    "range_basis": "mixed_or_unresolved",
+    "official_roster_note": "Founding and historical WMTC practice is six contestants per team. A current binding booklet is not in this briefing, so six remains the modeled active size rather than a frozen current official maximum."
+  },
+  "execution": {
+    "official_minutes": null
+  },
+  "allowed_tools": [
+    "query_rules"
+  ],
+  "resources": {
+    "internet": "forbidden",
+    "calculator": "forbidden",
+    "electronic_devices": "forbidden",
+    "paper_pencil": "allowed",
+    "provided_materials_only": true
+  },
+  "human_constraints": [
+    "Treat yourself as a World Mathematics Team Championship contestant on a six-person team at a multi-day in-person championship.",
+    "WMTC includes Individual, Team, and Relay examinations at Junior, Intermediate, and Advanced levels; this session is the Team Round only.",
+    "On the Team Round, work together with your teammates to solve the assigned problems; do not treat the round as six independent remote solves.",
+    "If mixed Individual or Relay items appear in the packet, ignore them and solve only the Team Round problems.",
+    "Submit one shared team answer sheet with exact simplified mathematical answers numbered to match the Team Round problems in order.",
+    "Problem-solving help may come only from your teammates; coaches, other teams, and outsiders do not join the examination.",
+    "You compete at one assigned level; team, individual, and relay awards are determined separately at that level.",
+    "Do not invent unpublished clocks, scoring formulas, materials lists, or format changes that officials have not issued to you."
+  ],
+  "rules_text": "You are a contestant at the World Mathematics Team Championship. You sit with five teammates for the Team Round and produce one shared answer sheet of exact simplified answers, numbered to the Team Round problems. WMTC also has Individual and Relay examinations and Junior, Intermediate, and Advanced levels; this session is the Team Round only. Some edition details—clocks, scoring formulas, and the current materials list—have not been issued in this briefing. Do not invent them. Work together. Do not take help from coaches, other teams, or outsiders. Treat unexposed physical, oral, live-opponent, judge, timing, or environment mechanisms as unavailable rather than simulated facts.",
+  "provenance": {
+    "status": "source_grounded",
+    "sources": [
+      {
+        "title": "WMTC International homepage",
+        "url": "https://wmtc.international/",
+        "authority": "official",
+        "edition": "current page retrieved 2026-08-19; binding booklet not archived",
+        "retrieved_at": "2026-08-19",
+        "sections": [
+          "Welcome to the 2026 World Mathematics Team Championship",
+          "Official Announcement (format-change notice pointing to the Rules page)",
+          "History 3 (teams of six; Junior, Intermediate, Advanced; Individual, Team, and Relay)",
+          "Team Awards",
+          "Individual Awards",
+          "Relay Awards"
+        ],
+        "archive_status": "official_url_verified_not_locally_archived",
+        "local_text": "data/rules/sources/wmtc/01_wmtc.txt"
+      },
+      {
+        "title": "WMTC Rules page",
+        "url": "https://wmtc.international/rules/",
+        "authority": "official",
+        "edition": "current page retrieved 2026-08-19; binding booklet not archived",
+        "retrieved_at": "2026-08-19",
+        "sections": [
+          "WMTC Rules Test loader (no extractable regulation text)"
+        ],
+        "archive_status": "official_url_verified_no_binding_text"
+      },
+      {
+        "title": "2016 WMTC Official Booklet",
+        "url": "https://wmtc.international/wp/wp-content/uploads/2016/11/2016-WMTC-Official-Booklet.pdf",
+        "authority": "official",
+        "edition": "2016 Official Booklet; not current and not used to authorize present constraints",
+        "sections": [
+          "historical format only"
+        ],
+        "archive_status": "locator_only_not_used_as_current"
+      }
+    ],
+    "adaptations": [
+      "max_turns is a safety budget rather than an official wall-clock limit",
+      "the session evaluates the Team Round only; Individual and Relay are out of scope",
+      "six equal contestants and a shared text answer sheet are a modeling choice while the current booklet is unavailable",
+      "calculator, phone, and internet bans are a simulation default-deny, not a clause copied from a current official booklet",
+      "structured deliberation actions are a benchmark traceability overlay",
+      "limited communication is a benchmark pressure overlay, not an official message cap"
+    ],
+    "official_time_note": "Team-round session timing is edition-dependent and is not frozen here.",
+    "research_confidence": "low",
+    "research_notes": [
+      "The 2026 homepage Official Announcement described Individual Round 1 as 15 multiple-choice problems, 2 points each, 30 points, 20 minutes; Round 2 as 6 medium and 2 difficult problems, 4 and 8 points, 40 points, 40 minutes; and a team contribution equal to the members' total divided by 6, maximum 70. Those figures are announcement text, not a fetched binding booklet, and are not frozen as official card values.",
+      "The same announcement said the Team Round had changed to require more teammate interaction, with details promised on the Rules page.",
+      "The same announcement said Relay was 7 minutes each for 3 rounds, noting changes from past Relay Rounds. That timing is not frozen here.",
+      "The Rules page retrieved 2026-08-19 rendered a WMTC Rules Test loader without extractable regulation text.",
+      "The local 2026-08-11 homepage capture was a human-verification page, not the current public homepage text.",
+      "The 2016 Official Booklet exists and must not be treated as the current ruleset.",
+      "Historical 2018 Team Round packets in the collected tasks mention 14 questions, 40 minutes, 5 points each, and no wrong-answer penalty. Those are edition-packet instructions, not a current official duration or scoring rule."
+    ],
+    "proxy_limitations": [
+      "A current official booklet was not archived, so team-round duration, scoring, and materials policy remain unspecified official state.",
+      "The runner accepts a numbered text sheet instead of a collected paper answer sheet.",
+      "Individual and Relay examinations, live clocks, and in-person proctoring are not simulated."
+    ],
+    "content_standard": {
+      "name": "icpc_three_component_content_standard",
+      "version": "1.1",
+      "applied_at": "2026-08-17",
+      "reference_card": "data/rules/icpc",
+      "official_facts_policy": "competition_specific_primary_sources_only",
+      "scope": [
+        "competition_constraints",
+        "collaboration_operations",
+        "evaluation_and_compliance",
+        "runtime_fidelity"
+      ]
+    },
+    "source_review": {
+      "reviewed_at": "2026-08-17",
+      "audit_report": "docs/rule_card_icpc_standard_gap_audit_2026-08-17.md",
+      "coverage_grade": "D",
+      "completion_status": "blocked_no_adequate_current_primary_ruleset",
+      "claim_policy": "unknown_official_values_remain_null_or_explicitly_unresolved",
+      "known_gaps": [
+        "A usable current official rules document was not available; historical or access-gated material cannot authorize current hard constraints."
+      ]
+    }
+  },
+  "comparability": {
+    "overall": "proxy",
+    "dimensions": {
+      "roster": "historical_six_unresolved_current",
+      "timing": "adapted_turn_budget",
+      "tools": "default_deny_unsourced",
+      "scoring": "specified_but_deferred",
+      "environment": "partial",
+      "communication": "adapted_coordination_budget",
+      "deliberation": "structured_trace_overlay",
+      "information": "shared_equal_contestants"
+    }
+  },
+  "deliverable": {
+    "answer_format": "Numbered team answers matching the team-round problems in order.",
+    "shared": true,
+    "mime_types": [
+      "text/plain"
+    ],
+    "task_types": [
+      "team_contest"
+    ],
+    "official_deliverable": "answer_sheet",
+    "official_mime_types": [
+      "text/plain"
+    ]
+  }
+}

@@ -1,0 +1,189 @@
+{
+  "agent_roles": [
+    {
+      "name": "Agent_1",
+      "title": "captain / editor",
+      "may_submit": true,
+      "duties": [
+        "Own the deliverable's structure and cut material that does not earn points.",
+        "Resolve disagreements between analysts before they reach the final text.",
+        "Submit only after the format and rule checks pass."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "timeline",
+        "collaboration_protocol",
+        "deliverable_format"
+      ]
+    },
+    {
+      "name": "Agent_2",
+      "title": "analyst",
+      "may_submit": false,
+      "duties": [
+        "Gather the evidence the recommendation rests on.",
+        "Separate what the sources say from what the team infers."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "integrity_and_compliance",
+        "evaluation_criteria"
+      ]
+    },
+    {
+      "name": "Agent_3",
+      "title": "quant / modeler",
+      "may_submit": false,
+      "duties": [
+        "Build the numbers: valuation, models, and sensitivity checks.",
+        "State assumptions explicitly and show which results depend on them."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "resource_policy",
+        "deliverable_format"
+      ]
+    },
+    {
+      "name": "Agent_4",
+      "title": "research lead",
+      "may_submit": false,
+      "duties": [
+        "Decide which questions the research must answer and in what order.",
+        "Kill lines of inquiry that will not change the recommendation."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "timeline",
+        "collaboration_protocol",
+        "deliverable_format"
+      ]
+    }
+  ],
+  "information_policy": {
+    "mode": "role_specialized",
+    "shared": [
+      "problem",
+      "contest_rules",
+      "team_discussion",
+      "scratchpad"
+    ],
+    "coordination_requirement": "All teammates may consult the complete public contest rules. Private reasoning becomes shared state only when communicated; assigned rule expertise creates tracking responsibility, not exclusive access."
+  },
+  "deliberation": {
+    "mode": "structured",
+    "min_challenges": 1,
+    "decision_maker": "submitter",
+    "evaluation_dimensions": [
+      "evidence_responsiveness",
+      "revision_after_challenge",
+      "decision_traceability",
+      "authority_bias",
+      "majority_bias"
+    ]
+  },
+  "rule_sections": {
+    "competition_format": [
+      "Competition model: The team researches, authors, and defends a judged artifact.",
+      "The source-recorded active team may have 2 to 5 members; the runner default is 4.",
+      "Source-recorded competition rule: Teams are 2 to 5 students from the same university; you may not compete as an individual.",
+      "Teams are 2 to 5 students from the same university; you may not compete as an individual."
+    ],
+    "timeline": [
+      "Benchmark adaptation: no official numeric duration is encoded in the available primary-source record; simulation.max_turns is only a runner safety budget.",
+      "Source-recorded competition rule: Round 1 deliverable is a written case deck prepared within a work period of up to 3 weeks from case release, and late registrants get only the days remaining before the deadline.",
+      "Source-recorded competition rule: Submit by the published Round 1 deadline; late submissions are not accepted.",
+      "Round 1 deliverable is a written case deck prepared within a work period of up to 3 weeks from case release, and late registrants get only the days remaining before the deadline.",
+      "Submit by the published Round 1 deadline; late submissions are not accepted.",
+      "Round 1 allows up to three weeks from case release; late submissions are not accepted.",
+      "Top teams advance to a recorded pitch and then live finalist Q&A."
+    ],
+    "resource_policy": [
+      "Source-recorded resource policy: Conditional: internet access is not verified, calculator permission is not verified and code-execution permission is not verified. Paper and pencil are always available.",
+      "Do not claim tools, internet, or materials that the rule card forbids.",
+      "No official public rule states which software, AI tools, or research sources are permitted; escalate uncertainty to the captain."
+    ],
+    "collaboration_protocol": [
+      "Source-recorded collaboration rule: Collaborate only within the team under contest rules.",
+      "Source-recorded competition rule: Solve the business case as a team deliverable.",
+      "Source-recorded competition rule: One person may appear on only one team.",
+      "Solve the business case as a team deliverable.",
+      "One person may appear on only one team.",
+      "You must behave like a human teammate under official contest rules."
+    ],
+    "integrity_and_compliance": [
+      "Benchmark safety rule: do not use hidden solutions, evaluator internals, unauthorized outside assistance, or resources forbidden by this competition.",
+      "Only registered teammates may prepare the case submission."
+    ],
+    "deliverable_format": [
+      "Runner answer contract: Submit a structured report or slide outline covering analysis, recommendation, and evidence.",
+      "Official deliverable: slide deck.",
+      "Benchmark adaptation: Official entries are slide files; the runner submits the deck as structured text.",
+      "Source-recorded competition rule: Round 1 deliverable is a written case deck prepared within a work period of up to 3 weeks from case release, and late registrants get only the days remaining before the deadline.",
+      "Source-recorded competition rule: The case is a finance and M&A problem requiring industry analysis, company analysis, and financial analysis and valuation, presented pitch-book style.",
+      "Source-recorded competition rule: Only the top 10 teams continue, delivering a recorded video pitch of 5 to 10 minutes that is judged on clarity, synthesis, and presentation quality.",
+      "Source-recorded competition rule: Finalists then face a live judge panel for roughly 20 minutes of Q&A on the case, their submitted deck, and general M&A knowledge.",
+      "Source-recorded competition rule: Winners are chosen by the judges weighing all three of the solution deck, the video pitch, and the finale performance.",
+      "Round 1 deliverable is a written case deck prepared within a work period of up to 3 weeks from case release, and late registrants get only the days remaining before the deadline.",
+      "The case is a finance and M&A problem requiring industry analysis, company analysis, and financial analysis and valuation, presented pitch-book style.",
+      "Only the top 10 teams continue, delivering a recorded video pitch of 5 to 10 minutes that is judged on clarity, synthesis, and presentation quality.",
+      "Finalists then face a live judge panel for roughly 20 minutes of Q&A on the case, their submitted deck, and general M&A knowledge.",
+      "Winners are chosen by the judges weighing all three of the solution deck, the video pitch, and the finale performance.",
+      "Do not look up answer keys or hidden solutions.",
+      "Round 1 is a pitch-book-style finance and M&A case deck.",
+      "The recorded pitch is 5–10 minutes; finalists face roughly 20 minutes of Q&A."
+    ],
+    "evaluation_criteria": [
+      "Repository evaluation status: Task performance is specified per artifact in rubric mode, but the repository evaluator is unassigned; do not invent a completed score.",
+      "Source-recorded competition rule: Submit by the published Round 1 deadline; late submissions are not accepted.",
+      "Source-recorded competition rule: Finalists then face a live judge panel for roughly 20 minutes of Q&A on the case, their submitted deck, and general M&A knowledge.",
+      "Submit by the published Round 1 deadline; late submissions are not accepted.",
+      "Finalists then face a live judge panel for roughly 20 minutes of Q&A on the case, their submitted deck, and general M&A knowledge.",
+      "Judges weigh the deck, clarity and synthesis of the video pitch, and finalist defense."
+    ],
+    "runtime_limitations": [
+      "Runtime limitation: A three-week team research project ending in a slide deck cannot be reproduced by a turn-budgeted text run.",
+      "Runtime limitation: Rounds 2 and 3 are a recorded video pitch and a live oral defense, neither of which is expressible as text output.",
+      "Runtime limitation: Judging is by business executives and HBS faculty against an unpublished rubric."
+    ]
+  },
+  "communication": {
+    "mode": "limited",
+    "team_message_budget": 10,
+    "per_agent_message_budget": 3,
+    "max_message_chars": 1200,
+    "counted_actions": [
+      "speak",
+      "write_scratchpad",
+      "propose",
+      "challenge",
+      "provide_evidence",
+      "revise",
+      "decide"
+    ]
+  },
+  "agent_constraints": [
+    "Apply this competition's own roster, timing, tool, collaboration, submission, and scoring rules; do not import rules from another contest.",
+    "Collaborate only within the team under contest rules.",
+    "Conditional: internet access is not verified, calculator permission is not verified and code-execution permission is not verified. Paper and pencil are always available.",
+    "Treat private reasoning and notes as unknown to teammates until you communicate the decision-relevant content.",
+    "Do not access hidden solutions, answer keys, evaluator internals, or unauthorized outside problem-solving help.",
+    "Keep sourced evidence, analysis, recommendations, and presentation claims distinct, then reconcile them into one internally consistent artifact.",
+    "Do not cite a source, experiment, market action, or judge interaction unless it was actually available and observed in the task environment.",
+    "Only designated submitters may make the shared submission: Agent_1.",
+    "Use only the official mechanisms that the current task actually exposes; do not claim physical, oral, live-opponent, judge, or environment actions that were not observed."
+  ],
+  "simulation": {
+    "max_turns": 30,
+    "scheduler": "src_collaboration_draft",
+    "turn_budget_basis": "standardized experiment budget: 30 global turns; official contest timing is recorded separately"
+  }
+}

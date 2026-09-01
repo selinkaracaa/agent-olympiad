@@ -1,0 +1,195 @@
+{
+  "schema_version": "1.0",
+  "rule_id": "ethics_bowl_appe:draft_v1",
+  "competition_id": "ethics_bowl_appe",
+  "profile": "proxy",
+  "protocol": "presentation_and_cross_examination",
+  "team": {
+    "active_min": 1,
+    "active_default": 5,
+    "active_max": 6,
+    "range_basis": "source_record",
+    "official_roster_note": "The 2025 national rules allow a team of any roster size, but no more than six members may actively participate in a match.",
+    "collaboration": "The seated participants may confer only in the designated phase; multiple members may contribute orally, but only one person speaks at a time."
+  },
+  "execution": {
+    "official_minutes": null,
+    "rules_edition": "2025_national",
+    "required_selectors": [
+      "competition_scope"
+    ],
+    "selector_default": {
+      "competition_scope": "national"
+    },
+    "official_phases": [
+      {
+        "phase": "presenting_team_conferral",
+        "minutes": 2
+      },
+      {
+        "phase": "presenting_team_response",
+        "minutes": 10,
+        "hard_stop": true
+      },
+      {
+        "phase": "opposing_team_conferral",
+        "minutes": 1
+      },
+      {
+        "phase": "opposing_team_commentary",
+        "minutes": 5,
+        "hard_stop": true
+      },
+      {
+        "phase": "presenting_team_reply_conferral",
+        "minutes": 1
+      },
+      {
+        "phase": "presenting_team_reply",
+        "minutes": 5,
+        "hard_stop": true
+      },
+      {
+        "phase": "judge_questioning",
+        "minutes": 10,
+        "hard_stop": true
+      }
+    ],
+    "second_case_role_reversal": "specified_only"
+  },
+  "allowed_tools": [
+    "query_rules"
+  ],
+  "resources": {
+    "internet": "forbidden",
+    "calculator": "forbidden",
+    "code_execution": "forbidden",
+    "paper_pencil": "scratch_paper_only_after_official_start",
+    "provided_materials_only": true,
+    "personal_timer": "non_networked_non_storage_reference_only"
+  },
+  "human_constraints": [
+    "Teams may be any roster size, but no more than six members may actively participate in a match.",
+    "Once participants are seated and ready, no substitution is allowed for the remainder of the round after the case is announced.",
+    "Books and pre-existing notes are prohibited during the match; organizer-provided case material and scratch paper may be used after the official timer starts.",
+    "A personal timer is only a reference: it may not connect to the internet or store data, and the moderator's timer is official.",
+    "The presenting team receives two minutes to confer and up to ten minutes to respond, with a hard stop at time.",
+    "After one minute of conferral, the opposing team has up to five minutes to comment, and only one of its members may speak at a time.",
+    "The presenting team then receives one minute to confer and up to five minutes to reply to the commentary, with one speaker at a time.",
+    "Judges receive up to ten minutes for questions; team members may briefly huddle before answering and different members may answer different judges.",
+    "After the first case, the teams reverse presenting and commenting roles for a second case.",
+    "The match winner is determined by judges' sheet outcomes, not by simply summing both teams' raw points."
+  ],
+  "rules_text": "APPE Intercollegiate Ethics Bowl. The team prepares a case, presents it, and responds to judges or opponents. The source-recorded active team may have 1 to 6 members; the runner default is 5; official roster note: The 2025 national rules allow a team of any roster size, but no more than six members may actively participate in a match. The seated participants may confer only in the designated phase; multiple members may contribute orally, but only one person speaks at a time. Banned during the contest: internet access, calculators and running code. Conditional: paper and pencil is scratch paper only after official start and personal timer is non networked non storage reference only. Work only from the materials provided with the problem. Submit one shared live oral match performance; Provide the case response, opposing-team commentary, commentary reply, and judge-question answers as distinct labeled sections exposed by the task. Treat unexposed physical, oral, live-opponent, judge, timing, or environment mechanisms as unavailable rather than simulated facts.",
+  "provenance": {
+    "status": "source_enriched_v1",
+    "sources": [
+      {
+        "title": "APPE Intercollegiate Ethics Bowl National Competition Rules",
+        "url": "https://growthzonecmsprodeastus.azureedge.net/sites/36/2025/10/2025-APPE-IEB-National-Rules.pdf",
+        "authority": "official",
+        "edition": "2025 national competition",
+        "retrieved_at": "2026-08-17",
+        "sections": [
+          "pp. 4-7 procedural rules and match phases",
+          "pp. 10-13 scoring, ranking, advancement, and tie breakers"
+        ],
+        "archive_status": "archived",
+        "local_file": "data/rules/sources/ethics_bowl_appe/2025_APPE_IEB_National_Rules.pdf"
+      }
+    ],
+    "adaptations": [
+      "max_turns is a safety budget, not necessarily the official wall-clock limit",
+      "specialist roles are a research roster overlay",
+      "physical/oral/live opponent fidelity may be incomplete in src/",
+      "role-specific rule expertise is a benchmark coordination overlay",
+      "structured deliberation actions are a benchmark traceability overlay",
+      "limited communication is a benchmark pressure overlay, not an official message cap"
+    ],
+    "crawl_status": "ok",
+    "crawled_excerpts": [
+      {
+        "url": "https://www.appe-ethics.org/cases-rules-guidelines/",
+        "excerpt": "Cases, Rules, & Guidelines - Association for Practical and Professional Ethics Skip to content Menu About About Us APPE Leadership Code of Conduct Support Donate APPE Endowment APPE Store Contact Us Members 2026 Board of Directors Election Member Benefits Member Directory Affinity Groups Organizational Members Member Login Signature Programs APPE RISE℠ APPE IEB® National Competition Ethics Center Directors Conference Conference Overview Call for Proposals Register Location Schedule Sponsors, Exh"
+      }
+    ],
+    "enriched_at": "2026-08-12T16:53:55.313397+00:00",
+    "research_confidence": "medium",
+    "proxy_limitations": [
+      "Live oral ethics debate / commentary rounds are rubric-oral; transcript-only proxies lose timing and interruption norms.",
+      "Need the Rules PDF click-through for bans on notes/devices if any.",
+      "The runner does not reproduce a live opposing team, moderator, three-judge panel, role reversal, oral hard stops, or judge questions.",
+      "A text transcript is a benchmark adaptation of the official oral match performance."
+    ],
+    "research_merged_at": "2026-08-12T17:04:20.887025+00:00",
+    "rules_text_source": "composed_from_card_fields_v2",
+    "research_reports": [
+      "docs/rules_crawl_2026-08-11.md"
+    ],
+    "research_notes": [
+      "Team size commonly up to 5 in community practice; confirm exact roster limits in the linked Rules PDF on the same page (not fully extracted in this crawl).",
+      "You must behave like a human teammate under official contest rules.",
+      "Do not claim tools, internet, or materials that the rule card forbids.",
+      "Do not look up answer keys or hidden solutions."
+    ],
+    "research_graded_at": "2026-08-11",
+    "content_standard": {
+      "name": "icpc_three_component_content_standard",
+      "version": "1.1",
+      "applied_at": "2026-08-17",
+      "reference_card": "data/rules/icpc",
+      "official_facts_policy": "competition_specific_primary_sources_only",
+      "scope": [
+        "competition_constraints",
+        "collaboration_operations",
+        "evaluation_and_compliance",
+        "runtime_fidelity"
+      ]
+    },
+    "source_review": {
+      "reviewed_at": "2026-08-17",
+      "audit_report": "docs/rule_card_icpc_standard_gap_audit_2026-08-17.md",
+      "coverage_grade": "A",
+      "completion_status": "primary_rules_available_exact_scoring_may_still_need_runtime_support",
+      "claim_policy": "unknown_official_values_remain_null_or_explicitly_unresolved",
+      "known_gaps": []
+    },
+    "discovery_sources": [
+      {
+        "title": "APPE Ethics Bowl",
+        "url": "https://www.appe-ethics.org/cases-rules-guidelines/",
+        "retrieved_at": "2026-08-12",
+        "local_text": "data/rules/sources/ethics_bowl_appe/01_cases-rules-guidelines.txt"
+      }
+    ],
+    "discard_pre_source_review_rule_sections": true,
+    "source_correction_revision": "2026-08-17-v1"
+  },
+  "comparability": {
+    "overall": "proxy",
+    "dimensions": {
+      "roster": "approximate",
+      "timing": "adapted",
+      "tools": "src_tool_surface",
+      "scoring": "rubric",
+      "environment": "proxy",
+      "communication": "adapted_coordination_budget",
+      "deliberation": "structured_trace_overlay",
+      "information": "role_specialized_tracking_overlay"
+    }
+  },
+  "deliverable": {
+    "answer_format": "Provide the case response, opposing-team commentary, commentary reply, and judge-question answers as distinct labeled sections exposed by the task.",
+    "shared": true,
+    "mime_types": [
+      "text/plain"
+    ],
+    "task_types": [
+      "ethics_case_set"
+    ],
+    "official_deliverable": "live_oral_match_performance",
+    "official_mime_types": [
+      "audio/x-live-speech"
+    ]
+  }
+}

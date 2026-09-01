@@ -1,0 +1,155 @@
+{
+  "schema_version": "1.0",
+  "rule_id": "science_olympiad:draft_v1",
+  "competition_id": "science_olympiad",
+  "profile": "non_comparable",
+  "protocol": "event_packet_proxy",
+  "team": {
+    "active_min": 1,
+    "active_default": 15,
+    "active_max": 15,
+    "collaboration": "Only the participants authorized by the selected season, division, and event rules may collaborate on that event.",
+    "range_basis": "benchmark_adaptation",
+    "roster_max": 15,
+    "official_roster_note": "Fifteen is a tournament roster cap, not the active participant count for one event."
+  },
+  "execution": {
+    "official_minutes": null,
+    "required_selectors": [
+      "season",
+      "division",
+      "event"
+    ],
+    "event_rules": "not_selected",
+    "event_corrections": "not_selected",
+    "event_score_sheet": "not_selected"
+  },
+  "allowed_tools": [
+    "query_rules",
+    "read_official_materials"
+  ],
+  "resources": {
+    "internet": "forbidden",
+    "calculator": "event_dependent_not_exposed_by_default",
+    "code_execution": "forbidden",
+    "paper_pencil": "allowed",
+    "provided_materials_only": true
+  },
+  "human_constraints": [
+    "The Division B or C tournament roster may contain up to fifteen students, but this does not make all fifteen active participants in one event.",
+    "Season, division, and event must be selected before active participants, time, tools, references, deliverable, and scoring can be treated as official.",
+    "Only the references, calculators, devices, build materials, and safety equipment authorized by the selected event rules may be used.",
+    "Official event corrections and clarifications modify the corresponding event rules and must be applied with the selected season packet.",
+    "The event score sheet or rubric, not a generic Science Olympiad formula, determines official performance.",
+    "No unrestricted web search is allowed unless the selected event rules explicitly authorize it."
+  ],
+  "rules_text": "Science Olympiad (USA). The task represents one event packet from a broader multi-event competition. Benchmark adaptation: the runner permits 1 to 15 active agents and defaults to 15; official roster note: Fifteen is a tournament roster cap, not the active participant count for one event. Only the participants authorized by the selected season, division, and event rules may collaborate on that event. Banned during the contest: internet access and running code. Conditional: calculator permission is event-dependent and not exposed by default. Paper and pencil are always available. Work only from the materials provided with the problem. Submit one shared event answer sheet; Submit the team's final answers in numbered order, using exact values when required. Treat unexposed physical, oral, live-opponent, judge, timing, or environment mechanisms as unavailable rather than simulated facts.",
+  "provenance": {
+    "status": "hand_written_fallback_v1",
+    "sources": [
+      {
+        "title": "Science Olympiad official event and rules portal",
+        "url": "https://www.soinc.org/",
+        "authority": "official",
+        "edition": "season-specific; no event selected",
+        "retrieved_at": "2026-08-17",
+        "sections": [
+          "Event rules release notice, event pages, corrections, and score sheets"
+        ],
+        "archive_status": "binding_event_rules_not_selected_or_archived"
+      }
+    ],
+    "adaptations": [
+      "max_turns is a safety budget, not necessarily the official wall-clock limit",
+      "specialist roles are a research roster overlay",
+      "physical/oral/live opponent fidelity may be incomplete in src/"
+    ],
+    "crawl_status": "fallback_notes",
+    "crawled_excerpts": [
+      {
+        "url": "https://www.soinc.org/",
+        "excerpt": "Science Olympiad national team STEM competition with event-specific rule PDFs. Follow event references and code of ethics. Sample-packet coverage is incomplete; proxy where physical events are unavailable."
+      }
+    ],
+    "enriched_at": "2026-08-12T16:53:55.318188+00:00",
+    "research_confidence": "medium",
+    "proxy_limitations": [
+      "Without the locked Rules Manual, event-level tool lists cannot be asserted.",
+      "15-person multi-event tournament ≠ one exam packet.",
+      "The current row lacks season, division, and event selectors and therefore cannot select a binding event rulebook.",
+      "The runner cannot reproduce event-dependent laboratory apparatus, constructed devices, impound, safety inspection, or physical performance."
+    ],
+    "research_merged_at": "2026-08-12T17:04:21.133217+00:00",
+    "rules_text_source": "composed_from_card_fields_v2",
+    "research_reports": [
+      "docs/rules_crawl_2026-08-11.md"
+    ],
+    "research_graded_at": "2026-08-11",
+    "content_standard": {
+      "name": "icpc_three_component_content_standard",
+      "version": "1.1",
+      "applied_at": "2026-08-17",
+      "reference_card": "data/rules/icpc",
+      "official_facts_policy": "competition_specific_primary_sources_only",
+      "scope": [
+        "competition_constraints",
+        "collaboration_operations",
+        "evaluation_and_compliance",
+        "runtime_fidelity"
+      ]
+    },
+    "research_notes": [
+      "You must behave like a human teammate under official contest rules.",
+      "Do not claim tools, internet, or materials that the rule card forbids.",
+      "Do not look up answer keys or hidden solutions.",
+      "Event-specific rules manuals are membership-locked — free sample exams only in this repo’s collection strategy."
+    ],
+    "source_review": {
+      "reviewed_at": "2026-08-17",
+      "audit_report": "docs/rule_card_icpc_standard_gap_audit_2026-08-17.md",
+      "coverage_grade": "D",
+      "completion_status": "blocked_no_adequate_current_primary_ruleset",
+      "claim_policy": "unknown_official_values_remain_null_or_explicitly_unresolved",
+      "known_gaps": [
+        "No universal event ruleset exists; season, division, event rules, corrections, and score sheet must be selected and archived."
+      ]
+    },
+    "discovery_sources": [
+      {
+        "title": "Science Olympiad",
+        "url": "https://www.soinc.org/",
+        "retrieved_at": "2026-08-12",
+        "local_text": "data/rules/sources/science_olympiad/01_fallback_notes.txt"
+      }
+    ],
+    "discard_pre_source_review_rule_sections": true,
+    "source_correction_revision": "2026-08-17-v1"
+  },
+  "comparability": {
+    "overall": "non_comparable",
+    "dimensions": {
+      "roster": "approximate",
+      "timing": "adapted",
+      "tools": "event_specific_policy_unavailable",
+      "scoring": "deferred_until_event_selected",
+      "environment": "season_and_event_selectors_missing",
+      "information": "shared_public_rules",
+      "deliberation": "unstructured_observation",
+      "communication": "unlimited_runner_channel"
+    }
+  },
+  "deliverable": {
+    "answer_format": "Submit the team's final answers in numbered order, using exact values when required.",
+    "shared": true,
+    "mime_types": [
+      "text/plain"
+    ],
+    "task_types": [
+      "science_olympiad_event"
+    ],
+    "official_deliverable": "event_answer_sheet",
+    "official_mime_types": [
+      "text/plain"
+    ]
+  }
+}

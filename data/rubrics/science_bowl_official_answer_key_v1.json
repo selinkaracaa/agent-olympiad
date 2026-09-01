@@ -1,0 +1,517 @@
+{
+  "rubric_id": "science_bowl_official_answer_key_v1",
+  "dataset": "science_bowl",
+  "kind": "official_answer_key",
+  "provenance": {
+    "authority": "U.S. Department of Energy National Science Bowl high-school question packets",
+    "official_url": "https://science.osti.gov/wdts/nsb",
+    "benchmark_source": "data/benchmarks/science_bowl/benchmark.json",
+    "method": "Uses the official ANSWER line embedded in each promoted DOE packet record; printed ACCEPT/DO NOT ACCEPT language is retained."
+  },
+  "coverage": {
+    "promoted_benchmark_records": 140,
+    "mapped_promoted_records": 140,
+    "unmapped_promoted_records": [],
+    "limitations": [
+      "The answer map covers the 140-record promoted high-school subsample in benchmark.json only.",
+      "The referenced HS and MS packet PDFs are preserved under data/raw/science_bowl; page-footer and clear next-question spillover are removed from promoted text, but remaining OCR defects cannot be provenance-safely corrected here.",
+      "No semantic, unit, spelling, or mathematical-equivalence aliases are invented. official_choice and official_guidance come from the official answer line."
+    ]
+  },
+  "answers": {
+    "science_bowl_sample_set_10_10a_hs_reg_2016_bonus_13": {
+      "expected": "6.0 x 107"
+    },
+    "science_bowl_sample_set_10_10a_hs_reg_2016_toss_up_16": {
+      "expected": "1 MICROMETER",
+      "official_choice": "X"
+    },
+    "science_bowl_sample_set_10_10a_hs_reg_2016_toss_up_17": {
+      "expected": "30/x7",
+      "official_guidance": "(DO NOT ACCEPT: 30x -7)"
+    },
+    "science_bowl_sample_set_10_11a_hs_reg_2016_bonus_22": {
+      "expected": "23"
+    },
+    "science_bowl_sample_set_10_12a_hs_reg_2016_bonus_02": {
+      "expected": "1"
+    },
+    "science_bowl_sample_set_10_12a_hs_reg_2016_toss_up_07": {
+      "expected": "PARAMAGNETISM"
+    },
+    "science_bowl_sample_set_10_12a_hs_reg_2016_toss_up_12": {
+      "expected": "ALUMINUM ION",
+      "official_choice": "Y"
+    },
+    "science_bowl_sample_set_10_13a_hs_reg_2016_toss_up_03": {
+      "expected": "144"
+    },
+    "science_bowl_sample_set_10_14a_hs_reg_2016_bonus_20": {
+      "expected": "MAGNESIUM",
+      "official_guidance": "(ACCEPT: Mg)"
+    },
+    "science_bowl_sample_set_10_14a_hs_reg_2016_toss_up_23": {
+      "expected": "CHARM",
+      "official_choice": "W"
+    },
+    "science_bowl_sample_set_10_15a_hs_reg_2016_toss_up_11": {
+      "expected": "REVERSE OSMOSIS",
+      "official_choice": "W"
+    },
+    "science_bowl_sample_set_10_16a_hs_reg_2016_bonus_03": {
+      "expected": "THE ATMOSPHERE IS A MUCH SMALLER WATER RESERVOIR THAN THE OCEAN",
+      "official_choice": "Z"
+    },
+    "science_bowl_sample_set_10_2a_hs_reg_2016_bonus_10": {
+      "expected": "(8, 2)",
+      "official_choice": "Z"
+    },
+    "science_bowl_sample_set_10_5a_hs_reg_2016_bonus_04": {
+      "expected": "PHOSPHORUS",
+      "official_choice": "Z"
+    },
+    "science_bowl_sample_set_10_6a_hs_reg_2016_bonus_04": {
+      "expected": "DECREASING AND CONCA VE UP",
+      "official_choice": "Y"
+    },
+    "science_bowl_sample_set_10_7a_hs_reg_2016_bonus_06": {
+      "expected": "1 – HOT SPOT; 2 – HOT SPOT; 3 - CONVERGENT"
+    },
+    "science_bowl_sample_set_10_8a_hs_reg_2016_bonus_02": {
+      "expected": "CENOZOIC"
+    },
+    "science_bowl_sample_set_10_9a_hs_reg_2016_bonus_10": {
+      "expected": "6√5"
+    },
+    "science_bowl_sample_set_10_9a_hs_reg_2016_bonus_12": {
+      "expected": "SUPERCAPACITOR",
+      "official_guidance": "(ACCEPT: CAPACITOR OR ULTRACAPACITOR)"
+    },
+    "science_bowl_sample_set_10_9a_hs_reg_2016_toss_up_13": {
+      "expected": "PYRIDINE",
+      "official_choice": "Z"
+    },
+    "science_bowl_sample_set_12_2018_hsround_12_bonus_13": {
+      "expected": "0.6"
+    },
+    "science_bowl_sample_set_12_2018_hsround_13_bonus_10": {
+      "expected": "GOA T-ANTI-RABBIT RFP",
+      "official_choice": "W"
+    },
+    "science_bowl_sample_set_12_2018_hsround_13_bonus_21": {
+      "expected": "1 AND 3"
+    },
+    "science_bowl_sample_set_12_2018_hsround_14_toss_up_05": {
+      "expected": "3",
+      "official_choice": "X"
+    },
+    "science_bowl_sample_set_12_2018_hsround_15_toss_up_05": {
+      "expected": "MYOGLOBIN"
+    },
+    "science_bowl_sample_set_12_2018_hsround_1_bonus_14": {
+      "expected": "y = x + 5"
+    },
+    "science_bowl_sample_set_12_2018_hsround_1_toss_up_04": {
+      "expected": "CARBON",
+      "official_choice": "W"
+    },
+    "science_bowl_sample_set_12_2018_hsround_2_bonus_08": {
+      "expected": "8/5",
+      "official_guidance": "(ACCEPT 1 3/5 or 1.6)"
+    },
+    "science_bowl_sample_set_12_2018_hsround_2_bonus_23": {
+      "expected": "2 AND 3"
+    },
+    "science_bowl_sample_set_12_2018_hsround_2_toss_up_10": {
+      "expected": "2π/3",
+      "official_guidance": "(ACCEPT: (2/3)π)"
+    },
+    "science_bowl_sample_set_12_2018_hsround_4_bonus_06": {
+      "expected": "RETINAL",
+      "official_guidance": "(ACCEPT: RETINALDEHYDE, DO NOT ACCEPT: RETINOL – if you can tell the difference)"
+    },
+    "science_bowl_sample_set_12_2018_hsround_5_toss_up_04": {
+      "expected": "BETA DECAY",
+      "official_guidance": "(ACCEPT: BETA MINUS DECAY)"
+    },
+    "science_bowl_sample_set_12_2018_hsround_5_toss_up_12": {
+      "expected": "TELOMERES"
+    },
+    "science_bowl_sample_set_12_2018_hsround_6_bonus_03": {
+      "expected": "27/23",
+      "official_guidance": "(ACCEPT: 1 4/23)"
+    },
+    "science_bowl_sample_set_12_2018_hsround_6_toss_up_10": {
+      "expected": "S TO M ATA",
+      "official_choice": "Z"
+    },
+    "science_bowl_sample_set_12_2018_hsround_7_bonus_11": {
+      "expected": "2 AND 3"
+    },
+    "science_bowl_sample_set_12_2018_hsround_8_bonus_22": {
+      "expected": "37/12",
+      "official_guidance": "(ACCEPT: 3 1/12)"
+    },
+    "science_bowl_sample_set_12_2018_hsround_8_toss_up_13": {
+      "expected": "2,500",
+      "official_choice": "Y"
+    },
+    "science_bowl_sample_set_12_2018_hsround_8_toss_up_15": {
+      "expected": "1 AND 2"
+    },
+    "science_bowl_sample_set_12_2018_hsround_9_bonus_21": {
+      "expected": "1 AND 3"
+    },
+    "science_bowl_sample_set_13_2019_nsb_hsr_round_15a_toss_up_23": {
+      "expected": "AMNIOTIC EGG"
+    },
+    "science_bowl_sample_set_13_2019_nsb_hsr_round_17a_bonus_04": {
+      "expected": "1.7 2019 Regional Science Bowl – Round 17A Page 3"
+    },
+    "science_bowl_sample_set_13_2019_nsb_hsr_round_17a_bonus_18": {
+      "expected": "THEY WILL BOTH BE SHIFTED BY SLIGHTLY LESS THAN 0.7 NANOMETERS 2019 Regional Science Bowl – Round 17A Page 10",
+      "official_choice": "X"
+    },
+    "science_bowl_sample_set_13_2019_nsb_hsr_round_17a_toss_up_02": {
+      "expected": "52"
+    },
+    "science_bowl_sample_set_13_2019_nsb_hsr_round_17a_toss_up_07": {
+      "expected": "TURBIDITY CURRENTS",
+      "official_choice": "Y"
+    },
+    "science_bowl_sample_set_13_2019_nsb_hsr_round_1a_bonus_11": {
+      "expected": "NONE"
+    },
+    "science_bowl_sample_set_13_2019_nsb_hsr_round_2a_toss_up_19": {
+      "expected": "17"
+    },
+    "science_bowl_sample_set_13_2019_nsb_hsr_round_3a_toss_up_21": {
+      "expected": "√3",
+      "official_guidance": "(ACCEPT: √3 TO ONE)"
+    },
+    "science_bowl_sample_set_13_2019_nsb_hsr_round_4a_toss_up_05": {
+      "expected": "CATALYST"
+    },
+    "science_bowl_sample_set_13_2019_nsb_hsr_round_5a_bonus_23": {
+      "expected": "9"
+    },
+    "science_bowl_sample_set_13_2019_nsb_hsr_round_5a_toss_up_12": {
+      "expected": "GIBBERELLINS",
+      "official_choice": "W"
+    },
+    "science_bowl_sample_set_13_2019_nsb_hsr_round_5a_toss_up_14": {
+      "expected": "CHARLES’S LAW"
+    },
+    "science_bowl_sample_set_13_2019_nsb_hsr_round_5a_toss_up_16": {
+      "expected": "ENDOCRINE",
+      "official_choice": "X"
+    },
+    "science_bowl_sample_set_13_2019_nsb_hsr_round_6a_bonus_10": {
+      "expected": "2, 4, 1, 3 2019 Regional Science Bowl – Round 6A Page 6"
+    },
+    "science_bowl_sample_set_13_2019_nsb_hsr_round_6a_bonus_11": {
+      "expected": "99"
+    },
+    "science_bowl_sample_set_14_2019_nsb_hsr_round_11a_toss_up_06": {
+      "expected": "BOTTOM RIGHT",
+      "official_choice": "X"
+    },
+    "science_bowl_sample_set_14_2019_nsb_hsr_round_12a_bonus_22": {
+      "expected": "5k 2019 Regional Science Bowl – Round 12A Page 12"
+    },
+    "science_bowl_sample_set_14_2019_nsb_hsr_round_14a_toss_up_11": {
+      "expected": "ALZHEIMER’S DISEASE"
+    },
+    "science_bowl_sample_set_14_2019_nsb_hsr_round_9a_bonus_06": {
+      "expected": "2 2019 Regional Science Bowl – Round 9A Page 4"
+    },
+    "science_bowl_sample_set_14_2019_nsb_hsr_round_9a_bonus_23": {
+      "expected": "–1/3"
+    },
+    "science_bowl_sample_set_15_2020_hs_rd10_bonus_13": {
+      "expected": "250 ******************"
+    },
+    "science_bowl_sample_set_15_2020_hs_rd10_bonus_18": {
+      "expected": "CaCO3"
+    },
+    "science_bowl_sample_set_15_2020_hs_rd10_toss_up_01": {
+      "expected": "IN A COUNTER-CLOCKWISE LOOP ABOUT THE WIRE",
+      "official_choice": "W"
+    },
+    "science_bowl_sample_set_15_2020_hs_rd10_toss_up_18": {
+      "expected": "WHITE BLOOD CELLS",
+      "official_choice": "Z"
+    },
+    "science_bowl_sample_set_15_2020_hs_rd11_bonus_06": {
+      "expected": "1, 2"
+    },
+    "science_bowl_sample_set_15_2020_hs_rd13_toss_up_07": {
+      "expected": "SYNTHESIS"
+    },
+    "science_bowl_sample_set_15_2020_hs_rd14_bonus_02": {
+      "expected": "54"
+    },
+    "science_bowl_sample_set_15_2020_hs_rd14_toss_up_05": {
+      "expected": "120"
+    },
+    "science_bowl_sample_set_15_2020_hs_rd15_toss_up_05": {
+      "expected": "IT WILL IMMEDIATELY UNDERGO METAMORPHOSIS",
+      "official_choice": "X"
+    },
+    "science_bowl_sample_set_15_2020_hs_rd15_toss_up_11": {
+      "expected": "INDUCTANCE"
+    },
+    "science_bowl_sample_set_15_2020_hs_rd15_toss_up_13": {
+      "expected": "TATA BOX",
+      "official_guidance": "(ACCEPT: GOLDBERG-HOGNESS BOX)"
+    },
+    "science_bowl_sample_set_15_2020_hs_rd17_bonus_11": {
+      "expected": "1, 3, 2 ******************"
+    },
+    "science_bowl_sample_set_15_2020_hs_rd17_toss_up_02": {
+      "expected": "RADIO",
+      "official_guidance": "(ACCEPT: RADIO WAVE)"
+    },
+    "science_bowl_sample_set_15_2020_hs_rd3_toss_up_03": {
+      "expected": "STARS",
+      "official_guidance": "(ACCEPT: MASSIVE STARS)"
+    },
+    "science_bowl_sample_set_15_2020_hs_rd5_bonus_07": {
+      "expected": "1, 3 ******************"
+    },
+    "science_bowl_sample_set_15_2020_hs_rd5_bonus_20": {
+      "expected": "0.3"
+    },
+    "science_bowl_sample_set_15_2020_hs_rd6_bonus_18": {
+      "expected": "A DIRECT CURRENT WOULD BE INDUCED IN THE WIRE",
+      "official_choice": "Z"
+    },
+    "science_bowl_sample_set_15_2020_hs_rd6_bonus_23": {
+      "expected": "SINGLE-STRAND BINDING PROTEINS",
+      "official_guidance": "(ACCEPT: SINGLE-STRAND DNA-BINDING PROTEINS, SSB, SSBPs)"
+    },
+    "science_bowl_sample_set_15_2020_hs_rd7_bonus_17": {
+      "expected": "6 ******************"
+    },
+    "science_bowl_sample_set_15_2020_hs_rd8_bonus_16": {
+      "expected": "50 TO 100",
+      "official_choice": "W"
+    },
+    "science_bowl_sample_set_16_set_10_hs_2021_toss_up_01": {
+      "expected": "CATENARY",
+      "official_guidance": "(ACCEPT: INVERTED CATENARY, HYPERBOLIC COSINE; do not accept: PARABOLA)"
+    },
+    "science_bowl_sample_set_16_set_2_hs_2021_bonus_06": {
+      "expected": "√2"
+    },
+    "science_bowl_sample_set_16_set_2_hs_2021_bonus_08": {
+      "expected": "INCREASING THE TEMPERATURE",
+      "official_choice": "X"
+    },
+    "science_bowl_sample_set_16_set_2_hs_2021_bonus_18": {
+      "expected": "POSITIVE Z",
+      "official_choice": "W"
+    },
+    "science_bowl_sample_set_16_set_3_hs_2021_bonus_09": {
+      "expected": "GEL PERMEATION CHROMATOGRAPHY",
+      "official_choice": "W"
+    },
+    "science_bowl_sample_set_16_set_3_hs_2021_toss_up_15": {
+      "expected": "MnO 2",
+      "official_choice": "X"
+    },
+    "science_bowl_sample_set_16_set_3_hs_2021_toss_up_16": {
+      "expected": "APERTURE",
+      "official_choice": "Z"
+    },
+    "science_bowl_sample_set_16_set_5_hs_2021_bonus_01": {
+      "expected": "2, 3"
+    },
+    "science_bowl_sample_set_16_set_5_hs_2021_bonus_05": {
+      "expected": "77"
+    },
+    "science_bowl_sample_set_16_set_5_hs_2021_toss_up_04": {
+      "expected": "THE PROJECTION OF A PARTICLE’S SPIN ONTO ITS MOMENTUM",
+      "official_choice": "W"
+    },
+    "science_bowl_sample_set_16_set_5_hs_2021_toss_up_08": {
+      "expected": "BAUXITE"
+    },
+    "science_bowl_sample_set_16_set_6_hs_2021_toss_up_11": {
+      "expected": "WITH THE INVERSE",
+      "official_choice": "Y"
+    },
+    "science_bowl_sample_set_16_set_7_hs_2021_bonus_11": {
+      "expected": "NITRATE",
+      "official_guidance": "(ACCEPT: NO 3-)"
+    },
+    "science_bowl_sample_set_16_set_8_hs_2021_bonus_12": {
+      "expected": "1, 3, 2"
+    },
+    "science_bowl_sample_set_16_set_9_hs_2021_bonus_01": {
+      "expected": "185π"
+    },
+    "science_bowl_sample_set_16_set_9_hs_2021_bonus_02": {
+      "expected": "10",
+      "official_choice": "Y"
+    },
+    "science_bowl_sample_set_16_set_9_hs_2021_bonus_04": {
+      "expected": "NEGATIVE E/R"
+    },
+    "science_bowl_sample_set_16_set_9_hs_2021_bonus_10": {
+      "expected": "NITRO-BENZENE"
+    },
+    "science_bowl_sample_set_16_set_9_hs_2021_bonus_13": {
+      "expected": "1/3"
+    },
+    "science_bowl_sample_set_16_set_9_hs_2021_bonus_18": {
+      "expected": "BETA OXIDATION",
+      "official_choice": "X"
+    },
+    "science_bowl_sample_set_17_2022_hs_10_bonus_11": {
+      "expected": "3, 2, 1"
+    },
+    "science_bowl_sample_set_17_2022_hs_10_bonus_16": {
+      "expected": "ONE HORIZONTAL AND ONE VERTICAL",
+      "official_guidance": "(ACCEPT: ONE OF EACH)"
+    },
+    "science_bowl_sample_set_17_2022_hs_12_toss_up_18": {
+      "expected": "ESTRADIOL",
+      "official_choice": "W"
+    },
+    "science_bowl_sample_set_17_2022_hs_13_toss_up_02": {
+      "expected": "100"
+    },
+    "science_bowl_sample_set_17_2022_hs_15_bonus_01": {
+      "expected": "METHIONINE",
+      "official_choice": "X"
+    },
+    "science_bowl_sample_set_17_2022_hs_15_toss_up_01": {
+      "expected": "MELATONIN"
+    },
+    "science_bowl_sample_set_17_2022_hs_15_toss_up_05": {
+      "expected": "90"
+    },
+    "science_bowl_sample_set_17_2022_hs_15_toss_up_10": {
+      "expected": "2-METHYL-1,3,5-TRI-NITRO-BENZENE",
+      "official_choice": "W"
+    },
+    "science_bowl_sample_set_17_2022_hs_1_toss_up_17": {
+      "expected": "13"
+    },
+    "science_bowl_sample_set_17_2022_hs_2_bonus_09": {
+      "expected": "DNA",
+      "official_guidance": "(ACCEPT: DEOXYRIBONUCLEIC ACID, PLASMID)"
+    },
+    "science_bowl_sample_set_17_2022_hs_2_bonus_10": {
+      "expected": "SP 2"
+    },
+    "science_bowl_sample_set_17_2022_hs_2_toss_up_01": {
+      "expected": "–1/3"
+    },
+    "science_bowl_sample_set_17_2022_hs_2_toss_up_12": {
+      "expected": "ENZYME",
+      "official_choice": "W"
+    },
+    "science_bowl_sample_set_17_2022_hs_3_bonus_18": {
+      "expected": "SILVER ION IS A SPECTATOR ION",
+      "official_choice": "X"
+    },
+    "science_bowl_sample_set_17_2022_hs_3_toss_up_18": {
+      "expected": "SMOKE",
+      "official_choice": "Y"
+    },
+    "science_bowl_sample_set_17_2022_hs_4_toss_up_05": {
+      "expected": "ELIMINATION"
+    },
+    "science_bowl_sample_set_17_2022_hs_6_bonus_05": {
+      "expected": "5 x 10 12"
+    },
+    "science_bowl_sample_set_17_2022_hs_6_toss_up_08": {
+      "expected": "PEPTIDOGLYCAN",
+      "official_guidance": "(ACCEPT: MUREIN)"
+    },
+    "science_bowl_sample_set_17_2022_hs_8_bonus_01": {
+      "expected": "HERPESVIRUS",
+      "official_choice": "Z"
+    },
+    "science_bowl_sample_set_17_2022_hs_9_bonus_04": {
+      "expected": "STRAWBERRY",
+      "official_choice": "Y"
+    },
+    "science_bowl_sample_set_11_hs_10a_toss_up_02": {
+      "expected": "EOSINOPHIL"
+    },
+    "science_bowl_sample_set_11_hs_15a_bonus_04": {
+      "expected": "100 2017 Regional High School NSB® PAGE 3"
+    },
+    "science_bowl_sample_set_11_hs_17a_toss_up_18": {
+      "expected": "63"
+    },
+    "science_bowl_sample_set_11_hs_3a_toss_up_01": {
+      "expected": "WORK",
+      "official_choice": "Z"
+    },
+    "science_bowl_sample_set_1_round16_bonus_18": {
+      "expected": "30º",
+      "official_choice": "W"
+    },
+    "science_bowl_sample_set_1_round7_toss_up_23": {
+      "expected": "HYDROGEN"
+    },
+    "science_bowl_sample_set_2_round15_bonus_15": {
+      "expected": "CALCIUM",
+      "official_guidance": "(ACCEPT: Ca+2)"
+    },
+    "science_bowl_sample_set_4_round11_bonus_04": {
+      "expected": "THERE ARE HIGH COSTS FOR FUEL CELLS AND HYDROGEN PRODUCTION TECHNOLOGIES Round 11 Page 3",
+      "official_choice": "Y"
+    },
+    "science_bowl_sample_set_4_round17_bonus_07": {
+      "expected": "WIND AND CURRENT ________________________________________________________________________",
+      "official_choice": "X"
+    },
+    "science_bowl_sample_set_4_round6_bonus_01": {
+      "expected": "PENNY ________________________________________________________________________",
+      "official_choice": "W"
+    },
+    "science_bowl_sample_set_5_round15_toss_up_18": {
+      "expected": "AIR DENSITY AND VELOCITY"
+    },
+    "science_bowl_sample_set_5_round4_toss_up_09": {
+      "expected": "IT IS LARGELY DECENTRALIZED",
+      "official_choice": "Z"
+    },
+    "science_bowl_sample_set_6_sample6_round15_toss_up_12": {
+      "expected": "PROPHASE I",
+      "official_choice": "Y"
+    },
+    "science_bowl_sample_set_6_sample6_round15_toss_up_16": {
+      "expected": "INCREASED THE SYSTEM'S ENTHALPY AND ENTROPY",
+      "official_choice": "X"
+    },
+    "science_bowl_sample_set_6_sample6_round8_toss_up_17": {
+      "expected": "C 3H8",
+      "official_choice": "X"
+    },
+    "science_bowl_sample_set_8_round_10_a_bonus_08": {
+      "expected": "IN THE ACCRETIONARY WEDGE ABOVE A SUBDUCTING PLATE",
+      "official_choice": "Z"
+    },
+    "science_bowl_sample_set_8_round_11_a_bonus_21": {
+      "expected": "A CATALYZED REACTION ALWAYS HAS THE SAME TRANSITION STATE AS THE UNCATALYZED REACTION _______________________________________________________",
+      "official_choice": "Y"
+    },
+    "science_bowl_sample_set_8_round_2_a_toss_up_09": {
+      "expected": "MASS EXTINCTION",
+      "official_guidance": "(ACCEPT: MASS EXTINCTION EVENTS)"
+    },
+    "science_bowl_sample_set_9_regionalhs_13a_toss_up_16": {
+      "expected": "THE SQUARE OF THE PRINCIPAL QUANTUM NUMBER",
+      "official_choice": "Z"
+    },
+    "science_bowl_sample_set_9_regionalhs_4a_toss_up_05": {
+      "expected": "NUCLEAR LAMINA"
+    }
+  }
+}

@@ -1,0 +1,307 @@
+{
+  "agent_constraints": [
+    "Inhabit an eligible high-school HMMT contestant identity on the selected-season Guts roster; do not invent substitutes, a ninth February member, or an eight-person November team.",
+    "Begin with the same contestant permissions as every teammate; do not assume a permanent runner, captain, coder, or reviewer office.",
+    "Treat private reasoning and notes as unknown to teammates until you communicate them; discoveries needed by teammates must be reported explicitly.",
+    "Track which set is currently released, which answers are still open, and which sets have already been handed in; do not use or claim a later set.",
+    "Choose which current-set problems to attempt, who writes the runner sheet, and when to hand in from current evidence; temporary specialization may emerge but is never a fixed office.",
+    "When teammates disagree on an answer, surface the conflict with an independent check before the runner leaves; do not silently overwrite a settled short answer.",
+    "Any contestant may record or submit the team's current-set answers; there is no exclusive designated submitter.",
+    "After a set is handed in, treat those answers as final for that set and move to the newly released set if one arrives.",
+    "When a live scoreboard is available, use posted scores as strategy input; do not invent standings that were not shown.",
+    "Do not use books, notes, calculators, computational aids, drawing aids, laptops, PDAs, phones, hidden solutions, or outside problem-solving help."
+  ],
+  "agent_roles": [
+    {
+      "name": "Agent_1",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit an eligible high-school HMMT contestant identity on the selected-season Guts roster.",
+        "Solve currently released short-answer problems, check answers, and help decide when the current set is ready to hand in.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": []
+    },
+    {
+      "name": "Agent_2",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit an eligible high-school HMMT contestant identity on the selected-season Guts roster.",
+        "Solve currently released short-answer problems, check answers, and help decide when the current set is ready to hand in.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": []
+    },
+    {
+      "name": "Agent_3",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit an eligible high-school HMMT contestant identity on the selected-season Guts roster.",
+        "Solve currently released short-answer problems, check answers, and help decide when the current set is ready to hand in.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": []
+    },
+    {
+      "name": "Agent_4",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit an eligible high-school HMMT contestant identity on the selected-season Guts roster.",
+        "Solve currently released short-answer problems, check answers, and help decide when the current set is ready to hand in.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": []
+    },
+    {
+      "name": "Agent_5",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit an eligible high-school HMMT contestant identity on the selected-season Guts roster.",
+        "Solve currently released short-answer problems, check answers, and help decide when the current set is ready to hand in.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": []
+    },
+    {
+      "name": "Agent_6",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit an eligible high-school HMMT contestant identity on the selected-season Guts roster.",
+        "Solve currently released short-answer problems, check answers, and help decide when the current set is ready to hand in.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": []
+    },
+    {
+      "name": "Agent_7",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit an eligible high-school HMMT contestant identity on the selected-season Guts roster.",
+        "Solve currently released short-answer problems, check answers, and help decide when the current set is ready to hand in.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": []
+    },
+    {
+      "name": "Agent_8",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit an eligible high-school HMMT contestant identity on the selected-season Guts roster.",
+        "Solve currently released short-answer problems, check answers, and help decide when the current set is ready to hand in.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": []
+    }
+  ],
+  "information_policy": {
+    "mode": "shared",
+    "shared": [
+      "problem",
+      "contest_rules",
+      "team_discussion",
+      "scratchpad"
+    ],
+    "coordination_requirement": "Contestants receive equal baseline information access, but private reasoning is not silently copied between them; they must communicate discoveries needed by teammates. Later Guts sets are not shared team state until released."
+  },
+  "rule_sections": {
+    "competition_format": [
+      "Official: Guts is an 80-minute team event with 36 short-answer questions on mixed subjects, of varying difficulty and printed point weights.",
+      "Official: problems are divided into sets of 3 in November or 4 in February.",
+      "Official: all teams gather in large lecture halls; at the starting signal a runner collects the first set for each teammate from an assigned problem station.",
+      "Official: this session is the Guts Round only; Individual tests and the Team Round are separate events.",
+      "Simulation choice: the runner loads one Guts packet for the selected season rather than a live multi-hall tournament."
+    ],
+    "timeline": [
+      "Official: the Guts Round lasts 80 minutes.",
+      "Official: it is not expected that students will finish all the problems.",
+      "Official: as soon as a team has answers for one problem set, the runner may bring those answers to the problem station and pick up the next set.",
+      "Simulation choice: max_turns is a safety budget approximating the official clock, not a second official time limit.",
+      "Simulation choice: later sets remain unreleased until a current-set hand-in is specified by the task; the runner logistics are not executed as a physical state machine."
+    ],
+    "resource_policy": [
+      "Official: books, notes, calculators, pocket organizers, slide-rules, abaci, and other computational aids are forbidden.",
+      "Official: graph paper, rulers, protractors, compasses, architectural tools, and other drawing aids are forbidden.",
+      "Official: laptops, PDAs, cell phones, and other communication devices are prohibited.",
+      "Official: paper and organizer-provided scratch paper are allowed.",
+      "Simulation choice: the only machine tool exposed is query_rules; do not claim a calculator, code runner, or public internet."
+    ],
+    "collaboration_protocol": [
+      "Official: Guts is a team event; all members of the selected-season roster work together on the current set.",
+      "Official: November teams are 4–6 students and February teams are 6–8 students; eligibility is high-school students around the world.",
+      "Official: problem-solving communication is limited to teammates; coaches and other teams may not solve for you.",
+      "Simulation choice: every contestant starts with equal permissions; runner, scribe, or checker jobs may rotate and are never exclusive offices.",
+      "Simulation choice: private notes are unknown to teammates until communicated."
+    ],
+    "integrity_and_compliance": [
+      "Official: computational aids, drawing aids, and communication devices are contest violations.",
+      "Official: outside problem-solving help is forbidden.",
+      "Official: written appeals go to the designated Appeals Room by the contest-day deadline; HMMT coordinators' decisions are final.",
+      "Simulation choice: do not access hidden answer keys, evaluator internals, or unreleased later sets.",
+      "Simulation choice: inventing teammates beyond the selected-season roster is a compliance violation."
+    ],
+    "deliverable_format": [
+      "Official: Guts answers are short-answer single values.",
+      "Official: acceptable-answer conventions are those published with Testing Information.",
+      "Official: the runner submits the current set's answers at the problem station before receiving the next set.",
+      "Simulation choice: the runner accepts one shared numbered answer sheet of exact values when required.",
+      "Simulation choice: any contestant may file that shared sheet."
+    ],
+    "evaluation_criteria": [
+      "Official: each Guts problem carries a point weight indicated on the exam; the raw Guts score is the sum of those weights for correct answers.",
+      "Official: grading is immediate and scores are posted in real time.",
+      "Official: Sweepstakes scales the top raw Guts score to 400 points and adds scaled Individual 800 and Team 400; that aggregate is not this session's score.",
+      "Simulation choice: repository evaluation is gold matching per problem_or_question and is deferred_benchmark_metadata_missing; do not invent a completed official grade.",
+      "Simulation choice: report Guts correctness separately from rule compliance and collaboration quality."
+    ],
+    "runtime_limitations": [
+      "Official: progressive set release, runner pickup, irreversible hand-in, immediate grading, and a live scoreboard are contest-day facts.",
+      "Simulation choice: progressive_batch_release and batch_finality are specified only; the session does not unlock later sets or lock handed-in answers.",
+      "Official: the live scoreboard posts Guts scores during the round.",
+      "Simulation choice: no multi-team board is published to agents.",
+      "Simulation choice: limited team messaging is a benchmark overlay, not an official HMMT cap.",
+      "Simulation choice: season is a required selector on each benchmark row."
+    ],
+    "official_eligibility_and_season": [
+      "Official: both tournaments are for high-school students around the world.",
+      "Official: November Guts uses sets of 3 and teams of 4–6; February Guts uses sets of 4 and teams of 6–8.",
+      "Simulation choice: November rows instantiate 6 contestants and February rows instantiate 8; smaller official November rosters of 4 or 5 are not instantiated.",
+      "Simulation choice: eligibility and on-site lecture-hall logistics are carried as contestant conscience, not as visa or attendance state machines."
+    ],
+    "appeals": [
+      "Official: a student who believes an answer-key entry is incorrect must go to the designated Appeals Room and submit an appeal in writing.",
+      "Official: the appeal deadline is announced on the day of the contest.",
+      "Official: decisions of the HMMT coordinators are final.",
+      "Simulation choice: the Appeals Room is specified and not executed."
+    ]
+  },
+  "deliberation": {
+    "mode": "unstructured",
+    "min_challenges": 0,
+    "evaluation_dimensions": [
+      "evidence_responsiveness",
+      "decision_traceability"
+    ]
+  },
+  "communication": {
+    "mode": "limited",
+    "team_message_budget": 60,
+    "per_agent_message_budget": 10,
+    "max_message_chars": 1200,
+    "counted_actions": [
+      "speak",
+      "write_scratchpad",
+      "propose",
+      "challenge",
+      "provide_evidence",
+      "revise",
+      "decide"
+    ]
+  },
+  "simulation": {
+    "max_turns": 30,
+    "scheduler": "src_collaboration_draft",
+    "turn_budget_basis": "standardized experiment budget: 30 global turns; official contest timing is recorded separately",
+    "contest_clock_and_scoreboard": "specified_for_role_immersion_scoreboard_not_enforced",
+    "eligibility_and_logistics_state": "specified_for_role_immersion_not_enforced",
+    "open_table_coach": {
+      "enabled": true,
+      "status": "counterfactual_synthetic_baseline_not_official_hmmt_rule",
+      "may_submit": false,
+      "allowed_tools": [],
+      "counts_toward_shared_api_and_token_budget": true,
+      "contestant_turn_policy": {
+        "mode": "private_deliberation_then_single_action",
+        "allowed_actions": [
+          "work",
+          "speak",
+          "rest"
+        ],
+        "exactly_one_action": true,
+        "unstructured_response": "rest",
+        "final_submission": "synthesis_only",
+        "visibility": {
+          "think": "private",
+          "work": "shared",
+          "speak": "team",
+          "rest": "private"
+        },
+        "max_chars_by_action": {
+          "think": 2400,
+          "work": 2400,
+          "speak": 320,
+          "rest": 80
+        },
+        "memory_entries": {
+          "private_think_per_agent": 3,
+          "shared_work": 48,
+          "group_messages": 12,
+          "public_messages": 24
+        },
+        "private_think_calls_per_turn": 1,
+        "discussion_policy": {
+          "report_after_work": true,
+          "silent_work_turn_requires_discussion": true,
+          "conflicts_require_targeted_speak": true
+        }
+      },
+      "precontest_brief": {
+        "turn": 1,
+        "problem_access": false,
+        "allowed_actions": [
+          "speak",
+          "sleep"
+        ],
+        "advice_scope": [
+          "time allocation",
+          "task triage",
+          "communication protocol",
+          "independent verification",
+          "final answer-sheet reconciliation"
+        ]
+      },
+      "opening_discussion": {
+        "turn": 2,
+        "problem_access": true,
+        "allowed_actions": [
+          "speak",
+          "sleep"
+        ],
+        "purpose": "summarize the contestants' opening discussion into priorities and checkpoints, and suggest temporary working groups that contestants may later change"
+      },
+      "after_opening_access": false,
+      "min_turns": 10
+    }
+  }
+}

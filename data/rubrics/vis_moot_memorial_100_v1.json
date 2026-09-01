@@ -1,0 +1,42 @@
+{
+  "rubric_id": "vis_moot_memorial_100_v1",
+  "title": "Vis Moot memorial rubric",
+  "total_points": 100,
+  "criteria": [
+    {
+      "id": "legal_analysis",
+      "name": "Legal analysis",
+      "max_score": 35,
+      "observable": true,
+      "description": "Accurate, issue-spotting legal analysis grounded in international law."
+    },
+    {
+      "id": "argumentation",
+      "name": "Argumentation",
+      "max_score": 30,
+      "observable": true,
+      "description": "Persuasive Applicant/Respondent arguments with coherent structure."
+    },
+    {
+      "id": "authorities",
+      "name": "Authorities & citation",
+      "max_score": 20,
+      "observable": true,
+      "description": "Relevant authorities are cited and used appropriately."
+    },
+    {
+      "id": "writing",
+      "name": "Written memorial quality",
+      "max_score": 15,
+      "observable": true,
+      "description": "Clarity, organization, and professional memorial style."
+    }
+  ],
+  "not_observable_from_deck": [
+    "oral advocacy",
+    "rebuttal performance",
+    "courtroom demeanor"
+  ],
+  "dataset": "vis_moot",
+  "derived_from": "data/rubrics/moot_memorial_100_v1.json"
+}

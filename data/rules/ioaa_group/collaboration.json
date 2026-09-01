@@ -1,0 +1,206 @@
+{
+  "agent_constraints": [
+    "Inhabit an IOAA international-team contestant identity: you were assigned across countries to one host-designed group task, classified separately from the individual papers.",
+    "Begin with the same contestant permissions as every teammate; do not assume a permanent captain, specialist, or sole submitter, and do not invent same-country teammates.",
+    "Collaborate only with your assigned teammates; do not communicate with other teams.",
+    "Treat private reasoning and notes as unknown to teammates until you communicate the decision-relevant content.",
+    "When a host kit is provided, use only the organizer calculator, office supplies, geometry instruments, paper, constants, and issued star charts; do not bring a personal calculator, formula collection, internet, or code execution.",
+    "Simulation choice: a limited message budget and structured propose, challenge, provide-evidence, revise, and decide steps are a session coordination overlay, not an official IOAA message cap.",
+    "Do not access hidden solutions, answer keys, evaluator internals, or unauthorized outside problem-solving help.",
+    "Any teammate may file the shared boxed answers after the team reconciles them; do not invent a universal clock or scoring formula from another year's packet.",
+    "Use only the official mechanisms the current task actually exposes; do not claim a telescope, envelope, video screen, or instrument reading that was not observed."
+  ],
+  "agent_roles": [
+    {
+      "name": "Agent_1",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit an IOAA international-team contestant identity assigned across countries.",
+        "Work the host-designed group task with equal teammates and only provided materials.",
+        "Share decision-relevant discoveries and help reconcile one shared boxed-answer sheet."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": []
+    },
+    {
+      "name": "Agent_2",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit an IOAA international-team contestant identity assigned across countries.",
+        "Work the host-designed group task with equal teammates and only provided materials.",
+        "Share decision-relevant discoveries and help reconcile one shared boxed-answer sheet."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": []
+    },
+    {
+      "name": "Agent_3",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit an IOAA international-team contestant identity assigned across countries.",
+        "Work the host-designed group task with equal teammates and only provided materials.",
+        "Share decision-relevant discoveries and help reconcile one shared boxed-answer sheet."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": []
+    },
+    {
+      "name": "Agent_4",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit an IOAA international-team contestant identity assigned across countries.",
+        "Work the host-designed group task with equal teammates and only provided materials.",
+        "Share decision-relevant discoveries and help reconcile one shared boxed-answer sheet."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": []
+    },
+    {
+      "name": "Agent_5",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit an IOAA international-team contestant identity assigned across countries.",
+        "Work the host-designed group task with equal teammates and only provided materials.",
+        "Share decision-relevant discoveries and help reconcile one shared boxed-answer sheet."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": []
+    }
+  ],
+  "information_policy": {
+    "mode": "shared",
+    "shared": [
+      "problem",
+      "contest_rules",
+      "team_discussion",
+      "scratchpad"
+    ],
+    "coordination_requirement": "Contestants receive equal baseline information access, but private reasoning is not silently copied between them; they must communicate discoveries needed by teammates."
+  },
+  "rule_sections": {
+    "competition_format": [
+      "Competition model: The team solves the host-designed group task and produces one shared answer.",
+      "Mixed or unresolved rulesets: statute minimum is five students from different countries; exact size is host-year specific.",
+      "Official: each IOAA includes an international-team event classified separately from the main individual competition.",
+      "Official: each group team has at least five students, each from a different country, selected randomly when possible.",
+      "Official: the host designs a task performed by the team as a whole and may use theoretical, practical, or observational work, or a combination, or propose another format with the Secretariat.",
+      "Official: the organizers prepare an award for the best international team.",
+      "Simulation choice: this card models five equal contestants and does not freeze five as a universal official maximum.",
+      "Simulation choice: a host-year selector is required before applying an edition packet."
+    ],
+    "timeline": [
+      "Source-recorded timing: The group task is host-designed; the 90-minute 2023 example is not a universal current duration.",
+      "Official: the group-task clock is host-designed and is not frozen as a universal official duration.",
+      "Official, 2023 edition example only: time is measured from the START signal; the maximum time is 90 minutes; remaining sheets are handed in at the limit.",
+      "Simulation choice: simulation.max_turns is a runner safety budget, not an official wall-clock limit.",
+      "Simulation choice: do not treat the 2023 90-minute maximum as official_minutes for other host years."
+    ],
+    "resource_policy": [
+      "Source-recorded resource policy: when the host supplies a kit, contestants use organizer-provided materials rather than personal formula collections.",
+      "Official: when the host supplies a kit, contestants use organizer-provided materials rather than personal formula collections.",
+      "Official, 2023 edition example only: everything needed is provided on the table—calculator, office supplies, geometrical instruments, paper, and a table of constants.",
+      "Official: statute 9's contestant-brought non-programmable calculator rule is for the individual theoretical and practical papers, not automatically the group event.",
+      "Simulation choice: personal calculators are banned in this session when a host kit is provided; internet and code execution are forbidden; paper and pencil are available.",
+      "Simulation choice: use_calculator and read_star_chart stand in for organizer-provided calculator and chart materials."
+    ],
+    "collaboration_protocol": [
+      "Official: the task is performed by the international team as a whole.",
+      "Official, 2023 edition example only: the team works together at one table under guide supervision and may not communicate with other teams.",
+      "Simulation choice: all five contestants begin with equal permissions and any of them may submit the shared answers.",
+      "Simulation choice: private reasoning is unknown to teammates until it is communicated."
+    ],
+    "integrity_and_compliance": [
+      "Official: do not communicate with other teams during the group event.",
+      "Official: do not bring a personal formula collection.",
+      "Simulation choice: hidden solutions, answer keys, and evaluator internals are unavailable and must not be used.",
+      "Simulation choice: using a personal calculator, internet, or code execution when a host kit is provided is a compliance violation in this session."
+    ],
+    "deliverable_format": [
+      "Runner answer contract: Submit the team's final answers in numbered order, using exact values when required.",
+      "Official deliverable: worked answers.",
+      "Official, 2023 edition example only: dedicated answer sheets; enter final answers in the marked boxes; sealed envelopes are opened on START; completed sheets are handed to the guide, who notes the total time.",
+      "Simulation choice: submit the team's final answers in numbered order, using exact values when required.",
+      "Simulation choice: official boxed paper sheets, drawings, and instrument readings may be represented as numbered worked-answer text."
+    ],
+    "evaluation_criteria": [
+      "Official: the group event is classified separately from the individual theoretical and practical competitions, and the organizers award the best international team.",
+      "Official, 2023 edition example only: the winning team is the one with the shortest total time after time penalties for incorrect or missing answers; penalties are explained in each task; the jury marks the sheets and applies those penalties.",
+      "Official: the current host-year scoring formula is not frozen as a universal official rule.",
+      "Simulation choice: repository gold scoring per problem_or_question by rubric_llm_v1 is ready as a proxy and is not official time-ranked scoring."
+    ],
+    "runtime_limitations": [
+      "Runtime limitation: Time-ranked scoring with penalties needs a real wall clock and answer-sheet workflow.",
+      "Simulation choice: live wall-clock and time-penalty ranking, sealed envelopes, physical or observational apparatus, provided instruments, and a start-signal video screen are not reproduced.",
+      "Simulation choice: cross-country random assignment is role immersion, not a runtime state machine.",
+      "Simulation choice: a host-year packet must be selected before treating duration, kit, or scoring as official for that row."
+    ],
+    "host_year_selector": [
+      "Official: the host is free to decide the group-task format.",
+      "Simulation choice: required selector is host_year; apply a year's packet only to that year's tasks.",
+      "Simulation choice: the 2023 packet is an edition example and does not rewrite later host years."
+    ],
+    "typical_contest_workflow": [
+      "Simulation choice: read the issued host instructions, partition the tasks, communicate decision-relevant work, independently check numerical and unit-sensitive answers, and reconcile one boxed sheet.",
+      "Simulation choice: temporary specialization may emerge but is never a fixed office."
+    ],
+    "conflict_resolution": [
+      "Simulation choice: disagreements are resolved by communicated evidence, not by silent overwrite of the shared sheet.",
+      "Simulation choice: an unresolved boxed answer may be left blank rather than invented."
+    ],
+    "handoff_protocol": [
+      "Simulation choice: a handoff may name the task, method, units, remaining checks, and next action.",
+      "Simulation choice: incomplete handoffs stay observable; there is no automatic memory copy."
+    ],
+    "review_protocol": [
+      "Simulation choice: review before submission is optional rather than mandatory.",
+      "Simulation choice: any teammate may recompute a contested numerical result or check required boxes."
+    ]
+  },
+  "deliberation": {
+    "mode": "structured",
+    "min_challenges": 1,
+    "decision_maker": "submitter",
+    "evaluation_dimensions": [
+      "evidence_responsiveness",
+      "revision_after_challenge",
+      "decision_traceability",
+      "authority_bias",
+      "majority_bias"
+    ]
+  },
+  "communication": {
+    "mode": "limited",
+    "team_message_budget": 16,
+    "per_agent_message_budget": 3,
+    "max_message_chars": 1200,
+    "counted_actions": [
+      "speak",
+      "write_scratchpad",
+      "propose",
+      "challenge",
+      "provide_evidence",
+      "revise",
+      "decide"
+    ]
+  },
+  "simulation": {
+    "max_turns": 30,
+    "scheduler": "src_collaboration_draft",
+    "turn_budget_basis": "standardized experiment budget: 30 global turns; official contest timing is recorded separately"
+  }
+}

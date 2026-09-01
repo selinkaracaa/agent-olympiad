@@ -1,0 +1,60 @@
+{
+  "rubric_id": "cfa_research_challenge_presentation_2017_v1",
+  "type": "structured_rubric",
+  "title": "CFA Institute Research Challenge Presentation Scoring Sheet (2017 published form)",
+  "competition_id": "cfa_research_challenge",
+  "deliverable": "presentation_and_questions",
+  "published_year": 2017,
+  "total_points": 100,
+  "criteria": [
+    {
+      "id": "financial_analysis",
+      "name": "Financial Analysis",
+      "max_score": 25,
+      "official_prompt": "How thorough was their analysis of the industry, company, and competitors?"
+    },
+    {
+      "id": "valuation",
+      "name": "Valuation",
+      "max_score": 25,
+      "official_prompt": "Were the valuation methodologies appropriate and detailed?"
+    },
+    {
+      "id": "presentation",
+      "name": "Presentation",
+      "max_score": 20,
+      "official_prompt": "How effective/convincing was their presentation? Was it logical and did the facts support the recommendation?"
+    },
+    {
+      "id": "question_answer",
+      "name": "Question & Answer",
+      "max_score": 20,
+      "official_prompt": "Were they able to answer the questions effectively and with confidence?"
+    },
+    {
+      "id": "team_involvement",
+      "name": "Team Involvement",
+      "max_score": 5,
+      "official_prompt": "Team involvement in the presentation/questions and answers"
+    },
+    {
+      "id": "materials",
+      "name": "Materials",
+      "max_score": 5,
+      "official_prompt": "Quality of slides"
+    }
+  ],
+  "provenance": {
+    "official_only": true,
+    "publisher": "CFA Institute",
+    "accessed_on": "2026-07-31",
+    "sources": [
+      {
+        "title": "Appendix E — Presentation Scoring Sheet",
+        "url": "http://blogs.cfainstitute.org/researchchallenge/files/2017/12/rc_judge_scoresheet.pdf",
+        "evidence": "Official published form assigns 25/25/20/20/5/5 and does not contain a separate ESG presentation criterion."
+      }
+    ],
+    "applicability_note": "The source establishes the form published in December 2017. It does not establish exact start and end seasons across all historical benchmark entries."
+  }
+}

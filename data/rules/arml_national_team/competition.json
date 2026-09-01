@@ -1,0 +1,169 @@
+{
+  "schema_version": "1.0",
+  "rule_id": "arml_national_team:draft_v1",
+  "competition_id": "arml_national_team",
+  "profile": "proxy",
+  "protocol": "shared_answer",
+  "team": {
+    "active_min": 15,
+    "active_default": 15,
+    "active_max": 15,
+    "roster_max": 15,
+    "range_basis": "source_record",
+    "official_roster_note": "A national ARML/IRML team consists of 15 members. Coaches seed teams by strength as A1, A2, … or B1, B2, …. Teams may compete with fewer than 15; no substitutions are allowed once the Team Round has started.",
+    "collaboration": "The entire team works the Team Round together and files one shared short-answer sheet."
+  },
+  "execution": {
+    "official_minutes": null,
+    "session_track": "team_round_only"
+  },
+  "allowed_tools": [
+    "query_rules"
+  ],
+  "resources": {
+    "internet": "forbidden",
+    "calculator": "forbidden",
+    "code_execution": "forbidden",
+    "electronic_devices": "forbidden",
+    "paper_pencil": "allowed",
+    "paper_dictionary": "non_native_english_speakers_book_form_only",
+    "electronic_translators": "forbidden",
+    "provided_materials_only": true,
+    "outside_communication": "forbidden"
+  },
+  "human_constraints": [
+    "Treat yourself as an eligible national ARML/IRML contestant: you must not have turned 19 before the December 31 immediately preceding the competition; if you turn 19 between January 1 and the competition dates you remain eligible only if you did not graduate high school (K-12) before March 1 of the competition year.",
+    "No student who graduated high school before March 1 of the competition year is eligible; do not fictionalize a graduate identity.",
+    "The team is drawn from one well-defined contiguous, non-intersecting geographic region; do not invent a gerrymandered or dual-region identity.",
+    "A team consists of 15 members. Coaches gauge strength and place students on A1, A2, … or B1, B2, … teams; inhabit that seeded roster rather than inventing a parallel team.",
+    "Teams may compete with fewer than 15 members; do not invent a borrowed student or an unregistered teammate.",
+    "No substitutions can be made once the Team Round has started; late pre-registered teammates may join only at an official break, which this Team Round sitting does not provide.",
+    "This sitting is the Team Round only: ten questions, five points each, 50 possible, worked by the entire team.",
+    "Individual, Power, and Relay exist at the same meet and enter official team-score tie-breaks after Team plus Power, then Relay, then Individual; they are not this team's current work.",
+    "Calculators are not allowed on any part of the ARML contest.",
+    "Electronic devices are banned; if one is discovered in the room during the Team or Power round the team is disqualified from that round. Proctors collect devices before Team and return them after Power.",
+    "A dictionary in book form is allowed only for participants whose first language is not English; electronic dictionaries or translators are not allowed.",
+    "Submit one shared Team Round short-answer sheet; answers are short numerical values, not proofs.",
+    "Do not use internet, outside references, hidden keys, or problem-solving help from anyone outside the team."
+  ],
+  "rules_text": "You are an eligible national ARML/IRML contestant on a coach-seeded regional team of 15 (A1/A2… or B1/B2… by strength). Teams may compete short-handed; borrowed students and substitutions after the Team Round starts are forbidden. This sitting is the Team Round only: ten short-answer questions, five points each, 50 possible, one shared sheet, entire team working together. Individual (five rounds × two questions), Power (50 points, one packet), and Relay (5 points at three minutes, 3 at six; 25 possible per Relay 1 and per Relay 2) exist at the meet and break team-score ties after Team+Power, then Relay, then Individual, but they are not your current work. Calculators are banned on every ARML part. Electronic devices are banned; discovery during Team or Power disqualifies the team from that round; devices are collected before Team and returned after Power. A paper dictionary is allowed only if English is not your first language. No internet, outside help, or answer keys. Treat unexposed physical, oral, live-opponent, judge, timing, or environment mechanisms as unavailable rather than simulated facts.",
+  "provenance": {
+    "status": "source_grounded",
+    "sources": [
+      {
+        "title": "ARML/IRML Competition Rules",
+        "url": "https://arml.com/ARML/arml_2019/page/index.php?page=competition_rules&page_type=public",
+        "authority": "official",
+        "edition": "ARML/IRML Competition Rules as published on the official ARML 2019 site; team-seeding and division clauses revised April 2017",
+        "archive_status": "local_text_capture_available",
+        "sections": [
+          "team of 15 and coach seeding A1/A2 or B1/B2",
+          "age and graduation eligibility",
+          "contiguous non-intersecting regions",
+          "calculator ban on every ARML part",
+          "Individual, Team, Power, and Relay scoring",
+          "team-score tie-break order",
+          "no substitutions after Team Round starts",
+          "short-handed Relay handling",
+          "paper dictionary for non-native English speakers",
+          "electronic-device ban and Team/Power collection",
+          "exactly one Power solution packet",
+          "cheating and property sanctions"
+        ],
+        "local_text": "data/rules/sources/arml_national_team/01_index.txt"
+      },
+      {
+        "title": "ARML/IRML Competition Rules (arml2.com official mirror)",
+        "url": "https://arml2.com/ARML/arml_2019/page/index.php?page=competition_rules&page_type=public",
+        "authority": "official",
+        "edition": "ARML/IRML Competition Rules as published on the official ARML 2019 site; team-seeding and division clauses revised April 2017",
+        "archive_status": "official_url_verified_not_locally_archived",
+        "sections": [
+          "team of 15 and coach seeding A1/A2 or B1/B2",
+          "age and graduation eligibility",
+          "contiguous non-intersecting regions",
+          "calculator ban on every ARML part",
+          "Individual, Team, Power, and Relay scoring",
+          "team-score tie-break order",
+          "no substitutions after Team Round starts",
+          "short-handed Relay handling",
+          "paper dictionary for non-native English speakers",
+          "electronic-device ban and Team/Power collection",
+          "exactly one Power solution packet",
+          "cheating and property sanctions"
+        ]
+      }
+    ],
+    "adaptations": [
+      "max_turns is a safety budget; the official rules page does not establish a Team Round wall-clock",
+      "structured deliberation actions are a benchmark traceability overlay",
+      "limited communication is a benchmark pressure overlay, not an official message cap",
+      "Individual, Power, Relay, and meet-wide tie-breaks are specified for role immersion; this card runs Team Round only",
+      "Age, region, seeding, substitution, and device-collection obligations are contestant-facing role-immersion text, not runtime state machines"
+    ],
+    "official_time_note": "The archived ARML competition-rules page does not establish a 20-minute Team Round clock; no exact official duration is encoded.",
+    "research_confidence": "high",
+    "research_notes": [
+      "Do not encode a 20-minute Team Round clock; mathleague.org and similar secondary clocks are not official for this card.",
+      "Relay scoring on the rules page is 25 possible per Relay 1 and 25 possible per Relay 2."
+    ],
+    "proxy_limitations": [
+      "No official Team Round duration is encoded, so there is no live countdown.",
+      "Fifteen-person physical-room, card, and proctor logistics are not reproduced.",
+      "Device collection, scoring-room substitution reporting, and live meet tie-breaks are not simulated."
+    ],
+    "content_standard": {
+      "name": "icpc_three_component_content_standard",
+      "version": "1.1",
+      "applied_at": "2026-08-17",
+      "reference_card": "data/rules/icpc",
+      "official_facts_policy": "competition_specific_primary_sources_only",
+      "scope": [
+        "competition_constraints",
+        "collaboration_operations",
+        "evaluation_and_compliance",
+        "runtime_fidelity"
+      ]
+    },
+    "source_review": {
+      "reviewed_at": "2026-08-17",
+      "audit_report": "docs/rule_card_icpc_standard_gap_audit_2026-08-17.md",
+      "coverage_grade": "B",
+      "completion_status": "primary_rules_partial_or_variant_selector_required",
+      "claim_policy": "unknown_official_values_remain_null_or_explicitly_unresolved",
+      "known_gaps": [
+        "The official ARML/IRML rules page does not establish a Team Round wall-clock duration."
+      ]
+    }
+  },
+  "comparability": {
+    "overall": "proxy",
+    "dimensions": {
+      "roster": "official",
+      "timing": "adapted_turn_budget_clock_unspecified",
+      "tools": "equivalent",
+      "scoring": "gold_proxy_of_official_five_point_items",
+      "environment": "partial",
+      "collaboration": "observable_proxy",
+      "information": "shared_public_rules",
+      "communication": "adapted_coordination_budget",
+      "deliberation": "structured_trace_overlay",
+      "eligibility_and_logistics": "role_immersion_text_only",
+      "individual_power_and_relay": "specified_not_run"
+    }
+  },
+  "deliverable": {
+    "answer_format": "Submit the team's final answers in numbered order, using exact values when required.",
+    "shared": true,
+    "mime_types": [
+      "text/plain"
+    ],
+    "task_types": [
+      "team_contest"
+    ],
+    "official_deliverable": "answer_sheet",
+    "official_mime_types": [
+      "text/plain"
+    ]
+  }
+}

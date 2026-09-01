@@ -1,0 +1,204 @@
+{
+  "schema_version": "1.0",
+  "rule_id": "ethics_bowl_nhseb:draft_v1",
+  "competition_id": "ethics_bowl_nhseb",
+  "profile": "proxy",
+  "protocol": "presentation_and_cross_examination",
+  "team": {
+    "active_min": 3,
+    "active_default": 5,
+    "active_max": 5,
+    "roster_max": 7,
+    "range_basis": "source_record",
+    "official_roster_note": "A team has three to seven students; no more than five are seated in a match.",
+    "collaboration": "Only the seated members participate in a match; they may confer in the designated periods, while the non-presenting team remains silent during the other team's speaking period."
+  },
+  "execution": {
+    "official_minutes": null,
+    "rules_edition": "2025-2026",
+    "required_selectors": [
+      "competition_scope",
+      "match_mode"
+    ],
+    "selector_default": {
+      "competition_scope": "regional",
+      "match_mode": "in_person"
+    },
+    "official_phases": [
+      {
+        "phase": "presentation_conferral",
+        "minutes": 2
+      },
+      {
+        "phase": "presentation",
+        "minutes_by_scope": {
+          "regional": 5,
+          "divisional_or_national": 6
+        }
+      },
+      {
+        "phase": "commentary_conferral",
+        "minutes": 2
+      },
+      {
+        "phase": "commentary",
+        "minutes": 3
+      },
+      {
+        "phase": "response_conferral",
+        "minutes": 2
+      },
+      {
+        "phase": "response",
+        "minutes": 3
+      },
+      {
+        "phase": "judge_questions",
+        "minutes": 10
+      }
+    ],
+    "second_case_role_reversal": "specified_only"
+  },
+  "allowed_tools": [
+    "query_rules"
+  ],
+  "resources": {
+    "internet": "forbidden",
+    "calculator": "forbidden",
+    "code_execution": "forbidden",
+    "paper_pencil": "organizer_provided_scratch_paper_only",
+    "provided_materials_only": true,
+    "personal_timer": "non_networked_non_storage_reference_only"
+  },
+  "human_constraints": [
+    "A registered team has at least three and at most seven students, with no more than five seated for one match.",
+    "Seated participants are selected before the match opens, and substitution is not allowed during a match.",
+    "Organizer-provided scratch paper may be used, but outside notes and materials are prohibited and all match materials are collected afterward.",
+    "A team timer may not store data or connect to the internet, may not time the opposing team, and is subordinate to the moderator's official time.",
+    "The presenting team has two minutes to confer, followed by five minutes at a regional event or six minutes at a divisional playoff or National Championship.",
+    "The opposing team has two minutes to confer and three minutes to comment; the presenting team then has two minutes to confer and three minutes to respond.",
+    "The judges' question-and-answer period lasts up to ten minutes; a team may briefly confer before answering a judge.",
+    "When one team speaks, the other team must remain silent, although it may quietly take notes where the rules permit.",
+    "The two teams reverse roles for the second half of the match and a new case and question are used.",
+    "Regional rule variations require NHSEB approval and must be communicated to participating teams."
+  ],
+  "rules_text": "National High School Ethics Bowl. The team prepares a case, presents it, and responds to judges or opponents. The source-recorded active team may have 3 to 5 members; the runner default is 5; official roster note: A team has three to seven students; no more than five are seated in a match. Only the seated members participate in a match; they may confer in the designated periods, while the non-presenting team remains silent during the other team's speaking period. Banned during the contest: internet access, calculators and running code. Conditional: paper and pencil is organizer provided scratch paper only and personal timer is non networked non storage reference only. Work only from the materials provided with the problem. Submit one shared live oral match performance; Provide the presentation, opposing-team commentary, response to commentary, and answers to judges as distinct labeled sections. Treat unexposed physical, oral, live-opponent, judge, timing, or environment mechanisms as unavailable rather than simulated facts.",
+  "provenance": {
+    "status": "source_enriched_v1",
+    "sources": [
+      {
+        "title": "National High School Ethics Bowl Rules Manual",
+        "url": "https://nhseb.org/s/Rules-Manual-2025-2026.pdf",
+        "authority": "official",
+        "edition": "2025-2026",
+        "retrieved_at": "2026-08-17",
+        "sections": [
+          "pp. 6-9 match format, phase timing, scoring, materials, and timers",
+          "pp. 12 and 15 regional versus divisional/national presentation time",
+          "pp. 17-23 team composition, team rules, judges, and moderator procedure",
+          "pp. 24-26 sanctions"
+        ],
+        "archive_status": "archived",
+        "local_file": "data/rules/sources/ethics_bowl_nhseb/2025-2026_NHSEB_Rules_Manual.pdf"
+      }
+    ],
+    "adaptations": [
+      "max_turns is a safety budget, not necessarily the official wall-clock limit",
+      "specialist roles are a research roster overlay",
+      "physical/oral/live opponent fidelity may be incomplete in src/",
+      "role-specific rule expertise is a benchmark coordination overlay",
+      "structured deliberation actions are a benchmark traceability overlay",
+      "limited communication is a benchmark pressure overlay, not an official message cap"
+    ],
+    "crawl_status": "ok",
+    "crawled_excerpts": [
+      {
+        "url": "https://nhseb.org/case-library",
+        "excerpt": "Case Library &mdash; National High School Ethics Bowl 0 Skip to Content About Home Mission, History, and Impact From the Director People FAQs News Competition How Ethics Bowl Works Rules and Documents Start a Team Competitive Awards Organizer Hub Cases National Case Set (2025-2026) Case Library Case Submission Events Regional Competitions Divisional Playoffs National Championship NHSEBOne Resources NHSEBAcademy Advocacy Resources Discord Community Media Photo Galleries Video Library Just for Fun"
+      }
+    ],
+    "enriched_at": "2026-08-12T16:53:55.313802+00:00",
+    "research_confidence": "medium",
+    "proxy_limitations": [
+      "Oral presentation + commentary + judge Q&A cannot be reduced to static essay answers without acknowledging the format mismatch.",
+      "The runner does not reproduce a live opponent, moderator, three independent judges, oral timing, approved regional variations, or sanctions workflow.",
+      "A structured text response cannot reproduce judges' private scoring and match votes."
+    ],
+    "research_merged_at": "2026-08-12T17:04:20.892021+00:00",
+    "rules_text_source": "composed_from_card_fields_v2",
+    "research_reports": [
+      "docs/rules_crawl_2026-08-11.md"
+    ],
+    "research_graded_at": "2026-08-11",
+    "content_standard": {
+      "name": "icpc_three_component_content_standard",
+      "version": "1.1",
+      "applied_at": "2026-08-17",
+      "reference_card": "data/rules/icpc",
+      "official_facts_policy": "competition_specific_primary_sources_only",
+      "scope": [
+        "competition_constraints",
+        "collaboration_operations",
+        "evaluation_and_compliance",
+        "runtime_fidelity"
+      ]
+    },
+    "research_notes": [
+      "You must behave like a human teammate under official contest rules.",
+      "Do not claim tools, internet, or materials that the rule card forbids.",
+      "Do not look up answer keys or hidden solutions.",
+      "Competition uses case-based oral ethics bowl format (same family as APPE); detailed timing/roster rules live in NHSEB competition rules (not fully fetched from case-library page)."
+    ],
+    "source_review": {
+      "reviewed_at": "2026-08-17",
+      "audit_report": "docs/rule_card_icpc_standard_gap_audit_2026-08-17.md",
+      "coverage_grade": "A",
+      "completion_status": "primary_rules_available_exact_scoring_may_still_need_runtime_support",
+      "claim_policy": "unknown_official_values_remain_null_or_explicitly_unresolved",
+      "known_gaps": []
+    },
+    "discovery_sources": [
+      {
+        "title": "NHSEB",
+        "url": "https://nhseb.org/case-library",
+        "retrieved_at": "2026-08-12",
+        "local_text": "data/rules/sources/ethics_bowl_nhseb/01_case-library.txt"
+      },
+      {
+        "title": "https://nhseb.org/",
+        "url": "https://nhseb.org/",
+        "retrieved_at": "2026-08-11",
+        "from_report": "docs/rules_crawl_2026-08-11.md"
+      }
+    ],
+    "discard_pre_source_review_rule_sections": true,
+    "source_correction_revision": "2026-08-17-v1"
+  },
+  "comparability": {
+    "overall": "proxy",
+    "dimensions": {
+      "roster": "approximate",
+      "timing": "adapted",
+      "tools": "src_tool_surface",
+      "scoring": "rubric",
+      "environment": "proxy",
+      "communication": "adapted_coordination_budget",
+      "deliberation": "structured_trace_overlay",
+      "information": "role_specialized_tracking_overlay"
+    }
+  },
+  "deliverable": {
+    "answer_format": "Provide the presentation, opposing-team commentary, response to commentary, and answers to judges as distinct labeled sections.",
+    "shared": true,
+    "mime_types": [
+      "text/plain"
+    ],
+    "task_types": [
+      "ethics_case_set"
+    ],
+    "official_deliverable": "live_oral_match_performance",
+    "official_mime_types": [
+      "audio/x-live-speech"
+    ]
+  }
+}

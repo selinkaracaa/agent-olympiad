@@ -1,0 +1,345 @@
+{
+  "agent_roles": [
+    {
+      "name": "Agent_1",
+      "title": "captain and batch submitter",
+      "may_submit": true,
+      "duties": [
+        "Decide when the current batch is good enough to commit.",
+        "Keep a running list of which problems are answered and which are open.",
+        "Submit only after the format and rule checks pass."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "timeline",
+        "collaboration_protocol",
+        "deliverable_format"
+      ]
+    },
+    {
+      "name": "Agent_2",
+      "title": "fast solver A",
+      "may_submit": false,
+      "duties": [
+        "Clear the easy problems in the current batch quickly and accurately.",
+        "Hand off anything that needs deep work instead of stalling the batch."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "timeline"
+      ]
+    },
+    {
+      "name": "Agent_3",
+      "title": "fast solver B",
+      "may_submit": false,
+      "duties": [
+        "Clear the easy problems in the current batch quickly and accurately.",
+        "Hand off anything that needs deep work instead of stalling the batch."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "resource_policy"
+      ]
+    },
+    {
+      "name": "Agent_4",
+      "title": "verifier",
+      "may_submit": false,
+      "duties": [
+        "Challenge weak arguments and demand an independent check.",
+        "Reject an answer rather than let an unverified one be submitted."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "evaluation_criteria",
+        "deliverable_format"
+      ]
+    },
+    {
+      "name": "Agent_5",
+      "title": "strategy lead",
+      "may_submit": false,
+      "duties": [
+        "Decide which problems are worth attempting for the points available.",
+        "Call the trade-off between accuracy and speed for each batch."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "timeline",
+        "collaboration_protocol",
+        "deliverable_format"
+      ]
+    },
+    {
+      "name": "Agent_6",
+      "title": "scribe",
+      "may_submit": false,
+      "duties": [
+        "Keep the shared workspace readable and current.",
+        "Write answers in the required format as they are settled."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "deliverable_format",
+        "evaluation_criteria"
+      ]
+    },
+    {
+      "name": "Agent_7",
+      "title": "backup solver",
+      "may_submit": false,
+      "duties": [
+        "Take the problems nobody has claimed rather than duplicating work.",
+        "Say early when a problem is beyond the remaining time."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "evaluation_criteria"
+      ]
+    },
+    {
+      "name": "Agent_8",
+      "title": "completeness checker",
+      "may_submit": false,
+      "duties": [
+        "Scan for unanswered problems before the team submits.",
+        "Confirm every required part of the deliverable is present."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "evaluation_criteria",
+        "deliverable_format"
+      ]
+    },
+    {
+      "name": "Agent_9",
+      "title": "specialist and completeness checker",
+      "may_submit": false,
+      "duties": [
+        "Scan for unanswered problems before the team submits.",
+        "Confirm every required part of the deliverable is present."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "evaluation_criteria",
+        "deliverable_format"
+      ]
+    },
+    {
+      "name": "Agent_10",
+      "title": "specialist and completeness checker",
+      "may_submit": false,
+      "duties": [
+        "Scan for unanswered problems before the team submits.",
+        "Confirm every required part of the deliverable is present."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "evaluation_criteria",
+        "deliverable_format"
+      ]
+    },
+    {
+      "name": "Agent_11",
+      "title": "specialist and completeness checker",
+      "may_submit": false,
+      "duties": [
+        "Scan for unanswered problems before the team submits.",
+        "Confirm every required part of the deliverable is present."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "evaluation_criteria",
+        "deliverable_format"
+      ]
+    },
+    {
+      "name": "Agent_12",
+      "title": "specialist and completeness checker",
+      "may_submit": false,
+      "duties": [
+        "Scan for unanswered problems before the team submits.",
+        "Confirm every required part of the deliverable is present."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": [
+        "evaluation_criteria",
+        "deliverable_format"
+      ]
+    }
+  ],
+  "rule_sections": {
+    "competition_format": [
+      "Competition model: The team works through material released in stages and commits answers under the event sequence.",
+      "Benchmark adaptation: the runner permits 8 to 12 active agents and defaults to 12; official roster note: The 2026 FAQ states no official team-size recommendation; 8-12 is only the runner's configured range."
+    ],
+    "timeline": [
+      "Source-recorded timing: Open-ended hunt timing; this row is one puzzle."
+    ],
+    "resource_policy": [
+      "Source-recorded resource policy: Banned during the contest: calculators and help from other teams. Permitted: internet access and running code. Paper and pencil are always available.",
+      "Source-recorded competition rule: Teams may coordinate internally and use ordinary solving tools and internet resources unless the current hunt or puzzle states a narrower rule."
+    ],
+    "collaboration_protocol": [
+      "Source-recorded collaboration rule: The configured agents may freely coordinate inside their benchmark team; they may not obtain answers from another competing team.",
+      "Source-recorded competition rule: The MIT Mystery Hunt does not publish an official team-size recommendation or an 8-12 person maximum.",
+      "Source-recorded competition rule: A team must not ask another competing team for puzzle answers."
+    ],
+    "integrity_and_compliance": [
+      "Benchmark safety rule: do not use hidden solutions, evaluator internals, unauthorized outside assistance, or resources forbidden by this competition."
+    ],
+    "deliverable_format": [
+      "Runner answer contract: Submit the team's final answers in numbered order, using exact values when required.",
+      "Official deliverable: puzzle answer.",
+      "Source-recorded competition rule: Answers must be submitted in the canonical answer form accepted by the current hunt's answer mechanism.",
+      "Source-recorded competition rule: The 2026 winner must satisfy the hunt's MIT-student eligibility requirement and is expected to write the following year's hunt."
+    ],
+    "evaluation_criteria": [
+      "Repository evaluation status: Task performance is specified per problem_or_question in gold mode, but the repository evaluator is unassigned; do not invent a completed score.",
+      "Source-recorded competition rule: Answers must be submitted in the canonical answer form accepted by the current hunt's answer mechanism.",
+      "Source-recorded competition rule: Remote participation does not reproduce every in-person interaction, and the in-person runaround is required to win the 2026 hunt."
+    ],
+    "runtime_limitations": [
+      "Runtime limitation: Index team_size 12 is a modeling stub vs real 30–100+ teams.",
+      "Runtime limitation: Physical runarounds, interactions, and meta structure are out of scope for isolated puzzle rows.",
+      "Runtime limitation: Unrestricted web/tools make 'fair human comparison' poorly defined for LLM agents.",
+      "Runtime limitation: The configured 8-12-agent range is a benchmark capacity choice, not an official roster limit.",
+      "Runtime limitation: Question-level rows omit full-hunt unlocking, metas, hints, interactions, rate limits, runaround, and coin verification."
+    ]
+  },
+  "information_policy": {
+    "mode": "role_specialized",
+    "shared": [
+      "problem",
+      "contest_rules",
+      "team_discussion",
+      "scratchpad"
+    ],
+    "coordination_requirement": "All teammates may consult the complete public contest rules. Private reasoning becomes shared state only when communicated; assigned rule expertise creates tracking responsibility, not exclusive access."
+  },
+  "agent_constraints": [
+    "Apply this competition's own roster, timing, tool, collaboration, submission, and scoring rules; do not import rules from another contest.",
+    "The configured agents may freely coordinate inside their benchmark team; they may not obtain answers from another competing team.",
+    "Banned during the contest: calculators and help from other teams. Permitted: internet access and running code. Paper and pencil are always available.",
+    "Treat private reasoning and notes as unknown to teammates until you communicate the decision-relevant content.",
+    "Do not access hidden solutions, answer keys, evaluator internals, or unauthorized outside problem-solving help.",
+    "Track which material is currently released, which answers are provisional, and which answers are already committed; do not use or claim access to unreleased stages.",
+    "Record dependencies between ordinary puzzles, metas, and final objectives so that handoffs preserve the state needed by later solvers.",
+    "Treat the configured 8-12-agent roster as a benchmark adaptation, not an official MIT Mystery Hunt team-size limit.",
+    "Separate task-level answer checking from full-hunt hint, interaction, meta, runaround, and coin-finding state that the current benchmark does not reproduce.",
+    "Only designated submitters may make the shared submission: Agent_1.",
+    "Use only the official mechanisms that the current task actually exposes; do not claim physical, oral, live-opponent, judge, or environment actions that were not observed."
+  ],
+  "deliberation": {
+    "mode": "unstructured",
+    "min_challenges": 0,
+    "evaluation_dimensions": [
+      "evidence_responsiveness",
+      "decision_traceability"
+    ]
+  },
+  "communication": {
+    "mode": "unlimited"
+  },
+  "simulation": {
+    "max_turns": 30,
+    "scheduler": "src_collaboration_draft",
+    "turn_budget_basis": "standardized experiment budget: 30 global turns; official contest timing is recorded separately",
+    "full_hunt_unlock_state": "unavailable",
+    "hint_and_interaction_state": "unavailable",
+    "runaround_and_coin_state": "unavailable",
+    "open_table_coach": {
+      "enabled": true,
+      "status": "counterfactual_synthetic_baseline_not_official_contest_rule",
+      "may_submit": false,
+      "allowed_tools": [],
+      "counts_toward_shared_api_and_token_budget": true,
+      "contestant_turn_policy": {
+        "mode": "private_deliberation_then_single_action",
+        "allowed_actions": [
+          "work",
+          "speak",
+          "rest"
+        ],
+        "exactly_one_action": true,
+        "unstructured_response": "rest",
+        "final_submission": "synthesis_only",
+        "visibility": {
+          "think": "private",
+          "work": "shared",
+          "speak": "team",
+          "rest": "private"
+        },
+        "max_chars_by_action": {
+          "think": 2400,
+          "work": 2400,
+          "speak": 320,
+          "rest": 80
+        },
+        "memory_entries": {
+          "private_think_per_agent": 3,
+          "shared_work": 18,
+          "group_messages": 12,
+          "public_messages": 24
+        },
+        "private_think_calls_per_turn": 1,
+        "discussion_policy": {
+          "report_after_work": true,
+          "silent_work_turn_requires_discussion": true,
+          "conflicts_require_targeted_speak": true
+        }
+      },
+      "precontest_brief": {
+        "turn": 1,
+        "problem_access": false,
+        "allowed_actions": [
+          "speak",
+          "sleep"
+        ],
+        "advice_scope": [
+          "time allocation",
+          "task triage",
+          "communication protocol",
+          "independent verification",
+          "final answer-sheet reconciliation"
+        ]
+      },
+      "opening_discussion": {
+        "turn": 2,
+        "problem_access": true,
+        "allowed_actions": [
+          "speak",
+          "sleep"
+        ],
+        "purpose": "summarize the contestants' opening discussion into priorities and checkpoints, and suggest temporary working groups that contestants may later change"
+      },
+      "after_opening_access": false,
+      "min_turns": 10
+    }
+  }
+}

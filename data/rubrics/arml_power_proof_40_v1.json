@@ -1,0 +1,40 @@
+{
+  "rubric_id": "arml_power_proof_40_v1",
+  "title": "ARML Power Contest proof-packet rubric",
+  "total_points": 40,
+  "criteria": [
+    {
+      "id": "correctness",
+      "name": "Mathematical correctness",
+      "max_score": 16,
+      "observable": true,
+      "description": "Results and proofs are mathematically correct against the official marking notes."
+    },
+    {
+      "id": "completeness",
+      "name": "Coverage of required parts",
+      "max_score": 12,
+      "observable": true,
+      "description": "All required sub-parts are attempted with substantive solutions."
+    },
+    {
+      "id": "reasoning",
+      "name": "Clarity of reasoning",
+      "max_score": 8,
+      "observable": true,
+      "description": "Arguments are structured, justified, and readable."
+    },
+    {
+      "id": "presentation",
+      "name": "Written presentation",
+      "max_score": 4,
+      "observable": true,
+      "description": "Notation, organization, and exposition are professional."
+    }
+  ],
+  "not_observable_from_deck": [
+    "oral defense"
+  ],
+  "dataset": "arml_power",
+  "derived_from": "data/rubrics/team_power_proof_40_v1.json"
+}

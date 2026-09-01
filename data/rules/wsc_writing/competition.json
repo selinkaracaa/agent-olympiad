@@ -1,0 +1,102 @@
+{
+  "schema_version": "1.0",
+  "rule_id": "wsc_writing:draft_v1",
+  "competition_id": "wsc_writing",
+  "profile": "proxy",
+  "protocol": "staged_collaborative_writing",
+  "team": {
+    "active_min": 3,
+    "active_default": 3,
+    "active_max": 3,
+    "collaboration": "Collaborate only within the team under contest rules.",
+    "range_basis": "source_record"
+  },
+  "execution": {
+    "official_minutes": null
+  },
+  "allowed_tools": [
+    "query_rules"
+  ],
+  "resources": {
+    "internet": "forbidden",
+    "calculator": "forbidden",
+    "code_execution": "forbidden",
+    "paper_pencil": "allowed",
+    "provided_materials_only": true,
+    "electronic_devices": "forbidden"
+  },
+  "human_constraints": [
+    "The team receives three to four prompts drawn from the six World Scholar's Cup subject areas.",
+    "The team answers exactly three prompts.",
+    "Each of the three teammates answers a different prompt.",
+    "First prepare with teammates without using devices, then write independently, then review one another's work at the end.",
+    "Write the response with pen or pencil.",
+    "Responses may use a form appropriate to the prompt, including creative pieces, persuasive arguments, poems, or essays."
+  ],
+  "rules_text": "World Scholar's Cup - Collaborative Writing. The team plans together, writes under the event's individual-work stage, and completes the permitted review stage. The source-recorded active team has 3 members. Collaborate only within the team under contest rules. Banned during the contest: internet access, calculators, running code and personal electronics. Paper and pencil are always available. Work only from the materials provided with the problem. Submit one shared written essay; Submit three written responses, one per teammate, with each response answering a different prompt. Treat unexposed physical, oral, live-opponent, judge, timing, or environment mechanisms as unavailable rather than simulated facts.",
+  "provenance": {
+    "status": "source_grounded",
+    "manifest": "data/rules/sources/wsc_writing/manifest.json",
+    "adaptations": [
+      "max_turns is a safety budget, not necessarily the official wall-clock limit",
+      "specialist roles are a research roster overlay",
+      "physical/oral/live opponent fidelity may be incomplete in src/",
+      "role-specific rule expertise is a benchmark coordination overlay",
+      "structured deliberation actions are a benchmark traceability overlay",
+      "limited communication is a benchmark pressure overlay, not an official message cap"
+    ],
+    "research_confidence": "medium",
+    "proxy_limitations": [
+      "Neither the fetched official events page nor the official rubric PDF states a numeric stage schedule.",
+      "The rubric PDF contains evaluation questions only; it does not establish a rule that peer editors may not finish an incomplete response."
+    ],
+    "content_standard": {
+      "name": "icpc_three_component_content_standard",
+      "version": "1.1",
+      "applied_at": "2026-08-17",
+      "reference_card": "data/rules/icpc",
+      "official_facts_policy": "competition_specific_primary_sources_only",
+      "scope": [
+        "competition_constraints",
+        "collaboration_operations",
+        "evaluation_and_compliance",
+        "runtime_fidelity"
+      ]
+    },
+    "source_review": {
+      "reviewed_at": "2026-08-17",
+      "audit_report": "docs/rule_card_icpc_standard_gap_audit_2026-08-17.md",
+      "coverage_grade": "B",
+      "completion_status": "primary_rules_partial_or_variant_selector_required",
+      "claim_policy": "unknown_official_values_remain_null_or_explicitly_unresolved",
+      "known_gaps": []
+    }
+  },
+  "comparability": {
+    "overall": "proxy",
+    "dimensions": {
+      "roster": "three_explicit_writers",
+      "timing": "unknown_official",
+      "tools": "src_tool_surface",
+      "scoring": "rubric",
+      "environment": "partial",
+      "communication": "adapted_coordination_budget",
+      "deliberation": "structured_trace_overlay",
+      "information": "role_specialized_tracking_overlay"
+    }
+  },
+  "deliverable": {
+    "answer_format": "Submit three written responses, one per teammate, with each response answering a different prompt.",
+    "shared": true,
+    "mime_types": [
+      "text/plain"
+    ],
+    "task_types": [
+      "collaborative_writing_discussion"
+    ],
+    "official_deliverable": "written_essay",
+    "official_mime_types": [
+      "text/plain"
+    ]
+  }
+}

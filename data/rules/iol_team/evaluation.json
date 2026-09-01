@@ -1,0 +1,183 @@
+{
+  "evaluation_guidance": "Report performance, rule compliance, and collaboration quality separately. Official performance is the International Jury's mark of one team script: explanations are required unless the question says otherwise, unexplained correct answers score lower, and alternative conflicting answers or explanations lose marks. Team medals are at most one gold, two silver, and three bronze, plus Honourable Mentions at Jury discretion; Jury decisions are final and there is no appeal. Do not apply individual-contest 1:2:3 medal ratios or a programming-judge penalty to this team contest. Treat eligibility, leader non-participation, and host logistics as contestant conscience. Collaboration evidence should cover joint data mapping, communicated counterexamples, one-language script merge, explanation completeness, and avoidance of unmerged solo writeups. Do not reward a fixed captain/analyst/tester/editor split, equal airtime, or message volume by themselves. Do not treat four independent high-quality writeups as good IOL team-contest collaboration.",
+  "scoring": {
+    "mode": "gold",
+    "unit": "problem_or_question",
+    "evaluator_id": "rubric_llm_v1",
+    "evaluator_status": "ready",
+    "rubric_path": "data/rubrics/iol_team_worked_answer_100_v1.json",
+    "evaluator_strategy": "structured_rubric_llm_judge",
+    "official_performance": {
+      "ranking_order": [
+        "jury_mark_of_single_team_script_descending",
+        "medal_caps_then_honourable_mentions_at_jury_discretion"
+      ],
+      "single_script": true,
+      "explanations_required_unless_instructed_otherwise": true,
+      "unexplained_correct_answer_scores_lower": true,
+      "alternative_conflicting_answers_score_zero_or_reduced": true,
+      "explanation_is_systematic_facts_not_discovery_diary": true,
+      "team_gold_cap": 1,
+      "team_silver_cap": 2,
+      "team_bronze_cap": 3,
+      "honourable_mentions": "any_number_at_jury_discretion",
+      "jury_decisions_final": true,
+      "appeal_accepted": false,
+      "leaders_receive_own_team_breakdown": true,
+      "individual_contest_medal_ratio_does_not_apply": true,
+      "correctness_alone_insufficient": true,
+      "must_report_even_when_forms_are_right": [
+        "presence_and_quality_of_explanations",
+        "conflicting_alternatives_left_on_script",
+        "working_language_consistency",
+        "whether_one_script_or_multiple_unmerged_drafts"
+      ],
+      "derived_reporting": [
+        "rubric_subscores",
+        "explanation_completeness",
+        "counterexample_use",
+        "script_merge_incidents",
+        "language_mixing_risk"
+      ]
+    },
+    "sanctions": {
+      "possible_outcomes": [
+        "script_or_item_score_reduced",
+        "immediate_disqualification",
+        "ethics_or_board_sanction"
+      ],
+      "example_triggers": [
+        "forbidden_device_or_internet",
+        "dictionary_or_own_paper",
+        "leader_or_outside_solving_help",
+        "alternative_conflicting_answers",
+        "conduct_code_violation"
+      ]
+    },
+    "rule_compliance": {
+      "reported_separately_from_performance": true,
+      "violation_types": [
+        {
+          "id": "ineligible_or_fifth_contestant",
+          "condition": "The team invents a fifth contestant, a mid-contest substitute, or an age or enrollment history that would make a member ineligible."
+        },
+        {
+          "id": "leader_or_outside_solving_help",
+          "condition": "The team leader or any outsider provides contest-time analyses, answers, or explanation text."
+        },
+        {
+          "id": "independent_individual_writeups",
+          "condition": "Contestants treat the team contest as four independent individual scripts instead of one joint solution."
+        },
+        {
+          "id": "multiple_working_languages_on_script",
+          "condition": "The team submits a solution that is not in one team working language, except for a limited clarifying fragment that risks marks."
+        },
+        {
+          "id": "forbidden_device_or_internet",
+          "condition": "A contestant uses a phone, laptop, tablet, smartwatch, calculator, or other outside-world or Internet device."
+        },
+        {
+          "id": "dictionary_printed_matter_or_own_paper",
+          "condition": "A contestant uses a dictionary, other printed matter, or paper not supplied by the Local Organising Committee."
+        },
+        {
+          "id": "hidden_key_or_published_solution",
+          "condition": "A contestant accesses hidden answers, published solutions, or Jury internals."
+        },
+        {
+          "id": "alternative_conflicting_answers",
+          "condition": "The script offers alternative answers or conflicting explanations instead of one reconciled account."
+        },
+        {
+          "id": "missing_required_explanation",
+          "condition": "An item that required explanation is submitted as a bare form list."
+        },
+        {
+          "id": "imported_individual_or_programming_rules",
+          "condition": "The team applies individual-contest medal ratios, a programming-judge topology, or another olympiad's device or scoring rules."
+        },
+        {
+          "id": "appeal_of_jury_decision",
+          "condition": "The team treats a Jury mark as appealable."
+        },
+        {
+          "id": "conduct_code_violation",
+          "condition": "A participant engages in bullying, harassment, or other conduct forbidden by the IOL code of behaviour."
+        }
+      ],
+      "reporting": [
+        "total_violations",
+        "violations_by_type",
+        "first_violation_time",
+        "sanctions_applied",
+        "performance_with_illegal_actions",
+        "compliant_performance"
+      ]
+    },
+    "collaboration_quality": {
+      "official_iol_team_scoring": false,
+      "reported_separately_from_performance": true,
+      "metric_groups": {
+        "joint_data_mapping": [
+          "time_to_shared_candidate_mapping",
+          "forms_accounted_for_across_the_paradigm",
+          "duplicate_analysis_before_coverage"
+        ],
+        "counterexample_and_challenge": [
+          "unsupported_generalizations_challenged",
+          "counterexamples_that_changed_the_script",
+          "evidence_backed_disagreements"
+        ],
+        "script_reconciliation": [
+          "one_script_versus_unmerged_drafts",
+          "conflicting_alternatives_removed",
+          "working_language_consistency",
+          "handoff_completeness"
+        ],
+        "explanation_quality": [
+          "systematic_fact_summary_not_discovery_diary",
+          "explanation_caused_mark_preservation",
+          "bare_forms_without_required_explanation"
+        ],
+        "team_room_coordination": [
+          "discovery_to_team_awareness_latency",
+          "private_reasoning_loss",
+          "useful_parallel_work_on_one_problem"
+        ],
+        "decision_quality_under_budget": [
+          "decision_relevant_communication",
+          "unresolved_disagreement_at_submission"
+        ]
+      },
+      "anti_metrics": [
+        "Do not reward message count by itself, especially under the 18/4 communication budget.",
+        "Do not reward a fixed captain, analyst, tester, and editor split by itself.",
+        "Do not reward equal airtime by itself.",
+        "Do not treat four independent high-quality writeups as good IOL team-contest collaboration.",
+        "Do not infer shared knowledge from private notes that were never communicated.",
+        "Do not treat a correct form list as a full Jury mark if required explanations are missing.",
+        "Do not apply individual-contest medal ratios to the team contest."
+      ]
+    },
+    "current_repository_availability": {
+      "evaluator_ready": true,
+      "evaluator_status": "ready",
+      "rubric_llm_proxy_for_jury": true,
+      "live_international_jury": false,
+      "allocated_team_room": false,
+      "handwritten_script_and_envelope": false,
+      "invigilator_and_paper_supply": false,
+      "three_versus_four_hour_selector": false,
+      "eligibility_and_leader_state": false,
+      "role_immersion_eligibility_text": true,
+      "medal_caps_documented": true,
+      "explanation_standard_documented": true,
+      "official_environment_fully_reproduced": false,
+      "official_wall_clock_enforced": false
+    }
+  },
+  "submission": {
+    "max_count": 1
+  }
+}

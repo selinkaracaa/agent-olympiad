@@ -1,0 +1,137 @@
+{
+  "evaluation_guidance": "Report official performance, rule compliance, collaboration quality, and current repository availability separately. Official performance may record only verified championship identity and award-structure facts; do not invent a Team Round scoring formula, duration, or materials rule. Repository gold scoring per problem is deferred_benchmark_metadata_missing. Rule compliance covers outside help, hidden-answer access, default-deny tool use, and treating Individual or Relay items as Team Round work. Collaboration quality is a non-official research layer: assess allocation, evidence exchange, verification, handoffs, recovery, and communication efficiency. Do not reward fixed roles, equal airtime, or message volume by themselves, and do not treat six independent solo solves as good Team Round collaboration. Never treat a text sheet as proof that a live clock, paper collection, or official booklet was present.",
+  "scoring": {
+    "mode": "gold",
+    "unit": "problem",
+    "evaluator_id": null,
+    "evaluator_status": "unassigned",
+    "recommended_evaluator_id": "gold_answer_v1",
+    "official_performance": {
+      "source_status": "source_grounded",
+      "source_review_status": "blocked_no_adequate_current_primary_ruleset",
+      "mechanics_completeness": "identity_and_award_structure_only",
+      "mode": "gold",
+      "unit": "problem",
+      "criteria": [
+        "Verified official facts stop at championship identity, the Individual/Team/Relay structure, the three levels, and published award-structure lines. They do not include a current Team Round scoring formula."
+      ],
+      "mechanics": [
+        "The championship includes Individual, Team, and Relay examinations at Junior, Intermediate, and Advanced levels.",
+        "Awards are issued separately for teams, individuals, and relay at each level.",
+        "Relay-award ties are broken by Team Round total, then Individual Round total."
+      ],
+      "tie_breakers": [
+        "Relay awards: Team Round total, then Individual Round total. Team Round tie-breakers are unknown."
+      ],
+      "source_refs": [
+        "WMTC International homepage, Team Awards / Individual Awards / Relay Awards, retrieved 2026-08-19"
+      ],
+      "unresolved": [
+        "current official Team Round duration",
+        "current official Team Round scoring formula and problem weights",
+        "current official materials and device policy",
+        "current official team size beyond historical six-person practice",
+        "2026 homepage announcement figures for Individual 20+40 and Relay 7x3, pending a binding booklet"
+      ],
+      "repository_evaluator_id": null,
+      "repository_evaluator_status": "deferred_benchmark_metadata_missing"
+    },
+    "rule_compliance": {
+      "reported_separately_from_performance": true,
+      "violation_types": [
+        {
+          "id": "independent_remote_solves",
+          "condition": "Contestants treat the Team Round as six independent remote solves instead of one shared-sheet team."
+        },
+        {
+          "id": "individual_or_relay_contamination",
+          "condition": "The team answers Individual or Relay items as if they were Team Round work."
+        },
+        {
+          "id": "unauthorized_tool_or_resource",
+          "condition": "A contestant uses a calculator, phone, internet, or other personal electronics under this session's default-deny, or uses materials that were not provided."
+        },
+        {
+          "id": "outside_assistance",
+          "condition": "The team receives problem-solving help from a coach, another team, or any outsider."
+        },
+        {
+          "id": "hidden_solution_or_evaluator_access",
+          "condition": "A contestant accesses hidden answers, tests, rubrics, evaluator internals, or judge state not released by the event."
+        },
+        {
+          "id": "invented_official_rule",
+          "condition": "The team invents a clock, scoring formula, materials list, or format change that officials have not issued."
+        }
+      ],
+      "reporting": [
+        "total_violations",
+        "violations_by_type",
+        "first_violation_turn",
+        "performance_with_illegal_actions",
+        "compliant_performance"
+      ]
+    },
+    "collaboration_quality": {
+      "official_wmtc_scoring": false,
+      "benchmark_diagnostic_only": true,
+      "reported_separately_from_performance": true,
+      "metric_groups": {
+        "task_allocation_and_coverage": [
+          "time_to_useful_task_allocation",
+          "duplicate_effort_before_coverage",
+          "workload_and_specialization_balance"
+        ],
+        "evidence_and_verification": [
+          "decision_relevant_evidence_shared",
+          "independent_checks",
+          "review_caused_corrections"
+        ],
+        "handoff_and_shared_state": [
+          "handoff_completeness",
+          "private_reasoning_loss",
+          "stale_state_decisions"
+        ],
+        "recovery_and_replanning": [
+          "failure_to_diagnosis_latency",
+          "new_evidence_before_retry",
+          "evidence_responsive_replanning"
+        ],
+        "communication_efficiency": [
+          "decision_relevant_communication",
+          "avoidable_message_overhead",
+          "unresolved_disagreement_at_submission"
+        ]
+      },
+      "anti_metrics": [
+        "Do not reward message count by itself.",
+        "Do not reward equal speaking time or fixed roles by itself.",
+        "Do not infer shared knowledge from private reasoning that was never communicated.",
+        "Do not let collaboration quality overwrite an official task score.",
+        "Do not treat six independent high-quality solo solves as good Team Round collaboration."
+      ]
+    },
+    "current_repository_availability": {
+      "evaluator_ready": false,
+      "evaluator_status": "deferred_benchmark_metadata_missing",
+      "official_environment_fully_reproduced": false,
+      "official_wall_clock_enforced": false,
+      "declared_unavailable_mechanisms": [
+        "current_official_booklet",
+        "live_team_round_clock",
+        "official_answer_sheet_collection",
+        "individual_and_relay_rounds"
+      ],
+      "proxy_limitations": [
+        "A current official booklet was not archived, so team-round duration, scoring, and materials policy remain unspecified official state.",
+        "The runner accepts a numbered text sheet instead of a collected paper answer sheet.",
+        "Individual and Relay examinations, live clocks, and in-person proctoring are not simulated."
+      ],
+      "required_selectors": [],
+      "submission_adaptation": "Official Team Round uses a paper answer sheet; the runner accepts numbered plain-text answers."
+    }
+  },
+  "submission": {
+    "max_count": 1
+  }
+}

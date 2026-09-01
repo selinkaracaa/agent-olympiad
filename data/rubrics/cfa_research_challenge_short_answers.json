@@ -1,0 +1,100 @@
+{
+  "_comment": "CFA Research Challenge champion recommendation labels from gold_label.expected_answer.",
+  "_dataset": "cfa_research_challenge",
+  "_kind": "short_answer_mapping",
+  "cfa_research_challenge_2008": {
+    "1": {
+      "expected": "BUY"
+    }
+  },
+  "cfa_research_challenge_2009": {
+    "1": {
+      "expected": "SELL"
+    }
+  },
+  "cfa_research_challenge_2010": {
+    "1": {
+      "expected": "BUY"
+    }
+  },
+  "cfa_research_challenge_2011": {
+    "1": {
+      "expected": "Accumulate"
+    }
+  },
+  "cfa_research_challenge_2012": {
+    "1": {
+      "expected": "BUY"
+    }
+  },
+  "cfa_research_challenge_2013": {
+    "1": {
+      "expected": "BUY"
+    }
+  },
+  "cfa_research_challenge_2014": {
+    "1": {
+      "expected": "BUY"
+    }
+  },
+  "cfa_research_challenge_2015": {
+    "1": {
+      "expected": "HOLD"
+    }
+  },
+  "cfa_research_challenge_2016": {
+    "1": {
+      "expected": "BUY"
+    }
+  },
+  "cfa_research_challenge_2017": {
+    "1": {
+      "expected": "BUY"
+    }
+  },
+  "cfa_research_challenge_2018": {
+    "1": {
+      "expected": "BUY"
+    }
+  },
+  "cfa_research_challenge_2019": {
+    "1": {
+      "expected": "BUY"
+    }
+  },
+  "cfa_research_challenge_2020": {
+    "1": {
+      "expected": "SELL"
+    }
+  },
+  "cfa_research_challenge_2021": {
+    "1": {
+      "expected": "BUY"
+    }
+  },
+  "cfa_research_challenge_2022": {
+    "1": {
+      "expected": "BUY"
+    }
+  },
+  "cfa_research_challenge_2023": {
+    "1": {
+      "expected": "BUY"
+    }
+  },
+  "cfa_research_challenge_2024": {
+    "1": {
+      "expected": "BUY"
+    }
+  },
+  "cfa_research_challenge_2025": {
+    "1": {
+      "expected": "BUY"
+    }
+  },
+  "cfa_research_challenge_2026": {
+    "1": {
+      "expected": "SELL"
+    }
+  }
+}

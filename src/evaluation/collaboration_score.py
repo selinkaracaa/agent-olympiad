@@ -27,12 +27,38 @@ def _truncate(text: str, limit: int = 12000) -> str:
 
 
 def format_agent_profiles(agents: list[str], schema: str) -> str:
+    if schema in {"single_agent", "self_consistency", "memory_solo", "liveoi_best_of_8"}:
+        return "- Solo: single logical solver; no team collaboration"
+    if schema == "subagent":
+        return "\n".join(
+            (
+                "- Orchestrator: decomposes and aggregates isolated worker returns"
+                if name == "Orchestrator"
+                else f"- {name}: stateless isolated worker; no worker-to-worker visibility"
+            )
+            for name in agents
+        )
+    if schema == "debate":
+        return "\n".join(
+            f"- {name}: independent proposer and structured debate participant"
+            for name in agents
+        )
     if schema == "centralized" and "Group_Leader" in agents:
         lines = []
         for name in agents:
             role = "group leader / coordinator" if name == "Group_Leader" else "worker"
             lines.append(f"- {name}: {role}")
         return "\n".join(lines)
+    if schema == "open_table_coach" and "Coach" in agents:
+        return "\n".join(
+            (
+                "- Coach: problem-blind pre-contest adviser and opening-turn adviser; "
+                "cannot use tools or submit and exits after turn 2"
+                if name == "Coach"
+                else f"- {name}: contestant; collaborates after Coach exits"
+            )
+            for name in agents
+        )
     return "\n".join(
         f"- {name}: team member in `{schema}` collaboration protocol" for name in agents
     ) or "(no agents listed)"

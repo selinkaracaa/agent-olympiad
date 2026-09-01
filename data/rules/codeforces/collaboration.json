@@ -1,0 +1,159 @@
+{
+  "agent_constraints": [
+    "Compete as three co-located teammates with one shared workstation—not as three independent remote solvers.",
+    "Begin with the same contestant permissions as both teammates; do not assume a permanent driver or reviewer office.",
+    "Treat private reasoning as unknown to teammates until you communicate it.",
+    "Only one teammate should edit/test/submit at a time; others continue off-workstation reasoning.",
+    "After a rejected run, construct a failing hypothesis before rewriting.",
+    "Do not use Internet access, external LLMs, search engines, or outside problem-solving help."
+  ],
+  "agent_roles": [
+    {
+      "name": "Agent_1",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Scout, solve, implement, test, review, debug, or coordinate as current team needs require.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": []
+    },
+    {
+      "name": "Agent_2",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Scout, solve, implement, test, review, debug, or coordinate as current team needs require.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": []
+    },
+    {
+      "name": "Agent_3",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Scout, solve, implement, test, review, debug, or coordinate as current team needs require.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": []
+    }
+  ],
+  "information_policy": {
+    "mode": "shared",
+    "shared": [
+      "problem",
+      "contest_rules",
+      "team_discussion",
+      "scratchpad"
+    ],
+    "coordination_requirement": "Private reasoning is not silently copied; discoveries needed by teammates must be communicated."
+  },
+  "rule_sections": {
+    "competition_format": [
+      "Simulation: one Codeforces programming problem with local sample judging and optional remote VJudge submission."
+    ],
+    "shared_workstation_protocol": [
+      "Simulation choice: at most one teammate edits, executes, or submits at a time.",
+      "Simulation choice: hand off algorithm, edge cases, and source state when transferring work."
+    ],
+    "failure_recovery": [
+      "Simulation choice: after CE/RE/TLE/WA, diagnose before resubmitting."
+    ]
+  },
+  "deliberation": {
+    "mode": "unstructured",
+    "min_challenges": 0,
+    "evaluation_dimensions": [
+      "evidence_responsiveness",
+      "decision_traceability"
+    ]
+  },
+  "communication": {
+    "mode": "unlimited"
+  },
+  "simulation": {
+    "max_turns": 30,
+    "scheduler": "src_collaboration_draft",
+    "open_table_coach": {
+      "enabled": true,
+      "status": "counterfactual_synthetic_baseline_not_official_codeforces_rule",
+      "may_submit": false,
+      "allowed_tools": [],
+      "counts_toward_shared_api_and_token_budget": true,
+      "contestant_turn_policy": {
+        "mode": "private_deliberation_then_single_action",
+        "allowed_actions": [
+          "work",
+          "speak",
+          "rest",
+          "submit_code"
+        ],
+        "exactly_one_action": true,
+        "unstructured_response": "rest",
+        "final_submission": "synthesis_only",
+        "visibility": {
+          "think": "private",
+          "work": "shared",
+          "speak": "team",
+          "rest": "private",
+          "submit_code": "team"
+        },
+        "max_chars_by_action": {
+          "think": 2400,
+          "work": 4000,
+          "speak": 320,
+          "rest": 80,
+          "submit_code": 12000
+        },
+        "memory_entries": {
+          "private_think_per_agent": 3,
+          "shared_work": 18,
+          "group_messages": 12,
+          "public_messages": 24
+        },
+        "private_think_calls_per_turn": 1,
+        "discussion_policy": {
+          "report_after_work": true,
+          "silent_work_turn_requires_discussion": true,
+          "conflicts_require_targeted_speak": true
+        }
+      },
+      "precontest_brief": {
+        "turn": 1,
+        "problem_access": false,
+        "allowed_actions": [
+          "speak",
+          "sleep"
+        ],
+        "advice_scope": [
+          "time allocation",
+          "task triage",
+          "communication protocol",
+          "sample testing discipline",
+          "rejected-run diagnosis before rewrite"
+        ]
+      },
+      "opening_discussion": {
+        "turn": 2,
+        "problem_access": true,
+        "allowed_actions": [
+          "speak",
+          "sleep"
+        ],
+        "purpose": "summarize the contestants' opening discussion into priorities and checkpoints, and suggest temporary working groups that contestants may later change"
+      },
+      "after_opening_access": false,
+      "min_turns": 10
+    }
+  }
+}

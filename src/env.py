@@ -4,9 +4,11 @@ import math
 import operator
 import os
 import subprocess
+import sys
 from pathlib import Path
 from typing import Any, Optional
 
+from communication import CommunicationBudget
 from contest_budget import (
     ContestBudget,
     estimate_tokens,
@@ -14,6 +16,8 @@ from contest_budget import (
     truncate_to_token_budget,
 )
 from contest_rules import get_contest_rules
+from deliberation import DELIBERATION_ACTIONS, DeliberationLedger
+from rules import RuleCardError, RulesBaseline, RulesMode
 from tools_search import live_web_search, looks_like_answer_lookup
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -40,6 +44,7 @@ TEAM_SIZE_MATRIX = {
     "jessup": 5,
     "iiot": 4,
     "icpc": 3,
+    "codeforces": 3,
 }
 
 COMPETITION_TOOL_REGISTRY = {
@@ -47,6 +52,7 @@ COMPETITION_TOOL_REGISTRY = {
     "fyziklani": ["use_calculator", "web_search"],
     "iiot": ["execute_code"],
     "icpc": ["execute_code"],
+    "codeforces": ["execute_code"],
     "mcm": ["execute_code", "web_search"],
     "icm": ["execute_code", "web_search"],
     "ieo_business_case": ["web_search"],
@@ -64,19 +70,36 @@ COMPETITION_TOOL_REGISTRY = {
     "wsc_writing": [],
 }
 
+COMPETITION_ACTION_REGISTRY = {
+    "icpc": ["submit_code"],
+    "iiot": ["submit_code"],
+    "codeforces": ["submit_code"],
+}
+
 ALL_ACTIONS = {
     "speak",
     "write_scratchpad",
+    "write_private_notes",
     "submit_final",
+    "submit_code",
     "sleep",
     "use_calculator",
     "execute_code",
     "web_search",
     "read_lab_equipment",
     "read_star_chart",
-}
+    "query_rules",
+} | DELIBERATION_ACTIONS
 
-TOOL_ACTIONS = ALL_ACTIONS - {"speak", "write_scratchpad", "submit_final", "sleep"}
+TOOL_ACTIONS = ALL_ACTIONS - {
+    "speak",
+    "write_scratchpad",
+    "write_private_notes",
+    "submit_final",
+    "submit_code",
+    "sleep",
+    *DELIBERATION_ACTIONS,
+}
 
 _SAFE_BINOPS = {
     ast.Add: operator.add,
@@ -112,14 +135,31 @@ class OlympiadEnvironment:
         max_api_calls: int | None = None,
         max_output_tokens_per_call: int | None = None,
         max_total_tokens: int | None = None,
+        rules_mode: RulesMode | str = RulesMode.OFF,
+        rules_root: str | Path | None = None,
+        rules_strict: bool = False,
     ):
         self.competition_id = competition_id
         self.problem_id = problem_id
         self.base_path = base_path
+        self.rules_baseline = RulesBaseline.resolve(
+            competition_id,
+            mode=rules_mode,
+            rules_root=rules_root,
+            strict=rules_strict,
+        )
+        self.rules_mode = self.rules_baseline.mode
+        self.rule_card = self.rules_baseline.card
 
         budget = resolve_contest_budget(
             competition_id,
-            max_turns=max_turns,
+            max_turns=(
+                max_turns
+                if max_turns is not None
+                else self.rule_card.max_turns
+                if self.rule_card is not None
+                else None
+            ),
             max_api_calls=max_api_calls,
             max_output_tokens_per_call=max_output_tokens_per_call,
             max_total_tokens=max_total_tokens,
@@ -134,8 +174,25 @@ class OlympiadEnvironment:
         self.simulated_minutes = 0.0
 
         self.chat_history: list[dict[str, str]] = []
+        self.group_messages: list[dict[str, Any]] = []
         self.action_log: list[dict[str, Any]] = []
-        self.workspace = {"scratchpad": "", "final_answer": ""}
+        self.agent_observations: dict[str, list[dict[str, Any]]] = {}
+        self.code_submissions: list[dict[str, Any]] = []
+        self.private_thoughts: dict[str, list[dict[str, Any]]] = {}
+        self.protocol_action_counts: dict[str, dict[str, int]] = {}
+        self.budget_snapshots: list[dict[str, Any]] = []
+        self.deliberation = DeliberationLedger()
+        self.communication = CommunicationBudget(
+            self.rule_card.communication
+            if self.rule_card is not None and self.rules_mode is RulesMode.ENFORCED
+            else {}
+        )
+        self.private_notes: dict[str, str] = {}
+        self.workspace = {
+            "scratchpad": "",
+            "final_answer": "",
+            "work_artifacts": [],
+        }
         self.current_turn = 0  # collaboration turns completed
         self.action_count = 0  # env actions executed (speak/tools/etc.)
         self.api_calls = 0  # LLM calls made by collaboration layer
@@ -145,39 +202,70 @@ class OlympiadEnvironment:
         self.submitted = False
         self.submitted_by: Optional[str] = None
         self.wrong_submissions = 0
+        self.submission_attempts = 0
+        self.remote_submission: dict[str, Any] | None = None
+        self.remote_submission_source: str | None = None
         self.rule_violations: list[str] = []
         self.contest_rules = get_contest_rules(competition_id)
 
-        self.allowed_tools = list(COMPETITION_TOOL_REGISTRY.get(competition_id, []))
+        if self.rule_card is not None and self.rules_mode is RulesMode.ENFORCED:
+            self.unavailable_declared_tools = sorted(
+                set(self.rule_card.allowed_tools) - TOOL_ACTIONS
+            )
+            self.allowed_tools = [
+                tool for tool in self.rule_card.allowed_tools if tool in TOOL_ACTIONS
+            ]
+        else:
+            self.unavailable_declared_tools = []
+            self.allowed_tools = list(COMPETITION_TOOL_REGISTRY.get(competition_id, []))
         # Prefer tools declared in the rules audit when registry is empty but
         # rules list encoded tools (keeps DATA_COLLECTION + contest_rules aligned).
-        if not self.allowed_tools and self.contest_rules and self.contest_rules.encoded_tools:
+        if (
+            self.rules_mode is not RulesMode.ENFORCED
+            and not self.allowed_tools
+            and self.contest_rules
+            and self.contest_rules.encoded_tools
+        ):
             self.allowed_tools = list(self.contest_rules.encoded_tools)
         self.problem_data = self._load_problem()
 
         problem_team_size = self.problem_data.get("team_size")
-        self.team_size = self._resolve_team_size(problem_team_size, competition_id)
+        self.team_size = self._resolve_team_size(
+            problem_team_size,
+            competition_id,
+            default_size=self.rule_card.team_size_default if self.rule_card else None,
+        )
+        if self.rule_card is not None and not (
+            self.rule_card.team_size_min <= self.team_size <= self.rule_card.team_size_max
+        ):
+            raise RuleCardError(
+                f"Problem {problem_id!r} team_size={self.team_size} is outside rule-card "
+                f"range {self.rule_card.team_size_min}-{self.rule_card.team_size_max}."
+            )
+        self.record_budget_snapshot("initialized")
 
     @staticmethod
-    def _resolve_team_size(raw: Any, competition_id: str) -> int:
+    def _resolve_team_size(
+        raw: Any, competition_id: str, *, default_size: int | None = None
+    ) -> int:
         if raw is None:
-            return TEAM_SIZE_MATRIX.get(competition_id, 3)
+            return default_size or TEAM_SIZE_MATRIX.get(competition_id, 3)
         if isinstance(raw, int):
             return raw
         text = str(raw).strip()
         if not text:
-            return TEAM_SIZE_MATRIX.get(competition_id, 3)
+            return default_size or TEAM_SIZE_MATRIX.get(competition_id, 3)
         if "-" in text:
             # Ranges like "2-5" → use upper bound for agent count.
             parts = text.split("-", 1)
             try:
                 return int(parts[1].strip())
             except ValueError:
-                return TEAM_SIZE_MATRIX.get(competition_id, 3)
+                return default_size or TEAM_SIZE_MATRIX.get(competition_id, 3)
         try:
             return int(text)
         except ValueError:
-            return TEAM_SIZE_MATRIX.get(competition_id, 3)
+            return default_size or TEAM_SIZE_MATRIX.get(competition_id, 3)
 
     def _problem_statement(self) -> str:
         for key in ("problem_description", "description", "prompt", "topic"):
@@ -211,9 +299,49 @@ class OlympiadEnvironment:
     def get_available_tools(self) -> list[str]:
         return list(self.allowed_tools)
 
+    def rules_metadata(self) -> dict[str, Any]:
+        metadata = self.rules_baseline.metadata()
+        metadata["declared_tool_availability"] = {
+            tool: (
+                "unavailable"
+                if tool in self.unavailable_declared_tools
+                else "enforced"
+                if self.rules_mode is RulesMode.ENFORCED
+                else "prompt_only"
+            )
+            for tool in (self.rule_card.allowed_tools if self.rule_card else ())
+        }
+        return metadata
+
+    def query_rules(self, agent_name: str | None = None) -> str:
+        if self.rule_card is None:
+            return json.dumps(
+                {
+                    "competition_id": self.competition_id,
+                    "allowed_tools": self.get_available_tools(),
+                    "note": "No rule-aware baseline card is active.",
+                },
+                ensure_ascii=False,
+                indent=2,
+            )
+        from rules import agent_view
+
+        visible = agent_view(self.rule_card, team_size=self.team_size)
+        if agent_name:
+            role = self.rule_card.role_for(agent_name)
+            if role:
+                visible["your_role"] = {
+                    "name": role.name,
+                    "title": role.title,
+                    "duties": list(role.duties),
+                    "may_submit": role.may_submit,
+                    "rule_expertise": list(role.rule_expertise),
+                }
+        return json.dumps(visible, ensure_ascii=False, indent=2)
+
     def get_metadata(self) -> dict:
         rules = self.contest_rules
-        return {
+        metadata = {
             "competition_id": self.competition_id,
             "problem_id": self.problem_id,
             "title": self.problem_data.get("title"),
@@ -230,7 +358,13 @@ class OlympiadEnvironment:
             "duration_minutes": self.duration_minutes,
             "max_turns": self.max_turns,
             "minutes_per_turn": self.minutes_per_turn,
+            **self.rules_metadata(),
         }
+        if self.rule_card is not None:
+            from rules import agent_view
+
+            metadata["rule"] = agent_view(self.rule_card, team_size=self.team_size)
+        return metadata
 
     def get_state(self) -> dict:
         api_status = (
@@ -256,6 +390,8 @@ class OlympiadEnvironment:
             "problem_statement": self._problem_statement(),
             "chat_logs": list(self.chat_history),
             "shared_workspace": dict(self.workspace),
+            "deliberation": self.deliberation.report(),
+            "communication": self.communication.report(),
             "turn_status": f"{self.current_turn}/{self.max_turns}",
             "api_call_status": api_status,
             "token_status": token_status,
@@ -272,20 +408,377 @@ class OlympiadEnvironment:
             ),
         }
 
+    def record_budget_snapshot(self, event: str) -> None:
+        self.budget_snapshots.append(
+            {
+                "event": event,
+                "turn": self.current_turn,
+                "api_calls": self.api_calls,
+                "tokens_used": self.tokens_used,
+                "simulated_minutes": self.simulated_minutes,
+                "wrong_submissions": self.wrong_submissions,
+            }
+        )
+
+    def consume_agent_observations(self, agent_name: str) -> list[dict[str, Any]]:
+        return self.agent_observations.pop(agent_name, [])
+
+    def _count_protocol_action(self, agent_name: str, action_type: str) -> None:
+        by_action = self.protocol_action_counts.setdefault(agent_name, {})
+        by_action[action_type] = by_action.get(action_type, 0) + 1
+
+    def record_private_thought(
+        self,
+        agent_name: str,
+        payload: str,
+        *,
+        metadata: dict[str, Any] | None = None,
+        count_as_action: bool = True,
+    ) -> str:
+        """Store explicit private reasoning outside public action history."""
+        if count_as_action:
+            self.action_count += 1
+        self._count_protocol_action(agent_name, "think")
+        entry = {
+            "turn": self.current_turn,
+            "agent": agent_name,
+            "content": payload,
+            "visibility": "private",
+            **(metadata or {}),
+        }
+        self.private_thoughts.setdefault(agent_name, []).append(entry)
+        return "Private thought stored for this contestant only."
+
+    def record_work_artifact(
+        self,
+        agent_name: str,
+        payload: str,
+        *,
+        recipients: list[str] | None = None,
+        metadata: dict[str, Any] | None = None,
+    ) -> str:
+        """Append durable work to public or recipient-scoped team state."""
+        self.action_count += 1
+        self._count_protocol_action(agent_name, "work")
+        audience = sorted(set(recipients or []))
+        visibility = "group" if audience else "team"
+        entry = {
+            "turn": self.current_turn,
+            "agent": agent_name,
+            "content": payload,
+            "visibility": visibility,
+            "recipients": audience,
+            **(metadata or {}),
+        }
+        artifacts = self.workspace.setdefault("work_artifacts", [])
+        artifacts.append(entry)
+        result = (
+            f"Work shared with {', '.join(audience)}."
+            if audience
+            else "Public written work appended."
+        )
+        self._log_action(
+            agent_name,
+            "work",
+            payload,
+            result,
+            metadata={
+                **(metadata or {}),
+                "visibility": visibility,
+                "recipients": audience,
+            },
+        )
+        return result
+
+    def record_scoped_message(
+        self,
+        agent_name: str,
+        payload: str,
+        *,
+        recipients: list[str],
+        metadata: dict[str, Any] | None = None,
+    ) -> str:
+        """Send one message visible only to its sender and named recipients."""
+        self.action_count += 1
+        max_chars = self.communication.max_message_chars
+        if max_chars and len(payload) > max_chars:
+            payload, compacted = self.communication.compact_payload(
+                agent_name=agent_name,
+                action_type="speak",
+                payload=payload,
+                turn=self.current_turn,
+                max_chars=max_chars,
+            )
+            metadata = {**(metadata or {}), **compacted}
+        violation = self.communication.check(
+            agent_name=agent_name,
+            action_type="speak",
+            payload=payload,
+            turn=self.current_turn,
+        )
+        audience = sorted(set(recipients))
+        scoped_metadata = {
+            **(metadata or {}),
+            "visibility": "group",
+            "recipients": audience,
+        }
+        if violation:
+            self.rule_violations.append(violation)
+            self._log_action(
+                agent_name,
+                "speak",
+                payload,
+                violation,
+                metadata=scoped_metadata,
+            )
+            return violation
+        self.communication.record(agent_name=agent_name, action_type="speak")
+        entry = {
+            "turn": self.current_turn,
+            "sender": agent_name,
+            "recipients": audience,
+            "message": payload,
+            "visibility": "group",
+        }
+        self.group_messages.append(entry)
+        result = f"Message sent to {', '.join(audience)}."
+        self._log_action(
+            agent_name,
+            "speak",
+            payload,
+            result,
+            metadata=scoped_metadata,
+        )
+        return result
+
+    def record_rest(
+        self,
+        agent_name: str,
+        reason: str = "",
+        *,
+        metadata: dict[str, Any] | None = None,
+    ) -> str:
+        """Record a private one-turn rest decision."""
+        self.action_count += 1
+        self._count_protocol_action(agent_name, "rest")
+        payload = reason.strip()
+        result = f"{agent_name} rests" + (f" ({payload})." if payload else ".")
+        self._log_action(
+            agent_name,
+            "rest",
+            payload,
+            result,
+            metadata=metadata,
+        )
+        return result
+
+    def record_protocol_speak(self, agent_name: str) -> None:
+        self._count_protocol_action(agent_name, "speak")
+
+    def format_private_thoughts(
+        self,
+        agent_name: str,
+        *,
+        max_entries: int | None = None,
+    ) -> str:
+        entries = self.private_thoughts.get(agent_name, [])
+        if max_entries is not None and max_entries > 0:
+            entries = entries[-max_entries:]
+        if not entries:
+            return ""
+        lines = ["=== YOUR PRIVATE THINK LEDGER ==="]
+        for item in entries:
+            lines.append(f"Turn {item['turn']}: {item['content']}")
+        return "\n".join(lines)
+
+    def format_shared_work(
+        self,
+        *,
+        agent_name: str | None = None,
+        max_entries: int | None = None,
+    ) -> str:
+        entries = list(self.workspace.get("work_artifacts") or [])
+        if agent_name is None:
+            entries = [item for item in entries if not item.get("recipients")]
+        else:
+            entries = [
+                item
+                for item in entries
+                if not item.get("recipients")
+                or item.get("agent") == agent_name
+                or agent_name in item.get("recipients", [])
+            ]
+        if max_entries is not None and max_entries > 0:
+            entries = entries[-max_entries:]
+        if not entries:
+            return ""
+        lines = ["=== SHARED WRITTEN WORK ==="]
+        for item in entries:
+            audience = item.get("recipients") or []
+            scope = f" | private group: {', '.join(audience)}" if audience else ""
+            lines.append(
+                f"Turn {item['turn']} | {item['agent']}{scope}:\n{item['content']}"
+            )
+        return "\n\n".join(lines)
+
+    def format_group_memory(
+        self,
+        agent_name: str,
+        *,
+        max_entries: int | None = None,
+    ) -> str:
+        """Render only private-group/direct messages this agent may read."""
+        entries = [
+            item
+            for item in self.group_messages
+            if item.get("sender") == agent_name
+            or agent_name in item.get("recipients", [])
+        ]
+        if max_entries is not None and max_entries > 0:
+            entries = entries[-max_entries:]
+        if not entries:
+            return ""
+        lines = ["=== YOUR GROUP / DIRECT MEMORY ==="]
+        for item in entries:
+            lines.append(
+                f"Turn {item['turn']} | {item['sender']} -> "
+                f"{', '.join(item['recipients'])}: {item['message']}"
+            )
+        return "\n".join(lines)
+
+    def _shared_team_state_keys(self) -> set[str]:
+        if self.rules_mode is not RulesMode.ENFORCED or self.rule_card is None:
+            return set()
+        simulation = self.rule_card.simulation or {}
+        raw = simulation.get("shared_team_state") or ()
+        return {str(item) for item in raw}
+
+    def submit_code_is_team_visible(self) -> bool:
+        """ICPC card shares pending_run_status with the whole team."""
+        return "pending_run_status" in self._shared_team_state_keys()
+
+    def _action_visibility(self, action_type: str) -> str:
+        if action_type in {"write_private_notes", "rest", *TOOL_ACTIONS}:
+            return "private"
+        if action_type == "submit_code":
+            return "team" if self.submit_code_is_team_visible() else "private"
+        return "team"
+
+    def _record_shared_code_submission(
+        self, agent_name: str, payload: str, result: str
+    ) -> None:
+        if not self.submit_code_is_team_visible():
+            return
+        try:
+            feedback = json.loads(result)
+        except json.JSONDecodeError:
+            return
+        remote = feedback.get("remote") or {}
+        effective_verdict = remote.get("verdict") or feedback.get("verdict")
+        effective_reason = (
+            remote.get("message")
+            or remote.get("status")
+            or feedback.get("reason")
+        )
+        entry = {
+            "turn": self.current_turn,
+            "agent": agent_name,
+            "verdict": effective_verdict,
+            "test_scope": feedback.get("test_scope"),
+            "grading_scope_label": feedback.get("grading_scope_label"),
+            "reason": effective_reason,
+            "passed": feedback.get("passed"),
+            "total": feedback.get("total"),
+            "finalized": bool(feedback.get("finalized")),
+            "code": payload.strip(),
+        }
+        cases = feedback.get("cases") or feedback.get("tests") or []
+        if cases:
+            entry["case_detail"] = cases[0].get("detail") or ""
+        self.code_submissions.append(entry)
+        scope = entry.get("grading_scope_label") or entry.get("test_scope") or "tests"
+        summary = (
+            f"[Contest control] {agent_name} submitted a programming run "
+            f"({scope}): verdict={entry.get('verdict')} "
+            f"({entry.get('reason') or 'no detail'}). "
+            "The full source is available in TEAM CODE SUBMISSIONS."
+        )
+        self.chat_history.append({"sender": "Contest_Control", "message": summary})
+
+    def format_team_code_submissions(self, *, include_source: bool = True) -> str:
+        if not self.code_submissions:
+            return ""
+        lines = ["=== TEAM CODE SUBMISSIONS (contest control) ==="]
+        for item in self.code_submissions:
+            scope = item.get("grading_scope_label") or item.get("test_scope") or "tests"
+            header = (
+                f"Turn {item['turn']} | {item['agent']} | verdict={item.get('verdict')} "
+                f"| scope={scope} | {item.get('reason') or ''}".strip()
+            )
+            lines.append(header)
+            if include_source and item.get("code"):
+                lines.append(str(item["code"]))
+        return "\n".join(lines) + "\n"
+
+    def to_transcript(self) -> dict[str, Any]:
+        agents = sorted(
+            {
+                str(item.get("sender") or item.get("agent"))
+                for item in [*self.chat_history, *self.action_log]
+                if item.get("sender") or item.get("agent")
+            }
+        )
+        return {
+            "schema_version": "agent-olympiad.transcript/v1",
+            "metadata": {
+                **self.get_metadata(),
+                "agents": agents,
+            },
+            "chat_history": list(self.chat_history),
+            "group_messages": list(self.group_messages),
+            "action_log": list(self.action_log),
+            "budget_snapshots": list(self.budget_snapshots),
+            "budget": {
+                "used": {
+                    "turns": self.current_turn,
+                    "api_calls": self.api_calls,
+                    "tokens": self.tokens_used,
+                },
+                "limits": {
+                    "turns": self.max_turns,
+                    "api_calls": self.max_api_calls,
+                    "tokens": self.max_total_tokens,
+                },
+            },
+            "submission": {
+                "submitted": self.submitted,
+                "submitted_by": self.submitted_by,
+                "final_answer": self.workspace.get("final_answer", ""),
+                "attempts": self.submission_attempts,
+                "wrong_submissions": self.wrong_submissions,
+            },
+            "workspace": dict(self.workspace),
+            "code_submissions": list(self.code_submissions),
+            "private_thoughts": {
+                agent: list(entries)
+                for agent, entries in self.private_thoughts.items()
+            },
+            "protocol_action_counts": {
+                agent: dict(counts)
+                for agent, counts in self.protocol_action_counts.items()
+            },
+            "rule_violations": list(self.rule_violations),
+            "deliberation": self.deliberation.report(),
+            "communication": self.communication.report(),
+            "rules_baseline": self.rules_metadata(),
+        }
+
     def turns_exhausted(self) -> bool:
         """True when no further collaboration turns may be started."""
         return self.current_turn >= self.max_turns
 
     def can_begin_turn(self) -> bool:
-        if self.current_turn >= self.max_turns:
-            return False
-        # WA penalties burn remaining contest clock; stop when duration is spent.
-        if (
-            self.duration_minutes is not None
-            and self.simulated_minutes >= float(self.duration_minutes)
-        ):
-            return False
-        return True
+        return self.current_turn < self.max_turns
 
     def api_budget_exhausted(self) -> bool:
         return self.max_api_calls is not None and self.api_calls >= self.max_api_calls
@@ -329,6 +822,7 @@ class OlympiadEnvironment:
         # Advance by turn schedule, but never rewind time already burned by WA.
         turn_clock = self.budget.simulated_minutes_for_turns(self.current_turn)
         self.simulated_minutes = max(self.simulated_minutes, turn_clock)
+        self.record_budget_snapshot("turn_started")
         return self.current_turn
 
     def record_api_call(self) -> None:
@@ -340,37 +834,145 @@ class OlympiadEnvironment:
         self.api_calls += 1
         turn = self.current_turn
         self.api_calls_by_turn[turn] = self.api_calls_by_turn.get(turn, 0) + 1
+        self.record_budget_snapshot("api_call")
 
-    def _log_action(self, agent_name: str, action_type: str, payload: str, result: str) -> None:
-        self.action_log.append(
-            {
-                "turn": self.current_turn,
-                "agent": agent_name,
-                "action": action_type,
-                "payload": payload,
-                "result": result,
-            }
-        )
+    def _log_action(
+        self,
+        agent_name: str,
+        action_type: str,
+        payload: str,
+        result: str,
+        *,
+        metadata: dict[str, Any] | None = None,
+    ) -> None:
+        visibility = self._action_visibility(action_type)
+        entry = {
+            "turn": self.current_turn,
+            "agent": agent_name,
+            "sender": agent_name,
+            "action": action_type,
+            "payload": payload,
+            "result": result,
+            "visibility": visibility,
+            **(metadata or {}),
+        }
+        self.action_log.append(entry)
+        observation = {
+            "turn": self.current_turn,
+            "action": action_type,
+            "result": result,
+            "visibility": visibility,
+        }
+        if visibility == "private":
+            self.agent_observations.setdefault(agent_name, []).append(observation)
+        elif action_type == "submit_code":
+            roster = (
+                [role.name for role in self.rule_card.agent_roles]
+                if self.rule_card is not None
+                else [agent_name]
+            )
+            for peer in roster:
+                self.agent_observations.setdefault(peer, []).append(observation)
 
-    def validate_action(self, action_type: str) -> Optional[str]:
+    def validate_action(self, action_type: str, agent_name: str | None = None) -> Optional[str]:
         if action_type not in ALL_ACTIONS:
             return f"Unrecognized action '{action_type}'."
-        if action_type in TOOL_ACTIONS and action_type not in self.allowed_tools:
+        if (
+            self.rules_mode is not RulesMode.ENFORCED
+            and action_type in DELIBERATION_ACTIONS | {"write_private_notes"}
+        ):
+            return f"Unrecognized action '{action_type}'."
+        if (
+            self.rules_mode is not RulesMode.PROMPT_ONLY
+            and action_type in TOOL_ACTIONS
+            and action_type not in self.allowed_tools
+        ):
             return (
                 f"RULE VIOLATION: Tool '{action_type}' is banned in {self.competition_id}. "
                 f"Allowed tools: {self.allowed_tools or 'none (paper and pencil only)'}"
             )
+        if action_type == "submit_code" and action_type not in COMPETITION_ACTION_REGISTRY.get(
+            self.competition_id, []
+        ):
+            return f"RULE VIOLATION: submit_code is unavailable in {self.competition_id}."
+        if (
+            self.rules_mode is RulesMode.ENFORCED
+            and action_type in DELIBERATION_ACTIONS
+            and not (
+                self.rule_card
+                and self.rule_card.deliberation.get("mode") == "structured"
+            )
+        ):
+            return (
+                f"RULE VIOLATION: Structured deliberation action '{action_type}' "
+                f"is not enabled for {self.competition_id}."
+            )
+        if (
+            self.rules_mode is RulesMode.ENFORCED
+            and action_type == "submit_final"
+            and agent_name is not None
+            and self.rule_card is not None
+        ):
+            role = self.rule_card.role_for(agent_name)
+            if role is None or not role.may_submit:
+                return f"RULE VIOLATION: {agent_name} is not authorized to submit."
         if action_type == "submit_final" and self.submitted:
             return "Submission already finalized; further submit_final actions are ignored."
         return None
 
-    def execute_action(self, agent_name: str, action_type: str, payload: str) -> str:
+    def execute_action(
+        self,
+        agent_name: str,
+        action_type: str,
+        payload: str,
+        *,
+        metadata: dict[str, Any] | None = None,
+    ) -> str:
         self.action_count += 1
 
-        violation = self.validate_action(action_type)
+        violation = self.validate_action(action_type, agent_name)
         if violation:
-            self._log_action(agent_name, action_type, payload, violation)
+            self.rule_violations.append(violation)
+            self._log_action(
+                agent_name,
+                action_type,
+                payload,
+                violation,
+                metadata=metadata,
+            )
             return violation
+
+        max_message_chars = self.communication.max_message_chars
+        if (
+            self.communication.is_counted(action_type)
+            and max_message_chars
+            and len(payload.strip()) > max_message_chars
+        ):
+            payload, compacted_metadata = self.communication.compact_payload(
+                agent_name=agent_name,
+                action_type=action_type,
+                payload=payload,
+                turn=self.current_turn,
+                max_chars=max_message_chars,
+            )
+            metadata = {**(metadata or {}), **compacted_metadata}
+
+        communication_violation = self.communication.check(
+            agent_name=agent_name,
+            action_type=action_type,
+            payload=payload,
+            turn=self.current_turn,
+        )
+        if communication_violation:
+            self.rule_violations.append(communication_violation)
+            self._log_action(
+                agent_name,
+                action_type,
+                payload,
+                communication_violation,
+                metadata=metadata,
+            )
+            return communication_violation
 
         if action_type == "speak":
             self.chat_history.append({"sender": agent_name, "message": payload})
@@ -378,6 +980,18 @@ class OlympiadEnvironment:
         elif action_type == "write_scratchpad":
             self.workspace["scratchpad"] = payload
             result = "Shared scratchpad updated."
+        elif action_type == "write_private_notes":
+            self.private_notes[agent_name] = payload
+            result = "Private notes updated; no communication budget used."
+        elif action_type in DELIBERATION_ACTIONS:
+            role = self.rule_card.role_for(agent_name) if self.rule_card else None
+            result = self.deliberation.record(
+                agent_name=agent_name,
+                action_type=action_type,
+                payload=payload,
+                turn=self.current_turn,
+                may_decide=bool(role and role.may_submit),
+            )
         elif action_type == "sleep":
             reason = payload.strip() or "passing this turn"
             result = f"{agent_name} sleeps ({reason})."
@@ -386,10 +1000,25 @@ class OlympiadEnvironment:
             if error:
                 result = error
             else:
-                self.workspace["final_answer"] = payload.strip()
-                self.submitted = True
-                self.submitted_by = agent_name
-                result = f"Submission finalized by {agent_name}."
+                evaluation = self.problem_data.get("evaluation") or {}
+                is_programming = self.problem_data.get("task_type") in {
+                    "algorithmic_programming",
+                    "programming",
+                } or evaluation.get("evaluator_id") == "programming_judge"
+                from judge.vjudge_gateway_client import gateway_enabled
+
+                if is_programming and gateway_enabled():
+                    result = self._submit_code(payload, agent_name=agent_name)
+                    self._record_shared_code_submission(agent_name, payload, result)
+                else:
+                    self.workspace["final_answer"] = payload.strip()
+                    self.submitted = True
+                    self.submitted_by = agent_name
+                    result = f"Submission finalized by {agent_name}."
+        elif action_type == "submit_code":
+            result = self._submit_code(payload, agent_name=agent_name)
+            if not result.startswith("RULE VIOLATION"):
+                self._record_shared_code_submission(agent_name, payload, result)
         elif action_type == "use_calculator":
             result = self._run_calculator(payload)
         elif action_type == "execute_code":
@@ -416,11 +1045,26 @@ class OlympiadEnvironment:
                     "Add problem assets/tool_fixtures with chart data."
                 )
             )
+        elif action_type == "query_rules":
+            result = self.query_rules(agent_name)
         else:
             result = f"Operational error: action '{action_type}' not implemented."
 
-        self._log_action(agent_name, action_type, payload, result)
+        if not result.startswith("Deliberation error:"):
+            self.communication.record(agent_name=agent_name, action_type=action_type)
+        else:
+            self.rule_violations.append(result)
+        self._log_action(
+            agent_name,
+            action_type,
+            payload,
+            result,
+            metadata=metadata,
+        )
         return result
+
+    def get_private_notes(self, agent_name: str) -> str:
+        return self.private_notes.get(agent_name, "")
 
     def _run_web_search(self, payload: str) -> str:
         """Live search with contest policy + answer-key anti-cheat."""
@@ -476,6 +1120,143 @@ class OlympiadEnvironment:
             return str(fixtures[role_substring])[:8000]
         return None
 
+    def _submit_code(self, payload: str, *, agent_name: str) -> str:
+        """Judge locally, then remotely when the VJudge gateway is enabled."""
+        from evaluation.programming_judge import judge_programming_submission
+
+        self.submission_attempts += 1
+        judged = judge_programming_submission(
+            self.problem_data,
+            payload,
+            competition_id=self.competition_id,
+            repo_root=Path(REPO_ROOT),
+            fetch_kattis=False,
+            test_scope="sample",
+        )
+        remote = None
+        if judged.wrong_submission:
+            self.record_wrong_submission()
+        elif judged.verdict == "AC":
+            remote = self._maybe_vjudge_remote_submit(
+                payload, local_language=judged.language
+            )
+            if remote is not None:
+                self.remote_submission = remote
+                self.remote_submission_source = payload.strip()
+                remote_status = str(remote.get("status") or "")
+                remote_verdict = str(remote.get("verdict") or "")
+                if remote_status == "final" and remote_verdict == "AC":
+                    self.workspace["final_answer"] = payload.strip()
+                    self.submitted = True
+                    self.submitted_by = agent_name
+                elif remote_status == "final":
+                    self.record_wrong_submission()
+                elif remote_status == "needs_human":
+                    # Preserve the exact candidate and pause the run. A browser
+                    # must resolve Turnstile; synthesis must not replace it.
+                    self.workspace["final_answer"] = payload.strip()
+                    self.submitted = True
+                    self.submitted_by = agent_name
+        feedback = judged.to_dict()
+        feedback.update(
+            {
+                "action": "submit_code",
+                "attempt": self.submission_attempts,
+                "finalized": self.submitted,
+                "penalty_minutes": self.penalty_minutes(),
+                "simulated_minutes": self.simulated_minutes,
+                "continue_allowed": not self.submitted and self.can_begin_turn(),
+            }
+        )
+        if remote is not None:
+            feedback["remote"] = remote
+        if self.submitted and remote and remote.get("verdict") == "AC":
+            feedback["note"] = "Remote judge AC; submission finalized."
+        elif self.submitted and remote and remote.get("status") == "needs_human":
+            feedback["note"] = (
+                "Remote judge requires human verification; run paused with this "
+                "candidate preserved."
+            )
+        elif judged.verdict == "AC" and remote is None:
+            feedback["note"] = (
+                "Sample AC only; final hidden tests may still reject this solution."
+            )
+        return json.dumps(feedback, sort_keys=True)
+
+    def _maybe_vjudge_remote_submit(
+        self, answer: str, *, local_language: str
+    ) -> dict[str, Any] | None:
+        """Optionally forward the final source to the local VJudge gateway."""
+        from judge.vjudge_gateway_client import (
+            extract_source_and_language,
+            gateway_enabled,
+            submit_via_gateway,
+        )
+
+        if not gateway_enabled():
+            return None
+        evaluation = self.problem_data.get("evaluation") or {}
+        mode = (
+            os.environ.get("VJUDGE_SUBMIT_MODE")
+            or str(evaluation.get("vjudge_submit_mode") or "problem")
+        ).strip().lower()
+        oj = (
+            str(evaluation.get("vjudge_oj") or "").strip()
+            or os.environ.get("VJUDGE_OJ", "").strip()
+        )
+        prob_num = (
+            str(evaluation.get("vjudge_prob_num") or "").strip()
+            or str(self.problem_data.get("codeforces_id") or "").strip()
+            or str(self.problem_data.get("kattis_id") or "").strip()
+        )
+        if not oj:
+            if self.problem_data.get("codeforces_id"):
+                oj = "CodeForces"
+            elif self.problem_data.get("kattis_id"):
+                oj = "Kattis"
+            else:
+                oj = "CodeForces"
+        contest_id = (
+            str(evaluation.get("vjudge_contest_id") or "").strip()
+            or os.environ.get("VJUDGE_CONTEST_ID", "").strip()
+        )
+        contest_letter = (
+            str(evaluation.get("vjudge_problem") or "").strip()
+            or os.environ.get("VJUDGE_PROBLEM", "").strip()
+        )
+        # Default: submit by OJ problem id (no private contest).
+        use_contest = mode == "contest" and bool(contest_id)
+        if use_contest:
+            problem = contest_letter or "A"
+            oj_for_request = oj
+            contest_for_request = contest_id
+        else:
+            problem = prob_num or contest_letter
+            oj_for_request = oj
+            contest_for_request = ""
+            if not problem:
+                return {
+                    "status": "failed",
+                    "error": (
+                        "VJudge problem-mode needs evaluation.vjudge_prob_num "
+                        "or codeforces_id on the benchmark record"
+                    ),
+                }
+        source, language = extract_source_and_language(answer, fallback=local_language)
+        key = (
+            f"{id(self)}:{self.competition_id}:{self.problem_id}:"
+            f"{self.submission_attempts}"
+        )
+        return submit_via_gateway(
+            contest_id=contest_for_request,
+            oj=oj_for_request,
+            problem=problem,
+            language=language,
+            source=source,
+            idempotency_key=key,
+            poll=True,
+        )
+
     def record_wrong_submission(self) -> None:
         """WA/TLE/RE: burn contest clock (remove remaining time), don't stack a bonus.
 
@@ -486,6 +1267,7 @@ class OlympiadEnvironment:
         self.wrong_submissions += 1
         rules = self.contest_rules
         if not rules or rules.wrong_submission_penalty_minutes is None:
+            self.record_budget_snapshot("wrong_submission")
             return
         burn = float(rules.wrong_submission_penalty_minutes)
         self.simulated_minutes += burn
@@ -497,6 +1279,7 @@ class OlympiadEnvironment:
         if step > 0:
             turns_burned = max(1, int(math.ceil(burn / step)))
             self.current_turn = min(self.max_turns, self.current_turn + turns_burned)
+        self.record_budget_snapshot("wrong_submission")
 
     def penalty_minutes(self) -> int | None:
         """Minutes of contest clock burned by wrong submissions so far."""
@@ -525,8 +1308,6 @@ class OlympiadEnvironment:
     def _eval_ast(node: ast.AST) -> float:
         if isinstance(node, ast.Constant) and isinstance(node.value, (int, float)):
             return float(node.value)
-        if isinstance(node, ast.Num):
-            return float(node.n)
         if isinstance(node, ast.BinOp) and type(node.op) in _SAFE_BINOPS:
             left = OlympiadEnvironment._eval_ast(node.left)
             right = OlympiadEnvironment._eval_ast(node.right)
@@ -541,7 +1322,7 @@ class OlympiadEnvironment:
     def _run_code(self, payload: str) -> str:
         try:
             proc = subprocess.run(
-                ["python3", "-c", payload],
+                [sys.executable, "-c", payload],
                 capture_output=True,
                 text=True,
                 timeout=5,
@@ -623,6 +1404,15 @@ class OlympiadEnvironment:
             if judged.verdict == "AC":
                 # Clock already includes any prior WA burns; do not add again.
                 grade["icpc_time_score"] = int(self.simulated_minutes)
+            remote = (
+                self.remote_submission
+                if self.remote_submission_source == answer.strip()
+                else self._maybe_vjudge_remote_submit(
+                    answer, local_language=judged.language
+                )
+            )
+            if remote is not None:
+                grade["remote"] = remote
             return grade
 
         if expected:
@@ -662,8 +1452,21 @@ class OlympiadEnvironment:
 
     def reset(self) -> None:
         self.chat_history.clear()
+        self.group_messages.clear()
         self.action_log.clear()
-        self.workspace = {"scratchpad": "", "final_answer": ""}
+        self.agent_observations.clear()
+        self.code_submissions.clear()
+        self.private_thoughts.clear()
+        self.protocol_action_counts.clear()
+        self.budget_snapshots.clear()
+        self.deliberation.reset()
+        self.communication.reset()
+        self.private_notes.clear()
+        self.workspace = {
+            "scratchpad": "",
+            "final_answer": "",
+            "work_artifacts": [],
+        }
         self.current_turn = 0
         self.simulated_minutes = 0.0
         self.action_count = 0
@@ -674,4 +1477,8 @@ class OlympiadEnvironment:
         self.submitted = False
         self.submitted_by = None
         self.wrong_submissions = 0
+        self.submission_attempts = 0
+        self.remote_submission = None
+        self.remote_submission_source = None
         self.rule_violations.clear()
+        self.record_budget_snapshot("reset")

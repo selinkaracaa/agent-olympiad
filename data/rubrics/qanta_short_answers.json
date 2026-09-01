@@ -1,0 +1,1206 @@
+{
+  "_comment": "Short-answer mapping aligned from data\\rubrics\\qanta_upstream_answer_key_v1.json. Applied into benchmarks via collectors/apply_curated_short_answers.py.",
+  "_dataset": "qanta",
+  "_kind": "short_answer_mapping",
+  "_source_rubric": "data\\rubrics\\qanta_upstream_answer_key_v1.json",
+  "qanta_train_52729": {
+    "1": {
+      "expected": "Melanie Klein"
+    }
+  },
+  "qanta_train_52814": {
+    "1": {
+      "expected": "Margaret {Sanger}"
+    }
+  },
+  "qanta_train_52824": {
+    "1": {
+      "expected": "{Betelgeuse}"
+    }
+  },
+  "qanta_train_52856": {
+    "1": {
+      "expected": "Louis Carl Paschen"
+    }
+  },
+  "qanta_train_52950": {
+    "1": {
+      "expected": "positivism"
+    }
+  },
+  "qanta_train_52976": {
+    "1": {
+      "expected": "Gustav Kirchoff"
+    }
+  },
+  "qanta_train_53007": {
+    "1": {
+      "expected": "{estuary}"
+    }
+  },
+  "qanta_train_77359": {
+    "1": {
+      "expected": "Edward {Bulwer-Lytton} (prompt on an early 'Rienzi')"
+    }
+  },
+  "qanta_train_77468": {
+    "1": {
+      "expected": "{Generation X}"
+    }
+  },
+  "qanta_train_77473": {
+    "1": {
+      "expected": "{Parsifal}"
+    }
+  },
+  "qanta_train_59764": {
+    "1": {
+      "expected": "{COMPARATIVE ADVANTAGE}"
+    }
+  },
+  "qanta_train_59769": {
+    "1": {
+      "expected": "{ARAL} Sea"
+    }
+  },
+  "qanta_train_59890": {
+    "1": {
+      "expected": "{Hesiod}"
+    }
+  },
+  "qanta_train_59903": {
+    "1": {
+      "expected": "{Klinefelter} syndrome"
+    }
+  },
+  "qanta_train_60191": {
+    "1": {
+      "expected": "{REQUIEM}s  [Note: To the best of my knowledge, no other answer applies to all the above, or even the first two. -- Samer Ismail]"
+    }
+  },
+  "qanta_train_64949": {
+    "1": {
+      "expected": "Apollo"
+    }
+  },
+  "qanta_train_85221": {
+    "1": {
+      "expected": "Ernest O. {Lawrence}"
+    }
+  },
+  "qanta_train_85318": {
+    "1": {
+      "expected": "Jean-Baptiste {Racine}"
+    }
+  },
+  "qanta_train_87261": {
+    "1": {
+      "expected": "Republic of {Kiribati}"
+    }
+  },
+  "qanta_train_92170": {
+    "1": {
+      "expected": "Blaise {Pascal}"
+    }
+  },
+  "qanta_train_13356": {
+    "1": {
+      "expected": "Triton"
+    }
+  },
+  "qanta_train_13399": {
+    "1": {
+      "expected": "John Wilkes Booth"
+    }
+  },
+  "qanta_train_13695": {
+    "1": {
+      "expected": "Henry the Fowler or Henry I"
+    }
+  },
+  "qanta_train_13778": {
+    "1": {
+      "expected": "The French Lieutenant's Woman [Technically it's pronounced \"Leff TEN ant\"] [Accept Sarah Woodruff before her name is mentioned]"
+    }
+  },
+  "qanta_train_13824": {
+    "1": {
+      "expected": "Herbert Spencer"
+    }
+  },
+  "qanta_train_13850": {
+    "1": {
+      "expected": "Nicolas Poussin"
+    }
+  },
+  "qanta_train_13949": {
+    "1": {
+      "expected": "American Mercury"
+    }
+  },
+  "qanta_train_14254": {
+    "1": {
+      "expected": "Adrianople"
+    }
+  },
+  "qanta_train_14319": {
+    "1": {
+      "expected": "telomeres (do not accept telomerase)"
+    }
+  },
+  "qanta_train_14438": {
+    "1": {
+      "expected": "chaos"
+    }
+  },
+  "qanta_train_12630": {
+    "1": {
+      "expected": "prometheum"
+    }
+  },
+  "qanta_train_12651": {
+    "1": {
+      "expected": "Long Day's Journey Into Night"
+    }
+  },
+  "qanta_train_12761": {
+    "1": {
+      "expected": "the Leonid meteor shower"
+    }
+  },
+  "qanta_train_12895": {
+    "1": {
+      "expected": "George Willard"
+    }
+  },
+  "qanta_train_13028": {
+    "1": {
+      "expected": "Alma Schindler Mahler Gropius Werfel (either name is ok)"
+    }
+  },
+  "qanta_train_13154": {
+    "1": {
+      "expected": "Lewis Cass"
+    }
+  },
+  "qanta_train_13162": {
+    "1": {
+      "expected": "Chu Yuan-Chang or Hung Wu or Shih Kao-Ti or Ming T'ai Tsu"
+    }
+  },
+  "qanta_train_13339": {
+    "1": {
+      "expected": "the Caroline Affair"
+    }
+  },
+  "qanta_train_74167": {
+    "1": {
+      "expected": "{laser}"
+    }
+  },
+  "qanta_train_74302": {
+    "1": {
+      "expected": "Ottorino {Respighi}"
+    }
+  },
+  "qanta_train_11488": {
+    "1": {
+      "expected": "mugwumps"
+    }
+  },
+  "qanta_train_11719": {
+    "1": {
+      "expected": "glycolysis or Embden-Meyerhof pathway"
+    }
+  },
+  "qanta_train_11838": {
+    "1": {
+      "expected": "ER or endoplasmic reticulum"
+    }
+  },
+  "qanta_train_12431": {
+    "1": {
+      "expected": "Ganges"
+    }
+  },
+  "qanta_train_56844": {
+    "1": {
+      "expected": "Théodore {Gericault}"
+    }
+  },
+  "qanta_train_56911": {
+    "1": {
+      "expected": "{Tammuz}"
+    }
+  },
+  "qanta_train_56996": {
+    "1": {
+      "expected": "{Sapphire}s"
+    }
+  },
+  "qanta_train_57002": {
+    "1": {
+      "expected": "{Jehovah’s Witnesses}"
+    }
+  },
+  "qanta_train_73579": {
+    "1": {
+      "expected": "{Street Scene}"
+    }
+  },
+  "qanta_train_80410": {
+    "1": {
+      "expected": "the {European Union}"
+    }
+  },
+  "qanta_train_10370": {
+    "1": {
+      "expected": "Battle of the Thames (or Moraviantown)"
+    }
+  },
+  "qanta_train_10469": {
+    "1": {
+      "expected": "Wheatstone bridge"
+    }
+  },
+  "qanta_train_10507": {
+    "1": {
+      "expected": "The Slutsky Equation"
+    }
+  },
+  "qanta_train_10987": {
+    "1": {
+      "expected": "Raman effect"
+    }
+  },
+  "qanta_train_11143": {
+    "1": {
+      "expected": "Lake Victoria"
+    }
+  },
+  "qanta_train_57637": {
+    "1": {
+      "expected": "Ogallala Aquifer"
+    }
+  },
+  "qanta_train_57652": {
+    "1": {
+      "expected": "Invisible Man [do not  accept “The Invisible Man”]"
+    }
+  },
+  "qanta_train_61076": {
+    "1": {
+      "expected": "John Ruskin"
+    }
+  },
+  "qanta_train_87017": {
+    "1": {
+      "expected": "{Tao-te Ching} or {Dao de Jing}"
+    }
+  },
+  "qanta_train_87124": {
+    "1": {
+      "expected": "Rigoberta {Menchu}"
+    }
+  },
+  "qanta_train_10058": {
+    "1": {
+      "expected": "The Master Builder or Byggmaster Solness"
+    }
+  },
+  "qanta_train_60524": {
+    "1": {
+      "expected": "{Gaspee} Affair (accept obvious equivalents for “Affair”)"
+    }
+  },
+  "qanta_train_68223": {
+    "1": {
+      "expected": "{Ghana}"
+    }
+  },
+  "qanta_train_68245": {
+    "1": {
+      "expected": "{aquifer}s"
+    }
+  },
+  "qanta_train_71054": {
+    "1": {
+      "expected": "Ming dynasty"
+    }
+  },
+  "qanta_train_79335": {
+    "1": {
+      "expected": "July Revolution (accept Juillet)"
+    }
+  },
+  "qanta_train_92045": {
+    "1": {
+      "expected": "{Thanatopsis}."
+    }
+  },
+  "qanta_train_9400": {
+    "1": {
+      "expected": "Ants (prompt on Hymenoptera)"
+    }
+  },
+  "qanta_train_9492": {
+    "1": {
+      "expected": "principle of least action"
+    }
+  },
+  "qanta_train_9758": {
+    "1": {
+      "expected": "Amelie Poulain (accept either name)"
+    }
+  },
+  "qanta_train_70375": {
+    "1": {
+      "expected": "{Clausius}-{Clapeyron} equation"
+    }
+  },
+  "qanta_train_8203": {
+    "1": {
+      "expected": "Balearic Islands"
+    }
+  },
+  "qanta_train_8802": {
+    "1": {
+      "expected": "The Third Class Carriage"
+    }
+  },
+  "qanta_train_88892": {
+    "1": {
+      "expected": "{Black Hawk} War"
+    }
+  },
+  "qanta_train_89005": {
+    "1": {
+      "expected": "“{No Exit}” [or “{Huis Clos}”]"
+    }
+  },
+  "qanta_train_89060": {
+    "1": {
+      "expected": "{enthalpy}"
+    }
+  },
+  "qanta_train_90372": {
+    "1": {
+      "expected": "{Amritsar} Massacre"
+    }
+  },
+  "qanta_train_90427": {
+    "1": {
+      "expected": "{Pluto}"
+    }
+  },
+  "qanta_train_90505": {
+    "1": {
+      "expected": "{Mictlan}"
+    }
+  },
+  "qanta_train_9051": {
+    "1": {
+      "expected": "lysosomes"
+    }
+  },
+  "qanta_train_51894": {
+    "1": {
+      "expected": "Calgary Flames (accept either)"
+    }
+  },
+  "qanta_train_56260": {
+    "1": {
+      "expected": "{Go Tell It on the Mountain}"
+    }
+  },
+  "qanta_train_62036": {
+    "1": {
+      "expected": "John Bell {Hood}"
+    }
+  },
+  "qanta_train_64000": {
+    "1": {
+      "expected": "(Johannes) {Brahms’ }{Symphony No. 1 in C Minor}"
+    }
+  },
+  "qanta_train_68571": {
+    "1": {
+      "expected": "A {Portrait of the Artist as a Young Man}"
+    }
+  },
+  "qanta_train_70475": {
+    "1": {
+      "expected": "{Moor}"
+    }
+  },
+  "qanta_train_7453": {
+    "1": {
+      "expected": "Nidhogg"
+    }
+  },
+  "qanta_train_7490": {
+    "1": {
+      "expected": "Sam Shepard"
+    }
+  },
+  "qanta_train_75229": {
+    "1": {
+      "expected": "{critical mass}"
+    }
+  },
+  "qanta_train_7829": {
+    "1": {
+      "expected": "Cannizaro Reaction"
+    }
+  },
+  "qanta_train_52420": {
+    "1": {
+      "expected": "Secretary"
+    }
+  },
+  "qanta_train_5879": {
+    "1": {
+      "expected": "the War of the Austrian Succession"
+    }
+  },
+  "qanta_train_63832": {
+    "1": {
+      "expected": "{Sieve} of {Eratosthenes}"
+    }
+  },
+  "qanta_train_6589": {
+    "1": {
+      "expected": "quantum dot or semiconductor nanocrystal (prompt on \"semiconductor crystal\")"
+    }
+  },
+  "qanta_train_6629": {
+    "1": {
+      "expected": "The Member of the Wedding"
+    }
+  },
+  "qanta_train_81669": {
+    "1": {
+      "expected": "{Eos}"
+    }
+  },
+  "qanta_train_87984": {
+    "1": {
+      "expected": "Flannery {O’Connor}"
+    }
+  },
+  "qanta_train_88016": {
+    "1": {
+      "expected": "{n} or {principal} quantum number"
+    }
+  },
+  "qanta_train_89461": {
+    "1": {
+      "expected": "The {Tale of Genji} [or {Genji monogatari}]"
+    }
+  },
+  "qanta_train_89552": {
+    "1": {
+      "expected": "{Symphony of a Thousand} [accept Mahler’s {Symphony} No. {8} in E flat major or equivalents before “eighth” is read]"
+    }
+  },
+  "qanta_train_4662": {
+    "1": {
+      "expected": "phonons"
+    }
+  },
+  "qanta_train_4810": {
+    "1": {
+      "expected": "Johann Gottlieb Fichte"
+    }
+  },
+  "qanta_train_5424": {
+    "1": {
+      "expected": "symbols (accept variants like symbolic)"
+    }
+  },
+  "qanta_train_55018": {
+    "1": {
+      "expected": "{Albany Congress}"
+    }
+  },
+  "qanta_train_55218": {
+    "1": {
+      "expected": "Ayn {Rand} or Alisa Zinov'yevna {Rosenbaum}"
+    }
+  },
+  "qanta_train_55222": {
+    "1": {
+      "expected": "{Legumes} (prompt on {Pod})"
+    }
+  },
+  "qanta_train_61590": {
+    "1": {
+      "expected": "{Kristallnacht}or {Crystal Night} or {Night of the Broken Glass}"
+    }
+  },
+  "qanta_train_69534": {
+    "1": {
+      "expected": "{Gomez}"
+    }
+  },
+  "qanta_train_78025": {
+    "1": {
+      "expected": "“The {Celebrated Jumping Frog of Calaveras County}” (accept “The Notorious Jumping Frog of Calaveras County” or “{J}im Smiley and His Jumping Frog”)"
+    }
+  },
+  "qanta_train_78402": {
+    "1": {
+      "expected": "Colonel {Aureliano} Buendia [accept {Colonel Buendia}]"
+    }
+  },
+  "qanta_train_37123": {
+    "1": {
+      "expected": "{paramagnetism} [or {paramagnetic}; prompt on {magnetism}]"
+    }
+  },
+  "qanta_train_37178": {
+    "1": {
+      "expected": "distillation"
+    }
+  },
+  "qanta_train_38544": {
+    "1": {
+      "expected": "{Druze} [accept {Derzi}, {Durzi}, or {Druzim}]"
+    }
+  },
+  "qanta_train_39120": {
+    "1": {
+      "expected": "Samarkand"
+    }
+  },
+  "qanta_train_51558": {
+    "1": {
+      "expected": "{Guernica}"
+    }
+  },
+  "qanta_train_75693": {
+    "1": {
+      "expected": "{Berlin}"
+    }
+  },
+  "qanta_train_82309": {
+    "1": {
+      "expected": "{Who’s Afraid of Virginia Woolf?}"
+    }
+  },
+  "qanta_train_85600": {
+    "1": {
+      "expected": "Rio de la {Plata} [or River {Plate}]"
+    }
+  },
+  "qanta_train_90157": {
+    "1": {
+      "expected": "{House Made of Dawn}"
+    }
+  },
+  "qanta_train_94004": {
+    "1": {
+      "expected": "Sweden"
+    }
+  },
+  "qanta_train_131686": {
+    "1": {
+      "expected": "Charlotte Temple or Charlotte: A Tale of Truth "
+    }
+  },
+  "qanta_train_28946": {
+    "1": {
+      "expected": "Ken {Kesey}"
+    }
+  },
+  "qanta_train_30345": {
+    "1": {
+      "expected": "Nabu"
+    }
+  },
+  "qanta_train_31095": {
+    "1": {
+      "expected": "{Spanish}-{American} War"
+    }
+  },
+  "qanta_train_32747": {
+    "1": {
+      "expected": "{Boston}"
+    }
+  },
+  "qanta_train_33372": {
+    "1": {
+      "expected": "{Odin} [or {Wotan}]"
+    }
+  },
+  "qanta_train_33880": {
+    "1": {
+      "expected": "Vilfredo {Pareto}"
+    }
+  },
+  "qanta_train_35269": {
+    "1": {
+      "expected": "Theodor {Adorno}"
+    }
+  },
+  "qanta_train_58420": {
+    "1": {
+      "expected": "One {Hundred Years Of Solitude}"
+    }
+  },
+  "qanta_train_58437": {
+    "1": {
+      "expected": "William {Thomson}, 1st Baron {Kelvin}"
+    }
+  },
+  "qanta_train_134499": {
+    "1": {
+      "expected": "Kingdom of Spain [or Reino de España]"
+    }
+  },
+  "qanta_train_1566": {
+    "1": {
+      "expected": "Decline and Fall"
+    }
+  },
+  "qanta_train_20812": {
+    "1": {
+      "expected": "{Cristero Uprising} or Rebellion"
+    }
+  },
+  "qanta_train_21606": {
+    "1": {
+      "expected": "Ernest {Hemingway}"
+    }
+  },
+  "qanta_train_21725": {
+    "1": {
+      "expected": "{Taboo}"
+    }
+  },
+  "qanta_train_26320": {
+    "1": {
+      "expected": "The {Sleepwalkers}"
+    }
+  },
+  "qanta_train_27567": {
+    "1": {
+      "expected": "{pions} [accept {pi meson}; prompt on {meson}]"
+    }
+  },
+  "qanta_train_70098": {
+    "1": {
+      "expected": "{Abraham} (or {Abram})"
+    }
+  },
+  "qanta_train_75210": {
+    "1": {
+      "expected": "{Ishtar} [accept {Inanna}]"
+    }
+  },
+  "qanta_train_801": {
+    "1": {
+      "expected": "Paul-Michel Foucault"
+    }
+  },
+  "qanta_train_139521": {
+    "1": {
+      "expected": "Kalika"
+    }
+  },
+  "qanta_train_14673": {
+    "1": {
+      "expected": "Allegory of Good and {Bad Government} (accept \"{Effects} of {Good/Bad Government} in the {City} or the {Country}\", or accept any {variation} which {indicates Lorenzetti's frescoes} on {government})"
+    }
+  },
+  "qanta_train_15582": {
+    "1": {
+      "expected": "{South Carolina}"
+    }
+  },
+  "qanta_train_18751": {
+    "1": {
+      "expected": "An {Enquiry} Concerning {Human Understanding}"
+    }
+  },
+  "qanta_train_37358": {
+    "1": {
+      "expected": "Pygmalion"
+    }
+  },
+  "qanta_train_39387": {
+    "1": {
+      "expected": "Doppler effect [or Doppler shift; prompt on red shift or blue shift after \"may appear\"]"
+    }
+  },
+  "qanta_train_40825": {
+    "1": {
+      "expected": "Pablo Neruda [or Neftalí Ricardo Reyes Basoalto]"
+    }
+  },
+  "qanta_train_84125": {
+    "1": {
+      "expected": "Anton {Chekhov}"
+    }
+  },
+  "qanta_train_87437": {
+    "1": {
+      "expected": "Diego Velázquez"
+    }
+  },
+  "qanta_train_95205": {
+    "1": {
+      "expected": "Minecraft"
+    }
+  },
+  "qanta_train_138340": {
+    "1": {
+      "expected": "The Shame of the Cities"
+    }
+  },
+  "qanta_train_142651": {
+    "1": {
+      "expected": "Trial of the Chicago Seven [or Chicago Eight]"
+    }
+  },
+  "qanta_train_160121": {
+    "1": {
+      "expected": "Karen Horney"
+    }
+  },
+  "qanta_train_167626": {
+    "1": {
+      "expected": "Arabidopsis thaliana"
+    }
+  },
+  "qanta_train_52355": {
+    "1": {
+      "expected": "{Mars}"
+    }
+  },
+  "qanta_train_52404": {
+    "1": {
+      "expected": "{virgin}s [or {virginity} or other word forms; accept {chastity}, being {chaste} or other word forms]"
+    }
+  },
+  "qanta_train_60415": {
+    "1": {
+      "expected": "Thomas Robert {Malthus}"
+    }
+  },
+  "qanta_train_83383": {
+    "1": {
+      "expected": "{Fever} [accept {pyrexia}, do not accept \"hyperthermia\"]"
+    }
+  },
+  "qanta_train_89751": {
+    "1": {
+      "expected": "The Mystical Nativity [or The Mystic Nativity]  1"
+    }
+  },
+  "qanta_train_96580": {
+    "1": {
+      "expected": "Kingdom of Spain [accept Reino de España]"
+    }
+  },
+  "qanta_train_161416": {
+    "1": {
+      "expected": "three-body problem [accept n-body problem]"
+    }
+  },
+  "qanta_train_161577": {
+    "1": {
+      "expected": "acetic acid [or ethanoic acid, acetate; accept CH3COOH or CH3COO- before \"CH3COOH\"]"
+    }
+  },
+  "qanta_train_169176": {
+    "1": {
+      "expected": "lysozyme"
+    }
+  },
+  "qanta_train_171350": {
+    "1": {
+      "expected": "Cleveland, Ohio"
+    }
+  },
+  "qanta_train_171588": {
+    "1": {
+      "expected": "Barcelona"
+    }
+  },
+  "qanta_train_42953": {
+    "1": {
+      "expected": "Percy Bysshe Shelley"
+    }
+  },
+  "qanta_train_44955": {
+    "1": {
+      "expected": "\"The Snows of Kilimanjaro\""
+    }
+  },
+  "qanta_train_46330": {
+    "1": {
+      "expected": "Hawaii"
+    }
+  },
+  "qanta_train_75921": {
+    "1": {
+      "expected": "Wallace {Stevens}"
+    }
+  },
+  "qanta_train_92513": {
+    "1": {
+      "expected": "fuddle duddle"
+    }
+  },
+  "qanta_train_100927": {
+    "1": {
+      "expected": "The Playboy of the Western World"
+    }
+  },
+  "qanta_train_101623": {
+    "1": {
+      "expected": "arsenic [or As until it is read]"
+    }
+  },
+  "qanta_train_101808": {
+    "1": {
+      "expected": "tectonic plates (prompt on \"plates\")"
+    }
+  },
+  "qanta_train_162884": {
+    "1": {
+      "expected": "the Mann Act"
+    }
+  },
+  "qanta_train_46554": {
+    "1": {
+      "expected": "Alfred Stieglitz"
+    }
+  },
+  "qanta_train_46879": {
+    "1": {
+      "expected": "index of refraction [or refractive index]"
+    }
+  },
+  "qanta_train_48587": {
+    "1": {
+      "expected": "Thomas Hardy"
+    }
+  },
+  "qanta_train_49297": {
+    "1": {
+      "expected": "James Hogg"
+    }
+  },
+  "qanta_train_49460": {
+    "1": {
+      "expected": "{Dreamtigers} [or El {hacedor}; or The {Maker}]"
+    }
+  },
+  "qanta_train_98819": {
+    "1": {
+      "expected": "Pierre Trudeau"
+    }
+  },
+  "qanta_dev_102045": {
+    "1": {
+      "expected": "Pablo Picasso [or Pablo Ruiz y Picasso]"
+    }
+  },
+  "qanta_dev_149935": {
+    "1": {
+      "expected": "Igor Stravinsky [or Igor Fyodorovich Stravinsky]"
+    }
+  },
+  "qanta_dev_150473": {
+    "1": {
+      "expected": "sulfur [or S]"
+    }
+  },
+  "qanta_train_102465": {
+    "1": {
+      "expected": "Charlemagne [or Karl der Grosse; or Carolus Magnus; or Charles the Great; or Charles I of France; prompt on just \"Charles\"]"
+    }
+  },
+  "qanta_train_119982": {
+    "1": {
+      "expected": "zero (accept equivalents like nothing)"
+    }
+  },
+  "qanta_train_133321": {
+    "1": {
+      "expected": "La Strada [or The Road] "
+    }
+  },
+  "qanta_train_135326": {
+    "1": {
+      "expected": "Welsh language [or Cymraeg]"
+    }
+  },
+  "qanta_train_136247": {
+    "1": {
+      "expected": "Jiménez [or Ximénez]"
+    }
+  },
+  "qanta_train_136253": {
+    "1": {
+      "expected": "Donna Tartt"
+    }
+  },
+  "qanta_train_144532": {
+    "1": {
+      "expected": "DoÃ±a Rosita the Spinster, or The Language of Flowers [or DoÃ±a Rosita la Soltera, o el Lenguaje de las Flores]"
+    }
+  },
+  "qanta_train_126396": {
+    "1": {
+      "expected": "trumpet &lt;Carson&gt;"
+    }
+  },
+  "qanta_train_126475": {
+    "1": {
+      "expected": "Tanzania [or United Republic of Tanzania; or Jamhuri ya Muungano wa Tanzania] &lt;Carson&gt;"
+    }
+  },
+  "qanta_train_128424": {
+    "1": {
+      "expected": "The Seagull (or Chayka)"
+    }
+  },
+  "qanta_train_129044": {
+    "1": {
+      "expected": "Congress of Vienna"
+    }
+  },
+  "qanta_train_129066": {
+    "1": {
+      "expected": "rheumatoid arthritis [or RA]"
+    }
+  },
+  "qanta_train_131150": {
+    "1": {
+      "expected": "Muhammad"
+    }
+  },
+  "qanta_train_145165": {
+    "1": {
+      "expected": "Wittig reaction"
+    }
+  },
+  "qanta_train_146818": {
+    "1": {
+      "expected": "People's Republic of China (accept Zhongguo ́ or Zhonghua ́ Re ́nmin Go`nghe ́guo ́; accept PRC)"
+    }
+  },
+  "qanta_train_147291": {
+    "1": {
+      "expected": "Virgin Islands [accept United States Virgin Islands; accept British Virgin Islands; prompt on \"Leeward Islands\"; prompt on \"Lesser Antilles\"] "
+    }
+  },
+  "qanta_train_150455": {
+    "1": {
+      "expected": "D.W.  Griffith  [Dwight Llewelyn Wark  Griffith] "
+    }
+  },
+  "qanta_train_122944": {
+    "1": {
+      "expected": "James Joyce [or James Augustine Aloysius Joyce] &lt;Tyler Benedict&gt;/&lt;ed. ME&gt;/&lt;ed. JO&gt;"
+    }
+  },
+  "qanta_train_123034": {
+    "1": {
+      "expected": "Merlin Ambrosius [accept Myrddin Emrys]"
+    }
+  },
+  "qanta_train_123766": {
+    "1": {
+      "expected": "Yooka-Laylee"
+    }
+  },
+  "qanta_train_125688": {
+    "1": {
+      "expected": "Tristan und Isolde [or Tristan and Isolde] &lt;JR&gt; Tiebreaker"
+    }
+  },
+  "qanta_train_130288": {
+    "1": {
+      "expected": "William Wordsworth &lt;CL&gt;"
+    }
+  },
+  "qanta_train_132989": {
+    "1": {
+      "expected": "The Octoroon"
+    }
+  },
+  "qanta_train_133108": {
+    "1": {
+      "expected": "Benjamin Libet"
+    }
+  },
+  "qanta_train_135767": {
+    "1": {
+      "expected": "Werner Herzog"
+    }
+  },
+  "qanta_train_142297": {
+    "1": {
+      "expected": "Willard Van Orman Quine "
+    }
+  },
+  "qanta_train_146319": {
+    "1": {
+      "expected": "mountain climbing [or obvious equivalents; if player gives more specific answer than necessary, ask for less specificity or accept outright at own leisure]"
+    }
+  },
+  "qanta_train_112719": {
+    "1": {
+      "expected": "waltzes [or Walzer; or valses; accept Valses nobles et sentimentales or “Minute Waltz”] &lt;JR, Music&gt;"
+    }
+  },
+  "qanta_train_114201": {
+    "1": {
+      "expected": "Kingdom of Italy [or Regno d’Italia] &lt;JR&gt;"
+    }
+  },
+  "qanta_train_114391": {
+    "1": {
+      "expected": "4th century A.D. [or 300s A.D.] &lt;SPQR&gt;"
+    }
+  },
+  "qanta_train_115444": {
+    "1": {
+      "expected": "crossing the Alps [accept any answer involving an action going across or over the Alps; prompt on answers like riding a horse; anti-prompt on any answer that gives Napoleon or Hannibal or their respective armies doing it] &lt;JG&gt;"
+    }
+  },
+  "qanta_train_115653": {
+    "1": {
+      "expected": "shadows &lt;RK&gt;"
+    }
+  },
+  "qanta_train_116237": {
+    "1": {
+      "expected": "operas [prompt on music or singing] &lt;JC, LongFic&gt;"
+    }
+  },
+  "qanta_train_118455": {
+    "1": {
+      "expected": "Citizen Kane"
+    }
+  },
+  "qanta_train_119007": {
+    "1": {
+      "expected": "Crazy Jane [prompt on partial answer] &lt;Poetry&gt;"
+    }
+  },
+  "qanta_train_121863": {
+    "1": {
+      "expected": "T. S. Eliot [or Thomas Stearns Eliot]"
+    }
+  },
+  "qanta_train_122042": {
+    "1": {
+      "expected": "The Physical Impossibility of Death in the Mind of Someone Living &lt;WN, Painting/Sculpture&gt;"
+    }
+  },
+  "qanta_train_105981": {
+    "1": {
+      "expected": "touch [or stretch or mechanoreception; accept pressure until read] &lt;RN, Biology: Medicine&gt;"
+    }
+  },
+  "qanta_train_106095": {
+    "1": {
+      "expected": "magnetic monopoles [accept Wu–Yang monopoles or Dirac monopoles] &lt;WA, Physics&gt;"
+    }
+  },
+  "qanta_train_106447": {
+    "1": {
+      "expected": "tundra [accept arctic tundra; or alpine tundra; or antarctic tundra] &lt;Biology&gt;"
+    }
+  },
+  "qanta_train_106504": {
+    "1": {
+      "expected": "radio waves [accept radio astronomy; accept radio emissions; accept radio galaxies] &lt;Other Science&gt;"
+    }
+  },
+  "qanta_train_108623": {
+    "1": {
+      "expected": "Lorraine Hansberry [or Lorraine Vivian Hansberry] &lt;WG, Drama&gt;"
+    }
+  },
+  "qanta_train_108704": {
+    "1": {
+      "expected": "People’s Republic of China [or Zhongguo] &lt;EA, Religion&gt;"
+    }
+  },
+  "qanta_train_110261": {
+    "1": {
+      "expected": "“‘Round Midnight” &lt;JL&gt;"
+    }
+  },
+  "qanta_train_112933": {
+    "1": {
+      "expected": "French invasion of Russia [or Patriotic War of 1812; accept Napoleon’s invasion of Russia until “Napoleon” is read; accept invasion of Russia after “Napoleon” is read; accept Second Polish War; prompt on Russian Campaign; prompt on Napoleonic Wars or Polish-Russian Wars] &lt;European History&gt;"
+    }
+  },
+  "qanta_train_113215": {
+    "1": {
+      "expected": "Morocco [or Kingdom of Morocco; or al-Mamlaka al-Maghribia] &lt;World History&gt;"
+    }
+  },
+  "qanta_train_113216": {
+    "1": {
+      "expected": "Walter Benjamin (“BEN-ya-meen”) &lt;Philosophy&gt;"
+    }
+  },
+  "qanta_train_106567": {
+    "1": {
+      "expected": "Colombia &lt;CK, Modern World&gt;"
+    }
+  },
+  "qanta_train_106595": {
+    "1": {
+      "expected": "Mirza Ghalib [or Mirza Asadullah Baig Khan] &lt;JF, World/Other Literature&gt;"
+    }
+  },
+  "qanta_train_106604": {
+    "1": {
+      "expected": "Gospel of John &lt;CK, Religion: Christianity&gt;"
+    }
+  },
+  "qanta_train_106607": {
+    "1": {
+      "expected": "Maxim Shostakovich [or Maxim Dmitriyevich Shostakovich; or Maksim; prompt on Shostakovich; prompt on M. Shostakovich; prompt on Dmitri Shostakovich’s son] (The parodied Lehár aria is “Da geh’ ich zu Maxim,” and the piano concerto is Shostakovich’s Piano Concerto No. 2.) &lt;OL, Classical Music&gt;"
+    }
+  },
+  "qanta_train_106769": {
+    "1": {
+      "expected": "illusion [accept māyā until read, but prompt after; accept illusory body, magic, unreality, or untruth; accept gyulu until read; accept māhākāyā; prompt on dream or milam or appearance; prompt on delusion or deception or ignorance or confusion or falsehood or lies by asking “what is either the original Sanskrit term or an alternate translation?”] &lt;KS, Religion: Buddhism&gt;"
+    }
+  },
+  "qanta_train_106873": {
+    "1": {
+      "expected": "The Handmaid’s Tale &lt;Long Fiction — Schwartz&gt; [Edited]"
+    }
+  },
+  "qanta_train_107061": {
+    "1": {
+      "expected": "voltage [or electric potential or scalar potential or electric scalar potential; accept voltage difference or electric potential difference or scalar potential difference or electric scalar potential difference; prompt on V or phi or delta-V or delta-phi; do NOT accept or prompt on “vector potential”] &lt;Physics — Gurazada&gt; [Ed. French]"
+    }
+  },
+  "qanta_train_107843": {
+    "1": {
+      "expected": "mass extinction [accept extinction event, prompt on answers like asteroid impact, rapid warming/cooling, or ocean anoxic event with ‘what type of event did that end up causing?’] &lt;LM&gt;"
+    }
+  },
+  "qanta_train_107921": {
+    "1": {
+      "expected": "Portuguese &lt;GDC&gt;"
+    }
+  },
+  "qanta_train_108309": {
+    "1": {
+      "expected": "Lemonade"
+    }
+  }
+}

@@ -1,0 +1,237 @@
+{
+  "evaluation_guidance": "Report performance, rule compliance, and collaboration quality separately. Problems solved always outranks total time. Official performance is never correctness alone: rank by problems solved, then lower total time, then earlier last accepted submission. Total time includes wall-clock minutes to first Accepted plus 20 minutes per prior penalized rejection on that solved problem; Compilation Error is not time-penalized, but CE spam that disrupts the system is a compliance issue. Unsolved problems contribute 0 time even if they show wrong attempts on the Scoreboard. Report per-problem attempt counts by verdict, time-to-first-Accepted, realized penalty minutes, clarification use, and productive use of the one-turn pending wait. Treat Team Requirements, Attendance, coach non-participation, and Support and Prizes as contestant conscience. Collaboration evidence should cover packet triage, useful parallel off-workstation work, scoreboard-aware replanning, handoff quality, peer review, conflict resolution with evidence, recovery after rejected runs, duplicate-work avoidance, and idle-time waste. Do not reward fixed roles, equal keyboard time, exclusive problem ownership, or message volume by themselves.",
+  "scoring": {
+    "mode": "gold_or_judge",
+    "unit": "problem_or_question",
+    "evaluator_id": "programming_judge",
+    "evaluator_status": "deferred",
+    "evaluator_strategy": "official_tests_in_isolated_sandbox",
+    "official_performance": {
+      "ranking_order": [
+        "problems_solved_descending",
+        "total_time_ascending",
+        "last_accepted_submission_time_ascending"
+      ],
+      "problems_solved_outranks_penalty": true,
+      "correctness_alone_insufficient": true,
+      "solved_problem_penalty_formula": "minutes from contest start to first accepted run + 20 * prior penalized rejections",
+      "penalty_minutes_per_rejection": 20,
+      "compilation_error_penalized": false,
+      "unsolved_problem_time_penalty": 0,
+      "unsolved_wrong_attempts_visible_on_scoreboard": true,
+      "unsolved_wrong_attempts_add_to_total_time": false,
+      "must_report_even_when_accepted": [
+        "wall_clock_minutes_to_first_accepted",
+        "penalized_attempt_count_before_accept",
+        "rejected_runs_by_verdict",
+        "realized_penalty_minutes",
+        "last_accepted_submission_time"
+      ],
+      "derived_reporting": [
+        "time_to_first_accepted",
+        "solve_timeline",
+        "accepted_runs_by_problem",
+        "attempt_count_by_problem",
+        "rejected_runs_by_verdict",
+        "realized_penalty_minutes",
+        "unrealized_rejections_on_unsolved_problems",
+        "pending_wait_turns_observed",
+        "scoreboard_consultations",
+        "clarifications_requested_and_received"
+      ]
+    },
+    "sanctions": {
+      "possible_outcomes": [
+        "invalid_run",
+        "problem_score_cancelled",
+        "team_disqualification",
+        "ban_from_further_icpc_activity"
+      ],
+      "example_triggers": [
+        "outside_help_or_coach_solving",
+        "internet_or_external_llm_use",
+        "viewing_other_teams_code",
+        "interfering_with_equipment_or_other_teams",
+        "ce_spam_or_system_disruption"
+      ]
+    },
+    "rule_compliance": {
+      "reported_separately_from_performance": true,
+      "violation_types": [
+        {
+          "id": "ineligible_or_substitute_roster",
+          "condition": "The team invents a reserve, substitute, second institutional World Finals team, contestant-as-coach role, or a prior World Finals contestant history that would make a member ineligible."
+        },
+        {
+          "id": "coach_or_outside_solving_help",
+          "condition": "The coach or any outsider provides contest-time algorithms, answers, or debugging help."
+        },
+        {
+          "id": "independent_remote_solves",
+          "condition": "Contestants treat the contest as three independent remote solves instead of one shared workstation team."
+        },
+        {
+          "id": "assume_pending_verdict",
+          "condition": "The team treats a pending run as Accepted or Rejected before the one-turn judging wait completes."
+        },
+        {
+          "id": "resubmit_while_pending",
+          "condition": "The team submits another run for the same problem while a prior run is still pending."
+        },
+        {
+          "id": "multiple_workstation_owners",
+          "condition": "More than one contestant has machine-action permission at the same time."
+        },
+        {
+          "id": "non_owner_machine_action",
+          "condition": "A non-owner edits, compiles, executes, locally tests, or submits."
+        },
+        {
+          "id": "hidden_parallel_terminal",
+          "condition": "An off-workstation contestant receives another execution environment."
+        },
+        {
+          "id": "public_internet_access",
+          "condition": "A contestant accesses the public Internet, search engines, or external LLMs."
+        },
+        {
+          "id": "outside_problem_solving_help",
+          "condition": "The team receives problem-solving help from a non-designated outsider."
+        },
+        {
+          "id": "other_team_code_or_interference",
+          "condition": "A contestant views another team's code/materials or interferes with other teams or contest equipment."
+        },
+        {
+          "id": "unapproved_electronic_material",
+          "condition": "The team imports an unapproved device, USB/storage, program, or machine-readable data."
+        },
+        {
+          "id": "hidden_test_access",
+          "condition": "A contestant observes hidden tests or judge internals."
+        },
+        {
+          "id": "clarification_bypass",
+          "condition": "The team asks outsiders about statement defects instead of using the clarification channel."
+        },
+        {
+          "id": "ce_spam_or_system_disruption",
+          "condition": "The team repeatedly submits Compilation Error runs in a way that appears to abuse or disrupt the contest control system."
+        },
+        {
+          "id": "invalid_penalty_accounting",
+          "condition": "Compilation Error is time-penalized, an unsolved problem consumes official time, a penalized rejection is omitted, or ranking lets penalty outweigh a higher solve count."
+        }
+      ],
+      "reporting": [
+        "total_violations",
+        "violations_by_type",
+        "first_violation_time",
+        "sanctions_applied",
+        "performance_with_illegal_actions",
+        "compliant_performance"
+      ]
+    },
+    "collaboration_quality": {
+      "official_icpc_scoring": false,
+      "metric_groups": {
+        "problem_discovery_and_allocation": [
+          "time_to_first_packet_coverage",
+          "problems_read_per_contestant",
+          "duplicate_reading_before_packet_coverage",
+          "difficulty_estimate_calibration",
+          "problem_reassignment_rate",
+          "abandoned_work_recovery"
+        ],
+        "parallel_reasoning": [
+          "useful_off_workstation_time",
+          "useful_work_during_pending_verdict_turns",
+          "duplicate_algorithm_effort",
+          "ready_work_inventory",
+          "work_in_progress"
+        ],
+        "workstation_coordination": [
+          "workstation_utilization",
+          "avoidable_workstation_idle_time",
+          "queue_wait_time",
+          "preemption_count_and_cost",
+          "keyboard_ownership_distribution",
+          "context_switch_overhead"
+        ],
+        "handoff_and_review": [
+          "handoff_completeness",
+          "handoff_repair_cost",
+          "pre_submission_review_rate",
+          "reviewer_diversity",
+          "review_caused_corrections"
+        ],
+        "conflict_and_decision_quality": [
+          "evidence_backed_algorithm_disagreements",
+          "silent_overwrite_incidents",
+          "decision_traceability"
+        ],
+        "failure_recovery": [
+          "rejection_to_diagnosis_time",
+          "rejection_to_resubmission_time",
+          "diagnostic_category_accuracy",
+          "repeated_submission_without_new_evidence",
+          "debugging_escalation"
+        ],
+        "scoreboard_and_timing_awareness": [
+          "scoreboard_consultations",
+          "strategy_change_after_standings_update",
+          "freeze_strategy_change",
+          "attempt_economy_vs_speed_tradeoff"
+        ],
+        "communication_and_shared_mental_model": [
+          "discovery_to_team_awareness_latency",
+          "decision_relevant_communication",
+          "private_reasoning_loss",
+          "stale_state_decisions",
+          "multi_contributor_solves"
+        ],
+        "dynamic_replanning": [
+          "priority_change_count",
+          "evidence_responsive_replanning",
+          "workload_and_fatigue_imbalance"
+        ]
+      },
+      "anti_metrics": [
+        "Do not reward message count by itself.",
+        "Do not reward equal workstation time by itself.",
+        "Do not reward a fixed coder, solver, and reviewer split by itself.",
+        "Do not punish adaptive specialization that does not create a bottleneck.",
+        "Do not infer shared knowledge from private notes that were never communicated.",
+        "Do not treat an Accepted verdict as a full success if attempt count and solve time are ignored.",
+        "Do not treat three independent high-quality solo solves as good ICPC collaboration."
+      ]
+    },
+    "current_repository_availability": {
+      "official_packet_scoring": false,
+      "exclusive_workstation_enforcement": false,
+      "per_problem_verdict_history": false,
+      "one_turn_pending_run_latency": false,
+      "live_scoreboard": false,
+      "clarification_and_scoreboard_state": false,
+      "team_interpreter_channel": false,
+      "full_english_problem_packet": false,
+      "workstation_queue_metrics": false,
+      "handoff_and_recovery_metrics": false,
+      "eligibility_visa_certification_state": false,
+      "attendance_and_host_logistics_state": false,
+      "role_immersion_eligibility_text": true,
+      "attempt_and_time_scoring_contract_documented": true,
+      "sanctions_model_documented": true,
+      "programming_judge_bottles_pilot": true,
+      "programming_judge_limitations": [
+        "Only icpc_wf_2012_bottles currently declares a hidden problem package.",
+        "The pilot package uses benchmark-native tests and Python 3, not official ICPC judge data or the full official language set."
+      ]
+    },
+    "rubric_path": "data/rubrics/icpc_programming_judge_v1.json"
+  },
+  "submission": {
+    "max_count": null,
+    "adaptation": "Official submissions are compiled and judged; the runner submits source text only."
+  }
+}

@@ -1,0 +1,376 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agent-olympiad.local/schemas/competition-rule-card-v1.json",
+  "title": "Agent Olympiad competition rule card",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "rule_id",
+    "competition_id",
+    "profile",
+    "protocol",
+    "team",
+    "execution",
+    "simulation",
+    "allowed_tools",
+    "human_constraints",
+    "agent_constraints",
+    "agent_roles",
+    "deliverable",
+    "evaluation_guidance",
+    "information_policy",
+    "rule_sections",
+    "deliberation",
+    "communication",
+    "scoring",
+    "resources",
+    "submission",
+    "rules_text",
+    "provenance",
+    "comparability"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "rule_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "competition_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "profile": {
+      "enum": [
+        "official_equivalent",
+        "benchmark_native",
+        "proxy",
+        "non_comparable"
+      ]
+    },
+    "protocol": {
+      "type": "string",
+      "minLength": 1
+    },
+    "team": {
+      "type": "object",
+      "required": [
+        "active_min",
+        "active_default",
+        "active_max",
+        "collaboration"
+      ],
+      "properties": {
+        "active_min": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "active_default": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "active_max": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "roster_max": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "range_basis": {
+          "type": "string",
+          "enum": [
+            "source_record",
+            "benchmark_adaptation",
+            "mixed_or_unresolved"
+          ]
+        },
+        "official_roster_note": {
+          "type": "string",
+          "minLength": 1
+        },
+        "collaboration": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": true
+    },
+    "execution": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "simulation": {
+      "type": "object",
+      "required": [
+        "max_turns"
+      ],
+      "properties": {
+        "max_turns": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "scheduler": {
+          "type": "string"
+        },
+        "turn_budget_basis": {
+          "type": "string"
+        },
+        "exclusive_workstation_lease": {},
+        "run_judging_latency_turns": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "run_judging_latency_basis": {
+          "type": "string"
+        },
+        "pending_run_policy": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
+    "allowed_tools": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string"
+      }
+    },
+    "human_constraints": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "agent_constraints": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "agent_roles": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "title",
+          "duties",
+          "may_submit",
+          "information_access",
+          "rule_expertise"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1
+          },
+          "duties": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "may_submit": {
+            "type": "boolean"
+          },
+          "information_access": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "enum": [
+                "contest_rules"
+              ]
+            }
+          },
+          "rule_expertise": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      }
+    },
+    "deliverable": {
+      "type": "object",
+      "required": [
+        "answer_format"
+      ],
+      "properties": {
+        "answer_format": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": true
+    },
+    "evaluation_guidance": {
+      "type": "string",
+      "minLength": 1
+    },
+    "information_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "shared",
+        "coordination_requirement"
+      ],
+      "properties": {
+        "mode": {
+          "enum": [
+            "shared",
+            "role_scoped",
+            "role_specialized"
+          ]
+        },
+        "shared": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "problem",
+              "contest_rules",
+              "team_discussion",
+              "scratchpad"
+            ]
+          }
+        },
+        "coordination_requirement": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "rule_sections": {
+      "type": "object",
+      "minProperties": 8,
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "deliberation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "min_challenges",
+        "evaluation_dimensions"
+      ],
+      "properties": {
+        "mode": {
+          "enum": [
+            "unstructured",
+            "structured"
+          ]
+        },
+        "min_challenges": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "decision_maker": {
+          "const": "submitter"
+        },
+        "evaluation_dimensions": {
+          "type": "array",
+          "minItems": 2,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "evidence_responsiveness",
+              "revision_after_challenge",
+              "decision_traceability",
+              "authority_bias",
+              "majority_bias"
+            ]
+          }
+        }
+      }
+    },
+    "communication": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode"
+      ],
+      "properties": {
+        "mode": {
+          "enum": [
+            "unlimited",
+            "limited"
+          ]
+        },
+        "team_message_budget": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "per_agent_message_budget": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "max_message_chars": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "counted_actions": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "speak",
+              "write_scratchpad",
+              "propose",
+              "challenge",
+              "provide_evidence",
+              "revise",
+              "decide"
+            ]
+          }
+        }
+      }
+    },
+    "scoring": {
+      "type": "object"
+    },
+    "resources": {
+      "type": "object"
+    },
+    "submission": {
+      "type": "object"
+    },
+    "rules_text": {
+      "type": "string",
+      "minLength": 1
+    },
+    "provenance": {
+      "type": "object"
+    },
+    "comparability": {
+      "type": "object"
+    }
+  }
+}
