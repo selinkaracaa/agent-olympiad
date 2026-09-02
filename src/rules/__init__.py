@@ -8,7 +8,7 @@ from .baseline import (
 from .describe import describe_resources
 from .loader import DEFAULT_RULES_ROOT, load_rule_card
 from .models import AgentRole, RuleCard, RuleCardError
-from .ownership import HIDDEN_EVAL_KEYS, SIMULATION_OWNED_KEYS
+from .phases import ContestPhase, PhaseSchedule
 from .storage import (
     COMPONENT_FILES,
     COMPONENT_KEYS,

@@ -1,0 +1,783 @@
+{
+  "schema_version": "agent-olympiad.transcript/v1",
+  "metadata": {
+    "competition_id": "ieo_business_case",
+    "problem_id": "ieo_business_case_2021",
+    "title": null,
+    "year": 2021,
+    "task_type": "business_case",
+    "team_size": 5,
+    "allowed_tools": [
+      "query_rules",
+      "use_calculator",
+      "execute_code",
+      "web_search"
+    ],
+    "has_gold_answer": false,
+    "search_policy": "unrestricted",
+    "wrong_submission_penalty_minutes": null,
+    "rules_gap_count": 4,
+    "duration_minutes": 1440,
+    "max_turns": 30,
+    "minutes_per_turn": 30,
+    "rules_mode": "enforced",
+    "rules_available": true,
+    "rules_coverage": "covered",
+    "rule_card_schema_version": "1.0",
+    "rule_card_version": "ieo_business_case:draft_v1",
+    "rule_card_competition_id": "ieo_business_case",
+    "rule_card_content_hash": "f68edc8dba65188c396e80e5c1f2a614f0a788fcfee13f806677a693d95a104e",
+    "rule_capabilities": {
+      "prompt_rules": "prompt_only",
+      "roster_roles": "prompt_only",
+      "communication_budgets": "enforced",
+      "submission_authority": "enforced",
+      "tool_allowlist": "enforced",
+      "private_notes": "enforced",
+      "structured_deliberation": "enforced"
+    },
+    "declared_tool_availability": {
+      "query_rules": "enforced",
+      "use_calculator": "enforced",
+      "execute_code": "enforced",
+      "web_search": "enforced"
+    },
+    "rule": {
+      "rule_id": "ieo_business_case:draft_v1",
+      "competition_id": "ieo_business_case",
+      "profile": "proxy",
+      "protocol": "research_artifact",
+      "rules_text": "International Economics Olympiad — Business Case. The team researches, authors, and defends a judged artifact. The source-recorded active team may have 3 to 5 members; the runner default is 5. Collaborate only within the team under contest rules. Permitted: internet access, calculators and running code. Paper and pencil are always available. Submit one shared slide deck; Submit a structured report or slide outline covering analysis, recommendation, and evidence. The regulations establish preparation and presentation days but not one exact continuous 1,440-minute official clock. Treat unexposed physical, oral, live-opponent, judge, timing, or environment mechanisms as unavailable rather than simulated facts.",
+      "human_constraints": [
+        "Online and offline research materials and ordinary software are allowed.",
+        "No contact with anyone outside the team during the case window.",
+        "Deliver a slide deck / strategic report suitable for oral presentation.",
+        "Do not modify the submission after the lock/deadline.",
+        "Team size: ≤5 contestants (+1–2 leaders).",
+        "Business Case is a team competition; communication only with IEO officials and teammates (no outsiders).",
+        "Business Case lasts two days: preparation day + presentation day; presentations must be English slide-supported oral talks.",
+        "During preparation: any online and offline materials allowed; contacting other people for help is prohibited.",
+        "All teams submit slides by Steering Committee deadline before Opening Ceremony; no slide changes afterward.",
+        "Business Case contributes 50 final points (raw then Z-normalized); group stage then Finals for group winners; criterion scores use median of judges.",
+        "Contrast: Economics/Finance individual exams ban smartphones/electronics; permitted instruments listed ≤1 month ahead (not the Business Case tools regime)."
+      ],
+      "agent_constraints": [
+        "Apply this competition's own roster, timing, tool, collaboration, submission, and scoring rules; do not import rules from another contest.",
+        "Collaborate only within the team under contest rules.",
+        "Permitted: internet access, calculators and running code. Paper and pencil are always available.",
+        "Treat private reasoning and notes as unknown to teammates until you communicate the decision-relevant content.",
+        "Do not access hidden solutions, answer keys, evaluator internals, or unauthorized outside problem-solving help.",
+        "Keep sourced evidence, analysis, recommendations, and presentation claims distinct, then reconcile them into one internally consistent artifact.",
+        "Do not cite a source, experiment, market action, or judge interaction unless it was actually available and observed in the task environment.",
+        "Only designated submitters may make the shared submission: Agent_1.",
+        "Use only the official mechanisms that the current task actually exposes; do not claim physical, oral, live-opponent, judge, or environment actions that were not observed."
+      ],
+      "answer_format": "Submit a structured report or slide outline covering analysis, recommendation, and evidence.",
+      "deliverable": {
+        "answer_format": "Submit a structured report or slide outline covering analysis, recommendation, and evidence.",
+        "shared": true,
+        "mime_types": [
+          "text/plain"
+        ],
+        "task_types": [
+          "business_case"
+        ],
+        "official_deliverable": "slide_deck",
+        "official_mime_types": [
+          "text/html",
+          "application/pdf"
+        ]
+      },
+      "resources": {
+        "internet": "allowed",
+        "calculator": "allowed",
+        "code_execution": "allowed",
+        "paper_pencil": "allowed",
+        "provided_materials_only": false
+      },
+      "allowed_tools": [
+        "query_rules",
+        "use_calculator",
+        "execute_code",
+        "web_search"
+      ],
+      "information_policy": {
+        "mode": "role_specialized",
+        "shared": [
+          "problem",
+          "contest_rules",
+          "team_discussion",
+          "scratchpad"
+        ],
+        "coordination_requirement": "All teammates may consult the complete public contest rules. Private reasoning becomes shared state only when communicated; assigned rule expertise creates tracking responsibility, not exclusive access."
+      },
+      "rule_sections": {
+        "competition_format": [
+          "Competition model: The team researches, authors, and defends a judged artifact.",
+          "The source-recorded active team may have 3 to 5 members; the runner default is 5.",
+          "Source-recorded competition rule: Contrast: Economics/Finance individual exams ban smartphones/electronics; permitted instruments listed ≤1 month ahead (not the Business Case tools regime).",
+          "Contrast: Economics/Finance individual exams ban smartphones/electronics; permitted instruments listed ≤1 month ahead (not the Business Case tools regime)."
+        ],
+        "timeline": [
+          "Source-recorded timing: The regulations establish preparation and presentation days but not one exact continuous 1,440-minute official clock.",
+          "Source-recorded competition rule: Do not modify the submission after the lock/deadline.",
+          "Source-recorded competition rule: Business Case lasts two days: preparation day + presentation day; presentations must be English slide-supported oral talks.",
+          "Source-recorded competition rule: All teams submit slides by Steering Committee deadline before Opening Ceremony; no slide changes afterward.",
+          "Source-recorded competition rule: Business Case contributes 50 final points (raw then Z-normalized); group stage then Finals for group winners; criterion scores use median of judges.",
+          "Do not modify the submission after the lock/deadline.",
+          "Business Case lasts two days: preparation day + presentation day; presentations must be English slide-supported oral talks.",
+          "All teams submit slides by Steering Committee deadline before Opening Ceremony; no slide changes afterward.",
+          "Business Case contributes 50 final points (raw then Z-normalized); group stage then Finals for group winners; criterion scores use median of judges.",
+          "Preparation and presentation span two days.",
+          "Slides must be submitted by the Steering Committee deadline and cannot be changed afterward."
+        ],
+        "resource_policy": [
+          "Source-recorded resource policy: Permitted: internet access, calculators and running code. Paper and pencil are always available.",
+          "Source-recorded competition rule: Online and offline research materials and ordinary software are allowed.",
+          "Online and offline research materials and ordinary software are allowed.",
+          "Do not claim tools, internet, or materials that the rule card forbids.",
+          "Online and offline research materials and ordinary software are allowed during preparation.",
+          "Contacting anyone outside the team for help is prohibited."
+        ],
+        "collaboration_protocol": [
+          "Source-recorded collaboration rule: Collaborate only within the team under contest rules.",
+          "Source-recorded competition rule: No contact with anyone outside the team during the case window.",
+          "Source-recorded competition rule: Team size: ≤5 contestants (+1–2 leaders).",
+          "Source-recorded competition rule: Business Case is a team competition; communication only with IEO officials and teammates (no outsiders).",
+          "No contact with anyone outside the team during the case window.",
+          "Team size: ≤5 contestants (+1–2 leaders).",
+          "Business Case is a team competition; communication only with IEO officials and teammates (no outsiders).",
+          "You must behave like a human teammate under official contest rules."
+        ],
+        "integrity_and_compliance": [
+          "Benchmark safety rule: do not use hidden solutions, evaluator internals, unauthorized outside assistance, or resources forbidden by this competition.",
+          "Source-recorded competition rule: No contact with anyone outside the team during the case window.",
+          "Source-recorded competition rule: During preparation: any online and offline materials allowed; contacting other people for help is prohibited.",
+          "No contact with anyone outside the team during the case window.",
+          "During preparation: any online and offline materials allowed; contacting other people for help is prohibited.",
+          "Use evidence responsibly and do not obtain hidden solutions or outside authorship."
+        ],
+        "deliverable_format": [
+          "Runner answer contract: Submit a structured report or slide outline covering analysis, recommendation, and evidence.",
+          "Official deliverable: slide deck.",
+          "Benchmark adaptation: Official entries are slide files; the runner submits the deck as structured text.",
+          "Source-recorded competition rule: Deliver a slide deck / strategic report suitable for oral presentation.",
+          "Source-recorded competition rule: Do not modify the submission after the lock/deadline.",
+          "Source-recorded competition rule: Business Case lasts two days: preparation day + presentation day; presentations must be English slide-supported oral talks.",
+          "Source-recorded competition rule: All teams submit slides by Steering Committee deadline before Opening Ceremony; no slide changes afterward.",
+          "Deliver a slide deck / strategic report suitable for oral presentation.",
+          "Do not modify the submission after the lock/deadline.",
+          "Business Case lasts two days: preparation day + presentation day; presentations must be English slide-supported oral talks.",
+          "All teams submit slides by Steering Committee deadline before Opening Ceremony; no slide changes afterward.",
+          "Do not look up answer keys or hidden solutions.",
+          "Deliver an English, slide-supported oral business-case presentation."
+        ],
+        "evaluation_criteria": [
+          "Repository evaluation status: Task performance is evaluated per artifact in rubric mode by slide_deck_v1; repository evaluator status is ready.",
+          "Source-recorded competition rule: Business Case contributes 50 final points (raw then Z-normalized); group stage then Finals for group winners; criterion scores use median of judges.",
+          "Business Case contributes 50 final points (raw then Z-normalized); group stage then Finals for group winners; criterion scores use median of judges.",
+          "Business Case contributes 50 final points; criterion scores use the median of judges."
+        ],
+        "runtime_limitations": [
+          "Runtime limitation: Oral Q&A with live judge panels and slide-lock social dynamics are weak under text-only multi-agent simulation.",
+          "Runtime limitation: Case partner / host-specific scoring guide is not universal across years."
+        ]
+      },
+      "deliberation": {
+        "mode": "structured",
+        "min_challenges": 1,
+        "decision_maker": "submitter",
+        "evaluation_dimensions": [
+          "evidence_responsiveness",
+          "revision_after_challenge",
+          "decision_traceability",
+          "authority_bias",
+          "majority_bias"
+        ]
+      },
+      "communication": {
+        "mode": "limited",
+        "team_message_budget": 12,
+        "per_agent_message_budget": 3,
+        "max_message_chars": 1200,
+        "counted_actions": [
+          "speak",
+          "write_scratchpad",
+          "propose",
+          "challenge",
+          "provide_evidence",
+          "revise",
+          "decide"
+        ]
+      },
+      "simulation": {
+        "max_turns": 30,
+        "scheduler": "src_collaboration_draft",
+        "turn_budget_basis": "standardized experiment budget: 30 global turns; official contest timing is recorded separately"
+      },
+      "comparability": {
+        "overall": "proxy"
+      },
+      "agent_roles": [
+        {
+          "name": "Agent_1",
+          "title": "captain / editor",
+          "duties": [
+            "Own the deliverable's structure and cut material that does not earn points.",
+            "Resolve disagreements between analysts before they reach the final text.",
+            "Submit only after the format and rule checks pass."
+          ],
+          "may_submit": true,
+          "information_access": [
+            "contest_rules"
+          ],
+          "rule_expertise": [
+            "timeline",
+            "collaboration_protocol",
+            "deliverable_format"
+          ]
+        },
+        {
+          "name": "Agent_2",
+          "title": "analyst",
+          "duties": [
+            "Gather the evidence the recommendation rests on.",
+            "Separate what the sources say from what the team infers."
+          ],
+          "may_submit": false,
+          "information_access": [
+            "contest_rules"
+          ],
+          "rule_expertise": [
+            "integrity_and_compliance",
+            "evaluation_criteria"
+          ]
+        },
+        {
+          "name": "Agent_3",
+          "title": "quant / modeler",
+          "duties": [
+            "Build the numbers: valuation, models, and sensitivity checks.",
+            "State assumptions explicitly and show which results depend on them."
+          ],
+          "may_submit": false,
+          "information_access": [
+            "contest_rules"
+          ],
+          "rule_expertise": [
+            "resource_policy",
+            "deliverable_format"
+          ]
+        },
+        {
+          "name": "Agent_4",
+          "title": "research lead",
+          "duties": [
+            "Decide which questions the research must answer and in what order.",
+            "Kill lines of inquiry that will not change the recommendation."
+          ],
+          "may_submit": false,
+          "information_access": [
+            "contest_rules"
+          ],
+          "rule_expertise": [
+            "timeline",
+            "collaboration_protocol",
+            "deliverable_format"
+          ]
+        },
+        {
+          "name": "Agent_5",
+          "title": "slide / report designer",
+          "duties": [
+            "Turn analysis into a structure a judge can follow in one pass.",
+            "Cut slides and sections that do not carry an argument."
+          ],
+          "may_submit": false,
+          "information_access": [
+            "contest_rules"
+          ],
+          "rule_expertise": [
+            "deliverable_format",
+            "evaluation_criteria"
+          ]
+        }
+      ]
+    },
+    "agents": [
+      "Agent_1"
+    ]
+  },
+  "chat_history": [],
+  "group_messages": [],
+  "action_log": [
+    {
+      "turn": 1,
+      "agent": "Agent_1",
+      "sender": "Agent_1",
+      "action": "submit_final",
+      "payload": "1. Executive recommendation  \nRAF2021 should produce an electric van/minibus platform, starting with a modern electric minibus for urban shuttle, municipal, and ride-hailing fleet use. This is the best fit because it aligns with RAF’s historical identity as a van/minibus maker, matches Latvia’s industrial rebirth objective, and targets a segment where electrification, regulation, and fleet demand are growing.\n\n2. Why this vehicle type  \n- Strategic fit: RAF’s legacy is in vans and minibuses, not passenger sedans or heavy trucks.  \n- Market demand: post-COVID mobility is recovering, with strong demand for shared mobility, last-mile transport, airport shuttles, hotel transfers, municipal transport, and corporate fleets.  \n- Regulation: EU emissions rules and city low-emission zones favor EVs, especially in urban transport.  \n- Competitive logic: competing head-on with global mass-market OEMs is too costly; a focused niche vehicle is more feasible.  \n- Industrial policy: a domestically assembled EV supports government goals for innovation, jobs, and regional development.\n\n3. Market opportunity  \nPrimary customers:\n- Municipalities and public transport operators\n- Ride-hailing and shuttle operators\n- Hotels, airports, logistics and campus transport fleets\n- Social care and school transport providers\n\nDemand drivers:\n- Electrification incentives and carbon-reduction targets\n- Lower total cost of ownership for fleet operators\n- Growth of shared and on-demand mobility\n- Need for flexible, quiet, low-emission urban transport\n\n4. Market challenges  \n- High upfront R&D and tooling costs\n- Strong competition from established van OEMs and EV entrants\n- Battery supply risk and price volatility\n- Need for charging infrastructure among fleet customers\n- Brand revival challenge: RAF has heritage, but weak modern market awareness\n\n5. Sales strategy  \nA. Go-to-market focus  \n- Start B2B and public-sector fleet sales, not retail consumers.  \n- Target Latvia and nearby Baltic/Nordic markets first, then expand into EU cities.\n\nB. Product positioning  \n- “Smart, clean, reliable urban mobility platform”  \n- Emphasize low operating cost, modular seating, safety, and connectivity\n\nC. Distribution model  \n- Direct sales to large fleets and government buyers  \n- Partnerships with local dealers/service centers for regional support  \n- Leasing and fleet-financing options to reduce customer capex barrier\n\nD. Pricing  \n- Value-based pricing supported by lower lifetime operating cost  \n- Offer battery lease / service packages if financially feasible  \n- Use government procurement and pilot projects to build reference customers\n\nE. Promotion  \n- Pilot programs with municipalities and airports  \n- Demonstration fleet for ride-hailing and shuttle operators  \n- Marketing centered on Latvian innovation, sustainability, and total cost of ownership  \n- Certification, safety testing, and reliability proofs as core sales tools\n\n6. Business model logic  \nRAF should not try to be a full-line automaker. It should be a niche OEM producing one platform with multiple variants:\n- passenger minibus\n- shuttle van\n- accessible transport version\n- cargo/utility derivative if needed later\n\nThis improves economies of scale while preserving product focus.\n\n7. Quantitative logic / decision criterion  \nUsing a simple strategic screen:\n- Market growth: high for electric urban fleet vehicles\n- Fit with capabilities: high\n- Capital requirement: moderate to high, but supported by government\n- Competitive intensity: manageable in niche segment\n- Differentiation potential: high through heritage + local production + fleet specialization\n\nOverall, electric minibus/van is the highest-scoring option.\n\n8. Risks and mitigations  \n- Technology risk: use proven EV platform or licensed architecture first  \n- Demand risk: secure anchor fleet contracts before scaling  \n- Supply chain risk: diversify battery and component sourcing  \n- Brand risk: invest in reliability, safety, and after-sales service  \n- Financial risk: phase investment and start with limited variants\n\n9. Final conclusion  \nRAF2021 should rebirth itself as a focused electric urban van/minibus manufacturer. This choice best matches its legacy, Latvia’s industrial policy goals, and the post-2021 market direction toward sustainable fleet mobility. The sales strategy should prioritize fleet customers, public-sector pilots, and low total cost of ownership messaging.",
+      "result": "Submission finalized by Agent_1.",
+      "visibility": "team"
+    }
+  ],
+  "budget_snapshots": [
+    {
+      "event": "initialized",
+      "turn": 0,
+      "api_calls": 0,
+      "tokens_used": 0,
+      "simulated_minutes": 0.0,
+      "wrong_submissions": 0
+    },
+    {
+      "event": "budget_configured",
+      "turn": 0,
+      "api_calls": 0,
+      "tokens_used": 0,
+      "simulated_minutes": 0.0,
+      "wrong_submissions": 0
+    },
+    {
+      "event": "budget_configured",
+      "turn": 0,
+      "api_calls": 0,
+      "tokens_used": 0,
+      "simulated_minutes": 0.0,
+      "wrong_submissions": 0
+    },
+    {
+      "event": "turn_started",
+      "turn": 1,
+      "api_calls": 0,
+      "tokens_used": 0,
+      "simulated_minutes": 30,
+      "wrong_submissions": 0
+    },
+    {
+      "event": "api_call",
+      "turn": 1,
+      "api_calls": 1,
+      "tokens_used": 0,
+      "simulated_minutes": 30,
+      "wrong_submissions": 0
+    }
+  ],
+  "budget": {
+    "used": {
+      "turns": 1,
+      "api_calls": 1,
+      "tokens": 1117
+    },
+    "limits": {
+      "turns": 30,
+      "api_calls": null,
+      "tokens": null
+    }
+  },
+  "submission": {
+    "submitted": true,
+    "submitted_by": "Agent_1",
+    "final_answer": "1. Executive recommendation  \nRAF2021 should produce an electric van/minibus platform, starting with a modern electric minibus for urban shuttle, municipal, and ride-hailing fleet use. This is the best fit because it aligns with RAF’s historical identity as a van/minibus maker, matches Latvia’s industrial rebirth objective, and targets a segment where electrification, regulation, and fleet demand are growing.\n\n2. Why this vehicle type  \n- Strategic fit: RAF’s legacy is in vans and minibuses, not passenger sedans or heavy trucks.  \n- Market demand: post-COVID mobility is recovering, with strong demand for shared mobility, last-mile transport, airport shuttles, hotel transfers, municipal transport, and corporate fleets.  \n- Regulation: EU emissions rules and city low-emission zones favor EVs, especially in urban transport.  \n- Competitive logic: competing head-on with global mass-market OEMs is too costly; a focused niche vehicle is more feasible.  \n- Industrial policy: a domestically assembled EV supports government goals for innovation, jobs, and regional development.\n\n3. Market opportunity  \nPrimary customers:\n- Municipalities and public transport operators\n- Ride-hailing and shuttle operators\n- Hotels, airports, logistics and campus transport fleets\n- Social care and school transport providers\n\nDemand drivers:\n- Electrification incentives and carbon-reduction targets\n- Lower total cost of ownership for fleet operators\n- Growth of shared and on-demand mobility\n- Need for flexible, quiet, low-emission urban transport\n\n4. Market challenges  \n- High upfront R&D and tooling costs\n- Strong competition from established van OEMs and EV entrants\n- Battery supply risk and price volatility\n- Need for charging infrastructure among fleet customers\n- Brand revival challenge: RAF has heritage, but weak modern market awareness\n\n5. Sales strategy  \nA. Go-to-market focus  \n- Start B2B and public-sector fleet sales, not retail consumers.  \n- Target Latvia and nearby Baltic/Nordic markets first, then expand into EU cities.\n\nB. Product positioning  \n- “Smart, clean, reliable urban mobility platform”  \n- Emphasize low operating cost, modular seating, safety, and connectivity\n\nC. Distribution model  \n- Direct sales to large fleets and government buyers  \n- Partnerships with local dealers/service centers for regional support  \n- Leasing and fleet-financing options to reduce customer capex barrier\n\nD. Pricing  \n- Value-based pricing supported by lower lifetime operating cost  \n- Offer battery lease / service packages if financially feasible  \n- Use government procurement and pilot projects to build reference customers\n\nE. Promotion  \n- Pilot programs with municipalities and airports  \n- Demonstration fleet for ride-hailing and shuttle operators  \n- Marketing centered on Latvian innovation, sustainability, and total cost of ownership  \n- Certification, safety testing, and reliability proofs as core sales tools\n\n6. Business model logic  \nRAF should not try to be a full-line automaker. It should be a niche OEM producing one platform with multiple variants:\n- passenger minibus\n- shuttle van\n- accessible transport version\n- cargo/utility derivative if needed later\n\nThis improves economies of scale while preserving product focus.\n\n7. Quantitative logic / decision criterion  \nUsing a simple strategic screen:\n- Market growth: high for electric urban fleet vehicles\n- Fit with capabilities: high\n- Capital requirement: moderate to high, but supported by government\n- Competitive intensity: manageable in niche segment\n- Differentiation potential: high through heritage + local production + fleet specialization\n\nOverall, electric minibus/van is the highest-scoring option.\n\n8. Risks and mitigations  \n- Technology risk: use proven EV platform or licensed architecture first  \n- Demand risk: secure anchor fleet contracts before scaling  \n- Supply chain risk: diversify battery and component sourcing  \n- Brand risk: invest in reliability, safety, and after-sales service  \n- Financial risk: phase investment and start with limited variants\n\n9. Final conclusion  \nRAF2021 should rebirth itself as a focused electric urban van/minibus manufacturer. This choice best matches its legacy, Latvia’s industrial policy goals, and the post-2021 market direction toward sustainable fleet mobility. The sales strategy should prioritize fleet customers, public-sector pilots, and low total cost of ownership messaging.",
+    "attempts": 0,
+    "wrong_submissions": 0
+  },
+  "workspace": {
+    "scratchpad": "",
+    "final_answer": "1. Executive recommendation  \nRAF2021 should produce an electric van/minibus platform, starting with a modern electric minibus for urban shuttle, municipal, and ride-hailing fleet use. This is the best fit because it aligns with RAF’s historical identity as a van/minibus maker, matches Latvia’s industrial rebirth objective, and targets a segment where electrification, regulation, and fleet demand are growing.\n\n2. Why this vehicle type  \n- Strategic fit: RAF’s legacy is in vans and minibuses, not passenger sedans or heavy trucks.  \n- Market demand: post-COVID mobility is recovering, with strong demand for shared mobility, last-mile transport, airport shuttles, hotel transfers, municipal transport, and corporate fleets.  \n- Regulation: EU emissions rules and city low-emission zones favor EVs, especially in urban transport.  \n- Competitive logic: competing head-on with global mass-market OEMs is too costly; a focused niche vehicle is more feasible.  \n- Industrial policy: a domestically assembled EV supports government goals for innovation, jobs, and regional development.\n\n3. Market opportunity  \nPrimary customers:\n- Municipalities and public transport operators\n- Ride-hailing and shuttle operators\n- Hotels, airports, logistics and campus transport fleets\n- Social care and school transport providers\n\nDemand drivers:\n- Electrification incentives and carbon-reduction targets\n- Lower total cost of ownership for fleet operators\n- Growth of shared and on-demand mobility\n- Need for flexible, quiet, low-emission urban transport\n\n4. Market challenges  \n- High upfront R&D and tooling costs\n- Strong competition from established van OEMs and EV entrants\n- Battery supply risk and price volatility\n- Need for charging infrastructure among fleet customers\n- Brand revival challenge: RAF has heritage, but weak modern market awareness\n\n5. Sales strategy  \nA. Go-to-market focus  \n- Start B2B and public-sector fleet sales, not retail consumers.  \n- Target Latvia and nearby Baltic/Nordic markets first, then expand into EU cities.\n\nB. Product positioning  \n- “Smart, clean, reliable urban mobility platform”  \n- Emphasize low operating cost, modular seating, safety, and connectivity\n\nC. Distribution model  \n- Direct sales to large fleets and government buyers  \n- Partnerships with local dealers/service centers for regional support  \n- Leasing and fleet-financing options to reduce customer capex barrier\n\nD. Pricing  \n- Value-based pricing supported by lower lifetime operating cost  \n- Offer battery lease / service packages if financially feasible  \n- Use government procurement and pilot projects to build reference customers\n\nE. Promotion  \n- Pilot programs with municipalities and airports  \n- Demonstration fleet for ride-hailing and shuttle operators  \n- Marketing centered on Latvian innovation, sustainability, and total cost of ownership  \n- Certification, safety testing, and reliability proofs as core sales tools\n\n6. Business model logic  \nRAF should not try to be a full-line automaker. It should be a niche OEM producing one platform with multiple variants:\n- passenger minibus\n- shuttle van\n- accessible transport version\n- cargo/utility derivative if needed later\n\nThis improves economies of scale while preserving product focus.\n\n7. Quantitative logic / decision criterion  \nUsing a simple strategic screen:\n- Market growth: high for electric urban fleet vehicles\n- Fit with capabilities: high\n- Capital requirement: moderate to high, but supported by government\n- Competitive intensity: manageable in niche segment\n- Differentiation potential: high through heritage + local production + fleet specialization\n\nOverall, electric minibus/van is the highest-scoring option.\n\n8. Risks and mitigations  \n- Technology risk: use proven EV platform or licensed architecture first  \n- Demand risk: secure anchor fleet contracts before scaling  \n- Supply chain risk: diversify battery and component sourcing  \n- Brand risk: invest in reliability, safety, and after-sales service  \n- Financial risk: phase investment and start with limited variants\n\n9. Final conclusion  \nRAF2021 should rebirth itself as a focused electric urban van/minibus manufacturer. This choice best matches its legacy, Latvia’s industrial policy goals, and the post-2021 market direction toward sustainable fleet mobility. The sales strategy should prioritize fleet customers, public-sector pilots, and low total cost of ownership messaging.",
+    "work_artifacts": []
+  },
+  "code_submissions": [],
+  "private_thoughts": {},
+  "protocol_action_counts": {},
+  "rule_violations": [],
+  "deliberation": {
+    "counts": {
+      "challenge": 0,
+      "decide": 0,
+      "propose": 0,
+      "provide_evidence": 0,
+      "revise": 0
+    },
+    "decisions_after_evidence": 0,
+    "evidence_led_revisions": 0,
+    "open_proposals": [],
+    "proposals": [],
+    "events": []
+  },
+  "communication": {
+    "mode": "limited",
+    "team_used": 0,
+    "team_budget": 12,
+    "team_remaining": 12,
+    "per_agent_budget": 3,
+    "by_agent": {},
+    "rejected": [],
+    "compacted": []
+  },
+  "rules_baseline": {
+    "rules_mode": "enforced",
+    "rules_available": true,
+    "rules_coverage": "covered",
+    "rule_card_schema_version": "1.0",
+    "rule_card_version": "ieo_business_case:draft_v1",
+    "rule_card_competition_id": "ieo_business_case",
+    "rule_card_content_hash": "f68edc8dba65188c396e80e5c1f2a614f0a788fcfee13f806677a693d95a104e",
+    "rule_capabilities": {
+      "prompt_rules": "prompt_only",
+      "roster_roles": "prompt_only",
+      "communication_budgets": "enforced",
+      "submission_authority": "enforced",
+      "tool_allowlist": "enforced",
+      "private_notes": "enforced",
+      "structured_deliberation": "enforced"
+    },
+    "declared_tool_availability": {
+      "query_rules": "enforced",
+      "use_calculator": "enforced",
+      "execute_code": "enforced",
+      "web_search": "enforced"
+    }
+  },
+  "run": {
+    "provider": "perplexity",
+    "model": "mock",
+    "max_output_tokens": null,
+    "temperature": null,
+    "schema": "single_agent",
+    "rules_mode": "enforced",
+    "task_type": "business_case",
+    "grade": {
+      "graded": true,
+      "method": "slide_deck_v1",
+      "score": 31.0,
+      "max_score": 50.0,
+      "correct": false,
+      "evaluation": {
+        "evaluator_id": "rubric_llm_v1",
+        "evaluator_version": "1.0.0",
+        "prompt_version": "rubric_document_v1",
+        "model": "openai/gpt-5.4-mini",
+        "rubric_id": "business_case_slides_50_v1",
+        "criteria": [
+          {
+            "id": "analytical",
+            "score": 11.5,
+            "max_score": 15.0,
+            "evidence": [
+              "“RAF2021 should produce an electric van/minibus platform…”",
+              "“Strategic fit: RAF’s legacy is in vans and minibuses…”",
+              "“Primary customers: Municipalities and public transport operators; Ride-hailing and shuttle operators; Hotels, airports, logistics and campus transport fleets…”",
+              "“Market challenges… High upfront R&D and tooling costs… Battery supply risk… Brand revival challenge…”"
+            ],
+            "justification": "The submission clearly identifies the core client decision and frames the recommendation around RAF’s legacy, market demand, and target customer segments. It also shows awareness of several stakeholder groups and key challenges, which is consistent with a solid business-case analysis. However, the analysis remains high-level and does not deeply synthesize the case facts or explore alternative strategic options in a broad MECE-like way.",
+            "confidence": 0.95,
+            "observable": true
+          },
+          {
+            "id": "conceptual",
+            "score": 11.0,
+            "max_score": 15.0,
+            "evidence": [
+              "“RAF should not try to be a full-line automaker. It should be a niche OEM producing one platform with multiple variants…”",
+              "“Start B2B and public-sector fleet sales, not retail consumers.”",
+              "“Use proven EV platform or licensed architecture first”",
+              "“Pricing… Value-based pricing supported by lower lifetime operating cost”"
+            ],
+            "justification": "The deck presents a coherent strategic concept: a focused niche EV minibus/van OEM with fleet-led go-to-market, phased product scope, and pragmatic risk mitigation. The recommendation is feasible and aligned with the stated context, and it shows some creativity in combining heritage, local production, and public-sector pilots. Still, the model is not very developed; there is no explicit strategic framework, no detailed implementation roadmap, and limited justification of assumptions beyond general business sense.",
+            "confidence": 0.91,
+            "observable": true
+          },
+          {
+            "id": "quantitative",
+            "score": 1.5,
+            "max_score": 10.0,
+            "evidence": [
+              "“Quantitative logic / decision criterion: Using a simple strategic screen: Market growth: high… Fit with capabilities: high… Capital requirement: moderate to high… Competitive intensity: manageable…”"
+            ],
+            "justification": "The submission contains only a qualitative scoring screen and does not provide actual calculations, market sizing, financial projections, sensitivities, or unit economics. The “quantitative logic” is decision-oriented but not numerically substantiated, so it earns only minimal credit. No transparent formulas or decision-relevant estimates are visible in the submission.",
+            "confidence": 0.98,
+            "observable": true
+          },
+          {
+            "id": "communication",
+            "score": 7.0,
+            "max_score": 10.0,
+            "evidence": [
+              "Structured sections: “1. Executive recommendation … 9. Final conclusion”",
+              "Bulleted lists under “Why this vehicle type,” “Market opportunity,” “Market challenges,” “Sales strategy,” and “Risks and mitigations”",
+              "Concise recommendation statement: “RAF2021 should rebirth itself as a focused electric urban van/minibus manufacturer.”"
+            ],
+            "justification": "The submission is well organized, easy to follow, and uses a clear slide-like hierarchy with concise bullets and a direct final conclusion. The narrative supports the recommendation logically and would likely be legible in a presentation format. However, because only text is visible, there is no evidence of actual slide design quality, visual polish, or graphical communication beyond structure.",
+            "confidence": 0.9,
+            "observable": true
+          }
+        ],
+        "total_score": 31.0,
+        "max_score": 50.0,
+        "warnings": [
+          "No actual slide deck visuals were provided, so visual layout, charts, typography, and slide professionalism cannot be directly assessed.",
+          "The submission is mostly qualitative; quantitative rigor is weak relative to the rubric."
+        ],
+        "limitations": [
+          "Oral delivery, timing, Q&A performance, and team participation cannot be judged from the submitted text.",
+          "Because only text is available, the assessment cannot verify whether the actual slides contained graphics, exhibits, or stronger quantitative analysis than the text suggests.",
+          "oral delivery",
+          "presentation timing",
+          "question-and-answer performance",
+          "on-stage participation",
+          "visible teamwork during presentation",
+          "Scored as text via rubric LLM; HTML/PDF slide checks not run in-pipeline."
+        ],
+        "artifact_checks": {},
+        "usage": {
+          "cost": {
+            "currency": "USD",
+            "input_cost": 0.00269,
+            "output_cost": 0.00435,
+            "total_cost": 0.00704
+          },
+          "input_tokens": 3581,
+          "input_tokens_details": {
+            "cached_tokens": 0
+          },
+          "output_tokens": 966,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 4547
+        }
+      },
+      "submitted_by": "Agent_1"
+    },
+    "coordination": {
+      "communication_score": 0.0,
+      "planning_score": 1.0,
+      "coordination_score": 0.5,
+      "communication_justification": "No communication observed; Cscore=0 per MultiAgentBench.",
+      "planning_justification": "The planning process shows no meaningful multi-agent coordination beyond a single final recommendation from one agent. There is no evidence of clear role definitions, task assignment, workload distribution, or iterative collaboration/competition across agents. As a result, the process does not demonstrate effective planning progress in a multi-agent sense.",
+      "model": "openai/gpt-5.4-mini",
+      "warnings": [
+        "no_communication"
+      ],
+      "source": "multiagentbench_arXiv:2503.01935"
+    },
+    "interaction": {
+      "interaction_helpfulness_score": 0.0,
+      "helpful_count": 0,
+      "neutral_count": 1,
+      "hurt_count": 0,
+      "n_interactions": 1,
+      "helpful_fraction": 0.0,
+      "labels": [
+        "neutral"
+      ],
+      "justification": "There is only one logged interaction, and it is the final submission itself. It contains a plausible, coherent answer but the log provides no evidence of collaborative steps that improved or corrected it, so it is best treated as neutral for collaboration evaluation. With no other interactions, there is no basis to assign helpful or hurt contributions.",
+      "model": "openai/gpt-5.4-mini",
+      "warnings": [],
+      "source": "interaction_helpfulness_v1"
+    },
+    "status": "ok",
+    "error": null,
+    "final_result": {
+      "schema": "single_agent",
+      "problem_id": "ieo_business_case_2021",
+      "competition_id": "ieo_business_case",
+      "submitted": true,
+      "submitted_by": "Agent_1",
+      "turns_used": 1,
+      "max_turns": 30,
+      "api_calls": 1,
+      "max_api_calls": null,
+      "tokens_used": 1117,
+      "tokens_by_turn": [
+        {
+          "turn": 1,
+          "tokens": 1117,
+          "api_calls": 1
+        }
+      ],
+      "max_total_tokens": null,
+      "max_output_tokens_per_call": null,
+      "action_count": 1,
+      "chat_messages": 0,
+      "final_answer": "1. Executive recommendation  \nRAF2021 should produce an electric van/minibus platform, starting with a modern electric minibus for urban shuttle, municipal, and ride-hailing fleet use. This is the best fit because it aligns with RAF’s historical identity as a van/minibus maker, matches Latvia’s industrial rebirth objective, and targets a segment where electrification, regulation, and fleet demand are growing.\n\n2. Why this vehicle type  \n- Strategic fit: RAF’s legacy is in vans and minibuses, not passenger sedans or heavy trucks.  \n- Market demand: post-COVID mobility is recovering, with strong demand for shared mobility, last-mile transport, airport shuttles, hotel transfers, municipal transport, and corporate fleets.  \n- Regulation: EU emissions rules and city low-emission zones favor EVs, especially in urban transport.  \n- Competitive logic: competing head-on with global mass-market OEMs is too costly; a focused niche vehicle is more feasible.  \n- Industrial policy: a domestically assembled EV supports government goals for innovation, jobs, and regional development.\n\n3. Market opportunity  \nPrimary customers:\n- Municipalities and public transport operators\n- Ride-hailing and shuttle operators\n- Hotels, airports, logistics and campus transport fleets\n- Social care and school transport providers\n\nDemand drivers:\n- Electrification incentives and carbon-reduction targets\n- Lower total cost of ownership for fleet operators\n- Growth of shared and on-demand mobility\n- Need for flexible, quiet, low-emission urban transport\n\n4. Market challenges  \n- High upfront R&D and tooling costs\n- Strong competition from established van OEMs and EV entrants\n- Battery supply risk and price volatility\n- Need for charging infrastructure among fleet customers\n- Brand revival challenge: RAF has heritage, but weak modern market awareness\n\n5. Sales strategy  \nA. Go-to-market focus  \n- Start B2B and public-sector fleet sales, not retail consumers.  \n- Target Latvia and nearby Baltic/Nordic markets first, then expand into EU cities.\n\nB. Product positioning  \n- “Smart, clean, reliable urban mobility platform”  \n- Emphasize low operating cost, modular seating, safety, and connectivity\n\nC. Distribution model  \n- Direct sales to large fleets and government buyers  \n- Partnerships with local dealers/service centers for regional support  \n- Leasing and fleet-financing options to reduce customer capex barrier\n\nD. Pricing  \n- Value-based pricing supported by lower lifetime operating cost  \n- Offer battery lease / service packages if financially feasible  \n- Use government procurement and pilot projects to build reference customers\n\nE. Promotion  \n- Pilot programs with municipalities and airports  \n- Demonstration fleet for ride-hailing and shuttle operators  \n- Marketing centered on Latvian innovation, sustainability, and total cost of ownership  \n- Certification, safety testing, and reliability proofs as core sales tools\n\n6. Business model logic  \nRAF should not try to be a full-line automaker. It should be a niche OEM producing one platform with multiple variants:\n- passenger minibus\n- shuttle van\n- accessible transport version\n- cargo/utility derivative if needed later\n\nThis improves economies of scale while preserving product focus.\n\n7. Quantitative logic / decision criterion  \nUsing a simple strategic screen:\n- Market growth: high for electric urban fleet vehicles\n- Fit with capabilities: high\n- Capital requirement: moderate to high, but supported by government\n- Competitive intensity: manageable in niche segment\n- Differentiation potential: high through heritage + local production + fleet specialization\n\nOverall, electric minibus/van is the highest-scoring option.\n\n8. Risks and mitigations  \n- Technology risk: use proven EV platform or licensed architecture first  \n- Demand risk: secure anchor fleet contracts before scaling  \n- Supply chain risk: diversify battery and component sourcing  \n- Brand risk: invest in reliability, safety, and after-sales service  \n- Financial risk: phase investment and start with limited variants\n\n9. Final conclusion  \nRAF2021 should rebirth itself as a focused electric urban van/minibus manufacturer. This choice best matches its legacy, Latvia’s industrial policy goals, and the post-2021 market direction toward sustainable fleet mobility. The sales strategy should prioritize fleet customers, public-sector pilots, and low total cost of ownership messaging.",
+      "grade": {
+        "graded": true,
+        "method": "slide_deck_v1",
+        "score": 31.0,
+        "max_score": 50.0,
+        "correct": false,
+        "evaluation": {
+          "evaluator_id": "rubric_llm_v1",
+          "evaluator_version": "1.0.0",
+          "prompt_version": "rubric_document_v1",
+          "model": "openai/gpt-5.4-mini",
+          "rubric_id": "business_case_slides_50_v1",
+          "criteria": [
+            {
+              "id": "analytical",
+              "score": 11.5,
+              "max_score": 15.0,
+              "evidence": [
+                "“RAF2021 should produce an electric van/minibus platform…”",
+                "“Strategic fit: RAF’s legacy is in vans and minibuses…”",
+                "“Primary customers: Municipalities and public transport operators; Ride-hailing and shuttle operators; Hotels, airports, logistics and campus transport fleets…”",
+                "“Market challenges… High upfront R&D and tooling costs… Battery supply risk… Brand revival challenge…”"
+              ],
+              "justification": "The submission clearly identifies the core client decision and frames the recommendation around RAF’s legacy, market demand, and target customer segments. It also shows awareness of several stakeholder groups and key challenges, which is consistent with a solid business-case analysis. However, the analysis remains high-level and does not deeply synthesize the case facts or explore alternative strategic options in a broad MECE-like way.",
+              "confidence": 0.95,
+              "observable": true
+            },
+            {
+              "id": "conceptual",
+              "score": 11.0,
+              "max_score": 15.0,
+              "evidence": [
+                "“RAF should not try to be a full-line automaker. It should be a niche OEM producing one platform with multiple variants…”",
+                "“Start B2B and public-sector fleet sales, not retail consumers.”",
+                "“Use proven EV platform or licensed architecture first”",
+                "“Pricing… Value-based pricing supported by lower lifetime operating cost”"
+              ],
+              "justification": "The deck presents a coherent strategic concept: a focused niche EV minibus/van OEM with fleet-led go-to-market, phased product scope, and pragmatic risk mitigation. The recommendation is feasible and aligned with the stated context, and it shows some creativity in combining heritage, local production, and public-sector pilots. Still, the model is not very developed; there is no explicit strategic framework, no detailed implementation roadmap, and limited justification of assumptions beyond general business sense.",
+              "confidence": 0.91,
+              "observable": true
+            },
+            {
+              "id": "quantitative",
+              "score": 1.5,
+              "max_score": 10.0,
+              "evidence": [
+                "“Quantitative logic / decision criterion: Using a simple strategic screen: Market growth: high… Fit with capabilities: high… Capital requirement: moderate to high… Competitive intensity: manageable…”"
+              ],
+              "justification": "The submission contains only a qualitative scoring screen and does not provide actual calculations, market sizing, financial projections, sensitivities, or unit economics. The “quantitative logic” is decision-oriented but not numerically substantiated, so it earns only minimal credit. No transparent formulas or decision-relevant estimates are visible in the submission.",
+              "confidence": 0.98,
+              "observable": true
+            },
+            {
+              "id": "communication",
+              "score": 7.0,
+              "max_score": 10.0,
+              "evidence": [
+                "Structured sections: “1. Executive recommendation … 9. Final conclusion”",
+                "Bulleted lists under “Why this vehicle type,” “Market opportunity,” “Market challenges,” “Sales strategy,” and “Risks and mitigations”",
+                "Concise recommendation statement: “RAF2021 should rebirth itself as a focused electric urban van/minibus manufacturer.”"
+              ],
+              "justification": "The submission is well organized, easy to follow, and uses a clear slide-like hierarchy with concise bullets and a direct final conclusion. The narrative supports the recommendation logically and would likely be legible in a presentation format. However, because only text is visible, there is no evidence of actual slide design quality, visual polish, or graphical communication beyond structure.",
+              "confidence": 0.9,
+              "observable": true
+            }
+          ],
+          "total_score": 31.0,
+          "max_score": 50.0,
+          "warnings": [
+            "No actual slide deck visuals were provided, so visual layout, charts, typography, and slide professionalism cannot be directly assessed.",
+            "The submission is mostly qualitative; quantitative rigor is weak relative to the rubric."
+          ],
+          "limitations": [
+            "Oral delivery, timing, Q&A performance, and team participation cannot be judged from the submitted text.",
+            "Because only text is available, the assessment cannot verify whether the actual slides contained graphics, exhibits, or stronger quantitative analysis than the text suggests.",
+            "oral delivery",
+            "presentation timing",
+            "question-and-answer performance",
+            "on-stage participation",
+            "visible teamwork during presentation",
+            "Scored as text via rubric LLM; HTML/PDF slide checks not run in-pipeline."
+          ],
+          "artifact_checks": {},
+          "usage": {
+            "cost": {
+              "currency": "USD",
+              "input_cost": 0.00269,
+              "output_cost": 0.00435,
+              "total_cost": 0.00704
+            },
+            "input_tokens": 3581,
+            "input_tokens_details": {
+              "cached_tokens": 0
+            },
+            "output_tokens": 966,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 4547
+          }
+        },
+        "submitted_by": "Agent_1"
+      },
+      "roster": [
+        {
+          "name": "Agent_1",
+          "title": "captain / editor",
+          "may_submit": true
+        },
+        {
+          "name": "Agent_2",
+          "title": "analyst",
+          "may_submit": false
+        },
+        {
+          "name": "Agent_3",
+          "title": "quant / modeler",
+          "may_submit": false
+        },
+        {
+          "name": "Agent_4",
+          "title": "research lead",
+          "may_submit": false
+        },
+        {
+          "name": "Agent_5",
+          "title": "slide / report designer",
+          "may_submit": false
+        }
+      ],
+      "rules_mode": "enforced",
+      "rules_available": true,
+      "rules_coverage": "covered",
+      "rule_card_schema_version": "1.0",
+      "rule_card_version": "ieo_business_case:draft_v1",
+      "rule_card_competition_id": "ieo_business_case",
+      "rule_card_content_hash": "f68edc8dba65188c396e80e5c1f2a614f0a788fcfee13f806677a693d95a104e",
+      "rule_capabilities": {
+        "prompt_rules": "prompt_only",
+        "roster_roles": "prompt_only",
+        "communication_budgets": "enforced",
+        "submission_authority": "enforced",
+        "tool_allowlist": "enforced",
+        "private_notes": "enforced",
+        "structured_deliberation": "enforced"
+      },
+      "declared_tool_availability": {
+        "query_rules": "enforced",
+        "use_calculator": "enforced",
+        "execute_code": "enforced",
+        "web_search": "enforced"
+      },
+      "solo_calls_per_turn": 5,
+      "natural_team_size": 5,
+      "stop_reason": null
+    },
+    "rules_available": true,
+    "rules_coverage": "covered",
+    "rule_card_schema_version": "1.0",
+    "rule_card_version": "ieo_business_case:draft_v1",
+    "rule_card_competition_id": "ieo_business_case",
+    "rule_card_content_hash": "f68edc8dba65188c396e80e5c1f2a614f0a788fcfee13f806677a693d95a104e",
+    "rule_capabilities": {
+      "prompt_rules": "prompt_only",
+      "roster_roles": "prompt_only",
+      "communication_budgets": "enforced",
+      "submission_authority": "enforced",
+      "tool_allowlist": "enforced",
+      "private_notes": "enforced",
+      "structured_deliberation": "enforced"
+    },
+    "declared_tool_availability": {
+      "query_rules": "enforced",
+      "use_calculator": "enforced",
+      "execute_code": "enforced",
+      "web_search": "enforced"
+    }
+  }
+}

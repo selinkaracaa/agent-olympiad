@@ -1,0 +1,3 @@
+﻿scope	graded_tasks	total_task_score	total_task_max_score	answer_accuracy_micro	answer_accuracy_macro	full_credit_tasks	full_credit_task_rate	mean_communication_score	mean_planning_score	mean_coordination_score	total_api_calls	total_tokens_used	total_elapsed_seconds
+overall	1	17.77777777777778	40.0	0.4444444444444445	0.4444444444444445	0	0.0				52	9278	187.85975362500176
+arml_local	1	17.77777777777778	40.0	0.4444444444444445	0.4444444444444445	0	0.0				52	9278	187.85975362500176

@@ -1,0 +1,2 @@
+﻿competition	problem_id	status	grade_score	grade_max_score	answer_accuracy	communication_score	planning_score	coordination_score	turns_used	max_turns	api_calls	tokens_used	elapsed_seconds	error
+arml_local	arml_local_2009	ok	17.77777777777778	40.0	0.4444444444444445				11	30	52	9278	187.85975362500176	

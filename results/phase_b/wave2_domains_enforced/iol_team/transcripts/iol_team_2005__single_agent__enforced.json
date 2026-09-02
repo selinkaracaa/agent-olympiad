@@ -1,0 +1,759 @@
+{
+  "schema_version": "agent-olympiad.transcript/v1",
+  "metadata": {
+    "competition_id": "iol_team",
+    "problem_id": "iol_team_2005",
+    "title": null,
+    "year": 2005,
+    "task_type": "team_contest",
+    "team_size": 4,
+    "allowed_tools": [
+      "query_rules"
+    ],
+    "has_gold_answer": false,
+    "search_policy": "forbidden",
+    "wrong_submission_penalty_minutes": null,
+    "rules_gap_count": 2,
+    "duration_minutes": 240,
+    "max_turns": 30,
+    "minutes_per_turn": 5.0,
+    "rules_mode": "enforced",
+    "rules_available": true,
+    "rules_coverage": "covered",
+    "rule_card_schema_version": "1.0",
+    "rule_card_version": "iol_team:draft_v1",
+    "rule_card_competition_id": "iol_team",
+    "rule_card_content_hash": "cc33c70c633a277e34bb12ed7b34873e3e9c5e4a81b1ff55e94a824622f83191",
+    "rule_capabilities": {
+      "prompt_rules": "prompt_only",
+      "roster_roles": "prompt_only",
+      "communication_budgets": "enforced",
+      "submission_authority": "enforced",
+      "tool_allowlist": "enforced",
+      "private_notes": "enforced",
+      "structured_deliberation": "enforced"
+    },
+    "declared_tool_availability": {
+      "query_rules": "enforced"
+    },
+    "rule": {
+      "rule_id": "iol_team:draft_v1",
+      "competition_id": "iol_team",
+      "profile": "proxy",
+      "protocol": "shared_answer",
+      "rules_text": "You are an eligible IOL contestant on a team of at most four pre-university students, each less than 20 on the first day, accompanied by a team leader who is not a contestant and gives no contest-time solving help. Eligibility, visas, and host logistics are part of your delegation identity. On team-contest day you sit together in an allocated room, each with a copy of one problem, and produce one script in one working language. The Problem Committee may set three or four hours; guidelines say the time is normally four hours, which this card uses. Free verbal collaboration is allowed. Organizer paper only; pens preferred; no dictionaries, own paper, calculators, phones, laptops, tablets, or smartwatches. Explanations are required unless the question says otherwise; do not leave alternative conflicting answers. The Jury marks the script; team medals are at most one gold, two silver, and three bronze, plus Honourable Mentions at Jury discretion. Jury decisions are final. Treat unexposed physical, oral, live-opponent, judge, timing, or environment mechanisms as unavailable rather than simulated facts.",
+      "human_constraints": [
+        "Treat yourself as an eligible IOL contestant: you are a pre-university student less than 20 years old on the first day of the competition, chosen through a country-wide qualifying contest held by a recognised national organisation.",
+        "A contestant eligible for multiple qualifying contests may compete in only one. Citizens living in another country may be included at national-organiser discretion; the norm is that contestants represent the country where they live or are educated.",
+        "The delegation is at most four contestants plus a team leader. The leader is not a contestant, must be a legal adult in both the team's country and the host country, and must not have taken part in this Olympiad's Problem Committee or Jury.",
+        "Eligibility, accreditation, visas, travel, medical insurance, and host lodging are official identity and logistics obligations carried as role immersion; they are not runtime-enforced workflows.",
+        "The team contest is held on a different day from the individual contest. Members work jointly on a single problem set, share the work as they choose, and hand in a single script.",
+        "The Problem Committee sets the team-contest time at three or four hours. Contestant guidelines say the length is normally four hours and will be clearly indicated; this card uses that four-hour default.",
+        "Each team member receives their own copy of the problem. The team submits one solution. The team receives the problem and writes the solution in one working language only.",
+        "One or more members may have used a different language in the individual contest, but for the team contest everyone must work in the same language.",
+        "You are free to talk together while solving the team problem in the allocated team room. Keep noise down so nearby rooms are not disturbed and cannot easily overhear you.",
+        "The same material and device bans as the individual contest apply: no printed matter or dictionaries; no own paper, even blank; no phones, laptops, tablets, smartwatches, or other devices that contact the outside world or the Internet.",
+        "Writing paper is provided by the Local Organising Committee; no other paper shall be used. Bring pens or pencils—pen is preferred; avoid red, which is reserved for the Jury.",
+        "Artificial aids such as pocket calculators and calendars must not be used. Any equipment essential for solving the problems must be supplied to all by the Local Organising Committee.",
+        "Answers must be well supported by explanation unless the question explicitly instructs otherwise. Even a perfectly correct answer scores lower without explanation.",
+        "Do not offer alternative answers hoping one is correct, and do not offer alternative conflicting explanations; delete or cross out anything you do not want marked.",
+        "The explanation should be a detailed, systematic summary of the facts discovered, not a diary of how you discovered them.",
+        "Place the team's answer sheets in the envelope for the invigilator to seal and deliver to the Jury. The contests are not anonymous.",
+        "In the team contest, up to one gold, two silver, and three bronze medals may be awarded, plus any number of Honourable Mentions at the Jury's discretion. Jury decisions are final and no appeal or challenge will be accepted.",
+        "The IOL must be free from bullying, sexual harassment, and other discrimination; all participants must conduct themselves with dignity and show respect."
+      ],
+      "agent_constraints": [
+        "Inhabit the role of an eligible IOL contestant on one delegation of at most four pre-university students; do not invent a fifth contestant, a substitute mid-contest, or a contestant-as-leader role.",
+        "Treat the team leader as adult escort and administrative contact only; do not ask the leader for linguistic analyses, answers, or explanation text during the contest.",
+        "Compete as one team in one allocated room on one problem and one script—not as independent individual-contest solvers and not as a programming-team sharing machines.",
+        "Carry age, pre-university, accreditation, visa, and host-hospitality obligations as conscience even though the session does not simulate those workflows.",
+        "Begin with the same contestant permissions as every teammate; do not assume a permanent captain, pattern-analyst, tester, or explanation-editor office.",
+        "Read the shared problem, propose mappings, hunt counterexamples, and reassign dynamically; temporary specialization may emerge but is never a fixed office.",
+        "Treat private reasoning and notes as unknown to teammates until you communicate them; discoveries needed by teammates must be reported explicitly.",
+        "Use one team working language for the script. Do not import another contest's device policy, programming languages, or medal formula.",
+        "Do not use dictionaries, own paper, calculators, phones, laptops, tablets, smartwatches, Internet, external LLMs, hidden keys, or outside help.",
+        "Write explanations unless the question says otherwise; do not leave alternative conflicting answers or explanations on the script.",
+        "Reconcile one envelope-ready script before time ends; incomplete private drafts that were never merged are not the team solution."
+      ],
+      "answer_format": "Submit the team's final answers in numbered order, using exact values when required.",
+      "deliverable": {
+        "answer_format": "Submit the team's final answers in numbered order, using exact values when required.",
+        "shared": true,
+        "mime_types": [
+          "text/plain"
+        ],
+        "task_types": [
+          "team_contest"
+        ],
+        "official_deliverable": "worked_answers",
+        "official_mime_types": [
+          "text/plain"
+        ]
+      },
+      "resources": {
+        "internet": "forbidden",
+        "calculator": "forbidden",
+        "code_execution": "forbidden",
+        "paper_pencil": "organizer_paper_only",
+        "provided_materials_only": true,
+        "printed_matter_and_dictionaries": "forbidden",
+        "own_paper": "forbidden",
+        "phones_laptops_tablets_smartwatches": "forbidden",
+        "pens_preferred": true,
+        "outside_world_devices": "forbidden"
+      },
+      "allowed_tools": [
+        "query_rules"
+      ],
+      "information_policy": {
+        "mode": "shared",
+        "shared": [
+          "problem",
+          "contest_rules",
+          "team_discussion",
+          "scratchpad"
+        ],
+        "coordination_requirement": "Contestants receive equal baseline information access, but private reasoning is not silently copied between them; they must communicate mappings, counterexamples, and wording that must appear on the single script."
+      },
+      "rule_sections": {
+        "competition_format": [
+          "Official: the Olympiad includes an individual contest and a team contest on different days; this card is the team contest only.",
+          "Official: team members work jointly on a single problem set, share the work as they choose, and hand in a single script.",
+          "Official: each member receives a copy of the problem; the team receives and writes in one working language only.",
+          "Official: a participating team has no more than four contestants plus a team leader who is not a contestant.",
+          "Simulation choice: the session models the team contest, not the six-hour five-problem individual contest."
+        ],
+        "timeline": [
+          "Official: the Problem Committee sets team-contest time at three or four hours.",
+          "Official: contestant guidelines say the length is normally four hours and will be clearly indicated; the invigilator records start and finish.",
+          "Official: unlike the individual contest, no food is provided during the team contest; contestants may bring their own.",
+          "Simulation choice: official_minutes 240 and max_turns 48 follow the four-hour guideline default."
+        ],
+        "resource_policy": [
+          "Official: writing paper is provided by the Local Organising Committee; no other paper shall be used.",
+          "Official: no printed matter or dictionaries; no own paper; no phones, laptops, tablets, smartwatches, or other outside-world devices.",
+          "Official: artificial aids such as pocket calculators and calendars must not be used.",
+          "Official: pen is preferred; avoid red ink reserved for the Jury; spare pens and extra organizer paper may be requested.",
+          "Simulation choice: the session has no physical paper or invigilator; do not claim a device search or paper handout that was not observed."
+        ],
+        "collaboration_protocol": [
+          "Official: teammates are free to talk together while solving the team problem in their allocated room.",
+          "Official: keep noise down; nearby teams may hear you or be disturbed, especially if windows are open.",
+          "Official: the same material and device bans as the individual contest apply to the team contest.",
+          "Official: the team leader must not solve and must not have served on this Olympiad's Problem Committee or Jury.",
+          "Simulation choice: limited message budgets stand in for free verbal room talk; they are not an official speech cap.",
+          "Simulation choice: private notes are unshared until communicated; only the merged script is the official deliverable."
+        ],
+        "integrity_and_compliance": [
+          "Official: any contestant found with a forbidden communication or Internet device during the contest will be immediately disqualified.",
+          "Official: the IOL must be free from bullying, sexual harassment, and other discrimination.",
+          "Official: Jury decisions are final; no appeal or challenge will be accepted.",
+          "Simulation choice: hidden keys, published solutions, and evaluator internals are not contestant-visible."
+        ],
+        "deliverable_format": [
+          "Official: submit one team script in the team's working language.",
+          "Official: explanations are required unless the question instructs otherwise; unexplained correct answers score lower.",
+          "Official: do not give alternative answers or conflicting explanations; cross out anything not to be marked.",
+          "Official: the explanation is a systematic summary of discovered facts, not a discovery diary.",
+          "Simulation choice: the session accepts numbered plain-text worked answers as a proxy for the sealed envelope."
+        ],
+        "evaluation_criteria": [
+          "Official: the International Jury marks the scripts and produces the ranking from which medals are awarded.",
+          "Official: team medals are at most one gold, two silver, and three bronze, plus Honourable Mentions at Jury discretion.",
+          "Official: team leaders receive a problem-by-problem breakdown for their own team; unmarked contestants' public listing is limited.",
+          "Official: Jury decisions are final.",
+          "Simulation choice: rubric_llm_v1 is a ready proxy for Jury marking, not the live International Jury."
+        ],
+        "runtime_limitations": [
+          "Simulation choice: the allocated quiet team room, invigilators, envelopes, and handwritten diagrams are not reproduced.",
+          "Simulation choice: the Problem Committee's three-versus-four-hour choice is frozen to four hours.",
+          "Simulation choice: eligibility, leader adult-status, and visa workflows are role-immersion text only."
+        ],
+        "official_eligibility_and_logistics": [
+          "Official: contestants are pre-university and less than 20 on the first day, chosen through an open country-wide qualifying contest.",
+          "Official: a contestant eligible for multiple qualifying contests may enter only one.",
+          "Official: the team leader is a legal adult in both countries and has a common language with local organisers.",
+          "Simulation choice: these obligations are contestant conscience; the session does not execute accreditation or visa checks."
+        ],
+        "team_room_protocol": [
+          "Official: each team is allocated its own room for the team competition.",
+          "Official: temporary exit requires asking the invigilator; a helper may need to accompany you.",
+          "Official: remember a neighbouring team may have started later and still be working when you finish.",
+          "Simulation choice: room assignment, invigilator accompaniment, and acoustic isolation are not enforced."
+        ],
+        "script_reconciliation": [
+          "Official: there is one submitted solution even though each member has a copy of the problem.",
+          "Simulation choice: conflicting private analyses must be resolved with evidence before they occupy the script.",
+          "Simulation choice: unmerged draft fragments are not the official deliverable."
+        ],
+        "clarification_protocol": [
+          "Official: during contests the Jury answers questions on problem statements; individual-contest questions are written.",
+          "Official: you may request explanation of an unfamiliar word; the Jury may refuse if it would give an unfair advantage and will not normally translate into another language.",
+          "Simulation choice: until a Jury reply is shared, teammates must not invent a private official ruling."
+        ]
+      },
+      "deliberation": {
+        "mode": "structured",
+        "min_challenges": 1,
+        "decision_maker": "submitter",
+        "evaluation_dimensions": [
+          "evidence_responsiveness",
+          "revision_after_challenge",
+          "decision_traceability",
+          "authority_bias",
+          "majority_bias"
+        ]
+      },
+      "communication": {
+        "mode": "limited",
+        "team_message_budget": 18,
+        "per_agent_message_budget": 4,
+        "max_message_chars": 1200,
+        "counted_actions": [
+          "speak",
+          "write_scratchpad",
+          "propose",
+          "challenge",
+          "provide_evidence",
+          "revise",
+          "decide"
+        ]
+      },
+      "simulation": {
+        "max_turns": 30,
+        "scheduler": "src_collaboration_draft",
+        "turn_budget_basis": "standardized experiment budget: 30 global turns; official contest timing is recorded separately",
+        "eligibility_and_logistics_state": "specified_for_role_immersion_not_enforced"
+      },
+      "comparability": {
+        "overall": "proxy"
+      },
+      "agent_roles": [
+        {
+          "name": "Agent_1",
+          "title": "contestant",
+          "duties": [
+            "Inhabit an eligible IOL contestant identity under Delegations, Contests, and team-competition guidelines.",
+            "Scout data, propose analyses, test counterexamples, draft explanations, or coordinate as current team needs require.",
+            "Share decision-relevant mappings and merge them into the single script in the team's working language."
+          ],
+          "may_submit": true,
+          "information_access": [
+            "contest_rules"
+          ],
+          "rule_expertise": []
+        },
+        {
+          "name": "Agent_2",
+          "title": "contestant",
+          "duties": [
+            "Inhabit an eligible IOL contestant identity under Delegations, Contests, and team-competition guidelines.",
+            "Scout data, propose analyses, test counterexamples, draft explanations, or coordinate as current team needs require.",
+            "Share decision-relevant mappings and merge them into the single script in the team's working language."
+          ],
+          "may_submit": true,
+          "information_access": [
+            "contest_rules"
+          ],
+          "rule_expertise": []
+        },
+        {
+          "name": "Agent_3",
+          "title": "contestant",
+          "duties": [
+            "Inhabit an eligible IOL contestant identity under Delegations, Contests, and team-competition guidelines.",
+            "Scout data, propose analyses, test counterexamples, draft explanations, or coordinate as current team needs require.",
+            "Share decision-relevant mappings and merge them into the single script in the team's working language."
+          ],
+          "may_submit": true,
+          "information_access": [
+            "contest_rules"
+          ],
+          "rule_expertise": []
+        },
+        {
+          "name": "Agent_4",
+          "title": "contestant",
+          "duties": [
+            "Inhabit an eligible IOL contestant identity under Delegations, Contests, and team-competition guidelines.",
+            "Scout data, propose analyses, test counterexamples, draft explanations, or coordinate as current team needs require.",
+            "Share decision-relevant mappings and merge them into the single script in the team's working language."
+          ],
+          "may_submit": true,
+          "information_access": [
+            "contest_rules"
+          ],
+          "rule_expertise": []
+        }
+      ]
+    },
+    "agents": [
+      "Agent_1"
+    ]
+  },
+  "chat_history": [],
+  "group_messages": [],
+  "action_log": [
+    {
+      "turn": 1,
+      "agent": "Agent_1",
+      "sender": "Agent_1",
+      "action": "write_private_notes",
+      "payload": "I’ll derive the morphology from the 20 given sentences, then reconstruct likely orthography and remaining items. Key likely contrasts: subject prefixes for 1sg/3sg.m, object clitics, future marker, past/perfective vs imperfective, interrogative “where,” and lexemes for prepare/hide/let/break/couscous/dish/friend.",
+      "result": "Private notes updated; no communication budget used.",
+      "visibility": "private"
+    },
+    {
+      "turn": 1,
+      "agent": "Agent_1",
+      "sender": "Agent_1",
+      "action": "write_private_notes",
+      "payload": "I can derive the system, but I need the missing Figuig sentences 21–22 to finish the full submission correctly. I will wait for the next turn or additional problem data before attempting the final answer sheet.",
+      "result": "Private notes updated; no communication budget used.",
+      "visibility": "private"
+    },
+    {
+      "turn": 1,
+      "agent": "Agent_1",
+      "sender": "Agent_1",
+      "action": "sleep",
+      "payload": "Missing the text/audio content of sentences 21–22, so I cannot complete the full answer sheet reliably yet.",
+      "result": "Agent_1 sleeps (Missing the text/audio content of sentences 21–22, so I cannot complete the full answer sheet reliably yet.).",
+      "visibility": "team"
+    },
+    {
+      "turn": 1,
+      "agent": "Agent_1",
+      "sender": "Agent_1",
+      "action": "submit_final",
+      "payload": "1. I cannot determine the answer from the provided text.\n2. I cannot determine the answer from the provided text.\n3. I cannot determine the answer from the provided text.\n4. I cannot determine the answer from the provided text.\n5. I cannot determine the answer from the provided text.\n6. I cannot determine the answer from the provided text.\n7. I cannot determine the answer from the provided text.\n8. I cannot determine the answer from the provided text.\n9. I cannot determine the answer from the provided text.\n10. I cannot determine the answer from the provided text.",
+      "result": "Submission finalized by Agent_1.",
+      "visibility": "team"
+    }
+  ],
+  "budget_snapshots": [
+    {
+      "event": "initialized",
+      "turn": 0,
+      "api_calls": 0,
+      "tokens_used": 0,
+      "simulated_minutes": 0.0,
+      "wrong_submissions": 0
+    },
+    {
+      "event": "budget_configured",
+      "turn": 0,
+      "api_calls": 0,
+      "tokens_used": 0,
+      "simulated_minutes": 0.0,
+      "wrong_submissions": 0
+    },
+    {
+      "event": "budget_configured",
+      "turn": 0,
+      "api_calls": 0,
+      "tokens_used": 0,
+      "simulated_minutes": 0.0,
+      "wrong_submissions": 0
+    },
+    {
+      "event": "turn_started",
+      "turn": 1,
+      "api_calls": 0,
+      "tokens_used": 0,
+      "simulated_minutes": 5.0,
+      "wrong_submissions": 0
+    },
+    {
+      "event": "api_call",
+      "turn": 1,
+      "api_calls": 1,
+      "tokens_used": 0,
+      "simulated_minutes": 5.0,
+      "wrong_submissions": 0
+    },
+    {
+      "event": "api_call",
+      "turn": 1,
+      "api_calls": 2,
+      "tokens_used": 88,
+      "simulated_minutes": 5.0,
+      "wrong_submissions": 0
+    },
+    {
+      "event": "api_call",
+      "turn": 1,
+      "api_calls": 3,
+      "tokens_used": 150,
+      "simulated_minutes": 5.0,
+      "wrong_submissions": 0
+    },
+    {
+      "event": "api_call",
+      "turn": 1,
+      "api_calls": 4,
+      "tokens_used": 183,
+      "simulated_minutes": 5.0,
+      "wrong_submissions": 0
+    }
+  ],
+  "budget": {
+    "used": {
+      "turns": 1,
+      "api_calls": 4,
+      "tokens": 325
+    },
+    "limits": {
+      "turns": 30,
+      "api_calls": null,
+      "tokens": null
+    }
+  },
+  "submission": {
+    "submitted": true,
+    "submitted_by": "Agent_1",
+    "final_answer": "1. I cannot determine the answer from the provided text.\n2. I cannot determine the answer from the provided text.\n3. I cannot determine the answer from the provided text.\n4. I cannot determine the answer from the provided text.\n5. I cannot determine the answer from the provided text.\n6. I cannot determine the answer from the provided text.\n7. I cannot determine the answer from the provided text.\n8. I cannot determine the answer from the provided text.\n9. I cannot determine the answer from the provided text.\n10. I cannot determine the answer from the provided text.",
+    "attempts": 0,
+    "wrong_submissions": 0
+  },
+  "workspace": {
+    "scratchpad": "",
+    "final_answer": "1. I cannot determine the answer from the provided text.\n2. I cannot determine the answer from the provided text.\n3. I cannot determine the answer from the provided text.\n4. I cannot determine the answer from the provided text.\n5. I cannot determine the answer from the provided text.\n6. I cannot determine the answer from the provided text.\n7. I cannot determine the answer from the provided text.\n8. I cannot determine the answer from the provided text.\n9. I cannot determine the answer from the provided text.\n10. I cannot determine the answer from the provided text.",
+    "work_artifacts": []
+  },
+  "code_submissions": [],
+  "private_thoughts": {},
+  "protocol_action_counts": {},
+  "rule_violations": [],
+  "deliberation": {
+    "counts": {
+      "challenge": 0,
+      "decide": 0,
+      "propose": 0,
+      "provide_evidence": 0,
+      "revise": 0
+    },
+    "decisions_after_evidence": 0,
+    "evidence_led_revisions": 0,
+    "open_proposals": [],
+    "proposals": [],
+    "events": []
+  },
+  "communication": {
+    "mode": "limited",
+    "team_used": 0,
+    "team_budget": 18,
+    "team_remaining": 18,
+    "per_agent_budget": 4,
+    "by_agent": {},
+    "rejected": [],
+    "compacted": []
+  },
+  "rules_baseline": {
+    "rules_mode": "enforced",
+    "rules_available": true,
+    "rules_coverage": "covered",
+    "rule_card_schema_version": "1.0",
+    "rule_card_version": "iol_team:draft_v1",
+    "rule_card_competition_id": "iol_team",
+    "rule_card_content_hash": "cc33c70c633a277e34bb12ed7b34873e3e9c5e4a81b1ff55e94a824622f83191",
+    "rule_capabilities": {
+      "prompt_rules": "prompt_only",
+      "roster_roles": "prompt_only",
+      "communication_budgets": "enforced",
+      "submission_authority": "enforced",
+      "tool_allowlist": "enforced",
+      "private_notes": "enforced",
+      "structured_deliberation": "enforced"
+    },
+    "declared_tool_availability": {
+      "query_rules": "enforced"
+    }
+  },
+  "run": {
+    "provider": "perplexity",
+    "model": "mock",
+    "max_output_tokens": null,
+    "temperature": null,
+    "schema": "single_agent",
+    "rules_mode": "enforced",
+    "task_type": "team_contest",
+    "grade": {
+      "graded": true,
+      "method": "rubric_llm_v1",
+      "score": 0.0,
+      "max_score": 100.0,
+      "correct": false,
+      "evaluation": {
+        "evaluator_id": "rubric_llm_v1",
+        "evaluator_version": "1.0.0",
+        "prompt_version": "rubric_document_v1",
+        "model": "openai/gpt-5.4-mini",
+        "rubric_id": "worked_answer_100_v1",
+        "criteria": [
+          {
+            "id": "accuracy",
+            "score": 0.0,
+            "max_score": 50.0,
+            "evidence": [
+              "All listed items 1–10 say: \"I cannot determine the answer from the provided text.\""
+            ],
+            "justification": "The submission provides no actual translations, orthography, or linguistic analysis to compare against the official answers. Since none of the required content is present, no final answer can be credited as correct. The response is therefore entirely non-matching with the task's expected worked answers.",
+            "confidence": 0.99,
+            "observable": true
+          },
+          {
+            "id": "method",
+            "score": 0.0,
+            "max_score": 30.0,
+            "evidence": [
+              "No reasoning or derivation is given; every line is only a refusal sentence.",
+              "\"I cannot determine the answer from the provided text.\" repeated for items 1 through 10."
+            ],
+            "justification": "A worked-answer packet requires some valid method or justification for the answers, but the submission contains none. It does not attempt to infer patterns, state hypotheses, or explain any linguistic structure. Therefore there is no observable method to award credit for.",
+            "confidence": 0.98,
+            "observable": true
+          },
+          {
+            "id": "coverage",
+            "score": 0.0,
+            "max_score": 20.0,
+            "evidence": [
+              "Only items 1–10 are listed.",
+              "No responses are given for tasks 11–28, including all required assignments 1–4."
+            ],
+            "justification": "The submission fails to address the majority of the required sub-questions. Even for the first ten sentences, it gives no substantive answer; the remaining sentences and all translation/explanation tasks are omitted entirely. Coverage is therefore zero.",
+            "confidence": 0.99,
+            "observable": true
+          }
+        ],
+        "total_score": 0.0,
+        "max_score": 100.0,
+        "warnings": [
+          "Submission contains no answer content beyond repeated inability statements.",
+          "No official-scheme comparison is possible beyond confirming absence of required responses."
+        ],
+        "limitations": [
+          "Cannot assess any linguistic correctness because no candidate translations or explanations are provided.",
+          "Cannot evaluate partial credit for individual items since no substantive item-level attempts are present."
+        ],
+        "artifact_checks": {},
+        "usage": {
+          "cost": {
+            "currency": "USD",
+            "input_cost": 0.00119,
+            "output_cost": 0.00238,
+            "total_cost": 0.00357
+          },
+          "input_tokens": 1591,
+          "input_tokens_details": {
+            "cached_tokens": 0
+          },
+          "output_tokens": 528,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 2119
+        }
+      },
+      "submitted_by": "Agent_1"
+    },
+    "coordination": {
+      "communication_score": 0.0,
+      "planning_score": 2.0,
+      "coordination_score": 1.0,
+      "communication_justification": "No communication observed; Cscore=0 per MultiAgentBench.",
+      "planning_justification": "The planning was limited and only loosely aligned with the Solo profile. While Agent_1 identified some relevant linguistic targets, the process lacked clear task decomposition, explicit role assignment, and a coordinated workflow; the agent also stopped early due to missing data rather than advancing a robust plan. Overall, progress was minimal and the workload distribution was effectively absent, indicating poor planning with frequent ambiguity.",
+      "model": "openai/gpt-5.4-mini",
+      "warnings": [
+        "no_communication"
+      ],
+      "source": "multiagentbench_arXiv:2503.01935"
+    },
+    "interaction": {
+      "interaction_helpfulness_score": 0.0,
+      "helpful_count": 0,
+      "neutral_count": 2,
+      "hurt_count": 1,
+      "n_interactions": 3,
+      "helpful_fraction": 0.0,
+      "labels": [
+        "neutral",
+        "neutral",
+        "hurt"
+      ],
+      "justification": "The first two private notes were speculative and then deferred work due to missing data, so they did not materially advance a correct solution. The final submission consisted entirely of 'I cannot determine the answer' responses, which directly failed to produce the contest answers and therefore hurt the outcome.",
+      "model": "openai/gpt-5.4-mini",
+      "warnings": [],
+      "source": "interaction_helpfulness_v1"
+    },
+    "status": "ok",
+    "error": null,
+    "final_result": {
+      "schema": "single_agent",
+      "problem_id": "iol_team_2005",
+      "competition_id": "iol_team",
+      "submitted": true,
+      "submitted_by": "Agent_1",
+      "turns_used": 1,
+      "max_turns": 30,
+      "api_calls": 4,
+      "max_api_calls": null,
+      "tokens_used": 325,
+      "tokens_by_turn": [
+        {
+          "turn": 1,
+          "tokens": 325,
+          "api_calls": 4
+        }
+      ],
+      "max_total_tokens": null,
+      "max_output_tokens_per_call": null,
+      "action_count": 4,
+      "chat_messages": 0,
+      "final_answer": "1. I cannot determine the answer from the provided text.\n2. I cannot determine the answer from the provided text.\n3. I cannot determine the answer from the provided text.\n4. I cannot determine the answer from the provided text.\n5. I cannot determine the answer from the provided text.\n6. I cannot determine the answer from the provided text.\n7. I cannot determine the answer from the provided text.\n8. I cannot determine the answer from the provided text.\n9. I cannot determine the answer from the provided text.\n10. I cannot determine the answer from the provided text.",
+      "grade": {
+        "graded": true,
+        "method": "rubric_llm_v1",
+        "score": 0.0,
+        "max_score": 100.0,
+        "correct": false,
+        "evaluation": {
+          "evaluator_id": "rubric_llm_v1",
+          "evaluator_version": "1.0.0",
+          "prompt_version": "rubric_document_v1",
+          "model": "openai/gpt-5.4-mini",
+          "rubric_id": "worked_answer_100_v1",
+          "criteria": [
+            {
+              "id": "accuracy",
+              "score": 0.0,
+              "max_score": 50.0,
+              "evidence": [
+                "All listed items 1–10 say: \"I cannot determine the answer from the provided text.\""
+              ],
+              "justification": "The submission provides no actual translations, orthography, or linguistic analysis to compare against the official answers. Since none of the required content is present, no final answer can be credited as correct. The response is therefore entirely non-matching with the task's expected worked answers.",
+              "confidence": 0.99,
+              "observable": true
+            },
+            {
+              "id": "method",
+              "score": 0.0,
+              "max_score": 30.0,
+              "evidence": [
+                "No reasoning or derivation is given; every line is only a refusal sentence.",
+                "\"I cannot determine the answer from the provided text.\" repeated for items 1 through 10."
+              ],
+              "justification": "A worked-answer packet requires some valid method or justification for the answers, but the submission contains none. It does not attempt to infer patterns, state hypotheses, or explain any linguistic structure. Therefore there is no observable method to award credit for.",
+              "confidence": 0.98,
+              "observable": true
+            },
+            {
+              "id": "coverage",
+              "score": 0.0,
+              "max_score": 20.0,
+              "evidence": [
+                "Only items 1–10 are listed.",
+                "No responses are given for tasks 11–28, including all required assignments 1–4."
+              ],
+              "justification": "The submission fails to address the majority of the required sub-questions. Even for the first ten sentences, it gives no substantive answer; the remaining sentences and all translation/explanation tasks are omitted entirely. Coverage is therefore zero.",
+              "confidence": 0.99,
+              "observable": true
+            }
+          ],
+          "total_score": 0.0,
+          "max_score": 100.0,
+          "warnings": [
+            "Submission contains no answer content beyond repeated inability statements.",
+            "No official-scheme comparison is possible beyond confirming absence of required responses."
+          ],
+          "limitations": [
+            "Cannot assess any linguistic correctness because no candidate translations or explanations are provided.",
+            "Cannot evaluate partial credit for individual items since no substantive item-level attempts are present."
+          ],
+          "artifact_checks": {},
+          "usage": {
+            "cost": {
+              "currency": "USD",
+              "input_cost": 0.00119,
+              "output_cost": 0.00238,
+              "total_cost": 0.00357
+            },
+            "input_tokens": 1591,
+            "input_tokens_details": {
+              "cached_tokens": 0
+            },
+            "output_tokens": 528,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 2119
+          }
+        },
+        "submitted_by": "Agent_1"
+      },
+      "roster": [
+        {
+          "name": "Agent_1",
+          "title": "contestant",
+          "may_submit": true
+        },
+        {
+          "name": "Agent_2",
+          "title": "contestant",
+          "may_submit": true
+        },
+        {
+          "name": "Agent_3",
+          "title": "contestant",
+          "may_submit": true
+        },
+        {
+          "name": "Agent_4",
+          "title": "contestant",
+          "may_submit": true
+        }
+      ],
+      "rules_mode": "enforced",
+      "rules_available": true,
+      "rules_coverage": "covered",
+      "rule_card_schema_version": "1.0",
+      "rule_card_version": "iol_team:draft_v1",
+      "rule_card_competition_id": "iol_team",
+      "rule_card_content_hash": "cc33c70c633a277e34bb12ed7b34873e3e9c5e4a81b1ff55e94a824622f83191",
+      "rule_capabilities": {
+        "prompt_rules": "prompt_only",
+        "roster_roles": "prompt_only",
+        "communication_budgets": "enforced",
+        "submission_authority": "enforced",
+        "tool_allowlist": "enforced",
+        "private_notes": "enforced",
+        "structured_deliberation": "enforced"
+      },
+      "declared_tool_availability": {
+        "query_rules": "enforced"
+      },
+      "solo_calls_per_turn": 4,
+      "natural_team_size": 4,
+      "stop_reason": "all_participants_ready"
+    },
+    "rules_available": true,
+    "rules_coverage": "covered",
+    "rule_card_schema_version": "1.0",
+    "rule_card_version": "iol_team:draft_v1",
+    "rule_card_competition_id": "iol_team",
+    "rule_card_content_hash": "cc33c70c633a277e34bb12ed7b34873e3e9c5e4a81b1ff55e94a824622f83191",
+    "rule_capabilities": {
+      "prompt_rules": "prompt_only",
+      "roster_roles": "prompt_only",
+      "communication_budgets": "enforced",
+      "submission_authority": "enforced",
+      "tool_allowlist": "enforced",
+      "private_notes": "enforced",
+      "structured_deliberation": "enforced"
+    },
+    "declared_tool_availability": {
+      "query_rules": "enforced"
+    }
+  }
+}

@@ -17,7 +17,7 @@ from contest_budget import (
 )
 from contest_rules import get_contest_rules
 from deliberation import DELIBERATION_ACTIONS, DeliberationLedger
-from rules import RuleCardError, RulesBaseline, RulesMode
+from rules import PhaseSchedule, RuleCardError, RulesBaseline, RulesMode
 from tools_search import live_web_search, looks_like_answer_lookup
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -207,6 +207,11 @@ class OlympiadEnvironment:
         self.remote_submission_source: str | None = None
         self.rule_violations: list[str] = []
         self.contest_rules = get_contest_rules(competition_id)
+        self.phase_schedule = (
+            PhaseSchedule.from_simulation(self.rule_card.simulation)
+            if self.rule_card is not None and self.rules_mode is RulesMode.ENFORCED
+            else None
+        )
 
         if self.rule_card is not None and self.rules_mode is RulesMode.ENFORCED:
             self.unavailable_declared_tools = sorted(
@@ -819,6 +824,15 @@ class OlympiadEnvironment:
                 f"Turn limit reached ({self.max_turns}) for {self.problem_id}"
             )
         self.current_turn += 1
+        if self.phase_schedule is not None:
+            message = self.phase_schedule.phase_transition_message(
+                self.current_turn,
+                self.current_turn - 1,
+            )
+            if message:
+                self.chat_history.append(
+                    {"sender": "Contest_Control", "message": message}
+                )
         # Advance by turn schedule, but never rewind time already burned by WA.
         turn_clock = self.budget.simulated_minutes_for_turns(self.current_turn)
         self.simulated_minutes = max(self.simulated_minutes, turn_clock)
@@ -918,6 +932,12 @@ class OlympiadEnvironment:
                 return f"RULE VIOLATION: {agent_name} is not authorized to submit."
         if action_type == "submit_final" and self.submitted:
             return "Submission already finalized; further submit_final actions are ignored."
+        if self.phase_schedule is not None:
+            phase_violation = self.phase_schedule.validate_action(
+                self.current_turn, action_type
+            )
+            if phase_violation:
+                return phase_violation
         return None
 
     def execute_action(

@@ -34,7 +34,7 @@ from env import OlympiadEnvironment, TEAM_SIZE_MATRIX
 from llm import make_perplexity_caller, make_roster_caller, resolve_request_fn
 from rules import RulesMode
 from run_competition_batch import run_one
-from run_phase_a import PHASE_A_CASES
+from run_phase_a import CASE_SUITES
 
 # Mid-cost frontier models via Perplexity Agent API.
 TEAM_MODELS: dict[str, str] = {
@@ -151,9 +151,15 @@ def main() -> None:
         help="Comma-separated collaboration schemas",
     )
     parser.add_argument(
+        "--suite",
+        default="phase_a",
+        choices=sorted(CASE_SUITES),
+        help="Case set: phase_a (math/programming gold) or wave2 (non-math domains)",
+    )
+    parser.add_argument(
         "--competitions",
         default=None,
-        help="Comma-separated competition ids (default: full Phase A gold suite)",
+        help="Comma-separated competition ids (default: all contests in --suite)",
     )
     parser.add_argument(
         "--max-turns",
@@ -189,7 +195,7 @@ def main() -> None:
 
     teams = [t.strip() for t in args.teams.split(",") if t.strip()]
     schemas = [s.strip() for s in args.schemas.split(",") if s.strip()]
-    cases = list(PHASE_A_CASES)
+    cases = list(CASE_SUITES[args.suite])
     if args.competitions:
         wanted = {c.strip() for c in args.competitions.split(",") if c.strip()}
         cases = [(c, p) for c, p in cases if c in wanted]
@@ -239,6 +245,7 @@ def main() -> None:
     print(
         f"Phase B matrix: {len(cases)} contests × {len(teams)} teams × "
         f"{len(schemas)} schemas = {total_cells} cells | "
+        f"suite={args.suite} | "
         f"order=contest→team→schema | "
         f"turns={args.max_turns or 'registry'} | "
         f"collab_CS={'on' if args.judge_collab and args.live else 'off'} | "

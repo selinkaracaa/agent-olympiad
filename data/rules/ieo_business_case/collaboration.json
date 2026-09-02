@@ -207,6 +207,47 @@
   "simulation": {
     "max_turns": 30,
     "scheduler": "src_collaboration_draft",
-    "turn_budget_basis": "standardized experiment budget: 30 global turns; official contest timing is recorded separately"
+    "turn_budget_basis": "standardized experiment budget: 30 global turns; official contest timing is recorded separately",
+    "phases": [
+      {
+        "id": "prep_day",
+        "label": "Preparation day",
+        "turn_start": 1,
+        "turn_end": 20,
+        "allowed_actions": [
+          "web_search",
+          "speak",
+          "write_scratchpad",
+          "write_private_notes",
+          "propose",
+          "challenge",
+          "provide_evidence",
+          "revise",
+          "sleep"
+        ],
+        "allow_submit_final": false,
+        "prompt": "Research and analysis only. Use web_search and team deliberation to build evidence and a deck outline on the scratchpad. You may not submit the final slide deck yet."
+      },
+      {
+        "id": "deck_lock",
+        "label": "Slide lock / presentation prep",
+        "turn_start": 21,
+        "turn_end": 30,
+        "allowed_actions": [
+          "speak",
+          "write_scratchpad",
+          "write_private_notes",
+          "decide",
+          "submit_final",
+          "sleep"
+        ],
+        "banned_actions": [
+          "web_search",
+          "execute_code"
+        ],
+        "allow_submit_final": true,
+        "prompt": "Slides are locked for new outside research. Reconcile the deck, assign the oral narrative, and submit the final artifact."
+      }
+    ]
   }
 }

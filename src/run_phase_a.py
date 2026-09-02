@@ -37,6 +37,20 @@ PHASE_A_CASES: list[tuple[str, str]] = [
     ("icpc", "icpc_wf_2012_bottles"),
 ]
 
+# Wave 2: non-math domains where multi-agent may help more than on ARML.
+# One representative problem per contest (smoke-tested graders).
+PHASE_B_WAVE2_CASES: list[tuple[str, str]] = [
+    ("ieo_business_case", "ieo_business_case_2021"),
+    ("iol_team", "iol_team_2005"),
+    ("ioaa_group", "ioaa_group_2025"),
+    ("icpc", "icpc_wf_2012_bottles"),
+]
+
+CASE_SUITES: dict[str, list[tuple[str, str]]] = {
+    "phase_a": PHASE_A_CASES,
+    "wave2": PHASE_B_WAVE2_CASES,
+}
+
 DEFAULT_SCHEMAS = [
     "single_agent",
     "centralized",

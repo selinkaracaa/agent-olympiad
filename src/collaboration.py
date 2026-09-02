@@ -359,6 +359,11 @@ def _system_prompt(
                 if expertise
                 else ""
             )
+            + (
+                "\n" + env.phase_schedule.prompt_block(env.current_turn)
+                if getattr(env, "phase_schedule", None) is not None
+                else ""
+            )
             + f"\n{tools}"
         )
     return (
