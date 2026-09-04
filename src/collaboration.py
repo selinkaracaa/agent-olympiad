@@ -324,6 +324,9 @@ def _system_prompt(
             and env.rule_card.deliberation.get("mode") == "structured"
         ),
         private_notes=env.rules_mode is RulesMode.ENFORCED,
+        board_item_count=len(env.workboard.items)
+        if getattr(env, "workboard", None) is not None
+        else 0,
     )
     if env.rule_card is not None:
         card = env.rule_card
@@ -425,6 +428,14 @@ def _agent_user_prompt(
     formatted_submissions = env.format_team_code_submissions(include_source=True)
     if formatted_submissions:
         team_code_section = f"{formatted_submissions}\n"
+    board_section = ""
+    board_overview = env.board_overview(agent_name) if hasattr(env, "board_overview") else ""
+    if board_overview:
+        board_section = f"{board_overview}\n\n"
+    group_section = ""
+    group_memory = env.format_group_memory(agent_name, max_entries=12)
+    if group_memory:
+        group_section = f"{group_memory}\n\n"
     default_turn_instruction = """You may act once this turn, or:
 ACTION: sleep | PAYLOAD: <short reason>
 What is your contribution?"""
@@ -440,7 +451,7 @@ What is your contribution?"""
 === SHARED SCRATCHPAD ===
 {scratchpad}
 
-{private_section}\
+{board_section}{group_section}{private_section}\
 === YOUR TURN ===
 You are {agent_name}.
 Turn budget (time): {state['turn_status']}
@@ -513,7 +524,9 @@ def _submit_synthesis_response(env, synthesizer: str, response: str) -> int:
     """Submit synthesis output; prefer full response over truncated ACTION payloads."""
     text = response.strip()
     if not text:
-        return 0
+        text = env.board_answer_sheet() if hasattr(env, "board_answer_sheet") else ""
+        if not text:
+            return 0
 
     for action_type, payload in parse_agent_response(response):
         if action_type == "submit_final":
@@ -528,7 +541,8 @@ def _submit_synthesis_response(env, synthesizer: str, response: str) -> int:
             parts = _count_numbered_parts(text)
 
     env.execute_action(synthesizer, "submit_final", text)
-    return parts
+    # env.submit_final backs the sheet with the board; count what it kept.
+    return max(parts, _count_numbered_parts(env.workspace.get("final_answer", "")))
 
 
 def _synthesis_prompt(env, schema_note: str) -> str:
@@ -538,6 +552,15 @@ def _synthesis_prompt(env, schema_note: str) -> str:
     team_code_block = f"\n{team_code}\n" if team_code else ""
     shared_work = env.format_shared_work()
     shared_work_block = f"\n{shared_work}\n" if shared_work else ""
+    answer_sheet = state.get("answer_sheet") or ""
+    board_block = (
+        "\n=== ANSWERS THE TEAM RECORDED ON THE BOARD ===\n"
+        f"{answer_sheet}\n"
+        "(These are the team's own recorded answers, not an answer key. Check "
+        "them; keep an item only if your own recomputation agrees.)\n"
+        if answer_sheet
+        else ""
+    )
     return f"""=== SCHEMA ===
 {schema_note}
 
@@ -547,7 +570,7 @@ def _synthesis_prompt(env, schema_note: str) -> str:
 === FULL TEAM DISCUSSION ===
 {_discussion_history(env)}
 {team_code_block}
-{shared_work_block}
+{shared_work_block}{board_block}
 === SHARED SCRATCHPAD ===
 {state['shared_workspace'].get('scratchpad') or '(empty)'}
 
@@ -1922,6 +1945,11 @@ def _result(env, schema: str) -> dict:
         "max_output_tokens_per_call": env.max_output_tokens_per_call,
         "action_count": env.action_count,
         "chat_messages": len(env.chat_history),
+        "workboard": (
+            env.workboard.metrics()
+            if getattr(env, "workboard", None) is not None
+            else None
+        ),
         "final_answer": env.workspace.get("final_answer", ""),
         "grade": env.grade_submission(),
         "roster": (
@@ -1962,4 +1990,8 @@ def run_collaboration(
 ) -> dict:
     if schema not in SCHEMAS:
         raise ValueError(f"Unknown schema '{schema}'. Choose from: {list(SCHEMAS)}")
+    # The env builds its board before the roster exists; name the agents now so
+    # claims, reviews, and direct messages can be checked against real names.
+    if hasattr(env, "register_agents"):
+        env.register_agents([role.name for role in _roster(env)])
     return SCHEMAS[schema](env, query_llm_fn, config)

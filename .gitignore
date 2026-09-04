@@ -12,3 +12,4 @@ results/**/*.log
 
 # Local meeting notes — not for GitHub
 MEETING_BRIEF.md
+notes/

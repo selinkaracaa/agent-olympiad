@@ -9,6 +9,23 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Any
 
+# Reads and personal bookkeeping. Phase allowlists were written to constrain
+# what a team may *do* during a phase (research on prep day, no edits after the
+# deck locks), not to stop a contestant checking the clock or rereading their
+# own notes. Cards predate these actions, so an allowlist would otherwise ban
+# them by omission. Actions that change shared contest state — recording an
+# answer, claiming an item — stay subject to the allowlist.
+IMPLICITLY_ALLOWED_ACTIONS = frozenset(
+    {
+        "list_problems",
+        "open_problem",
+        "check_budget",
+        "remember",
+        "recall",
+        "publish_memory",
+    }
+)
+
 
 @dataclass(frozen=True)
 class ContestPhase:
@@ -105,7 +122,11 @@ class PhaseSchedule:
                 f"RULE VIOLATION: {phase.label} — action '{action_type}' is banned "
                 f"during this phase."
             )
-        if phase.allowed_actions is not None and action_type not in phase.allowed_actions:
+        if (
+            phase.allowed_actions is not None
+            and action_type not in phase.allowed_actions
+            and action_type not in IMPLICITLY_ALLOWED_ACTIONS
+        ):
             return (
                 f"RULE VIOLATION: {phase.label} — action '{action_type}' is not "
                 f"permitted during this phase."

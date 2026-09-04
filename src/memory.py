@@ -20,6 +20,7 @@ class MemoryItem:
     content_hash: str
     shared: bool = False
     source_memory_id: str | None = None
+    problem_ref: str = ""
 
 
 class MemoryStore:
@@ -34,9 +35,9 @@ class MemoryStore:
         self._shared_counter = 0
 
     def _require_agent(self, agent_name: str) -> dict[str, MemoryItem]:
-        if agent_name not in self.private:
-            raise KeyError(f"Unknown memory owner: {agent_name}")
-        return self.private[agent_name]
+        # Agents register themselves on first write: the environment builds the
+        # store before the collaboration layer has named the roster.
+        return self.private.setdefault(agent_name, {})
 
     def add(
         self,
@@ -45,6 +46,7 @@ class MemoryStore:
         *,
         turn: int,
         kind: MemoryKind = "note",
+        problem_ref: str = "",
     ) -> MemoryItem:
         memories = self._require_agent(agent_name)
         content = str(content or "").strip()
@@ -58,6 +60,7 @@ class MemoryStore:
             content=content,
             created_turn=turn,
             content_hash=hashlib.sha256(content.encode("utf-8")).hexdigest(),
+            problem_ref=str(problem_ref or "").strip(),
         )
         memories[item.memory_id] = item
         return item
@@ -104,6 +107,7 @@ class MemoryStore:
         *,
         scope: MemoryScope = "all",
         top_k: int | None = 8,
+        problem_ref: str = "",
     ) -> list[MemoryItem]:
         memories = self._require_agent(agent_name)
         candidates: list[MemoryItem] = []
@@ -112,8 +116,10 @@ class MemoryStore:
         if scope in {"shared", "all"}:
             candidates.extend(self.shared.values())
         terms = {term.lower() for term in query.split() if len(term) > 1}
+        wanted_ref = str(problem_ref or "").strip().lower()
         candidates.sort(
             key=lambda item: (
+                bool(wanted_ref) and item.problem_ref.lower() == wanted_ref,
                 sum(term in item.content.lower() for term in terms),
                 item.created_turn,
             ),
@@ -133,7 +139,9 @@ class MemoryStore:
     @staticmethod
     def render(items: Iterable[MemoryItem]) -> str:
         rows = [
-            f"[{item.memory_id}] kind={item.kind} owner={item.owner}\n{item.content}"
+            f"[{item.memory_id}] kind={item.kind} owner={item.owner}"
+            + (f" item={item.problem_ref}" if item.problem_ref else "")
+            + f" turn={item.created_turn}\n{item.content}"
             for item in items
         ]
         return "\n\n".join(rows) or "(none)"

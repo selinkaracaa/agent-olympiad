@@ -16,12 +16,41 @@ Available action types:
 {programming_lines}
 - submit_final    — submit the team's final answer (only when ready)
 {tool_lines}
-
+{workspace_lines}
 Rules:
 - Use only tools listed as allowed for this contest.
 - Each turn you get at most ONE model call: act, or sleep.
 - submit_final must contain the complete team answer.
 - Be substantive; build on prior discussion."""
+
+WORKBOARD_INSTRUCTIONS = """\
+
+Problem board ({item_count} items — the team's shared answer sheet):
+- list_problems    — every item: status, who is on it, what is recorded
+- open_problem     — PAYLOAD: <item> — the item plus its full answer history
+- claim_problem    — PAYLOAD: <item> — take an item; one per agent at a time
+- release_problem  — PAYLOAD: <item> — hand it back
+- submit_problem   — PAYLOAD: <item> | <answer> — record an answer
+- verify_problem   — PAYLOAD: <item> | agree|disagree|unsure <comment>
+- mark_hopeless    — PAYLOAD: <item> | <reason>
+- set_priority     — PAYLOAD: <item> | high|normal|low
+
+Board rules:
+- Only the latest recorded answer for an item is graded. An item with nothing
+  recorded scores zero, so a considered guess beats leaving it blank.
+- Recording an answer already recorded for that item is rejected — it changes
+  nothing. Change your approach or move to an item that is still blank.
+- There is no correctness feedback in this contest. Reviewing a teammate's
+  recorded answer is the only check available."""
+
+WORKSPACE_INSTRUCTIONS = """\
+
+Shared workspace:
+- remember       — PAYLOAD: [<item> |] <note> — store a note only you can read
+- recall         — PAYLOAD: [<item> |] <query> — search your notes and the team's
+- publish_memory — PAYLOAD: M1, M2 — share stored notes with the team
+- check_budget   — turns, tokens, and how much of the board is still blank
+- message_group  — PAYLOAD: <names> | <message> — message named teammates only"""
 
 ACTION_BLOCK_RE = re.compile(
     r"^\s*ACTION:\s*(?P<action>[\w_]+)\s*\|\s*PAYLOAD:\s*(?P<payload>.*?)(?=^\s*ACTION:|\Z)",
@@ -55,6 +84,8 @@ def build_action_instructions(
     programming_contest: bool = False,
     structured_deliberation: bool = False,
     private_notes: bool = False,
+    board_item_count: int = 0,
+    workspace_actions: bool = True,
 ) -> str:
     if allowed_tools:
         tool_lines = "\n".join(f"- {tool}" for tool in allowed_tools)
@@ -66,9 +97,17 @@ def build_action_instructions(
         if programming_contest
         else ""
     )
+    workspace_lines = ""
+    if board_item_count:
+        workspace_lines += WORKBOARD_INSTRUCTIONS.format(
+            item_count=board_item_count
+        )
+    if workspace_actions:
+        workspace_lines += WORKSPACE_INSTRUCTIONS
     rendered = ACTION_INSTRUCTIONS.format(
         programming_lines=programming_lines,
         tool_lines=tool_lines,
+        workspace_lines=workspace_lines,
     )
     additions = []
     if private_notes:

@@ -47,7 +47,7 @@ Last week's slide evaluator is the same `slide_deck_v1` used everywhere:
 ```bash
 export PERPLEXITY_API_KEY="pplx-..."
 
-python3 src/evaluate_artifact.py results/demo_yusen/submission.pdf \
+python3 src/evaluate_artifact.py results/demo_submission/submission.pdf \
   --benchmark data/benchmarks/ieo_business_case/benchmark.json \
   --problem-id ieo_business_case_2024 \
   --provider perplexity --media images
@@ -91,7 +91,7 @@ python3 src/evaluate_submission.py \
 python3 src/evaluate_submission.py \
   --benchmark data/benchmarks/ieo_business_case/benchmark.json \
   --problem-id ieo_business_case_2024 \
-  --submission results/demo_yusen/submission.pdf \
+  --submission results/demo_submission/submission.pdf \
   --provider perplexity \
   --media images
 ```

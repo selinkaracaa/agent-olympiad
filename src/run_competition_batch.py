@@ -56,6 +56,42 @@ TINKER_DEFAULT_TEMPERATURE = 0.2
 PROVIDERS = ("perplexity", "tinker")
 JUDGE_PROVIDERS = ("perplexity", "tinker", "openai")
 
+TRACKED_TOOLS = (
+    "execute_code",
+    "submit_code",
+    "use_calculator",
+    "web_search",
+    "read_lab_equipment",
+    "read_star_chart",
+    "query_rules",
+)
+
+MATH_CONTESTS = frozenset(
+    {
+        "arml_local",
+        "arml_national_team",
+        "arml_national_power",
+        "arml_power",
+        "purple_comet",
+        "hmmt_guts",
+        "hmmt_team",
+        "hmmt_nov",
+        "putnam",
+        "imo_shortlist",
+        "aime",
+        "amc",
+        "science_bowl",
+        "qanta",
+        "mystery_hunt",
+        "nyu_ctf_bench",
+        "history_olympiad",
+        "cfa_research_challenge",
+        "wmtc",
+    }
+)
+DEFAULT_RULES_ROOT = REPO_ROOT / "data" / "rules"
+DEFAULT_BENCHMARK_ROOT = REPO_ROOT / "data" / "benchmarks"
+
 
 def _write_json_atomic(path: Path, payload: dict) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -100,7 +136,10 @@ def _select_cases(
     limit: int | None,
     *,
     structured_gold: bool = False,
+    benchmark_suite: str | None = None,
     benchmark_root: Path | None = None,
+    rules_root: Path | None = None,
+    require_rule_card: bool = True,
 ) -> list[tuple[str, str]]:
     selected = (
         [item.strip() for item in competitions.split(",") if item.strip()]
@@ -109,9 +148,19 @@ def _select_cases(
     )
     if structured_gold and problem_id:
         raise ValueError("--structured-gold cannot be combined with --problem-id.")
-    if structured_gold:
+    if benchmark_suite and (structured_gold or problem_id):
+        raise ValueError("--benchmark-suite cannot be combined with --structured-gold or --problem-id.")
+    if benchmark_suite:
+        cases = _discover_benchmark_suite_cases(
+            benchmark_suite,
+            benchmark_root or DEFAULT_BENCHMARK_ROOT,
+            rules_root or DEFAULT_RULES_ROOT,
+            selected or None,
+            require_rule_card=require_rule_card,
+        )
+    elif structured_gold:
         cases = _discover_structured_gold_cases(
-            benchmark_root or (REPO_ROOT / "data" / "benchmarks"),
+            benchmark_root or DEFAULT_BENCHMARK_ROOT,
             selected or None,
         )
     elif problem_id:
@@ -145,6 +194,62 @@ def _has_structured_gold(problem: dict) -> bool:
     return False
 
 
+def _has_rule_card(competition: str, rules_root: Path) -> bool:
+    return (rules_root / competition / "competition.json").exists()
+
+
+def _discover_benchmark_suite_cases(
+    suite: str,
+    benchmark_root: Path,
+    rules_root: Path,
+    competitions: list[str] | None,
+    *,
+    require_rule_card: bool,
+) -> list[tuple[str, str]]:
+    if suite == "non_math":
+        wanted = {
+            path.parent.name
+            for path in sorted(benchmark_root.glob("*/benchmark.json"))
+            if path.parent.name not in MATH_CONTESTS
+        }
+    elif suite == "math":
+        wanted = set(MATH_CONTESTS) & {
+            path.parent.name for path in benchmark_root.glob("*/benchmark.json")
+        }
+    elif suite == "all":
+        wanted = {path.parent.name for path in benchmark_root.glob("*/benchmark.json")}
+    else:
+        raise ValueError(f"Unknown benchmark suite {suite!r}")
+    if competitions:
+        wanted &= set(competitions)
+    cases: list[tuple[str, str]] = []
+    skipped_no_card: list[str] = []
+    for competition in sorted(wanted):
+        if require_rule_card and not _has_rule_card(competition, rules_root):
+            skipped_no_card.append(competition)
+            continue
+        benchmark_path = benchmark_root / competition / "benchmark.json"
+        if not benchmark_path.exists():
+            continue
+        problems = json.loads(benchmark_path.read_text(encoding="utf-8"))
+        if not isinstance(problems, list):
+            continue
+        for problem in problems:
+            if not isinstance(problem, dict):
+                continue
+            problem_id = problem.get("problem_id")
+            if isinstance(problem_id, str) and problem_id:
+                cases.append((competition, problem_id))
+    if skipped_no_card:
+        print(
+            "Skipping contests without rule cards: " + ", ".join(skipped_no_card),
+            flush=True,
+        )
+    if not cases:
+        raise ValueError(f"No benchmark cases discovered for suite={suite!r}")
+    return cases
+
+
 def _discover_structured_gold_cases(
     benchmark_root: Path,
     competitions: list[str] | None = None,
@@ -169,6 +274,78 @@ def _discover_structured_gold_cases(
 
 def _mean(values: list[float]) -> float | None:
     return sum(values) / len(values) if values else None
+
+
+def summarize_action_log(action_log: list[dict] | None) -> dict[str, int | str]:
+    counts: dict[str, int] = {}
+    tool_errors = 0
+    for entry in action_log or []:
+        action = entry.get("action")
+        if not isinstance(action, str) or not action:
+            continue
+        counts[action] = counts.get(action, 0) + 1
+        if action in TRACKED_TOOLS:
+            result = str(entry.get("result") or "")
+            if "error" in result.lower():
+                tool_errors += 1
+    used_bits = [
+        f"{tool}×{counts[tool]}"
+        for tool in TRACKED_TOOLS
+        if counts.get(tool)
+    ]
+    return {
+        **{f"tool_{tool}": counts.get(tool, 0) for tool in TRACKED_TOOLS},
+        "tool_errors": tool_errors,
+        "tool_usage_summary": "; ".join(used_bits) if used_bits else "",
+        "speak_count": counts.get("speak", 0),
+        "scratchpad_count": counts.get("write_scratchpad", 0),
+    }
+
+
+def enrich_row_tool_usage(row: dict, *, repo_root: Path = REPO_ROOT) -> dict:
+    if any(key.startswith("tool_") and key not in {"tool_errors", "tool_usage_summary"} for key in row):
+        return row
+    action_log = row.get("action_log") or row.get("action_log_tail")
+    if not action_log:
+        transcript_path = row.get("transcript_path")
+        if transcript_path:
+            path = Path(transcript_path)
+            if not path.is_absolute():
+                path = repo_root / path
+            if path.exists():
+                try:
+                    transcript = json.loads(path.read_text(encoding="utf-8"))
+                    action_log = transcript.get("action_log") or []
+                except (OSError, json.JSONDecodeError):
+                    action_log = []
+    row = dict(row)
+    row.update(summarize_action_log(action_log if isinstance(action_log, list) else None))
+    return row
+
+
+def _board_row_fields(board: dict | None) -> dict:
+    """Flatten workboard metrics onto the row so they reach the TSV sheets.
+
+    ``board_repeat_rate`` is the stubbornness number: the share of answer
+    attempts that re-recorded an answer the team already had for that item.
+    """
+    if not board:
+        return {
+            "board_items": None,
+            "board_items_answered": None,
+            "board_items_reviewed": None,
+            "board_attempts": None,
+            "board_repeat_attempts": None,
+            "board_repeat_rate": None,
+        }
+    return {
+        "board_items": board.get("items_total"),
+        "board_items_answered": board.get("items_answered"),
+        "board_items_reviewed": board.get("items_reviewed"),
+        "board_attempts": board.get("attempts_recorded"),
+        "board_repeat_attempts": board.get("repeat_attempts_rejected"),
+        "board_repeat_rate": board.get("repeat_rate"),
+    }
 
 
 def _aggregate_metrics(rows: list[dict]) -> dict:
@@ -225,6 +402,19 @@ def _aggregate_metrics(rows: list[dict]) -> dict:
         "total_elapsed_seconds": sum(
             float(row.get("elapsed_seconds") or 0) for row in rows
         ),
+        "board_runs": sum(1 for row in rows if row.get("board_items")),
+        "mean_board_repeat_rate": _mean(scores("board_repeat_rate")),
+        "total_board_repeat_attempts": sum(
+            int(row.get("board_repeat_attempts") or 0) for row in rows
+        ),
+        "mean_board_answered_fraction": _mean(
+            [
+                float(row["board_items_answered"]) / float(row["board_items"])
+                for row in rows
+                if row.get("board_items")
+                and isinstance(row.get("board_items_answered"), (int, float))
+            ]
+        ),
     }
 
 
@@ -261,6 +451,7 @@ def _build_summary(rows: list[dict], metadata: dict) -> dict:
 
 
 def _write_results_tsv(path: Path, rows: list[dict]) -> None:
+    enriched = [enrich_row_tool_usage(row) for row in rows]
     fields = [
         "competition",
         "problem_id",
@@ -271,6 +462,17 @@ def _write_results_tsv(path: Path, rows: list[dict]) -> None:
         "communication_score",
         "planning_score",
         "coordination_score",
+        "tool_usage_summary",
+        * [f"tool_{tool}" for tool in TRACKED_TOOLS],
+        "tool_errors",
+        "speak_count",
+        "scratchpad_count",
+        "board_items",
+        "board_items_answered",
+        "board_items_reviewed",
+        "board_attempts",
+        "board_repeat_attempts",
+        "board_repeat_rate",
         "turns_used",
         "max_turns",
         "api_calls",
@@ -292,7 +494,7 @@ def _write_results_tsv(path: Path, rows: list[dict]) -> None:
         ) as handle:
             writer = csv.DictWriter(handle, fieldnames=fields, delimiter="\t")
             writer.writeheader()
-            for row in rows:
+            for row in enriched:
                 maximum = row.get("grade_max_score")
                 score = row.get("grade_score")
                 accuracy = (
@@ -331,6 +533,10 @@ def _write_summary_tsv(path: Path, summary: dict) -> None:
         "mean_communication_score",
         "mean_planning_score",
         "mean_coordination_score",
+        "board_runs",
+        "mean_board_repeat_rate",
+        "total_board_repeat_attempts",
+        "mean_board_answered_fraction",
         "total_api_calls",
         "total_tokens_used",
         "total_elapsed_seconds",
@@ -650,6 +856,7 @@ def run_one(
         "tokens_by_turn": result.get("tokens_by_turn") or [],
         "wrong_submissions": env.wrong_submissions,
         "penalty_minutes": env.penalty_minutes(),
+        **_board_row_fields(result.get("workboard")),
         "rule_violations": list(env.rule_violations),
         "grade_method": grade.get("method"),
         "grade_score": grade.get("score"),
@@ -669,6 +876,7 @@ def run_one(
         "final_answer_preview": (result.get("final_answer") or "")[-2000:],
         "chat_history": list(env.chat_history)[-80:],
         "action_log_tail": list(env.action_log)[-40:],
+        **summarize_action_log(env.action_log),
         "elapsed_seconds": time.perf_counter() - started_at,
         "status": "error" if run_error else "ok",
         "error": run_error,
@@ -740,6 +948,17 @@ def main() -> None:
         action="store_true",
         help="Run every benchmark problem with at least one deterministic scored gold part",
     )
+    parser.add_argument(
+        "--benchmark-suite",
+        choices=["non_math", "math", "all"],
+        default=None,
+        help="Run every benchmark problem in a suite (non_math = all collected non-math contests)",
+    )
+    parser.add_argument(
+        "--allow-missing-rule-card",
+        action="store_true",
+        help="With --benchmark-suite, include contests that lack data/rules/<id>/ cards",
+    )
     parser.add_argument("--output", type=Path, default=None)
     parser.add_argument(
         "--resume",
@@ -769,6 +988,9 @@ def main() -> None:
             args.problem_id,
             args.limit,
             structured_gold=args.structured_gold,
+            benchmark_suite=args.benchmark_suite,
+            rules_root=args.rules_root,
+            require_rule_card=not args.allow_missing_rule_card,
         )
         if args.resume and args.output is None:
             raise ValueError("--resume requires an explicit --output directory.")
@@ -844,6 +1066,7 @@ def main() -> None:
         "rules_mode": args.rules_mode,
         "max_turns": args.max_turns,
         "structured_gold": args.structured_gold,
+        "benchmark_suite": args.benchmark_suite,
         "selected_cases": [
             {"competition": competition, "problem_id": problem_id}
             for competition, problem_id in cases

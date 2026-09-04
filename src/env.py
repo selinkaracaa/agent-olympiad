@@ -3,6 +3,7 @@ import json
 import math
 import operator
 import os
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -17,8 +18,10 @@ from contest_budget import (
 )
 from contest_rules import get_contest_rules
 from deliberation import DELIBERATION_ACTIONS, DeliberationLedger
+from memory import MemoryStore
 from rules import PhaseSchedule, RuleCardError, RulesBaseline, RulesMode
 from tools_search import live_web_search, looks_like_answer_lookup
+from workboard import Workboard
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DEFAULT_BENCHMARK_PATH = os.path.join(REPO_ROOT, "data", "benchmarks")
@@ -76,6 +79,35 @@ COMPETITION_ACTION_REGISTRY = {
     "codeforces": ["submit_code"],
 }
 
+# Per-item board: pick a problem, record an answer, review a teammate's.
+BOARD_ACTIONS = {
+    "list_problems",
+    "open_problem",
+    "submit_problem",
+    "claim_problem",
+    "release_problem",
+    "verify_problem",
+    "mark_hopeless",
+    "set_priority",
+}
+
+# Structured recall, so history survives outside the chat transcript.
+MEMORY_ACTIONS = {"remember", "recall", "publish_memory"}
+
+TEAM_ACTIONS = {"message_group", "check_budget"}
+
+# Available in every contest and every mode, including the vanilla baseline:
+# these are the desk and the answer sheet, not contest-specific instruments.
+CORE_WORKSPACE_ACTIONS = BOARD_ACTIONS | MEMORY_ACTIONS | TEAM_ACTIONS
+
+# Prefixes that mean "the environment refused this", as opposed to a rule break.
+OPERATIONAL_ERROR_PREFIXES = (
+    "Deliberation error:",
+    "Board error:",
+    "Memory error:",
+    "Board unavailable:",
+)
+
 ALL_ACTIONS = {
     "speak",
     "write_scratchpad",
@@ -89,7 +121,7 @@ ALL_ACTIONS = {
     "read_lab_equipment",
     "read_star_chart",
     "query_rules",
-} | DELIBERATION_ACTIONS
+} | DELIBERATION_ACTIONS | CORE_WORKSPACE_ACTIONS
 
 TOOL_ACTIONS = ALL_ACTIONS - {
     "speak",
@@ -99,6 +131,7 @@ TOOL_ACTIONS = ALL_ACTIONS - {
     "submit_code",
     "sleep",
     *DELIBERATION_ACTIONS,
+    *CORE_WORKSPACE_ACTIONS,
 }
 
 _SAFE_BINOPS = {
@@ -192,6 +225,7 @@ class OlympiadEnvironment:
             "scratchpad": "",
             "final_answer": "",
             "work_artifacts": [],
+            "answer_sheet": "",
         }
         self.current_turn = 0  # collaboration turns completed
         self.action_count = 0  # env actions executed (speak/tools/etc.)
@@ -233,6 +267,11 @@ class OlympiadEnvironment:
         ):
             self.allowed_tools = list(self.contest_rules.encoded_tools)
         self.problem_data = self._load_problem()
+        # Multi-item contests get a board; single-deliverable ones stay as they
+        # were, and the board actions report themselves unavailable.
+        self.workboard = Workboard.from_problem(self.problem_data)
+        self.memory = MemoryStore([])
+        self.agent_names: list[str] = []
 
         problem_team_size = self.problem_data.get("team_size")
         self.team_size = self._resolve_team_size(
@@ -403,6 +442,9 @@ class OlympiadEnvironment:
             "output_token_cap_per_call": per_call_cap,
             "submitted": self.submitted,
             "wrong_submissions": self.wrong_submissions,
+            "board_enabled": self.workboard is not None,
+            "board_overview": self.board_overview(),
+            "answer_sheet": self.board_answer_sheet(),
             "search_policy": self.contest_rules.search_policy if self.contest_rules else None,
             "duration_minutes": self.duration_minutes,
             "simulated_minutes": self.simulated_minutes,
@@ -662,8 +704,24 @@ class OlympiadEnvironment:
         """ICPC card shares pending_run_status with the whole team."""
         return "pending_run_status" in self._shared_team_state_keys()
 
+    # Reads and personal bookkeeping: the result goes back to the actor only.
+    # The mutating board actions stay team-visible — a board nobody else can
+    # see would not coordinate anything.
+    PRIVATE_WORKSPACE_ACTIONS = {
+        "list_problems",
+        "open_problem",
+        "check_budget",
+        "remember",
+        "recall",
+    }
+
     def _action_visibility(self, action_type: str) -> str:
-        if action_type in {"write_private_notes", "rest", *TOOL_ACTIONS}:
+        if action_type in {
+            "write_private_notes",
+            "rest",
+            *TOOL_ACTIONS,
+            *self.PRIVATE_WORKSPACE_ACTIONS,
+        }:
             return "private"
         if action_type == "submit_code":
             return "team" if self.submit_code_is_team_visible() else "private"
@@ -775,6 +833,10 @@ class OlympiadEnvironment:
             "rule_violations": list(self.rule_violations),
             "deliberation": self.deliberation.report(),
             "communication": self.communication.report(),
+            "workboard": (
+                self.workboard.snapshot() if self.workboard is not None else None
+            ),
+            "memory": self.memory.snapshot(),
             "rules_baseline": self.rules_metadata(),
         }
 
@@ -878,6 +940,10 @@ class OlympiadEnvironment:
             "visibility": visibility,
         }
         if visibility == "private":
+            self.agent_observations.setdefault(agent_name, []).append(observation)
+        elif action_type in CORE_WORKSPACE_ACTIONS:
+            # Team-visible board work still needs its result to reach the actor:
+            # the rejection notice is the whole point of recording a repeat.
             self.agent_observations.setdefault(agent_name, []).append(observation)
         elif action_type == "submit_code":
             roster = (
@@ -1015,7 +1081,34 @@ class OlympiadEnvironment:
         elif action_type == "sleep":
             reason = payload.strip() or "passing this turn"
             result = f"{agent_name} sleeps ({reason})."
+        elif action_type in BOARD_ACTIONS:
+            result = self._board_action(agent_name, action_type, payload)
+        elif action_type in MEMORY_ACTIONS:
+            result = self._memory_action(agent_name, action_type, payload)
+        elif action_type == "check_budget":
+            result = self._check_budget(agent_name)
+        elif action_type == "message_group":
+            audience, message, error = self._parse_recipients(payload)
+            if error:
+                result = error
+            else:
+                self.group_messages.append(
+                    {
+                        "turn": self.current_turn,
+                        "sender": agent_name,
+                        "recipients": audience,
+                        "message": message,
+                        "visibility": "group",
+                    }
+                )
+                metadata = {
+                    **(metadata or {}),
+                    "visibility": "group",
+                    "recipients": audience,
+                }
+                result = f"Message sent to {', '.join(audience)}."
         elif action_type == "submit_final":
+            payload = self._resolve_final_payload(payload)
             error = self._validate_submission(payload)
             if error:
                 result = error
@@ -1034,7 +1127,10 @@ class OlympiadEnvironment:
                     self.workspace["final_answer"] = payload.strip()
                     self.submitted = True
                     self.submitted_by = agent_name
-                    result = f"Submission finalized by {agent_name}."
+                    result = (
+                        f"Submission finalized by {agent_name}."
+                        f"{self._board_submission_note()}"
+                    )
         elif action_type == "submit_code":
             result = self._submit_code(payload, agent_name=agent_name)
             if not result.startswith("RULE VIOLATION"):
@@ -1070,10 +1166,12 @@ class OlympiadEnvironment:
         else:
             result = f"Operational error: action '{action_type}' not implemented."
 
-        if not result.startswith("Deliberation error:"):
-            self.communication.record(agent_name=agent_name, action_type=action_type)
+        if result.startswith(OPERATIONAL_ERROR_PREFIXES):
+            # A refused board/memory call is a no-op, not a broken contest rule.
+            if result.startswith("Deliberation error:"):
+                self.rule_violations.append(result)
         else:
-            self.rule_violations.append(result)
+            self.communication.record(agent_name=agent_name, action_type=action_type)
         self._log_action(
             agent_name,
             action_type,
@@ -1085,6 +1183,213 @@ class OlympiadEnvironment:
 
     def get_private_notes(self, agent_name: str) -> str:
         return self.private_notes.get(agent_name, "")
+
+    # ------------------------------------------------------------- workboard
+
+    def register_agents(self, names: list[str]) -> None:
+        """Record the roster so claims and direct messages can be checked."""
+        self.agent_names = [str(name) for name in names if str(name).strip()]
+        for name in self.agent_names:
+            self.memory.private.setdefault(name, {})
+
+    def board_enabled(self) -> bool:
+        return self.workboard is not None
+
+    def board_answer_sheet(self) -> str:
+        """Recorded per-item answers, rendered as a numbered sheet."""
+        return self.workboard.answer_sheet() if self.workboard is not None else ""
+
+    def board_overview(self, agent_name: str | None = None) -> str:
+        if self.workboard is None:
+            return ""
+        return self.workboard.overview(
+            turn=self.current_turn, agent_name=agent_name
+        )
+
+    def _sync_answer_sheet(self) -> None:
+        """Keep the shared workspace showing what the board currently holds."""
+        if self.workboard is None:
+            return
+        self.workspace["answer_sheet"] = self.workboard.answer_sheet()
+
+    def _board_action(self, agent_name: str, action_type: str, payload: str) -> str:
+        if self.workboard is None:
+            return (
+                "Board unavailable: this contest is graded as a single "
+                "deliverable, so there are no separate items to pick up. "
+                "Use submit_final for the team's answer."
+            )
+        board = self.workboard
+        turn = self.current_turn
+        if action_type == "list_problems":
+            return board.overview(turn=turn, agent_name=agent_name)
+
+        ref, rest = board.split_ref(payload)
+        item = board.resolve(ref)
+        if item is None:
+            return board.unknown_ref_message(ref)
+
+        if action_type == "open_problem":
+            return board.detail(item, turn=turn)
+
+        if action_type == "claim_problem":
+            result = board.claim(agent_name, item, turn=turn)
+        elif action_type == "release_problem":
+            result = board.release(agent_name, item, turn=turn)
+        elif action_type == "submit_problem":
+            result = board.record_answer(agent_name, item, rest, turn=turn)
+            self._sync_answer_sheet()
+        elif action_type == "verify_problem":
+            verdict, _, comment = rest.partition(" ")
+            result = board.review(agent_name, item, verdict, comment, turn=turn)
+        elif action_type == "set_priority":
+            result = board.set_priority(item, rest)
+        elif action_type == "mark_hopeless":
+            undo = rest.strip().lower() in {"undo", "clear", "false", "reopen"}
+            result = board.mark_hopeless(item, rest, hopeless=not undo)
+        else:
+            return f"Board error: '{action_type}' is not a board action."
+
+        self._broadcast_board_event(agent_name, action_type, item, result)
+        return result
+
+    def _broadcast_board_event(
+        self, agent_name: str, action_type: str, item: Any, result: str
+    ) -> None:
+        """Put board changes in the shared log; a private board coordinates nothing."""
+        if result.startswith("Board error:"):
+            return
+        if action_type == "submit_problem":
+            summary = (
+                f"{agent_name} recorded an answer for {item.item_id}: "
+                f"{item.answer} (attempt {len(item.attempts)})."
+            )
+        elif action_type == "claim_problem":
+            summary = f"{agent_name} is now working on {item.item_id}."
+        elif action_type == "release_problem":
+            summary = f"{agent_name} released {item.item_id}."
+        elif action_type == "verify_problem":
+            review = item.reviews[-1]
+            summary = (
+                f"{agent_name} reviewed {item.item_id} ({review.verdict})"
+                + (f": {review.comment}" if review.comment else ".")
+            )
+        elif action_type == "mark_hopeless":
+            summary = (
+                f"{agent_name} marked {item.item_id} hopeless."
+                if item.hopeless
+                else f"{agent_name} put {item.item_id} back in play."
+            )
+        elif action_type == "set_priority":
+            summary = f"{agent_name} set {item.item_id} priority to {item.priority}."
+        else:
+            return
+        self.chat_history.append(
+            {"sender": "Contest_Control", "message": f"[board] {summary}"}
+        )
+
+    def _memory_action(self, agent_name: str, action_type: str, payload: str) -> str:
+        text = str(payload or "").strip()
+        problem_ref = ""
+        if self.workboard is not None and action_type in {"remember", "recall"}:
+            ref, rest = self.workboard.split_ref(text)
+            item = self.workboard.resolve(ref)
+            if item is not None and rest:
+                problem_ref, text = item.item_id, rest
+
+        if action_type == "remember":
+            if not text:
+                return "Memory error: nothing to remember."
+            item = self.memory.add(
+                agent_name, text, turn=self.current_turn, problem_ref=problem_ref
+            )
+            scope = f" against item {problem_ref}" if problem_ref else ""
+            return (
+                f"Stored {item.memory_id}{scope} (private). "
+                f"Publish it with: publish_memory | {item.memory_id}"
+            )
+        if action_type == "recall":
+            items = self.memory.recall(
+                agent_name, text, problem_ref=problem_ref, top_k=8
+            )
+            if not items:
+                return "Recall: nothing stored yet."
+            return f"Recall ({len(items)} item(s)):\n{MemoryStore.render(items)}"
+        if action_type == "publish_memory":
+            ids = [chunk for chunk in re.split(r"[,\s]+", text) if chunk]
+            if not ids:
+                return "Memory error: name the memory ids to publish, e.g. M1, M2."
+            try:
+                published = self.memory.publish(
+                    agent_name, ids, turn=self.current_turn
+                )
+            except KeyError as exc:
+                return f"Memory error: {exc}"
+            names = ", ".join(item.memory_id for item in published)
+            return f"Published to the team as {names}."
+        return f"Memory error: '{action_type}' is not a memory action."
+
+    def _check_budget(self, agent_name: str) -> str:
+        state = self.get_state()
+        lines = [
+            "=== BUDGET ===",
+            f"Turns (time): {state['turn_status']}",
+            f"API calls (cost): {state['api_call_status']}",
+            f"Team output tokens: {state['token_status']}",
+            f"Clock: {state['clock_status']}",
+        ]
+        if self.wrong_submissions:
+            lines.append(
+                f"Wrong submissions: {self.wrong_submissions} "
+                f"(penalty {self.penalty_minutes()} min)"
+            )
+        if self.workboard is not None:
+            metrics = self.workboard.metrics()
+            remaining = self.max_turns - self.current_turn
+            unanswered = metrics["items_unanswered"]
+            lines.append(
+                f"Board: {metrics['items_answered']}/{metrics['items_total']} "
+                f"answered, {unanswered} blank, "
+                f"{metrics['repeat_attempts_rejected']} repeat attempt(s) rejected"
+            )
+            if unanswered:
+                lines.append(
+                    f"{remaining} turn(s) left for {unanswered} unanswered item(s) "
+                    "across the whole team. A blank item scores zero."
+                )
+        return "\n".join(lines)
+
+    def _parse_recipients(self, payload: str) -> tuple[list[str], str, str]:
+        """Split 'Agent_2, Agent_3 | message' into (audience, message, error)."""
+        head, sep, tail = str(payload or "").partition("|")
+        if not sep:
+            return (
+                [],
+                "",
+                "Board error: message_group needs "
+                "'<recipients> | <message>', e.g. Agent_2, Agent_3 | ...",
+            )
+        requested = [name.strip() for name in re.split(r"[,;]+", head) if name.strip()]
+        message = tail.strip()
+        if not requested:
+            return [], "", "Board error: name at least one recipient."
+        if not message:
+            return [], "", "Board error: the message body is empty."
+        if self.agent_names:
+            lookup = {name.lower(): name for name in self.agent_names}
+            resolved, unknown = [], []
+            for name in requested:
+                match = lookup.get(name.lower())
+                (resolved if match else unknown).append(match or name)
+            if unknown:
+                return (
+                    [],
+                    "",
+                    f"Board error: unknown recipient(s) {', '.join(unknown)}. "
+                    f"Team: {', '.join(self.agent_names)}",
+                )
+            requested = resolved
+        return sorted(set(requested)), message, ""
 
     def _run_web_search(self, payload: str) -> str:
         """Live search with contest policy + answer-key anti-cheat."""
@@ -1308,10 +1613,67 @@ class OlympiadEnvironment:
             return None
         return self.wrong_submissions * rules.wrong_submission_penalty_minutes
 
+    def _resolve_final_payload(self, payload: str) -> str:
+        """Back the submitted answer with what the team recorded on the board.
+
+        The submitter's own text wins — synthesis is asked to recompute, not to
+        copy. But an item the team recorded and the submitter dropped would
+        score zero for no reason, and a submitter that returns commentary or a
+        stray ACTION line would throw the whole board away.
+        """
+        from evaluation.gold import parse_numbered_answers
+
+        text = str(payload or "").strip()
+        if self.workboard is None:
+            return payload
+        recorded = {
+            item.item_id: item.answer
+            for item in self.workboard.items.values()
+            if item.answered
+        }
+        if not recorded:
+            return payload
+        sheet = self.workboard.answer_sheet()
+        if len(text) < 10 or text.lower() in {"submit", "final", "done", "ready"}:
+            return sheet
+        written = parse_numbered_answers(text)
+        if not written:
+            return sheet
+        missing = [
+            f"{item_id}. {answer}"
+            for item_id, answer in recorded.items()
+            if not str(written.get(item_id) or "").strip()
+        ]
+        if not missing:
+            return payload
+        return (
+            f"{text.rstrip()}\n\nRecorded on the board and not covered above:\n"
+            + "\n".join(missing)
+        )
+
+    def _board_submission_note(self) -> str:
+        if self.workboard is None:
+            return ""
+        blank = [
+            item.item_id
+            for item in self.workboard.items.values()
+            if not item.answered
+        ]
+        if not blank:
+            return " All board items have a recorded answer."
+        listed = ", ".join(blank[:10]) + ("..." if len(blank) > 10 else "")
+        return f" Board items with no recorded answer: {listed}."
+
     def _validate_submission(self, payload: str) -> Optional[str]:
         if not payload or not payload.strip():
             return "Submission rejected: final answer cannot be empty."
         if len(payload.strip()) < 10:
+            # The floor exists to reject "ok" / "done", not a short answer
+            # sheet: "1. 268" is a complete submission on a one-item board.
+            from evaluation.gold import parse_numbered_answers
+
+            if self.workboard is not None and parse_numbered_answers(payload):
+                return None
             return "Submission rejected: final answer is too short (minimum 10 characters)."
         return None
 
@@ -1486,6 +1848,7 @@ class OlympiadEnvironment:
             "scratchpad": "",
             "final_answer": "",
             "work_artifacts": [],
+            "answer_sheet": "",
         }
         self.current_turn = 0
         self.simulated_minutes = 0.0
@@ -1501,4 +1864,6 @@ class OlympiadEnvironment:
         self.remote_submission = None
         self.remote_submission_source = None
         self.rule_violations.clear()
+        self.workboard = Workboard.from_problem(self.problem_data)
+        self.memory = MemoryStore(self.agent_names)
         self.record_budget_snapshot("reset")

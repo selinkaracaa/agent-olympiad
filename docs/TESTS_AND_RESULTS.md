@@ -319,15 +319,3 @@ export PERPLEXITY_API_KEY=pplx-...
 python3 src/run_smoke_batch.py --live --rounds 2             # live 20
 python3 src/run_exam.py --all-schemas --rounds 2             # ARML scored
 ```
-
----
-
-## Meeting summary
-
-All **20** DATA_COLLECTION contest families are benchmarked. Offline and live smoke both **20/20**; live judged smoke scores **18/20** (ICPC/IIOT deferred). Turns are the time clock (≤1 model call per agent per turn, or sleep); API and token caps are separate. Three collaboration baselines remain. ARML Local 2009 pilot scores: round table **4/40**, centralized **14/40**, decentralized **12/40** (GPT-5.4-mini, 2 turns). Next: stronger budgets, programming judges, then scale.
-
----
-
-## One-liner
-
-**20/20 offline + 20/20 live judged smoke (18 scored); ARML three-schema pilot 4 / 14 / 12 out of 40; programming judges and paper-scale runs still ahead.**
