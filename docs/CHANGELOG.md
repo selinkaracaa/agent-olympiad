@@ -2,152 +2,160 @@
 
 ## Per-item workboard and shared-workspace actions
 
-Adds per-item state to multi-item contests: agents pick up an item, record an
-answer, see every answer already tried, and review each other's work. Full
-reference in [`WORKBOARD_AND_TOOLS.md`](WORKBOARD_AND_TOOLS.md).
+Most contests here are one environment over many items — an ARML answer sheet
+has ten problems, an IOAA group task has a dozen sub-questions. Previously a
+team held a single `final_answer` string for the whole contest. The workboard
+replaces that with a shared answer sheet the agents can actually work: pick up
+an item, record an answer against it, read what has already been tried, and
+check a teammate's work.
 
-### New module — `src/workboard.py`
+The closest familiar thing is an online quiz. You open a question, type an
+answer, move to another, come back later and your previous answer is still
+sitting there. That is what the board gives a team.
 
-| Component | Purpose |
+**Three problems it solves:**
+
+- **Agents could not see what they had already tried.** With one answer string
+  and no history, resubmitting the same wrong answer cost nothing and taught
+  nothing, so runs could spend their whole turn budget cycling on one item.
+- **Nothing recorded who was working on what.** A transcript could not answer
+  "what happened on question 4?", which made collaboration failures impossible
+  to diagnose.
+- **There was no review step.** An answer went from one agent straight into the
+  final submission with nothing in between.
+
+Full reference: [`WORKBOARD_AND_TOOLS.md`](WORKBOARD_AND_TOOLS.md).
+
+---
+
+### The board
+
+A board is built automatically for any contest whose items can be identified —
+from `gold_label.parts`, from labelled sub-questions in the problem statement,
+or from an explicit `board_items` field. Contests graded as one deliverable get
+no board and are unaffected.
+
+Eight actions, grouped by what they are for.
+
+**Finding work.** `list_problems` shows every item at once: status, points, who
+is on it, how many attempts it has taken, and the answer currently recorded.
+`open_problem <item>` opens one item — its statement plus the **complete answer
+history**, every attempt with its turn and author. This is the action that
+makes stubbornness visible: an agent about to retry can first see the four
+answers already tried.
+
+**Taking work.** `claim_problem <item>` takes an item, one per agent, and
+`release_problem` hands it back. This turns "divide up the questions" from an
+instruction in a prompt into something the environment actually enforces —
+another agent cannot answer an item you hold. Claims expire after three idle
+turns, so an agent that claims an item and then stops acting cannot lock it for
+the rest of the run.
+
+**Recording answers.** `submit_problem <item> | <answer>` records an answer.
+Three rules apply, each for a reason:
+
+- *Only the latest recorded answer is graded, and an item with nothing recorded
+  scores zero.* This matches how the contests actually score, and means a
+  considered guess always beats leaving a blank.
+- *Recording an answer already recorded for that item is refused.* It changes
+  nothing, so the environment says so — naming the turn and agent that recorded
+  it first, and how many items are still blank. Retrying with a **different**
+  answer stays unlimited: persistence on a hard problem is reasonable, and only
+  the literal no-op is blocked.
+- *No correctness feedback is returned.* These contests do not give teams
+  per-item feedback, and the board is built from the gold record — returning a
+  verdict would hand over the answer key.
+
+**Checking work.** `verify_problem <item> | agree|disagree|unsure <comment>`
+reviews whatever answer is currently recorded. You cannot review your own sole
+answer, which is the point: since the board gives no correctness feedback, a
+teammate's review is the only check a team has. A review does not change the
+recorded answer — it flags it for someone to replace.
+
+**Triage.** `mark_hopeless <item> | <reason>` and `set_priority <item> |
+high|normal|low` let a team say what it has given up on and what matters most.
+A hopeless item stays on the board, because a recorded guess still beats a
+blank.
+
+### Workspace actions
+
+Five actions that are not about any single item. They are available in every
+contest and every rules mode — including the vanilla baseline — because they
+represent the desk rather than contest-specific equipment like a calculator or
+a star chart.
+
+**`remember` / `recall` / `publish_memory`** give an agent notes that survive
+outside the chat log. A note can be tagged to a board item, so `recall` scoped
+to item 4 returns what was worked out about item 4 earlier in the run.
+`publish_memory` promotes a private note to the whole team.
+
+**`check_budget`** reports turns, API calls, tokens, the contest clock, and how
+much of the board is still blank. Deciding whether to keep working a hard item
+or move on is only a real decision if an agent can see both the clock and the
+remaining work; without this it is guesswork.
+
+**`message_group <names> | <message>`** sends to named teammates instead of
+broadcasting. This is what makes sub-teams possible — two groups working
+separate halves of a paper and then checking each other — without every message
+going to every seat.
+
+### Metrics
+
+Each answers a specific question about a run.
+
+| Metric | The question it answers |
 |---|---|
-| `Attempt` | One recorded answer: turn, agent, text, normalised key. |
-| `Review` | One `verify_problem` verdict against the answer it reviewed. |
-| `BoardItem` | One contest item: statement, points, claim, attempts, reviews, triage flags. |
-| `Workboard` | The board: item collection, reference resolution, mutations, metrics. |
-| `_parse_labeled_spans()` | Splits a problem statement into `label → body` using the first of four patterns that finds ≥2 labels. |
-| `_keep_ordered_run()` | Keeps only numeric labels reading `1, 2, 3, …`, so prose like `"…is 96. 2. Compute"` does not create an item 96. |
-| `_normalize()` | Answer-equality key via `evaluation.gold.normalize_answer`, so repeat detection matches grading. |
+| `repeat_rate` | Did the team cycle on answers it had already tried? `repeats / (attempts + repeats)`. |
+| `items_answered` / `items_unanswered` | How much of the paper did they actually attempt? Blank items score zero. |
+| `items_reviewed` | Did anyone check anyone else's work? |
+| `attempts_recorded` | How much answering happened, independent of coverage. |
+| `distinct_claimers` | Did the team divide the work, or did one agent do everything? |
+| `items_hopeless` | What did the team consciously give up on? |
+| `board_source` | Where the items came from, for debugging a bad board. |
 
-`BoardItem`: `.answer` (latest attempt — the one graded) · `.answered` ·
-`.status()` (`open`/`claimed`/`answered`/`reviewed`/`hopeless`) · `.holder()`
-(claim holder, `None` once stale) · `.snapshot()`.
+Aggregated across a batch as `board_runs`, `mean_board_repeat_rate`,
+`total_board_repeat_attempts`, and `mean_board_answered_fraction`. All reach
+`competition_batch.tsv`, `competition_summary.tsv`, `sheet1_summary.tsv`, and
+`sheet2_detail.tsv`.
 
-`Workboard`: `.from_problem()` (derives a board, or `None` for single-deliverable
-tasks) · `.resolve()` (tolerant item lookup) · `.split_ref()` · `.overview()` ·
-`.detail()` · `.answer_sheet()` · `.claim()` / `.release()` · `.record_answer()` ·
-`.review()` · `.set_priority()` / `.mark_hopeless()` · `.metrics()` · `.snapshot()`.
-
-### New actions
-
-Registered in `CORE_WORKSPACE_ACTIONS` (`src/env.py`), which sits outside
-`TOOL_ACTIONS` — so every contest, schema, and `rules_mode` can use them,
-including the vanilla baseline, with no rule-card declaration.
-
-**Board** (`BOARD_ACTIONS`)
-
-| Action | Payload | Effect |
-|---|---|---|
-| `list_problems` | — | Whole board: status, points, holder, attempts, recorded answer. |
-| `open_problem` | `<item>` | Statement plus complete answer history and reviews. |
-| `claim_problem` | `<item>` | Take an item; one per agent, auto-releases the previous. |
-| `release_problem` | `<item>` | Hand it back. |
-| `submit_problem` | `<item> \| <answer>` | Record an answer. Latest recorded answer is what gets graded. |
-| `verify_problem` | `<item> \| agree\|disagree\|unsure <comment>` | Review a teammate's recorded answer. Cannot review your own sole answer. |
-| `mark_hopeless` | `<item> \| <reason>` or `\| undo` | Flag as not worth more time; item stays on the board. |
-| `set_priority` | `<item> \| high\|normal\|low` | Triage marker. |
-
-**Workspace** (`MEMORY_ACTIONS`, `TEAM_ACTIONS`)
-
-| Action | Payload | Effect |
-|---|---|---|
-| `remember` | `[<item> \|] <note>` | Store a private note, optionally tagged to an item. Returns `M1`. |
-| `recall` | `[<item> \|] <query>` | Search private notes plus team-published ones. |
-| `publish_memory` | `M1, M2` | Share stored notes with the team as `S1`, `S2`. |
-| `check_budget` | — | Turns, API calls, tokens, clock, and how much of the board is blank. |
-| `message_group` | `<names> \| <message>` | Message named teammates only; recipients validated against the roster. |
-
-Three rules make the board more than bookkeeping:
-
-- **Repeats are rejected.** Recording an answer already recorded for that item
-  returns a `Board error:` naming the earlier turn and author, and increments
-  `repeat_attempts` without overwriting.
-- **Different answers are unlimited.** Only the literal no-op is refused.
-- **Claims are enforced**, and expire after 3 idle turns so the board cannot
-  deadlock.
-
-### New environment methods — `src/env.py`
-
-| Method | Purpose |
-|---|---|
-| `register_agents()` | Records the roster so claims, reviews, and direct messages validate against real names. |
-| `board_enabled()` / `board_overview()` / `board_answer_sheet()` | Board accessors for prompts and runners. |
-| `_board_action()` | Dispatches the eight board actions. |
-| `_memory_action()` | Dispatches `remember` / `recall` / `publish_memory`. |
-| `_check_budget()` | Renders the budget report. |
-| `_parse_recipients()` | Parses and validates `message_group` recipients. |
-| `_broadcast_board_event()` | Posts a one-line `[board]` notice to `chat_history` on each mutation. |
-| `_sync_answer_sheet()` | Mirrors recorded answers into `workspace["answer_sheet"]`. |
-| `_resolve_final_payload()` | Backs `submit_final` with the board (see below). |
-| `_board_submission_note()` | Appends unanswered items to the submission result. |
-
-New constants: `BOARD_ACTIONS`, `MEMORY_ACTIONS`, `TEAM_ACTIONS`,
-`CORE_WORKSPACE_ACTIONS`, `PRIVATE_WORKSPACE_ACTIONS`,
-`OPERATIONAL_ERROR_PREFIXES`.
-
-### New metrics
-
-`Workboard.metrics()` → run result `workboard` → batch row → TSV.
-
-| Metric | Row / sheet column | Meaning |
-|---|---|---|
-| `board_source` | — | Which of the three item sources was used. |
-| `items_total` | `board_items` | Items on the board. |
-| `items_answered` | `board_items_answered` / `board_answered` | Items with a recorded answer. |
-| `items_unanswered` | — | Items scoring zero by default. |
-| `items_reviewed` | `board_items_reviewed` / `board_reviewed` | Items with at least one review. |
-| `items_hopeless` | — | Items flagged via `mark_hopeless`. |
-| `attempts_recorded` | `board_attempts` | Distinct answers recorded. |
-| `repeat_attempts_rejected` | `board_repeat_attempts` / `board_repeats` | Attempts refused as already recorded. |
-| `repeat_rate` | `board_repeat_rate` | `repeats / (attempts + repeats)`. |
-| `distinct_claimers` | — | Agents that held a claim; work-division proxy. |
-
-Batch aggregates (`_aggregate_metrics`, `src/run_competition_batch.py`):
-`board_runs`, `mean_board_repeat_rate`, `total_board_repeat_attempts`,
-`mean_board_answered_fraction`.
-
-New helper `_board_row_fields()` flattens board metrics onto each row; columns
-added to `competition_batch.tsv`, `competition_summary.tsv`,
-`sheet1_summary.tsv`, and `sheet2_detail.tsv`.
+`repeat_rate` is the headline. Because the board refuses a repeat rather than
+absorbing it, the count is a direct measure of the behaviour rather than a
+proxy for it.
 
 ### Changed behaviour
 
-**`submit_final` is backed by the board** (`env._resolve_final_payload`). The
-submitter's own answers win; recorded items they dropped are appended under
-`Recorded on the board and not covered above:`; a submission that parses to no
-numbered answers falls back to the board sheet. Without this a synthesizer that
-returned commentary or a stray `ACTION:` line discarded the team's recorded
-work — a run with five correct answers on the board scored zero. The merge lives
-in the environment, so every submission path benefits, including
-`single_agent`, `memory_solo`, `subagent`, and `debate`, which never call
+**`submit_final` is now backed by the board.** Whoever submits keeps authorship
+of their answers, but any item recorded on the board and missing from their
+submission gets appended, and a submission that contains no numbered answers at
+all falls back to the board sheet. Without this the feature was worse than
+useless: a run with five correct answers on the board scored zero, because the
+synthesis step wrote its own answer and discarded everything the team had
+recorded. The merge lives in the environment rather than in the synthesis code,
+so every submission path gets it — including the schemas that never call
 synthesis.
 
-**The 10-character minimum on `submit_final` exempts answer sheets.** That floor
-rejects `"ok"`; `"1. 268"` is a complete submission on a one-item board.
+**The 10-character minimum on `submit_final` no longer rejects short answer
+sheets.** That floor exists to reject `"ok"`; `"1. 268"` is a complete
+submission on a one-item board.
 
-**Phase allowlists implicitly permit reads** (`rules/phases.py`,
-`IMPLICITLY_ALLOWED_ACTIONS`). Rule cards that list `allowed_actions` predate
-these actions and would ban them by omission; reads and personal bookkeeping are
-now exempt, while actions that change shared state stay gated.
+**Contest phase rules no longer block reads.** Rule cards that list permitted
+actions per phase were written before these actions existed and would have
+banned them by omission. Reading the board, checking the budget, and rereading
+your own notes are now always permitted; actions that change shared state are
+still gated by the phase.
 
-**Refused board and memory calls are no-ops, not rule violations.** They stay
-out of `rule_violations` and consume no communication budget.
+**A refused board or memory call is a no-op, not a rule violation.** Asking for
+an item that does not exist is a mistake, not cheating, and should not pollute
+the rule-violation count.
 
-**`MemoryStore` gained per-item scoping and auto-registration**
-(`src/memory.py`): `MemoryItem.problem_ref`, `add(problem_ref=…)`,
-`recall(problem_ref=…)` ranking item-tagged memories first, and agents
-registering on first write.
+### Code
 
-**Prompts carry board state** (`src/collaboration.py`,`src/actions.py`): the
-board overview and group messages appear in the agent prompt, the recorded
-answer sheet appears in the synthesis prompt, and `build_action_instructions()`
-takes `board_item_count` / `workspace_actions` to render
-`WORKBOARD_INSTRUCTIONS` and `WORKSPACE_INSTRUCTIONS`.
-
-### Tests
-
-`tests/test_workboard.py` — 32 tests across board construction (including
-gold-answer leak protection), behaviour, environment integration, and phase
-gating.
+New module `src/workboard.py` holds the board: `Workboard` with its
+`BoardItem`s, each owning its `Attempt`s, `Review`s, claim, and triage flags.
+The actions are dispatched from `src/env.py`; `src/memory.py` gained per-item
+tagging; `src/actions.py` and `src/collaboration.py` put the board into the
+prompts agents actually read. `tests/test_workboard.py` covers it in 32 tests,
+including one asserting that no gold answer can leak through the board.
 
 ---
 
