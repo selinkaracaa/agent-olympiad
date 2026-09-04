@@ -157,12 +157,13 @@ gating.
   measures, contest realism, baselines, CS/IHS metric definitions, the two
   reporting layers, and known limitations.
   [`WORKBOARD_AND_TOOLS.md`](WORKBOARD_AND_TOOLS.md) — workboard reference.
-- **Removed from the repository:** meeting notes, weekly status updates,
-  personal worklogs, and dated plans. They were internal working documents;
-  their technical substance was folded into `BENCHMARK_DESIGN.md`.
+- **Removed from the repository:** meeting notes, weekly status updates, and
+  dated plans. They were internal working documents; their technical substance
+  was folded into `BENCHMARK_DESIGN.md`. Contributor documentation under
+  `docs/from_zhongzheng/` is unaffected.
 - **Renamed:** `scripts/export_shawn_sheet.py` → `scripts/export_results_sheet.py`,
   generated `shawn_sheet/` output directories → `results_sheet/`, and
-  `results/demo_yusen/` → `results/demo_submission/`. Individual names no longer
-  appear in paths or documentation.
+  `results/demo_yusen/` → `results/demo_submission/`, so that generated paths
+  and filenames describe their contents rather than a person.
 - **Fixed:** the per-problem block of `sheet1_summary.tsv` now derives its header
   and body from the same keys, so they cannot drift apart as columns are added.
