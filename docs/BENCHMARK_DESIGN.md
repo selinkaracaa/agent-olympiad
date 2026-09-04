@@ -123,6 +123,21 @@ Team compositions run both **homogeneous** (every seat on one model) and
 
 ## Metrics
 
+Every run reports four families. Task score says whether the answers were
+right; CS and IHS say something about how the team worked; board metrics say
+how it used its time.
+
+| Metric | Range | Answers | Defined in |
+|---|---|---|---|
+| **Task score** | contest scale | Were the answers correct? | [below](#task-score) |
+| **CS** — Coordination Score | 0–5 | Did the team communicate and plan well? | [below](#coordination-score-cs) |
+| **IHS** — Interaction Helpfulness | 0–5 | Did the talking actually improve the answers? | [below](#interaction-helpfulness-score-ihs) |
+| **Board metrics** | counts, 0–1 | How much of the paper was attempted, and did the team repeat itself? | [`WORKBOARD_AND_TOOLS.md`](WORKBOARD_AND_TOOLS.md#metrics) |
+
+CS and IHS are both computed in `src/evaluation/collaboration_score.py`. They
+can disagree, and that disagreement is informative: a team that discusses
+thoroughly but never fixes an answer scores high CS and low IHS.
+
 ### Task score
 
 Contest score from the appropriate evaluator: deterministic gold matching where

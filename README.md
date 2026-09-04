@@ -8,7 +8,7 @@ Benchmark **multi-agent AI teams** on olympiad-style **team tasks**. Part of the
 
 | Doc | Contents |
 |-----|----------|
-| [`docs/BENCHMARK_DESIGN.md`](docs/BENCHMARK_DESIGN.md) | What the benchmark measures, contest realism, baselines, metrics, limitations |
+| [`docs/BENCHMARK_DESIGN.md`](docs/BENCHMARK_DESIGN.md) | What the benchmark measures, contest realism, baselines, the CS / IHS metrics, limitations |
 | [`docs/DATA_COLLECTION.md`](docs/DATA_COLLECTION.md) | What we collected — summary table + format per contest |
 | [`docs/EVALUATION.md`](docs/EVALUATION.md) | PDF-first artifact evaluators, human calibration, and readiness |
 | [`docs/WORKBOARD_AND_TOOLS.md`](docs/WORKBOARD_AND_TOOLS.md) | Per-item workboard and shared-workspace actions — reference and metrics |
