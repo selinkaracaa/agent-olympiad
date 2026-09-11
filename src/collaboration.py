@@ -529,7 +529,7 @@ def _submit_synthesis_response(env, synthesizer: str, response: str) -> int:
             return 0
 
     for action_type, payload in parse_agent_response(response):
-        if action_type == "submit_final":
+        if action_type == "submit":
             text = payload.strip()
             break
 
@@ -620,7 +620,7 @@ def _all_agents_slept(env, agents: list[str], turn: int) -> bool:
         for item in env.action_log
         if item.get("turn") == turn
         and item.get("agent") in agents
-        and item.get("action") == "sleep"
+        and item.get("action") == "rest"
         and not item.get("protocol_error")
     }
     return sleeping_agents == set(agents)
@@ -1454,7 +1454,7 @@ def run_single_agent(env, query_llm_fn: QueryFn, config: CollabConfig | None = N
                 system_prompt=single_agent_system,
                 progress=config.progress,
             )
-            if env.action_log and env.action_log[-1].get("action") == "sleep":
+            if env.action_log and env.action_log[-1].get("action") == "rest":
                 break
         if stop_reason is not None:
             break

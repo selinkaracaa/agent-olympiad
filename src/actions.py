@@ -11,29 +11,38 @@ Respond with ONE of these formats:
 
 Available action types:
 - speak           — broadcast a message to the team
-- write_scratchpad — update the shared working notes
-- sleep           — pass this turn (optional reason in PAYLOAD)
+- work            — record durable shared work
+- rest            — pass this turn (optional reason in PAYLOAD)
 {programming_lines}
-- submit_final    — submit the team's final answer (only when ready)
+- submit          — submit the team's final answer (only when ready)
 {tool_lines}
 {workspace_lines}
 Rules:
 - Use only tools listed as allowed for this contest.
 - Each turn you get at most ONE model call: act, or sleep.
-- submit_final must contain the complete team answer.
+- submit must contain the complete team answer.
 - Be substantive; build on prior discussion."""
+
+COMMON_ACTION_ALIASES = """\
+
+Unified public common-action vocabulary:
+- select_problem / assign_problem
+- inspect_problem / triage_problem
+- direct_message / work
+- remember / recall / share_note
+- request_review / review_answer
+- submit / finish_contest / skip_problem / rest
+"""
 
 WORKBOARD_INSTRUCTIONS = """\
 
 Problem board ({item_count} items — the team's shared answer sheet):
-- list_problems    — every item: status, who is on it, what is recorded
-- open_problem     — PAYLOAD: <item> — the item plus its full answer history
-- claim_problem    — PAYLOAD: <item> — take an item; one per agent at a time
+- inspect_problem  — PAYLOAD: [<item>] — statement and answer history
+- triage_problem   — PAYLOAD: <item> | high|normal|low|hopeless — prioritize an item
+- select_problem   — PAYLOAD: <item> — take an item; one per agent at a time
 - release_problem  — PAYLOAD: <item> — hand it back
-- submit_problem   — PAYLOAD: <item> | <answer> — record an answer
-- verify_problem   — PAYLOAD: <item> | agree|disagree|unsure <comment>
-- mark_hopeless    — PAYLOAD: <item> | <reason>
-- set_priority     — PAYLOAD: <item> | high|normal|low
+- work             — PAYLOAD: <item> | <answer> — record durable work
+- review_answer    — PAYLOAD: <item> | agree|disagree|unsure <comment>
 
 Board rules:
 - Only the latest recorded answer for an item is graded. An item with nothing
@@ -48,9 +57,9 @@ WORKSPACE_INSTRUCTIONS = """\
 Shared workspace:
 - remember       — PAYLOAD: [<item> |] <note> — store a note only you can read
 - recall         — PAYLOAD: [<item> |] <query> — search your notes and the team's
-- publish_memory — PAYLOAD: M1, M2 — share stored notes with the team
+- share_note     — PAYLOAD: M1, M2 — share stored notes with the team
 - check_budget   — turns, tokens, and how much of the board is still blank
-- message_group  — PAYLOAD: <names> | <message> — message named teammates only"""
+- direct_message — PAYLOAD: <names> | <message> — message named teammates only"""
 
 ACTION_BLOCK_RE = re.compile(
     r"^\s*ACTION:\s*(?P<action>[\w_]+)\s*\|\s*PAYLOAD:\s*(?P<payload>.*?)(?=^\s*ACTION:|\Z)",
@@ -109,6 +118,7 @@ def build_action_instructions(
         tool_lines=tool_lines,
         workspace_lines=workspace_lines,
     )
+    rendered += COMMON_ACTION_ALIASES
     additions = []
     if private_notes:
         additions.append(

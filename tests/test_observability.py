@@ -11,6 +11,7 @@ sys.path.insert(0, str(REPO_ROOT / "src"))
 
 from collaboration import _agent_user_prompt
 from env import OlympiadEnvironment
+from contest_budget import MIN_RECOMMENDED_TURNS, resolve_contest_budget
 from run_competition_batch import run_one
 
 
@@ -39,6 +40,49 @@ class AgentObservationTests(unittest.TestCase):
         self.assertEqual(action["result"], result)
         self.assertEqual(action["turn"], 1)
         self.assertEqual(action["visibility"], "private")
+
+    def test_shawn_common_action_aliases_use_existing_handlers(self):
+        env = OlympiadEnvironment("arml_local", "arml_local_2009")
+        env.register_agents(["Agent_1", "Agent_2"])
+        env.begin_turn()
+
+        self.assertIn("claimed", env.execute_action("Agent_1", "select_problem", "1"))
+        self.assertIn("Message sent", env.execute_action(
+            "Agent_1", "direct_message", "Agent_2 | check item 1"
+        ))
+        self.assertIn("sleeps", env.execute_action("Agent_2", "rest", "break"))
+        self.assertEqual(env.to_transcript()["action_log"][-1]["action"], "rest")
+
+    def test_public_work_and_inspect_actions_have_board_semantics(self):
+        env = OlympiadEnvironment("arml_local", "arml_local_2009")
+        env.register_agents(["Agent_1"])
+        env.begin_turn()
+
+        self.assertIn("Recorded", env.execute_action("Agent_1", "work", "1 | 268"))
+        overview = env.execute_action("Agent_1", "inspect_problem", "")
+        self.assertIn("answered 1/10", overview)
+        self.assertEqual(env.to_transcript()["action_log"][0]["action"], "work")
+
+    def test_shared_computer_capacity_is_k_per_turn_without_release(self):
+        env = OlympiadEnvironment(
+            "icpc",
+            "icpc_wf_2012_bottles",
+            rules_mode="enforced",
+        )
+        env.register_agents(["Agent_1", "Agent_2"])
+        env.begin_turn()
+
+        self.assertEqual(env.k, 1)
+        self.assertIn("Code output", env.execute_action("Agent_1", "execute_code", "print(1)"))
+        blocked = env.execute_action("Agent_2", "execute_code", "print(2)")
+        self.assertIn("all 1 computer(s) are occupied", blocked)
+        self.assertEqual(env.get_state()["computers_available_this_turn"], 0)
+
+        env.begin_turn()
+        self.assertIn("Code output", env.execute_action("Agent_2", "execute_code", "print(2)"))
+
+    def test_standard_budget_has_at_least_ten_turns(self):
+        self.assertGreaterEqual(resolve_contest_budget("icpc").max_turns, MIN_RECOMMENDED_TURNS)
 
 
 class TranscriptPersistenceTests(unittest.TestCase):

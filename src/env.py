@@ -79,6 +79,57 @@ COMPETITION_ACTION_REGISTRY = {
     "codeforces": ["submit_code"],
 }
 
+# Shawn's contest-session vocabulary is canonical. Legacy names are accepted
+# at this boundary so old callers and transcripts remain compatible.
+PUBLIC_TO_INTERNAL_ACTIONS = {
+    "select_problem": "claim_problem",
+    "direct_message": "message_group",
+    "work": "write_scratchpad",
+    "inspect_problem": "open_problem",
+    "triage_problem": "list_problems",
+    "share_note": "publish_memory",
+    "assign_problem": "claim_problem",
+    "request_review": "verify_problem",
+    "review_answer": "verify_problem",
+    "submit": "submit_final",
+    "skip_problem": "mark_hopeless",
+    "finish_contest": "submit_final",
+    "rest": "sleep",
+}
+LEGACY_TO_PUBLIC_ACTIONS = {
+    internal: public
+    for public, internal in PUBLIC_TO_INTERNAL_ACTIONS.items()
+}
+LEGACY_TO_PUBLIC_ACTIONS.update(
+    {
+        "submit_problem": "work",
+        "set_priority": "triage_problem",
+        "mark_hopeless": "triage_problem",
+        "release_problem": "release_problem",
+        "list_problems": "inspect_problem",
+        "open_problem": "inspect_problem",
+        "publish_memory": "share_note",
+        "message_group": "direct_message",
+        "write_scratchpad": "work",
+        "submit_final": "submit",
+        "sleep": "rest",
+    }
+)
+
+
+def normalize_action_name(action_type: str) -> tuple[str, str]:
+    """Return the public action name and its current internal handler name."""
+    name = str(action_type or "").strip().lower()
+    if name in PUBLIC_TO_INTERNAL_ACTIONS:
+        return name, PUBLIC_TO_INTERNAL_ACTIONS[name]
+    if name in LEGACY_TO_PUBLIC_ACTIONS:
+        public = LEGACY_TO_PUBLIC_ACTIONS[name]
+        return public, PUBLIC_TO_INTERNAL_ACTIONS.get(public, name)
+    return name, name
+
+COMPUTER_ACTIONS = {"use_calculator", "execute_code"}
+DEFAULT_COMPUTER_CAPACITY = 1
+
 # Per-item board: pick a problem, record an answer, review a teammate's.
 BOARD_ACTIONS = {
     "list_problems",
@@ -122,6 +173,7 @@ ALL_ACTIONS = {
     "read_star_chart",
     "query_rules",
 } | DELIBERATION_ACTIONS | CORE_WORKSPACE_ACTIONS
+ALL_ACTIONS |= set(PUBLIC_TO_INTERNAL_ACTIONS)
 
 TOOL_ACTIONS = ALL_ACTIONS - {
     "speak",
@@ -168,6 +220,7 @@ class OlympiadEnvironment:
         max_api_calls: int | None = None,
         max_output_tokens_per_call: int | None = None,
         max_total_tokens: int | None = None,
+        computer_capacity: int | None = None,
         rules_mode: RulesMode | str = RulesMode.OFF,
         rules_root: str | Path | None = None,
         rules_strict: bool = False,
@@ -241,6 +294,8 @@ class OlympiadEnvironment:
         self.remote_submission_source: str | None = None
         self.rule_violations: list[str] = []
         self.contest_rules = get_contest_rules(competition_id)
+        self.k = self._resolve_computer_capacity(computer_capacity)
+        self.computer_uses_by_turn: dict[int, list[str]] = {}
         self.phase_schedule = (
             PhaseSchedule.from_simulation(self.rule_card.simulation)
             if self.rule_card is not None and self.rules_mode is RulesMode.ENFORCED
@@ -287,6 +342,31 @@ class OlympiadEnvironment:
                 f"range {self.rule_card.team_size_min}-{self.rule_card.team_size_max}."
             )
         self.record_budget_snapshot("initialized")
+
+    def _resolve_computer_capacity(self, explicit_capacity: int | None) -> int:
+        if explicit_capacity is not None:
+            if explicit_capacity < 1:
+                raise ValueError("computer_capacity must be positive")
+            return explicit_capacity
+        if self.rule_card is not None:
+            resources = self.rule_card.resources or {}
+            for key in (
+                "shared_workstation_count",
+                "contest_machine_capacity",
+                "computer_capacity",
+            ):
+                value = resources.get(key)
+                if isinstance(value, int) and value > 0:
+                    return value
+        if self.contest_rules is not None:
+            match = re.search(
+                r"(\d+)\s+(?:shared )?(?:workstation|VMs?|computers?)",
+                self.contest_rules.shared_computers,
+                re.IGNORECASE,
+            )
+            if match:
+                return int(match.group(1))
+        return DEFAULT_COMPUTER_CAPACITY
 
     @staticmethod
     def _resolve_team_size(
@@ -402,6 +482,7 @@ class OlympiadEnvironment:
             "duration_minutes": self.duration_minutes,
             "max_turns": self.max_turns,
             "minutes_per_turn": self.minutes_per_turn,
+            "computer_capacity": self.k,
             **self.rules_metadata(),
         }
         if self.rule_card is not None:
@@ -452,6 +533,14 @@ class OlympiadEnvironment:
                 f"{self.simulated_minutes:g}/{self.duration_minutes} min"
                 if self.duration_minutes is not None
                 else f"{self.simulated_minutes:g} min"
+            ),
+            "computer_capacity": self.k,
+            "computers_used_this_turn": len(
+                self.computer_uses_by_turn.get(self.current_turn, [])
+            ),
+            "computers_available_this_turn": max(
+                0,
+                self.k - len(self.computer_uses_by_turn.get(self.current_turn, [])),
             ),
         }
 
@@ -921,12 +1010,14 @@ class OlympiadEnvironment:
         *,
         metadata: dict[str, Any] | None = None,
     ) -> None:
+        public_action, _ = normalize_action_name(action_type)
         visibility = self._action_visibility(action_type)
         entry = {
             "turn": self.current_turn,
             "agent": agent_name,
             "sender": agent_name,
-            "action": action_type,
+            "action": public_action,
+            "legacy_action": action_type if public_action != action_type else None,
             "payload": payload,
             "result": result,
             "visibility": visibility,
@@ -935,7 +1026,7 @@ class OlympiadEnvironment:
         self.action_log.append(entry)
         observation = {
             "turn": self.current_turn,
-            "action": action_type,
+            "action": public_action,
             "result": result,
             "visibility": visibility,
         }
@@ -955,6 +1046,7 @@ class OlympiadEnvironment:
                 self.agent_observations.setdefault(peer, []).append(observation)
 
     def validate_action(self, action_type: str, agent_name: str | None = None) -> Optional[str]:
+        _, action_type = normalize_action_name(action_type)
         if action_type not in ALL_ACTIONS:
             return f"Unrecognized action '{action_type}'."
         if (
@@ -1016,6 +1108,20 @@ class OlympiadEnvironment:
     ) -> str:
         self.action_count += 1
 
+        public_action, action_type = normalize_action_name(action_type)
+
+        if public_action == "inspect_problem" and not payload.strip():
+            action_type = "list_problems"
+        elif public_action == "work" and "|" in payload and self.workboard is not None:
+            action_type = "submit_problem"
+        elif public_action == "triage_problem" and "|" in payload:
+            _, priority = payload.split("|", 1)
+            action_type = (
+                "mark_hopeless"
+                if priority.strip().lower().startswith("hopeless")
+                else "set_priority"
+            )
+
         violation = self.validate_action(action_type, agent_name)
         if violation:
             self.rule_violations.append(violation)
@@ -1027,6 +1133,17 @@ class OlympiadEnvironment:
                 metadata=metadata,
             )
             return violation
+
+        if action_type in COMPUTER_ACTIONS:
+            used = self.computer_uses_by_turn.setdefault(self.current_turn, [])
+            if len(used) >= self.k:
+                result = (
+                    f"Resource error: all {self.k} computer(s) are occupied this turn; "
+                    "try again next turn."
+                )
+                self._log_action(agent_name, action_type, payload, result, metadata=metadata)
+                return result
+            used.append(agent_name)
 
         max_message_chars = self.communication.max_message_chars
         if (

@@ -228,7 +228,7 @@ class Phase3BaselineTests(unittest.TestCase):
         coach_actions = [
             item for item in env.action_log if item["agent"] == "Coach"
         ]
-        self.assertEqual([item["action"] for item in coach_actions], ["sleep"])
+        self.assertEqual([item["action"] for item in coach_actions], ["rest"])
         self.assertIn("blocked prohibited action", coach_actions[0]["payload"])
 
     def test_open_table_coach_requires_explicit_rule_card_policy(self) -> None:

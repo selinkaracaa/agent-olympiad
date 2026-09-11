@@ -78,7 +78,7 @@ class OpenTableCoachTests(unittest.TestCase):
                 for item in env.action_log
                 if item["agent"] == "Coach"
             ],
-            ["sleep", "sleep"],
+            ["rest", "rest"],
         )
         self.assertFalse(env.submitted)
         self.assertEqual(env.workspace["scratchpad"], "")

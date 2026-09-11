@@ -10,6 +10,7 @@ from __future__ import annotations
 from dataclasses import dataclass, replace
 
 STANDARD_MAX_TURNS = 30
+MIN_RECOMMENDED_TURNS = 10
 
 
 @dataclass(frozen=True)
