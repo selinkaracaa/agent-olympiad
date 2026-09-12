@@ -1,0 +1,143 @@
+# Method — `arml_national_power`
+
+How this benchmark's agents are asked to work. Projected from `data/rules/arml_national_power/collaboration.json`.
+
+## Agent constraints
+
+- Inhabit an eligible national ARML contestant on the frozen 15-person Team/Power roster; do not invent substitutes or borrowed students.
+- Compete as one team writing exactly one Power packet—not as 15 independent papers.
+- Begin with the same contestant permissions as every teammate; do not assume a permanent captain, specialist, or scribe office.
+- Carry eligibility, frozen-roster, device-ban, and one-packet obligations as conscience.
+- Treat private reasoning as unknown to teammates until you communicate it.
+- When teammates disagree on a proof, surface the gap with a counterexample or missing step before it enters the packet.
+- Any contestant may file the packet, but the team files exactly one; extra packets would all be scored and the lowest kept.
+- Match justification depth to the official verbs; do not submit bare answers where determine/find/show/justify/prove is required.
+- Do not use a calculator, electronic device, internet, or outside help, and do not invent a 60-minute Power clock.
+
+## Information / deliberation / communication
+
+```json
+{
+  "information_policy": {
+    "mode": "shared",
+    "shared": [
+      "problem",
+      "contest_rules",
+      "team_discussion",
+      "scratchpad"
+    ],
+    "coordination_requirement": "Contestants receive equal baseline information access, but private reasoning is not silently copied between them; they must communicate discoveries needed by teammates."
+  },
+  "deliberation": {
+    "mode": "structured",
+    "min_challenges": 1,
+    "decision_maker": "submitter",
+    "evaluation_dimensions": [
+      "evidence_responsiveness",
+      "revision_after_challenge",
+      "decision_traceability",
+      "authority_bias",
+      "majority_bias"
+    ]
+  },
+  "communication": {
+    "mode": "limited",
+    "team_message_budget": 30,
+    "per_agent_message_budget": 2,
+    "max_message_chars": 1200,
+    "counted_actions": [
+      "speak",
+      "write_scratchpad",
+      "propose",
+      "challenge",
+      "provide_evidence",
+      "revise",
+      "decide"
+    ]
+  }
+}
+```
+
+## Simulation
+
+```json
+{
+  "max_turns": 35,
+  "scheduler": "src_collaboration_draft",
+  "turn_budget_basis": "official clock 12 turns vs floor 35 (15 teammates x 2 turns + 1 answer parts + 4 for synthesis)",
+  "eligibility_and_logistics_state": "specified_for_role_immersion_not_enforced"
+}
+```
+
+## Rule sections
+
+```json
+{
+  "official_eligibility_and_logistics": [
+    "Official: the Power Round uses the same 15-person (or short-handed) national team; substitutions are closed once Team Round has started.",
+    "Official: electronic devices are collected before Team and returned after Power.",
+    "Simulation choice: eligibility, frozen roster, and device collection are role immersion, not executed logistics."
+  ],
+  "competition_format": [
+    "Official: the Power Round is worth 50 points.",
+    "Official: teams may submit exactly one solution to the Power Question; extra solutions are all scored and the lowest is kept.",
+    "Official: this is the national-meet Power Round, not the separate mail/in-school Power Contest.",
+    "Simulation choice: agents write one shared packet for this sitting only."
+  ],
+  "timeline": [
+    "Official: the ARML/IRML rules page does not establish a Power Round wall-clock duration.",
+    "Simulation choice: do not treat 60 minutes or any other secondary clock as official.",
+    "Simulation choice: max_turns is a safety budget, not an official countdown."
+  ],
+  "resource_policy": [
+    "Official: calculators are not allowed on any ARML part.",
+    "Official: electronic devices are banned; discovery during Team or Power disqualifies the team from that round.",
+    "Official: a book-form dictionary is allowed only for non-native English speakers; electronic translators are not allowed.",
+    "Simulation choice: the only exposed tool is consulting these contest rules."
+  ],
+  "collaboration_protocol": [
+    "Official: the entire team works the Power Question together and files one packet.",
+    "Simulation choice: contestants start as equal peers; temporary lemma-writers or checkers may emerge but are never fixed offices."
+  ],
+  "integrity_and_compliance": [
+    "Official: cheating during Power nullifies that round's score.",
+    "Official: no internet, phones, or outside help.",
+    "Official: extra packets trigger lowest-score assessment.",
+    "Simulation choice: accessing hidden solutions or evaluator internals is a compliance violation."
+  ],
+  "deliverable_format": [
+    "Official: typical Power instructions require a legible, orderly, clear, concise presentation.",
+    "Official: list/compute need not justify; determine/find/show need work or reasoning; justify/prove need rigorous proof.",
+    "Official: earlier numbered items may be used later even if not proved; later items may not be used earlier.",
+    "Official: pages submitted for credit should be numbered in consecutive order on one side only; put the team NUMBER, not the team name, on the cover.",
+    "Simulation choice: the runner accepts one plain-text packet rather than handwritten one-sided pages."
+  ],
+  "evaluation_criteria": [
+    "Official: the Power Round is worth 50 points; typical packets print part values in brackets.",
+    "Official: extra submitted packets are all corrected and the lowest score is kept.",
+    "Simulation choice: this session uses a structured proof rubric as a proxy for official part marking."
+  ],
+  "runtime_limitations": [
+    "Simulation choice: no official Power clock is encoded.",
+    "Simulation choice: handwriting, one-sided paper, cover-sheet anonymity, and device collection are not physically enforced.",
+    "Simulation choice: limited message budgets and structured deliberation are research overlays, not official ARML rules."
+  ],
+  "typical_contest_workflow": [
+    "Simulation choice: map parts and point values, assign proof work, and reuse earlier parts in later ones.",
+    "Simulation choice: synthesize one packet and check verb-required justification before filing."
+  ],
+  "conflict_resolution": [
+    "Simulation choice: proof disagreements are resolved by a missing-step or counterexample argument, not by silent overwrite of the packet."
+  ],
+  "handoff_protocol": [
+    "Simulation choice: a handoff should name the part, claim, proof status, unused earlier results, and remaining gaps."
+  ],
+  "review_protocol": [
+    "Simulation choice: review justification depth against the verb; corrections caused by review should remain observable."
+  ],
+  "emergent_behavior": [
+    "Observe but do not require lemma specialization, packet synthesis, or role rotation.",
+    "Do not reward a permanent scribe, equal speaking time, or message volume by itself."
+  ]
+}
+```

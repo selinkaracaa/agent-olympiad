@@ -1,0 +1,3 @@
+# History
+
+This ruler's desire for musical reform probably spurred the creation of the first musical symbols, "neumes." This ruler promoted education, especially literacy for monks, in documents like the Admonitio generalis. His reign included the birth of what became modern lowercase letters. He made (*) Alcuin of York the head of his court's school in Aachen, bringing about his namesake "Renaissance." His biography was written by Einhard. One of his subordinates was killed at the Battle of Roncevaux Pass and became the star of the Chanson de Roland. For 10 points, name this grandson of Charles Martel, a Carolingian ruler who was crowned "Emperor of the Romans" in 800.

@@ -1,0 +1,136 @@
+{
+  "rubric_id": "arml_national_power_2012_v1",
+  "title": "Power Round \u2014 2012 \u2014 ARML Power sub-problem rubric",
+  "total_points": 50.0,
+  "criteria": [
+    {
+      "id": "problem_03a",
+      "name": "Problem 3a",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 3a (1 pt). Statement: 3. The focus of this Power Question is to determine, given a hideout map and a \ufb01xed number of Cops, whether the Cops can be sure of catching the Robber within some time limit. Map Notation: The following notation may be useful when writing your solutions. For a map M, let h(M) be the number of hideouts and e(M) be the number of edges in M. The safety of a hideout H is the number of hideouts adjacent to H, and is denoted by s(H). 158 Power Question 2012: Cops and Robbers 159 1a. Consider the hideout map M below. B6B5 B4 B3 B2 A B1 Show that one Cop can always catch the Robber."
+    },
+    {
+      "id": "problem_03b",
+      "name": "Problem 3b",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 3b (2 pts). Statement: The Cop number of a mapM, denotedC(M), is the minimum number of Cops required to guarantee that the Robber is caught. In 1a, you have shown that C(M) = 1. 1b. The map shown below is C6, the cyclic graph with six hideouts. Show that three Cops are su\ufb03cient to catch the Robber on C6, so that C(C6)\u2264 3."
+    },
+    {
+      "id": "problem_03c",
+      "name": "Problem 3c",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 3c (2 pts). Statement: A6A5 A4 A3 A2 A1 1c. Show that for all maps M, C(M)<h (M)."
+    },
+    {
+      "id": "problem_03d",
+      "name": "Problem 3d",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 3d (2 pts). Statement: 2a. Find C(M) for the map below."
+    },
+    {
+      "id": "problem_03e",
+      "name": "Problem 3e",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 3e (2 pts). Statement: A2 A3 A4 A5 A6 A1A7 2b. Show that C(M)\u2264 3 for the map below."
+    },
+    {
+      "id": "problem_03f",
+      "name": "Problem 3f",
+      "max_score": 3.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 3f (3 pts). Statement: D A J G C L I F B H K E 160 Power Question 2012: Cops and Robbers 2c. Generalize the result of 2a: if Kn is a map with n hideouts in which every hideout is adjacent to every other hideout (also called the complete map on n hideouts), determine C(Kn)."
+    },
+    {
+      "id": "problem_03g",
+      "name": "Problem 3g",
+      "max_score": 4.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 3g (4 pts). Statement: ber of days required to guarantee a capture using c Cops. For example, in the graph from 1b, if three Cops are deployed, they might catch the Robber in the \ufb01rst day, but if they don\u2019t, there is a strategy that will guarantee they will capture the Robber within two days. Therefore the capture time is D(C6, 3) = 2. 3. A path on n hideouts is a map with n hideouts, connected in one long string. (More formally, a map is a path if and only if two hideouts are adjacent to exactly one hideout each and all other hideouts are adjacent to exactly two hideouts each.) It is denoted by Pn. The maps P3 throughP6 are shown below. A6A5A4A3A2 A5A4A3A2 A4A3A2 A3 A1 A2 A1 A1 A1 Show that D(Pn, 1)\u2264 2n for n\u2265 3."
+    },
+    {
+      "id": "problem_04a",
+      "name": "Problem 4a",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 4a (2 pts). Statement: 4. A cycle on n hideouts is a map with n hideouts, connected in one loop. (More formally, a map is a cycle if every hideout is adjacent to exactly two hideouts.) It is denoted by Cn. The mapsC3 throughC6 are shown below. A2 A3 A5 A4 A6 A3 A4 A5 A2 A1A1 A4 A2 A3 A3 A2 A1A1 a. Determine C(Cn) for n\u2265 3. (Note that this is determine and not compute.)"
+    },
+    {
+      "id": "problem_04b",
+      "name": "Problem 4b",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 4b (2 pts). Statement: b. Show that D(Cn,C (Cn))< 3n 2 for n\u2265 3."
+    },
+    {
+      "id": "problem_05",
+      "name": "Problem 5",
+      "max_score": 4.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 5 (4 pts). Statement: 5. Determine W (M) for each of the maps in problem 2a and 2b."
+    },
+    {
+      "id": "problem_06",
+      "name": "Problem 6",
+      "max_score": 6.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 6 (6 pts). Statement: 6. Let M be a map with n\u2265 3 hideouts. Prove that 2 \u2264 W (M)\u2264 n, and that these bounds cannot be improved. In other words, prove that for each n\u2265 3, there exist maps M1 and M2 such that W (M1) = 2 and W (M2) =n."
+    },
+    {
+      "id": "problem_07a",
+      "name": "Problem 7a",
+      "max_score": 3.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 7a (3 pts). Statement: 7a. Prove that if M is bipartite, then C(M)\u2264n/2."
+    },
+    {
+      "id": "problem_07b",
+      "name": "Problem 7b",
+      "max_score": 3.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 7b (3 pts). Statement: 7b. Prove that C(M)\u2264n/2 for any map M with the property that, for all hideouts H1 and H2, either all paths from H1 to H2 contain an odd number of edges, or all paths from H1 to H2 contain an even number of edges."
+    },
+    {
+      "id": "problem_08",
+      "name": "Problem 8",
+      "max_score": 4.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 8 (4 pts). Statement: 8. A map M is called k-perfect if its hideout set H can be partitioned into equal-sized subsets A1,A2,..., Ak such that for anyj, the hideouts ofAj are only adjacent to hideouts inAj+1 or Aj\u22121. (The indices are taken modulo k: the hideouts of A1 may be adjacent to the hideouts ofAk.) Show that if M is k-perfect, then C(M)\u2264 2n k ."
+    },
+    {
+      "id": "problem_09",
+      "name": "Problem 9",
+      "max_score": 5.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 9 (5 pts). Statement: 9. Find an example of a map M with 2012 hideouts such that C(M) = 17 and W (M) = 34, or prove that no such map exists."
+    },
+    {
+      "id": "problem_10",
+      "name": "Problem 10",
+      "max_score": 5.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 10 (5 pts). Statement: 10. Find an example of a map M with 4 or more hideouts such that W (M) = 3, or prove that no such map exists."
+    }
+  ],
+  "not_observable_from_deck": [
+    "oral defense",
+    "diagrams that were not recovered from the source PDF"
+  ],
+  "provenance": {
+    "competition_id": "arml_national_power",
+    "problem_id": "arml_national_power_2012",
+    "year": 2012,
+    "source_file": "data/raw/arml_national/ARML_2009_2014.pdf",
+    "solution_file": null,
+    "official_total_points": 50.0,
+    "parsed_total_points": 50.0,
+    "points_coverage": 1.0,
+    "awards_parsed": 16,
+    "problems_parsed": 8,
+    "derived_by": "scripts/build_arml_power_rubrics.py"
+  }
+}

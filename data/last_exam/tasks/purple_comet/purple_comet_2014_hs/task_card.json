@@ -1,0 +1,33 @@
+{
+  "task_id": "purple_comet/purple_comet_2014_hs",
+  "competition_id": "purple_comet",
+  "problem_id": "purple_comet_2014_hs",
+  "title": "Purple Comet 2014 — High School",
+  "year": 2014,
+  "team_size": 6,
+  "source_url": "https://purplecomet.org/files/2014HS_English.pdf",
+  "inherits_competition_pack": "competitions/purple_comet",
+  "rule_card": "data/rules/purple_comet",
+  "input": {
+    "visibility": "agent_at_start",
+    "files": [
+      {
+        "name": "problem.md",
+        "path": "base/input/problem.md"
+      },
+      {
+        "name": "purple_comet_hs_2014.pdf.path",
+        "path": "base/input/purple_comet_hs_2014.pdf.path"
+      }
+    ]
+  },
+  "method": {
+    "visibility": "agent_at_start",
+    "path": "competitions/purple_comet/method"
+  },
+  "eval": {
+    "visibility": "hidden_until_grade",
+    "path": "eval/reference.json",
+    "competition_eval": "competitions/purple_comet/eval"
+  }
+}

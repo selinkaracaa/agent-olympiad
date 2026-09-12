@@ -1,0 +1,17 @@
+{
+  "competition_id": "science_bowl",
+  "crawled_at": "2026-08-11T16:10:45.889788+00:00",
+  "sources": [
+    {
+      "title": "NSB Regional Competition Resources",
+      "url": "https://science.osti.gov/wdts/nsb/Regional-Competitions/Resources",
+      "status": "ok",
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 219520,
+      "raw_file": "data/rules/sources/science_bowl/01_Resources.html",
+      "text_file": "data/rules/sources/science_bowl/01_Resources.txt",
+      "text_chars": 8636,
+      "text_preview": "﻿\r\n \r\n \r\n \r\n \r\n \r\n \r\n \r\n \r\n \r\n \r\n\r\n\r\n NSB Rules, Forms, and Resources | U.S. DOE Office of Science (SC) \r\n \r\n\r\n\r\n \r\n\r\n \r\n \r\n\r\n\r\n \r\n \r\n\r\n\r\n \r\n \r\n \r\n\r\n\r\n \r\n\r\n\r\n \r\n \r\n \r\n \r\n \r\n \r\n \r\n \r\n \r\n \r\n \r\n \r\n \r\n \r\n \r\n \r\n \r\n \r\n \r\n \r\n \r\n \r\n \r\n \r\n \r\n \r\n \r\n \r\n \r\n \r\n \r\n \r\n \r\n \r\n \r\n \r\n \r\n \r\n\r\n \r\n \r\n \r\n \r\n \r\n \r\n \r\n \r\n \r\n\r\n \r\n \r\n \r\n \r\n\r\n \r\n \r\n Javascript is currently disabled in your browser. Please enable Javascript, or use an alternative browser.\n\n\r\n \r\n \r\n \r\n \r\n \r\n \r\n \r\n \r\n \r\n \r\n \r\n \r\n \r\n An official website of the United States government\r\n \n\n\r\n Here’s how you know\n\n\r\n \r\n \r\n Here’s how you know \r\n \r\n \r\n \r\n \r\n \r\n \r\n \r\n \r\n \r\n Official websites use .gov \nA\r\n .gov website belongs to an official government organization in the United States.\r\n \n\n\r\n \r\n \r\n \r\n \r\n \r\n \r\n Secure .gov websites use HTTPS \nA\r\n lock (\r\n \r\n \r\n Lock \r\n Locked padlock icon \r\n \r\n \r\n ) or https:// means you’ve safely connected to\r\n the .gov website. Share sensitive information only on official,\r\n secure websites.\r\n \n\n\r\n \r\n \r\n \r\n \r\n \r\n \r\n \r\n \r\n Skip to content \r\n \r\n \r\n \r\n \r\n \r\n U.S. Department of Energy Office of Science \r\n \r\n \r\n \r\n \r\n \r\n \r\n \r\n \r\n \r\n \r\n \r\n\r\n \r\n\r\n\r\n \r\n \r\n \r\n \r\n \r\n \r\n \r\n \r\n \r\n\r\n \r\n \r\n \r\n \r\n\r\n\r\n\r\n \r\n \r\n \r\n \r\n \r\n \r\n \r\n \r\n \r\n \r\n \r\n\r\n \r\n \r\n \r\n\r\n \r\n\r\n \r\n\r\n \r\n \r\n \r\n\r\n \r\n \r\n Main Navigation \r\n \r\n \r\n \r\n \r\n Home \r\n \r\n \r\n About \r\n \r\n \r\n Organization \r\n \r\n \r\n Budget \r\n \r\n \r\n Field Operations \r\n \r\n \r\n Federal Advisory Committee \r\n \r\n \r\n Scientific and Technical Information \r\n \r\n \r\n History \r\n \r\n \r\n Honors & Awards \r\n \r\n \r\n Jobs \r"
+    }
+  ]
+}

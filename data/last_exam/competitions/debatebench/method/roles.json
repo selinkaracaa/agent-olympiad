@@ -1,0 +1,78 @@
+{
+  "source": "data/rules/debatebench/collaboration.json#agent_roles",
+  "information_policy": "shared",
+  "roles": [
+    {
+      "name": "Agent_1",
+      "title": "Opening Government Prime Minister",
+      "may_submit": true,
+      "duties": [
+        "Define the motion when necessary and establish Opening Government's case.",
+        "Prepare only with Agent_2."
+      ]
+    },
+    {
+      "name": "Agent_2",
+      "title": "Opening Government Deputy Prime Minister",
+      "may_submit": true,
+      "duties": [
+        "Defend and extend the opening government case while rebutting Opening Opposition.",
+        "Prepare only with Agent_1."
+      ]
+    },
+    {
+      "name": "Agent_3",
+      "title": "Opening Opposition Leader of Opposition",
+      "may_submit": true,
+      "duties": [
+        "Answer the government definition and establish Opening Opposition's case.",
+        "Prepare only with Agent_4."
+      ]
+    },
+    {
+      "name": "Agent_4",
+      "title": "Opening Opposition Deputy Leader of Opposition",
+      "may_submit": true,
+      "duties": [
+        "Defend and extend the opening opposition case while rebutting Opening Government.",
+        "Prepare only with Agent_3."
+      ]
+    },
+    {
+      "name": "Agent_5",
+      "title": "Closing Government Member of Government",
+      "may_submit": true,
+      "duties": [
+        "Present a distinct closing-government extension and engage prior speeches.",
+        "Prepare only with Agent_6."
+      ]
+    },
+    {
+      "name": "Agent_6",
+      "title": "Closing Government Government Whip",
+      "may_submit": true,
+      "duties": [
+        "Compare the debate and explain why Closing Government ranks first without adding a new substantive argument.",
+        "Prepare only with Agent_5."
+      ]
+    },
+    {
+      "name": "Agent_7",
+      "title": "Closing Opposition Member of Opposition",
+      "may_submit": true,
+      "duties": [
+        "Present a distinct closing-opposition extension and engage prior speeches.",
+        "Prepare only with Agent_8."
+      ]
+    },
+    {
+      "name": "Agent_8",
+      "title": "Closing Opposition Opposition Whip",
+      "may_submit": true,
+      "duties": [
+        "Compare the debate and explain why Closing Opposition ranks first without adding a new substantive argument.",
+        "Prepare only with Agent_7."
+      ]
+    }
+  ]
+}

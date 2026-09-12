@@ -1,0 +1,15 @@
+{
+  "competition_id": "purple_comet",
+  "rule_id": "purple_comet:official_shared_answer",
+  "profile": "non_comparable",
+  "protocol": "shared_answer",
+  "visibility": {
+    "agent_at_start": [
+      "input",
+      "method"
+    ],
+    "hidden_until_grade": [
+      "eval"
+    ]
+  }
+}

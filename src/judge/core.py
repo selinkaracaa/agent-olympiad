@@ -12,7 +12,7 @@ from .models import (
     TestScope,
 )
 from .package import load_problem_package
-from .runners import BackendUnavailable, DockerProgrammingJudge, NativePythonRunner
+from .runners import BackendUnavailable, DockerProgrammingJudge, DockerPythonRunner, NativePythonRunner
 
 _VERDICT_ORDER = {
     "AC": 0,
@@ -131,11 +131,14 @@ def run_submission(
     source: str,
     language: str,
     test_scope: TestScope | str,
+    *,
+    trusted_python: bool = False,
 ) -> JudgeResult:
     """Run source against exactly one package scope.
 
-    Python is a trusted host-only smoke backend. C++17 always uses Docker and
-    fails closed when Docker is unavailable.
+    Agent Python and C++17 use Docker and fail closed when it is unavailable.
+    Only callers explicitly providing trusted_python=True may run trusted
+    fixture source on the host; benchmark adapters never set that flag.
     """
     loaded = (
         load_problem_package(package)
@@ -183,7 +186,7 @@ def run_submission(
             grading_scope_label="official-secret" if scope == "secret" else "sample-only",
         )
     if canonical_language == "python3":
-        runner = NativePythonRunner()
+        runner = NativePythonRunner() if trusted_python else DockerPythonRunner()
         cases, compile_output = runner.run(loaded, source, tests)
         return build_result(
             loaded,

@@ -1,0 +1,87 @@
+Hide 
+ Takeover Wars 
+
+ You are studying a takeover war between two large
+ corporations, Takeover Incorporated and Buyout Limited. Each of
+ these corporations controls a number of subsidiaries. The aim
+ in this war is simply to drive the competition out of the
+ market. There are $N$ 
+ subsidiaries of Takeover Incorporated and $M$ subsidiaries of Buyout Limited,
+ and you know the market value of each subsidiary. 
+
+ Each company can designate one of its subsidiaries to
+ perform a takeover. The takeover can either be friendly or
+ hostile. A friendly takeover means a subsidiary of a
+ corporation merges with a different subsidiary of the same
+ corporation. The market value of the merged subsidiary is the
+ sum of the market values of the constituent subsidiaries. There
+ is no constraint on the relative sizes of the subsidiaries
+ participating in a friendly takeover. 
+
+ A hostile takeover means a subsidiary $A$ of a corporation attempts to take
+ over a subsidiary $B$ of
+ the other corporation. For this to succeed, the market value of
+ $A$ has to be greater than
+ the market value of $B$ .
+ After this move, $B$ 
+ disappears from the market. The market value of $A$ does not change (the gain of
+ incorporating $B$ ’s assets
+ is offset by the monetary cost of the takeover). For simplicity
+ we assume that no sequence of moves leads to two subsidiaries
+ of different corporations having the same market value. 
+
+ The companies take turns making moves in this takeover war,
+ with Takeover Incorporated going first. A company will do
+ nothing on its turn only if it cannot make a takeover. A
+ company loses the takeover war if all its subsidiaries are
+ taken over. 
+
+ Your aim is to learn which company can guarantee a victory
+ from this war. In the first case of the sample data, Takeover
+ Incorporated can simply take over one of the companies of
+ Buyout Limited in its first move with the 7-value subsidiary.
+ Then it will lose one of its small (1-value) subsidiaries to a
+ hostile takeover, and then it will take over the second
+ subsidiary of Buyout Limited. In the second case, Takeover has
+ to make a friendly takeover in its first move. Buyout Limited
+ will join its two subsidiaries into a single company with
+ market value 10. Takeover will have to make a friendly takeover
+ again (as again it will not have a large enough subsidiary to
+ take over Buyout’s giant). Now Takeover will have two
+ subsidiaries, valued either 9 and 3 or 6 and 6. In either case,
+ Buyout takes over one of these subsidiaries, Takeover has to
+ pass, and Buyout takes over the other one. 
+
+ Input 
+
+ Each test case is described by three lines of input. The
+ first line contains two numbers $1\leq N \leq 10^5$ and $1\leq M\leq 10^5$ denoting
+ respectively the number of subsidiaries of Takeover
+ Incorporated and Buyout Limited. The next line lists the
+ $N$ sizes $a_ i$ of the subsidiaries of Takeover
+ Incorporated ( $1 \leq a_ i \leq
+ 10^{12}$ ), and the third line lists the $M$ sizes $b_ j$ of the subsidiaries of Buyout
+ Limited ( $1\leq b_ j\leq
+ 10^{12}$ ). 
+
+ Output 
+
+ For each test case, display the case number and either the
+ phrase Takeover Incorporated or the phrase
+ Buyout   Limited 
+ depending on who wins the takeover war if both corporations act
+ optimally. 
+
+ Sample Input 1 
+
+ Sample Output 1 
+
+3 2
+7 1 1
+5 5
+4 2
+3 3 3 3
+5 5
+
+Case 1: Takeover Incorporated
+Case 2: Buyout Limited

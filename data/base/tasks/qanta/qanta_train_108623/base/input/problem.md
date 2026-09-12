@@ -1,0 +1,3 @@
+# Literature
+
+The title character of one play by this author uses the money from his failed nightclub Walden Pond to start a newspaper which is said to endorse "no one," though he is later encouraged to support Wally O'Hara. In another of this author's plays, a woman is told that straightening her hair is "mutilation." In that play by this author, both George Murchison and Joseph (*) Asagai compete for the affection of Benethea. Karl Lidner attempts to bribe the Younger family to prevent them from moving to an all-white neighborhood in Chicago in this author's most famous play. For 10 points, name this author of The Sign in Sidney Brustein's Window and A Raisin in the Sun.

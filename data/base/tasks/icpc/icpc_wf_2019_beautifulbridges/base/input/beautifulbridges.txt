@@ -1,0 +1,103 @@
+Hide 
+ Beautiful Bridges 
+
+ Example of a Roman arch bridge. Source: 
+ Wikimedia Commons 
+
+ What connects us all? Well, it is often bridges. Since
+ ancient times, people have been building bridges for roads, for
+ trains, for pedestrians, and as aqueducts to transport water.
+ It is humanity’s way of not taking inconvenient geography for
+ an answer.
+ The company Arch Bridges Construction (ABC) specializes
+ in—you guessed it—the construction of arch bridges. This
+ classical style of bridge is supported by pillars that extend
+ from the ground below the bridge. Arches between pillars
+ distribute the bridge’s weight onto the adjacent pillars. 
+ The bridges built by ABC often have pillars spaced at
+ irregular intervals. For aesthetic reasons, ABC’s bridges
+ always have semicircular arches, as illustrated in Figure 1.
+ However, while a bridge arch can touch the ground, it cannot
+ extend below the ground. This makes some pillar placements
+ impossible. 
+
+ (a) Consecutive
+ pillars at distance $d$ 
+ are connected by a semicircular 
+ arch with radius $r =
+ d/2$ . 
+
+ (b) An invalid
+ pillar placement 
+ (arches cannot extend below ground). 
+
+ (c) A bridge
+ corresponding to 
+ Sample Input 1. 
+
+ Figure 1 : Bridge examples.
+
+ Given a ground profile and a desired bridge height
+ $h$ , there are usually
+ many ways of building an arch bridge. We model the ground
+ profile as a piecewise-linear function described by
+ $n$ key points
+ $(x_1, y_1), (x_2, y_2), \ldots ,
+ (x_ n, y_ n)$ , where the $x$ -coordinate of a point is the
+ position along the bridge, and the $y$ -coordinate is the elevation of the
+ ground above sea level at this position along the bridge. The
+ first and last pillars must be built at the first and last key
+ points, and any intermediate pillars can be built only at these
+ key points. The cost of a bridge is the cost of its pillars
+ (which is proportional to their heights) plus the cost of its
+ arches (which is proportional to the amount of material used).
+ So a bridge with $k$ 
+ pillars of heights $h_1, \dots ,
+ h_ k$ that are separated by horizontal distances
+ $d_1, \dots , d_{k-1}$ has
+ a total cost of \[ \alpha
+ \cdot \sum _{i=1}^ k h_ i + \beta \cdot \sum _{i=1}^{k-1} d_
+ i^2 \] 
+ for some given constants $\alpha $ and $\beta $ . ABC wants to construct each
+ bridge at the lowest possible cost. 
+ Input 
+ The first line of input contains four integers $n$ , $h$ , $\alpha $ , and $\beta $ , where $n$ ( $2
+ \le n \le 10^4$ ) is the number of points describing the
+ ground profile, $h$ 
+ ( $1 \le h \le 10^5$ ) is
+ the desired height of the bridge above sea level, and
+ $\alpha $ , $\beta $ ( $1 \le \alpha , \beta \le 10^4$ ) are
+ the cost factors as described earlier. Then follow $n$ lines, the $i^{\text {th}}$ of which contains two
+ integers $x_ i$ ,
+ $y_ i$ ( $0 \le x_1 < x_2 < \ldots < x_ n \le
+ 10^5$ and $0 \le y_ i <
+ h$ ), describing the ground profile. 
+ Output 
+ Output the minimum cost of building a bridge from horizontal
+ position $x_1$ to
+ $x_ n$ at height
+ $h$ above sea level. If it
+ is impossible to build any such bridge, output impossible . 
+
+ Sample Input 1 
+ Sample Output 1 
+
+ 5 60 18 2
+0 0
+20 20
+30 10
+50 30
+70 20
+
+ 6460
+
+ Sample Input 2 
+ Sample Output 2 
+
+ 4 10 1 1
+0 0
+1 9
+9 9
+10 0
+
+ impossible

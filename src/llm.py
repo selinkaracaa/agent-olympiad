@@ -1,11 +1,12 @@
 import base64
 import io
+import json
 import os
 import re
 import time
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any, Callable, Optional
+from typing import Any, Callable, Literal, Optional
 
 from pypdf import PdfReader, PdfWriter
 
@@ -22,12 +23,21 @@ class LLMAttachment:
 
 
 @dataclass(frozen=True)
+class LLMToolCall:
+    name: str
+    arguments: dict[str, Any]
+    call_id: str = ""
+
+
+@dataclass(frozen=True)
 class LLMRequest:
     system_prompt: str
     user_prompt: str
     attachments: tuple[LLMAttachment, ...] = ()
     purpose: str = "generation"
     metadata: dict[str, Any] = field(default_factory=dict)
+    tools: tuple[dict[str, Any], ...] = ()
+    tool_choice: Literal["auto", "required", "none"] = "auto"
 
 
 @dataclass
@@ -36,9 +46,72 @@ class LLMResponse:
     provider: str
     model: str
     usage: dict[str, Any] = field(default_factory=dict)
+    tool_calls: tuple[LLMToolCall, ...] = ()
 
 
 RequestFn = Callable[[LLMRequest], LLMResponse]
+
+ActionTransport = Literal["native", "emulated", "prompt_json"]
+
+
+@dataclass(frozen=True)
+class ProviderCapabilities:
+    """Provider features that affect how agent actions are transported."""
+
+    native_tools: bool = False
+    emulated_tools: bool = False
+    json_schema: bool = False
+    token_usage: bool = False
+    attachments: bool = False
+
+    @property
+    def action_transport(self) -> ActionTransport:
+        if self.native_tools:
+            return "native"
+        if self.emulated_tools:
+            return "emulated"
+        return "prompt_json"
+
+
+_PROVIDER_CAPABILITIES: dict[str, ProviderCapabilities] = {
+    "perplexity": ProviderCapabilities(
+        native_tools=True,
+        token_usage=True,
+        attachments=True,
+    ),
+    "pplx": ProviderCapabilities(
+        native_tools=True,
+        token_usage=True,
+        attachments=True,
+    ),
+    "openai": ProviderCapabilities(
+        native_tools=True,
+        token_usage=True,
+        attachments=True,
+    ),
+    "oai": ProviderCapabilities(
+        native_tools=True,
+        token_usage=True,
+        attachments=True,
+    ),
+    # Tinker 0.26 exposes plain sampling but no tools/JSON-schema parameter.
+    # Its adapter therefore renders the same schemas into the prompt, validates
+    # the sampled call, and performs bounded repair attempts.
+    "tinker": ProviderCapabilities(emulated_tools=True),
+    "tml": ProviderCapabilities(emulated_tools=True),
+}
+
+
+def provider_capabilities(provider: str) -> ProviderCapabilities:
+    """Return explicit capabilities instead of branching on provider names."""
+    return _PROVIDER_CAPABILITIES.get(
+        provider.lower().strip(),
+        ProviderCapabilities(),
+    )
+
+
+def provider_action_transport(provider: str) -> ActionTransport:
+    return provider_capabilities(provider).action_transport
 
 
 def _attachment_bytes(attachment: LLMAttachment) -> bytes:
@@ -95,10 +168,41 @@ def _response_output_text(data: dict[str, Any]) -> str:
                 chunks.append(str(content["text"]))
     if chunks:
         return "\n".join(chunks)
+    if any(item.get("type") == "function_call" for item in data.get("output", [])):
+        return ""
     return str(data)
 
 
-def make_openai_responses_caller(model: str = "gpt-4.1") -> RequestFn:
+def parse_response_tool_calls(data: dict[str, Any]) -> tuple[LLMToolCall, ...]:
+    """Parse provider responses using the OpenAI Responses function-call shape."""
+    calls: list[LLMToolCall] = []
+    for item in data.get("output", []):
+        if item.get("type") != "function_call":
+            continue
+        raw_arguments = item.get("arguments", {})
+        if isinstance(raw_arguments, str):
+            try:
+                arguments = json.loads(raw_arguments)
+            except json.JSONDecodeError as exc:
+                raise ValueError("Function-call arguments are not valid JSON.") from exc
+        else:
+            arguments = raw_arguments
+        if not isinstance(arguments, dict):
+            raise ValueError("Function-call arguments must decode to an object.")
+        name = str(item.get("name") or "").strip()
+        if not name:
+            raise ValueError("Function call is missing its name.")
+        calls.append(
+            LLMToolCall(
+                name=name,
+                arguments=arguments,
+                call_id=str(item.get("call_id") or item.get("id") or ""),
+            )
+        )
+    return tuple(calls)
+
+
+def make_openai_responses_caller(model: str = "gpt-4.1", *, max_output_tokens: int = 8192) -> RequestFn:
     """Create a file-capable OpenAI Responses API caller (PDF + images)."""
     api_key = os.environ.get("OPENAI_API_KEY")
     if not api_key:
@@ -109,10 +213,17 @@ def make_openai_responses_caller(model: str = "gpt-4.1") -> RequestFn:
     client = OpenAI(api_key=api_key)
 
     def call(request: LLMRequest) -> LLMResponse:
+        kwargs: dict[str, Any] = {
+            "model": model,
+            "instructions": request.system_prompt,
+            "max_output_tokens": max_output_tokens,
+            "input": [{"role": "user", "content": _openai_style_content(request)}],
+        }
+        if request.tools:
+            kwargs["tools"] = list(request.tools)
+            kwargs["tool_choice"] = request.tool_choice
         response = client.responses.create(
-            model=model,
-            instructions=request.system_prompt,
-            input=[{"role": "user", "content": _openai_style_content(request)}],
+            **kwargs,
         )
         usage = {}
         if getattr(response, "usage", None):
@@ -123,6 +234,7 @@ def make_openai_responses_caller(model: str = "gpt-4.1") -> RequestFn:
             provider="openai",
             model=model,
             usage=usage,
+            tool_calls=parse_response_tool_calls(response.model_dump()),
         )
 
     return call
@@ -130,6 +242,9 @@ def make_openai_responses_caller(model: str = "gpt-4.1") -> RequestFn:
 
 def make_perplexity_responses_caller(
     model: str = "openai/gpt-5.4",
+    *,
+    max_output_tokens: int = 16000,
+    temperature: float = 0.2,
 ) -> RequestFn:
     """Perplexity Agent API caller with multi-image (and optional PDF) attachments.
 
@@ -158,8 +273,12 @@ def make_perplexity_responses_caller(
         payload = {
             "model": model,
             "input": [{"role": "user", "content": content}],
-            "max_output_tokens": 16000,
+            "max_output_tokens": max_output_tokens,
+            "temperature": temperature,
         }
+        if request.tools:
+            payload["tools"] = list(request.tools)
+            payload["tool_choice"] = request.tool_choice
         last_error: Exception | None = None
         for attempt in range(max_retries):
             try:
@@ -182,6 +301,7 @@ def make_perplexity_responses_caller(
                     provider="perplexity",
                     model=model,
                     usage=usage,
+                    tool_calls=parse_response_tool_calls(data),
                 )
             except requests.exceptions.SSLError as exc:
                 last_error = RuntimeError(
@@ -205,13 +325,144 @@ def make_perplexity_responses_caller(
     return call
 
 
+def _json_objects(text: str) -> list[Any]:
+    """Decode JSON values embedded in fences or provider-specific tags."""
+    cleaned = (text or "").strip()
+    cleaned = re.sub(r"^```(?:json)?\s*", "", cleaned, flags=re.IGNORECASE)
+    cleaned = re.sub(r"\s*```$", "", cleaned)
+    cleaned = cleaned.replace("<tool_call>", "").replace("</tool_call>", "")
+    decoder = json.JSONDecoder()
+    values: list[Any] = []
+    for index, char in enumerate(cleaned):
+        if char not in "[{":
+            continue
+        try:
+            value, _ = decoder.raw_decode(cleaned[index:])
+        except json.JSONDecodeError:
+            continue
+        values.append(value)
+    return values
+
+
+def _coerce_emulated_tool_call(text: str) -> LLMToolCall:
+    """Parse common JSON tool-call shapes emitted by open-weight models."""
+    values = _json_objects(text)
+    if not values:
+        raise ValueError("response contains no JSON tool-call object")
+    value = values[0]
+    if isinstance(value, list):
+        if len(value) != 1:
+            raise ValueError("response must contain exactly one tool call")
+        value = value[0]
+    if not isinstance(value, dict):
+        raise ValueError("tool call must be a JSON object")
+    function = value.get("function")
+    if isinstance(function, dict):
+        value = function
+    name = value.get("name", value.get("action"))
+    arguments = value.get("arguments", value.get("parameters"))
+    if not isinstance(name, str) or not name.strip():
+        raise ValueError("tool call is missing a string name")
+    if isinstance(arguments, str):
+        try:
+            arguments = json.loads(arguments)
+        except json.JSONDecodeError as exc:
+            raise ValueError("tool-call arguments are not valid JSON") from exc
+    if not isinstance(arguments, dict):
+        raise ValueError("tool-call arguments must be a JSON object")
+    return LLMToolCall(name=name.strip(), arguments=arguments)
+
+
+_JSON_TYPES: dict[str, type[Any] | tuple[type[Any], ...]] = {
+    "string": str,
+    "integer": int,
+    "number": (int, float),
+    "boolean": bool,
+    "object": dict,
+    "array": list,
+}
+
+
+def _validate_emulated_tool_call(
+    call: LLMToolCall,
+    tools: tuple[dict[str, Any], ...],
+) -> str | None:
+    """Validate one emulated call against the provider-neutral tool schemas."""
+    by_name = {str(tool.get("name") or ""): tool for tool in tools}
+    tool = by_name.get(call.name)
+    if tool is None:
+        return (
+            f"tool {call.name!r} is unavailable; choose exactly one of "
+            f"{sorted(name for name in by_name if name)}"
+        )
+    schema = tool.get("parameters") or {}
+    properties = schema.get("properties") or {}
+    required = set(schema.get("required") or ())
+    missing = sorted(required - set(call.arguments))
+    if missing:
+        return f"tool {call.name!r} is missing required arguments {missing}"
+    if schema.get("additionalProperties") is False:
+        extras = sorted(set(call.arguments) - set(properties))
+        if extras:
+            return f"tool {call.name!r} has unknown arguments {extras}"
+    for name, value in call.arguments.items():
+        field = properties.get(name)
+        if not isinstance(field, dict):
+            continue
+        expected = _JSON_TYPES.get(str(field.get("type") or ""))
+        if expected is not None and (
+            not isinstance(value, expected)
+            or field.get("type") == "integer"
+            and isinstance(value, bool)
+        ):
+            return (
+                f"argument {name!r} for tool {call.name!r} must be "
+                f"{field.get('type')}"
+            )
+        enum = field.get("enum")
+        if isinstance(enum, list) and enum and value not in enum:
+            return f"argument {name!r} must be one of {enum}"
+        items = field.get("items")
+        if field.get("type") == "array" and isinstance(items, dict):
+            if not value:
+                return f"argument {name!r} must contain at least one item"
+            item_enum = items.get("enum")
+            if isinstance(item_enum, list) and item_enum and any(
+                item not in item_enum for item in value
+            ):
+                return f"argument {name!r} items must be one of {item_enum}"
+    return None
+
+
+def _tinker_tool_prompt(tools: tuple[dict[str, Any], ...]) -> str:
+    compact_tools = [
+        {
+            "name": tool.get("name"),
+            "description": tool.get("description"),
+            "parameters": tool.get("parameters"),
+        }
+        for tool in tools
+    ]
+    return (
+        "\n\nTOOL-CALL TRANSPORT CONTRACT\n"
+        "Choose exactly one function from the schemas below. Return only one "
+        'JSON object shaped as {"name":"function_name","arguments":{...}}. '
+        "Do not use Markdown, prose, XML, or additional calls. Enum values are "
+        "strict: copy one exactly as shown.\n"
+        f"FUNCTION SCHEMAS:\n{json.dumps(compact_tools, ensure_ascii=False)}"
+    )
+
+
 def make_tinker_request_fn(
     model: str,
     *,
     max_output_tokens: int = 8192,
     temperature: float = 0.2,
+    max_tool_retries: int = 2,
 ) -> RequestFn:
-    """Adapt native Tinker sampling to the RequestFn judge interface."""
+    """Adapt Tinker sampling to the provider-neutral request/tool interface."""
+    if max_tool_retries < 0:
+        raise ValueError("max_tool_retries must be non-negative")
     caller = make_tinker_caller(
         model,
         max_output_tokens=max_output_tokens,
@@ -219,8 +470,78 @@ def make_tinker_request_fn(
     )
 
     def call(request: LLMRequest) -> LLMResponse:
-        text = caller(request.system_prompt, request.user_prompt)
-        return LLMResponse(text=text, provider="tinker", model=model)
+        if not request.tools or request.tool_choice == "none":
+            text = caller(request.system_prompt, request.user_prompt)
+            return LLMResponse(
+                text=text,
+                provider="tinker",
+                model=model,
+                usage={
+                    "output_tokens": max(1, len(text) // 4),
+                    "api_calls": 1,
+                    "action_transport": "prompt_json",
+                },
+            )
+
+        system = request.system_prompt + _tinker_tool_prompt(request.tools)
+        user = request.user_prompt
+        output_tokens = 0
+        last_text = ""
+        last_error = "unknown tool-call error"
+        requested_attempts = request.metadata.get("max_transport_attempts")
+        attempts = max_tool_retries + 1
+        if isinstance(requested_attempts, int):
+            attempts = max(1, min(attempts, requested_attempts))
+        for attempt in range(attempts):
+            last_text = caller(system, user)
+            output_tokens += max(1, len(last_text) // 4)
+            try:
+                tool_call = _coerce_emulated_tool_call(last_text)
+                error = _validate_emulated_tool_call(tool_call, request.tools)
+                if error:
+                    raise ValueError(error)
+            except ValueError as exc:
+                last_error = str(exc)
+                if attempt >= max_tool_retries:
+                    break
+                user = (
+                    f"{request.user_prompt}\n\n"
+                    "YOUR PREVIOUS TOOL CALL WAS INVALID\n"
+                    f"Error: {last_error}\n"
+                    f"Invalid output: {last_text[:1200]}\n"
+                    "Return one corrected JSON tool-call object only."
+                )
+                continue
+            return LLMResponse(
+                text="",
+                provider="tinker",
+                model=model,
+                usage={
+                    "output_tokens": output_tokens,
+                    "api_calls": attempt + 1,
+                    "tool_retries": attempt,
+                    "action_transport": "emulated",
+                },
+                tool_calls=(
+                    LLMToolCall(
+                        name=tool_call.name,
+                        arguments=tool_call.arguments,
+                        call_id=f"tinker-emulated-{attempt + 1}",
+                    ),
+                ),
+            )
+        return LLMResponse(
+            text=last_text,
+            provider="tinker",
+            model=model,
+            usage={
+                "output_tokens": output_tokens,
+                "api_calls": attempts,
+                "tool_retries": attempts - 1,
+                "tool_error": last_error,
+                "action_transport": "emulated",
+            },
+        )
 
     return call
 
@@ -235,9 +556,13 @@ def resolve_request_fn(
     """Factory for multimodal judges/agents."""
     provider = provider.lower().strip()
     if provider in {"perplexity", "pplx"}:
-        return make_perplexity_responses_caller(model=model or "openai/gpt-5.4")
+        return make_perplexity_responses_caller(
+            model=model or "openai/gpt-5.4",
+            max_output_tokens=max_output_tokens,
+            temperature=temperature,
+        )
     if provider in {"openai", "oai"}:
-        return make_openai_responses_caller(model=model or "gpt-4.1")
+        return make_openai_responses_caller(model=model or "gpt-4.1", max_output_tokens=max_output_tokens)
     if provider in {"tinker", "tml"}:
         resolved_model = (
             model or os.environ.get("TINKER_MODEL") or "Qwen/Qwen3.6-35B-A3B"

@@ -1,0 +1,66 @@
+{
+  "rubric_id": "arml_national_power_2023_v1",
+  "title": "Power Round \u2014 2023 \u2014 ARML Power sub-problem rubric",
+  "total_points": 12.0,
+  "criteria": [
+    {
+      "id": "problem_02a",
+      "name": "Problem 2a",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 2a (2 pts). Statement: 2. One argument for proving the above claim begins as follows. Let m = \u0004 k 4 \u0005 \u2265 75, let p1, p2, . . . , pr denote the primes in the set {1, 2, . . . , m} (note that p1 = 2), and let pr+1, pr+2, . . . , ps denote the primes in the set {m + 1, m+ 2, . . . ,2m}. a. Prove that if each of the k consecutive integers in the sequence is divisible by at least one of the primes p1, p2, . . . , ps, then the sequence has no cromulent elements."
+    },
+    {
+      "id": "problem_02b",
+      "name": "Problem 2b",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 2b (2 pts). Statement: Let x be a solution to the system of congruences x \u2261 1 (mod 2) and x \u2261 0 (mod p2p3 \u00b7 \u00b7 \u00b7pr). Then the integers x \u2212 2m, x\u2212 2m + 2, . . . , x\u2212 2, x, x+ 2, . . . , x+ 2m \u2212 2, x+ 2m form a sequence of 2 m + 1 consecutive odd integers of the form x \u00b1 2y, where y varies from 0 to m. b. Prove that every number in the above sequence, except those in which y is a power of 2, is divisible by one of the primes p2, . . . , pr."
+    },
+    {
+      "id": "problem_02t_1",
+      "name": "Problem 2t (award 1)",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 2t (award 1) (1 pt). Statement: 2t. c. Prove that there are at least 2 t primes in the set {m + 1, m+ 2, . . . ,2m}."
+    },
+    {
+      "id": "problem_02t_2",
+      "name": "Problem 2t (award 2)",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 2t (award 2) (2 pts). Statement: It therefore follows that s \u2212 r \u2265 2t, hence pr+2t \u2264 ps. d. Show that there exists an integer x such that x \u2261 1 (mod 2), x \u2261 0 (mod p2p3 \u00b7 \u00b7 \u00b7pr), and for each u \u2208 {1, . . . , t}, x + 2u \u2261 0 (mod pr+u), and x \u2212 2u \u2261 0 (mod pr+t+u)."
+    },
+    {
+      "id": "problem_02t_3",
+      "name": "Problem 2t (award 3)",
+      "max_score": 3.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 2t (award 3) (3 pts). Statement: e. Let x be a solution to the system of congruences in part (d). Show that the sequence of 4 m + 3 consecutive integers x \u2212 2m \u2212 1, x\u2212 2m, x\u2212 2m + 1, . . . , x\u2212 1, x, x+ 1, . . . , x+ 2m + 1 has no cromulent elements."
+    },
+    {
+      "id": "problem_02t_4",
+      "name": "Problem 2t (award 4)",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 2t (award 4) (2 pts). Statement: f. Show that for k \u2265 300, there is a sequence of k consecutive integers with no cromulent elements."
+    }
+  ],
+  "not_observable_from_deck": [
+    "oral defense",
+    "diagrams that were not recovered from the source PDF"
+  ],
+  "provenance": {
+    "competition_id": "arml_national_power",
+    "problem_id": "arml_national_power_2023",
+    "year": 2023,
+    "source_file": "data/raw/arml_national/2023/ARML_2023Contest.pdf",
+    "solution_file": null,
+    "official_total_points": 50.0,
+    "parsed_total_points": 12.0,
+    "points_coverage": 0.24,
+    "awards_parsed": 6,
+    "problems_parsed": 1,
+    "derived_by": "scripts/build_arml_power_rubrics.py"
+  }
+}

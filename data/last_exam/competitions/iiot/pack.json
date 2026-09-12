@@ -1,0 +1,15 @@
+{
+  "competition_id": "iiot",
+  "rule_id": "iiot:draft_v1",
+  "profile": "proxy",
+  "protocol": "two_workstation_programming",
+  "visibility": {
+    "agent_at_start": [
+      "input",
+      "method"
+    ],
+    "hidden_until_grade": [
+      "eval"
+    ]
+  }
+}

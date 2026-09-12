@@ -1,0 +1,3 @@
+# Fine Arts
+
+Two early works by this painter show three men at a square table with a white tablecloth; those works are The Lunch and The Farmers' Lunch. One work by this artist got a nickname from the lances in its upper right quadrant and depicts Justin Nassau giving a key to Ambrosio Spinola. Another work by this artist was given a nickname due to the house in Yorkshire where it was displayed and shows Cupid holding up a mirror for Venus. Another work by this artist shows him working behind the entourage of five-year-old Infanta Margarita in the palace of Philip the Fourth.  Name this artist of The Surrender of Breda and Las Meninas.

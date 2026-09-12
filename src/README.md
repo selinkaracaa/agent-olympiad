@@ -2,6 +2,18 @@
 
 Multi-agent olympiad simulator: load a real team problem, run agents under competition rules, compare coordination schemas, and grade the result.
 
+> The sections below document the legacy per-problem `env.py` /
+> `collaboration.py` path. New benchmark experiments use the contest-session
+> engine: `run_competition_batch.py --contest-manifest ...`, with lifecycle in
+> `contest_engine.py`, actions in `contest_actions.py`, policy in
+> `contest_policy.py`, and state in `contest_session.py` / `contest_memory.py`.
+> Start with
+> [`../docs/from_zhongzheng/pipeline-overview-20260910.md`](../docs/from_zhongzheng/pipeline-overview-20260910.md)
+> and the
+> [`benchmark runbook`](../docs/from_zhongzheng/benchmark-runbook.md).
+
+## Legacy per-problem pipeline
+
 ```
 benchmark JSON  →  env.py  →  collaboration.py  →  actions.py
                       ↑              ↑
@@ -71,10 +83,12 @@ env.grade_submission()
 | `chat_history` | Full team discussion — every `speak` action appends here. All schemas read this. |
 | `workspace` | Shared `scratchpad` (working notes) and `final_answer` (official submission). |
 | `action_log` | Audit trail of every action, turn number, and env response. Saved in experiment JSONs. |
-| `max_turns` | Time budget (default 50). One collaboration turn = each eligible agent ≤ 1 LLM call (or `sleep`). |
+| `max_turns` | Time budget (default 50). One collaboration turn = each eligible agent ≤ 1 LLM call (or `rest`). |
 | `max_api_calls` | Optional cost budget across the whole run (discussion + synthesis). |
 
 **Tool gatekeeper:** Before any tool runs, `validate_action()` checks whether that action is allowed for this competition. If an agent tries `use_calculator` on ARML, the env returns a rule violation — it does not silently run the tool.
+
+**Action set:** every action is declared once in `tool_registry.ACTION_REGISTRY` (31 canonical actions, `ACTION_SET_VERSION = 5`) and tagged with the runtimes that implement it. `env.py` derives `ENV_ACTIONS`, `TOOL_ACTIONS`, and its `_HANDLERS` table from that registry; `contest_actions.py` (the contest-session runtime) derives `SESSION_HANDLERS` from the same one. `execute_action(agent, action, payload)` accepts either a typed dict or the `a | b | c` text payload, and `action_wire.normalize_invocation` turns both into the same canonical `Invocation`. Legacy names (`sleep`, `submit_final`, `write_scratchpad`, `submit_problem`, `claim_problem`, `release_problem`, `list_problems`, `open_problem`, `verify`, `set_priority`, `mark_hopeless`, `publish_memory`, `message_group`) still parse via `LEGACY_ALIASES`; the action log stores the canonical name plus `invoked_as`. See [`../docs/WORKBOARD_AND_TOOLS.md`](../docs/WORKBOARD_AND_TOOLS.md) for the full table.
 
 **Implemented tools:**
 - `use_calculator` — safe AST evaluator (basic arithmetic only)
@@ -99,9 +113,10 @@ Problems load from `data/benchmarks/{competition_id}/benchmark.json`.
 1. **Plain text** → treated as `speak` (broadcast to team)
 2. **Structured:**
    ```
-   ACTION: write_scratchpad | PAYLOAD: Problem 3 answer: 946/27
+   ACTION: work | PAYLOAD: 3 | 946/27
    ACTION: speak | PAYLOAD: I agree with Agent_2 on P3.
    ```
+   Multi-field payloads separate fields with ` | ` in the order the prompt shows; the prompt itself is rendered from the registry (`build_action_instructions`), so the text agents read always matches what `execute_action` accepts.
 
 **Key functions:**
 
@@ -109,8 +124,8 @@ Problems load from `data/benchmarks/{competition_id}/benchmark.json`.
 |----------|------|
 | `build_action_instructions()` | Injected into every agent system prompt — tells the model what actions exist and which tools are allowed. |
 | `parse_agent_response()` | Regex parser; supports multi-line `PAYLOAD` (important for full answer sheets). |
-| `apply_agent_response()` | Parses + calls `env.execute_action()` for each action. Stops early if `submit_final` succeeds. |
-| `submitters` kwarg | In centralized schema, only `Group_Leader` may submit; other agents' `submit_final` gets redirected to scratchpad. |
+| `apply_agent_response()` | Parses + calls `env.execute_action()` for each action. Stops early if `submit` succeeds. |
+| `submitters` kwarg | In centralized schema, only `Group_Leader` may submit; other agents' `submit` gets redirected to the scratchpad. |
 
 **Design choice:** Plain-text fallback keeps the protocol forgiving — agents can discuss naturally without always using `ACTION:` syntax. Structured actions are used when agents need to update scratchpad, run code, or submit.
 
@@ -139,7 +154,7 @@ Best for: peer debate, self-assignment of sub-problems, cross-checking (what we 
 ### Schema B — Centralized (`run_centralized`)
 
 - **Group_Leader** plans first: assigns sub-tasks to Agent_2 … Agent_N.
-- Workers solve their slice (cannot `submit_final` — redirected to scratchpad).
+- Workers solve their slice (cannot `submit` — redirected to scratchpad).
 - Leader synthesizes and submits the official answer.
 
 Best for: fewer turns, clearer division of labor (scored 20/40 on ARML with only 7 turns).
@@ -158,7 +173,7 @@ Separate from discussion. After all rounds, one agent is prompted to write the *
 
 - Dedicated system prompt: output plain text only, no `ACTION:` lines
 - Retries up to 2× if fewer than 5 numbered parts detected
-- Prefers full response text over truncated `ACTION: submit_final` payloads (this fix took scores from 4/40 → 17–20/40)
+- Prefers full response text over truncated `ACTION: submit` payloads (this fix took scores from 4/40 → 17–20/40)
 
 **`CollabConfig`:** `max_turns` (time), `max_api_calls` (cost), `rounds` / `decentralized_events` (aliases for smoke), `synthesize`, `progress`.
 

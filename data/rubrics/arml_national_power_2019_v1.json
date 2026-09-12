@@ -1,0 +1,66 @@
+{
+  "rubric_id": "arml_national_power_2019_v1",
+  "title": "Power Round \u2014 2019 \u2014 ARML Power sub-problem rubric",
+  "total_points": 15.0,
+  "criteria": [
+    {
+      "id": "problem_01a",
+      "name": "Problem 1a",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 1a (1 pt). Statement: One might guess that in most cases, E(n,k )\u2248 n k . In light of this guess, de\ufb01ne the ine\ufb03ciency of the ordered pair (n,k ), denoted I(n,k ), as I(n,k ) =E(n,k )\u2212 n k if E(n,k )\u0338=\u221e. If E(n,k ) =\u221e, then by convention, I(n,k ) is unde\ufb01ned. 8. a. Compute I(6, 3)."
+    },
+    {
+      "id": "problem_01b",
+      "name": "Problem 1b",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 1b (1 pt). Statement: b. Compute I(5, 3)."
+    },
+    {
+      "id": "problem_01c",
+      "name": "Problem 1c",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 1c (2 pts). Statement: c. Find positive integers n and k for which I(n,k ) = 15 8 ."
+    },
+    {
+      "id": "problem_01d",
+      "name": "Problem 1d",
+      "max_score": 3.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 1d (3 pts). Statement: d. Prove that for any integer x> 2, there exists an ordered pair ( n,k ) for which I(n,k )>x ."
+    },
+    {
+      "id": "problem_01e",
+      "name": "Problem 1e",
+      "max_score": 4.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 1e (4 pts). Statement: 9. Let S be the set of values of I(n,k ) for all n,k for which k < n 2 and I(n,k ) is de\ufb01ned. Find the least upper bound of S. Prove that your answer is correct."
+    },
+    {
+      "id": "problem_01f",
+      "name": "Problem 1f",
+      "max_score": 4.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 1f (4 pts). Statement: 10. Find two distinct non-integral positive rational numbers that are not the ine\ufb03ciency of any ordered pair. That is, \ufb01nd positive rational numbers q1 andq2 withq1\u0338=q2 such that neither q1 norq2 is an integer and such that neither q1 nor q2 is I(n,k ) for any integers n and k. Prove that your answers are correct."
+    }
+  ],
+  "not_observable_from_deck": [
+    "oral defense",
+    "diagrams that were not recovered from the source PDF"
+  ],
+  "provenance": {
+    "competition_id": "arml_national_power",
+    "problem_id": "arml_national_power_2019",
+    "year": 2019,
+    "source_file": "data/raw/arml_national/2019/2019_Contest_Final_Version.pdf",
+    "solution_file": null,
+    "official_total_points": 50.0,
+    "parsed_total_points": 15.0,
+    "points_coverage": 0.3,
+    "awards_parsed": 6,
+    "problems_parsed": 1,
+    "derived_by": "scripts/build_arml_power_rubrics.py"
+  }
+}

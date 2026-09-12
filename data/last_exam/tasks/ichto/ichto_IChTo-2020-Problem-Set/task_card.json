@@ -1,0 +1,33 @@
+{
+  "task_id": "ichto/ichto_IChTo-2020-Problem-Set",
+  "competition_id": "ichto",
+  "problem_id": "ichto_IChTo-2020-Problem-Set",
+  "title": "IChTo-2020-Problem-Set",
+  "year": 2020,
+  "team_size": 4,
+  "source_url": "http://ichto.org/en/problems/",
+  "inherits_competition_pack": "competitions/ichto",
+  "rule_card": "data/rules/ichto",
+  "input": {
+    "visibility": "agent_at_start",
+    "files": [
+      {
+        "name": "problem.md",
+        "path": "base/input/problem.md"
+      },
+      {
+        "name": "IChTo-2020-Problem-Set.pdf.path",
+        "path": "base/input/IChTo-2020-Problem-Set.pdf.path"
+      }
+    ]
+  },
+  "method": {
+    "visibility": "agent_at_start",
+    "path": "competitions/ichto/method"
+  },
+  "eval": {
+    "visibility": "hidden_until_grade",
+    "path": "eval/reference.json",
+    "competition_eval": "competitions/ichto/eval"
+  }
+}

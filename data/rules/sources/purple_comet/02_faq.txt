@@ -1,0 +1,434 @@
+PurpleComet 
+
+ 
+ 
+ 
+
+ 
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ Purple Comet ! Math Meet
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+
+ 
+ 
+ 
+ Home
+ 
+ 
+ 
+ 
+ Supervisor Login/Registration
+ 
+ 
+ 
+ 
+ Team Login
+ 
+ 
+ 
+ 
+ Contest Information
+ 
+ 
+
+ 
+ 
+ 
+ Donations
+ 
+ 
+
+ 
+ 
+ Acknowledgments
+ 
+ 
+ 
+ 
+ Contact Us
+ 
+ 
+
+ 
+
+ 
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+ Home
+ 
+ 
+ 
+ 
+ Contest Information
+ 
+ 
+
+ 
+ 
+ Contest Results
+ 
+ 
+ 
+ 
+ Old Contest Answers
+ 
+ 
+
+ 
+ 
+ Donations
+ 
+ 
+
+ 
+ 
+ Acknowledgments
+ 
+ 
+ 
+ 
+ Contact Us
+ 
+ 
+
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+
+ 
+ 
+ 
+ Contest Rules
+ 
+ 
+
+ 
+ 
+ Instructions to Supervisors
+ 
+ 
+
+ 
+ 
+ Quick Start Instructions
+ 
+ 
+ 
+ 
+ FAQ
+ 
+ 
+
+ 
+ 
+ Contest Results
+ 
+ 
+ 
+ 
+ Old Contest Answers
+ 
+ 
+
+ 
+ 
+ Changes To The 2026 Contest
+ 
+ 
+
+ 
+ 
+ Poster & Flyer
+ 
+ 
+
+ 
+ 
+ List of Teams
+ 
+ 
+
+ 
+
+ 
+ 
+ Purple Comet! Math Meet Frequently Asked Questions
+
+ What Is The Purple Comet! Math Meet?
+
+ The Purple Comet! Math Meet is a free, on-line, international, team,
+ mathematics competition designed for middle and high school students conducted annually since 2003.
+ 
+
+ Where Does The Purple Comer! Math Meet Come From?
+
+ The Purple Comet! Math Meet is a collaboration between Dr. Jonathan Kane and Dr. Titu Andreescu
+ who together design
+ the contest and write the contest problems. Dr. Bennette Harris wrote the original software that runs the
+ contest website.
+ Dr. Sobitha Samaranayake currently provides the web support for the Purple Comet! website.
+ For many years the contest was housed at the University of Wisconsin - Whitewater where
+ each of the collaborators worked. The contest is now run by AwesomeMath .
+ 
+
+ Who May Participate?
+
+ 
+ There are competitive teams and non-competitive teams. Any person may participate on a non-competitive team.
+ Any student anywhere who has not completed high school and has not reached the age of 20 years old at the
+ time of the
+ competition may compete on a competitive team. Each team is required to have an adult supervisor.
+ 
+
+ What Is The Difference Between A Competitive Team Aand A Non-competitive Team?
+
+ 
+ Students on a competitive team must qualify by satisfying age, grade, and school criteria. Competitive teams
+ are eligible for award certificates, and winning teams have their team names and results posted on the
+ contest website. Non-competitive teams have no age, grade, or school restrictions. Members of
+ non-competitive teams only receive certificates of participation, and their team results are never posted on
+ the contest website.
+ 
+
+ Why Does A Team Need An Adult Supervisor?
+
+ 
+ We require a list of the names of students competing on each team so that we can assure that no student
+ competes on more than one team, and so that we can produce award certificates and certificates of
+ participation for all students. We never post students' names on our website, nor do we share this
+ information with anyone.
+ 
+
+ Why Do You Collect Student' Names?
+
+ After the end of the ten-day contest period, supervisors are given the scores of each of their participating
+ teams. A few days later, a full contest results report is published and supervisors are provided with either
+ certificates of participation
+ or certificates of merit for each student participating in the contest. There are no other awards.
+ 
+
+ Can A Student Compete Even If No Teacher At The Student&#039;s Sshool Is Intersted In Being
+ A Team Supervisor?
+
+ 
+ Yes, the adult supervisor for a team does not need to be a teacher. For example, parents of interested
+ students have often served as team supervisors.
+ 
+
+ How Many Teams May Enter From One School?
+
+ 
+ There is no limit to the number of teams from a single school.
+ 
+
+ May More Than One Teacher From A Single School Supervise Teams From That School?
+
+ 
+ Yes, often one teacher will supervise teams made up of their students while other teachers supervise other
+ teams in the school.
+ 
+
+ How Many Students Can Compete On One Team?
+
+ A team may have 1, 2, 3, 4, 5, or 6 students.
+
+ Can Team Members Work Together To Solve Contest Problems?
+
+ Yes, this is encouraged. In fact, many contest problems are specifically designed to be solved
+ as a collaboration between students. During the contest, teams can choose to divide up the work by assigning some
+ problems to each team member or they can choose to work on problems in a collaborative manner. Successful teams combine both of these strategies.
+
+ How Can A Supervisor Start The Contest Clock For Some But Not All Of Their Teams?
+ 
+
+ When a supervisor logs in, they should display their MANAGE CONTEST page. On this page, select a contest for
+ each team whose clock you wish to start. Then click the START CONTEST button for each of those teams. Only the
+ clocks for the teams for which you selected a contest will start.
+
+ What Is The Difference Between The Middle School And The High School Levels?
+
+ The middle school contest consists of 20 mathematics problems to be completed in 60 minutes. The
+ high school contest consists of 30 mathematics problems to be completed in 90 minutes. The problems for the middle
+ school contest cover topics in arithmetic, elementary algebra, elementary geometry, simple counting and
+ probability, and facts about prime factorizations and divisibility of numbers. The problems for the high school contest
+ cover a wider range of topics including advanced algebra, geometry, combinatorics, probability, trigonometry,
+ conic sections, functions, and so forth. No problems from either contest require techniques from calculus.
+
+ Why Are There Four Categories For Teams?
+
+ After the competition, the contest website will display a list of winning teams. The list
+ distinguishes teams from large schools, teams from small schools, and teams comprised of students who do not all attend the same
+ school.
+
+ Can A Single Student Compete As An Individual?
+
+ Yes, a team may compete with as few as one student on the team, although students who compete on
+ a team by themselves miss out on the collaborative nature of the contest. Because the contest is designed for teams of
+ up to six students, students from small teams should not expect to complete many of the contest problems in the
+ allotted time.
+
+ Do All The Members Of A Team Need To Attend The Same School?
+
+ No, there is a category of mixed teams which is for teams comprised of students who do not all
+ attend the same
+ school. This category is designed for homeschooled students as well as for students who belong to a regional
+ mathematics club (math circle).
+
+ If Our School Has Students Through The Ninth Grade, May The Ninth Graders Compete On A
+ Middle School Team?
+
+ No, any team with a student beyond grade eight must compete as a high school team.
+
+ May Middle School Students Compete On The High School Contest?
+
+ Yes, a student who qualifies as a middle school student may compete on the high school contest.
+ 
+
+ May A Student Compete Both As A Middle School Student And A High School Student?
+
+ Yes, a team of middle school students may register twice, once competing as a middle school team
+ and once
+ competing as a high school team. Alternatively, a middle school student can be a member of one middle school
+ team and a different high school team.
+
+ Can Students Use Calculators Or Computers To Help Solve The Contest Problems?
+
+ Yes, even though all contest problems are designed so that they can be worked without the aid of
+ a calculator or
+ computer, students are allowed to use these devices to help them solve problems. Students may not search the
+ Internet to find information to help them solve contest problems. They may not use artificial intelligence
+ tools
+ (AI) to solve problems because these tools do not force students to find their own methods to solve
+ problems.
+
+ Can Students Consult Books Or Notes During The Contest?
+
+ Yes, students may read any books or notes available to them locally. Students may not use the
+ Internet to access
+ information not stored at their contest site.
+
+ Can Students Ask The Adult Supervisor For Help During The Contest?
+
+ No, supervisors may not help students with any aspect of solving contest problems. Team members
+ cannot receive
+ help with any mathematics, with any definitions, or with any translation of words during the contest from
+ any
+ person not on their own team.
+
+ Can Students Search The Internet During The Contest To Find Information That Can Help
+ Them Solve Contest Problems?
+
+ No, this is specifically prohibited. Students may use reference materials at their contest site,
+ but they may
+ not access the Internet to get help.
+
+ Can The Adult Supervisor Enter Answers For Students?
+
+ No, students must enter their own answers. Exceptions to this rule might be granted by contest
+ judges in cases
+ where students on a team have disabilities making it difficult for them to enter contest answers. For
+ example,
+ exceptions might be granted to a team of blind students.
+
+ Do All Students On A Team Need To Be In The Same Location During The Contest?
+
+ No, as long as all team members are being supervised to ensure that all contest rules are being
+ followed,
+ students from the same team can compete from different locations. More than one student from a team may log
+ into
+ the contest website and submit solutions to contest problems. Solutions submitted by team members at one
+ site
+ will be visible to team members at a second site.
+
+ What Happens If The Competition End Time Is Reached Before A Team Has Completed The
+ Competition?
+ All teams whose clocks have started before the end of the competition will be allowed to
+ complete the
+ competition even if their allotted time runs beyond the end of the competition end time.
+ 
+
+ When Does A Team Find Out How Well They Have Done On The Contest?
+
+ Solutions to contest problems will be posted shortly after the end of the contest. A list of
+ winning teams will
+ be posted several days after the completion of the contest. Team supervisors get a complete report of the
+ results of their teams scored, and they receive downloadable certificates for each team member.
+
+ Will Winning Teams Get Prizes?
+
+ Prizes? Why do we need prizes? Actually, since it is impossible to monitor whether contest rules
+ are uniformly
+ followed at each contest site, the distribution of prizes with high economic value would provide the wrong
+ incentives to teams. The contest staff intends to make available to team supervisors certificates suitable
+ for
+ printing. These certificates will indicate each team's achievement. Occasionally, the contest receives
+ donations
+ of nominal prizes which will be mailed to winning teams.
+
+ 
+ 
+ 
+ 
+
+ 
+ 
+
+ 
+ 
+ 
+ 
+
+ All content copyright &copy; 2003-2026 by Jonathan
+ Kane, Titu Andreescu,
+ Bennette Harris, and Sobitha Samaranayake.
+
+ For problems or questions regarding this website contact
+ [webmaster@purplecomet.org] .
+
+ Last updated: January 24, 2026.

@@ -1,16 +1,24 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import Any
+from typing import Any, Mapping
+
+from tool_registry import DELIBERATION_ACTION_NAMES
+
+# Single source of truth is the registry's ``deliberation`` pack.
+DELIBERATION_ACTIONS = set(DELIBERATION_ACTION_NAMES)
 
 
-DELIBERATION_ACTIONS = {
-    "propose",
-    "challenge",
-    "provide_evidence",
-    "revise",
-    "decide",
-}
+def deliberation_payload(action: str, arguments: Mapping[str, Any]) -> str:
+    """Render typed deliberation arguments in the ledger's ``|`` text form."""
+    if action == "propose":
+        return str(arguments.get("content") or "")
+    if action == "decide":
+        return (
+            f"{arguments.get('proposal_id')} | {arguments.get('outcome')} | "
+            f"{arguments.get('reason') or ''}"
+        )
+    return f"{arguments.get('proposal_id')} | {arguments.get('content') or ''}"
 
 
 def _targeted_payload(payload: str, parts: int = 2) -> list[str] | None:

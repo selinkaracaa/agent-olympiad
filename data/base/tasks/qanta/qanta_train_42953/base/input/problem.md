@@ -1,0 +1,3 @@
+# Literature
+
+One of this author's poems urges listeners to "Rise like lions after slumber / in unvanquishable number," as "Ye are many--they are few." Another poem by this man states, "The breath whose might I have invoked in song / Descends on me" and asks "where was lorn Urania" when the title figure died. That work by this author of The Masque of Anarchy states that a certain soul "Beacons from the abode where the Eternal are" and repeatedly asks the reader to weep for Adonais. Another of this poet's speakers recalls a sculpture of a king whose pedestal reads "Look on my works ye mighty, and despair!" For 10 points, name this Romantic poet of "Ozymandias."

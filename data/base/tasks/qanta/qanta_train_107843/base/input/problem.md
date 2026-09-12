@@ -1,0 +1,3 @@
+# Science
+
+The extent and periodicity of these events was described in a 1982 paper by Raup and Sepkoski. The ‘Murder on the Orient Express' model assigned multiple causes to the largest of these events, while the ‘clathrate gun' hypothesis attempts to explain some of them. Black shale can serve as evidence of these events since they form in low-oxygen environments. Lystrosaurus was the dominant terrestrial vertebrate following one of these events. Luis and Walter Alvarez proposed that a certain feature located near Chicxulub [CHEEK-shuh-loob], Mexico, is a remnant of one of these events. For 10 points, name these events, one of which occured at the end of the Cretaceous and is hypothesised to have been caused by an asteroid.

@@ -1,0 +1,339 @@
+{
+  "description": "One last-exam pack per data/rules competition.",
+  "n_competitions": 37,
+  "competitions": [
+    {
+      "competition_id": "arml_local",
+      "rule_id": "arml_local:official_shared_answer",
+      "profile": "proxy",
+      "protocol": "shared_answer",
+      "n_roles": 6,
+      "path": "data/last_exam/competitions/arml_local",
+      "source": "data/rules/arml_local"
+    },
+    {
+      "competition_id": "arml_national_power",
+      "rule_id": "arml_national_power:draft_v1",
+      "profile": "proxy",
+      "protocol": "shared_answer",
+      "n_roles": 15,
+      "path": "data/last_exam/competitions/arml_national_power",
+      "source": "data/rules/arml_national_power"
+    },
+    {
+      "competition_id": "arml_national_team",
+      "rule_id": "arml_national_team:draft_v1",
+      "profile": "proxy",
+      "protocol": "shared_answer",
+      "n_roles": 15,
+      "path": "data/last_exam/competitions/arml_national_team",
+      "source": "data/rules/arml_national_team"
+    },
+    {
+      "competition_id": "arml_power",
+      "rule_id": "arml_power:draft_v1",
+      "profile": "proxy",
+      "protocol": "shared_answer",
+      "n_roles": 15,
+      "path": "data/last_exam/competitions/arml_power",
+      "source": "data/rules/arml_power"
+    },
+    {
+      "competition_id": "ccdc",
+      "rule_id": "ccdc:draft_v1",
+      "profile": "non_comparable",
+      "protocol": "cyber_defense_proxy",
+      "n_roles": 8,
+      "path": "data/last_exam/competitions/ccdc",
+      "source": "data/rules/ccdc"
+    },
+    {
+      "competition_id": "cfa_research_challenge",
+      "rule_id": "cfa_research_challenge:draft_v1",
+      "profile": "proxy",
+      "protocol": "research_artifact",
+      "n_roles": 4,
+      "path": "data/last_exam/competitions/cfa_research_challenge",
+      "source": "data/rules/cfa_research_challenge"
+    },
+    {
+      "competition_id": "cybench",
+      "rule_id": "cybench:draft_v1",
+      "profile": "benchmark_native",
+      "protocol": "ctf_sandbox",
+      "n_roles": 5,
+      "path": "data/last_exam/competitions/cybench",
+      "source": "data/rules/cybench"
+    },
+    {
+      "competition_id": "debatebench",
+      "rule_id": "debatebench:draft_v1",
+      "profile": "non_comparable",
+      "protocol": "presentation_and_cross_examination",
+      "n_roles": 8,
+      "path": "data/last_exam/competitions/debatebench",
+      "source": "data/rules/debatebench"
+    },
+    {
+      "competition_id": "eoes",
+      "rule_id": "eoes:draft_v1",
+      "profile": "non_comparable",
+      "protocol": "lab_practical_proxy",
+      "n_roles": 3,
+      "path": "data/last_exam/competitions/eoes",
+      "source": "data/rules/eoes"
+    },
+    {
+      "competition_id": "ethics_bowl_appe",
+      "rule_id": "ethics_bowl_appe:draft_v1",
+      "profile": "proxy",
+      "protocol": "presentation_and_cross_examination",
+      "n_roles": 5,
+      "path": "data/last_exam/competitions/ethics_bowl_appe",
+      "source": "data/rules/ethics_bowl_appe"
+    },
+    {
+      "competition_id": "ethics_bowl_nhseb",
+      "rule_id": "ethics_bowl_nhseb:draft_v1",
+      "profile": "proxy",
+      "protocol": "presentation_and_cross_examination",
+      "n_roles": 5,
+      "path": "data/last_exam/competitions/ethics_bowl_nhseb",
+      "source": "data/rules/ethics_bowl_nhseb"
+    },
+    {
+      "competition_id": "fyziklani",
+      "rule_id": "fyziklani:draft_v1",
+      "profile": "non_comparable",
+      "protocol": "progressive_release",
+      "n_roles": 5,
+      "path": "data/last_exam/competitions/fyziklani",
+      "source": "data/rules/fyziklani"
+    },
+    {
+      "competition_id": "gcch_harvard",
+      "rule_id": "gcch_harvard:draft_v1",
+      "profile": "non_comparable",
+      "protocol": "research_artifact",
+      "n_roles": 4,
+      "path": "data/last_exam/competitions/gcch_harvard",
+      "source": "data/rules/gcch_harvard"
+    },
+    {
+      "competition_id": "history_olympiad",
+      "rule_id": "history_olympiad:draft_v1",
+      "profile": "non_comparable",
+      "protocol": "buzzer_match_session_proxy",
+      "n_roles": 3,
+      "path": "data/last_exam/competitions/history_olympiad",
+      "source": "data/rules/history_olympiad"
+    },
+    {
+      "competition_id": "hmmt_guts",
+      "rule_id": "hmmt_guts:draft_v1",
+      "profile": "proxy",
+      "protocol": "progressive_release",
+      "n_roles": 8,
+      "path": "data/last_exam/competitions/hmmt_guts",
+      "source": "data/rules/hmmt_guts"
+    },
+    {
+      "competition_id": "ichto",
+      "rule_id": "ichto:draft_v1",
+      "profile": "proxy",
+      "protocol": "presentation_and_cross_examination",
+      "n_roles": 4,
+      "path": "data/last_exam/competitions/ichto",
+      "source": "data/rules/ichto"
+    },
+    {
+      "competition_id": "icpc",
+      "rule_id": "icpc:world_finals_2026_v1",
+      "profile": "proxy",
+      "protocol": "human_team_shared_workstation_programming",
+      "n_roles": 3,
+      "path": "data/last_exam/competitions/icpc",
+      "source": "data/rules/icpc"
+    },
+    {
+      "competition_id": "ieo_business_case",
+      "rule_id": "ieo_business_case:draft_v1",
+      "profile": "proxy",
+      "protocol": "research_artifact",
+      "n_roles": 5,
+      "path": "data/last_exam/competitions/ieo_business_case",
+      "source": "data/rules/ieo_business_case"
+    },
+    {
+      "competition_id": "iiot",
+      "rule_id": "iiot:draft_v1",
+      "profile": "proxy",
+      "protocol": "two_workstation_programming",
+      "n_roles": 4,
+      "path": "data/last_exam/competitions/iiot",
+      "source": "data/rules/iiot"
+    },
+    {
+      "competition_id": "ijso_practical",
+      "rule_id": "ijso_practical:draft_v1",
+      "profile": "proxy",
+      "protocol": "lab_practical_proxy",
+      "n_roles": 3,
+      "path": "data/last_exam/competitions/ijso_practical",
+      "source": "data/rules/ijso_practical"
+    },
+    {
+      "competition_id": "ioaa_group",
+      "rule_id": "ioaa_group:draft_v1",
+      "profile": "proxy",
+      "protocol": "shared_answer",
+      "n_roles": 5,
+      "path": "data/last_exam/competitions/ioaa_group",
+      "source": "data/rules/ioaa_group"
+    },
+    {
+      "competition_id": "ioai_team",
+      "rule_id": "ioai_team:draft_v1",
+      "profile": "proxy",
+      "protocol": "research_artifact",
+      "n_roles": 4,
+      "path": "data/last_exam/competitions/ioai_team",
+      "source": "data/rules/ioai_team"
+    },
+    {
+      "competition_id": "iol_team",
+      "rule_id": "iol_team:draft_v1",
+      "profile": "proxy",
+      "protocol": "shared_answer",
+      "n_roles": 4,
+      "path": "data/last_exam/competitions/iol_team",
+      "source": "data/rules/iol_team"
+    },
+    {
+      "competition_id": "jessup",
+      "rule_id": "jessup:draft_v1",
+      "profile": "proxy",
+      "protocol": "presentation_and_cross_examination",
+      "n_roles": 5,
+      "path": "data/last_exam/competitions/jessup",
+      "source": "data/rules/jessup"
+    },
+    {
+      "competition_id": "mystery_hunt",
+      "rule_id": "mystery_hunt:draft_v1",
+      "profile": "proxy",
+      "protocol": "progressive_release",
+      "n_roles": 12,
+      "path": "data/last_exam/competitions/mystery_hunt",
+      "source": "data/rules/mystery_hunt"
+    },
+    {
+      "competition_id": "nyu_ctf_bench",
+      "rule_id": "nyu_ctf_bench:draft_v1",
+      "profile": "benchmark_native",
+      "protocol": "ctf_sandbox",
+      "n_roles": 5,
+      "path": "data/last_exam/competitions/nyu_ctf_bench",
+      "source": "data/rules/nyu_ctf_bench"
+    },
+    {
+      "competition_id": "odyssey_of_the_mind",
+      "rule_id": "odyssey_of_the_mind:draft_v1",
+      "profile": "non_comparable",
+      "protocol": "creative_performance_proxy",
+      "n_roles": 7,
+      "path": "data/last_exam/competitions/odyssey_of_the_mind",
+      "source": "data/rules/odyssey_of_the_mind"
+    },
+    {
+      "competition_id": "pumac_power",
+      "rule_id": "pumac_power:draft_v1",
+      "profile": "proxy",
+      "protocol": "proof_packet",
+      "n_roles": 8,
+      "path": "data/last_exam/competitions/pumac_power",
+      "source": "data/rules/pumac_power"
+    },
+    {
+      "competition_id": "purple_comet",
+      "rule_id": "purple_comet:official_shared_answer",
+      "profile": "non_comparable",
+      "protocol": "shared_answer",
+      "n_roles": 6,
+      "path": "data/last_exam/competitions/purple_comet",
+      "source": "data/rules/purple_comet"
+    },
+    {
+      "competition_id": "qanta",
+      "rule_id": "qanta:question_proxy",
+      "profile": "proxy",
+      "protocol": "buzzer_match_question_proxy",
+      "n_roles": 4,
+      "path": "data/last_exam/competitions/qanta",
+      "source": "data/rules/qanta"
+    },
+    {
+      "competition_id": "science_bowl",
+      "rule_id": "science_bowl:2026:question_proxy",
+      "profile": "proxy",
+      "protocol": "buzzer_match_question_proxy",
+      "n_roles": 4,
+      "path": "data/last_exam/competitions/science_bowl",
+      "source": "data/rules/science_bowl"
+    },
+    {
+      "competition_id": "science_olympiad",
+      "rule_id": "science_olympiad:draft_v1",
+      "profile": "non_comparable",
+      "protocol": "event_packet_proxy",
+      "n_roles": 15,
+      "path": "data/last_exam/competitions/science_olympiad",
+      "source": "data/rules/science_olympiad"
+    },
+    {
+      "competition_id": "vis_moot",
+      "rule_id": "vis_moot:draft_v1",
+      "profile": "proxy",
+      "protocol": "presentation_and_cross_examination",
+      "n_roles": 5,
+      "path": "data/last_exam/competitions/vis_moot",
+      "source": "data/rules/vis_moot"
+    },
+    {
+      "competition_id": "wharton_investment",
+      "rule_id": "wharton_investment:draft_v1",
+      "profile": "non_comparable",
+      "protocol": "research_artifact",
+      "n_roles": 5,
+      "path": "data/last_exam/competitions/wharton_investment",
+      "source": "data/rules/wharton_investment"
+    },
+    {
+      "competition_id": "wmtc",
+      "rule_id": "wmtc:team_round_shared_answer",
+      "profile": "proxy",
+      "protocol": "shared_answer",
+      "n_roles": 6,
+      "path": "data/last_exam/competitions/wmtc",
+      "source": "data/rules/wmtc"
+    },
+    {
+      "competition_id": "wro",
+      "rule_id": "wro:draft_v1",
+      "profile": "non_comparable",
+      "protocol": "robotics_rules_proxy",
+      "n_roles": 3,
+      "path": "data/last_exam/competitions/wro",
+      "source": "data/rules/wro"
+    },
+    {
+      "competition_id": "wsc_writing",
+      "rule_id": "wsc_writing:draft_v1",
+      "profile": "proxy",
+      "protocol": "staged_collaborative_writing",
+      "n_roles": 3,
+      "path": "data/last_exam/competitions/wsc_writing",
+      "source": "data/rules/wsc_writing"
+    }
+  ]
+}

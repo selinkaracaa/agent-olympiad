@@ -1,0 +1,3 @@
+# Literature
+
+In one scene in this novel, the narrator imagines having a seizure after seeing a massive group of fish become stuck near the shore at night. A commentary on this work's composition makes up a significant part of its author's memoir The Names. The protagonist meets Reverend John in this novel's second section, The Priest of the Sun, along with Milly and Ben Benally after arriving in Los Angeles following a prison stint for stabbing an albino. Ending with the burial of the protagonist's grandfather Francisco, it focuses on Abel, a Kiowa Indian who returns to New Mexico after World War II. FTP, identify this work of Native American literature, a novel by N. Scott Momaday.

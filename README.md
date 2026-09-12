@@ -2,12 +2,23 @@
 
 Benchmark **multi-agent AI teams** on olympiad-style **team tasks**. Part of the **Agent Olympiad** research project at DAPLab.
 
-**Current focus:** collecting and documenting team-competition data (PDFs + extracted benchmarks).
+**Current focus:** a manifest-driven contest-session benchmark with five selectable
+baselines, rule-card Open Table Coach, typed actions, resumable runs, and
+deterministic or remote judging.
 
 ## Documentation
 
 | Doc | Contents |
 |-----|----------|
+| [Vallina OTC](docs/vallina-otc.md) | Basic Coach + rule-card baseline, isolated from full OTC enhancements |
+| [OTC artifact pipeline](docs/otc-artifact-pipeline.md) | Shared OTC engine, reviewed PDF delivery, rubric grading, and per-competition readiness |
+| [`docs/from_zhongzheng/README.md`](docs/from_zhongzheng/README.md) | Current documentation index |
+| [`docs/from_zhongzheng/current-status-20260910.md`](docs/from_zhongzheng/current-status-20260910.md) | Current contest-session pipeline: settings, actions, tools, memory |
+| [`docs/from_zhongzheng/pipeline-overview-20260910.md`](docs/from_zhongzheng/pipeline-overview-20260910.md) | End-to-end current architecture and benchmark pipeline |
+| [`docs/from_zhongzheng/benchmark-runbook.md`](docs/from_zhongzheng/benchmark-runbook.md) | How to run single contests, matched baselines, gold batches, and ICPC |
+| [`docs/from_zhongzheng/actions-reference.md`](docs/from_zhongzheng/actions-reference.md) | All current typed actions, packs, baseline surfaces, and gates |
+| [`docs/contest-systems.md`](docs/contest-systems.md) | Current baseline and OTC v6 contract |
+| [`docs/contest-run-reuse.md`](docs/contest-run-reuse.md) | Run fingerprints, checkpoint reuse, and resume safety |
 | [`docs/BENCHMARK_DESIGN.md`](docs/BENCHMARK_DESIGN.md) | What the benchmark measures, contest realism, baselines, the CS / IHS metrics, limitations |
 | [`docs/DATA_COLLECTION.md`](docs/DATA_COLLECTION.md) | What we collected — summary table + format per contest |
 | [`docs/EVALUATION.md`](docs/EVALUATION.md) | PDF-first artifact evaluators, human calibration, and readiness |
@@ -46,7 +57,21 @@ rather than downloaded.
 mounted LiveOIBench problem tree, and imports local contestant data. It has no
 network behavior and never runs LiveOIBench host-judge or setup scripts.
 
+## OTC and contest sessions
+
+OTC is the sole current Open Table Coach implementation (protocol v6). Run it
+with `--contest-manifest ... --system-variant otc`; old variant spellings are
+aliases, not separate baselines. Legacy per-problem `--schema open_table_coach`
+is removed. Use fresh output directories when migrating from older protocols.
+See [contest systems](docs/contest-systems.md) for presets and matched budgets.
+
 ## Rule-aware baseline
+
+For the contest-session path (`--contest-manifest`), see
+[`docs/contest-run-reuse.md`](docs/contest-run-reuse.md#effective-contest-settings):
+`prompt_only` loads the selected card into prompts, while `enforced` is supported
+by the `otc` baseline only. The rules-mode description below covers the legacy
+per-problem path.
 
 Competition runs accept `--rules-mode off|prompt_only|enforced` (default:
 `off`). `off` preserves the current-main collaboration and tool behavior.

@@ -1,0 +1,29 @@
+{
+  "task_id": "ioaa_group/ioaa_group_2025",
+  "competition_id": "ioaa_group",
+  "problem_id": "ioaa_group_2025",
+  "title": "Group Competition 2025",
+  "year": 2025,
+  "team_size": 5,
+  "source_url": "https://ioaastrophysics.org/resources/problems-from-past-ioaa",
+  "inherits_competition_pack": "competitions/ioaa_group",
+  "rule_card": "data/rules/ioaa_group",
+  "input": {
+    "visibility": "agent_at_start",
+    "files": [
+      {
+        "name": "problem.md",
+        "path": "base/input/problem.md"
+      }
+    ]
+  },
+  "method": {
+    "visibility": "agent_at_start",
+    "path": "competitions/ioaa_group/method"
+  },
+  "eval": {
+    "visibility": "hidden_until_grade",
+    "path": "eval/reference.json",
+    "competition_eval": "competitions/ioaa_group/eval"
+  }
+}

@@ -1,0 +1,19 @@
+Global Case Competition at Harvard (fallback notes).
+
+This is the university-level Global Case Competition at Harvard
+(https://www.thecasecompetition.org/), NOT the high-school Harvard Crimson Global
+Case Competition (https://casecomp.org/). An earlier crawl pointed at the retired
+gcchatharvard.com domain and conflated the two events.
+
+The organizer publishes no rulebook, terms document, or judging rubric, so only the
+edition page is citable. Verified constraints live in
+docs/rules_lowconf_2026-08-12.md and were merged into the rule card:
+
+- Teams of 2 to 5 students from the same university; no individual entries.
+- Round 1 deliverable is a written case deck built within up to three weeks of case
+  release, submitted by the published deadline.
+- Top 10 teams record a 5 to 10 minute video pitch; finalists face roughly 20
+  minutes of live judge Q&A.
+
+Unverified (no official statement exists): permitted research sources, software,
+generative AI policy, plagiarism policy, outside assistance, and slide limits.

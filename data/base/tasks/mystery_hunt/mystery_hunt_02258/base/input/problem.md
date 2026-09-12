@@ -1,0 +1,3 @@
+# 2016/puzzle/thinking_caps
+
+Thinking Caps &mdash; Dreamtime &mdash; MIT Mystery Hunt 2016 Toggle navigation Home Navigation All Puzzles FAQ Call in Answer --> Solution Thinking Caps When poor Thomas sang the scholastic blues, it led to quite an argument. _ _ ? _ A universalist snoozing ? _ _ _ _ A teleologic surface _ _ _ ? _ Monopsychist states ? _ _ _ A grammarian Adriatic city _ _ _ ? A scholastic matter _ _ _ _ _ ? _ An idealist feast _ _ ? A nominalist breadstuff ? _ _ A reformational ass ? _ _ _ An evidentialist line _ _ _ ? Humanist time periods ? _ _ _ Realist tools _ _ _ _ ? _ An epicurean death eater _ _ _ ? _ Apophatic wounds _ ? _ A rationalist resort _ _ ? A pyrrhonist weight _ _ ? _ A deist rodent _ ? _ _ A feminist drift

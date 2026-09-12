@@ -24,6 +24,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT / "src"))
 
 from env_config import load_repo_dotenv
+from judge.kattis import KattisClient
 from judge.remote import RemoteSubmitRequest
 from judge.vjudge import VJudgeClient
 
@@ -31,6 +32,18 @@ load_repo_dotenv(REPO_ROOT / ".env")
 
 _RUNS: dict[str, dict[str, Any]] = {}
 _LOCK = threading.Lock()
+_REMOTE_CALL_LOCK = threading.Lock()
+_REMOTE_CLIENTS: dict[str, Any] = {}
+
+
+def _remote_client(oj: str):
+    key = (oj or "").strip().lower()
+    with _LOCK:
+        client = _REMOTE_CLIENTS.get(key)
+        if client is None:
+            client = KattisClient() if key == "kattis" else VJudgeClient()
+            _REMOTE_CLIENTS[key] = client
+        return client
 
 
 def _json_response(handler: BaseHTTPRequestHandler, code: int, payload: dict[str, Any]) -> None:
@@ -80,8 +93,9 @@ class GatewayHandler(BaseHTTPRequestHandler):
                 _json_response(self, 404, {"error": "run not found", "run_id": run_id})
                 return
             if row.get("status") in {"submitted", "polling", "queued"} and row.get("vjudge_run_id"):
-                client = VJudgeClient()
-                remote = client.get_result(str(row["vjudge_run_id"]))
+                client = _remote_client(str(row.get("oj") or "CodeForces"))
+                with _REMOTE_CALL_LOCK:
+                    remote = client.get_result(str(row["vjudge_run_id"]))
                 row = {**row, **remote.to_dict(), "gateway_run_id": run_id}
                 with _LOCK:
                     _RUNS[run_id] = row
@@ -116,12 +130,13 @@ class GatewayHandler(BaseHTTPRequestHandler):
                             _json_response(self, 200, existing)
                             return
             poll = bool(data.get("poll", True))
-            client = VJudgeClient()
+            client = _remote_client(request.oj)
             gateway_run_id = uuid.uuid4().hex
-            if poll:
-                remote = client.submit_and_poll(request)
-            else:
-                remote = client.submit(request)
+            with _REMOTE_CALL_LOCK:
+                if poll:
+                    remote = client.submit_and_poll(request)
+                else:
+                    remote = client.submit(request)
             row = {
                 "gateway_run_id": gateway_run_id,
                 "idempotency_key": request.idempotency_key,
@@ -142,8 +157,6 @@ class GatewayHandler(BaseHTTPRequestHandler):
 def cmd_serve(args: argparse.Namespace) -> int:
     host = args.host
     port = int(args.port)
-    # Fail fast if cookie missing.
-    VJudgeClient()
     server = ThreadingHTTPServer((host, port), GatewayHandler)
     print(f"VJudge gateway listening on http://{host}:{port}", flush=True)
     print("POST /v1/submit  GET /v1/runs/{id}  GET /health", flush=True)
@@ -160,7 +173,6 @@ def cmd_submit(args: argparse.Namespace) -> int:
         source = Path(args.source_file).read_text(encoding="utf-8")
     if not source:
         raise SystemExit("provide --source or --source-file")
-    client = VJudgeClient()
     request = RemoteSubmitRequest(
         contest_id=str(args.contest or ""),
         oj=str(args.oj or "CodeForces"),
@@ -169,6 +181,7 @@ def cmd_submit(args: argparse.Namespace) -> int:
         source=source,
         idempotency_key=str(args.idempotency_key or ""),
     )
+    client = _remote_client(request.oj)
     if args.no_poll:
         result = client.submit(request)
     else:

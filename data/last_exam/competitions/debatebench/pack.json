@@ -1,0 +1,15 @@
+{
+  "competition_id": "debatebench",
+  "rule_id": "debatebench:draft_v1",
+  "profile": "non_comparable",
+  "protocol": "presentation_and_cross_examination",
+  "visibility": {
+    "agent_at_start": [
+      "input",
+      "method"
+    ],
+    "hidden_until_grade": [
+      "eval"
+    ]
+  }
+}

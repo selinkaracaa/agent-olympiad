@@ -171,18 +171,19 @@ class EvaluationSchemaTests(unittest.TestCase):
         )
         self.assertEqual(result.total_score, 40)
 
-    def test_inconsistent_total_is_rejected(self):
+    def test_inconsistent_total_is_recomputed_with_a_warning(self):
         payload = json.loads(self.valid_payload())
         payload["total_score"] = 41
-        with self.assertRaises(EvaluationError):
-            parse_evaluation_payload(
-                json.dumps(payload),
-                rubric=self.rubric,
-                evaluator_id="slide_deck_v1",
-                evaluator_version="1.0.0",
-                prompt_version="test",
-                model="mock",
-            )
+        result = parse_evaluation_payload(
+            json.dumps(payload),
+            rubric=self.rubric,
+            evaluator_id="slide_deck_v1",
+            evaluator_version="1.0.0",
+            prompt_version="test",
+            model="mock",
+        )
+        self.assertEqual(result.total_score, 40)
+        self.assertTrue(any("total_score=41" in warning for warning in result.warnings))
 
     def test_slide_evaluator_uses_both_pdfs_and_adds_limitations(self):
         with tempfile.TemporaryDirectory() as temp_dir:

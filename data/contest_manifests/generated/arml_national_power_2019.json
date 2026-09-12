@@ -1,0 +1,11 @@
+{
+  "session_id": "arml_national_power_2019",
+  "competition_id": "arml_national_power",
+  "problem_ids": [
+    "arml_national_power_2019"
+  ],
+  "description": "OTC contest-session manifest for arml_national_power_2019",
+  "split_parts": false,
+  "task_family": "mathematics",
+  "competition_description": "ARML National Power Round: a long collaborative proof / exploration packet. Produce a clear written solution with justifications; partial credit is rubric-based when an exact answer key is unavailable."
+}

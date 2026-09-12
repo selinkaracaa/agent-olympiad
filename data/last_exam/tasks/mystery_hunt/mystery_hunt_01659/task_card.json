@@ -1,0 +1,29 @@
+{
+  "task_id": "mystery_hunt/mystery_hunt_01659",
+  "competition_id": "mystery_hunt",
+  "problem_id": "mystery_hunt_01659",
+  "title": "2012/puzzles/watson_2_0/raw_bar/",
+  "year": 2012,
+  "team_size": 12,
+  "source_url": "https://puzzles.mit.edu/",
+  "inherits_competition_pack": "competitions/mystery_hunt",
+  "rule_card": "data/rules/mystery_hunt",
+  "input": {
+    "visibility": "agent_at_start",
+    "files": [
+      {
+        "name": "problem.md",
+        "path": "base/input/problem.md"
+      }
+    ]
+  },
+  "method": {
+    "visibility": "agent_at_start",
+    "path": "competitions/mystery_hunt/method"
+  },
+  "eval": {
+    "visibility": "hidden_until_grade",
+    "path": "eval/reference.json",
+    "competition_eval": "competitions/mystery_hunt/eval"
+  }
+}

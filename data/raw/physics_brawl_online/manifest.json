@@ -1,0 +1,152 @@
+{
+  "dataset": "Physics Brawl Online",
+  "language": "English",
+  "coverage": {
+    "first_year": 2012,
+    "last_year": 2025,
+    "years": 14,
+    "missing_years": []
+  },
+  "document_type": "combined problems and worked solutions",
+  "official_archive": "https://physicsbrawl.org/archive",
+  "source_url_pattern": "https://physicsbrawl.org/download/<year>/solutions.pdf",
+  "checked_at": "2026-07-28",
+  "license_status": "No explicit reusable content license was identified on the official archive page; verify permission before redistribution.",
+  "validation": {
+    "pdf_magic_checked": true,
+    "pypdf_parse_checked": true,
+    "official_content_length_checked": true,
+    "visual_samples": [
+      "2012 page 1",
+      "2025 page 1"
+    ]
+  },
+  "files": [
+    {
+      "year": 2012,
+      "path": "2012/Physics_Brawl_Online_2012_English_Problems_and_Solutions.pdf",
+      "source_url": "https://physicsbrawl.org/download/2012/solutions.pdf",
+      "bytes": 239052,
+      "official_etag": "\"3a5cc-60cd06d8a4277\"",
+      "pages": 35,
+      "sha256": "ea653ce671815accc82a31ee9964a693137ee7a9d79bb5e868fd6833692b69c7"
+    },
+    {
+      "year": 2013,
+      "path": "2013/Physics_Brawl_Online_2013_English_Problems_and_Solutions.pdf",
+      "source_url": "https://physicsbrawl.org/download/2013/solutions.pdf",
+      "bytes": 424625,
+      "official_etag": "\"67ab1-60cd06d8a61b7\"",
+      "pages": 35,
+      "sha256": "fb942431f047308b932bccfcd2c19a1faa9a7da5d0491394e2734de341898fe0"
+    },
+    {
+      "year": 2014,
+      "path": "2014/Physics_Brawl_Online_2014_English_Problems_and_Solutions.pdf",
+      "source_url": "https://physicsbrawl.org/download/2014/solutions.pdf",
+      "bytes": 326259,
+      "official_etag": "\"4fa73-60cd06d8a7157\"",
+      "pages": 39,
+      "sha256": "67f88af2e56aa03e266b6ffcb2df599044a6c822f9e88bf1a5b1c5ef38d57c78"
+    },
+    {
+      "year": 2015,
+      "path": "2015/Physics_Brawl_Online_2015_English_Problems_and_Solutions.pdf",
+      "source_url": "https://physicsbrawl.org/download/2015/solutions.pdf",
+      "bytes": 307307,
+      "official_etag": "\"4b06b-60cd06d8a9097\"",
+      "pages": 45,
+      "sha256": "678a126ec7d21d19867cc735f9ce5c97c7a52007e4b596511777cbebec07eac1"
+    },
+    {
+      "year": 2016,
+      "path": "2016/Physics_Brawl_Online_2016_English_Problems_and_Solutions.pdf",
+      "source_url": "https://physicsbrawl.org/download/2016/solutions.pdf",
+      "bytes": 384230,
+      "official_etag": "\"5dce6-60cd06d8aafd8\"",
+      "pages": 50,
+      "sha256": "43ffdcce08814eec8b77e06e028f93147b0bb10ff038c03806fbeef960d865a8"
+    },
+    {
+      "year": 2017,
+      "path": "2017/Physics_Brawl_Online_2017_English_Problems_and_Solutions.pdf",
+      "source_url": "https://physicsbrawl.org/download/2017/solutions.pdf",
+      "bytes": 308966,
+      "official_etag": "\"4b6e6-60cd06d8abf78\"",
+      "pages": 46,
+      "sha256": "ae917506c6844a7877240904897d26453d8e62baa48753d361f1038c272ed4ba"
+    },
+    {
+      "year": 2018,
+      "path": "2018/Physics_Brawl_Online_2018_English_Problems_and_Solutions.pdf",
+      "source_url": "https://physicsbrawl.org/download/2018/solutions.pdf",
+      "bytes": 321414,
+      "official_etag": "\"4e786-60cd06d8adeb8\"",
+      "pages": 47,
+      "sha256": "fb23fd1092e08b74e183cb080eab8290b737a7f6473f132296085670a1197ff5"
+    },
+    {
+      "year": 2019,
+      "path": "2019/Physics_Brawl_Online_2019_English_Problems_and_Solutions.pdf",
+      "source_url": "https://physicsbrawl.org/download/2019/solutions.pdf",
+      "bytes": 425393,
+      "official_etag": "\"67db1-60cd06d8afdf8\"",
+      "pages": 51,
+      "sha256": "394a50d2e1b2e07d51b5821d9fc0dbba6ed36469fd628bf61708175343602cdd"
+    },
+    {
+      "year": 2020,
+      "path": "2020/Physics_Brawl_Online_2020_English_Problems_and_Solutions.pdf",
+      "source_url": "https://physicsbrawl.org/download/2020/solutions.pdf",
+      "bytes": 408345,
+      "official_etag": "\"63b19-60cd06d8b1d38\"",
+      "pages": 54,
+      "sha256": "334bb9dd7023baaed1cdbb1a0a68d7785a50d061f80aca91705779464fdc85d4"
+    },
+    {
+      "year": 2021,
+      "path": "2021/Physics_Brawl_Online_2021_English_Problems_and_Solutions.pdf",
+      "source_url": "https://physicsbrawl.org/download/2021/solutions.pdf",
+      "bytes": 482132,
+      "official_etag": "\"75b54-60cd06d8b4c18\"",
+      "pages": 65,
+      "sha256": "c6f39b134c74e89781210fe9c8496a6d9f429278c62bff3862df9184f5fe3cff"
+    },
+    {
+      "year": 2022,
+      "path": "2022/Physics_Brawl_Online_2022_English_Problems_and_Solutions.pdf",
+      "source_url": "https://physicsbrawl.org/download/2022/solutions.pdf",
+      "bytes": 835470,
+      "official_etag": "\"cbf8e-60cd06d8b9a39\"",
+      "pages": 71,
+      "sha256": "ffffa2dc7f23886c0990b0f021a84d6e0ea386761ce3063df02c5efe1c8a1322"
+    },
+    {
+      "year": 2023,
+      "path": "2023/Physics_Brawl_Online_2023_English_Problems_and_Solutions.pdf",
+      "source_url": "https://physicsbrawl.org/download/2023/solutions.pdf",
+      "bytes": 560572,
+      "official_etag": "\"88dbc-60cd06d8bb979\"",
+      "pages": 79,
+      "sha256": "42d78574e8991491f9cb14d3fba3a5dd6f4d772c7e3470fa434a31b08da0a30f"
+    },
+    {
+      "year": 2024,
+      "path": "2024/Physics_Brawl_Online_2024_English_Problems_and_Solutions.pdf",
+      "source_url": "https://physicsbrawl.org/download/2024/solutions.pdf",
+      "bytes": 886907,
+      "official_etag": "\"d887b-62919bd649307\"",
+      "pages": 66,
+      "sha256": "e8bfa492f8431bb4e33431fec9a0c0901e959c2cad1c8108f1eeb1a580facef7"
+    },
+    {
+      "year": 2025,
+      "path": "2025/Physics_Brawl_Online_2025_English_Problems_and_Solutions.pdf",
+      "source_url": "https://physicsbrawl.org/download/2025/solutions.pdf",
+      "bytes": 1634954,
+      "official_etag": "\"18f28a-6467bdaa97828\"",
+      "pages": 104,
+      "sha256": "b1c1bd23b7574561ba9c01b840265e19e46b01f0420f17d7588bc1b2c01fc417"
+    }
+  ]
+}

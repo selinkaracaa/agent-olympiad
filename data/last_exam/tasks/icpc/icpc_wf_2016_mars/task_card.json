@@ -1,0 +1,33 @@
+{
+  "task_id": "icpc/icpc_wf_2016_mars",
+  "competition_id": "icpc",
+  "problem_id": "icpc_wf_2016_mars",
+  "title": "What Really Happened on Mars?",
+  "year": 2016,
+  "team_size": 3,
+  "source_url": "https://open.kattis.com/problems/mars",
+  "inherits_competition_pack": "competitions/icpc",
+  "rule_card": "data/rules/icpc",
+  "input": {
+    "visibility": "agent_at_start",
+    "files": [
+      {
+        "name": "problem.md",
+        "path": "base/input/problem.md"
+      },
+      {
+        "name": "mars.txt.path",
+        "path": "base/input/mars.txt.path"
+      }
+    ]
+  },
+  "method": {
+    "visibility": "agent_at_start",
+    "path": "competitions/icpc/method"
+  },
+  "eval": {
+    "visibility": "hidden_until_grade",
+    "path": "eval/reference.json",
+    "competition_eval": "competitions/icpc/eval"
+  }
+}

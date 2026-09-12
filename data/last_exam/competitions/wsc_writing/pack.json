@@ -1,0 +1,15 @@
+{
+  "competition_id": "wsc_writing",
+  "rule_id": "wsc_writing:draft_v1",
+  "profile": "proxy",
+  "protocol": "staged_collaborative_writing",
+  "visibility": {
+    "agent_at_start": [
+      "input",
+      "method"
+    ],
+    "hidden_until_grade": [
+      "eval"
+    ]
+  }
+}

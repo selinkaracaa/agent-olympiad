@@ -1,0 +1,150 @@
+{
+  "rubric_id": "arml_power_fall_2025_v1",
+  "title": "Power Round \u2014 Fall 2025 \u2014 ARML Power sub-problem rubric",
+  "total_points": 40.0,
+  "criteria": [
+    {
+      "id": "problem_01",
+      "name": "Problem 1",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 1 (2 pts). Statement: 1. List all positive integers less than 100 that are perfect powers. (That is, numbers n such that n = ab where a is an integer and b is a positive integer greater than 1.)"
+    },
+    {
+      "id": "problem_02",
+      "name": "Problem 2",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 2 (2 pts). Statement: 2. Among these perfect powers, several combinations add to zero, where a combination is any sum or difference of distinct numbers. For instance, 9 + 16 \u2212 25 = 0 or 1 + 8 + 9 \u2212 16 + 25\u2212 27 = 0. List three more such combinations, each using at most six of the numbers in the list from problem 1. (changing all the signs in a combination does not count as a separate combination!)."
+    },
+    {
+      "id": "problem_03",
+      "name": "Problem 3",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 3 (2 pts). Statement: 3. One of the most interesting combinations that adds to zero is this string of consecutive squares: 12 \u2212 22 \u2212 32 + 42 \u2212 52 + 62 + 72 \u2212 82 = 0. In fact, prove that for any 8 consecutive integers (not necessarily positive) a, a + 1, . . . ,a + 7, using the same signs as in the above expression,"
+    },
+    {
+      "id": "problem_04",
+      "name": "Problem 4",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 4 (1 pt). Statement: 4."
+    },
+    {
+      "id": "problem_05",
+      "name": "Problem 5",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 5 (2 pts). Statement: 5. Prove that the length of Wn is 2n."
+    },
+    {
+      "id": "problem_06",
+      "name": "Problem 6",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 6 (1 pt). Statement: 6. Compute s23."
+    },
+    {
+      "id": "problem_07",
+      "name": "Problem 7",
+      "max_score": 3.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 7 (3 pts). Statement: 7. Prove Wn is a palindrome (that is, the word is left unchanged by reversing the order of its letters) if and only if n is even."
+    },
+    {
+      "id": "problem_08",
+      "name": "Problem 8",
+      "max_score": 3.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 8 (3 pts). Statement: 8. Show that for any nonnegative integer, k, that the number of ones in the binary expression for k is even if sk = 0 and odd if sk = 1. For instance, 6 = 110 (2) has an even number of ones, and s6 = 0."
+    },
+    {
+      "id": "problem_10a",
+      "name": "Problem 10a",
+      "max_score": 3.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 10a (3 pts). Statement: 10. For instance, \u00b5(100) = 100101. Prove that \u00b5(Wn) = Wn+1 and that \u00b5(Wn) = Wn+1."
+    },
+    {
+      "id": "problem_10b",
+      "name": "Problem 10b",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 10b (2 pts). Statement: 10. Prove that for any nonnegative integer k, s2k = sk and s2k+1 = 1 \u2212 sk."
+    },
+    {
+      "id": "problem_11a",
+      "name": "Problem 11a",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 11a (1 pt). Statement: 11. (a) Let p(x) be any constant polynomial, p(x) = c0, and let a be any real number. Show \u2206ap(x) = 0."
+    },
+    {
+      "id": "problem_11b",
+      "name": "Problem 11b",
+      "max_score": 3.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 11b (3 pts). Statement: (b) Let p(x) = cdxd + cd\u22121xd\u22121 + \u00b7 \u00b7 \u00b7+ c1x + c0 with cd \u0338= 0 be any polynomial of positive degree, d >0, and let a be any nonzero real number. Show that \u2206 ap(x) has degree exactly d \u2212 1."
+    },
+    {
+      "id": "problem_11c",
+      "name": "Problem 11c",
+      "max_score": 3.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 11c (3 pts). Statement: (c) Let p(x) have degree d and let a1, a2, . . .ad, ad+1 be any d + 1 real numbers. Show that \u2206a1(\u2206a2 \u00b7 \u00b7 \u00b7\u2206ad(\u2206ad+1p(x)) \u00b7 \u00b7 \u00b7) = 0."
+    },
+    {
+      "id": "problem_12",
+      "name": "Problem 12",
+      "max_score": 4.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 12 (4 pts). Statement: 12. For any polynomial p(x) and any nonnegative integer n, prove that pn(x) = 2n\u22121X j=0 (\u22121)sj p(x + j) where the sj are the entries of the Thue-Morse sequence defined previously."
+    },
+    {
+      "id": "problem_13",
+      "name": "Problem 13",
+      "max_score": 3.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 13 (3 pts). Statement: 13. Prove that for any nonnegative integer n, the combination of 2 n+1 consecutive powers, using signs determined by terms of the Thue-Morse sequence (0 \u2194 +, 1 \u2194 \u2212), sums to zero, for any power up to and including n. (For example, with n = 2 the statement is that each of a0 \u2212 (a + 1)0 \u2212 (a + 2)0 + (a + 3)0 \u2212 (a + 4)0 + (a + 5)0 + (a + 6)0 \u2212 (a + 7)0 = 0 a1 \u2212 (a + 1)1 \u2212 (a + 2)1 + (a + 3)1 \u2212 (a + 4)1 + (a + 5)1 + (a + 6)1 \u2212 (a + 7)1 = 0 a2 \u2212 (a + 1)2 \u2212 (a + 2)2 + (a + 3)2 \u2212 (a + 4)2 + (a + 5)2 + (a + 6)2 \u2212 (a + 7)2 = 0 for any a. Compare with problem 3.)"
+    },
+    {
+      "id": "problem_14",
+      "name": "Problem 14",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 14 (1 pt). Statement: 14. Given 16 cubes whose edges have lengths 1, 2, . . . , 16, separate the cubes into two subsets so that the number of cubes in each subset, the total length of all edges of all cubes in each subset is equal, the total surface area of all cubes in each subset is equal, and the total volume of the cubes in each subset is equal, simultaneously!."
+    },
+    {
+      "id": "problem_15a",
+      "name": "Problem 15a",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 15a (2 pts). Statement: 15. (a) Prove that neither word 000 nor 111 can appear as a subword of Wn."
+    },
+    {
+      "id": "problem_15b",
+      "name": "Problem 15b",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 15b (2 pts). Statement: (b) Prove that neither word 01010 nor 10101 can appear as a subword of Wn."
+    }
+  ],
+  "not_observable_from_deck": [
+    "oral defense",
+    "diagrams that were not recovered from the source PDF"
+  ],
+  "provenance": {
+    "competition_id": "arml_power",
+    "problem_id": "arml_power_fall_2025",
+    "year": 2025,
+    "source_file": "data/raw/arml/Fall_2025/ARMLPower_Fall_2025.pdf",
+    "solution_file": "data/raw/arml/Fall_2025/ARMLPower_Fall_Solution_2025.pdf",
+    "official_total_points": 40.0,
+    "parsed_total_points": 40.0,
+    "points_coverage": 1.0,
+    "awards_parsed": 18,
+    "problems_parsed": 14,
+    "derived_by": "scripts/build_arml_power_rubrics.py"
+  }
+}

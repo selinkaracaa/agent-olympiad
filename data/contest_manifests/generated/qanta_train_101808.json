@@ -1,0 +1,9 @@
+{
+  "session_id": "qanta_train_101808",
+  "competition_id": "qanta",
+  "problem_ids": [
+    "qanta_train_101808"
+  ],
+  "description": "OTC contest-session manifest for qanta_train_101808",
+  "split_parts": false
+}

@@ -1,0 +1,17 @@
+{
+  "competition_id": "cfa_research_challenge",
+  "crawled_at": "2026-08-11T16:07:40.768258+00:00",
+  "sources": [
+    {
+      "title": "CFA Research Challenge",
+      "url": "https://www.cfainstitute.org/insights/events/research-challenge",
+      "status": "ok",
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 269030,
+      "raw_file": "data/rules/sources/cfa_research_challenge/01_research-challenge.html",
+      "text_file": "data/rules/sources/cfa_research_challenge/01_research-challenge.txt",
+      "text_chars": 8196,
+      "text_preview": "Research Challenge | CFA Institute \n \n \n\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n Skip to main content\n \n\n \n Employers Universities University students \n \n \n \n \n Sign In \n Create Account \n \n \n \n \n Open Search Overlay Close Search Overlay I'm looking for: \n \n\n \n \n \n\n \n \n \n\n \n \n \n \n \n \n Sign In \n Create Account \n \n \n Programs CFA® Program Overview Exam Dates & fees Curriculum Learning Ecosystem Career prospects Policies Registered candidate resources Enroll and register Other programs CIPM® Program Sustainable Investing Principles of Sustainable Investing (Chinese) 可持续投资基础证书 Climate Investing Private Markets Private Equity Investment Foundations® View all programs Learning paths Private markets Sustainability Program support Help choosing a program All candidate resources Candidate sign in Membership Explore membership Membership overview Compare membership types Charterholder membership Professional membership Associate membership For members Find a member Renew membership Member portal Additional resources CFA Institute job board Communities Volunteering Find a CFA Society® Professional learning program Insights Research & Policy Center Research and thought leadership Financial Analysts Journal Research Foundation Podcasts & blogs Research & Policy Center In Brief Career insights Digital innovation First person Trends ESG View all articles Events Upcoming events Event recordings Event sponsorship Research Challenge CFA Institute a"
+    }
+  ]
+}

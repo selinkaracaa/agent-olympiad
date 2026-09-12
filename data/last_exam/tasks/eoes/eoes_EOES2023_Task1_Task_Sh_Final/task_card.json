@@ -1,0 +1,33 @@
+{
+  "task_id": "eoes/eoes_EOES2023_Task1_Task_Sh_Final",
+  "competition_id": "eoes",
+  "problem_id": "eoes_EOES2023_Task1_Task_Sh_Final",
+  "title": "EOES2023_Task1_Task_Sh_Final",
+  "year": 2023,
+  "team_size": 3,
+  "source_url": "https://www.eoes.science/Previous%20olympiads/previous.html",
+  "inherits_competition_pack": "competitions/eoes",
+  "rule_card": "data/rules/eoes",
+  "input": {
+    "visibility": "agent_at_start",
+    "files": [
+      {
+        "name": "problem.md",
+        "path": "base/input/problem.md"
+      },
+      {
+        "name": "EOES2023_Task1_Task_Sh_Final.pdf.path",
+        "path": "base/input/EOES2023_Task1_Task_Sh_Final.pdf.path"
+      }
+    ]
+  },
+  "method": {
+    "visibility": "agent_at_start",
+    "path": "competitions/eoes/method"
+  },
+  "eval": {
+    "visibility": "hidden_until_grade",
+    "path": "eval/reference.json",
+    "competition_eval": "competitions/eoes/eval"
+  }
+}

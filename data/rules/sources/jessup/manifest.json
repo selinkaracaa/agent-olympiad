@@ -1,0 +1,17 @@
+{
+  "competition_id": "jessup",
+  "crawled_at": "2026-08-11T16:10:38.682306+00:00",
+  "sources": [
+    {
+      "title": "Jessup",
+      "url": "https://www.ilsa.org/jessup/",
+      "status": "ok",
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 240349,
+      "raw_file": "data/rules/sources/jessup/01_jessup.html",
+      "text_file": "data/rules/sources/jessup/01_jessup.txt",
+      "text_chars": 33683,
+      "text_preview": "About the Jessup &#8211; International Law Students Association \n \n \n \n \n \n \r\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n\n \n\n \n\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n\n \n\n \n Skip to content \n \n \n \n \n \n \n Menu \n ILSA \n \n Latest News \n About ILSA \n Board of Directors \n ILSA Student Directors \n Student Deak Award \n Annual International Refugee Law Student Writing Competition \n Publications \n \n Jessup Compendium \n ILSA Guide to International Law Moot Court Competitions \n \n \n Policies \n \n \n Jessup \n \n About the Jessup \n Jessup 2027 \n \n Competition Materials \n Rules \n Competition Schedule \n National and Friendly Rounds \n White & Case International Rounds \n King & Spalding United States National Rounds \n \n \n Frequently Asked Questions \n Registering Your Team \n Judging at the Jessup \n Advertising and Sponsorship \n \n Academic Institution Advertising \n Law Firm Sponsorship \n \n \n Jessup History \n \n \n HLI Moot \n Donate \n \n Donate to ILSA \n All Rise Society \n Rusty Dalferes Memorial Fund \n Store \n \n \n Log In \n \n \n \n \n \n About the Jessup \n \n \n \n\n \n \n \n \n \n \n What is the Jessup? \n\n Jessup is the world&#8217;s largest moot court competition, with participants from roughly 700 law schools in 100 countries and jurisdictions. The Competition is a simulation of a fictional dispute between countries before the International Court of Justice, the judicial organ of the United Nations. One t"
+    }
+  ]
+}

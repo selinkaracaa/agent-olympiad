@@ -29,7 +29,7 @@ def build_markdown(transcript: dict[str, Any], source: Path) -> str:
         if not agent or agent in {"Coach", "Contest_Control"}:
             continue
         action = str(entry.get("action") or "")
-        if action == "submit_final":
+        if action in {"submit", "submit_final"}:
             continue
         actions[(int(entry.get("turn", 0)), agent)] = entry
 

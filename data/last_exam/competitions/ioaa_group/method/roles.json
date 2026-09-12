@@ -1,0 +1,56 @@
+{
+  "source": "data/rules/ioaa_group/collaboration.json#agent_roles",
+  "information_policy": "shared",
+  "roles": [
+    {
+      "name": "Agent_1",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit an IOAA international-team contestant identity assigned across countries.",
+        "Work the host-designed group task with equal teammates and only provided materials.",
+        "Share decision-relevant discoveries and help reconcile one shared boxed-answer sheet."
+      ]
+    },
+    {
+      "name": "Agent_2",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit an IOAA international-team contestant identity assigned across countries.",
+        "Work the host-designed group task with equal teammates and only provided materials.",
+        "Share decision-relevant discoveries and help reconcile one shared boxed-answer sheet."
+      ]
+    },
+    {
+      "name": "Agent_3",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit an IOAA international-team contestant identity assigned across countries.",
+        "Work the host-designed group task with equal teammates and only provided materials.",
+        "Share decision-relevant discoveries and help reconcile one shared boxed-answer sheet."
+      ]
+    },
+    {
+      "name": "Agent_4",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit an IOAA international-team contestant identity assigned across countries.",
+        "Work the host-designed group task with equal teammates and only provided materials.",
+        "Share decision-relevant discoveries and help reconcile one shared boxed-answer sheet."
+      ]
+    },
+    {
+      "name": "Agent_5",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit an IOAA international-team contestant identity assigned across countries.",
+        "Work the host-designed group task with equal teammates and only provided materials.",
+        "Share decision-relevant discoveries and help reconcile one shared boxed-answer sheet."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,3 @@
+# 2007/puzzles/cambridge_tea_part
+
+VIII-3: Cambridge Tea Party Lesson VIII-3: Counterrevolutionary Activities They wouldn't be called &ldquo;freedom fighters&rdquo; if they were FOR freedom, now would they? Cambridge Tea Party The rebels are hiding an inordinate amount of tea for illicit harbor-dumping activities, and it's up to you to find it. You'll start your investigation at a Cambridge restaurant. To obtain its location, you'll want to listen to a man who played Signor Ferrari in Casablanca. When you're there, ask for the "Mystery Tea" (or if they're closed, check in at the nearest counter). (In the Hunt, asking for the Mystery Tea from the correct location got you this handout .)

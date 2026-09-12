@@ -1,0 +1,13 @@
+{
+  "session_id": "icpc_wf_2012_5",
+  "competition_id": "icpc",
+  "problem_ids": [
+    "icpc_wf_2012_bottles",
+    "icpc_wf_2012_bustour",
+    "icpc_wf_2012_fibonacci",
+    "icpc_wf_2012_flightpath",
+    "icpc_wf_2012_infiltration2"
+  ],
+  "split_parts": false,
+  "description": "Five-problem ICPC World Finals 2012 matched-pair smoke manifest."
+}

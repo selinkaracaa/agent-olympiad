@@ -1,0 +1,3 @@
+# Science
+
+He got his brothers to climb a mountain with a barometer and thus establish Torricelli's view that pressure would drop at higher altitudes. In correspondence he and Fermat tackled the inquiries of a puzzled gentleman gambler and worked out the basics of probability theory. Before an intense conversion led him to chuck science for theology, he also pointed out that pressure exerted on a fluid in a closed vessel is transmitted undiminished throught the vessel at right angles to the container's surface. FTP name this French scientist, the author of PensŽes (pawn-say) who is best known for his triangle.

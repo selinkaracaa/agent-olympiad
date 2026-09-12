@@ -1,0 +1,33 @@
+{
+  "task_id": "cfa_research_challenge/cfa_research_challenge_2013",
+  "competition_id": "cfa_research_challenge",
+  "problem_id": "cfa_research_challenge_2013",
+  "title": "KGHM Polska Miedź S.A. (KGH.WA)",
+  "year": 2013,
+  "team_size": 4,
+  "source_url": "https://www.cfainstitute.org/insights/events/research-challenge/past-champions",
+  "inherits_competition_pack": "competitions/cfa_research_challenge",
+  "rule_card": "data/rules/cfa_research_challenge",
+  "input": {
+    "visibility": "agent_at_start",
+    "files": [
+      {
+        "name": "problem.md",
+        "path": "base/input/problem.md"
+      },
+      {
+        "name": "rc-2013-rpt-wroclaw-univ.pdf.path",
+        "path": "base/input/rc-2013-rpt-wroclaw-univ.pdf.path"
+      }
+    ]
+  },
+  "method": {
+    "visibility": "agent_at_start",
+    "path": "competitions/cfa_research_challenge/method"
+  },
+  "eval": {
+    "visibility": "hidden_until_grade",
+    "path": "eval/reference.json",
+    "competition_eval": "competitions/cfa_research_challenge/eval"
+  }
+}

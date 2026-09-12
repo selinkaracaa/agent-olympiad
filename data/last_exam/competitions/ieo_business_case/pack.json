@@ -1,0 +1,15 @@
+{
+  "competition_id": "ieo_business_case",
+  "rule_id": "ieo_business_case:draft_v1",
+  "profile": "proxy",
+  "protocol": "research_artifact",
+  "visibility": {
+    "agent_at_start": [
+      "input",
+      "method"
+    ],
+    "hidden_until_grade": [
+      "eval"
+    ]
+  }
+}

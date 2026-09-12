@@ -1,0 +1,644 @@
+GitHub - NYU-LLM-CTF/NYU_CTF_Bench · GitHub 
+
+ 
+ 
+ 
+ 
+
+ 
+ 
+
+ 
+
+ 
+
+ 
+ 
+
+ 
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+ 
+
+ 
+
+ 
+ 
+
+ 
+
+ 
+
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+
+ 
+ Skip to content 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ Navigation Menu Sign in Appearance settings Platform AI CODE CREATION GitHub Copilot Write better code with AI GitHub Copilot app Direct agents from issue to merge MCP Registry Integrate external tools DEVELOPER WORKFLOWS Actions Automate any workflow Codespaces Instant dev environments Issues Plan and track work Code Review Manage code changes Code Quality Enforce quality at merge APPLICATION SECURITY GitHub Advanced Security Find and fix vulnerabilities Code security Secure your code as you build Secret protection Stop leaks before they start EXPLORE Why GitHub Documentation Blog Changelog Marketplace View all features Solutions BY COMPANY SIZE Enterprises Small and medium teams Startups Nonprofits BY USE CASE App Modernization DevSecOps DevOps CI/CD View all use cases BY INDUSTRY Healthcare Financial services Manufacturing Government View all industries View all solutions Resources EXPLORE BY TOPIC AI Software Development DevOps Security View all topics EXPLORE BY TYPE Customer stories Events & webinars Ebooks & reports Business insights GitHub Skills SUPPORT & SERVICES Documentation Customer support Community forum Trust center Partners View all resources Open Source COMMUNITY GitHub Sponsors Fund open source developers PROGRAMS Security Lab Maintainer Community Accelerator GitHub Stars Archive Program REPOSITORIES Topics Trending Collections Enterprise ENTERPRISE SOLUTIONS Enterprise platform AI-powered developer platform AVAILABLE ADD-ONS GitHub Advanced Security Enterprise-grade security features Copilot for Business Enterprise-grade AI features Premium Support Enterprise-grade 24/7 support Pricing Type / to search Sign in Sign up Appearance settings 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ You signed in with another tab or window. Reload to refresh your session. 
+ You signed out in another tab or window. Reload to refresh your session. 
+ You switched accounts on another tab or window. Reload to refresh your session. 
+
+ 
+ 
+ 
+ Dismiss alert 
+
+ 
+ 
+ 
+
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ {{ message }} 
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Uh oh!
+ 
+ There was an error while loading. Please reload this page .
+
+ 
+ 
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ NYU-LLM-CTF
+ 
+ / 
+ 
+ NYU_CTF_Bench 
+ 
+
+ Public 
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ Notifications
+ You must be signed in to change notification settings 
+
+ 
+
+ 
+ 
+ 
+ Fork
+ 27 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ Star
+ 166 
+ 
+ 
+
+ 
+
+ 
+ 
+
+ 
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Code 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Issues 
+ 2 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Pull requests 
+ 1 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Actions 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Projects 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Security and quality 
+ 0 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Insights 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Additional navigation options 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Code
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Issues
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Pull requests
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Actions
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Projects
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Security and quality
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Insights
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+ main Branches Tags Go to file Code Open more actions menu Folders and files Name Name Last commit message Last commit date Latest commit   History 245 Commits 245 Commits CA CA     development development     mitre_attack_mapping mitre_attack_mapping     python python     removed removed     scripts scripts     test test     .gitignore .gitignore     LICENSE LICENSE     README.md README.md     TODO.md TODO.md     development_dataset.json development_dataset.json     test_dataset.json test_dataset.json     View all files Repository files navigation README GPL-2.0 license More items NYU CTF Bench 
+ This repository hosts the NYU CTF Bench, a collection of CTF challenges from the CSAW CTF competitions, designed for evaluation of LLM agents.
+The CTF challenges are dockerized and easily deployable to allow an LLM-based automation framework to interact with the challenge and attempt a solution.
+The main benchmark dataset contains 200 challenges across 6 CTF categories: web, binary exploitation (pwn), forensics, reverse engineering (rev), cryptography (crypto), and miscellaneous (misc).
+
+ Benchmark structure 
+ The test/ folder contains the main benchmark dataset of 200 challenges. A smaller development set of 55 challenges is present in the development/ folder.
+The development set can be treated equivalent to a "train" split and used for building the agent, so that design decisions made to improve the agent do not bias the test scores.
+
+ The folder structure is as follows: <year>/<event>/<category>/<challenge> .
+ <year> is the year of the competition, <event> is either "CSAW-Quals" or "CSAW-Finals", <category> is among the 6 categories, and <challenge> is the challenge name.
+Note that the challenge name may have spaces and single-quotes, so it is advisable to wrap it in double-quotes when using in scripts.
+
+ Each challenge contains a challenge.json containing the metadata of the challenge, and the corresponding challenge files.
+Challenges that require a server to host some challenge files are set up with a docker image, and a docker-compose.yaml file.
+The docker image is loaded directly using docker compose up .
+
+ Setup 
+ Install the python package:
+
+ pip install nyuctf
+ 
+ The repository is automatically cloned when the CTFDataset is first instantiated with the split argument.
+If needed, you can manually clone it by running:
+
+ python3 -m nyuctf.download
+ 
+ Usage 
+ The following python snippet shows how to load challenge details using the python module:
+
+ from nyuctf.dataset import CTFDataset
+from nyuctf.challenge import CTFChallenge
+
+# Clones the repository for the first time, which takes a while
+ds = CTFDataset(split="test")
+chal = CTFChallenge(ds.get("2021f-rev-maze"), ds.basedir)
+
+print(chal.name)
+print(chal.flag)
+print(chal.files)
+ 
+ Tests 
+ Run tests on the challenges, for docker setup and network connection.
+Requires the docker network to be setup.
+
+ cd python
+python -m unittest -v test.test_challenges
+ 
+ Optionally filter the tests with the unittest -k flag.
+
+ About No description, website, or topics provided. Resources Readme GPL-2.0 license Activity Custom properties Stars 166 stars Watchers 6 watching Forks 27 forks Report repository Releases Packages Used by Contributors Languages 
+ 
+
+ 
+
+ 
+
+ 
+ 
+
+ 
+
+ 
+ Footer 
+
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ &copy; 2026 GitHub, Inc.
+ 
+ 
+
+ 
+ Footer navigation 
+
+ 
+
+ 
+ Terms 
+ 
+
+ 
+ Privacy 
+ 
+
+ 
+ Security 
+ 
+
+ 
+ Status 
+ 
+
+ 
+ Community 
+ 
+
+ 
+ Docs 
+ 
+
+ 
+ Contact 
+ 
+
+ 
+ 
+ 
+ Manage cookies
+ 
+ 
+ 
+
+ 
+ 
+ 
+ Do not share my personal information
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ You can’t perform that action at this time.

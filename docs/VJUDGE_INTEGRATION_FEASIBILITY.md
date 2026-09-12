@@ -225,7 +225,7 @@ provider 返回原始响应摘要和规范化 verdict，但不让 agent 直接�
 
 ## 6. 已实现的 turn 内闭环（2026-08-27 / 更新 2026-08-28）
 
-当 `VJUDGE_GATEWAY_URL` 已配置时，编程 agent 的 `submit_code` / 编程 `submit_final` 现在执行：
+当 `VJUDGE_GATEWAY_URL` 已配置时，编程 agent 的 `submit_code` / 编程 `submit`（旧名 `submit_final`）现在执行：
 
 1. 先跑本地 sample judge；未通过则直接把本地 verdict 返回下一 turn。
 2. 本地 AC 后，自动调用 localhost gateway 提交源码到 VJudge。

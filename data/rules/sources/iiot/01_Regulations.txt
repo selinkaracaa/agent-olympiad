@@ -1,0 +1,349 @@
+IIOT regulations ver. 3 Oct 2024                                                                                       Page 1 of 9 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+INTERNATIONAL INFORMATICS OLYMPIAD IN TEAMS 
+ 
+REGULATIONS 
+ 
+Introduction 
+Goals 
+General regulations 
+Teams 
+The International Committee 
+The Scientific Committee 
+Competitions 
+Problems 
+Evaluation 
+Results and prizes 
+Host Country 
+ 
+ 
+ 
+ 
+Approved by the International Committee IIOT 
+Egypt, Hungary, Italy, Romania, Syria 
+the 3rd of October 2024 
+
+IIOT regulations ver. 3 Oct 2024                                                                                       Page 2 of 9 
+INTRODUCTION 
+The Olympiad is organized by an International Committee, which consists of the  
+representatives of the countries which are regular participants. Regular participants are the 
+countries which, in turn, organize the International Olympiad. At present the 
+representatives of Italy, Romania , Egypt, Syria and Hungary are regular participants, as  
+founding countries of the competition  (Italy and Romania) and full members ( Egypt, Syria 
+and Hungary). According to the rules accepted by the initiators of  the IIOT, any other 
+teams can be invited as regular participants, if they become full  members of the 
+organizational committee, so they will also be hosts of the final future  editions of IIOT. 
+Moreover, the host country may invite guest participants from other  countries. The guest 
+teams will, in certain situations, have to pay a participation fee. 
+English is the official language for all communication: documents, problems texts,  
+website, emails and appeals. 
+IIOT logo, name and trophy are property of the International Committee and can be  
+used only under its formal written permission and never for commercial use. 
+ 
+GOALS 
+IIOT aims at motivating secondary school students to get more interested in 
+informatics and information technology in general, test and prove their competence in  
+solving problems with the help of computers, exchange knowledge and experience with 
+other students of similar interest and qualification, establish personal contacts with young  
+people of other countries. 
+The primary objective is to stimulate the interest of young people in Computer  
+Science and Information Technologies alongside the Individual Computer Olympiad. 
+More and more often, the work world operates in contexts in which working groups  
+(or teamwork) are made up to carry out specific projects or activities. The ability to work in  
+groups, therefore, becomes a prerequisite for all those who move in the current labor  
+market. Today’s organizations, as a matter of fact, aim a lot for group work as a strategy to  
+achieve better results under collective talents of the team, the ability of members to  
+support each other to overcome the difficult times, the ability to multiply the options thanks  
+to the creativity that comes from the comparison of different ideas. The teamwork skill  
+becomes a requirement by companies that select personnel, but not only; assuming that in  
+all workplaces, or nearly so, you need to interface with other people to carry on your own  
+activities, it is clear that establishing  this capability could lead to a better life working  
+environment and improve the level of performance. 
+ 
+ 
+GENERAL REGULATIONS 
+Each team is coordinated by one team leader. The teams will be registered in the 
+competitions by their coordinating team leader. 
+Only the cost of travel to and from the place of the competition should be paid by 
+the first winning team (4 students and a teacher) of each National Final Competition, the  
+leader school team (4 students and a teacher) and by each national committee (4 people);  
+all local expenses are covered by the institutions from the host country. 
+IIOT regulations ver. 3 Oct 2024                                                                                       Page 3 of 9 
+Accompanying persons and observers are welcome, but they should pay for their  
+stay. Interested people are advised to contact the local organizers. 
+Only the computers and software with built-in help facilities provided by the 
+organizers may be used in the competition. The host country shall provide software  
+(including the operating system) localized in English. Each team may bring and use their  
+own mouse and keyboard, provided that they are approved by the host scientific 
+committee. 
+ 
+ 
+TEAMS 
+The contestants are students enrolled in a school for secondary education/high  
+school, in the country they are representing, during at least September - December in the  
+year before IIOT final  and who are not older than 20 on July 1 st of the year of IIOT final.  
+Students who are studying abroad may represent the country of their nationality. 
+If all members of a team have a nationality other than the country of their school, or  
+the team represents a linguistic minority school, then the team may represent the foreign  
+country, if allowed by that country. In such cases, the team can only participate in one  
+country's qualifying contest, and they must choose before the start of the preliminary  
+online competitions. 
+Each team is composed of 4 students and 2 reserves for replacement, if needed. A  
+team can include no more than one awarded contestant of the National Individual 
+Olympiad in Programming in the previous year (for practical purposes, the teams’ 
+composition refers to the last available results of the National Individual Olympiad). There  
+cannot be any student exchanges between teams. A team cannot be composed of 
+students from different schools. 
+If, and only if, a national organization has in charge all the management (see next  
+point in Regulations: “The International Committee” ), students must come from the same 
+institution or region in the mandatory spirit of preserving the single teams that competed in  
+the national context. 
+Teams attending the International Final are directly selected by the country they  
+represent according to its own rules. It is mandatory for regular countries to have a form of  
+national qualifying contest in presence. 
+ 
+ 
+THE INTERNATIONAL COMMITTEE 
+The International Committee (IC) is the engine of IIOT; it consists of the 
+representatives of the countries which are regular participants. Each country is 
+represented by a national committee that consists of four people: the representative of the  
+Ministry of Education or another appropriate institution, the scientific coordinator and the  
+headmaster and a teacher of the leader school. 
+The competition is born and has to remain a competition between schools, so we  
+consider mainly schools as representatives and managers of each national championship.  
+If, and only if, the national school curriculum does not provide for programming, a national 
+IIOT regulations ver. 3 Oct 2024                                                                                       Page 4 of 9 
+organization might have in charge all the management. In this case, the national 
+committee will consist of the president and a qualified member of the national organization, 
+instead of the headmaster and the teacher of the leader school. In this case, no team from  
+the leader  school will be present at the International final, nor the team’s coach. In this  
+case, the national organization may have the same privileges as a leader school. 
+Every year during the IIOT competition days, IC members have a round -table 
+meeting so as to evaluate the current edition, plan next year’s edition, make changes in 
+the Regulations if needed, and welcome the requests of nations wishing to become part of  
+the project. 
+During these meetings, IC members elect the International Secretary with the 
+tasks of upholding the IIOT web site, carrying out the countries admission formalities, 
+writing the minutes at the end of the IC meetings and protecting and upholding IIOT 
+Regulations. The International Secretary is elected by an IC majority vote, remains in 
+charge for three years and can be removed by a 2/3 IC majority vote during an IC meeting. 
+During these meetings, IC members also elect the International Coordinator with 
+the tasks of maintaining the IIOT institutional email, ensuring communication and co-
+operation within the IC members, representing the project at the exterior, promoting the  
+IIOT development, establishing links with other International Olympiads and/or the 
+Informatics Olympiad in synergy with the IC. The International Coordinator is elected by an  
+IC majority vote, remains in charge for three years and can be removed by a 2/3 IC  
+majority vote during an IC meeting. 
+The voting procedure is based on “one country, one vote”; votes require a simple  
+majority except for what has already been said and the following decisions: 
+● selection of the next host is made by the IC by a majority vote; 
+● revision of the Regulations of the IIOT is adopted by the IC by a 2/3 majority vote; 
+● enlarging or reducing the set of IIOT countries can only be adopted by a 2/3  
+majority vote. 
+IC meetings can also be held on-line. 
+IC meetings are exceptionally open to invite other personalities for specific and well-
+defined purposes. Invitations are made by the IC himself/herself; the invited people  have 
+no voting rights. 
+ 
+THE GENERAL ASSEMBLY 
+The General Assembly (GA) is the democratic representative of all those who are  
+involved in IIOT, both  as regular and guest nations. It is composed of the team leaders of 
+the participating countries, experts in Informatics and a president nominated by the host  
+country, together with four people for each country: the representative of the Ministry of  
+Education or another appropriate institution, the scientific coordinator and the headmaster  
+and a teacher of the leader school. 
+The GA determines the minimum scores for the gold, silver and bronze medals. 
+The voting procedure is based on “one country, one vote”; votes require a simple  
+majority. 
+The GA’s life is during that specific IIOT edition. 
+IIOT regulations ver. 3 Oct 2024                                                                                       Page 5 of 9 
+THE SCIENTIFIC COMMITTEE 
+The National Scientific Committee (SC) of each regular participant country of the  
+IIOT consists of the scientific experts who could be teachers and University students,  
+coordinated by a University referent. 
+The National Scientific Committees become active well before the beginning of the  
+Olympiad and have the task of selecting and preparing problem proposals, of testing and  
+evaluating the solutions of the contestants for their national championships. 
+The Scientific Committee of the host country should prepare for the International 
+Final Competition at least one extra proposal, besides the seven problems which the 
+contestants will have to solve. They will be presented to the International Scientific 
+Committee (consisting of a representative of each national SC) the day before the contest. 
+The International SC has the right to deny the proposal of a problem prepared and 
+proposed by the Scientific Committee of the host country, in case of a major ambiguity of 
+formulation or other serious reasons. For such cases the Scientific Committee of the host 
+country should prepare at least one extra proposal. The text of the accepted proposals 
+must not be changed by the International SC, except for minor rephrasing that is needed 
+to avoid smaller ambiguities. 
+The International Scientific Committee should set up a guideline for the Syllabus  
+and the production of problems during next year's edition . 
+The National Scientific Committees can receive help from a Technical Committee 
+at their discretion, which should propose, develop and support technical matters 
+concerning the IIOT: Virtual Machines, CMS, OS, tools, hardware, network security. One  
+month before the IIOT the host national Scientific Committee can collect the requests from  
+competing countries. 
+ 
+COMPETITIONS 
+Each regular member can decide by himself/herself  about the selection procedure  
+during its National Championship, but the National Final contest must be on -site and it  
+must be held by the 31st of March of the year of IIOT. 
+All the data about its competitions are published by the nation itself on its website 
+on some dedicated pages. It should include at least: 
+● enrolled teams data: team name, members (names, dates of birth, class 
+attended), school (name and city) 
+● scheduled contests 
+● contest rankings 
+For instance, a suggested format for the National Competition is the following: four 
+online preliminary competitions and one National Final on -site. Each competition lasts 3  
+hours and involves solving 7 problems. The first four Preliminary Competitions are held  
+online, on a National dedicated platform, with automatic evaluator. Each team is given a  
+valid username for the whole competition and a password that is different for each  
+competition. The National Final Competition, in presence, decides its participants 
+according to the total scores obtained in the previous 4 Competitions. The scores of the  
+National Final Competition are not added to the scores of the Preliminary competitions. 
+IIOT regulations ver. 3 Oct 2024                                                                                       Page 6 of 9 
+ 
+Only for countries where Programming is not studied in schools, the students may be 
+enrolled in an organization and come from the same region. Region = the metropolitan area 
+or a city with the neighbouring villages. F or the se countries, in which there is no leader 
+school but an organization  in charge, the contestants must be in the same location  during 
+the National competition, moreover they should come from the same institution or region.  
+Each teacher assigned to a team will ensure the proper running of the national 
+competitions, checking: 
+● that students do not use mobile phones, tablets or any type of electronic device; 
+● that students do not consult textbooks nor translators; 
+● that in the used laboratories the Internet connection is disconnected, with the 
+exception of the Race Platform; 
+● that USB ports are disabled; 
+● that communication between teams is not possible. 
+ 
+The first winning team (4 students and a teacher) of each National Final 
+Competition will participate in presence in the International Competition. Also, the 
+second ranked team (4 students and a teacher) of each regular member may participate in  
+the International Competition in presence. In this case, they will be officially ranked as the  
+other regular teams, but they might have to pay a participation fee for their stay. 
+The Nation Leader Schools of the regular participants participate for free with 1  
+more team (4 students and a teacher) as “a special guest team”. 
+The host country can have no more than 3 new extra teams as guests, no more 
+than 5 teams in total.  
+Also, the guest nations invited teams participate in the International Competition in  
+presence. 
+The International Competition, in presence, lasts 4 hours and it involves solving at  
+least 7 problems. 
+Students should enter the room half an hour before the beginning of the contest, to  
+check that everything works properly. None should enter the room dedicated to the  
+contest, except for the host country’s scientific and technical staff. 
+Contestants may submit written questions to the Scientific Committee of the host  
+country concerning the formulation and interpretation of the problems during the initial  
+period of each competition round. 
+No special hardware requirement or software packages  (e.g. graphic packages) is  
+needed to solve the problems. The whole communication between the IIOT committees  
+and contestants is in a written form. 
+In the exceptional case of having online teams as guests in the  International 
+Competition, the recording of PC's activity for online teams has to     be sent within 3 hours 
+after the end the contest. The records will be checked only in presence of suspicion. 
+ 
+PROBLEMS 
+All the problems are given and solved in English. 
+The test that the students face is the writing of programs that solve all the problems  
+assigned (7 at least). 
+IIOT regulations ver. 3 Oct 2024                                                                                       Page 7 of 9 
+ 
+The languages that can be used are: C, C ++ and Pascal. 
+The topics of the Olympic competitions include: arrays, even multidimensional,  
+sorting and searching, greedy algorithms, recursion, dynamic programming, graphs, trees,  
+lists. The Syllabus is posted on the web site. 
+ 
+EVALUATION 
+When the working time is over, the solutions of each of the contestant team are  
+checked by an automatic evaluator and published onto the official IIOT website. If a team  
+leader does not accept the results of the evaluation, he/she may appeal to the 
+International Scientific Committee. 
+ 
+RESULTS AND PRIZES 
+The General Assembly determines the minimum scores for the gold, silver and  
+bronze medals. The proportion of these gold, silver and bronze medals should be 
+approximately 1:2:3. At least  50% of the contestants should receive medals. Each  
+contestant receives a certificate of participation. 
+Each participant team, both regular and guest teams, ha s the right to be awarded,  
+according to their results. The official rank ing will present only the results of the regular  
+participants. The results of the guest teams will not be put in the official ranking. 
+A contestant may be disqualified by the GA in the event of unethical behavior during 
+the contest and/or outside it which means any behavior that may ruin individuals, countries  
+or IIOT reputation. 
+ 
+HOST COUNTRY 
+A host country, which is willing to organize an IIOT edition in a given year in its  
+country, has to announce its intention at least one year before (during the previous IIOT  
+competition days). The selection of the next host is made by the IC during its annual  
+meeting. 
+The host country proposes at least two dates for the next IIOT edition to the other  
+IC members, which will be voted for by the International Committee in order to avoid  
+overlapping with national exams; they should be both by the end of May. The host country  
+communicates the official dates to all the participating countries by January of the IIOT  
+edition year with all the needed information: location, VISA, invitations. 
+A dedicated web site is set up by the host country by the beginning of January of 
+the IIOT edition year. There should be published at least one month before: 
+● the program, 
+● the list of software and the environment the students will find in the 
+competition (which operating system, editors, IDEs, compilers), 
+● address, details and photos of accommodation planned, 
+● information about VISA, 
+● regulations. 
+The program should include opening and award ceremonies, practice and contests,  
+IIOT regulations ver. 3 Oct 2024                                                                                       Page 8 of 9 
+social and cultural activities. 
+At the end of the event, certificates of attendance are provided by the host country  
+for all the participants: students, teachers, delegates. The award ceremony should be  
+comprehensive of the closing ceremony too. It also involves  the passing-by of the official  
+trophy to the next year’s host country. 
+The host country decides the fees that may be paid by the second team of regular  
+members and by the guest country teams as well as by the generic guests (accompanying  
+persons and observers). Fees for the second national team and for guest country teams  
+should be smaller than fees for generic guests. The host country will take into account  
+personal, religious or cultural dietary requirements as much as possible. 
+There should also be some minimal conditions about accommodation: the hosting  
+place should be at least a three star, all the rooms should have facilities, and adults should 
+have a single room. Special cultural activities should be organized by the host country for  
+guests (accompanying persons and observers), during the “involved people” activities. 
+The host country provides a sufficient number of PCs with the same Virtual Machine 
+with the same software installed; the number should include a sufficient number of spare  
+PCs in case something does not work in the last moment. USB should be disabled as well  
+as Internet connection except for the contest platform. There must be software to allow  
+viewing of the topics in electronic format (pdf). 
+The documentation of the allowed languages should be available during the 
+competition. 
+The PCs used during the practice session should be cleaned; teams should not  
+receive the same PC during the contest and the practice. 
+The author of the problems and one of his collaborators should be reachable during  
+the contest to answer possible questions about the problems from teams. 
+ 
+REGULATIONS REVISION 
+Regular members may propose Revisions to the IIOT Regulations to the 
+International Committee at least one month before the beginning of the IIOT competition 
+days. Guest members to the IIOT may also submit suggestions. IC members decide about  
+Regulations Revision during the annual meeting. The Revision is adopted by a 2/3 majority 
+vote and becomes effective starting from the next year’s edition of the IIOT. 
+ 
+ 
+Signed by the National Delegations of the IIOT in Order of Enrolment as 
+Regular Participants 
+ 
+* ITALY: IIS Aldini Valeriani (Bologna) as Leader School 
+Nadia Amaroli 
+* ROMANIA: Colegiul National de Informatică (Piatra Neamț) as Leader School 
+Daniela Neamțu 
+IIOT regulations ver. 3 Oct 2024                                                                                       Page 9 of 9 
+* EGYPT: Arab Academy for Science and Technology Regional Informatics Center 
+Eslam Wageed 
+* SYRIA: Distinct and Creativity Agency (DCA) 
+Ubai Sandouk 
+* HUNGARY: Budapesti Fazekas Mihály Gyakorló Általános Iskola és Gimnázium as Leader 
+School 
+László Nikházy 
+ 

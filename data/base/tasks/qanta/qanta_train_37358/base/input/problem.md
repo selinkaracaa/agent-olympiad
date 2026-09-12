@@ -1,0 +1,3 @@
+# Literature
+
+The epilogue to this play reveals that one character outgrew the pompousness of Largelady Lane by reading the novels of H.G. Wells. This play opens during a torrential downpour in Covent Garden, where the "Note Taker" is suspected of being a policeman. Characters in this play include the scolding but upright housekeeper Mrs. Pearce and the protagonist's love interest (*) Freddy Eynsford Hill. In this play, a professor of phonetics makes a bet with his colleague Colonel Pickering that he can change a Cockney girl into a duchess. For 10 points, name this play about Henry Higgins and Eliza Doolittle written by George Bernard Shaw.

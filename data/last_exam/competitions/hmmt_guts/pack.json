@@ -1,0 +1,15 @@
+{
+  "competition_id": "hmmt_guts",
+  "rule_id": "hmmt_guts:draft_v1",
+  "profile": "proxy",
+  "protocol": "progressive_release",
+  "visibility": {
+    "agent_at_start": [
+      "input",
+      "method"
+    ],
+    "hidden_until_grade": [
+      "eval"
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "session_id": "history_olympiad_bowl_playoff_rd_1_history_bowl_2021_ihbb_asian_championships",
+  "competition_id": "history_olympiad",
+  "problem_ids": [
+    "history_olympiad_bowl_playoff_rd_1_history_bowl_2021_ihbb_asian_championships"
+  ],
+  "description": "OTC contest-session manifest for history_olympiad_bowl_playoff_rd_1_history_bowl_2021_ihbb_asian_championships",
+  "split_parts": false,
+  "task_family": "short_answer",
+  "competition_description": "History Bowl/Olympiad packets containing many numbered history toss-up and bonus questions that require concise factual answers."
+}

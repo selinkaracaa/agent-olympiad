@@ -1,0 +1,95 @@
+Hide 
+ Fibonacci Words 
+
+ The Fibonacci word sequence of bit strings is defined
+ as: \begin{equation*} F(n) =
+ \left\{ \begin{array}{ll} 0 & \text {if $n = 0$}\\ 1 &
+ \text {if $n = 1$}\\ F(n-1) + F(n-2) & \text {if $n \ge 2$}
+ \end{array}\right. \end{equation*} 
+
+ Here $+$ denotes
+ concatenation of strings. The first few elements are: 
+
+ $n$ 
+
+ $F(n)$ 
+
+ 0 
+
+ 0 
+
+ 1 
+
+ 1 
+
+ 2 
+
+ 10 
+
+ 3 
+
+ 101 
+
+ 4 
+
+ 10110 
+
+ 5 
+
+ 10110101 
+
+ 6 
+
+ 1011010110110 
+
+ 7 
+
+ 101101011011010110101 
+
+ 8 
+
+ 1011010110110101101011011010110110 
+
+ 9 
+
+ 1011010110110101101011011010110110101101011011010110101 
+
+ Given a bit pattern $p$ 
+ and a number $n$ , how
+ often does $p$ occur in
+ $F(n)$ ? 
+
+ Input 
+
+ The first line of each test case contains the integer
+ $n$ ( $0 \le n \le 100$ ). The second line
+ contains the bit pattern $p$ . The pattern $p$ is nonempty and has a length of at
+ most $100\, 000$ 
+ characters. 
+
+ Output 
+
+ For each test case, display its case number followed by the
+ number of occurrences of the bit pattern $p$ in $F(n)$ . Occurrences may overlap. The
+ number of occurrences will be less than $\mathrm{2}^\mathrm {63}$ . 
+
+ Sample Input 1 
+
+ Sample Output 1 
+
+6
+10
+7
+10
+6
+01
+6
+101
+96
+10110101101101
+
+Case 1: 5
+Case 2: 8
+Case 3: 4
+Case 4: 4
+Case 5: 7540113804746346428

@@ -1,0 +1,10 @@
+run_dir	model	competition	tasks	score	max_score	macro_pct	mean_CS	api_calls	tokens	elapsed_sec
+task_based_structured_gold_perplexity_20260829	openai/gpt-5.4-mini	arml_local	6	167.22	260.00	62.73	3.833	1050	115245	2476.9
+task_based_structured_gold_perplexity_20260829	openai/gpt-5.4-mini	arml_national_team	11	271.11	550.00	49.29	3.591	3543	334018	7963.4
+task_based_structured_gold_perplexity_20260829	openai/gpt-5.4-mini	hmmt_guts	1	2.00	36.00	5.56	3.500	163	12584	342.6
+task_based_structured_gold_perplexity_20260829	openai/gpt-5.4-mini	purple_comet	14	51.00	350.00	15.24	3.357	3078	320174	7366.7
+task_based_structured_gold_perplexity_20260829	openai/gpt-5.4-mini	TOTAL	32	491.33	1196.00	35.55	3.531	7834	782021	18149.6
+task_based_structured_gold_tinker_qwen35_35b_base_20260831	Qwen/Qwen3.5-35B-A3B-Base	arml_local	6	153.33	260.00	59.72	2.500	1278	1683829	26904.4
+task_based_structured_gold_tinker_qwen35_35b_base_20260831	Qwen/Qwen3.5-35B-A3B-Base	arml_national_team	8	265.56	400.00	66.39	2.562	3234	6530570	98681.7
+task_based_structured_gold_tinker_qwen35_35b_base_20260831	Qwen/Qwen3.5-35B-A3B-Base	TOTAL	14	418.89	660.00	63.53	2.536	4512	8214399	125586.1
+icpc_kattis_5_recovery_gate_30turn_20260902	openai/gpt-5.4-mini	icpc	5	2.00	5.00	40.00	3.300	316	72280	1264.1

@@ -387,7 +387,7 @@ def format_interactions(
             items.append(f"CHAT {speaker}: {content[:500]}")
     for action in action_log or []:
         kind = str(action.get("action") or "")
-        if kind in {"speak", "sleep"}:
+        if kind in {"speak", "rest", "sleep"}:
             continue
         agent = action.get("agent") or "?"
         detail = str(

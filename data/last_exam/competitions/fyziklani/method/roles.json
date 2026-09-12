@@ -1,0 +1,56 @@
+{
+  "source": "data/rules/fyziklani/collaboration.json#agent_roles",
+  "information_policy": "shared",
+  "roles": [
+    {
+      "name": "Agent_1",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit an eligible Physics Brawl Online contestant identity on one 1–5 person team in one category.",
+        "Solve currently unlocked Main or Hurry-up problems, weigh attempt risk and skips, and submit numeric answers as team needs require.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ]
+    },
+    {
+      "name": "Agent_2",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit an eligible Physics Brawl Online contestant identity on one 1–5 person team in one category.",
+        "Solve currently unlocked Main or Hurry-up problems, weigh attempt risk and skips, and submit numeric answers as team needs require.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ]
+    },
+    {
+      "name": "Agent_3",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit an eligible Physics Brawl Online contestant identity on one 1–5 person team in one category.",
+        "Solve currently unlocked Main or Hurry-up problems, weigh attempt risk and skips, and submit numeric answers as team needs require.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ]
+    },
+    {
+      "name": "Agent_4",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit an eligible Physics Brawl Online contestant identity on one 1–5 person team in one category.",
+        "Solve currently unlocked Main or Hurry-up problems, weigh attempt risk and skips, and submit numeric answers as team needs require.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ]
+    },
+    {
+      "name": "Agent_5",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit an eligible Physics Brawl Online contestant identity on one 1–5 person team in one category.",
+        "Solve currently unlocked Main or Hurry-up problems, weigh attempt risk and skips, and submit numeric answers as team needs require.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ]
+    }
+  ]
+}

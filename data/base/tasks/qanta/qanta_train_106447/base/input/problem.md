@@ -1,0 +1,3 @@
+# Science
+
+An American "North Slope" is composed of "coastal" and "foothills" biomes of this type. A terrain found in this biome features a surface of pits and hummocks, and is named for resembling karst topography. In the Köppen classification, this biome is designated ET. Organisms such as cushion plants and pikas can be found in the alpine type of this biome, which is separated from taiga biomes by the tree line. Lemmings may be present in these biomes, which also contains a frozen ground called permafrost. For 10 points, low levels of biodiversity and precipitation characterize what cold treeless biome?

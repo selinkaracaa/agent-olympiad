@@ -199,6 +199,92 @@ class TinkerRequestFnTests(unittest.TestCase):
         self.assertEqual(response.provider, "tinker")
         self.assertEqual(response.text, "exact response")
 
+    def test_emulates_and_repairs_schema_validated_tool_calls(self):
+        outputs = iter(
+            [
+                '{"name":"select_problem","arguments":{"problem_id":"wrong"}}',
+                '{"name":"select_problem","arguments":{"problem_id":"allowed"}}',
+            ]
+        )
+        caller = Mock(side_effect=lambda *_args: next(outputs))
+        tools = (
+            {
+                "type": "function",
+                "name": "select_problem",
+                "description": "Select a problem.",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "problem_id": {
+                            "type": "string",
+                            "enum": ["allowed"],
+                        }
+                    },
+                    "required": ["problem_id"],
+                    "additionalProperties": False,
+                },
+            },
+        )
+        with patch.object(llm, "make_tinker_caller", return_value=caller):
+            request_fn = llm.make_tinker_request_fn(MODEL)
+            response = request_fn(
+                llm.LLMRequest(
+                    system_prompt="sys",
+                    user_prompt="user",
+                    tools=tools,
+                    tool_choice="required",
+                )
+            )
+
+        self.assertEqual(len(response.tool_calls), 1)
+        self.assertEqual(response.tool_calls[0].name, "select_problem")
+        self.assertEqual(
+            response.tool_calls[0].arguments,
+            {"problem_id": "allowed"},
+        )
+        self.assertEqual(response.usage["action_transport"], "emulated")
+        self.assertEqual(response.usage["api_calls"], 2)
+        self.assertEqual(response.usage["tool_retries"], 1)
+        self.assertIn("PREVIOUS TOOL CALL WAS INVALID", caller.call_args.args[1])
+        self.assertIn("must be one of", caller.call_args.args[1])
+
+    def test_emulated_tools_fail_closed_and_honor_attempt_cap(self):
+        caller = Mock(return_value="not json")
+        tools = (
+            {
+                "type": "function",
+                "name": "rest",
+                "parameters": {
+                    "type": "object",
+                    "properties": {},
+                    "additionalProperties": False,
+                },
+            },
+        )
+        with patch.object(llm, "make_tinker_caller", return_value=caller):
+            request_fn = llm.make_tinker_request_fn(MODEL, max_tool_retries=2)
+            response = request_fn(
+                llm.LLMRequest(
+                    system_prompt="sys",
+                    user_prompt="user",
+                    tools=tools,
+                    tool_choice="required",
+                    metadata={"max_transport_attempts": 2},
+                )
+            )
+
+        self.assertEqual(response.tool_calls, ())
+        self.assertEqual(response.usage["api_calls"], 2)
+        self.assertEqual(response.usage["tool_retries"], 1)
+        self.assertIn("no JSON", response.usage["tool_error"])
+        self.assertEqual(caller.call_count, 2)
+
+    def test_provider_capabilities_choose_transport(self):
+        self.assertEqual(llm.provider_action_transport("perplexity"), "native")
+        self.assertEqual(llm.provider_action_transport("openai"), "native")
+        self.assertEqual(llm.provider_action_transport("tinker"), "emulated")
+        self.assertEqual(llm.provider_action_transport("unknown"), "prompt_json")
+
 
 class CompetitionProviderTests(unittest.TestCase):
     def test_tinker_model_default_and_environment_override(self):

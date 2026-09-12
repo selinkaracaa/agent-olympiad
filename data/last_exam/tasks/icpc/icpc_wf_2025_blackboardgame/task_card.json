@@ -1,0 +1,33 @@
+{
+  "task_id": "icpc/icpc_wf_2025_blackboardgame",
+  "competition_id": "icpc",
+  "problem_id": "icpc_wf_2025_blackboardgame",
+  "title": "Blackboard Game",
+  "year": 2025,
+  "team_size": 3,
+  "source_url": "https://open.kattis.com/problems/blackboardgame",
+  "inherits_competition_pack": "competitions/icpc",
+  "rule_card": "data/rules/icpc",
+  "input": {
+    "visibility": "agent_at_start",
+    "files": [
+      {
+        "name": "problem.md",
+        "path": "base/input/problem.md"
+      },
+      {
+        "name": "blackboardgame.txt.path",
+        "path": "base/input/blackboardgame.txt.path"
+      }
+    ]
+  },
+  "method": {
+    "visibility": "agent_at_start",
+    "path": "competitions/icpc/method"
+  },
+  "eval": {
+    "visibility": "hidden_until_grade",
+    "path": "eval/reference.json",
+    "competition_eval": "competitions/icpc/eval"
+  }
+}

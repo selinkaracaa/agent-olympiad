@@ -1,0 +1,33 @@
+{
+  "task_id": "ieo_business_case/ieo_business_case_2021",
+  "competition_id": "ieo_business_case",
+  "problem_id": "ieo_business_case_2021",
+  "title": "Business Case — Rebirth and Evolution of JDL",
+  "year": 2021,
+  "team_size": 5,
+  "source_url": "https://ieo-official.org/prepare",
+  "inherits_competition_pack": "competitions/ieo_business_case",
+  "rule_card": "data/rules/ieo_business_case",
+  "input": {
+    "visibility": "agent_at_start",
+    "files": [
+      {
+        "name": "problem.md",
+        "path": "base/input/problem.md"
+      },
+      {
+        "name": "2021_case.pdf.path",
+        "path": "base/input/2021_case.pdf.path"
+      }
+    ]
+  },
+  "method": {
+    "visibility": "agent_at_start",
+    "path": "competitions/ieo_business_case/method"
+  },
+  "eval": {
+    "visibility": "hidden_until_grade",
+    "path": "eval/reference.json",
+    "competition_eval": "competitions/ieo_business_case/eval"
+  }
+}

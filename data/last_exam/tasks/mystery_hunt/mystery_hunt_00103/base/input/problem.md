@@ -1,0 +1,3 @@
+# 2000/set3/4/Puzzle.html
+
+Mystery Hunt 2000, Puzzle 3.4 3.4: Dorothy Finds Building 66 Back to hunt | Back to puzzle set "I don't care how much you like playing that silly little card game; all I said was that I was looking for an expert at Magic to help send me home." Quite a strange game of Magic it was, too, since the players were experimenting in constructing their decks out of cards from other games. The players had each initially revealed three cards before Dorothy interrupted them, and although they can remember their hands, they can't remember what order they were sitting in around the table. Nathan Reiner Eric Hans Gary Ivan Richard

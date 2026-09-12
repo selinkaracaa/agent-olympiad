@@ -1,0 +1,36 @@
+{
+  "source": "data/rules/icpc/collaboration.json#agent_roles",
+  "information_policy": "shared",
+  "roles": [
+    {
+      "name": "Agent_1",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit an eligible World Finals contestant identity under Team Requirements, Attendance, and Support and Prizes.",
+        "Scout, solve, implement, test, review, debug, or coordinate as current team needs require.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ]
+    },
+    {
+      "name": "Agent_2",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit an eligible World Finals contestant identity under Team Requirements, Attendance, and Support and Prizes.",
+        "Scout, solve, implement, test, review, debug, or coordinate as current team needs require.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ]
+    },
+    {
+      "name": "Agent_3",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit an eligible World Finals contestant identity under Team Requirements, Attendance, and Support and Prizes.",
+        "Scout, solve, implement, test, review, debug, or coordinate as current team needs require.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ]
+    }
+  ]
+}

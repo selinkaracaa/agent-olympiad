@@ -1,0 +1,3 @@
+# Social Science
+
+The subtitle of a work by Mary Douglas pairs this concept to pollution and begins by discussing dirt. That work is titled Purity and Danger. The etymological origin of this word is Tongan and entered into English through Captain James Cook's notes on his voyages, which document the social mores of the indigenous population. In a work by Sigmund Freud about religion, this word is paired with the concept of the Totem. For 10 points, name this concept which has been used to describe acts like cannibalism or incest and usually refers to things that explicitly and strongly forbidden within a society.

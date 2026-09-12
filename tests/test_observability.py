@@ -41,7 +41,7 @@ class AgentObservationTests(unittest.TestCase):
         self.assertEqual(action["turn"], 1)
         self.assertEqual(action["visibility"], "private")
 
-    def test_shawn_common_action_aliases_use_existing_handlers(self):
+    def test_common_action_aliases_use_existing_handlers(self):
         env = OlympiadEnvironment("arml_local", "arml_local_2009")
         env.register_agents(["Agent_1", "Agent_2"])
         env.begin_turn()

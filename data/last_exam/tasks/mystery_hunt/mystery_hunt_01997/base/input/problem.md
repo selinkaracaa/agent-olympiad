@@ -1,0 +1,3 @@
+# 2015/puzzle/coins
+
+Coins &mdash; MIT Mystery Hunt 2015 Toggle navigation World Map The Story So Far... Useful links List of Puzzles Events Schedule Updates from Sealab Full team log FAQ Sponsors 2015 Archive Overview Location: Treasure Chest Depth: 210 View Solution Coins Answer: click here to reveal There are 72 coins in the chest of 16 unique designs. They look like this: Obverse Reverse Number in the Chest 5 2 1 3 4 7 2 4 7 8 5 8 6 1 3 6 Recommended for puzzlers like you: 4 Names for Pizza Places That are Full of Win We've noticed that you are blocking ads. You'll miss out on our subtle suggestions! Recommended for puzzlers like you: 4 Names for Pizza Places That are Full of Win

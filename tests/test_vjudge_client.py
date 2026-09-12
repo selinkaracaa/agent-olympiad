@@ -1,9 +1,11 @@
 from __future__ import annotations
 
 import json
+import os
 import sys
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT / "src"))
@@ -14,7 +16,10 @@ from judge.vjudge import (
     normalize_status,
     problem_num,
     problem_submit_key,
+    resolve_binding_id,
     resolve_language_id,
+    resolve_problem_language,
+    resolve_submit_method,
 )
 from judge.vjudge_gateway_client import extract_source_and_language
 
@@ -54,12 +59,33 @@ class VJudgeClientTests(unittest.TestCase):
     def test_language_and_problem_helpers(self):
         self.assertEqual(resolve_language_id("cpp17"), "54")
         self.assertEqual(resolve_language_id("python3"), "31")
+        self.assertEqual(resolve_problem_language("python3", "Kattis"), "Python 3")
+        self.assertEqual(resolve_problem_language("cpp17", "Kattis"), "C++")
+        self.assertEqual(resolve_problem_language("python3", "CodeForces"), "31")
         self.assertEqual(problem_num("A"), "A")
         self.assertEqual(problem_num("C"), "C")
         self.assertEqual(problem_submit_key(oj="CodeForces", problem="4A"), "CodeForces-4A")
         self.assertEqual(
             problem_submit_key(oj="CodeForces", problem="cf_231A"), "CodeForces-231A"
         )
+
+    def test_per_oj_submit_accounts_override_global_fallback(self):
+        with patch.dict(
+            os.environ,
+            {
+                "VJUDGE_BINDING_ID": "legacy",
+                "VJUDGE_BINDING_ID_CODEFORCES": "cf-binding",
+                "VJUDGE_BINDING_ID_KATTIS": "kattis-binding",
+                "VJUDGE_SUBMIT_METHOD_CODEFORCES": "1",
+                "VJUDGE_SUBMIT_METHOD_KATTIS": "2",
+            },
+            clear=True,
+        ):
+            self.assertEqual(resolve_binding_id("CodeForces"), "cf-binding")
+            self.assertEqual(resolve_binding_id("Kattis"), "kattis-binding")
+            self.assertEqual(resolve_submit_method("CodeForces", 0), 1)
+            self.assertEqual(resolve_submit_method("Kattis", 0), 2)
+            self.assertEqual(resolve_binding_id("OtherOJ"), "legacy")
 
     def test_normalize_challenge(self):
         verdict, status = normalize_status("Challenge Encountered")

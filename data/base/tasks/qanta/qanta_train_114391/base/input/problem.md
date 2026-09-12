@@ -1,0 +1,3 @@
+# History
+
+During this century, an 8.0 magnitude earthquake struck Crete, causing a Mediterranean-wide tsunami. Usurpers in this century included Eugenius and Magnentius, and authors during it included Victorinus and Prudentius. Licinius fomented a civil war in this century, in which Visigoths appeared on the Danube and were allowed into the Roman Empire, leading to the Battle of (*) Adrianople. At the beginning of this century, Armenia became the first country to adopt Christianity as a state religion. Constantine the Great called the first Council of Nicaea in this century, in which Diocletian died. For 10 points each, name this century before the one in which the Western Roman Empire fell.

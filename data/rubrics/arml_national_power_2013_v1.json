@@ -1,0 +1,234 @@
+{
+  "rubric_id": "arml_national_power_2013_v1",
+  "title": "Power Round \u2014 2013 \u2014 ARML Power sub-problem rubric",
+  "total_points": 50.0,
+  "criteria": [
+    {
+      "id": "problem_01a",
+      "name": "Problem 1a",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 1a (1 pt). Statement: 1a. Compute d(6), d(16), and d(72)."
+    },
+    {
+      "id": "problem_01b",
+      "name": "Problem 1b",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 1b (2 pts). Statement: 1b. Of the houses with positive numbers less than 100, \ufb01nd, with proof, the house or houses which is (are) closest to City Hall."
+    },
+    {
+      "id": "problem_01c",
+      "name": "Problem 1c",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 1c (1 pt). Statement: 1c. Find four houses at a distance of 1 /9 from house number 17."
+    },
+    {
+      "id": "problem_01d",
+      "name": "Problem 1d",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 1d (2 pts). Statement: 1d. Find an in\ufb01nite sequence of houses {hn} such that d(17,h 1)>d (17,h 2)>\u00b7\u00b7\u00b7 >d (17,hn)>d (17,hn+1)>\u00b7\u00b7\u00b7 ."
+    },
+    {
+      "id": "problem_02a",
+      "name": "Problem 2a",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 2a (1 pt). Statement: 2a. Find four houses in N (6)."
+    },
+    {
+      "id": "problem_02b",
+      "name": "Problem 2b",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 2b (1 pt). Statement: 2b. Suppose that n is a house with d(n) = 1. Find four houses in N (n)."
+    },
+    {
+      "id": "problem_02c",
+      "name": "Problem 2c",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 2c (2 pts). Statement: 2c. Suppose that n is a house with d(n) = 1/27. Determine the ten smallest positive integers m (in the standard ordering of the integers) such that m\u2208N (n)."
+    },
+    {
+      "id": "problem_03a",
+      "name": "Problem 3a",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 3a (1 pt). Statement: 3a. Notice that d(16) = d(17) = 1 and that d(16, 17) = 1. Is it true that, for all m,n such that d(m) =d(n) = 1 andm\u0338=n,d(m,n ) = 1? Either prove your answer or \ufb01nd a counterexample."
+    },
+    {
+      "id": "problem_03b",
+      "name": "Problem 3b",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 3b (2 pts). Statement: 3b. Suppose that d(m) =d(n) = 1/3k and that m\u0338=n. Determine the possible values of d(m,n )."
+    },
+    {
+      "id": "problem_03c",
+      "name": "Problem 3c",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 3c (2 pts). Statement: 3c. Suppose that d(17,m ) = 1/81. Determine the possible values of d(16,m )."
+    },
+    {
+      "id": "problem_04a",
+      "name": "Problem 4a",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 4a (1 pt). Statement: 4a. Show that d(17, 51)\u2264d(17, 34) +d(34, 51) and that d(17, 95)\u2264d(17, 68) +d(68, 95)."
+    },
+    {
+      "id": "problem_04b",
+      "name": "Problem 4b",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 4b (2 pts). Statement: 4b. If a = 17 and b = 68, determine all values of c such that d(a,c ) =d(a,b )."
+    },
+    {
+      "id": "problem_05a",
+      "name": "Problem 5a",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 5a (2 pts). Statement: 5a. Prove that, for all a and b, d(a,b )\u2264 max{d(a),d (b)}."
+    },
+    {
+      "id": "problem_05b",
+      "name": "Problem 5b",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 5b (2 pts). Statement: 5b. Prove that, for all a, b, and c, d(a,c )\u2264 max{d(a,b ),d (b,c )}."
+    },
+    {
+      "id": "problem_05c",
+      "name": "Problem 5c",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 5c (1 pt). Statement: 5c. Prove that, for all a, b, and c, d(a,c )\u2264d(a,b ) +d(b,c )."
+    },
+    {
+      "id": "problem_05d",
+      "name": "Problem 5d",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 5d (2 pts). Statement: 5d. After thinking about it some more, the visitor announces that all ARMLopolitan triangles have a special property. What is it? Justify your answer."
+    },
+    {
+      "id": "problem_06a",
+      "name": "Problem 6a",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 6a (1 pt). Statement: 6a. Find at least one house whose distance from City Hall changes as a result of the move."
+    },
+    {
+      "id": "problem_06b",
+      "name": "Problem 6b",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 6b (2 pts). Statement: 6b. Prove that the distance between houses with consecutive numbers does not change after the move."
+    },
+    {
+      "id": "problem_07a",
+      "name": "Problem 7a",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 7a (2 pts). Statement: 7a. The residents of N (1) value their suburban location and protest the move, claiming it will make them closer to City Hall. Will it? Justify your answer."
+    },
+    {
+      "id": "problem_07b",
+      "name": "Problem 7b",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 7b (2 pts). Statement: 7b. Some residents ofN (9) claim that their tightly-knit community will be disrupted by the move: they will be scattered between di\ufb00erent neighborhoods after the change. Will they? Justify your answer."
+    },
+    {
+      "id": "problem_07c",
+      "name": "Problem 7c",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 7c (2 pts). Statement: 7c. Other residents ofN (9) claim that their community will be disrupted by newcomers: they say that after the move, their new neighborhood will also contain residents previously from several di\ufb00erent old neighborhoods (not just the new arrivals to ARMLopolis). Will it? Justify your answer."
+    },
+    {
+      "id": "problem_07d",
+      "name": "Problem 7d",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 7d (2 pts). Statement: 7d. Determine all values of n such thatN (n) will either entirely relocate (i.e., all residents r of N (n) are at a di\ufb00erent distance from City Hall than they were before), lose residents (as in 7b), or gain residents besides the new ARMLopolitans (as in 7c)."
+    },
+    {
+      "id": "problem_08a",
+      "name": "Problem 8a",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 8a (2 pts). Statement: 8a. One day, Paul (house 23) and Sally (house 32), longtime residents of N (1), are discussing the \u201c2 side\u201d of the neighborhood, that is, the set of houses {n|n = 3k + 2, k\u2208 Z}. Paul says \u201cI feel like I\u2019m at the center of the \u201c2 side\u201d: when I looked out my window, I realized that the \u201c2 side\u201d consists of exactly those houses whose distance from me is at most 1 /3.\u201d Prove that Paul is correct."
+    },
+    {
+      "id": "problem_08b",
+      "name": "Problem 8b",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 8b (2 pts). Statement: 8b. Sally replies \u201cIt\u2019s not all about you: I have the same experience!\u201d Justify Sally\u2019s claim; in other words, prove that {n| n = 3k + 2, k\u2208 Z} consists exactly of those houses whose distance from Sally\u2019s house is at most 1 /3."
+    },
+    {
+      "id": "problem_08c",
+      "name": "Problem 8c",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 8c (2 pts). Statement: 8c. Paul\u2019s and Sally\u2019s observations can be generalized. For any x, letDr(x) ={y|d(x,y )\u2264r}, that is,Dr(x) is the disk of radius r. Prove that if d(x,z ) =r, thenDr(x) =Dr(z)."
+    },
+    {
+      "id": "problem_09a",
+      "name": "Problem 9a",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 9a (2 pts). Statement: 9a. Ross takes a walk starting at his house, which is number 34. He \ufb01rst visits house n1, such that d(n1, 34) = 1/3. He then goes to another house, n2, such that d(n1,n 2) = 1/3. Continuing in that way, he visits houses n3,n 4,..., and each time, d(ni,ni+1) = 1/3. At the end of the day, what is his maximum possible distance from his original house? Justify your answer."
+    },
+    {
+      "id": "problem_09b",
+      "name": "Problem 9b",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 9b (2 pts). Statement: 9b. Generalize your answer to 9a: given a value of n0, determine the rational values ofr for which the sequence n1,n 2,... with d(ni,ni+1) = r is entirely contained in a circle of \ufb01nite radius centered at n0."
+    },
+    {
+      "id": "problem_10a",
+      "name": "Problem 10a",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 10a (1 pt). Statement: 10a. Compute d(3/5),d (5/8), and d(7/18)."
+    },
+    {
+      "id": "problem_10b",
+      "name": "Problem 10b",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 10b (1 pt). Statement: 10b. Determine all pairs of relatively prime integers p and q such that p/q\u2208N (4/3)."
+    },
+    {
+      "id": "problem_10c",
+      "name": "Problem 10c",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 10c (2 pts). Statement: s same address. When asked, he says \u201cMy old address was e, that is, the sum 1 0! + 1 1! + 1 2! +... . I\u2019d really like to keep that address, because the addresses of my friends here are all partial sums of this series: Alice\u2019s house is 1 0!, Bob\u2019s house is 1 0! + 1 1!, Carol\u2019s house is 1 0! + 1 1! + 1 2!, and so on. Just let me know what I have to do in order to be near my friends!\u201d After some head-scratching, the ARMLopolitan planning council announces that this request cannot be satis\ufb01ed: there is no number, rational or otherwise, that corresponds to the (in\ufb01nite) sum, or that is arbitrarily close to the houses in this sequence. Prove that the council is correct (and not just bureaucratic)."
+    }
+  ],
+  "not_observable_from_deck": [
+    "oral defense",
+    "diagrams that were not recovered from the source PDF"
+  ],
+  "provenance": {
+    "competition_id": "arml_national_power",
+    "problem_id": "arml_national_power_2013",
+    "year": 2013,
+    "source_file": "data/raw/arml_national/ARML_2009_2014.pdf",
+    "solution_file": null,
+    "official_total_points": 50.0,
+    "parsed_total_points": 50.0,
+    "points_coverage": 1.0,
+    "awards_parsed": 30,
+    "problems_parsed": 10,
+    "derived_by": "scripts/build_arml_power_rubrics.py"
+  }
+}

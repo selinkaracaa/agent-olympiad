@@ -1,0 +1,108 @@
+# Method — `wro`
+
+How this benchmark's agents are asked to work. Projected from `data/rules/wro/collaboration.json`.
+
+## Agent constraints
+
+- Apply this competition's own roster, timing, tool, collaboration, submission, and scoring rules; do not import rules from another contest.
+- The two or three student members design, build, and program the robot; a coach may guide learning but may not build or program it for the team.
+- Banned during the contest: internet access, calculators and running code. Paper and pencil are always available. Work only from the materials provided with the problem.
+- Treat private reasoning and notes as unknown to teammates until you communicate the decision-relevant content.
+- Do not access hidden solutions, answer keys, evaluator internals, or unauthorized outside problem-solving help.
+- Keep design intent, program behavior, observed simulator output, and physical robot-run claims separate; only observed state may be reported as a completed run.
+- Apply the selected season, category, age group, game document, and official Q&A together; do not combine rules from incompatible robotics tracks.
+- The text runner cannot certify construction, inspection, quarantine, table state, judge decisions, or a physical robot attempt; report those mechanisms as unavailable.
+- Only designated submitters may make the shared submission: Agent_1.
+- Use only the official mechanisms that the current task actually exposes; do not claim physical, oral, live-opponent, judge, or environment actions that were not observed.
+
+## Information / deliberation / communication
+
+```json
+{
+  "information_policy": {
+    "mode": "role_specialized",
+    "shared": [
+      "problem",
+      "contest_rules",
+      "team_discussion",
+      "scratchpad"
+    ],
+    "coordination_requirement": "All teammates may consult the complete public contest rules. Private reasoning becomes shared state only when communicated; assigned rule expertise creates tracking responsibility, not exclusive access."
+  },
+  "deliberation": {
+    "mode": "unstructured",
+    "min_challenges": 0,
+    "evaluation_dimensions": [
+      "evidence_responsiveness",
+      "decision_traceability"
+    ]
+  },
+  "communication": {
+    "mode": "unlimited"
+  }
+}
+```
+
+## Simulation
+
+```json
+{
+  "max_turns": 24,
+  "scheduler": "src_collaboration_draft",
+  "turn_budget_basis": "official clock n/a turns vs floor 11 (3 teammates x 2 turns + 1 answer parts + 4 for synthesis)",
+  "selector_enforcement": "game_and_national_rules_missing_from_current_rows",
+  "robot_environment": "unavailable",
+  "inspection_quarantine_and_field_state": "unavailable"
+}
+```
+
+## Rule sections
+
+```json
+{
+  "competition_format": [
+    "Competition model: The task represents a physical robotics event through design, rules, and program text.",
+    "The source-recorded active team may have 2 to 3 members; the runner default is 3; official roster note: A 2026 RoboMission team consists of two or three students and is guided by a coach.",
+    "Source-recorded competition rule: The selected national organizer combines the General Rules, age-group game document, local rules, and binding official Q&A into the operative competition rules.",
+    "Source-recorded competition rule: Exact mission points, number of rounds, ranking, tie breakers, practice, quarantine, and optional competition elements depend on the selected game and organizer rules."
+  ],
+  "timeline": [
+    "Benchmark adaptation: no official numeric duration is encoded in the available primary-source record; simulation.max_turns is only a runner safety budget.",
+    "Source-recorded competition rule: A robot attempt ends after two minutes or earlier upon an official stop condition such as prohibited touching, leaving the table, or a rule violation.",
+    "Source-recorded competition rule: At the end of an attempt the judge scores the observed field state, records full seconds, and the team signs the score sheet; after sign-off no further complaint is allowed.",
+    "Source-recorded competition rule: A disqualified attempt receives the worst possible score and the maximum time of 120 seconds."
+  ],
+  "resource_policy": [
+    "Source-recorded resource policy: Banned during the contest: internet access, calculators and running code. Paper and pencil are always available. Work only from the materials provided with the problem.",
+    "Source-recorded competition rule: Adults may guide and inspire but may not build, code, or program the robot for the team.",
+    "Source-recorded competition rule: A robot attempt ends after two minutes or earlier upon an official stop condition such as prohibited touching, leaving the table, or a rule violation."
+  ],
+  "collaboration_protocol": [
+    "Source-recorded collaboration rule: The two or three student members design, build, and program the robot; a coach may guide learning but may not build or program it for the team.",
+    "Source-recorded competition rule: Under the 2026 RoboMission General Rules, a team consists of two or three students and one student with a coach is not a team.",
+    "Source-recorded competition rule: A student may participate in only one team and one WRO category during the season.",
+    "Source-recorded competition rule: Adults may guide and inspire but may not build, code, or program the robot for the team.",
+    "Source-recorded competition rule: At the end of an attempt the judge scores the observed field state, records full seconds, and the team signs the score sheet; after sign-off no further complaint is allowed."
+  ],
+  "integrity_and_compliance": [
+    "Benchmark safety rule: do not use hidden solutions, evaluator internals, unauthorized outside assistance, or resources forbidden by this competition.",
+    "Source-recorded competition rule: A robot attempt ends after two minutes or earlier upon an official stop condition such as prohibited touching, leaving the table, or a rule violation."
+  ],
+  "deliverable_format": [
+    "Runner answer contract: Submit the program and a structured design/run analysis; label simulated or hypothetical behavior and do not report an unobserved physical score.",
+    "Official deliverable: inspected robot program and scored field attempt.",
+    "Benchmark adaptation: The runner accepts program text and analysis but cannot accept or score a physical robot attempt."
+  ],
+  "evaluation_criteria": [
+    "Repository evaluation status: Task performance is specified per robot_attempt in selected_game_score_then_time mode, but the repository evaluator is deferred_physical_game_and_selectors; do not invent a completed score.",
+    "Source-recorded competition rule: At the end of an attempt the judge scores the observed field state, records full seconds, and the team signs the score sheet; after sign-off no further complaint is allowed.",
+    "Source-recorded competition rule: A disqualified attempt receives the worst possible score and the maximum time of 120 seconds."
+  ],
+  "runtime_limitations": [
+    "Runtime limitation: Physical robot construction, sensors, and table runs are outside software-agent fidelity.",
+    "Runtime limitation: Always pair General Rules with the year’s Game PDF + Q&A.",
+    "Runtime limitation: The runner has no physical robot, inspection, quarantine, randomized field, judge, score sheet, or national tournament state.",
+    "Runtime limitation: The selected age-group game document, jurisdiction rules, and Q&A snapshot are absent, so exact mission score and ranking are deferred."
+  ]
+}
+```

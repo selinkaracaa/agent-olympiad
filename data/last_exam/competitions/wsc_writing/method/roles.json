@@ -1,0 +1,34 @@
+{
+  "source": "data/rules/wsc_writing/collaboration.json#agent_roles",
+  "information_policy": "role_specialized",
+  "roles": [
+    {
+      "name": "Agent_1",
+      "title": "writer / captain / final submitter",
+      "may_submit": true,
+      "duties": [
+        "Draft one complete response to a distinct prompt during the individual-writing stage.",
+        "Coordinate the planning stage without drafting another teammate's response.",
+        "Join the peer-review stage and submit only after all three complete responses pass the format and rule checks."
+      ]
+    },
+    {
+      "name": "Agent_2",
+      "title": "writer A",
+      "may_submit": false,
+      "duties": [
+        "Draft one complete response to a distinct prompt in full prose, not notes.",
+        "Write independently after team preparation and join peer review only in the final stage."
+      ]
+    },
+    {
+      "name": "Agent_3",
+      "title": "writer B",
+      "may_submit": false,
+      "duties": [
+        "Draft one complete response to a distinct prompt in full prose, not notes.",
+        "Write independently after team preparation and join peer review only in the final stage."
+      ]
+    }
+  ]
+}

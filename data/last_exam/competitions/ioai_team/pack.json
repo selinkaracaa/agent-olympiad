@@ -1,0 +1,15 @@
+{
+  "competition_id": "ioai_team",
+  "rule_id": "ioai_team:draft_v1",
+  "profile": "proxy",
+  "protocol": "research_artifact",
+  "visibility": {
+    "agent_at_start": [
+      "input",
+      "method"
+    ],
+    "hidden_until_grade": [
+      "eval"
+    ]
+  }
+}

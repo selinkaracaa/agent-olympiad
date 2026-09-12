@@ -1,0 +1,15 @@
+{
+  "competition_id": "qanta",
+  "rule_id": "qanta:question_proxy",
+  "profile": "proxy",
+  "protocol": "buzzer_match_question_proxy",
+  "visibility": {
+    "agent_at_start": [
+      "input",
+      "method"
+    ],
+    "hidden_until_grade": [
+      "eval"
+    ]
+  }
+}

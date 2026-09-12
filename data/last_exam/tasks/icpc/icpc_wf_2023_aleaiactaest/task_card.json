@@ -1,0 +1,33 @@
+{
+  "task_id": "icpc/icpc_wf_2023_aleaiactaest",
+  "competition_id": "icpc",
+  "problem_id": "icpc_wf_2023_aleaiactaest",
+  "title": "Alea Iacta Est",
+  "year": 2023,
+  "team_size": 3,
+  "source_url": "https://open.kattis.com/problems/aleaiactaest",
+  "inherits_competition_pack": "competitions/icpc",
+  "rule_card": "data/rules/icpc",
+  "input": {
+    "visibility": "agent_at_start",
+    "files": [
+      {
+        "name": "problem.md",
+        "path": "base/input/problem.md"
+      },
+      {
+        "name": "aleaiactaest.txt.path",
+        "path": "base/input/aleaiactaest.txt.path"
+      }
+    ]
+  },
+  "method": {
+    "visibility": "agent_at_start",
+    "path": "competitions/icpc/method"
+  },
+  "eval": {
+    "visibility": "hidden_until_grade",
+    "path": "eval/reference.json",
+    "competition_eval": "competitions/icpc/eval"
+  }
+}

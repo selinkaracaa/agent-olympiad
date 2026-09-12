@@ -1,0 +1,20 @@
+{
+  "session_id": "icpc_wf_2014",
+  "competition_id": "icpc",
+  "problem_ids": [
+    "icpc_wf_2014_baggage",
+    "icpc_wf_2014_buffet",
+    "icpc_wf_2014_crane",
+    "icpc_wf_2014_game",
+    "icpc_wf_2014_maze",
+    "icpc_wf_2014_messenger",
+    "icpc_wf_2014_metal",
+    "icpc_wf_2014_pachinko",
+    "icpc_wf_2014_sensor",
+    "icpc_wf_2014_skiing",
+    "icpc_wf_2014_surveillance",
+    "icpc_wf_2014_wire"
+  ],
+  "split_parts": false,
+  "description": "Full ICPC World Finals 2014 contest: 12 problems under one shared turn budget."
+}

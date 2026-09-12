@@ -1,0 +1,3 @@
+# Fine Arts
+
+A painter from this country had a 1917 exhibition closed for "obscenity," since his realistic nudes included armpit and pubic hair. A man from this country sculpted an abstracted bottle spiralling outward onto its base. A Paris-based painter from this country was known for portraits with almond-shaped eyes and flattened, stretched faces. An artist from this country sculpted a man striding forward in the rippling, abstracted bronze (*) Unique Forms of Continuity in Space. A manifesto from this country declares "a roaring automobile...is more beautiful than the Victory of Samothrace." Futurism was born in—for 10 points—what home of Amedeo Modigliani and Umberto Boccioni?

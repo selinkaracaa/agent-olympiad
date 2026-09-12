@@ -1,0 +1,46 @@
+{
+  "source": "data/rules/iol_team/collaboration.json#agent_roles",
+  "information_policy": "shared",
+  "roles": [
+    {
+      "name": "Agent_1",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit an eligible IOL contestant identity under Delegations, Contests, and team-competition guidelines.",
+        "Scout data, propose analyses, test counterexamples, draft explanations, or coordinate as current team needs require.",
+        "Share decision-relevant mappings and merge them into the single script in the team's working language."
+      ]
+    },
+    {
+      "name": "Agent_2",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit an eligible IOL contestant identity under Delegations, Contests, and team-competition guidelines.",
+        "Scout data, propose analyses, test counterexamples, draft explanations, or coordinate as current team needs require.",
+        "Share decision-relevant mappings and merge them into the single script in the team's working language."
+      ]
+    },
+    {
+      "name": "Agent_3",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit an eligible IOL contestant identity under Delegations, Contests, and team-competition guidelines.",
+        "Scout data, propose analyses, test counterexamples, draft explanations, or coordinate as current team needs require.",
+        "Share decision-relevant mappings and merge them into the single script in the team's working language."
+      ]
+    },
+    {
+      "name": "Agent_4",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit an eligible IOL contestant identity under Delegations, Contests, and team-competition guidelines.",
+        "Scout data, propose analyses, test counterexamples, draft explanations, or coordinate as current team needs require.",
+        "Share decision-relevant mappings and merge them into the single script in the team's working language."
+      ]
+    }
+  ]
+}

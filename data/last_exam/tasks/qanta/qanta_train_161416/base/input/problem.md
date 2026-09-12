@@ -1,0 +1,3 @@
+# Science
+
+This system is modeled by the Agekyan-Anosova map, which has a strange attractor at x equalspoint five and y equals zero. Jacobi's integral gives a conserved quantity for this system. Thisproblem can be solved by a slowly-converging series in powers of t to the one-third; that result wasby Sundman. The H two plus ion is a quantum version of this problem, which is often solved usingfirst-order perturbation theory. One restricted version of this problem displays five equilibriumpoints named for (*) Lagrange. This non-integrable problem is approximated by assuming one mass ismuch smaller than the others. For 10 points, name this problem about the motion of the requisite number ofmassive objects under gravity, most often applied to the Earth, Moon, and Sun.

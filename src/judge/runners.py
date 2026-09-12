@@ -106,6 +106,42 @@ class NativePythonRunner:
         )
 
 
+class DockerPythonRunner(NativePythonRunner):
+    """Agent submissions execute with only their source and stdin mounted."""
+
+    name = "docker-python3"
+
+    def _run_case(self, package: ProblemPackage, script: Path, test: TestCase, cwd: Path) -> CaseResult:
+        from isolated_python import IsolationUnavailable, run_python_isolated
+        try:
+            result = run_python_isolated(
+                script.read_text(encoding="utf-8"),
+                stdin=test.input_path.read_text(encoding="utf-8", errors="replace"),
+                timeout_sec=package.limits.time_ms / 1000,
+                memory_mb=package.limits.memory_mb,
+                output_bytes=package.limits.output_kb * 1024,
+            )
+        except IsolationUnavailable as exc:
+            return CaseResult(test.name, "JUDGE_ERROR", scope=test.scope, group=test.group, detail=str(exc))
+        if result.timed_out:
+            verdict, detail = "TLE", "Time limit exceeded."
+        elif result.output_limited:
+            verdict, detail = "OLE", "Output limit exceeded."
+        elif result.returncode:
+            verdict, detail = "RE", _detail(result.stderr, f"Exited with {result.returncode}")
+        else:
+            try:
+                accepted, detail = check_output(
+                    test.answer_path.read_text(encoding="utf-8", errors="replace"),
+                    result.stdout, package.checker, input_path=test.input_path,
+                )
+                verdict = "AC" if accepted else "WA"
+            except JudgeError as exc:
+                verdict, detail = "JUDGE_ERROR", str(exc)
+        return CaseResult(test.name, verdict, detail=detail, scope=test.scope,
+                          group=test.group, time_ms=result.elapsed_ms)
+
+
 class DockerProgrammingJudge:
     """Compile and execute C++17 submissions in hardened Docker containers."""
 

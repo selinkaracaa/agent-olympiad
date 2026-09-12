@@ -1,0 +1,10 @@
+{
+  "visibility": "hidden_until_grade",
+  "gold_pointer": "data/benchmarks/jessup/benchmark.json#jessup_2024.gold_label",
+  "has_gold_answer": false,
+  "evaluator_id": "rubric_llm_v1",
+  "evaluator_status": "ready",
+  "rubric_path": "data/rubrics/moot_memorial_100_v1.json",
+  "deliverable": "written_memorial",
+  "solution_file": null
+}

@@ -1,0 +1,6 @@
+﻿run_dir	provider	model	schema	rules_mode	competition	problem_id	score	max_score	accuracy_pct	Communication	Planning	CS	turns_used	max_turns	api_calls	tokens	elapsed_sec	wrong_subs	submitted	graded	status
+arml_local_three_memory_gpt54mini_20260828	perplexity	openai/gpt-5.4-mini	open_table_coach	enforced	arml_local	arml_local_2009	22.22	40.0	55.56	4.0	3.0	3.5	12	16	135	19231	461.6	0	True	True	ok
+arml_local_2009_tolerant_discussion_gpt54mini_20260828	perplexity	openai/gpt-5.4-mini	open_table_coach	enforced	arml_local	arml_local_2009	22.22	40.0	55.56	3.0	2.0	2.5	21	30	243	32361	709.3	0	True	True	ok
+arml_local_discussion_gpt54mini_2010_20260828	perplexity	openai/gpt-5.4-mini	open_table_coach	enforced	arml_local	arml_local_2010	26.67	40.0	66.67	4.0	2.0	3.0	30	30	351	31920	804.1	0	True	True	ok
+arml_local_2011_think_trace_gpt54mini_20260828	perplexity	openai/gpt-5.4-mini	open_table_coach	enforced	arml_local	arml_local_2011	25.0	40.0	62.5	4.0	4.0	4.0	10	30	111	9109	249.0	0	True	True	ok
+arml_local_2011_think_trace_tinker_qwen36_20260828	tinker	Qwen/Qwen3.6-35B-A3B	open_table_coach	enforced	arml_local	arml_local_2011	35.0	40.0	87.5	3.0	4.0	3.5	14	30	159	53323	5125.8	0	True	True	ok

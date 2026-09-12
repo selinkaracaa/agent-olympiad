@@ -1,0 +1,3 @@
+# Literature
+
+This poet described a creature who "thinketh no evil, but sings" in his anti-Vinkensport poem "The Blinded Bird". In another poem, he wishes for a "vengeful god" to clarify his suffering by telling him "thy love's loss is my hate's profiting!" and expresses frustration with "purblind Doomsters". This author of "Hap" described the "Immanent Will" creating a "Shape of Ice" in a poem about the (*) Titanic called "The Convergence of the Twain". While leaning "upon a coppice gate", the speaker of his best-known poem hears the title bird "fling his soul upon the growing gloom". For 10 points, name this British author of "The Darkling Thrush" and the Wessex Poems, as well as novels like Tess of the d'Urbervilles.

@@ -1,0 +1,13 @@
+{
+  "competition_id": "science_olympiad",
+  "crawled_at": "2026-08-11T00:00:00+00:00",
+  "sources": [
+    {
+      "title": "Science Olympiad fallback notes",
+      "url": "https://www.soinc.org/",
+      "status": "ok",
+      "text_file": "data/rules/sources/science_olympiad/01_fallback_notes.txt",
+      "text_preview": "Science Olympiad national team STEM competition with event-specific rule PDFs. Follow event references and code of ethics. Sample-packet coverage is incomplete; proxy where physical events are unavailable."
+    }
+  ]
+}

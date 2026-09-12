@@ -1,0 +1,15 @@
+{
+  "competition_id": "ioaa_group",
+  "rule_id": "ioaa_group:draft_v1",
+  "profile": "proxy",
+  "protocol": "shared_answer",
+  "visibility": {
+    "agent_at_start": [
+      "input",
+      "method"
+    ],
+    "hidden_until_grade": [
+      "eval"
+    ]
+  }
+}

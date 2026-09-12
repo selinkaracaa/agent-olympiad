@@ -1,0 +1,3 @@
+# Geography
+
+A building in this city contains a glass dome symbolizing the transparency of democracy designed by Norman Foster, and a museum dedicated to the works of Kathe Kollwitz. This city also contains a Yevgeniy Vuchetich- designed Soviet War Memorial in its Treptower Park, while other landmarks include a museum which contains the Ishtar Gate and an altar excavated from the ruins of a Greek city, the Pergamon Museum. Also containing a field of concrete slabs that serve as a memorial to the Jews of Europe, FTP, identify this city that is home to the Brandenburg Gate, the Reichstag House, and remains of a certain wall.

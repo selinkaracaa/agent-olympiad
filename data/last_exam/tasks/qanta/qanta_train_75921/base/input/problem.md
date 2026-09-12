@@ -1,0 +1,3 @@
+# Literature
+
+This poet addressed Ramon Fernandez in a poem that begins, "She sang beyond the genius of the sea." Another of his speakers compares himself to a tree after saying, "I was of three minds" and asks, "O thin men of Haddam,/ why do you imagine golden birds?" This author also wrote about "the dresser of deal, lacking the three glass knobs" in a poem that exhorts, "Let be be finale of seem." He wrote "Idea of Order at Key West," "Thirteen Ways of Looking at a Blackbird" and a poem that begins, "Call the roller of big cigars." For 10 points, name this author of "The Emperor of Ice Cream."

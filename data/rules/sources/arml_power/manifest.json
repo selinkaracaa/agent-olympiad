@@ -1,0 +1,17 @@
+{
+  "competition_id": "arml_power",
+  "crawled_at": "2026-08-11T16:07:31.195561+00:00",
+  "sources": [
+    {
+      "title": "ARML Competition Rules",
+      "url": "https://arml.com/ARML/arml_2019/page/index.php?page=competition_rules&page_type=public",
+      "status": "ok",
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 19834,
+      "raw_file": "data/rules/sources/arml_power/01_index.php",
+      "text_file": "data/rules/sources/arml_power/01_index.txt",
+      "text_chars": 12787,
+      "text_preview": "The Official American Regions Mathematics League Web Page \n \n \n \n -->\n \n\n \n \n \n \n \n \n The Official \nAmerican Regions Mathematics League\n Web Page \n \n -->\n \n \n \n \n \n -->\n\n -->\n -->\n \n \n \n \n \n \n \n \n\n Home \n\n Supporters \n Meet Results \n IRML \n\n 40th Anniversary Puzzle Hunt -->\n Power Contest \n\n ARML Local -->\n\n ARML. Local \n\n ARML Local -->\n\n ARML Local -->\n\n Awards \n\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n\n ARML/IRML Competition Rules \n\n \n \n \n A team will consist of 15 members. Coaches are expected to gauge the strength of each of the 15 member teams and place their students on the teams accordingly. The team that consists of the students who have historically performed with the highest results should be placed on the same 15 member team. The next strongest 15 students should be placed on the next team, etc. Those teams will then be named, A1, A2, A3, etc. if they are to compete in the A division and B1, B2, B3, etc. if they are to compete in the B division Please see the section called \"Team Names\" of the document called, \"General Information for All Sites,\" for clarification. (This rule was revised in April 2017.)\n\n \n\n Each year, regions will be ordered by the highest score achieved by a team in that\nregion. All teams in the top 20 regions will be required to compete in Division A. The remaining regions may choose the division in which all of their teams will compete. Students on the top teams in each division will receive software and/or book prizes. During the award ceremony, we encou"
+    }
+  ]
+}

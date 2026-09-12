@@ -222,6 +222,88 @@
   "simulation": {
     "max_turns": 30,
     "scheduler": "src_collaboration_draft",
-    "turn_budget_basis": "standardized experiment budget: 30 global turns; official contest timing is recorded separately"
+    "turn_budget_basis": "standardized experiment budget: 30 global turns; official contest timing is recorded separately",
+    "open_table_coach": {
+      "enabled": true,
+      "status": "counterfactual_otc_collaboration_overlay_not_official_competition_rule",
+      "may_submit": false,
+      "allowed_tools": [],
+      "counts_toward_shared_api_and_token_budget": true,
+      "contestant_turn_policy": {
+        "mode": "private_deliberation_then_single_action",
+        "allowed_actions": [
+          "work",
+          "speak",
+          "rest"
+        ],
+        "exactly_one_action": true,
+        "unstructured_response": "rest",
+        "final_submission": "reviewed_answer_sheet",
+        "visibility": {
+          "think": "private",
+          "work": "shared",
+          "speak": "team",
+          "rest": "private"
+        },
+        "max_chars_by_action": {
+          "think": 2400,
+          "work": 8000,
+          "speak": 1000,
+          "rest": 80
+        },
+        "memory_entries": {
+          "private_think_per_agent": 3,
+          "shared_work": 18,
+          "group_messages": 12,
+          "public_messages": 24
+        },
+        "private_think_calls_per_turn": 1,
+        "discussion_policy": {
+          "report_after_work": true,
+          "silent_work_turn_requires_discussion": true,
+          "conflicts_require_targeted_speak": true
+        }
+      },
+      "precontest_brief": {
+        "turn": 0,
+        "problem_access": false,
+        "allowed_actions": [
+          "speak",
+          "sleep"
+        ],
+        "advice_scope": [
+          "time allocation within the rule card",
+          "team coordination and handoffs",
+          "independent verification",
+          "reconciling the required final deliverable"
+        ]
+      },
+      "opening_discussion": {
+        "enabled": false,
+        "problem_access": false,
+        "allowed_actions": [],
+        "purpose": "Coach exits permanently after the single turn-0 blind brief."
+      },
+      "after_opening_access": false,
+      "min_turns": 3,
+      "protocol_version": "otc_turn0_review_v1",
+      "review_required": true,
+      "action_surface": "registry_bundles_v1",
+      "action_bundles": [
+        "common",
+        "desk",
+        "memory",
+        "independent_review",
+        "competition_tools",
+        "deliberation_if_structured"
+      ]
+    },
+    "deliverable_pipeline": {
+      "version": "otc_artifact_v1",
+      "kind": "external_environment",
+      "fidelity": "benchmark_adaptation_not_official_equivalence",
+      "status": "requires_specialized_adapter",
+      "reason": "Live, physical or interactive performance requires its own environment and scoring adapter."
+    }
   }
 }

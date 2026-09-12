@@ -1,0 +1,3 @@
+# Trash
+
+He wrote about the time he spent on Bob Dylan's 1975 tour in Rolling Thunder Logbook.  He collaborated with Antonioni on the screenplay for Zabriskie Point, but got his start in the theater.  His play The Tooth of Crime premiered in London, while earlier works premiered in New York, such as The Rock Garden and Cowboys.  He won four Obie awards for a 1983 work which was made into a movie in which he starred, Fool for Love.  However, he is best known for a group of plays about families in crisis, including True West and Curse of the Starving Class.  FTP, name this author of Buried Child, who has also appeared as an actor, including a performance as Chuck Yeager in The Right Stuff.

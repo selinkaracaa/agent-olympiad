@@ -1,0 +1,16 @@
+# Long-Term Problem Synopses — 2026
+
+# Odyssey of the Mind — 2026 Long-Term Problem Synopses
+
+Source: https://odysseyofthemind.com/past-problems/
+
+Note: These are public synopses. Full problem packets require membership.
+
+---
+
+1. Off the RailsAll aboard! OMers become conductors and engineers as they design, build, and operate a train vehicle. As the train travels the course it will have a new car attached at each stop. Along the route it will encounter challenges that make the train travel in different ways. After all of its cargo is picked up, the items will be unloaded and assembled into a work of art. The performance will also include the use of ARM & HAMMER™ Baking Soda, a humorous conductor character, and a villain character that tries to prevent the train from getting to its destination. Sponsored by ARM & HAMMER™
+2. Lost in OMERlandGetting lost often leads to unexpected opportunities! In this problem OM™ teams will design, build, and operate a Technical Trip Assistant only to find their voice activated-device has a few malfunctions that result in hilarity. While they set out to explore a new place, the device gives a humorous answer to a question, wrong directions that take them to an unexpected location, and a silly translation. All props and backdrops must fit inside two suitcases.
+3. Classics… The Epic QuestOMers, are you ready to get EPIC? Quests from history have been passed from generation to generation through many art forms, including poetry. OMers will create an epic poem that details a team-created quest that is acted out in the performance. During the quest, the characters encounter an original beast, will rescue someone, and will overcome an epic challenge. The performance will use colors to help depict different settings.
+4. Life’s a Ball!Party Time! In this problem, teams will create a performance about throwing a party or a ball. The team will design and build a balsa wood structure that is tested by balancing and supporting as much weight as possible. At intervals various balls will be rolled to collide with the structure. The performance will include a creative “ball” character and a party guest that explains the impact of the collisions using team-created terms.
+5. Taller Tales of John JiveryNo one can tell a story like an OMer! In this problem, teams will create and present a humorous performance about an original tall tale. The tale will include a team-created hero or heroine that performs an incredible feat, a unique explanation of how something began or came to be, and a surprise for the audience. Each event will be accompanied by a visual weather effect that represents an emotion
+6. Clowning Around With ScienceWhat kind of hair do oceans have? Wavy! In this problem, OM teams will create an original performance about a group of comedy performers that teach lessons about natural science. The lessons will also include a visual effect, a sound effect, and jokes.

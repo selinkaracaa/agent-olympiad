@@ -17,13 +17,14 @@ from env import TurnLimitExceededError
 from memory import MemoryStore
 from rules import AgentRole, RulesMode, agent_view
 from rules.describe import describe_resources
+from tool_registry import canonical_action_name
 
 SchemaName = Literal[
     "round_table",
     "centralized",
     "decentralized",
     "single_agent",
-    "open_table_coach",
+    "vanilla_team",
     "debate",
     "self_consistency",
     "memory_solo",
@@ -141,168 +142,6 @@ def _is_programming_contest(env) -> bool:
     )
 
 
-def _open_table_coach_policy(env) -> dict[str, Any]:
-    if env.rules_mode is not RulesMode.ENFORCED or env.rule_card is None:
-        raise ValueError(
-            "open_table_coach requires an enforced rule card with an explicit "
-            "open_table_coach policy"
-        )
-    raw = env.rule_card.simulation.get("open_table_coach")
-    if not isinstance(raw, dict) or raw.get("enabled") is not True:
-        raise ValueError(
-            f"Rule card for {env.competition_id!r} does not enable open-table coaching"
-        )
-    required_top_level = {
-        "may_submit": False,
-        "allowed_tools": [],
-        "counts_toward_shared_api_and_token_budget": True,
-        "after_opening_access": False,
-    }
-    for field_name, expected in required_top_level.items():
-        if raw.get(field_name) != expected:
-            raise ValueError(
-                f"Unsafe open_table_coach policy: {field_name} must be {expected}"
-            )
-    precontest = raw.get("precontest_brief")
-    opening = raw.get("opening_discussion")
-    if not isinstance(precontest, dict) or not isinstance(opening, dict):
-        raise ValueError(
-            "open_table_coach requires precontest_brief and opening_discussion policies"
-        )
-    if (
-        precontest.get("turn") != 1
-        or precontest.get("problem_access") is not False
-        or set(precontest.get("allowed_actions") or ()) != {"speak", "sleep"}
-    ):
-        raise ValueError("Unsafe open_table_coach precontest_brief policy")
-    if (
-        opening.get("turn") != 2
-        or opening.get("problem_access") is not True
-        or set(opening.get("allowed_actions") or ()) != {"speak", "sleep"}
-    ):
-        raise ValueError("Unsafe open_table_coach opening_discussion policy")
-    advice_scope = precontest.get("advice_scope")
-    if not isinstance(advice_scope, list) or not advice_scope or not all(
-        isinstance(item, str) and item.strip() for item in advice_scope
-    ):
-        raise ValueError(
-            "open_table_coach precontest advice_scope must be a non-empty string list"
-        )
-    turn_policy = raw.get("contestant_turn_policy")
-    required_actions = {"work", "speak", "rest"}
-    optional_actions = {"submit_code"}
-    if not isinstance(turn_policy, dict):
-        raise ValueError("open_table_coach requires contestant_turn_policy")
-    mode = turn_policy.get("mode")
-    allowed_actions = set(turn_policy.get("allowed_actions") or ())
-    if (
-        mode
-        not in {
-            "self_selected_single_action",
-            "private_deliberation_then_single_action",
-        }
-        or turn_policy.get("exactly_one_action") is not True
-        or not required_actions.issubset(allowed_actions)
-        or not allowed_actions.issubset(required_actions | optional_actions | {"think"})
-        or turn_policy.get("final_submission") != "synthesis_only"
-    ):
-        raise ValueError("Unsafe open_table_coach contestant_turn_policy")
-    private_calls = int(turn_policy.get("private_think_calls_per_turn", 0))
-    if mode == "self_selected_single_action":
-        if "think" not in allowed_actions or private_calls:
-            raise ValueError("Legacy open-table mode requires think as an action")
-    elif "think" in allowed_actions or not 1 <= private_calls <= 2:
-        raise ValueError(
-            "Private-deliberation mode requires 1-2 private calls and no think action"
-        )
-    if "submit_code" in allowed_actions and not _is_programming_contest(env):
-        raise ValueError(
-            "open_table_coach submit_code is only allowed for programming contests"
-        )
-    visibility = turn_policy.get("visibility")
-    expected_visibility = {
-        "think": "private",
-        "work": "shared",
-        "speak": "team",
-        "rest": "private",
-    }
-    if "submit_code" in allowed_actions:
-        expected_visibility = {**expected_visibility, "submit_code": "team"}
-    if visibility != expected_visibility:
-        raise ValueError("Unsafe open-table action visibility policy")
-    max_chars = turn_policy.get("max_chars_by_action")
-    expected_limits = allowed_actions | (
-        {"think"} if mode == "private_deliberation_then_single_action" else set()
-    )
-    if (
-        not isinstance(max_chars, dict)
-        or set(max_chars) != expected_limits
-        or not all(
-            isinstance(max_chars[action], int) and max_chars[action] > 0
-            for action in expected_limits
-        )
-    ):
-        raise ValueError("Open-table action character limits must be positive integers")
-    memory_entries = turn_policy.get("memory_entries")
-    if (
-        not isinstance(memory_entries, dict)
-        or not isinstance(memory_entries.get("private_think_per_agent"), int)
-        or memory_entries["private_think_per_agent"] <= 0
-        or not isinstance(memory_entries.get("shared_work"), int)
-        or memory_entries["shared_work"] <= 0
-        or not isinstance(memory_entries.get("group_messages", 1), int)
-        or memory_entries.get("group_messages", 1) <= 0
-        or not isinstance(memory_entries.get("public_messages", 1), int)
-        or memory_entries.get("public_messages", 1) <= 0
-    ):
-        raise ValueError("Open-table memory entry limits must be positive integers")
-    return dict(raw)
-
-
-def _coach_system_prompt(
-    env,
-    *,
-    phase: Literal["precontest", "opening"],
-    policy: dict[str, Any],
-) -> str:
-    if phase == "precontest":
-        scope = "\n".join(
-            f"- {item}" for item in policy["precontest_brief"]["advice_scope"]
-        )
-        phase_text = (
-            "The problem is unavailable. Give preparation advice only within this "
-            f"scope:\n{scope}"
-        )
-    else:
-        phase_text = (
-            "This is your final participation. Read the opening discussion and "
-            f"{policy['opening_discussion']['purpose']}. You exit after this message."
-        )
-    return (
-        f"You are Coach for a {env.competition_id} team during the "
-        f"{'pre-contest brief' if phase == 'precontest' else 'opening discussion'}.\n"
-        "You are an adviser, not a contestant. You have no tools and may only speak "
-        "or sleep. You may not edit notes, execute tools, or submit an answer.\n"
-        f"{phase_text}\n\n"
-        "Respond with plain text, or exactly one of:\n"
-        "ACTION: speak | PAYLOAD: <advice>\n"
-        "ACTION: sleep | PAYLOAD: <short reason>"
-    )
-
-
-def _precontest_coach_prompt(env, policy: dict[str, Any]) -> str:
-    visible_rules = agent_view(env.rule_card, team_size=env.team_size)
-    return (
-        "=== CONTESTANT-VISIBLE RULE CARD ===\n"
-        f"{json.dumps(visible_rules, ensure_ascii=False, indent=2)}\n\n"
-        "=== PRE-CONTEST RESOURCE ENVELOPE ===\n"
-        f"Contestants: {env.team_size}\n"
-        f"Contest turns: {env.max_turns}\n\n"
-        "Prepare the team to allocate time, communicate, verify work, and reconcile "
-        "the final deliverable while following every visible rule."
-    )
-
-
 def _system_prompt(
     env,
     role: str,
@@ -327,6 +166,7 @@ def _system_prompt(
         board_item_count=len(env.workboard.items)
         if getattr(env, "workboard", None) is not None
         else 0,
+        rule_card=env.rule_card is not None,
     )
     if env.rule_card is not None:
         card = env.rule_card
@@ -529,7 +369,7 @@ def _submit_synthesis_response(env, synthesizer: str, response: str) -> int:
             return 0
 
     for action_type, payload in parse_agent_response(response):
-        if action_type == "submit":
+        if canonical_action_name(action_type) == "submit":
             text = payload.strip()
             break
 
@@ -598,29 +438,13 @@ def _should_stop(env) -> bool:
     return env.submitted or env.api_budget_exhausted() or env.token_budget_exhausted()
 
 
-def _all_open_table_contestants_ready(
-    env,
-    agents: list[str],
-    turn: int,
-) -> bool:
-    """End when every contestant is inactive for a full turn."""
-    ready_agents = {
-        item["agent"]
-        for item in env.action_log
-        if item.get("turn") == turn
-        and item.get("agent") in agents
-        and item.get("action") == "rest"
-    }
-    return ready_agents == set(agents)
-
-
 def _all_agents_slept(env, agents: list[str], turn: int) -> bool:
     sleeping_agents = {
         item["agent"]
         for item in env.action_log
         if item.get("turn") == turn
         and item.get("agent") in agents
-        and item.get("action") == "rest"
+        and canonical_action_name(str(item.get("action") or "")) == "rest"
         and not item.get("protocol_error")
     }
     return sleeping_agents == set(agents)
@@ -657,434 +481,6 @@ def _run_agent_once(
         response,
         submitters=submitters,
         allowed_actions=allowed_actions,
-    )
-
-
-def _open_table_turn_policy(policy: dict[str, Any]) -> dict[str, Any]:
-    return dict(policy["contestant_turn_policy"])
-
-
-def _open_table_available_actions(
-    env,
-    agent_name: str,
-    policy: dict[str, Any],
-) -> set[str]:
-    turn_policy = _open_table_turn_policy(policy)
-    allowed = set(turn_policy["allowed_actions"])
-    discussion = turn_policy.get("discussion_policy") or {}
-    prior_turn = env.current_turn - 1
-    prior_team_actions = [
-        item
-        for item in env.action_log
-        if item.get("turn") == prior_turn and item.get("agent") != "Coach"
-    ]
-    if (
-        discussion.get("silent_work_turn_requires_discussion") is True
-        and any(item.get("action") == "work" for item in prior_team_actions)
-        and not any(item.get("action") == "speak" for item in prior_team_actions)
-    ):
-        allowed.discard("work")
-    prior_agent_actions = [
-        item
-        for item in env.action_log
-        if item.get("agent") == agent_name
-        and item.get("turn", 0) < env.current_turn
-        and item.get("action") in {"work", "speak", "rest"}
-        and not item.get("protocol_error")
-    ]
-    if (
-        discussion.get("report_after_work") is True
-        and prior_agent_actions
-        and prior_agent_actions[-1].get("action") == "work"
-    ):
-        allowed.discard("work")
-    if env.communication.enabled:
-        per_agent = int(
-            env.communication.policy.get("per_agent_message_budget", 0)
-        )
-        agent_used = env.communication.by_agent.get(agent_name, 0)
-        if env.communication.team_budget_exhausted() or (
-            per_agent and agent_used >= per_agent
-        ):
-            allowed.discard("speak")
-    return allowed
-
-
-def _open_table_contestant_system_prompt(
-    env,
-    agent_name: str,
-    policy: dict[str, Any],
-) -> str:
-    turn_policy = _open_table_turn_policy(policy)
-    limits = turn_policy["max_chars_by_action"]
-    allowed = _open_table_available_actions(env, agent_name, policy)
-    private_mode = (
-        turn_policy.get("mode") == "private_deliberation_then_single_action"
-    )
-    lines = [
-        "=== OPEN-TABLE SINGLE-ACTION PROTOCOL ===",
-        "These are the ONLY valid actions this turn. Return exactly ONE "
-        "structured ACTION block and no other text.",
-    ]
-    if "think" in allowed:
-        lines.append(
-            f"- ACTION: think | PAYLOAD: <private analysis, max {limits['think']} chars>"
-        )
-    if "work" in allowed:
-        lines.append(
-            f"- ACTION: work | TARGET: public or Agent_2,Agent_3 | "
-            f"PAYLOAD: <new solution/check, max {limits['work']} chars>"
-        )
-    if "speak" in allowed:
-        lines.append(
-            f"- ACTION: speak | TARGET: public or Agent_2,Agent_3 | "
-            f"PAYLOAD: <brief summary/request/risk, max {limits['speak']} chars>"
-        )
-    if "rest" in allowed:
-        lines.append(
-            f"- ACTION: rest | PAYLOAD: <optional private reason, max {limits['rest']} chars>"
-        )
-    if "submit_code" in allowed:
-        lines.append(
-            f"- ACTION: submit_code | PAYLOAD: <complete stdin/stdout source, "
-            f"max {limits['submit_code']} chars; local sample judge first, then "
-            "remote gateway when configured; remote AC finalizes>"
-        )
-    lines.extend(
-        [
-            "Do not use write_scratchpad, sleep, submit_final, or any deliberation action. "
-            "Choose one action independently. Do not combine full reasoning with speech.",
-            (
-                "A private deliberation call has already updated your personal memory. "
-                "Share only its decision-relevant summary."
-                if private_mode
-                else "think is visible only to you."
-            ),
-            "TARGET public writes public memory. A comma-separated TARGET sends only "
-            "to those agents and writes group/direct memory. Omit TARGET for rest.",
-            "If shared work contains incompatible answers, do not silently add another "
-            "derivation. Use targeted speak to name the disputed question, competing "
-            "claims, and the exact step that needs checking. After producing work, use "
-            "your next action to report its result or request a check before more work.",
-            "Prefer work for a fresh derivation or independent check of an unresolved "
-            "answer. Do not repeat a shared claim unless you add new evidence or a "
-            "correction. If all derivable answers are checked and you have no new "
-            "evidence, choose rest.",
-        ]
-    )
-    if "submit_code" in allowed:
-        lines.append(
-            "When a complete program is ready, use submit_code rather than only "
-            "writing it into work. Official finalization still uses synthesis if "
-            "no remote AC finalizes earlier."
-        )
-    return _system_prompt(env, agent_name, action_instructions="\n".join(lines))
-
-
-def _open_table_contestant_prompt(
-    env,
-    agent_name: str,
-    schema_note: str,
-    policy: dict[str, Any],
-    *,
-    extra: str,
-    private_deliberation: bool = False,
-) -> str:
-    turn_policy = _open_table_turn_policy(policy)
-    memory = turn_policy["memory_entries"]
-    private_think = env.format_private_thoughts(
-        agent_name,
-        max_entries=memory["private_think_per_agent"],
-    )
-    shared_work = env.format_shared_work(
-        agent_name=agent_name,
-        max_entries=memory["shared_work"],
-    )
-    group_memory = env.format_group_memory(
-        agent_name,
-        max_entries=memory.get("group_messages"),
-    )
-    private_block = (
-        f"\n\n{private_think}" if private_think else "\n\n=== YOUR PRIVATE THINK LEDGER ===\n(empty)"
-    )
-    shared_block = (
-        f"\n\n{shared_work}" if shared_work else "\n\n=== SHARED WRITTEN WORK ===\n(empty)"
-    )
-    group_block = (
-        f"\n\n{group_memory}"
-        if group_memory
-        else "\n\n=== YOUR GROUP / DIRECT MEMORY ===\n(empty)"
-    )
-    communication_status = env.communication.status_for(agent_name)
-    allowed = sorted(_open_table_available_actions(env, agent_name, policy))
-    turn_instruction = (
-        "This is a PRIVATE deliberation call. Update only your personal working "
-        "memory. Do not emit ACTION, TARGET, or a message to teammates. Return a "
-        "concise working note with your assignment, reasoning progress, uncertainty, "
-        "and intended next action."
-        if private_deliberation
-        else ""
-    )
-    return (
-        _agent_user_prompt(
-            env,
-            agent_name,
-            schema_note,
-            extra=extra,
-            turn_instruction=turn_instruction,
-            discussion_limit=memory.get("public_messages"),
-        )
-        + shared_block
-        + group_block
-        + private_block
-        + "\n\n=== OPEN-TABLE BUDGET STATUS ===\n"
-        + f"Communication: {communication_status}\n"
-        + (
-            "Write your private note now."
-            if private_deliberation
-            else f"Select exactly one of {', '.join(allowed)} now."
-        )
-    )
-
-
-def _compact_open_table_payload(
-    env,
-    *,
-    agent_name: str,
-    action_type: str,
-    payload: str,
-    policy: dict[str, Any],
-) -> tuple[str, dict[str, Any]]:
-    limits = _open_table_turn_policy(policy)["max_chars_by_action"]
-    return env.communication.compact_payload(
-        agent_name=agent_name,
-        action_type=action_type,
-        payload=payload,
-        turn=env.current_turn,
-        max_chars=int(limits[action_type]),
-    )
-
-
-def _apply_open_table_contestant_response(
-    env,
-    agent_name: str,
-    response: str,
-    policy: dict[str, Any],
-) -> None:
-    allowed = _open_table_available_actions(env, agent_name, policy)
-    action_type, target, payload, error = parse_scoped_single_action(
-        response,
-        allowed_actions=allowed,
-    )
-    if error:
-        violation = f"OPEN_TABLE_PROTOCOL: {agent_name}: {error}"
-        env.rule_violations.append(violation)
-        env.record_rest(
-            agent_name,
-            "invalid single-action response",
-            metadata={
-                "protocol_error": error,
-                "raw_response_preview": (response or "")[:1200],
-            },
-        )
-        return
-    assert action_type is not None
-    if action_type != "rest" and not payload:
-        error = f"{action_type} requires a non-empty payload"
-        env.rule_violations.append(f"OPEN_TABLE_PROTOCOL: {agent_name}: {error}")
-        env.record_rest(
-            agent_name,
-            "empty action payload",
-            metadata={"protocol_error": error},
-        )
-        return
-
-    recipients: list[str] = []
-    normalized_target = target.strip().lower()
-    if action_type in {"speak", "work"} and normalized_target not in {
-        "",
-        "public",
-        "all",
-        "team",
-    }:
-        raw_target = re.sub(r"^(?:group|agent)\s*:\s*", "", target.strip(), flags=re.I)
-        recipients = sorted(
-            {
-                item.strip()
-                for item in raw_target.split(",")
-                if item.strip() and item.strip() != agent_name
-            }
-        )
-        valid_agents = {role.name for role in _roster(env)}
-        invalid = [item for item in recipients if item not in valid_agents]
-        if not recipients or invalid:
-            error = (
-                f"invalid TARGET '{target}'; use public or comma-separated agent names"
-            )
-            env.rule_violations.append(
-                f"OPEN_TABLE_PROTOCOL: {agent_name}: {error}"
-            )
-            env.record_rest(
-                agent_name,
-                "invalid action target",
-                metadata={"protocol_error": error},
-            )
-            return
-
-    compacted, metadata = _compact_open_table_payload(
-        env,
-        agent_name=agent_name,
-        action_type=action_type,
-        payload=payload,
-        policy=policy,
-    )
-    if action_type == "think":
-        env.record_private_thought(agent_name, compacted, metadata=metadata)
-    elif action_type == "work":
-        env.record_work_artifact(
-            agent_name,
-            compacted,
-            recipients=recipients,
-            metadata={"target": target, **metadata},
-        )
-    elif action_type == "speak":
-        env.record_protocol_speak(agent_name)
-        if recipients:
-            env.record_scoped_message(
-                agent_name,
-                compacted,
-                recipients=recipients,
-                metadata={"target": target, **metadata},
-            )
-        else:
-            env.execute_action(
-                agent_name,
-                "speak",
-                compacted,
-                metadata={"target": "public", **metadata},
-            )
-    elif action_type == "submit_code":
-        env.execute_action(
-            agent_name,
-            "submit_code",
-            compacted,
-            metadata=metadata,
-        )
-    else:
-        env.record_rest(agent_name, compacted, metadata=metadata)
-
-
-def _run_open_table_contestant_once(
-    env,
-    query: QueryFn,
-    agent_name: str,
-    schema_note: str,
-    policy: dict[str, Any],
-    *,
-    extra: str,
-    progress: Callable[[str], None] | None = None,
-) -> None:
-    if _should_stop(env):
-        return
-    turn_policy = _open_table_turn_policy(policy)
-    private_calls = int(turn_policy.get("private_think_calls_per_turn", 0))
-    for call_index in range(private_calls):
-        if _should_stop(env):
-            return
-        if progress:
-            progress(
-                f"Turn {env.current_turn}/{env.max_turns} — "
-                f"{agent_name} private think {call_index + 1}/{private_calls}..."
-            )
-        try:
-            thought = query(
-                _system_prompt(
-                    env,
-                    agent_name,
-                    action_instructions=(
-                        "PRIVATE DELIBERATION ONLY. Return a concise private working "
-                        "note, not an ACTION and not a teammate message."
-                    ),
-                ),
-                _open_table_contestant_prompt(
-                    env,
-                    agent_name,
-                    schema_note,
-                    policy,
-                    extra=extra,
-                    private_deliberation=True,
-                ),
-            )
-        except TurnLimitExceededError:
-            return
-        compacted, metadata = _compact_open_table_payload(
-            env,
-            agent_name=agent_name,
-            action_type="think",
-            payload=thought,
-            policy=policy,
-        )
-        env.record_private_thought(
-            agent_name,
-            compacted,
-            metadata={"internal_call": True, **metadata},
-            count_as_action=False,
-        )
-
-    if progress:
-        progress(
-            f"Turn {env.current_turn}/{env.max_turns} — "
-            f"{agent_name} selecting one action..."
-        )
-    try:
-        response = query(
-            _open_table_contestant_system_prompt(env, agent_name, policy),
-            _open_table_contestant_prompt(
-                env,
-                agent_name,
-                schema_note,
-                policy,
-                extra=extra,
-            ),
-        )
-    except TurnLimitExceededError:
-        if progress:
-            progress("API/turn budget exhausted — stopping contestant calls.")
-        return
-    _apply_open_table_contestant_response(env, agent_name, response, policy)
-
-
-def _apply_open_table_coach_response(
-    env,
-    response: str,
-    policy: dict[str, Any],
-) -> None:
-    action_type, payload, error = parse_single_structured_action(
-        response,
-        allowed_actions={"speak", "sleep"},
-    )
-    if error:
-        env.execute_action(
-            "Coach",
-            "sleep",
-            f"blocked prohibited action ({error})",
-            metadata={"protocol_error": error},
-        )
-        return
-    assert action_type is not None
-    limit_action = "speak" if action_type == "speak" else "rest"
-    compacted, metadata = _compact_open_table_payload(
-        env,
-        agent_name="Coach",
-        action_type=limit_action,
-        payload=payload,
-        policy=policy,
-    )
-    env.execute_action(
-        "Coach",
-        action_type,
-        compacted,
-        metadata=metadata,
     )
 
 
@@ -1370,8 +766,8 @@ def run_single_agent(env, query_llm_fn: QueryFn, config: CollabConfig | None = N
     programming = _is_programming_contest(env)
     single_agent_actions = {
         "write_private_notes",
-        "submit_final",
-        "sleep",
+        "submit",
+        "rest",
     }
     if programming:
         single_agent_actions.add("submit_code")
@@ -1393,15 +789,15 @@ def run_single_agent(env, query_llm_fn: QueryFn, config: CollabConfig | None = N
             "local sample judge first, then remote gateway when configured>"
         )
         action_lines.append(
-            "- ACTION: submit_final | PAYLOAD: <same complete source if ready to finalize>"
+            "- ACTION: submit | PAYLOAD: <same complete source if ready to finalize>"
         )
     else:
         action_lines.append(
-            "- ACTION: submit_final | PAYLOAD: <complete numbered answer sheet>"
+            "- ACTION: submit | PAYLOAD: <complete numbered answer sheet>"
         )
     action_lines.extend(
         [
-            "- ACTION: sleep | PAYLOAD: <optional reason>",
+            "- ACTION: rest | PAYLOAD: <optional reason>",
             (
                 "Iterate with submit_code until remote/local AC, then stop."
                 if programming
@@ -1454,7 +850,9 @@ def run_single_agent(env, query_llm_fn: QueryFn, config: CollabConfig | None = N
                 system_prompt=single_agent_system,
                 progress=config.progress,
             )
-            if env.action_log and env.action_log[-1].get("action") == "rest":
+            if env.action_log and canonical_action_name(
+                str(env.action_log[-1].get("action") or "")
+            ) == "rest":
                 break
         if stop_reason is not None:
             break
@@ -1771,153 +1169,110 @@ def run_liveoi_best_of_8(
     return result
 
 
-def run_open_table_coach(
+def _vanilla_system_prompt(env, agent_name: str, allowed_actions: set[str]) -> str:
+    actions = ", ".join(sorted(allowed_actions))
+    return (
+        f"You are {agent_name}, one member of a {env.team_size}-agent team. "
+        "Work with the team to solve the current problem.\n"
+        f"Available actions: {actions}.\n"
+        "Return exactly one structured action and no other text:\n"
+        "ACTION: <action> | PAYLOAD: <content>"
+    )
+
+
+def _vanilla_user_prompt(env, agent_name: str) -> str:
+    discussion = _discussion_history(env, max_entries=12)
+    shared_work = env.format_shared_work(max_entries=12) or "(empty)"
+    return (
+        f"PROBLEM\n{env._problem_statement()}\n\n"
+        f"PUBLIC DISCUSSION\n{discussion}\n\n"
+        f"PUBLIC WORK\n{shared_work}\n\n"
+        f"TURN {env.current_turn}/{env.max_turns}; "
+        f"API {env.api_calls}/{env.max_api_calls or 'unlimited'}; "
+        f"TOKENS {env.tokens_used}/{env.max_total_tokens or 'unlimited'}\n"
+        f"You are {agent_name}. Choose one action."
+    )
+
+
+def _apply_vanilla_response(
+    env,
+    agent_name: str,
+    response: str,
+    allowed_actions: set[str],
+) -> None:
+    action_type, _target, payload, error = parse_scoped_single_action(
+        response,
+        allowed_actions=allowed_actions,
+    )
+    if error:
+        env.record_rest(
+            agent_name,
+            "invalid single-action response",
+            metadata={"protocol_error": error},
+        )
+        return
+    assert action_type is not None
+    canonical = canonical_action_name(action_type)
+    if canonical == "work":
+        env.record_work_artifact(agent_name, payload)
+    elif canonical == "rest":
+        env.record_rest(agent_name, payload)
+    else:
+        env.execute_action(agent_name, action_type, payload)
+
+
+def run_vanilla_team(
     env, query_llm_fn: QueryFn, config: CollabConfig | None = None
 ) -> dict:
-    """Coach prepares the team, joins one open-table turn, then exits."""
+    """Minimal rules-off team baseline with one public action per model call."""
+    if env.rule_card is not None or env.rules_mode is not RulesMode.OFF:
+        raise ValueError("vanilla_team requires rules_mode=off")
     config = config or CollabConfig()
     _apply_budget_config(env, config)
-    policy = _open_table_coach_policy(env)
     query = _budgeted_query(env, query_llm_fn, config)
-    visible_rules = json.dumps(
-        agent_view(env.rule_card, team_size=env.team_size),
-        ensure_ascii=False,
-        indent=2,
-    )
-    roles = _roster(env)
-    agents = [role.name for role in roles]
-    submitters = {role.name for role in roles if role.may_submit}
-    synthesizer = next(
-        (role.name for role in roles if role.may_submit),
-        agents[0],
-    )
-    stop_reason: str | None = None
-    schema_note = (
-        "Open Table + Coach: Coach gives a problem-blind preparation brief, then "
-        "joins exactly one problem-aware opening discussion. Coach exits after turn "
-        "2; all later collaboration is contestant-only."
-    )
+    agents = [f"Agent_{index + 1}" for index in range(env.team_size)]
+    allowed_actions = {
+        "speak",
+        "work",
+        "rest",
+        "submit",
+        *env.get_available_tools(),
+    }
+    if _is_programming_contest(env):
+        allowed_actions.add("submit_code")
 
-    # Stage 1: charged to the common turn/API/token budgets, with no problem access.
-    if not _should_stop(env) and env.can_begin_turn():
-        turn = env.begin_turn()
-        if config.progress:
-            config.progress(f"Turn {turn}/{env.max_turns} — Coach preparing team...")
-        try:
-            response = query(
-                _coach_system_prompt(env, phase="precontest", policy=policy),
-                _precontest_coach_prompt(env, policy),
-            )
-        except TurnLimitExceededError:
-            response = ""
-        if response:
-            _apply_open_table_coach_response(env, response, policy)
-
-    # Stage 2: contestants open the problem-aware table; Coach summarizes and exits.
-    if not _should_stop(env) and env.can_begin_turn():
-        turn = env.begin_turn()
+    while not _should_stop(env) and env.can_begin_turn():
+        scheduled_turn = env.begin_turn()
         for agent in agents:
-            _run_open_table_contestant_once(
-                env,
-                query,
-                agent,
-                schema_note,
-                policy,
-                extra=(
-                    f"Opening open-table turn {turn} of {env.max_turns}. Review the "
-                    "problem, propose assignments and priorities, and respond to the "
-                    "Coach's preparation brief.\n\n"
-                    f"CONTESTANT-VISIBLE RULE CARD:\n{visible_rules}"
-                ),
-                progress=config.progress,
-            )
-            if _should_stop(env):
+            if _should_stop(env) or env.current_turn != scheduled_turn:
                 break
-        if not _should_stop(env):
-            if config.progress:
-                config.progress(
-                    f"Turn {turn}/{env.max_turns} — Coach summarizing opening..."
-                )
-            work_limit = policy["contestant_turn_policy"]["memory_entries"][
-                "shared_work"
-            ]
-            shared_work = env.format_shared_work(max_entries=work_limit) or "(empty)"
             try:
                 response = query(
-                    _coach_system_prompt(env, phase="opening", policy=policy),
-                    _agent_user_prompt(
-                        env,
-                        "Coach",
-                        schema_note,
-                        extra=(
-                            f"{policy['opening_discussion']['purpose']}. This is your "
-                            "final message; after it you cannot observe or communicate "
-                            "with the team."
-                            f"\n\nSHARED WRITTEN WORK:\n{shared_work}"
-                            f"\n\nCONTESTANT-VISIBLE RULE CARD:\n{visible_rules}"
-                        ),
-                    ),
+                    _vanilla_system_prompt(env, agent, allowed_actions),
+                    _vanilla_user_prompt(env, agent),
                 )
             except TurnLimitExceededError:
-                response = ""
-            if response:
-                _apply_open_table_coach_response(env, response, policy)
-
-    # Stage 3: Coach is never called again.
-    while not _should_stop(env):
-        if not env.can_begin_turn():
-            break
-        turn = env.begin_turn()
-        for agent in agents:
-            _run_open_table_contestant_once(
-                env,
-                query,
-                agent,
-                schema_note,
-                policy,
-                extra=(
-                    f"Contestant-only collaboration turn {turn} of {env.max_turns}. "
-                    "Coach has exited and cannot observe or participate.\n\n"
-                    f"CONTESTANT-VISIBLE RULE CARD:\n{visible_rules}"
-                ),
-                progress=config.progress,
-            )
+                break
+            _apply_vanilla_response(env, agent, response, allowed_actions)
             if _should_stop(env):
                 break
-        min_turns = int(policy.get("min_turns", 0))
-        if turn >= min_turns and _all_open_table_contestants_ready(
-            env, agents, turn
-        ):
-            stop_reason = "all_contestants_ready"
-            break
 
-    if config.synthesize and not env.submitted:
-        _run_synthesis(
-            env,
-            query,
-            schema_note,
-            synthesizer,
-            submitters=submitters,
-            progress=config.progress,
-        )
+    if config.synthesize and not env.submitted and not env.api_budget_exhausted():
+        try:
+            answer = query(
+                "You are Agent_1. Return only the team's final answer, with no commentary.",
+                (
+                    f"PROBLEM\n{env._problem_statement()}\n\n"
+                    f"PUBLIC DISCUSSION\n{_discussion_history(env, max_entries=12)}\n\n"
+                    f"PUBLIC WORK\n{env.format_shared_work(max_entries=12) or '(empty)'}"
+                ),
+            )
+        except TurnLimitExceededError:
+            answer = ""
+        if answer.strip():
+            env.execute_action("Agent_1", "submit_final", answer.strip())
 
-    result = _result(env, "open_table_coach")
-    result["coach_policy_status"] = policy.get("status")
-    result["coach_exit_after_turn"] = 2
-    result["coach_problem_access"] = {
-        "precontest_brief": False,
-        "opening_discussion": True,
-        "after_opening": False,
-    }
-    result["protocol_action_counts"] = {
-        agent: dict(counts)
-        for agent, counts in env.protocol_action_counts.items()
-    }
-    result["shared_work_artifacts"] = len(
-        env.workspace.get("work_artifacts") or []
-    )
-    result["stop_reason"] = stop_reason
-    return result
+    return _result(env, "vanilla_team")
 
 
 def _result(env, schema: str) -> dict:
@@ -1973,7 +1328,7 @@ SCHEMAS: dict[SchemaName, Callable] = {
     "centralized": run_centralized,
     "decentralized": run_decentralized,
     "single_agent": run_single_agent,
-    "open_table_coach": run_open_table_coach,
+    "vanilla_team": run_vanilla_team,
     "debate": run_debate,
     "self_consistency": run_self_consistency,
     "memory_solo": run_memory_solo,
@@ -1988,6 +1343,8 @@ def run_collaboration(
     query_llm_fn: QueryFn,
     config: CollabConfig | None = None,
 ) -> dict:
+    if schema in {"otc", "OTC", "open_table_coach", "open_table_coach_memory", "strategic", "strategic_team"}:
+        raise ValueError("OTC uses the contest-session engine; run with --contest-manifest and --system-variant otc")
     if schema not in SCHEMAS:
         raise ValueError(f"Unknown schema '{schema}'. Choose from: {list(SCHEMAS)}")
     # The env builds its board before the roster exists; name the agents now so

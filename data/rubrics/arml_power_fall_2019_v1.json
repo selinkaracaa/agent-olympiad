@@ -1,0 +1,164 @@
+{
+  "rubric_id": "arml_power_fall_2019_v1",
+  "title": "Power Round \u2014 Fall 2019 \u2014 ARML Power sub-problem rubric",
+  "total_points": 40.0,
+  "criteria": [
+    {
+      "id": "problem_01a",
+      "name": "Problem 1a",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 1a (1 pt). Statement: Problem 1. The di\ufb00y box A = (9, 17, 31, 57) has one of the largest longevities among all di\ufb00y boxes with four positive integers less than 100. (a) Compute \u2206 4A."
+    },
+    {
+      "id": "problem_01b",
+      "name": "Problem 1b",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 1b (1 pt). Statement: (b) Compute the longevity of A."
+    },
+    {
+      "id": "problem_02a",
+      "name": "Problem 2a",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 2a (1 pt). Statement: Problem 2. Let A = (4, 2, 8, 3, 6). (a) Compute \u2206 A."
+    },
+    {
+      "id": "problem_02b",
+      "name": "Problem 2b",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 2b (1 pt). Statement: (b) Compute 3 \u00b7A + 7."
+    },
+    {
+      "id": "problem_02c",
+      "name": "Problem 2c",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 2c (1 pt). Statement: (c) Compute \u2206(3 \u00b7A + 7)."
+    },
+    {
+      "id": "problem_03a",
+      "name": "Problem 3a",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 3a (2 pts). Statement: Problem 3. Let A = (a1,a 2,...,a n) be an arbitrary n-tuple of real numbers. (a) Prove that \u2206( A +c) = \u2206A for any real number c."
+    },
+    {
+      "id": "problem_03b",
+      "name": "Problem 3b",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 3b (2 pts). Statement: (b) Prove that \u2206( k\u00b7A) =|k|\u00b7 \u2206A for any real number k."
+    },
+    {
+      "id": "problem_04",
+      "name": "Problem 4",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 4 (2 pts). Statement: Problem 4. Let A = (a1,a 2,...,a n) be an arbirary n-tuple of real numbers. Show that"
+    },
+    {
+      "id": "problem_05a",
+      "name": "Problem 5a",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 5a (2 pts). Statement: Problem 5. (a) Prove that r(A +c) =r(A)."
+    },
+    {
+      "id": "problem_05b",
+      "name": "Problem 5b",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 5b (2 pts). Statement: (b) Prove that r(k\u00b7A) =|k|\u00b7 r(A)."
+    },
+    {
+      "id": "problem_05c",
+      "name": "Problem 5c",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 5c (2 pts). Statement: (c) Prove that r(\u2206A)\u2264r(A)."
+    },
+    {
+      "id": "problem_06",
+      "name": "Problem 6",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 6 (2 pts). Statement: Problem 6. Begin with A = (\u03c0,e, 4, \u221a 2). Compute the results of repeatedly applying \u2206"
+    },
+    {
+      "id": "problem_07",
+      "name": "Problem 7",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 7 (2 pts). Statement: Problem 7. Given that A = (a1,a 2,a 3,a 4) is a list of four integers, show that all entries of"
+    },
+    {
+      "id": "problem_08",
+      "name": "Problem 8",
+      "max_score": 4.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 8 (4 pts). Statement: Problem 8. Prove that the longevity of any di\ufb00y box of four integers is \ufb01nite."
+    },
+    {
+      "id": "problem_09",
+      "name": "Problem 9",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 9 (2 pts). Statement: Problem 9. Given that n\u2265 2, prove that \u2206 3Tn = 2\u00b7Tn\u22122."
+    },
+    {
+      "id": "problem_10",
+      "name": "Problem 10",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 10 (2 pts). Statement: Problem 10. Compute an exact formula of n for the longevity of Tn."
+    },
+    {
+      "id": "problem_11",
+      "name": "Problem 11",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 11 (2 pts). Statement: Problem 11. Lett be the unique real root of the cubic polynomial t3\u2212t2\u2212t\u2212 1 = 0. (The"
+    },
+    {
+      "id": "problem_12a",
+      "name": "Problem 12a",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 12a (1 pt). Statement: Problem 12. Let A = (a1,a 2,\u00b7\u00b7\u00b7 ,a n) be an ordered n-tuple of real numbers representing a di\ufb00ygon with n sides. (a) Show that the longevity of A is 1 if and only if A is constant and not already all zeroes"
+    },
+    {
+      "id": "problem_12b",
+      "name": "Problem 12b",
+      "max_score": 3.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 12b (3 pts). Statement: (that is, a1 =a2 =\u00b7\u00b7\u00b7 =an\u0338= 0). (b) Show that if n is odd then there are no di\ufb00ygons withn entries with \ufb01nite longevity\u2265 2."
+    },
+    {
+      "id": "problem_13",
+      "name": "Problem 13",
+      "max_score": 5.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 13 (5 pts). Statement: Problem 13. Prove this last statement, by classifying all the non-increasing di\ufb00y boxes"
+    }
+  ],
+  "not_observable_from_deck": [
+    "oral defense",
+    "diagrams that were not recovered from the source PDF"
+  ],
+  "provenance": {
+    "competition_id": "arml_power",
+    "problem_id": "arml_power_fall_2019",
+    "year": 2019,
+    "source_file": "data/raw/arml/Fall_2019/ARMLPower_Fall_2019.pdf",
+    "solution_file": "data/raw/arml/Fall_2019/ARMLPower_Fall_Solution_2019.pdf",
+    "official_total_points": 40.0,
+    "parsed_total_points": 40.0,
+    "points_coverage": 1.0,
+    "awards_parsed": 20,
+    "problems_parsed": 13,
+    "derived_by": "scripts/build_arml_power_rubrics.py"
+  }
+}

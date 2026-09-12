@@ -30,7 +30,7 @@
     "evaluation": {
       "evaluator_id": "rubric_llm_v1",
       "status": "ready",
-      "rubric_path": "data/rubrics/team_power_proof_40_v1.json",
+      "rubric_path": "data/rubrics/arml_national_power_2009_v1.json",
       "deliverable": "proof_packet",
       "fallback_evaluator_id": "gold_answer_v1"
     }
@@ -66,7 +66,7 @@
     "evaluation": {
       "evaluator_id": "rubric_llm_v1",
       "status": "ready",
-      "rubric_path": "data/rubrics/team_power_proof_40_v1.json",
+      "rubric_path": "data/rubrics/arml_national_power_2010_v1.json",
       "deliverable": "proof_packet",
       "fallback_evaluator_id": "gold_answer_v1"
     }
@@ -102,7 +102,7 @@
     "evaluation": {
       "evaluator_id": "rubric_llm_v1",
       "status": "ready",
-      "rubric_path": "data/rubrics/team_power_proof_40_v1.json",
+      "rubric_path": "data/rubrics/arml_national_power_2011_v1.json",
       "deliverable": "proof_packet",
       "fallback_evaluator_id": "gold_answer_v1"
     }
@@ -138,7 +138,7 @@
     "evaluation": {
       "evaluator_id": "rubric_llm_v1",
       "status": "ready",
-      "rubric_path": "data/rubrics/team_power_proof_40_v1.json",
+      "rubric_path": "data/rubrics/arml_national_power_2012_v1.json",
       "deliverable": "proof_packet",
       "fallback_evaluator_id": "gold_answer_v1"
     }
@@ -174,7 +174,7 @@
     "evaluation": {
       "evaluator_id": "rubric_llm_v1",
       "status": "ready",
-      "rubric_path": "data/rubrics/team_power_proof_40_v1.json",
+      "rubric_path": "data/rubrics/arml_national_power_2013_v1.json",
       "deliverable": "proof_packet",
       "fallback_evaluator_id": "gold_answer_v1"
     }
@@ -210,7 +210,7 @@
     "evaluation": {
       "evaluator_id": "rubric_llm_v1",
       "status": "ready",
-      "rubric_path": "data/rubrics/team_power_proof_40_v1.json",
+      "rubric_path": "data/rubrics/arml_national_power_2014_v1.json",
       "deliverable": "proof_packet",
       "fallback_evaluator_id": "gold_answer_v1"
     }
@@ -282,7 +282,7 @@
     "evaluation": {
       "evaluator_id": "rubric_llm_v1",
       "status": "ready",
-      "rubric_path": "data/rubrics/team_power_proof_40_v1.json",
+      "rubric_path": "data/rubrics/arml_national_power_2017_v1.json",
       "deliverable": "proof_packet",
       "fallback_evaluator_id": "gold_answer_v1"
     }

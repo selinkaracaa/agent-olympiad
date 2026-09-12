@@ -1,0 +1,17 @@
+{
+  "competition_id": "ccdc",
+  "crawled_at": "2026-08-11T16:07:49.685186+00:00",
+  "sources": [
+    {
+      "title": "National CCDC",
+      "url": "https://www.nationalccdc.org/",
+      "status": "ok",
+      "content_type": "text/html",
+      "bytes": 726,
+      "raw_file": "data/rules/sources/ccdc/01_www.nationalccdc.org",
+      "text_file": "data/rules/sources/ccdc/01_www.nationalccdc.txt",
+      "text_chars": 121,
+      "text_preview": "Redirecting… \n \n \n \n \n \n You are being redirected to the new NCCDC website site at ccdc.io. Please update your bookmarks."
+    }
+  ]
+}

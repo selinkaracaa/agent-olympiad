@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Redirecting…</title>
+<meta http-equiv="refresh" content="5; url=https://www.ccdc.io">
+<style>
+  body {
+    background: #000;
+    color: #fff;
+    font-family: system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    text-align: center;
+    padding: 1rem;
+  }
+  a { color: #4da6ff; }
+</style>
+</head>
+<body>
+  <p>
+    <a href="https://www.ccdc.io">You are being redirected to the new NCCDC website site at ccdc.io. Please update your bookmarks.</a>
+  </p>
+</body>
+</html>

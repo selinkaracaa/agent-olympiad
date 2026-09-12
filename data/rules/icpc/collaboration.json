@@ -163,11 +163,12 @@
     "mode": "unlimited"
   },
   "simulation": {
-    "max_turns": 30,
+    "max_turns": 60,
     "scheduler": "src_collaboration_draft",
-    "turn_budget_basis": "standardized experiment budget: 30 global turns; official contest timing is recorded separately",
+    "turn_budget_basis": "official duration 300 min / 5 min per turn = 60 turns (hard cap 90); src/contest_budget.py is the source of truth",
     "exclusive_workstation_lease": "enforced",
     "run_judging_latency_turns": 1,
+    "repair_budget_after_rejected_run": 2,
     "run_judging_latency_basis": "simulation_choice_approximating_ccs_pending_verdict",
     "pending_run_policy": "after_submit_wait_one_turn_before_verdict_during_which_team_may_discuss_or_work_other_problems_off_workstation",
     "repeat_verdict_history": "unavailable",
@@ -193,7 +194,7 @@
         ],
         "exactly_one_action": true,
         "unstructured_response": "rest",
-        "final_submission": "synthesis_only",
+        "final_submission": "reviewed_answer_sheet",
         "visibility": {
           "think": "private",
           "work": "shared",
@@ -222,7 +223,7 @@
         }
       },
       "precontest_brief": {
-        "turn": 1,
+        "turn": 0,
         "problem_access": false,
         "allowed_actions": [
           "speak",
@@ -237,16 +238,24 @@
         ]
       },
       "opening_discussion": {
-        "turn": 2,
-        "problem_access": true,
-        "allowed_actions": [
-          "speak",
-          "sleep"
-        ],
-        "purpose": "summarize the contestants' opening discussion into priorities and checkpoints, and suggest temporary working groups that contestants may later change"
+        "enabled": false,
+        "problem_access": false,
+        "allowed_actions": [],
+        "purpose": "Coach exits permanently after the single turn-0 blind brief."
       },
       "after_opening_access": false,
-      "min_turns": 10
+      "min_turns": 10,
+      "protocol_version": "otc_turn0_review_v1",
+      "review_required": true,
+      "action_surface": "registry_bundles_v1",
+      "action_bundles": [
+        "common",
+        "desk",
+        "memory",
+        "independent_review",
+        "competition_tools",
+        "deliberation_if_structured"
+      ]
     }
   }
 }

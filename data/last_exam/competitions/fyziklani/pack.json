@@ -1,0 +1,15 @@
+{
+  "competition_id": "fyziklani",
+  "rule_id": "fyziklani:draft_v1",
+  "profile": "non_comparable",
+  "protocol": "progressive_release",
+  "visibility": {
+    "agent_at_start": [
+      "input",
+      "method"
+    ],
+    "hidden_until_grade": [
+      "eval"
+    ]
+  }
+}

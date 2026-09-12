@@ -1,0 +1,16 @@
+# Long-Term Problem Synopses — 2011
+
+# Odyssey of the Mind — 2011 Long-Term Problem Synopses
+
+Source: https://odysseyofthemind.com/past-problems/
+
+Note: These are public synopses. Full problem packets require membership.
+
+---
+
+1. Extreme MousemobilesDivisions I, II, III , & IVThis problem requires teams to design, build, and run vehicles that use mousetraps as their only source of energy. The Mouse Mobiles will travel a course that has segments with different challenges. The team can choose from assorted tasks such as driving through a tunnel, raising a flag, hitting a target, changing direction, making a delivery, and will also perform two team-created challenges. The running of the Mouse Mobiles will be presented in a performance with a team-created theme.Cost limit: $145 USD.
+2. As Good as Gold…bergDivisions I, II, & IIITeams will present an uncomplicated existing item that is used in a simple and effective way to complete a real life task. The teams will also create their own solution, a device made out of an unnecessarily complex series of components that will perform the same task as the existing item. The performance will include an inventor character and a marketing plan/sales pitch for its creation.Cost limit: $145 USD.
+3. Le Tour GuideDivisions I, II, III & IVTeams will create and present an original performance where a classical character acts as a Tour Guide. The tour will make three stops including one that will be a team-created location. During the tour an inanimate object will show signs of life, the Tour Guide will give the wrong explanation about something, and will give a creative explanation about why it is important to guard and secure a worthless item.Cost limit: $125 USD.
+4. Unhinged StructureDivisions I, II, III & IVThe problem is to design and build a solution using only balsa wood and glue that folds into the team’s structure without coming apart. The team may use material other than balsa wood and glue to serve as a hinge. The team will test its “folded” structure by placing as much weight as possible on it during a performance that also includes three different objects that change appearance by being folded or unfolded.Cost limit: $145 USD.
+5. Full CircleDivisions I, II, III & IVThe problem is to create and present a humorous performance where something changes form or appearance at least three times and eventually undergoes a final change where it returns to its original form and appearance. The team will signal the audience each time there is a change. The performance will include a very silly character, a very serious character, a song and dance, and a surprise ending.Cost limit: $125 USD.Sponsored by NASA.
+6. Money MakerGrades K-2The team is to create and present a humorous performance about a Money Maker character that tries to make money from wild ideas. The Money Maker will fail three times but will finally succeed. There will be another character that thinks all of the ideas are great and encourages the Money Maker to keep trying out his wild ideas. The performance will also include a commercial, a customer, and a real life example of an actual successful “wild” idea.Cost limit: $125 USD.

@@ -1,0 +1,24 @@
+{
+  "task_id": "ijso_practical/ijso_practical_2015_team_practical_2015",
+  "competition_id": "ijso_practical",
+  "problem_id": "ijso_practical_2015_team_practical_2015",
+  "title": "Team Practical 2015",
+  "year": 2015,
+  "team_size": 3,
+  "source_url": "https://ijsoweb.org/",
+  "inherits_competition_pack": "competitions/ijso_practical",
+  "rule_card": "data/rules/ijso_practical",
+  "input": {
+    "visibility": "agent_at_start",
+    "files": []
+  },
+  "method": {
+    "visibility": "agent_at_start",
+    "path": "competitions/ijso_practical/method"
+  },
+  "eval": {
+    "visibility": "hidden_until_grade",
+    "path": "eval/reference.json",
+    "competition_eval": "competitions/ijso_practical/eval"
+  }
+}

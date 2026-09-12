@@ -1,0 +1,33 @@
+{
+  "task_id": "ccdc/ccdc_2011-NCCDC-TeamPacket",
+  "competition_id": "ccdc",
+  "problem_id": "ccdc_2011-NCCDC-TeamPacket",
+  "title": "NCCDC 2011 Team Packet",
+  "year": 2011,
+  "team_size": 8,
+  "source_url": "https://www.nationalccdc.org/",
+  "inherits_competition_pack": "competitions/ccdc",
+  "rule_card": "data/rules/ccdc",
+  "input": {
+    "visibility": "agent_at_start",
+    "files": [
+      {
+        "name": "problem.md",
+        "path": "base/input/problem.md"
+      },
+      {
+        "name": "2011-NCCDC-TeamPacket.pdf.path",
+        "path": "base/input/2011-NCCDC-TeamPacket.pdf.path"
+      }
+    ]
+  },
+  "method": {
+    "visibility": "agent_at_start",
+    "path": "competitions/ccdc/method"
+  },
+  "eval": {
+    "visibility": "hidden_until_grade",
+    "path": "eval/reference.json",
+    "competition_eval": "competitions/ccdc/eval"
+  }
+}

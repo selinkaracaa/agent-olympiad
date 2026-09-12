@@ -1,0 +1,405 @@
+Testing Information | HMMT
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Toggle navigation 
+ 
+ 
+ 
+ 
+ 
+ Registration 
+ 
+ General Information 
+ Financial Aid 
+ Deadlines 
+ 
+ Video Guides 
+ Apply 
+ 
+ 
+ 
+ 
+ 
+ Tournament 
+ 
+ November vs February 
+ General Information 
+ Test Information 
+ Schedule 
+ Travel Info 
+ 
+ Online Tournament 
+ 
+ 
+ 
+ 
+ 
+ Archive 
+ 
+ Problems and Results 
+ Education 
+ Photos 
+ POTW 
+ 
+ 
+ 
+ 
+ 
+ About 
+ 
+ Our Mission 
+ Current Organizers 
+ Past Organizers 
+ 
+ Contact 
+ Volunteer 
+ Privacy Policy 
+ Data Use Policy 
+ 
+ 
+ 
+
+ 
+ 
+ FAQ 
+ 
+ 
+
+ 
+ 
+ Log in | New user 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ Testing Information 
+ 
+
+ Testing Rules 
+ Calculators and Other Computational Aids 
+ 
+ You may not use books, notes, calculators, pocket organizers, slide-rules, abaci, or any other computational aids.
+ Similarly you may not use graph paper, rulers, protractors, compasses, architectural tools, or any other drawing aids.
+ In addition, communication devices such as laptops, PDAs, and cell phones are prohibited.
+ 
+
+ Answer Format 
+ 
+ Complete description of acceptable answers can be found in
+ this PDF .
+ 
+
+ Protests 
+ 
+ If a student believes that an answer given on the answer key is incorrect,
+ they must go to the designated Appeals Room and submit an appeal in writing.
+ The deadline to do so will be announced on the day of the contest.
+ 
+
+ 
+ Decisions of the HMMT coordinators are final.
+ 
+
+ Types of Tests 
+
+ Individual Tests 
+ 
+ Each individual test is 10 problems and 50 minutes long ,
+ where all answers are single values (i.e. short answers).
+ 
+
+ 
+ The November tournament includes two individual tests:
+ 
+ General round, drawing from all high school mathematics subjects.
+ Theme round, which is based around a common theme.
+ 
+ The problems on these exams range from mid-AMC to upper-AIME in difficulty.
+ 
+
+ 
+ The February tournament includes three individual tests:
+ 
+ Algebra test, which covers topics from high school algebra and number theory.
+ Geometry test, which covers high school Euclidean geometry.
+ Combinatorics test, which covers high school combinatorics.
+ 
+ The February problems are challenging, ranging from mid-AIME problems
+ to problems which would be suitable for national olympiads such as USAMO.
+ 
+
+ 
+ The weight of each problem is a real number between 3 and 10 is determined by a
+ post-weight function .
+ A student's score is determined by summing the weights of solved problems.
+ 
+
+ Team Round 
+ 
+ The Team Round is a 60-minute , 10-problem test 
+ where all members of a team work together.
+ The point weights for each problem are indicated on the exam.
+ 
+
+ 
+ The November tournament’s team round is short-answer based.
+ The difficulty is similar to that of the General and Theme round.
+ 
+
+ 
+ The February tournament’s team round is proof based .
+ As a result, students attending the February tournament should feel comfortable crafting and writing rigorous proofs.
+ This is the only round in which teams earn partial marks (unless otherwise specified on the exam).
+ The February Team round is quite difficult;
+ some of the problems are comparable to the hardest problems on national olympiads such as USAMO.
+ 
+
+ Guts Round 
+ 
+ The Guts Round is an 80-minute team event with 36 short-answer questions on an assortment of subjects, of varying difficulty and point values.
+ The problems are divided into sets of 3 (November) or 4 (February).
+ The point weights for each problem are indicated on the exam.
+ 
+
+ 
+ All teams gather in one of several large lecture halls.
+ At the starting signal, each team sends a runner to an assigned problem station to pick up copies of the first set of problems for each team member.
+ As soon as a team has answers for one problem set, the runner may bring the answers to the problem station and pick up the next set.
+ It is not expected that students will finish all the problems.
+ Grading is immediate and scores are posted in real time.
+ 
+
+ Sweepstakes 
+ 
+ Sweepstakes refers to the aggregate scores of each team,
+ used to determine the overall team winners of the contest.
+ The sweepstakes score is defined as the sum of three components:
+ 
+ Individual Total, worth 800 points.
+ Guts Round, worth 400 points.
+ Team Round, worth 400 points.
+ 
+ The scores for each component are calculated as follows.
+ The raw score for the Guts and Team Round is the sum of the specified problem weights.
+ The raw score for the Individual Total is the sum of the
+ individual scores 
+ of students on that team.
+ Then, each component is weighted by a constant factor in such a way
+ that the top score for that component is the number of points it is worth
+ (800 for Individual Total, or 400 each for Guts/Team).
+ 
+
+ 
+ In particular, the maximum possible sweepstakes score is 1600,
+ which is achieved if and only if the first place team had the highest
+ raw score in all three components across all teams.
+ 
+
+ HMMT Invitational Competition 
+ 
+ Starting in 2013, the top 50 students from the February tournament
+ are invited to compete in the HMMT Invitational Competition,
+ which is a 4-hour, 5-problem olympiad-style exam .
+ See here for the rules of the 2016 HMIC .
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Registration 
+ 
+ 
+ General Information 
+ 
+ 
+ 
+ Financial Aid 
+ 
+ 
+ 
+ Deadlines 
+ 
+ 
+ 
+ Hotels 
+ 
+ 
+ 
+ Video Guides 
+ 
+ 
+ 
+ Apply 
+ 
+ 
+ 
+ 
+ 
+ 
+ Tournaments 
+ 
+ 
+ November vs February 
+ 
+ 
+ 
+ General Information 
+ 
+ 
+ 
+ Testing Information 
+ 
+ 
+ 
+ Schedule 
+ 
+ 
+ 
+ Travel Information 
+ 
+ 
+ 
+ Online Tournament 
+ 
+ 
+ 
+ 
+ 
+ 
+ Archive 
+ 
+ 
+ Problems 
+ 
+ 
+ 
+ Results 
+ 
+ 
+ 
+ Education 
+ 
+ 
+ 
+ Photos 
+ 
+ 
+ 
+ POTW 
+ 
+ 
+ 
+ 
+ 
+ 
+ About Us 
+ 
+ 
+ Current Organizers 
+ 
+ 
+ 
+ Past Organizers 
+ 
+ 
+ 
+ Volunteer 
+ 
+ 
+ 
+ Privacy Policy 
+ 
+ 
+ 
+ Data Use Policy 
+ 
+ 
+ 
+ 
+ 
+ 
+ Questions 
+ 
+ 
+ FAQ 
+ 
+ 
+ 
+ 
+ Contact us 
+ 
+ 
+ 
+ Contact us 
+ 
+ 
+ 
+ 
+ 
+ Like us 
+ 
+ 
+ 
+ 
+ 
+ Follow us 
+ 
+ 
+ 
+ 
+
+ 
+ HMMT

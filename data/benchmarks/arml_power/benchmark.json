@@ -31,7 +31,7 @@
     "evaluation": {
       "evaluator_id": "rubric_llm_v1",
       "status": "ready",
-      "rubric_path": "data/rubrics/team_power_proof_40_v1.json",
+      "rubric_path": "data/rubrics/arml_power_fall_2018_v1.json",
       "deliverable": "proof_packet",
       "fallback_evaluator_id": "gold_answer_v1"
     }
@@ -68,7 +68,7 @@
     "evaluation": {
       "evaluator_id": "rubric_llm_v1",
       "status": "ready",
-      "rubric_path": "data/rubrics/team_power_proof_40_v1.json",
+      "rubric_path": "data/rubrics/arml_power_fall_2019_v1.json",
       "deliverable": "proof_packet",
       "fallback_evaluator_id": "gold_answer_v1"
     }
@@ -105,7 +105,7 @@
     "evaluation": {
       "evaluator_id": "rubric_llm_v1",
       "status": "ready",
-      "rubric_path": "data/rubrics/team_power_proof_40_v1.json",
+      "rubric_path": "data/rubrics/arml_power_spring_2019_v1.json",
       "deliverable": "proof_packet",
       "fallback_evaluator_id": "gold_answer_v1"
     }
@@ -142,7 +142,7 @@
     "evaluation": {
       "evaluator_id": "rubric_llm_v1",
       "status": "ready",
-      "rubric_path": "data/rubrics/team_power_proof_40_v1.json",
+      "rubric_path": "data/rubrics/arml_power_fall_2020_v1.json",
       "deliverable": "proof_packet",
       "fallback_evaluator_id": "gold_answer_v1"
     }
@@ -179,7 +179,7 @@
     "evaluation": {
       "evaluator_id": "rubric_llm_v1",
       "status": "ready",
-      "rubric_path": "data/rubrics/team_power_proof_40_v1.json",
+      "rubric_path": "data/rubrics/arml_power_spring_2020_v1.json",
       "deliverable": "proof_packet",
       "fallback_evaluator_id": "gold_answer_v1"
     }
@@ -216,7 +216,7 @@
     "evaluation": {
       "evaluator_id": "rubric_llm_v1",
       "status": "ready",
-      "rubric_path": "data/rubrics/team_power_proof_40_v1.json",
+      "rubric_path": "data/rubrics/arml_power_fall_2021_v1.json",
       "deliverable": "proof_packet",
       "fallback_evaluator_id": "gold_answer_v1"
     }
@@ -253,7 +253,7 @@
     "evaluation": {
       "evaluator_id": "rubric_llm_v1",
       "status": "ready",
-      "rubric_path": "data/rubrics/team_power_proof_40_v1.json",
+      "rubric_path": "data/rubrics/arml_power_spring_2021_v1.json",
       "deliverable": "proof_packet",
       "fallback_evaluator_id": "gold_answer_v1"
     }
@@ -290,7 +290,7 @@
     "evaluation": {
       "evaluator_id": "rubric_llm_v1",
       "status": "ready",
-      "rubric_path": "data/rubrics/team_power_proof_40_v1.json",
+      "rubric_path": "data/rubrics/arml_power_fall_2022_v1.json",
       "deliverable": "proof_packet",
       "fallback_evaluator_id": "gold_answer_v1"
     }
@@ -317,7 +317,7 @@
     "evaluation": {
       "evaluator_id": "rubric_llm_v1",
       "status": "ready",
-      "rubric_path": "data/rubrics/team_power_proof_40_v1.json",
+      "rubric_path": "data/rubrics/arml_power_spring_2022_v1.json",
       "deliverable": "proof_packet",
       "fallback_evaluator_id": "gold_answer_v1"
     }
@@ -354,7 +354,7 @@
     "evaluation": {
       "evaluator_id": "rubric_llm_v1",
       "status": "ready",
-      "rubric_path": "data/rubrics/team_power_proof_40_v1.json",
+      "rubric_path": "data/rubrics/arml_power_fall_2023_v1.json",
       "deliverable": "proof_packet",
       "fallback_evaluator_id": "gold_answer_v1"
     }
@@ -381,7 +381,7 @@
     "evaluation": {
       "evaluator_id": "rubric_llm_v1",
       "status": "ready",
-      "rubric_path": "data/rubrics/team_power_proof_40_v1.json",
+      "rubric_path": "data/rubrics/arml_power_spring_2023_v1.json",
       "deliverable": "proof_packet",
       "fallback_evaluator_id": "gold_answer_v1"
     }
@@ -418,7 +418,7 @@
     "evaluation": {
       "evaluator_id": "rubric_llm_v1",
       "status": "ready",
-      "rubric_path": "data/rubrics/team_power_proof_40_v1.json",
+      "rubric_path": "data/rubrics/arml_power_fall_2024_v1.json",
       "deliverable": "proof_packet",
       "fallback_evaluator_id": "gold_answer_v1"
     }
@@ -445,7 +445,7 @@
     "evaluation": {
       "evaluator_id": "rubric_llm_v1",
       "status": "ready",
-      "rubric_path": "data/rubrics/team_power_proof_40_v1.json",
+      "rubric_path": "data/rubrics/arml_power_spring_2024_v1.json",
       "deliverable": "proof_packet",
       "fallback_evaluator_id": "gold_answer_v1"
     }
@@ -482,7 +482,7 @@
     "evaluation": {
       "evaluator_id": "rubric_llm_v1",
       "status": "ready",
-      "rubric_path": "data/rubrics/team_power_proof_40_v1.json",
+      "rubric_path": "data/rubrics/arml_power_fall_2025_v1.json",
       "deliverable": "proof_packet",
       "fallback_evaluator_id": "gold_answer_v1"
     }
@@ -509,7 +509,7 @@
     "evaluation": {
       "evaluator_id": "rubric_llm_v1",
       "status": "ready",
-      "rubric_path": "data/rubrics/team_power_proof_40_v1.json",
+      "rubric_path": "data/rubrics/arml_power_spring_2025_v1.json",
       "deliverable": "proof_packet",
       "fallback_evaluator_id": "gold_answer_v1"
     }

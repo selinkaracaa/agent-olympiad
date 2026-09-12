@@ -1,0 +1,118 @@
+Hide 
+ Citizenship 
+
+ Image via Rawpixel ,
+ CC0 
+
+ It has been a long time since you moved to a different
+ country and you have decided it is time to become a citizen.
+ Your new country has a strict residency requirement for all
+ applicants. To apply, you must have been physically present in
+ the country for at least $d$ days per year, for the past
+ $y$ consecutive years.
+ These years are counted in $12$ -month periods backwards from the
+ application date.
+ For this problem, assume that a calendar year has
+ $12$ months of
+ $365$ days, and each month
+ has exactly the number of days below: 
+
+ month 
+
+ 01 
+
+ 02 
+
+ 03 
+
+ 04 
+
+ 05 
+
+ 06 
+
+ 07 
+
+ 08 
+
+ 09 
+
+ 10 
+
+ 11 
+
+ 12 
+
+ days 
+
+ 31 
+
+ 28 
+
+ 31 
+
+ 30 
+
+ 31 
+
+ 30 
+
+ 31 
+
+ 31 
+
+ 30 
+
+ 31 
+
+ 30 
+
+ 31 
+
+ For example, if you were to apply on 2024–09–19 you must
+ have been in the country for at least $d$ days during the $12$ -month periods from 2023–09–19 to
+ 2024–09–18, 2022–09–19 to 2023–09–18, and so on for
+ $y$ such periods. 
+ You have lived in the country for at least $y$ years, but having traveled a lot,
+ you are not sure if you meet the residency requirement. Write a
+ program that finds the earliest date you can submit your
+ citizenship application given your travel history. 
+ Input 
+ The first line contains three integers $n$ , $y$ and $d$ ( $1
+ \leq n \leq 500$ , $1 \leq
+ y \leq 1\, 000$ , $1 \leq d
+ \leq 365$ ). You have been out of the country
+ $n$ times and $y$ and $d$ specify the country’s residency
+ requirement as described above. 
+ Each of the following $n$ lines contains two dates in the
+ form YYYY-MM-DD ( $0000 \leq \texttt{YYYY} \leq 5\,
+ 000$ , $01 \leq \texttt{MM}
+ \leq 12$ , $01 \leq
+ \texttt{DD} \leq 31$ ). You have been out of the country
+ between the two dates, inclusive. All dates in the input are
+ sorted in increasing order. The only dates which may be equal
+ are dates on the same line. All given dates are valid. 
+ Output 
+ Output the earliest date on which you meet the residency
+ requirement. The date must be after the last date of the
+ input. 
+
+ Sample Input 1 
+ Sample Output 1 
+
+ 3 5 240
+2022-02-28 2022-10-01
+2022-11-11 2022-11-11
+2023-12-30 2024-01-01
+
+ 2024-05-31
+
+ Sample Input 2 
+ Sample Output 2 
+
+ 3 5 240
+2011-11-11 2012-12-12
+2022-02-28 2022-10-01
+2025-01-01 2025-06-30
+
+ 2028-02-26

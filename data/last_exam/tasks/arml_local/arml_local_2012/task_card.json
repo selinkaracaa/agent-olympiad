@@ -1,0 +1,33 @@
+{
+  "task_id": "arml_local/arml_local_2012",
+  "competition_id": "arml_local",
+  "problem_id": "arml_local_2012",
+  "title": "Team Round — 2012",
+  "year": 2012,
+  "team_size": 6,
+  "source_url": "https://www.arml.com/ARML/arml_2019/public_contest_files/2009_2014_book/ARML_2009_2014.pdf",
+  "inherits_competition_pack": "competitions/arml_local",
+  "rule_card": "data/rules/arml_local",
+  "input": {
+    "visibility": "agent_at_start",
+    "files": [
+      {
+        "name": "problem.md",
+        "path": "base/input/problem.md"
+      },
+      {
+        "name": "ARML_2009_2014.pdf.path",
+        "path": "base/input/ARML_2009_2014.pdf.path"
+      }
+    ]
+  },
+  "method": {
+    "visibility": "agent_at_start",
+    "path": "competitions/arml_local/method"
+  },
+  "eval": {
+    "visibility": "hidden_until_grade",
+    "path": "eval/reference.json",
+    "competition_eval": "competitions/arml_local/eval"
+  }
+}

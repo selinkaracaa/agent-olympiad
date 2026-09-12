@@ -1,0 +1,10 @@
+{
+  "visibility": "hidden_until_grade",
+  "gold_pointer": "data/benchmarks/icpc/benchmark.json#icpc_wf_2020_leylines.gold_label",
+  "has_gold_answer": false,
+  "evaluator_id": "programming_judge",
+  "evaluator_status": "deferred",
+  "rubric_path": null,
+  "deliverable": null,
+  "solution_file": null
+}

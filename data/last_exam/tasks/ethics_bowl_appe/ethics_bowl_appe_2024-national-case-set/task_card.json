@@ -1,0 +1,33 @@
+{
+  "task_id": "ethics_bowl_appe/ethics_bowl_appe_2024-national-case-set",
+  "competition_id": "ethics_bowl_appe",
+  "problem_id": "ethics_bowl_appe_2024-national-case-set",
+  "title": "2024-national-case-set",
+  "year": 2024,
+  "team_size": 5,
+  "source_url": "https://www.appeieo.org/",
+  "inherits_competition_pack": "competitions/ethics_bowl_appe",
+  "rule_card": "data/rules/ethics_bowl_appe",
+  "input": {
+    "visibility": "agent_at_start",
+    "files": [
+      {
+        "name": "problem.md",
+        "path": "base/input/problem.md"
+      },
+      {
+        "name": "2024-national-case-set.pdf.path",
+        "path": "base/input/2024-national-case-set.pdf.path"
+      }
+    ]
+  },
+  "method": {
+    "visibility": "agent_at_start",
+    "path": "competitions/ethics_bowl_appe/method"
+  },
+  "eval": {
+    "visibility": "hidden_until_grade",
+    "path": "eval/reference.json",
+    "competition_eval": "competitions/ethics_bowl_appe/eval"
+  }
+}

@@ -1,0 +1,3 @@
+# Literature
+
+In this novel, a woman is abruptly fired from her job after two soldiers appear at her workplace with machine guns. That character is inspired by a Latin phrase she finds engraved on a cupboard meaning "Don't let the bastards keep you down." In this novel, the lesbian Moira briefly reuinites with its central character at the underground night club (*) Jezebel's. This novel's central character remembers Serena Joy's work as a singer on TV before she plays Scrabble with Serena's husband, the Commander. For 10 points, the fanatically religious nation Gilead oppresses women like Offred in what novel by Margaret Atwood?

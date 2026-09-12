@@ -1,0 +1,122 @@
+{
+  "rubric_id": "arml_power_fall_2022_v1",
+  "title": "Power Round \u2014 Fall 2022 \u2014 ARML Power sub-problem rubric",
+  "total_points": 40.0,
+  "criteria": [
+    {
+      "id": "problem_01",
+      "name": "Problem 1",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 1 (2 pts). Statement: 1. Determine a formula for the number of ways to paint the squares of an m\u00d7 n grid either black or white. Justify your formula."
+    },
+    {
+      "id": "problem_02",
+      "name": "Problem 2",
+      "max_score": 3.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 2 (3 pts). Statement: 2. Of the 16 ways to paint a 2 \u00d7 2 grid, exactly seven have an end-to-end path. Draw these seven painted grids."
+    },
+    {
+      "id": "problem_03",
+      "name": "Problem 3",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 3 (2 pts). Statement: 3. Compute the number of ways to paint a 2 \u00d7 3 grid so that it has an end-to-end path."
+    },
+    {
+      "id": "problem_04",
+      "name": "Problem 4",
+      "max_score": 3.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 4 (3 pts). Statement: 4. Prove that E2(n) satis\ufb01es the recursive formula"
+    },
+    {
+      "id": "problem_05",
+      "name": "Problem 5",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 5 (2 pts). Statement: 5. Prove that E2(n) also counts the number of n-digit numbers whose digits are all 1, 2, or 3, where the digits 1 and 2 are never consecutive. For instance, E2(2) = 7 because there are seven such 2-digit numbers: 11, 13, 22, 23, 31, 32, 33 (the combinations 12 and 21 both have a 1 and 2 consecutive)."
+    },
+    {
+      "id": "problem_06a",
+      "name": "Problem 6a",
+      "max_score": 3.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 6a (3 pts). Statement: 6. Prove the following facts about the relationship between E2(n) and F2(n): (a) For n\u2265 1, E2(n) = E2(n\u2212 1) + 2F2(n\u2212 1) while F2(n) = E2(n\u2212 1) + F2(n\u2212 1)."
+    },
+    {
+      "id": "problem_06b",
+      "name": "Problem 6b",
+      "max_score": 3.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 6b (3 pts). Statement: (b) E2(n)2 = 2F2(n)2\u2212 (\u22121)n."
+    },
+    {
+      "id": "problem_07",
+      "name": "Problem 7",
+      "max_score": 3.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 7 (3 pts). Statement: 7. Find, with proof, a formula involving m and n that computes the maximum number of squares in an m\u00d7 n grid that can be painted black without creating an end-to-end path."
+    },
+    {
+      "id": "problem_08",
+      "name": "Problem 8",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 8 (2 pts). Statement: 8. Draw a painted 3 \u00d7 3 grid that has neither and end-to-end path nor a top-to-bottom path."
+    },
+    {
+      "id": "problem_09",
+      "name": "Problem 9",
+      "max_score": 4.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 9 (4 pts). Statement: 9. Prove that no painted grid can have both an end-to-end path and a top-to-bottom path."
+    },
+    {
+      "id": "problem_10",
+      "name": "Problem 10",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 10 (2 pts). Statement: 10. Let E3(n) be the number of ways to paint a 3 \u00d7 n grid so that there is an end-to-end path. Compute, with explanation, E3(2)."
+    },
+    {
+      "id": "problem_11",
+      "name": "Problem 11",
+      "max_score": 4.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 11 (4 pts). Statement: 11. Following the established pattern, Ek(2) is the number of ways to paint a k\u00d7 2 grid so that there is an end-to-end path. In other words, there is at least one row in which both squares are painted black. We know from our work so far that E1(2) = 1, E2(2) = 7 and E3(2) is the answer to the previous question. Show that Ek(2) satis\ufb01es both the recurrences Ek(2) = 4Ek\u22121(2) + 3k\u22121 and Ek(2) = 3Ek\u22121(2) + 4k\u22121."
+    },
+    {
+      "id": "problem_12",
+      "name": "Problem 12",
+      "max_score": 3.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 12 (3 pts). Statement: 12. Compute, with explanation, E3(3)."
+    },
+    {
+      "id": "problem_13",
+      "name": "Problem 13",
+      "max_score": 4.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 13 (4 pts). Statement: 13. Two players play a game using a 6 \u00d7 6 grid. On each turn, player 1 paints one square black, while player 2 paints one square white. Player 1 goes \ufb01rst, and the players alternate after that. Player 1 wins is she can create an end-to-end path. Player 2 wins by preventing the creation of an end-to-end path. Describe a strategy that player 2 can follow to ensure a victory. Prove your strategy works."
+    }
+  ],
+  "not_observable_from_deck": [
+    "oral defense",
+    "diagrams that were not recovered from the source PDF"
+  ],
+  "provenance": {
+    "competition_id": "arml_power",
+    "problem_id": "arml_power_fall_2022",
+    "year": 2022,
+    "source_file": "data/raw/arml/Fall_2022/ARMLPower_Fall_2022.pdf",
+    "solution_file": "data/raw/arml/Fall_2022/ARMLPower_Fall_Solution_2022.pdf",
+    "official_total_points": 40.0,
+    "parsed_total_points": 40.0,
+    "points_coverage": 1.0,
+    "awards_parsed": 14,
+    "problems_parsed": 13,
+    "derived_by": "scripts/build_arml_power_rubrics.py"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "session_id": "arml_power_fall_2023",
+  "competition_id": "arml_power",
+  "problem_ids": [
+    "arml_power_fall_2023"
+  ],
+  "description": "OTC contest-session manifest for arml_power_fall_2023",
+  "split_parts": false,
+  "task_family": "mathematics",
+  "competition_description": "ARML Power Contest (mail-in): collaborative multi-part proof packets. Write structured solutions with reasoning; exact short-answer keys may be unavailable and grading may be unsupported until a rubric judge runs."
+}

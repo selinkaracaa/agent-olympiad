@@ -58,12 +58,12 @@ it was spent. Token counts are estimated from output length at roughly four
 characters per token; synthesis after the turn loop is attributed to the final
 turn.
 
-### Penalties consume the resource they would really consume
+### Programming penalties are tracked separately from the clock
 
-A wrong programming submission does not add an abstract 20-point penalty. It
-**burns 20 minutes of the remaining contest clock**, so the team has less time
-left to work — which is what a penalty costs a real team mid-contest. Ranking
-penalties are a scoreboard artifact; time is the thing teams actually lose.
+A wrong official programming submission adds the contest's penalty minutes to
+`penalty_minutes`. It does **not** consume `simulated_minutes` or remove later
+agent rounds. This matches ICPC standings, where penalty affects ranking rather
+than the contest end time. Local sample failures do not add official penalty.
 
 ### Tools are per contest, and search is policed
 

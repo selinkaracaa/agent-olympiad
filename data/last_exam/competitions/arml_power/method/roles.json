@@ -1,0 +1,156 @@
+{
+  "source": "data/rules/arml_power/collaboration.json#agent_roles",
+  "information_policy": "shared",
+  "roles": [
+    {
+      "name": "Agent_1",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit a Power-contest contestant identity on the active team without inventing a complete administrivia packet.",
+        "Scout, prove, check, or synthesize packet parts as current team needs require.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ]
+    },
+    {
+      "name": "Agent_2",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit a Power-contest contestant identity on the active team without inventing a complete administrivia packet.",
+        "Scout, prove, check, or synthesize packet parts as current team needs require.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ]
+    },
+    {
+      "name": "Agent_3",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit a Power-contest contestant identity on the active team without inventing a complete administrivia packet.",
+        "Scout, prove, check, or synthesize packet parts as current team needs require.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ]
+    },
+    {
+      "name": "Agent_4",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit a Power-contest contestant identity on the active team without inventing a complete administrivia packet.",
+        "Scout, prove, check, or synthesize packet parts as current team needs require.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ]
+    },
+    {
+      "name": "Agent_5",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit a Power-contest contestant identity on the active team without inventing a complete administrivia packet.",
+        "Scout, prove, check, or synthesize packet parts as current team needs require.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ]
+    },
+    {
+      "name": "Agent_6",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit a Power-contest contestant identity on the active team without inventing a complete administrivia packet.",
+        "Scout, prove, check, or synthesize packet parts as current team needs require.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ]
+    },
+    {
+      "name": "Agent_7",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit a Power-contest contestant identity on the active team without inventing a complete administrivia packet.",
+        "Scout, prove, check, or synthesize packet parts as current team needs require.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ]
+    },
+    {
+      "name": "Agent_8",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit a Power-contest contestant identity on the active team without inventing a complete administrivia packet.",
+        "Scout, prove, check, or synthesize packet parts as current team needs require.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ]
+    },
+    {
+      "name": "Agent_9",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit a Power-contest contestant identity on the active team without inventing a complete administrivia packet.",
+        "Scout, prove, check, or synthesize packet parts as current team needs require.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ]
+    },
+    {
+      "name": "Agent_10",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit a Power-contest contestant identity on the active team without inventing a complete administrivia packet.",
+        "Scout, prove, check, or synthesize packet parts as current team needs require.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ]
+    },
+    {
+      "name": "Agent_11",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit a Power-contest contestant identity on the active team without inventing a complete administrivia packet.",
+        "Scout, prove, check, or synthesize packet parts as current team needs require.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ]
+    },
+    {
+      "name": "Agent_12",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit a Power-contest contestant identity on the active team without inventing a complete administrivia packet.",
+        "Scout, prove, check, or synthesize packet parts as current team needs require.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ]
+    },
+    {
+      "name": "Agent_13",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit a Power-contest contestant identity on the active team without inventing a complete administrivia packet.",
+        "Scout, prove, check, or synthesize packet parts as current team needs require.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ]
+    },
+    {
+      "name": "Agent_14",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit a Power-contest contestant identity on the active team without inventing a complete administrivia packet.",
+        "Scout, prove, check, or synthesize packet parts as current team needs require.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ]
+    },
+    {
+      "name": "Agent_15",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit a Power-contest contestant identity on the active team without inventing a complete administrivia packet.",
+        "Scout, prove, check, or synthesize packet parts as current team needs require.",
+        "Share decision-relevant discoveries and transfer work with explicit context."
+      ]
+    }
+  ]
+}

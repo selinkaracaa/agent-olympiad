@@ -1,0 +1,17 @@
+{
+  "competition_id": "hmmt_guts",
+  "crawled_at": "2026-08-11T16:10:44.180431+00:00",
+  "sources": [
+    {
+      "title": "HMMT Testing Information",
+      "url": "https://hmmt.co/www/tournaments/testing",
+      "status": "ok",
+      "content_type": "text/html",
+      "bytes": 17222,
+      "raw_file": "data/rules/sources/hmmt_guts/01_testing.html",
+      "text_file": "data/rules/sources/hmmt_guts/01_testing.txt",
+      "text_chars": 5854,
+      "text_preview": "Testing Information | HMMT\n \n\n \n \n \n \n \n \n \n \n\n \n \n \n \n \n\n \n\n \n \n \n\n \n \n \n \n \n \n\n \n \n\n \n \n \n \n \n \n \n \n Toggle navigation \n \n \n \n \n \n Registration \n \n General Information \n Financial Aid \n Deadlines \n \n Video Guides \n Apply \n \n \n \n \n \n Tournament \n \n November vs February \n General Information \n Test Information \n Schedule \n Travel Info \n \n Online Tournament \n \n \n \n \n \n Archive \n \n Problems and Results \n Education \n Photos \n POTW \n \n \n \n \n \n About \n \n Our Mission \n Current Organizers \n Past Organizers \n \n Contact \n Volunteer \n Privacy Policy \n Data Use Policy \n \n \n \n\n \n \n FAQ \n \n \n\n \n \n Log in | New user \n \n \n \n \n \n \n \n\n \n \n Testing Information \n \n\n Testing Rules \n Calculators and Other Computational Aids \n \n You may not use books, notes, calculators, pocket organizers, slide-rules, abaci, or any other computational aids.\n Similarly you may not use graph paper, rulers, protractors, compasses, architectural tools, or any other drawing aids.\n In addition, communication devices such as laptops, PDAs, and cell phones are prohibited.\n \n\n Answer Format \n \n Complete description of acceptable answers can be found in\n this PDF .\n \n\n Protests \n \n If a student believes that an answer given on the answer key is incorrect,\n they must go to the designated Appeals Room and submit an appeal in writing.\n The deadline to do so will be announced on the day of the contest.\n \n\n \n Decisions of the HMMT coordinators are final.\n \n\n Types of Tests \n\n Individual Tests \n \n Each individual test is 10 prob"
+    }
+  ]
+}

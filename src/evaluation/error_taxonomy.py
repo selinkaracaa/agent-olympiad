@@ -85,7 +85,7 @@ def classify_errors(value: TeamTranscript | dict[str, Any]) -> list[dict[str, An
                 _occurrence("COMM-1", message.text, turn=message.turn, agent=message.agent)
             )
     for action in transcript.actions:
-        if action.action in {"sleep", "noop"} or _NOOP_RE.match(action.payload):
+        if action.action in {"rest", "sleep", "noop"} or _NOOP_RE.match(action.payload):
             occurrences.append(
                 _occurrence(
                     "COMM-1",

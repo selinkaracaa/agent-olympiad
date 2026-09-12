@@ -1,0 +1,21 @@
+{
+  "session_id": "arml_local_2011",
+  "competition_id": "arml_local",
+  "problem_ids": [
+    "arml_local_2011"
+  ],
+  "description": "OTC contest-session manifest for arml_local_2011",
+  "split_parts": true,
+  "task_family": "mathematics",
+  "competition_description": "ARML local mathematics team rounds: solve a numbered set of contest problems and submit one shared answer sheet.",
+  "question_ids": [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "10"
+  ]
+}

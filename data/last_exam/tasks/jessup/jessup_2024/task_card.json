@@ -1,0 +1,33 @@
+{
+  "task_id": "jessup/jessup_2024",
+  "competition_id": "jessup",
+  "problem_id": "jessup_2024",
+  "title": "The Case Concerning the Prentanian Sea",
+  "year": 2024,
+  "team_size": "2-5",
+  "source_url": "https://www.ilsa.org/Jessup/Jessup2024/",
+  "inherits_competition_pack": "competitions/jessup",
+  "rule_card": "data/rules/jessup",
+  "input": {
+    "visibility": "agent_at_start",
+    "files": [
+      {
+        "name": "problem.md",
+        "path": "base/input/problem.md"
+      },
+      {
+        "name": "jessup_2024_compromis.pdf.path",
+        "path": "base/input/jessup_2024_compromis.pdf.path"
+      }
+    ]
+  },
+  "method": {
+    "visibility": "agent_at_start",
+    "path": "competitions/jessup/method"
+  },
+  "eval": {
+    "visibility": "hidden_until_grade",
+    "path": "eval/reference.json",
+    "competition_eval": "competitions/jessup/eval"
+  }
+}

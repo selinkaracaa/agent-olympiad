@@ -1,0 +1,33 @@
+{
+  "task_id": "science_bowl/science_bowl_sample_set_16_set_9_hs_2021_bonus_02",
+  "competition_id": "science_bowl",
+  "problem_id": "science_bowl_sample_set_16_set_9_hs_2021_bonus_02",
+  "title": "Physics / Multiple Choice / bonus",
+  "year": 2021,
+  "team_size": 4,
+  "source_url": "https://science.osti.gov/wdts/nsb",
+  "inherits_competition_pack": "competitions/science_bowl",
+  "rule_card": "data/rules/science_bowl",
+  "input": {
+    "visibility": "agent_at_start",
+    "files": [
+      {
+        "name": "problem.md",
+        "path": "base/input/problem.md"
+      },
+      {
+        "name": "Set-9-HS-2021.pdf.path",
+        "path": "base/input/Set-9-HS-2021.pdf.path"
+      }
+    ]
+  },
+  "method": {
+    "visibility": "agent_at_start",
+    "path": "competitions/science_bowl/method"
+  },
+  "eval": {
+    "visibility": "hidden_until_grade",
+    "path": "eval/reference.json",
+    "competition_eval": "competitions/science_bowl/eval"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "competition_id": "wro",
+  "crawled_at": "2026-08-11T16:08:04.175066+00:00",
+  "sources": [
+    {
+      "title": "WRO Association",
+      "url": "https://wro-association.org/",
+      "status": "ok",
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 284857,
+      "raw_file": "data/rules/sources/wro/01_wro-association.org",
+      "text_file": "data/rules/sources/wro/01_wro-association.txt",
+      "text_chars": 5934,
+      "text_preview": "Home - WRO Association \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n\n \n\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n\n \n \n Skip to content \n\n \n \n \n \n Toggle Navigation About WRO WRO is for Everyone Association Member Countries Partners Join &#038; Support Support WRO ® Join the competition Volunteering at WRO Projects WRO Learn RoboStarter Growing Future Innovators Competition Categories 2026 Season Aramco Innovation Award Questions &#038; Answers International Events Previous Challenges Newsroom Annual Report 2025 WRO ® Story Hub Media Archive \n\n \n \n \n Loading... \n \n \n \n \n \n \n \n World Robot Olympiad™ \n \n \n \n A truly global competition \n \n \n \n \n \n \n \n \n \n \n \n World Robot Olympiad™ \n \n \n \n A truly global competition \n \n \n \n \n \n \n \n \n \n \n \n World Robot Olympiad™ \n \n \n \n A truly global competition \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n Home admin 2026-06-10T06:04:53+02:00 \n \n A truly global robotics competition dedicated to science, technology and education Our mission is to help young people develop their creativity and problem-solving skills in a fun and engaging way. We do this by organizing robotics competitions in four different categories for students aged 8-19* years.\n\n World Robot Olympiad™ Association is an independent non-profit organization. All revenue from sponsorships and fees is invested in support of our mission, which is to promote robotics in STEM education worldwide.\n\n WRO ® tournaments are"
+    }
+  ]
+}

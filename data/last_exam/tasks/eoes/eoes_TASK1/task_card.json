@@ -1,0 +1,33 @@
+{
+  "task_id": "eoes/eoes_TASK1",
+  "competition_id": "eoes",
+  "problem_id": "eoes_TASK1",
+  "title": "TASK1",
+  "year": 2024,
+  "team_size": 3,
+  "source_url": "https://www.eoes.science/Previous%20olympiads/previous.html",
+  "inherits_competition_pack": "competitions/eoes",
+  "rule_card": "data/rules/eoes",
+  "input": {
+    "visibility": "agent_at_start",
+    "files": [
+      {
+        "name": "problem.md",
+        "path": "base/input/problem.md"
+      },
+      {
+        "name": "TASK1.pdf.path",
+        "path": "base/input/TASK1.pdf.path"
+      }
+    ]
+  },
+  "method": {
+    "visibility": "agent_at_start",
+    "path": "competitions/eoes/method"
+  },
+  "eval": {
+    "visibility": "hidden_until_grade",
+    "path": "eval/reference.json",
+    "competition_eval": "competitions/eoes/eval"
+  }
+}

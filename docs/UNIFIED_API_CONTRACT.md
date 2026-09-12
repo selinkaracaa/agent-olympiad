@@ -1,8 +1,8 @@
 # Unified API and Action Contract
 
-Status: repository contract for the Shawn alignment work.
+Status: repository contract for the unified contest-session engine.
 
-This document follows Shawn's GitHub contest-session contract (`ACTION_SET_VERSION = 5` on `feat/contest-session-v4-desk-actions`). It unifies the action vocabulary, collaboration schemas, rule-card configuration, tools, budgets, resource conditions, and run commands. The spreadsheet action vocabulary is the public vocabulary. Older runtime spellings are compatibility mappings only; they are not a second conceptual API.
+This document defines the unified contest-session contract (`ACTION_SET_VERSION = 5`). It unifies the action vocabulary, collaboration schemas, rule-card configuration, tools, budgets, resource conditions, and run commands. The spreadsheet action vocabulary is the public vocabulary. Older runtime spellings are compatibility mappings only; they are not a second conceptual API.
 
 ## Source of truth
 
@@ -39,7 +39,7 @@ For `single_agent`, `solo_calls_per_turn` can match the team API budget. For ord
 
 ## Common actions
 
-The names in the first column are the public workflow names from Shawn's registry and spreadsheet. New callers and generated prompts use only these names. The implementation normalizes them to existing handlers internally. Older spellings are accepted only for existing transcripts, tests, and callers; they are not public names.
+The names in the first column are the public workflow names from the registry and spreadsheet. New callers and generated prompts use only these names. The implementation normalizes them to existing handlers internally. Older spellings are accepted only for existing transcripts, tests, and callers; they are not public names.
 
 | Public action | Internal handler | Payload / condition |
 |---|---|---|

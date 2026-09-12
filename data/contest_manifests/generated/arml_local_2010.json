@@ -1,0 +1,23 @@
+{
+  "session_id": "arml_local_2010",
+  "competition_id": "arml_local",
+  "problem_ids": [
+    "arml_local_2010"
+  ],
+  "description": "OTC contest-session manifest for arml_local_2010",
+  "split_parts": true,
+  "task_family": "mathematics",
+  "competition_description": "ARML local mathematics team rounds: solve a numbered set of contest problems and submit one shared answer sheet.",
+  "question_ids": [
+    "1",
+    "2",
+    "3",
+    "5",
+    "9",
+    "10"
+  ],
+  "prompt_overrides": {
+    "3": "At a meeting of the Nuclear Powerplant Workers of America, every person has 3, 4, 5, 6, or 7 fingers on each hand. The probability of having k fingers on one hand is 2^(2-|5-k|)/10. The numbers of fingers on the left and right hands are independent. Compute the probability that a member has at least 10 fingers total.",
+    "10": "In the multiplication puzzle, A, B, C, D, E, and F are distinct non-zero digits. The aligned equations shown in the original diagram are ABC \u00d7 D = DEC and ABC \u00d7 E = FEC, where juxtaposition denotes decimal digits. Compute the six-digit number ABCDEF."
+  }
+}

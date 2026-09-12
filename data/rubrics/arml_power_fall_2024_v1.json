@@ -1,0 +1,143 @@
+{
+  "rubric_id": "arml_power_fall_2024_v1",
+  "title": "Power Round \u2014 Fall 2024 \u2014 ARML Power sub-problem rubric",
+  "total_points": 40.0,
+  "criteria": [
+    {
+      "id": "problem_01",
+      "name": "Problem 1",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 1 (2 pts). Statement: 1. Given the restriction that Alice must choose a monomial, akxk, Bob can determine Alice\u2019s polynomial by asking just two questions. Bob asks Alice to compute A = p(1) and B = p(2). Given the values of A and B, determine Alice\u2019s polynomial. That is, compute the exact values of k and ak in terms of A and B"
+    },
+    {
+      "id": "problem_02",
+      "name": "Problem 2",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 2 (2 pts). Statement: 2. Show that even if it is known that Alice has chosen a monomial, it is impossible for Bob to determine it by asking just one question. That is, for any x that Bob might choose, and given that p(x) = A, \ufb01nd two di\ufb00erent monomials that could be Alice\u2019s polynomial."
+    },
+    {
+      "id": "problem_03",
+      "name": "Problem 3",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 3 (2 pts). Statement: 3. Alice is restricted to choosing a polynomial of degree at most 1. Given the values A = p(0) and B = p(1), determine Alice\u2019s polynomial (in terms of A and B)."
+    },
+    {
+      "id": "problem_04",
+      "name": "Problem 4",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 4 (2 pts). Statement: 4. Alice is restricted to choosing a polynomial of degree at most 2. Given the values A = p(0), B = p(1), and C = p(\u22121), determine Alice\u2019s polynomial (in terms of A, B, and C)."
+    },
+    {
+      "id": "problem_05",
+      "name": "Problem 5",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 5 (1 pt). Statement: 5. Compute \u2113j(ri) for any 1\u2264 i\u2264 k with i\u0338= j ."
+    },
+    {
+      "id": "problem_06",
+      "name": "Problem 6",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 6 (1 pt). Statement: 6. Compute \u2113j(rj)."
+    },
+    {
+      "id": "problem_07",
+      "name": "Problem 7",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 7 (2 pts). Statement: 7. Given the restriction that Alice must choose a polynomial of degree at most k, prove that Bob can determine her polynomial by asking k + 1 questions."
+    },
+    {
+      "id": "problem_08",
+      "name": "Problem 8",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 8 (2 pts). Statement: 8. Given the restriction that Alice must choose a polynomial of degree at most k, prove that Bob cannot determine her polynomial by asking fewer than k+1 questions."
+    },
+    {
+      "id": "problem_09",
+      "name": "Problem 9",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 9 (2 pts). Statement: 9. Given the restriction that all the coe\ufb03cients in Alice\u2019s polynomial are nonnegative integers less than 10, Bob asks Alice to compute p(10) and is told that the value is 364,208,592. Determine Alice\u2019s polynomial."
+    },
+    {
+      "id": "problem_10",
+      "name": "Problem 10",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 10 (2 pts). Statement: 10. Given the restriction that all the coe\ufb03cients in Alice\u2019s polynomial are either 0 or 1, Bob asks Alice to compute p(2) and is told the value is 593. Determine Alice\u2019s polynomial."
+    },
+    {
+      "id": "problem_11",
+      "name": "Problem 11",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 11 (2 pts). Statement: 11. Given the restriction that all the coe\ufb03cients in Alice\u2019s polynomial are either 0 or 1, explain how Bob can always determine Alice\u2019s polynomial by asking Alice to compute the single value p(2)."
+    },
+    {
+      "id": "problem_12",
+      "name": "Problem 12",
+      "max_score": 3.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 12 (3 pts). Statement: 12. Given the restriction that all the coe\ufb03cients in Alice\u2019s polynomial are nonnegative integers less than b, explain how Bob can always determine Alice\u2019s polynomial with just one question."
+    },
+    {
+      "id": "problem_13",
+      "name": "Problem 13",
+      "max_score": 3.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 13 (3 pts). Statement: 13. Given the restriction that all the coe\ufb03cients in Alice\u2019s polynomial are nonnegative integers, explain how Bob can determine Alice\u2019s polynomial with just two questions."
+    },
+    {
+      "id": "problem_14",
+      "name": "Problem 14",
+      "max_score": 3.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 14 (3 pts). Statement: 14. Given the restriction that all the coe\ufb03cients in Alice\u2019s polynomial are either 0, 1, or\u22121, Bob asks Alice to compute p(3) and is told the value is 1573. Determine Alice\u2019s polynomial."
+    },
+    {
+      "id": "problem_15",
+      "name": "Problem 15",
+      "max_score": 3.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 15 (3 pts). Statement: 15. Given the restriction that all the coe\ufb03cients in Alice\u2019s polynomial are \u22121, 0, 1, 2, or 3, Bob asks Alice to compute p(5) and is told the value is 1238. Determine Alice\u2019s polynomial."
+    },
+    {
+      "id": "problem_16",
+      "name": "Problem 16",
+      "max_score": 4.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 16 (4 pts). Statement: 16. Given the restriction that all the coe\ufb03cients in Alice\u2019s polynomial are integers in the interval ( m, n), explain how Bob can determine Alice\u2019s polynomial with just one question. Note: m and n need not themselves be integers."
+    },
+    {
+      "id": "problem_17",
+      "name": "Problem 17",
+      "max_score": 4.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 17 (4 pts). Statement: 17. Problem 13 asked you to \ufb01nd a way to determine Alice\u2019s polynomial with just two questions, given that all of her coe\ufb03cients were nonnegative integers. Now assume that all of her coe\ufb03cients are integers, the leading coe\ufb03cient is positive, and the smallest coe\ufb03cient is known to be at least \u2212n for some positive integer n. Explain how to determine Alice\u2019s polynomial with just two questions."
+    }
+  ],
+  "not_observable_from_deck": [
+    "oral defense",
+    "diagrams that were not recovered from the source PDF"
+  ],
+  "provenance": {
+    "competition_id": "arml_power",
+    "problem_id": "arml_power_fall_2024",
+    "year": 2024,
+    "source_file": "data/raw/arml/Fall_2024/ARMLPower_Fall_2024.pdf",
+    "solution_file": "data/raw/arml/Fall_2024/ARMLPower_Fall_Solution_2024.pdf",
+    "official_total_points": 40.0,
+    "parsed_total_points": 40.0,
+    "points_coverage": 1.0,
+    "awards_parsed": 17,
+    "problems_parsed": 17,
+    "derived_by": "scripts/build_arml_power_rubrics.py"
+  }
+}

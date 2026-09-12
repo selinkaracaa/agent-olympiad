@@ -41,9 +41,9 @@
       "id": "programming_judge",
       "task_types": ["algorithmic_programming", "programming"],
       "submission_mime_types": ["text/x-c++src", "text/x-python"],
-      "strategy": "official_tests_in_isolated_sandbox",
-      "status": "sample_tests_mvp",
-      "notes": "Local Kattis sample .in/.ans judge + 20-min WA penalty on simulated clock. Secret tests / DomJudge / multi-language still deferred."
+      "strategy": "remote_oj_via_vjudge_with_local_sample_fallback",
+      "status": "remote_judge_mvp",
+      "notes": "VJudge remote verdicts are authoritative when the local gateway is configured; otherwise local sample packages remain available as a non-final fallback."
     },
     {
       "id": "physical_lab_judge",

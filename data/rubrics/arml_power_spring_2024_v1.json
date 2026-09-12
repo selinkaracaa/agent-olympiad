@@ -1,0 +1,171 @@
+{
+  "rubric_id": "arml_power_spring_2024_v1",
+  "title": "Power Round \u2014 Spring 2024 \u2014 ARML Power sub-problem rubric",
+  "total_points": 40.0,
+  "criteria": [
+    {
+      "id": "problem_01",
+      "name": "Problem 1",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 1 (1 pt). Statement: 1."
+    },
+    {
+      "id": "problem_02",
+      "name": "Problem 2",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 2 (2 pts). Statement: 2. Compute, with explanation, f(1, s)."
+    },
+    {
+      "id": "problem_03",
+      "name": "Problem 3",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 3 (2 pts). Statement: 3. Compute, with explanation f(ks, s) where k is any positive integer."
+    },
+    {
+      "id": "problem_04",
+      "name": "Problem 4",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 4 (2 pts). Statement: 4. Explain why, if m is not a multiple of s as in the previous problem, f(m, s)\u2264 1/2."
+    },
+    {
+      "id": "problem_05",
+      "name": "Problem 5",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 5 (1 pt). Statement: 5. Any way of dividing m mu\ufb03ns fairly among s students leads to mu\ufb03n division tables such as those created by the students to display how they divided 5 mu\ufb03ns among 3 students. Explain why the numbers in each column of a mu\ufb03n division table must add to 1."
+    },
+    {
+      "id": "problem_06",
+      "name": "Problem 6",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 6 (2 pts). Statement: 6. Compute, with explanation, the sum of the numbers in any row of a mu\ufb03n division table."
+    },
+    {
+      "id": "problem_07",
+      "name": "Problem 7",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 7 (2 pts). Statement: 7. Explain why, to make the largest possible smallest piece, no mu\ufb03n should be cut into more than two pieces."
+    },
+    {
+      "id": "problem_08",
+      "name": "Problem 8",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 8 (2 pts). Statement: 8. Since, by the previous problem, all mu\ufb03ns should be cut into two pieces, there are ten pieces of mu\ufb03ns. Use the pigeon-hole principle to show that someone must have a piece that is no larger than 5 /12."
+    },
+    {
+      "id": "problem_09",
+      "name": "Problem 9",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 9 (2 pts). Statement: 9. Create a mu\ufb03n division table that divides 3 mu\ufb03ns among 5 students, where no piece of any mu\ufb03n has size less than 1 /4."
+    },
+    {
+      "id": "problem_10",
+      "name": "Problem 10",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 10 (2 pts). Statement: 10. If someone gets a single piece of size 3 /5, explain why someone else must get a piece that is smaller than 1 /4. (Hint: what happens to the other 2 /5 of the mu\ufb03n from which the 3/5 piece was taken?)"
+    },
+    {
+      "id": "problem_11",
+      "name": "Problem 11",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 11 (1 pt). Statement: 11. If there is a division where no one gets a piece smaller than 1 /4, explain why no one gets three or more pieces."
+    },
+    {
+      "id": "problem_12",
+      "name": "Problem 12",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 12 (2 pts). Statement: 12. So in any division where the smallest piece is 1 /4 everyone gets exactly two pieces. So the mu\ufb03ns are divided into a total of ten pieces. Complete the proof thatf(3, 5) = 1/4."
+    },
+    {
+      "id": "problem_13",
+      "name": "Problem 13",
+      "max_score": 3.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 13 (3 pts). Statement: 13. Use mu\ufb03n division tables to prove that f(m, s) = m s f(s, m) for all positive integers m and s."
+    },
+    {
+      "id": "problem_14",
+      "name": "Problem 14",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 14 (1 pt). Statement: 14. Explain why if there is some mu\ufb03n that is cut into three or more pieces the upper bound is satis\ufb01ed."
+    },
+    {
+      "id": "problem_15",
+      "name": "Problem 15",
+      "max_score": 3.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 15 (3 pts). Statement: 15. On the other hand, if every mu\ufb03n is cut into exactly two pieces, there are 2 m pieces of mu\ufb03n. Prove that F C(m, s) is an upper bound for the smallest-sized piece that someone must receive."
+    },
+    {
+      "id": "problem_16a",
+      "name": "Problem 16a",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 16a (1 pt). Statement: 16. Prove that the \ufb02oor-ceiling upper bound is tight when there are three students and m > 1 is not divisible by three. (Note: F C(1, 3) is unde\ufb01ned, but it is already known that f(1, 3) = 1/3. Similarly, it is already known that f(3k, 3) = 1.) (a) Compute and simplify F C(3k + 1, 3) for k\u2265 1."
+    },
+    {
+      "id": "problem_16b",
+      "name": "Problem 16b",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 16b (1 pt). Statement: (b) Compute and simplify F C(3k + 2, 3) for k\u2265 0."
+    },
+    {
+      "id": "problem_16c",
+      "name": "Problem 16c",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 16c (2 pts). Statement: (c) For k\u2265 1 describe a division of 3k +1 mu\ufb03ns among three students that achieves the upper bound F C(3k + 1, 3) of the smallest required piece."
+    },
+    {
+      "id": "problem_16d",
+      "name": "Problem 16d",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 16d (2 pts). Statement: (d) For k\u2265 0 describe a division of 3k +2 mu\ufb03ns among three students that achieves the upper bound F C(3k + 2, 3) of the smallest required piece."
+    },
+    {
+      "id": "problem_17",
+      "name": "Problem 17",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 17 (2 pts). Statement: 17. Note that F C(11, 5) = 11 /25, but the correct value of f(11, 5) is actually 13 /30 < 11/25. Find a division of 11 mu\ufb03ns among 5 students that achieves this value of 11/30 for the smallest piece."
+    },
+    {
+      "id": "problem_18",
+      "name": "Problem 18",
+      "max_score": 4.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 18 (4 pts). Statement: 18. For a \ufb01nal challenge, prove that f(24, 25) = 8/25."
+    }
+  ],
+  "not_observable_from_deck": [
+    "oral defense",
+    "diagrams that were not recovered from the source PDF"
+  ],
+  "provenance": {
+    "competition_id": "arml_power",
+    "problem_id": "arml_power_spring_2024",
+    "year": 2024,
+    "source_file": "data/raw/arml/Spring_2024/ARMLPower_Spring_2024.pdf",
+    "solution_file": null,
+    "official_total_points": 40.0,
+    "parsed_total_points": 40.0,
+    "points_coverage": 1.0,
+    "awards_parsed": 21,
+    "problems_parsed": 18,
+    "derived_by": "scripts/build_arml_power_rubrics.py"
+  }
+}

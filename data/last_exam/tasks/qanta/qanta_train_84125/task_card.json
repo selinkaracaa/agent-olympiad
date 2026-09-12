@@ -1,0 +1,29 @@
+{
+  "task_id": "qanta/qanta_train_84125",
+  "competition_id": "qanta",
+  "problem_id": "qanta_train_84125",
+  "title": "Literature",
+  "year": 2011,
+  "team_size": 4,
+  "source_url": "https://www.qanta.org/",
+  "inherits_competition_pack": "competitions/qanta",
+  "rule_card": "data/rules/qanta",
+  "input": {
+    "visibility": "agent_at_start",
+    "files": [
+      {
+        "name": "problem.md",
+        "path": "base/input/problem.md"
+      }
+    ]
+  },
+  "method": {
+    "visibility": "agent_at_start",
+    "path": "competitions/qanta/method"
+  },
+  "eval": {
+    "visibility": "hidden_until_grade",
+    "path": "eval/reference.json",
+    "competition_eval": "competitions/qanta/eval"
+  }
+}

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import math
+import re
 import subprocess
 import tempfile
 from pathlib import Path
@@ -15,6 +16,64 @@ def _tokens(expected: str, actual: str) -> tuple[list[str], list[str]]:
     return expected.split(), actual.split()
 
 
+def _infiltration_output(text: str, sizes: list[int]) -> list[list[int]]:
+    """Strict case framing, flexible whitespace and arbitrary identifier order."""
+    tokens = iter(text.split())
+    cells = []
+    for case_number, n in enumerate(sizes, 1):
+        if next(tokens) != "Case" or next(tokens) != f"{case_number}:":
+            raise ValueError("incorrect case label")
+        def integer() -> int:
+            token = next(tokens)
+            if not re.fullmatch(r"[0-9]+", token):
+                raise ValueError("expected a nonnegative integer")
+            return int(token)
+        count = integer()
+        if not 1 <= count <= n:
+            raise ValueError("invalid set size")
+        chosen = [integer() for _ in range(count)]
+        if len(set(chosen)) != count or any(not 1 <= x <= n for x in chosen):
+            raise ValueError("duplicate or out-of-range cell")
+        cells.append(chosen)
+    if next(tokens, None) is not None:
+        raise ValueError("extra output")
+    return cells
+
+
+def _check_infiltration(expected: str, actual: str, input_path: Path | None) -> tuple[bool, str]:
+    """Validate direct domination, using the trusted answer's optimal size."""
+    if input_path is None:
+        raise JudgeError("Infiltration checker requires test input")
+    try:
+        tokens = iter(input_path.read_text(encoding="utf-8").split())
+        graphs = []
+        while (raw_n := next(tokens, None)) is not None:
+            n = int(raw_n)
+            if not 1 <= n <= 75:
+                raise ValueError("invalid number of cells")
+            rows = [next(tokens) for _ in range(n)]
+            if any(len(row) != n or set(row) - {"0", "1"} for row in rows):
+                raise ValueError("invalid adjacency matrix")
+            graphs.append(rows)
+        sizes = [len(rows) for rows in graphs]
+        wanted = _infiltration_output(expected, sizes)
+    except (OSError, ValueError, StopIteration) as exc:
+        raise JudgeError(f"Invalid Infiltration test fixture: {exc}") from exc
+    try:
+        received = _infiltration_output(actual, sizes)
+    except (ValueError, StopIteration) as exc:
+        return False, f"Invalid Infiltration output: {exc}"
+    for number, (rows, optimal, chosen) in enumerate(zip(graphs, wanted, received), 1):
+        if len(chosen) != len(optimal):
+            return False, f"Case {number}: expected minimum set size {len(optimal)}, received {len(chosen)}"
+        covered = {cell - 1 for cell in chosen}
+        for cell in chosen:
+            covered.update(i for i, edge in enumerate(rows[cell - 1]) if edge == "1")
+        if len(covered) != len(rows):
+            return False, f"Case {number}: selected cells do not directly control all cells"
+    return True, ""
+
+
 def check_output(
     expected: str,
     actual: str,
@@ -23,6 +82,8 @@ def check_output(
     input_path: Path | None = None,
 ) -> tuple[bool, str]:
     mode = str(checker.get("mode") or checker.get("type") or "token").lower()
+    if mode == "infiltration":
+        return _check_infiltration(expected, actual, input_path)
     if mode == "exact":
         accepted = expected == actual
         return accepted, "" if accepted else "exact output mismatch"

@@ -1,0 +1,10 @@
+{
+  "visibility": "hidden_until_grade",
+  "gold_pointer": "data/benchmarks/purple_comet/benchmark.json#purple_comet_2018_hs.gold_label",
+  "has_gold_answer": true,
+  "evaluator_id": null,
+  "evaluator_status": null,
+  "rubric_path": null,
+  "deliverable": null,
+  "solution_file": "data/raw/purple_comet/2018/purple_comet_hs_2018_answers.json"
+}

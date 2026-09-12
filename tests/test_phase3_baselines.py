@@ -40,7 +40,6 @@ def rule_environment(turns: int = 4) -> OlympiadEnvironment:
 class Phase3BaselineTests(unittest.TestCase):
     def test_schemas_registered_and_rosters(self) -> None:
         required = {
-            "open_table_coach",
             "debate",
             "self_consistency",
             "memory_solo",
@@ -81,43 +80,6 @@ class Phase3BaselineTests(unittest.TestCase):
             "1. A",
         )
 
-    def test_open_table_coach_is_problem_blind_then_exits_after_opening(self) -> None:
-        env = rule_environment(3)
-        calls: list[tuple[str, str]] = []
-
-        def query(system: str, user: str) -> str:
-            calls.append((system, user))
-            if "PRIVATE DELIBERATION ONLY" in system:
-                return "Private working note."
-            return "ACTION: speak | PAYLOAD: phase contribution"
-
-        result = run_collaboration(
-            "open_table_coach",
-            env,
-            query,
-            CollabConfig(max_turns=3, synthesize=False),
-        )
-
-        self.assertNotIn(env._problem_statement(), calls[0][1])
-        self.assertNotIn("evaluation_guidance", calls[0][1])
-        self.assertIn("pre-contest brief", calls[0][0].lower())
-        opening_coach_call = 1 + (2 * env.team_size)
-        self.assertIn("opening discussion", calls[opening_coach_call][0].lower())
-        self.assertIn(env._problem_statement(), calls[opening_coach_call][1])
-        self.assertTrue(
-            all(
-                "you are coach" not in system.lower()
-                for system, _ in calls[opening_coach_call + 1 :]
-            )
-        )
-        coach_actions = [
-            item for item in env.action_log if item["agent"] == "Coach"
-        ]
-        self.assertEqual([item["turn"] for item in coach_actions], [1, 2])
-        self.assertEqual([item["action"] for item in coach_actions], ["speak", "speak"])
-        self.assertEqual(result["turns_used"], 3)
-        self.assertEqual(result["schema"], "open_table_coach")
-        self.assertEqual(result["coach_exit_after_turn"], 2)
 
     def test_core_team_schemas_stop_at_communication_budget(self) -> None:
         expectations = {
@@ -188,7 +150,7 @@ class Phase3BaselineTests(unittest.TestCase):
         self.assertEqual(result["api_calls"], 1)
         self.assertEqual(result["stop_reason"], "all_participants_ready")
         self.assertIn("ACTION: write_private_notes", systems[0])
-        self.assertIn("ACTION: submit_final", systems[0])
+        self.assertIn("ACTION: submit |", systems[0])
         self.assertNotIn("ACTION: speak", systems[0])
         self.assertNotIn("ACTION: write_scratchpad", systems[0])
         self.assertEqual(env.communication.team_used, 0)
@@ -210,41 +172,7 @@ class Phase3BaselineTests(unittest.TestCase):
         self.assertTrue(result["submitted"])
         self.assertEqual(result["submitted_by"], "Agent_1")
 
-    def test_open_table_coach_output_cannot_execute_actions(self) -> None:
-        env = rule_environment(1)
 
-        result = run_collaboration(
-            "open_table_coach",
-            env,
-            lambda system, _user: (
-                "ACTION: submit_final | PAYLOAD: forbidden"
-                if "you are coach" in system.lower()
-                else "ACTION: sleep | PAYLOAD: test"
-            ),
-            CollabConfig(max_turns=1, synthesize=False),
-        )
-
-        self.assertFalse(result["submitted"])
-        coach_actions = [
-            item for item in env.action_log if item["agent"] == "Coach"
-        ]
-        self.assertEqual([item["action"] for item in coach_actions], ["rest"])
-        self.assertIn("blocked prohibited action", coach_actions[0]["payload"])
-
-    def test_open_table_coach_requires_explicit_rule_card_policy(self) -> None:
-        env = OlympiadEnvironment(
-            "iiot",
-            "iiot_2017_01",
-            max_turns=1,
-            rules_mode="enforced",
-        )
-        with self.assertRaisesRegex(ValueError, "does not enable open-table coaching"):
-            run_collaboration(
-                "open_table_coach",
-                env,
-                lambda _system, _user: "unused",
-                CollabConfig(max_turns=1, synthesize=False),
-            )
 
     def test_memory_solo_shares_only_bounded_self_state(self) -> None:
         prompts: list[str] = []

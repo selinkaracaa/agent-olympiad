@@ -1,0 +1,153 @@
+# Method — `fyziklani`
+
+How this benchmark's agents are asked to work. Projected from `data/rules/fyziklani/collaboration.json`.
+
+## Agent constraints
+
+- Inhabit an eligible Physics Brawl Online contestant identity on one 1–5 person team in one category; do not invent a sixth member, a second team, or a teacher-solver.
+- Treat this as the 2025 online edition; do not import in-person Fyziklání's no-internet rules.
+- Begin with the same contestant permissions as every teammate; do not assume a permanent captain, submitter, or series specialist office.
+- Treat private reasoning and notes as unknown to teammates until you communicate them; discoveries needed by teammates must be reported explicitly.
+- Track which Main and Hurry-up problems are currently unlocked, which series is locked out, how many incorrect attempts a problem has, and how many skips remain.
+- Do not claim a later series problem, a Hurry-up opening before one hour, or skips before 90 minutes.
+- Any contestant may submit a numeric answer through the shared contest interface; there is no exclusive designated submitter.
+- After a wrong answer, treat that series as locked for one official minute and expect reduced remaining points on the next correct attempt.
+- Do not use generative AI, hidden solutions, or outside problem-solving help from teachers or other teams.
+- When a live scoreboard is available, use it as strategy input and remember it hides for the last 20 official minutes; do not invent hidden standings.
+
+## Information / deliberation / communication
+
+```json
+{
+  "information_policy": {
+    "mode": "shared",
+    "shared": [
+      "problem",
+      "contest_rules",
+      "team_discussion",
+      "scratchpad"
+    ],
+    "coordination_requirement": "Contestants receive equal baseline information access, but private reasoning is not silently copied between them; they must communicate discoveries needed by teammates. Later series problems are not shared team state until unlocked."
+  },
+  "deliberation": {
+    "mode": "unstructured",
+    "min_challenges": 0,
+    "evaluation_dimensions": [
+      "evidence_responsiveness",
+      "decision_traceability"
+    ]
+  },
+  "communication": {
+    "mode": "limited",
+    "team_message_budget": 20,
+    "per_agent_message_budget": 4,
+    "max_message_chars": 1200,
+    "counted_actions": [
+      "speak",
+      "write_scratchpad",
+      "propose",
+      "challenge",
+      "provide_evidence",
+      "revise",
+      "decide"
+    ]
+  }
+}
+```
+
+## Simulation
+
+```json
+{
+  "max_turns": 36,
+  "scheduler": "src_collaboration_draft",
+  "turn_budget_basis": "official clock 36 turns vs floor 15 (5 teammates x 2 turns + 1 answer parts + 4 for synthesis)",
+  "contest_clock_and_scoreboard": "specified_for_role_immersion_scoreboard_not_enforced",
+  "eligibility_and_logistics_state": "specified_for_role_immersion_not_enforced"
+}
+```
+
+## Rule sections
+
+```json
+{
+  "competition_format": [
+    "Official: Physics Brawl Online is held exclusively in the online competition environment; this card uses the 2025 online rules, not in-person Fyziklání.",
+    "Official: a team consists of 1–5 competitors in one category; all categories share the same problems and keep separate results lists.",
+    "Official: the contest consists of four parallel series—the Main series and three Hurry-up series.",
+    "Official: Main opens with 7 problems and continues after each correct answer; it contains approximately 50 problems whose exact number is not published in advance.",
+    "Official: Hurry-up opens one hour after the start with one problem in each of three categories, usually M, E, and X.",
+    "Simulation choice: the runner loads currently exposed problems rather than a live multi-series unlock graph."
+  ],
+  "timeline": [
+    "Official: the competition lasts 3 hours.",
+    "Official: Hurry-up answerability begins after one hour.",
+    "Official: skips become available 90 minutes after the start.",
+    "Official: a wrong answer imposes a 1-minute lockout on that series.",
+    "Official: live results hide 20 minutes before the end; the contest ends at 3 hours.",
+    "Simulation choice: max_turns is a safety budget approximating the official clock, not a second official time limit.",
+    "Simulation choice: lockout minutes, skip clocks, and the scoreboard hide are specified and not executed as timers."
+  ],
+  "resource_policy": [
+    "Official: teams use computers or other electronic equipment with internet access.",
+    "Official: internet and any literature are permitted as information sources.",
+    "Official: calculators and writing or drafting supplies are permitted.",
+    "Official: generative artificial intelligence tools, including ChatGPT-class systems, are strictly prohibited.",
+    "Simulation choice: the exposed machine tools are query_rules and use_calculator; do not claim a code runner or a generative model.",
+    "Simulation choice: in-person Fyziklání's printed-materials-only ban is out of scope."
+  ],
+  "collaboration_protocol": [
+    "Official: during the competition all competitors may communicate only with their team members or the organizers.",
+    "Official: any interaction with teachers, other teams, or similar outsiders is strictly forbidden.",
+    "Official: the in-environment chat is for wording, environment, or contest questions; organizers may answer publicly.",
+    "Official: giving hints, discussing solutions, spam, or other inappropriate conduct in official channels may be penalized.",
+    "Simulation choice: every contestant starts with equal permissions; series specialist jobs may rotate and are never exclusive offices.",
+    "Simulation choice: private notes are unknown to teammates until communicated."
+  ],
+  "integrity_and_compliance": [
+    "Official: generative AI use is a strictly prohibited breach and may lead to point removal, disqualification, or further sanctions.",
+    "Official: communicating solutions to other teams, obtaining problems or solutions before the contest, or attacking the contest server are extremely severe breaches.",
+    "Official: teams must keep solution materials and present them on request until final results.",
+    "Official: selected teams may be invited to a recorded post-contest fairness video call; non-participation is not an automatic penalty.",
+    "Simulation choice: do not access hidden answers, evaluator internals, or unreleased later-series problems.",
+    "Simulation choice: fairness video calls are official and unavailable in this session."
+  ],
+  "deliverable_format": [
+    "Official: the answer to every problem is a number.",
+    "Official: required significant figures and units are specified in the problem statement.",
+    "Official: listed constants must be used unless the statement gives a different value; unspecified constants may be taken from public sources.",
+    "Official: answers must be sent through the competition environment; email and other channels are rejected.",
+    "Simulation choice: the runner accepts one shared numbered answer sheet of exact values when required.",
+    "Simulation choice: any contestant may file that shared sheet."
+  ],
+  "evaluation_criteria": [
+    "Official: a correct first attempt earns the problem's maximum score; later correct attempts earn the reduced schedule 100/60/40/20 percent and then the published remainder table.",
+    "Official: each skip costs 1 point and the skipped problem can no longer be answered.",
+    "Official: a Hurry-up same-number triplet completed in the first 30 minutes of Hurry-up doubles that triplet's earned points; bonuses stop once skips are available.",
+    "Official: the winner is the team with the most points; ties go to the earlier last correct answer, then to drawing lots.",
+    "Simulation choice: repository evaluation is gold matching per problem_or_question and is deferred_benchmark_metadata_missing; do not invent a completed official grade.",
+    "Simulation choice: report points separately from rule compliance and collaboration quality, and do not treat a late correct answer as equal to an earlier one when ranking is required."
+  ],
+  "runtime_limitations": [
+    "Official: progressive series unlock, incorrect-attempt decay, 1-minute series lockout, and skips after 90 minutes are contest-day facts.",
+    "Simulation choice: progressive_series, incorrect_attempt_penalty, series_lockout, and skip_state are specified only.",
+    "Official: live results hide for the final 20 minutes.",
+    "Simulation choice: scoreboard hide is official and unavailable.",
+    "Official: selected teams may receive a fairness video-call invitation after the contest.",
+    "Simulation choice: fairness video calls are official and unavailable.",
+    "Simulation choice: limited team messaging is a benchmark overlay, not an official Physics Brawl cap.",
+    "Simulation choice: exact unpublished Main-series length must not be invented."
+  ],
+  "official_eligibility_and_categories": [
+    "Official: pre-registration at physicsbrawl.org is required; each team agrees to the Rules of Conduct and these rules.",
+    "Official: categories A, B, and C use the official graduation-year coefficient algorithm; Open is non-competitive.",
+    "Official: a contestant may be in only one category and on only one team.",
+    "Simulation choice: category placement, team-name review, and result publication consent are carried as contestant conscience, not as registration state machines."
+  ],
+  "in_person_exclusion": [
+    "Official: these rules are the Rules of Physics Brawl Online ratified 1 September 2025.",
+    "Official: in-person Fyziklání is a different competition with a different resource policy.",
+    "Simulation choice: do not apply in-person no-internet or printed-materials-only constraints to this session."
+  ]
+}
+```

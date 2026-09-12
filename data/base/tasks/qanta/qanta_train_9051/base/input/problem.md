@@ -1,0 +1,3 @@
+# Science
+
+Proteins destined for these structures are post-translationally modified to include mannose-6-phosphate residues on their N-linked oligosaccharides. The addition of the M6P tag to enzymes, such as aryl-sulfytase A, is being investigated as a potential treatment for diseases that affect these organelles, which diseases include metachromatic leukodystrophy and Fabry's disease.  Once inside these structures, the proteins and their M6P tags dissociate due to the environment created by vacuolar ATPase, which is closely related to the proton pump used in oxidative phosphorylation.  FTP, identify these organelles containing hydrolases that function best at a pH of about 5 and which are structurally similar to peroxisomes.

@@ -1,0 +1,15 @@
+{
+  "competition_id": "wmtc",
+  "rule_id": "wmtc:team_round_shared_answer",
+  "profile": "proxy",
+  "protocol": "shared_answer",
+  "visibility": {
+    "agent_at_start": [
+      "input",
+      "method"
+    ],
+    "hidden_until_grade": [
+      "eval"
+    ]
+  }
+}

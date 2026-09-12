@@ -1,0 +1,3 @@
+# Religion
+
+One religious tradition from this country centers on the tenets of truthfulness, compassion, and forbearance. Buddhism was introduced to this present-day country by Bodhidarma. A text from this country discusses how rulers should govern via the principle of "action without action." A symbol from this country contrasts the (*) dark, feminine side of nature with the bright, masculine side. This country continues to persecute the Falun Gong religion. For 10 points, name this country where the ancient master Laozi [low-tzuh] explained a concept called the Way, or Tao, which is represented with the yin-yang symbol.

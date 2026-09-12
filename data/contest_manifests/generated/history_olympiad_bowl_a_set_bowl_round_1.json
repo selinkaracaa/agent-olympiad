@@ -1,0 +1,11 @@
+{
+  "session_id": "history_olympiad_bowl_a_set_bowl_round_1",
+  "competition_id": "history_olympiad",
+  "problem_ids": [
+    "history_olympiad_bowl_a_set_bowl_round_1"
+  ],
+  "description": "OTC contest-session manifest for history_olympiad_bowl_a_set_bowl_round_1",
+  "split_parts": false,
+  "task_family": "short_answer",
+  "competition_description": "History Bowl/Olympiad packets containing many numbered history toss-up and bonus questions that require concise factual answers."
+}

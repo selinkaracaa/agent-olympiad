@@ -1,0 +1,33 @@
+{
+  "task_id": "science_bowl/science_bowl_sample_set_10_12a_hs_reg_2016_bonus_02",
+  "competition_id": "science_bowl",
+  "problem_id": "science_bowl_sample_set_10_12a_hs_reg_2016_bonus_02",
+  "title": "Earth and Space / Short Answer / bonus",
+  "year": 2016,
+  "team_size": 4,
+  "source_url": "https://science.osti.gov/wdts/nsb",
+  "inherits_competition_pack": "competitions/science_bowl",
+  "rule_card": "data/rules/science_bowl",
+  "input": {
+    "visibility": "agent_at_start",
+    "files": [
+      {
+        "name": "problem.md",
+        "path": "base/input/problem.md"
+      },
+      {
+        "name": "12A_HS_Reg_2016.pdf.path",
+        "path": "base/input/12A_HS_Reg_2016.pdf.path"
+      }
+    ]
+  },
+  "method": {
+    "visibility": "agent_at_start",
+    "path": "competitions/science_bowl/method"
+  },
+  "eval": {
+    "visibility": "hidden_until_grade",
+    "path": "eval/reference.json",
+    "competition_eval": "competitions/science_bowl/eval"
+  }
+}

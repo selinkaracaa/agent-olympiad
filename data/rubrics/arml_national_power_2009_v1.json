@@ -1,0 +1,213 @@
+{
+  "rubric_id": "arml_national_power_2009_v1",
+  "title": "Power Round \u2014 2009 \u2014 ARML Power sub-problem rubric",
+  "total_points": 50.0,
+  "criteria": [
+    {
+      "id": "problem_01a",
+      "name": "Problem 1a",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 1a (1 pt). Statement: 1. (a) Compute the 3-signature for 52341."
+    },
+    {
+      "id": "problem_01b",
+      "name": "Problem 1b",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 1b (2 pts). Statement: (b) Find another 5-label with the same 3-signature as in part (a)."
+    },
+    {
+      "id": "problem_01c",
+      "name": "Problem 1c",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 1c (2 pts). Statement: (c) Compute two other 6-labels with the same 4-signature as 462135."
+    },
+    {
+      "id": "problem_02a",
+      "name": "Problem 2a",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 2a (1 pt). Statement: 2. (a) Explain why the label 1234 has a unique 3-signature."
+    },
+    {
+      "id": "problem_02b",
+      "name": "Problem 2b",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 2b (1 pt). Statement: (b) List three other 4-labels with unique 3-signatures."
+    },
+    {
+      "id": "problem_02c",
+      "name": "Problem 2c",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 2c (1 pt). Statement: (c) Explain why the 3-signature (123 , 321) is impossible."
+    },
+    {
+      "id": "problem_02d",
+      "name": "Problem 2d",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 2d (1 pt). Statement: (d) List three other impossible 3-signatures that have exactly two windows."
+    },
+    {
+      "id": "problem_03a",
+      "name": "Problem 3a",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 3a (2 pts). Statement: 3. Consider the shape below: (a) Find the 2-signature that corresponds to this shape."
+    },
+    {
+      "id": "problem_03b",
+      "name": "Problem 3b",
+      "max_score": 3.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 3b (3 pts). Statement: (b) Compute two di\ufb00erent 6-labels with the 2-signature you found in part (a)."
+    },
+    {
+      "id": "problem_04a",
+      "name": "Problem 4a",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 4a (2 pts). Statement: 4. (a) List all 5-labels with 2-signature (12 , 12, 21, 21)."
+    },
+    {
+      "id": "problem_04b",
+      "name": "Problem 4b",
+      "max_score": 3.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 4b (3 pts). Statement: (b) Find a formula for the number of (2 n + 1)-labels with the 2-signature"
+    },
+    {
+      "id": "problem_05a",
+      "name": "Problem 5a",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 5a (2 pts). Statement: 5. (a) Compute the number of 5-labels with 2-signature (12 , 21, 12, 21)."
+    },
+    {
+      "id": "problem_05b",
+      "name": "Problem 5b",
+      "max_score": 3.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 5b (3 pts). Statement: (b) Determine the number of 9-labels with 2-signature (12, 21, 12, 21, 12, 21, 12, 21). Justify your answer."
+    },
+    {
+      "id": "problem_06a",
+      "name": "Problem 6a",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 6a (1 pt). Statement: 6. (a) Determine whether the following signatures are possible or impossible: (i) (123, 132, 213),"
+    },
+    {
+      "id": "problem_06b",
+      "name": "Problem 6b",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 6b (1 pt). Statement: (ii) (321, 312, 213)."
+    },
+    {
+      "id": "problem_06c",
+      "name": "Problem 6c",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 6c (1 pt). Statement: (b) Notice that a ( p + 1)-label has only two windows in its p-signature. For a given window \u03c91, compute the number of windows \u03c92 such that Sp[L] = ( \u03c91,\u03c9 2) for some (p + 1)-labelL."
+    },
+    {
+      "id": "problem_06d",
+      "name": "Problem 6d",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 6d (2 pts). Statement: (c) Justify your answer from part (b)."
+    },
+    {
+      "id": "problem_07a",
+      "name": "Problem 7a",
+      "max_score": 4.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 7a (4 pts). Statement: 7. (a) For a general n, determine the number of distinct possible p-signatures."
+    },
+    {
+      "id": "problem_07b",
+      "name": "Problem 7b",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 7b (1 pt). Statement: (b) If a randomly chosen p-signature is 575 times more likely of being impossible than pos- sible, determine p and n."
+    },
+    {
+      "id": "problem_08a",
+      "name": "Problem 8a",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 8a (1 pt). Statement: 8. (a) Show that (312 , 231, 312, 132) is not a unique 3-signature."
+    },
+    {
+      "id": "problem_08b",
+      "name": "Problem 8b",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 8b (2 pts). Statement: (b) Show that (231, 213, 123, 132) is a unique 3-signature."
+    },
+    {
+      "id": "problem_08c",
+      "name": "Problem 8c",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 8c (1 pt). Statement: (c) Find two 5-labels with unique 2-signatures."
+    },
+    {
+      "id": "problem_08d",
+      "name": "Problem 8d",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 8d (2 pts). Statement: (d) Find a 6-label with a unique 4-signature but which has the 3-signature from part (a)."
+    },
+    {
+      "id": "problem_09a",
+      "name": "Problem 9a",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 9a (1 pt). Statement: 9. (a) For a general n\u2265 2, compute all n-labels that have unique 2-signatures."
+    },
+    {
+      "id": "problem_09b",
+      "name": "Problem 9b",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 9b (1 pt). Statement: (b) Determine whether or not S5[495138627] is unique."
+    },
+    {
+      "id": "problem_09c",
+      "name": "Problem 9c",
+      "max_score": 3.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 9c (3 pts). Statement: (c) Determine the smallest p for which the 20-label L = 3, 11, 8, 4, 17, 7, 15, 19, 6, 2, 14, 1, 10, 16, 5, 12, 20, 9, 13, 18 has a unique p-signature."
+    },
+    {
+      "id": "problem_10",
+      "name": "Problem 10",
+      "max_score": 5.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 10 (5 pts). Statement: 10. Show that for each k\u2265 2, the number of unique 2 k\u22121-signatures on the set of 2 k-labels is at least 22k\u22123."
+    }
+  ],
+  "not_observable_from_deck": [
+    "oral defense",
+    "diagrams that were not recovered from the source PDF"
+  ],
+  "provenance": {
+    "competition_id": "arml_national_power",
+    "problem_id": "arml_national_power_2009",
+    "year": 2009,
+    "source_file": "data/raw/arml_national/ARML_2009_2014.pdf",
+    "solution_file": null,
+    "official_total_points": 50.0,
+    "parsed_total_points": 50.0,
+    "points_coverage": 1.0,
+    "awards_parsed": 27,
+    "problems_parsed": 10,
+    "derived_by": "scripts/build_arml_power_rubrics.py"
+  }
+}

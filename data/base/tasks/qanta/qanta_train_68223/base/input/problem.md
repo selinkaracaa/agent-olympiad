@@ -1,0 +1,3 @@
+# History
+
+Its collapse was imminent and came within half a century after its second greatest city, the market center Audaghost, fell. The Sanhaja had taken that city, and one of its former constituent people, the Susu, would murder its royal line. It was known as Wagadu by its citizens – a fact related to us in the chronicles of al-Bakri who described its society in detail, including its future major capital at Kumbi Saleh. Situated between the Sahara and the headwaters of the Senegal and Niger Rivers, it became the first great trading empire of western Africa. FTP, identify this African kingdom whose name lives on in a west African country.

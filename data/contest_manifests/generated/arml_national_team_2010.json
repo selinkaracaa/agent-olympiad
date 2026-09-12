@@ -1,0 +1,23 @@
+{
+  "session_id": "arml_national_team_2010",
+  "competition_id": "arml_national_team",
+  "problem_ids": [
+    "arml_national_team_2010"
+  ],
+  "description": "OTC contest-session manifest for arml_national_team_2010",
+  "split_parts": true,
+  "task_family": "mathematics",
+  "competition_description": "ARML national team mathematics rounds: teammates divide a difficult numbered problem set and combine answers on one sheet.",
+  "question_ids": [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10"
+  ]
+}

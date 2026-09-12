@@ -1,0 +1,3 @@
+# Fine Arts
+
+This painting contains a prostrate man with stigmata on his hands, as well as a dove with a broken wing perched near a large animal, who is peering at his smoky tail. Fire will consume a woman peering at the only view of the outside, a small, square window in the upper right. A flower grows from a broken sword in the foreground, which appears to be next to the nose of an animal's head superimposed on another animal, whose nose forms a human skull. Another woman holds a candle, and a lightbulb burns the eyes of a trapped horse. FTP, name this huge Pablo Picasso mural in which a bull represents Spain, about the titular Basque town.          |

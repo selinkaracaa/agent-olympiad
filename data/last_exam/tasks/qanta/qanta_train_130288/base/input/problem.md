@@ -1,0 +1,3 @@
+# Literature
+
+In one work, this poet laments, "We have given our hearts away, a sordid boon!" This writer of "The World Is Too Much With Us" described flowers "Continuous as the stars that shine / And twinkle on the milky way" in another work. This poet included "Strange fits of passion I have known" in his (*) Lucy poems, which may be inspired by his sister, Dorothy. In another work, this poet explains, "Five years have past" since he last walked by "steep and lofty cliffs" in the title location. This poet also wrote about "golden daffodils" in "I Wandered Lonely as a Cloud" and, with Samuel Taylor Coleridge, collaborated on Lyrical Ballads. For 10 points, name this British poet of Tintern Abbey.

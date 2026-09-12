@@ -1,0 +1,33 @@
+{
+  "task_id": "eoes/eoes_EUSO_I_2004_TaskB",
+  "competition_id": "eoes",
+  "problem_id": "eoes_EUSO_I_2004_TaskB",
+  "title": "EUSO_I_2004_TaskB",
+  "year": 2004,
+  "team_size": 3,
+  "source_url": "https://www.eoes.science/Previous%20olympiads/previous.html",
+  "inherits_competition_pack": "competitions/eoes",
+  "rule_card": "data/rules/eoes",
+  "input": {
+    "visibility": "agent_at_start",
+    "files": [
+      {
+        "name": "problem.md",
+        "path": "base/input/problem.md"
+      },
+      {
+        "name": "EUSO_I_2004_TaskB.pdf.path",
+        "path": "base/input/EUSO_I_2004_TaskB.pdf.path"
+      }
+    ]
+  },
+  "method": {
+    "visibility": "agent_at_start",
+    "path": "competitions/eoes/method"
+  },
+  "eval": {
+    "visibility": "hidden_until_grade",
+    "path": "eval/reference.json",
+    "competition_eval": "competitions/eoes/eval"
+  }
+}

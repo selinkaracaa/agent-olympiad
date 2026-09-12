@@ -1,0 +1,164 @@
+{
+  "rubric_id": "arml_power_fall_2021_v1",
+  "title": "Power Round \u2014 Fall 2021 \u2014 ARML Power sub-problem rubric",
+  "total_points": 40.0,
+  "criteria": [
+    {
+      "id": "problem_01a",
+      "name": "Problem 1a",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 1a (2 pts). Statement: 1. For each sequence below, list rows 0 through 5 of the corresponding triangular array, and list terms 0 through 5 of its triangular transform. (a) 1, 1, 1, 1, 1, 1,... ."
+    },
+    {
+      "id": "problem_01b",
+      "name": "Problem 1b",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 1b (2 pts). Statement: (b) 1,\u22121, 1,\u22121, 1,\u22121,... ."
+    },
+    {
+      "id": "problem_02",
+      "name": "Problem 2",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 2 (2 pts). Statement: 2. List terms 0 through 5 of a sequence whose triangular transform is 0 , 1, 2, 3, 4, 5,... ."
+    },
+    {
+      "id": "problem_03a",
+      "name": "Problem 3a",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 3a (2 pts). Statement: 3. For each sequence below, list rows 0 through 5 of the boustrophedon array, and list terms 0 through 5 of its boustrophedon transform. (Do not box or underline entries\u2014 that highlighting was for demonstration purposes only.) (a) 1, 1, 1, 1, 1, 1,... ."
+    },
+    {
+      "id": "problem_03b",
+      "name": "Problem 3b",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 3b (2 pts). Statement: (b) 1,\u22121, 1,\u22121, 1,\u22121,... ."
+    },
+    {
+      "id": "problem_04",
+      "name": "Problem 4",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 4 (2 pts). Statement: 4. List terms 0 through 5 of a sequence whose boustrophedon transform is 0, 1, 2, 3, 4, 5,... ."
+    },
+    {
+      "id": "problem_05",
+      "name": "Problem 5",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 5 (2 pts). Statement: 5. Given a sequence {an}, determine a recursive de\ufb01nition for the entries of its boustro- phedon array."
+    },
+    {
+      "id": "problem_06",
+      "name": "Problem 6",
+      "max_score": 3.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 6 (3 pts). Statement: 6. Given the sequence{an}, prove that each entry of the corresponding triangular array is given by the formula Tn,k = k\u2211 i=0 (k i ) an\u2212i where (k i ) is the usual binomial coe\ufb03cient (k i ) = k! i!(k\u2212i)!. You may use standard facts about the binomial coe\ufb03cients in your proof."
+    },
+    {
+      "id": "problem_07",
+      "name": "Problem 7",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 7 (2 pts). Statement: 7. Given a sequence {bn}, prove that there is a unique sequence {an} whose triangular transform is{bn}. The sequence {an} will be called the inverse triangular transform of{bn}."
+    },
+    {
+      "id": "problem_08",
+      "name": "Problem 8",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 8 (1 pt). Statement: 8. Given a sequence {bn} of integers, prove that its inverse triangular transform is also a sequence of integers."
+    },
+    {
+      "id": "problem_09",
+      "name": "Problem 9",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 9 (2 pts). Statement: 9. Given a sequence{bn}, prove that there is a unique sequence{an} whose boustrophedon transform is{bn}. The sequence{ab} will be called the inverse boustrophedon transform of{bn}."
+    },
+    {
+      "id": "problem_10",
+      "name": "Problem 10",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 10 (1 pt). Statement: 10. Prove that the inverse boustrophedon transform of a sequence of integers is again a sequence of integers."
+    },
+    {
+      "id": "problem_11",
+      "name": "Problem 11",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 11 (2 pts). Statement: 11. There are \ufb01ve up-down permutations of the \ufb01rst 4 positive integers. List them."
+    },
+    {
+      "id": "problem_12",
+      "name": "Problem 12",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 12 (2 pts). Statement: 12. Compute the number of up-down permutation of the \ufb01rst 5 positive integers."
+    },
+    {
+      "id": "problem_13",
+      "name": "Problem 13",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 13 (2 pts). Statement: 13. Prove that the number of up-down permutations of the \ufb01rst n positive integers and the number of down-up permutations of the \ufb01rst n positive integers are equal."
+    },
+    {
+      "id": "problem_14",
+      "name": "Problem 14",
+      "max_score": 3.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 14 (3 pts). Statement: 14. Let An be the number of up-down permutations of the \ufb01rst n positive integers. For example, there are two up-down permutations of the \ufb01rst three positive integers: \u27e8\u27e81, 3, 2\u27e9\u27e9 and\u27e8\u27e82, 3, 1\u27e9\u27e9. The sequence {An} begins 1, 1, 1, 2, 5,... where the next term is the correct answer to the previous problem, and the \u201cempty permutation\u201d of the \ufb01rst 0 positive integers is declared by de\ufb01nition to be an up-down permutation. Prove that An satis\ufb01es the recurrence relation 2An+1 = n\u2211 k=0 (n k ) AkAn\u2212k (with, of course, the initial value A0 = 1)."
+    },
+    {
+      "id": "problem_15",
+      "name": "Problem 15",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 15 (1 pt). Statement: 15. Use the above recurrence to compute A6."
+    },
+    {
+      "id": "problem_16",
+      "name": "Problem 16",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 16 (2 pts). Statement: 16. Show that the Entringer numbers satisfy the recursive de\ufb01nition En,k = \uf8f1 \uf8f4\uf8f2 \uf8f4\uf8f3 1 n =k = 0 0 n> 0,k = 0 En,k\u22121 +En\u22121,n\u2212k k >0 ."
+    },
+    {
+      "id": "problem_17",
+      "name": "Problem 17",
+      "max_score": 3.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 17 (3 pts). Statement: 17. Prove that En,k is the number of down-up permutations of the \ufb01rst n + 1 positive integers whose \ufb01rst number is exactly k + 1. For example, E3,2 = 2 and there are exactly 2 down-up permutations of the \ufb01rst 3 + 1 = 4 integers whose \ufb01rst number is 2 + 1 = 3, namely\u27e8\u27e83, 1, 4, 2\u27e9\u27e9 and\u27e8\u27e83, 2, 4, 1\u27e9\u27e9"
+    },
+    {
+      "id": "problem_18",
+      "name": "Problem 18",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 18 (2 pts). Statement: 18. Prove that An =En,n."
+    }
+  ],
+  "not_observable_from_deck": [
+    "oral defense",
+    "diagrams that were not recovered from the source PDF"
+  ],
+  "provenance": {
+    "competition_id": "arml_power",
+    "problem_id": "arml_power_fall_2021",
+    "year": 2021,
+    "source_file": "data/raw/arml/Fall_2021/ARMLPower_Fall_2021.pdf",
+    "solution_file": "data/raw/arml/Fall_2021/ARMLPower_Fall_Solution_2021.pdf",
+    "official_total_points": 40.0,
+    "parsed_total_points": 40.0,
+    "points_coverage": 1.0,
+    "awards_parsed": 20,
+    "problems_parsed": 18,
+    "derived_by": "scripts/build_arml_power_rubrics.py"
+  }
+}

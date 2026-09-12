@@ -1,0 +1,206 @@
+{
+  "rubric_id": "arml_power_spring_2020_v1",
+  "title": "Power Round \u2014 Spring 2020 \u2014 ARML Power sub-problem rubric",
+  "total_points": 40.0,
+  "criteria": [
+    {
+      "id": "problem_01",
+      "name": "Problem 1",
+      "max_score": 4.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 1 (4 pts). Statement: Problem 1. Make a table like the one above for four people, with only the \ufb01rst person being"
+    },
+    {
+      "id": "problem_02",
+      "name": "Problem 2",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 2 (1 pt). Statement: Problem 2. In the four-person scenario, in which seats can person 4 sit?"
+    },
+    {
+      "id": "problem_03",
+      "name": "Problem 3",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 3 (2 pts). Statement: Problem 3. For any n \u2265 2 and k with 2 \u2264 k \u2264 n, explain why person k can only end up"
+    },
+    {
+      "id": "problem_04",
+      "name": "Problem 4",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 4 (2 pts). Statement: Problem 4. For any n \u2265 2 and any k, 2 \u2264 k \u2264 n, choose any subset consisting of k of the n"
+    },
+    {
+      "id": "problem_05",
+      "name": "Problem 5",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 5 (2 pts). Statement: Problem 5. Prove that there are exactly 2 n\u22121 possible seating arrangements."
+    },
+    {
+      "id": "problem_06",
+      "name": "Problem 6",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 6 (2 pts). Statement: Problem 6. Prove that, for any n \u2265 2, the probability that person n sits in her own seat n"
+    },
+    {
+      "id": "problem_07a",
+      "name": "Problem 7a",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 7a (1 pt). Statement: Problem 7. (a) When n = 3, determine the probability that person 2 is in her correct seat."
+    },
+    {
+      "id": "problem_07b",
+      "name": "Problem 7b",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 7b (1 pt). Statement: (b) When n = 4, determine the probability that person 3 in in her correct seat."
+    },
+    {
+      "id": "problem_07c",
+      "name": "Problem 7c",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 7c (1 pt). Statement: (c) When n = 4, determine the probability that person 2 is in her correct seat."
+    },
+    {
+      "id": "problem_08",
+      "name": "Problem 8",
+      "max_score": 3.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 8 (3 pts). Statement: Problem 8. When there are n people, and only person 1 is absent-minded, show that the"
+    },
+    {
+      "id": "problem_09a",
+      "name": "Problem 9a",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 9a (1 pt). Statement: Problem 9. (a) With n = 3, compute the probability that there are exactly s people sitting in their own"
+    },
+    {
+      "id": "problem_09b",
+      "name": "Problem 9b",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 9b (1 pt). Statement: seats, where s is each integer from 0 up to 3. (b) Compute the expected value of the number of people sitting in their own seats when"
+    },
+    {
+      "id": "problem_10a",
+      "name": "Problem 10a",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 10a (1 pt). Statement: Problem 10. (a) With n = 4, compute the probability that there are exactly s people sitting in their own"
+    },
+    {
+      "id": "problem_10b",
+      "name": "Problem 10b",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 10b (1 pt). Statement: seats, where s is each integer from 0 up to 4. (b) Compute the expected value of the number of people sitting in their own seats when"
+    },
+    {
+      "id": "problem_11",
+      "name": "Problem 11",
+      "max_score": 3.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 11 (3 pts). Statement: Problem 11. Determine and prove a formula depending on n that computes the expected"
+    },
+    {
+      "id": "problem_12a",
+      "name": "Problem 12a",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 12a (1 pt). Statement: Problem 12. Let n = 3 and a = 2. (a) Compute the number of possible seating arrangements."
+    },
+    {
+      "id": "problem_12b",
+      "name": "Problem 12b",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 12b (1 pt). Statement: (b) Compute the probability that person 3 sits in her own seat."
+    },
+    {
+      "id": "problem_13a",
+      "name": "Problem 13a",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 13a (1 pt). Statement: Problem 13. Let n = 4 and a = 2. (a) Compute the number of possible seating arrangements."
+    },
+    {
+      "id": "problem_13b",
+      "name": "Problem 13b",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 13b (1 pt). Statement: (b) Compute the probability that person 3 sits in her own seat."
+    },
+    {
+      "id": "problem_13c",
+      "name": "Problem 13c",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 13c (1 pt). Statement: (c) Compute the probability that person 4 sits in her own seat."
+    },
+    {
+      "id": "problem_14a",
+      "name": "Problem 14a",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 14a (1 pt). Statement: Problem 14. (a) Compute the number of possible seating arrangements for n = 5 and a = 2."
+    },
+    {
+      "id": "problem_14b",
+      "name": "Problem 14b",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 14b (1 pt). Statement: (b) Compute the number of possible seating arrangements for n = 5 and a = 3."
+    },
+    {
+      "id": "problem_15",
+      "name": "Problem 15",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 15 (1 pt). Statement: Problem 15. Given that k > a , show that person k can only sit in seats with numbers"
+    },
+    {
+      "id": "problem_16a",
+      "name": "Problem 16a",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 16a (1 pt). Statement: Problem 16. (a) Prove that person n will sit in her own seat with probability 1 a + 1."
+    },
+    {
+      "id": "problem_16b",
+      "name": "Problem 16b",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 16b (2 pts). Statement: (b) Prove that person k (with k > a ) will sit in her own seat with probability n \u2212 k + 1 n \u2212 k + a + 1."
+    },
+    {
+      "id": "problem_17",
+      "name": "Problem 17",
+      "max_score": 3.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 17 (3 pts). Statement: Problem 17. Prove that with n people, the \ufb01rst a of whom are absent-minded, there are"
+    }
+  ],
+  "not_observable_from_deck": [
+    "oral defense",
+    "diagrams that were not recovered from the source PDF"
+  ],
+  "provenance": {
+    "competition_id": "arml_power",
+    "problem_id": "arml_power_spring_2020",
+    "year": 2020,
+    "source_file": "data/raw/arml/Spring_2020/ARMLPower_Spring_2020.pdf",
+    "solution_file": "data/raw/arml/Spring_2020/ARMLPower_Spring_Solution_2020.pdf",
+    "official_total_points": 40.0,
+    "parsed_total_points": 40.0,
+    "points_coverage": 1.0,
+    "awards_parsed": 26,
+    "problems_parsed": 17,
+    "derived_by": "scripts/build_arml_power_rubrics.py"
+  }
+}

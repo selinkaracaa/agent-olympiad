@@ -1,0 +1,3 @@
+# Literature
+
+One of this author's stories features a man who calls himself Obadiah Elihue, who is accused of idolatry by his wife Sarah Ruth after showing her a picture of God. Another story by this author feature a girl who calls herself Star Drake, though her name is Sarah Ham, and ends with Farebrother's discovery of a shooting. In addition to "Parker's Back" and "The Comforts of Home," this author included "Judgment Day" and "Greenleaf" in a collection whose title story features Julian and his mother, who go downtown on the bus every Wednesday. That story, "Everything That Rises Must Converge," titles one collection of stories by this author of The Violent Bear It Away. FTP, name this Southern writer of Wise Blood and "A Good Man Is Hard to Find."

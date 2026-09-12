@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Testing Information | HMMT
+</title>
+
+  <link rel="icon" type="image/png" href="//hmmt-prod.s3.amazonaws.com/static/img/favicon.ico?v=20260808202330">
+  <link href="//hmmt-assets.s3.amazonaws.com/head/bootstrap/bootstrap.min.css" rel="stylesheet">
+  <link href="//hmmt-assets.s3.amazonaws.com/head/fonts/fonts.css" rel="stylesheet">
+  <link href="//hmmt-assets.s3.amazonaws.com/head/fonts/font-awesome.min.css" rel="stylesheet">
+  <link href="//hmmt-assets.s3.amazonaws.com/head/jquery/jquery-ui.css" rel="stylesheet">
+  <link href="//hmmt-prod.s3.amazonaws.com/static/css/constants.css?v=20260808202330" rel="stylesheet">
+  <link href="//hmmt-prod.s3.amazonaws.com/static/css/layout.css?v=20260808202330" rel="stylesheet">
+<link href="//hmmt-prod.s3.amazonaws.com/static/css/www.css?v=20260808202330" rel="stylesheet">
+
+  <script src="//hmmt-assets.s3.amazonaws.com/head/jquery/jquery-3.3.1.min.js"></script>
+  <script src="//hmmt-assets.s3.amazonaws.com/head/jquery/jquery-ui.min.js"></script>
+  <script src="//hmmt-assets.s3.amazonaws.com/head/popper.min.js"></script>
+  <script src="//hmmt-assets.s3.amazonaws.com/head/bootstrap/bootstrap.min.js"></script>
+  <script src="//sdk.amazonaws.com/js/aws-sdk-2.699.0.min.js"></script>
+
+  <script src="//hmmt-prod.s3.amazonaws.com/static/js/setup.js?v=20260808202330"></script>
+
+  <script src="//hmmt-prod.s3.amazonaws.com/static/js/libasync.js?v=20260808202330"></script>
+  <script src="//hmmt-prod.s3.amazonaws.com/static/js/libfluent.js?v=20260808202330"></script>
+  <script src="//hmmt-prod.s3.amazonaws.com/static/js/libfs.js?v=20260808202330"></script>
+
+  <script src="//hmmt-prod.s3.amazonaws.com/static/js/hmmt-katex.js?v=20260808202330"></script>
+  <link href="//hmmt-assets.s3.amazonaws.com/head/katex/katex-0.13.13.min.css" rel="stylesheet">
+  <script src="//hmmt-assets.s3.amazonaws.com/head/katex/katex-0.13.13.min.js" defer></script>
+  <script src="//hmmt-assets.s3.amazonaws.com/head/katex/auto-render.min.js" defer onload="TexifyLoader.init();"></script>
+  <link href="//hmmt-assets.s3.amazonaws.com/head/katex/copy-tex.min.css" rel="stylesheet">
+  <script src="//hmmt-assets.s3.amazonaws.com/head/katex/copy-tex.min.js"></script>
+
+
+  <div id="warning-container">
+  </div>
+
+
+  <div id="page-wrapper">
+<!-- Collect the nav links, forms, and other content for toggling -->
+<nav class="navbar navbar-light navbar-expand-md sticky-top" id="main-navbar" role="navigation">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">
+      <img src="//hmmt-prod.s3.amazonaws.com/static/img/logo/hmmt/logo.png?v=20260808202330">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse mr-auto" id="navbar">
+      <div class="navbar-nav">
+        <div class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbar-reg-menu" role="button" data-toggle="dropdown">Registration</a>
+          <div class="dropdown-menu" aria-labelledby="navbar-reg-menu">
+            <a class="dropdown-item" href="/rg/info">General Information</a>
+            <a class="dropdown-item" href="/rg/finaid">Financial Aid</a>
+            <a class="dropdown-item" href="/rg/deadlines">Deadlines</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/rg/guide">Video Guides</a>
+            <a class="dropdown-item" href="/rg/nu">Apply</a>
+          </div>
+        </div>
+      </div>
+      <div class="navbar-nav">
+        <div class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbar-tournament-menu" role="button" data-toggle="dropdown">Tournament</a>
+          <div class="dropdown-menu" aria-labelledby="navbar-tournament-menu">
+            <a class="dropdown-item" href="/www/tournaments/novfeb">November vs February</a>
+            <a class="dropdown-item" href="/www/tournaments/info">General Information</a>
+            <a class="dropdown-item" href="/www/tournaments/testing">Test Information</a>
+            <a class="dropdown-item" href="/www/tournaments/schedule">Schedule</a>
+            <a class="dropdown-item" href="/www/tournaments/travel">Travel Info</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/www/tournaments/online">Online Tournament</a>
+          </div>
+        </div>
+      </div>
+      <div class="navbar-nav">
+        <div class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbar-archive-menu" role="button" data-toggle="dropdown">Archive</a>
+          <div class="dropdown-menu" aria-labelledby="navbar-archive-menu">
+            <a class="dropdown-item" href="/www/archive/problems">Problems and Results</a>
+            <a class="dropdown-item" href="/www/archive/education">Education</a>
+            <a class="dropdown-item" href="/www/archive/photos">Photos</a>
+            <a class="dropdown-item" href="/www/potw/archive">POTW</a>
+          </div>
+        </div>
+      </div>
+      <div class="navbar-nav">
+        <div class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbar-about-menu" role="button" data-toggle="dropdown">About</a>
+          <div class="dropdown-menu" aria-labelledby="navbar-about-menu">
+            <a class="dropdown-item" href="/www/about/us">Our Mission</a>
+            <a class="dropdown-item" href="/www/about/organizers">Current Organizers</a>
+            <a class="dropdown-item" href="/www/about/past">Past Organizers</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/www/about/contact">Contact</a>
+            <a class="dropdown-item" href="/www/about/volunteer">Volunteer</a>
+            <a class="dropdown-item" href="/www/privacy">Privacy Policy</a>
+            <a class="dropdown-item" href="/www/data-use">Data Use Policy</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="navbar-nav">
+        <div class="nav-item dropdown">
+          <a class="nav-link" href="/www/faq" role="button">FAQ</a>
+        </div>
+      </div>
+
+
+      <div class="navbar-nav ml-auto" id="navbar-identity">
+        <div class="nav-item dropdown unauthenticated">
+          <span><a href="/me">Log in</a></span> | <span><a href="/me/new">New user</a></span>
+        </div>
+      </div>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav><section id="banner">
+  <img src="//hmmt-prod.s3.amazonaws.com/static/img/banner/banner.jpg?v=20260808202330">
+</section>
+
+<section id="body-form">
+<div id="content">
+  <h1>Testing Information</h1>
+  <div class="mt-2" id="rules">
+
+    <h3 class="bold-red mt-3">Testing Rules</h3>
+    <h4 class="mt-3">Calculators and Other Computational Aids</h4>
+    <div class="mt-2">
+      You may not use books, notes, calculators, pocket organizers, slide-rules, abaci, or any other computational aids.
+      Similarly you may not use graph paper, rulers, protractors, compasses, architectural tools, or any other drawing aids.
+      In addition, communication devices such as laptops, PDAs, and cell phones are prohibited.
+    </div>
+
+    <h4 class="mt-3">Answer Format</h4>
+    <div class="mt-2">
+      Complete description of acceptable answers can be found in
+      <a href="//hmmt-prod.s3.amazonaws.com/static/acceptable_answers.pdf?v=20260808202330">this PDF</a>.
+    </div>
+
+    <h4 class="mt-3">Protests</h4>
+    <div class="mt-2">
+      If a student believes that an answer given on the answer key is incorrect,
+      they must go to the designated Appeals Room and submit an appeal in writing.
+      The deadline to do so will be announced on the day of the contest.
+    </div>
+
+    <div class="mt-2">
+      Decisions of the HMMT coordinators are final.
+    </div>
+
+    <h3 class="bold-red mt-3">Types of Tests</h3>
+
+    <h4 class="mt-3">Individual Tests</h4>
+    <div class="mt-2">
+      Each individual test is <b>10 problems</b> and <b>50 minutes long</b>,
+      where all answers are single values (i.e. short answers).
+    </div>
+
+    <div class="mt-2">
+      The November tournament includes two individual tests:
+      <ul>
+        <li>General round, drawing from all high school mathematics subjects.
+        <li>Theme round, which is based around a common theme.
+      </ul>
+      The problems on these exams range from mid-AMC to upper-AIME in difficulty.
+    </div>
+
+    <div class="mt-2">
+      The February tournament includes three individual tests:
+      <ul>
+        <li>Algebra test, which covers topics from high school algebra and number theory.
+        <li>Geometry test, which covers high school Euclidean geometry.
+        <li>Combinatorics test, which covers high school combinatorics.
+      </ul>
+      The February problems are challenging, ranging from mid-AIME problems
+      to problems which would be suitable for national olympiads such as USAMO.
+    </div>
+
+    <div class="mt-2">
+      The weight of each problem is a real number between 3 and 10 is determined by a
+      <a href="//hmmt-prod.s3.amazonaws.com/static/scoring_algorithm.pdf?v=20260808202330">post-weight function</a>.
+      A student's score is determined by summing the weights of solved problems.
+    </div>
+
+    <h4 class="mt-3">Team Round</h4>
+    <div class="mt-2">
+      The Team Round is a <b>60-minute</b>, <b>10-problem test</b>
+      where all members of a team work together.
+      The point weights for each problem are indicated on the exam.
+    </div>
+
+    <div class="mt-2">
+      The November tournament’s team round is short-answer based.
+      The difficulty is similar to that of the General and Theme round.
+    </div>
+
+    <div class="mt-2">
+      The February tournament’s team round is <b>proof based</b>.
+      As a result, students attending the February tournament should feel comfortable crafting and writing rigorous proofs.
+      This is the only round in which teams earn partial marks (unless otherwise specified on the exam).
+      The February Team round is quite difficult;
+      some of the problems are comparable to the hardest problems on national olympiads such as USAMO.
+    </div>
+
+    <h4 class="mt-3">Guts Round</h4>
+    <div class="mt-2">
+      The Guts Round is an <b>80-minute team event</b> with <b>36 short-answer questions</b> on an assortment of subjects, of varying difficulty and point values.
+      The problems are divided into sets of 3 (November) or 4 (February).
+      The point weights for each problem are indicated on the exam.
+    </div>
+
+    <div class="mt-2">
+      All teams gather in one of several large lecture halls.
+      At the starting signal, each team sends a runner to an assigned problem station to pick up copies of the first set of problems for each team member.
+      As soon as a team has answers for one problem set, the runner may bring the answers to the problem station and pick up the next set.
+      It is not expected that students will finish all the problems.
+      Grading is immediate and scores are posted in real time.
+    </div>
+
+    <h4 class="mt-3">Sweepstakes</h4>
+    <div class="mt-2">
+      Sweepstakes refers to the aggregate scores of each team,
+      used to determine the overall team winners of the contest.
+      The sweepstakes score is defined as the sum of three components:
+      <ol>
+        <li>Individual Total, worth 800 points.
+        <li>Guts Round, worth 400 points.
+        <li>Team Round, worth 400 points.
+      </ol>
+      The scores for each component are calculated as follows.
+      The <i>raw score</i> for the Guts and Team Round is the sum of the specified problem weights.
+      The <i>raw score</i> for the Individual Total is the sum of the
+      <a href="//hmmt-prod.s3.amazonaws.com/static/scoring_algorithm.pdf?v=20260808202330">individual scores</a>
+      of students on that team.
+      Then, each component is weighted by a constant factor in such a way
+      that the top score for that component is the number of points it is worth
+      (800 for Individual Total, or 400 each for Guts/Team).
+    </div>
+
+    <div class="mt-2">
+      In particular, the maximum possible sweepstakes score is 1600,
+      which is achieved if and only if the first place team had the highest
+      raw score in all three components across all teams.
+    </div>
+
+    <h4 class="mt-3">HMMT Invitational Competition</h4>
+    <div class="mt-2">
+      Starting in 2013, the top <b>50 students</b> from the February tournament
+      are invited to compete in the HMMT Invitational Competition,
+      which is a <b>4-hour, 5-problem olympiad-style exam</b>.
+      <a href="//s3.amazonaws.com/hmmt-archive/february/2016/hmic/HMIC-2016-Information.pdf">See here for the rules of the 2016 HMIC</a>.
+    </div>
+    
+  </div>
+</div>
+</section>
+
+<section id="footer">
+  <ul class="footer-info">
+  <li>
+    <div class="row">
+      <div class="col-md-2">
+        <ul class="footer-links">
+          <li>
+            <h4>Registration</h4>
+            <a href="/rg/info">
+              <li>
+                <h6>General Information</h6>
+            </a>
+            <a href="/rg/finaid">
+              <li>
+                <h6>Financial Aid</h6>
+            </a>
+            <a href="/rg/deadlines">
+              <li>
+                <h6>Deadlines</h6>
+            </a>
+            <a href="/rg/hotels">
+              <li>
+                <h6>Hotels</h6>
+            </a>
+            <a href="/rg/guide">
+              <li>
+                <h6>Video Guides</h6>
+            </a>
+            <a href="/rg/nu">
+              <li>
+                <h6>Apply</h6>
+            </a>
+        </ul>
+      </div>
+      <div class="col-md-2">
+        <ul class="footer-links">
+          <li>
+            <h4>Tournaments</h4>
+            <a href="/www/tournaments/novfeb">
+              <li>
+                <h6>November vs February</h6>
+            </a>
+            <a href="/www/tournaments/info">
+              <li>
+                <h6>General Information</h6>
+            </a>
+            <a href="/www/tournaments/testing">
+              <li>
+                <h6>Testing Information</h6>
+            </a>
+            <a href="/www/tournaments/schedule">
+              <li>
+                <h6>Schedule</h6>
+            </a>
+            <a href="/www/tournaments/travel">
+              <li>
+                <h6>Travel Information</h6>
+            </a>
+            <a href="/www/tournaments/online">
+              <li>
+                <h6>Online Tournament</h6>
+            </a>
+        </ul>
+      </div>
+      <div class="col-md-2">
+        <ul class="footer-links">
+          <li>
+            <h4>Archive</h4>
+            <a href="/www/archive/problems">
+              <li>
+                <h6>Problems</h6>
+            </a>
+            <a href="/www/archive/results">
+              <li>
+                <h6>Results</h6>
+            </a>
+            <a href="/www/archive/education">
+              <li>
+                <h6>Education</h6>
+            </a>
+            <a href="/www/archive/photos">
+              <li>
+                <h6>Photos</h6>
+            </a>
+            <a href="/www/potw/archive">
+              <li>
+                <h6>POTW</h6>
+            </a>
+        </ul>
+      </div>
+      <div class="col-md-2">
+        <ul class="footer-links">
+          <li>
+            <h4>About Us</h4>
+            <a href="/www/about/organizers">
+              <li>
+                <h6>Current Organizers</h6>
+            </a>
+            <a href="/www/about/past">
+              <li>
+                <h6>Past Organizers</h6>
+            </a>
+            <a href="/www/about/volunteer">
+              <li>
+                <h6>Volunteer</h6>
+            </a>
+            <a href="/www/privacy">
+              <li>
+                <h6>Privacy Policy</h6>
+            </a>
+            <a href="/www/data-use">
+              <li>
+                <h6>Data Use Policy</h6>
+            </a>
+        </ul>
+      </div>
+      <div class="col-md-2">
+        <ul class="footer-links">
+          <li>
+            <h4>Questions</h4>
+            <a href="/www/faq">
+              <li>
+                <h6>FAQ</h6>
+            </a>
+        </ul>
+      </div>
+      <div class="col-md-2" id="contact">
+        <h4>Contact us</h4>
+        <div>
+          <a href="mailto:request@hmmt.org">
+            <i class="fa fa-envelope"></i>
+            <span class="icon">Contact us</span>
+          </a>
+        </div>
+        <div>
+          <a href="//www.facebook.com/hmmt.info">
+            <i class="fa fa-facebook-square"></i>
+            <span class="icon">Like us</span>
+          </a>
+        </div>
+        <div>
+          <a href="//twitter.com/mathtournament">
+            <i class="fa fa-twitter"></i>
+            <span class="icon">Follow us</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <li class="divider">
+    <li class="footnote">HMMT
+  </ul>
+</section>  </div>
+

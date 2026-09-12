@@ -194,7 +194,7 @@ def package_from_sample_directory(
         problem_id=problem_id,
         root=root,
         limits=Limits(time_ms, memory_mb, output_kb),
-        checker={"mode": "token"},
+        checker={"mode": "infiltration" if problem_id == "icpc_wf_2012_infiltration2" else "token"},
         groups=(group,),
         subtasks=(Subtask("sample", 1.0, ("sample",)),),
         images={"python3": "python:3.12-slim", "cpp17": "gcc:14"},

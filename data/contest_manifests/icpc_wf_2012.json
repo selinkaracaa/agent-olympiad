@@ -1,0 +1,20 @@
+{
+  "session_id": "icpc_wf_2012",
+  "competition_id": "icpc",
+  "problem_ids": [
+    "icpc_wf_2012_bottles",
+    "icpc_wf_2012_bustour",
+    "icpc_wf_2012_fibonacci",
+    "icpc_wf_2012_flightpath",
+    "icpc_wf_2012_infiltration2",
+    "icpc_wf_2012_keys",
+    "icpc_wf_2012_minflow",
+    "icpc_wf_2012_rangers",
+    "icpc_wf_2012_roomservice",
+    "icpc_wf_2012_safebet",
+    "icpc_wf_2012_stacking",
+    "icpc_wf_2012_takeover"
+  ],
+  "split_parts": false,
+  "description": "Full ICPC World Finals 2012 contest: 12 problems under one shared turn budget."
+}

@@ -1,0 +1,17 @@
+{
+  "competition_id": "iiot",
+  "crawled_at": "2026-08-11T16:07:36.544908+00:00",
+  "sources": [
+    {
+      "title": "IIOT Regulations",
+      "url": "https://iio.team/documents/Regulations.pdf",
+      "status": "ok",
+      "content_type": "application/pdf",
+      "bytes": 424767,
+      "raw_file": "data/rules/sources/iiot/01_Regulations.pdf",
+      "text_file": "data/rules/sources/iiot/01_Regulations.txt",
+      "text_chars": 22163,
+      "text_preview": "IIOT regulations ver. 3 Oct 2024                                                                                       Page 1 of 9 \n \n \n \n \n \n \n \nINTERNATIONAL INFORMATICS OLYMPIAD IN TEAMS \n \nREGULATIONS \n \nIntroduction \nGoals \nGeneral regulations \nTeams \nThe International Committee \nThe Scientific Committee \nCompetitions \nProblems \nEvaluation \nResults and prizes \nHost Country \n \n \n \n \nApproved by the International Committee IIOT \nEgypt, Hungary, Italy, Romania, Syria \nthe 3rd of October 2024 \n\nIIOT regulations ver. 3 Oct 2024                                                                                       Page 2 of 9 \nINTRODUCTION \nThe Olympiad is organized by an International Committee, which consists of the  \nrepresentatives of the countries which are regular participants. Regular participants are the \ncountries which, in turn, organize the International Olympiad. At present the \nrepresentatives of Italy, Romania , Egypt, Syria and Hungary are regular participants, as  \nfounding countries of the competition  (Italy and Romania) and full members ( Egypt, Syria \nand Hungary). According to the rules accepted by the initiators of  the IIOT, any other \nteams can be invited as regular participants, if they become full  members of the \norganizational committee, so they will also be hosts of the final future  editions of IIOT. \nMoreover, the host country may invite guest participants from other  countries. The guest \nteams will, in certain situations, have to pay a participa"
+    }
+  ]
+}

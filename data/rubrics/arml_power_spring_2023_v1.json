@@ -1,0 +1,164 @@
+{
+  "rubric_id": "arml_power_spring_2023_v1",
+  "title": "Power Round \u2014 Spring 2023 \u2014 ARML Power sub-problem rubric",
+  "total_points": 40.0,
+  "criteria": [
+    {
+      "id": "problem_03a",
+      "name": "Problem 3a",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 3a (1 pt). Statement: 3. No matter the choices made, the resulting single digit will always be the same, depending only on the starting number and the base, but not the particular choices made during the condensing process. This will be proven later. The Problems 1. Condense each of the following numbers: (a) 9876."
+    },
+    {
+      "id": "problem_03b",
+      "name": "Problem 3b",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 3b (1 pt). Statement: (b) 888 888 888 888 888 (there are \ufb01fteen 8\u2019s)."
+    },
+    {
+      "id": "problem_03c",
+      "name": "Problem 3c",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 3c (1 pt). Statement: (c) The number 777. . . 777 consisting of 2023 7\u2019s."
+    },
+    {
+      "id": "problem_03d",
+      "name": "Problem 3d",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 3d (1 pt). Statement: 2. Condense each of the following base-15 numbers: 1 (a) 9876 (15)."
+    },
+    {
+      "id": "problem_03e",
+      "name": "Problem 3e",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 3e (1 pt). Statement: (b) 888 888 888 888 888(15) (there are \ufb01fteen 8\u2019s)."
+    },
+    {
+      "id": "problem_03f",
+      "name": "Problem 3f",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 3f (2 pts). Statement: (c) The number 777 . . .777(15) consisting of 2023 7\u2019s."
+    },
+    {
+      "id": "problem_03g",
+      "name": "Problem 3g",
+      "max_score": 3.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 3g (3 pts). Statement: 3. When working in base 10, show that if A is any positive integer, and B is obtained from A by one single step of the condensing process, then A \u2212 B is divisible by 9. For example, for A = 138293156 and B = 1382 + 931 + 56 = 2369, their di\ufb00erence is A \u2212 B = 138290787 can be checked to be divisible by 9."
+    },
+    {
+      "id": "problem_04",
+      "name": "Problem 4",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 4 (2 pts). Statement: 4. Prove that, no matter the steps chosen in the condensation process, the resulting single digit will always be the same for any given starting number."
+    },
+    {
+      "id": "problem_05",
+      "name": "Problem 5",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 5 (2 pts). Statement: 5. Show that, given any starting number, the smallest possible number that can be achieved by one step of the condensation process is the result of adding the digits of the number. That is, no way of splitting the number into parts and adding the parts results in a smaller number than if each part is a single digit."
+    },
+    {
+      "id": "problem_06a",
+      "name": "Problem 6a",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 6a (1 pt). Statement: 6. When each condensing step consists of simply adding the digits, compute the least positive integer for which the condensation process requires: (a) three steps."
+    },
+    {
+      "id": "problem_06b",
+      "name": "Problem 6b",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 6b (1 pt). Statement: (b) four steps."
+    },
+    {
+      "id": "problem_07",
+      "name": "Problem 7",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 7 (2 pts). Statement: 7. Compute the least positive integer for which the condensation process requires at least three steps, regardless of how the number is split into pieces at each step."
+    },
+    {
+      "id": "problem_08",
+      "name": "Problem 8",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 8 (2 pts). Statement: 8. Note that in base 2, the only single-digit number is 1 (2). Use this fact to explain why a positive integer, written in base 2, can be condensed in one step if and only if it is a power of two."
+    },
+    {
+      "id": "problem_09",
+      "name": "Problem 9",
+      "max_score": 3.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 9 (3 pts). Statement: 9. When m = 3 the number has exactly three 1\u2019s, and may have any number of 0\u2019s in its binary expansion. Construct a strategy for splitting any such number into pieces so that the sum of the pieces will result in a power of two. Make sure to demonstrate that the strategy will work for any positive integer that has exactly m = 3 1\u2019s in its binary expansion."
+    },
+    {
+      "id": "problem_10",
+      "name": "Problem 10",
+      "max_score": 3.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 10 (3 pts). Statement: 10. Create and prove a strategy that will take any number with m = 5 1\u2019s in its binary expansion and condense it to a power of two in one step."
+    },
+    {
+      "id": "problem_11",
+      "name": "Problem 11",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 11 (2 pts). Statement: 11. Create and prove a strategy that will work when m = 6 or m = 7."
+    },
+    {
+      "id": "problem_12",
+      "name": "Problem 12",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 12 (2 pts). Statement: 12. As just seen, the sum of the pieces increases by one when two digits are grouped together. Determine the possible e\ufb00ects on the sum when a three-digit piece is created."
+    },
+    {
+      "id": "problem_13",
+      "name": "Problem 13",
+      "max_score": 3.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 13 (3 pts). Statement: 13. Prove that, starting at the left end of the number and creating as many three-digit pieces as possible, the sum of these pieces is at least 2 m."
+    },
+    {
+      "id": "problem_14",
+      "name": "Problem 14",
+      "max_score": 4.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 14 (4 pts). Statement: 14. Prove that if m \u2265 10 then this strategy will always be able to produce a power of two."
+    },
+    {
+      "id": "problem_15",
+      "name": "Problem 15",
+      "max_score": 3.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 15 (3 pts). Statement: 15. Create and prove a strategy that will create a power of two with one condensation step when m = 9."
+    }
+  ],
+  "not_observable_from_deck": [
+    "oral defense",
+    "diagrams that were not recovered from the source PDF"
+  ],
+  "provenance": {
+    "competition_id": "arml_power",
+    "problem_id": "arml_power_spring_2023",
+    "year": 2023,
+    "source_file": "data/raw/arml/Spring_2023/ARMLPower_Spring_2023.pdf",
+    "solution_file": null,
+    "official_total_points": 40.0,
+    "parsed_total_points": 40.0,
+    "points_coverage": 1.0,
+    "awards_parsed": 20,
+    "problems_parsed": 13,
+    "derived_by": "scripts/build_arml_power_rubrics.py"
+  }
+}

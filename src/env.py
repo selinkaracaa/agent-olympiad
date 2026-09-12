@@ -1,4 +1,5 @@
 import ast
+import hashlib
 import json
 import math
 import operator
@@ -17,9 +18,22 @@ from contest_budget import (
     truncate_to_token_budget,
 )
 from contest_rules import get_contest_rules
-from deliberation import DELIBERATION_ACTIONS, DeliberationLedger
+from deliberation import DELIBERATION_ACTIONS, DeliberationLedger, deliberation_payload
 from memory import MemoryStore
 from rules import PhaseSchedule, RuleCardError, RulesBaseline, RulesMode
+from action_wire import Invocation, normalize_invocation
+from tool_registry import (
+    ACTION_REGISTRY,
+    COMPETITION_ACTION_REGISTRY,
+    COMPETITION_TOOL_REGISTRY,
+    LEGACY_ACTION_ALIASES,
+    PACK_ACTION_NAMES,
+    TOOL_PACKS,
+    action_matches,
+    actions_for_runtime,
+    canonical_action_name,
+    dispatch_environment_action,
+)
 from tools_search import live_web_search, looks_like_answer_lookup
 from workboard import Workboard
 
@@ -50,106 +64,33 @@ TEAM_SIZE_MATRIX = {
     "codeforces": 3,
 }
 
-COMPETITION_TOOL_REGISTRY = {
-    "purple_comet": ["use_calculator"],
-    "fyziklani": ["use_calculator", "web_search"],
-    "iiot": ["execute_code"],
-    "icpc": ["execute_code"],
-    "codeforces": ["execute_code"],
-    "mcm": ["execute_code", "web_search"],
-    "icm": ["execute_code", "web_search"],
-    "ieo_business_case": ["web_search"],
-    "jessup": ["web_search"],
-    "iypt": ["web_search", "execute_code", "use_calculator"],
-    "ijso_practical": ["use_calculator", "read_lab_equipment"],
-    "ioaa_group": ["use_calculator", "read_star_chart"],
-    "iol_team": [],
-    "arml_power": [],
-    "arml_national_team": [],
-    "arml_national_power": [],
-    "arml_local": [],
-    "hmmt_team": [],
-    "hmmt_guts": [],
-    "wsc_writing": [],
-}
+# COMPETITION_TOOL_REGISTRY / COMPETITION_ACTION_REGISTRY live in tool_registry.
 
-COMPETITION_ACTION_REGISTRY = {
-    "icpc": ["submit_code"],
-    "iiot": ["submit_code"],
-    "codeforces": ["submit_code"],
-}
+# Every set below is derived from the registry: the environment implements
+# the canonical actions tagged ``runtimes={"env"}`` (or both) and accepts the
+# legacy spellings in ``LEGACY_ACTION_ALIASES`` at its boundary.
+ENV_ACTIONS = actions_for_runtime("env")
 
-# Shawn's contest-session vocabulary is canonical. Legacy names are accepted
-# at this boundary so old callers and transcripts remain compatible.
-PUBLIC_TO_INTERNAL_ACTIONS = {
-    "select_problem": "claim_problem",
-    "direct_message": "message_group",
-    "work": "write_scratchpad",
-    "inspect_problem": "open_problem",
-    "triage_problem": "list_problems",
-    "share_note": "publish_memory",
-    "assign_problem": "claim_problem",
-    "request_review": "verify_problem",
-    "review_answer": "verify_problem",
-    "submit": "submit_final",
-    "skip_problem": "mark_hopeless",
-    "finish_contest": "submit_final",
-    "rest": "sleep",
-}
-LEGACY_TO_PUBLIC_ACTIONS = {
-    internal: public
-    for public, internal in PUBLIC_TO_INTERNAL_ACTIONS.items()
-}
-LEGACY_TO_PUBLIC_ACTIONS.update(
+# Per-item board: pick a problem, record an answer, review a teammate's.
+BOARD_ACTIONS = frozenset(
     {
-        "submit_problem": "work",
-        "set_priority": "triage_problem",
-        "mark_hopeless": "triage_problem",
-        "release_problem": "release_problem",
-        "list_problems": "inspect_problem",
-        "open_problem": "inspect_problem",
-        "publish_memory": "share_note",
-        "message_group": "direct_message",
-        "write_scratchpad": "work",
-        "submit_final": "submit",
-        "sleep": "rest",
+        "select_problem",
+        "skip_problem",
+        "work",
+        "triage_problem",
+        "review_answer",
+        "verify_problem",
     }
 )
 
-
-def normalize_action_name(action_type: str) -> tuple[str, str]:
-    """Return the public action name and its current internal handler name."""
-    name = str(action_type or "").strip().lower()
-    if name in PUBLIC_TO_INTERNAL_ACTIONS:
-        return name, PUBLIC_TO_INTERNAL_ACTIONS[name]
-    if name in LEGACY_TO_PUBLIC_ACTIONS:
-        public = LEGACY_TO_PUBLIC_ACTIONS[name]
-        return public, PUBLIC_TO_INTERNAL_ACTIONS.get(public, name)
-    return name, name
-
-COMPUTER_ACTIONS = {"use_calculator", "execute_code"}
-DEFAULT_COMPUTER_CAPACITY = 1
-
-# Per-item board: pick a problem, record an answer, review a teammate's.
-BOARD_ACTIONS = {
-    "list_problems",
-    "open_problem",
-    "submit_problem",
-    "claim_problem",
-    "release_problem",
-    "verify_problem",
-    "mark_hopeless",
-    "set_priority",
-}
-
 # Structured recall, so history survives outside the chat transcript.
-MEMORY_ACTIONS = {"remember", "recall", "publish_memory"}
+MEMORY_ACTIONS = frozenset({"remember", "recall", "share_note"})
 
-TEAM_ACTIONS = {"message_group", "check_budget"}
+TEAM_ACTIONS = frozenset({"direct_message", "check_budget"})
 
 # Available in every contest and every mode, including the vanilla baseline:
 # these are the desk and the answer sheet, not contest-specific instruments.
-CORE_WORKSPACE_ACTIONS = BOARD_ACTIONS | MEMORY_ACTIONS | TEAM_ACTIONS
+CORE_WORKSPACE_ACTIONS = BOARD_ACTIONS | MEMORY_ACTIONS | TEAM_ACTIONS | {"inspect_problem"}
 
 # Prefixes that mean "the environment refused this", as opposed to a rule break.
 OPERATIONAL_ERROR_PREFIXES = (
@@ -159,32 +100,22 @@ OPERATIONAL_ERROR_PREFIXES = (
     "Board unavailable:",
 )
 
-ALL_ACTIONS = {
-    "speak",
-    "write_scratchpad",
-    "write_private_notes",
-    "submit_final",
-    "submit_code",
-    "sleep",
-    "use_calculator",
-    "execute_code",
-    "web_search",
-    "read_lab_equipment",
-    "read_star_chart",
-    "query_rules",
-} | DELIBERATION_ACTIONS | CORE_WORKSPACE_ACTIONS
-ALL_ACTIONS |= set(PUBLIC_TO_INTERNAL_ACTIONS)
+# Contest instruments: gated by the competition's tool allowlist. Submissions
+# (``submit_code``) live in a tool pack but are gated by the competition's
+# action registry instead.
+TOOL_ACTIONS = frozenset(
+    name
+    for pack in TOOL_PACKS
+    for name in PACK_ACTION_NAMES[pack]
+    if not ACTION_REGISTRY[name].submission
+) & ENV_ACTIONS
 
-TOOL_ACTIONS = ALL_ACTIONS - {
-    "speak",
-    "write_scratchpad",
-    "write_private_notes",
-    "submit_final",
-    "submit_code",
-    "sleep",
-    *DELIBERATION_ACTIONS,
-    *CORE_WORKSPACE_ACTIONS,
-}
+# Every spelling the wire may carry: canonical env actions plus their aliases.
+ALL_ACTIONS = ENV_ACTIONS | frozenset(
+    alias
+    for alias, canonical in LEGACY_ACTION_ALIASES.items()
+    if canonical in ENV_ACTIONS
+)
 
 _SAFE_BINOPS = {
     ast.Add: operator.add,
@@ -220,7 +151,6 @@ class OlympiadEnvironment:
         max_api_calls: int | None = None,
         max_output_tokens_per_call: int | None = None,
         max_total_tokens: int | None = None,
-        computer_capacity: int | None = None,
         rules_mode: RulesMode | str = RulesMode.OFF,
         rules_root: str | Path | None = None,
         rules_strict: bool = False,
@@ -294,24 +224,37 @@ class OlympiadEnvironment:
         self.remote_submission_source: str | None = None
         self.rule_violations: list[str] = []
         self.contest_rules = get_contest_rules(competition_id)
-        self.k = self._resolve_computer_capacity(computer_capacity)
-        self.computer_uses_by_turn: dict[int, list[str]] = {}
         self.phase_schedule = (
             PhaseSchedule.from_simulation(self.rule_card.simulation)
             if self.rule_card is not None and self.rules_mode is RulesMode.ENFORCED
             else None
         )
+        # Loaded before tool resolution: runtime-resource checks read fixtures.
+        self.problem_data = self._load_problem()
 
         if self.rule_card is not None and self.rules_mode is RulesMode.ENFORCED:
             self.unavailable_declared_tools = sorted(
-                set(self.rule_card.allowed_tools) - TOOL_ACTIONS
+                {
+                    tool
+                    for tool in self.rule_card.allowed_tools
+                    if tool not in TOOL_ACTIONS
+                    or not self._tool_has_runtime_resource(tool)
+                }
             )
             self.allowed_tools = [
-                tool for tool in self.rule_card.allowed_tools if tool in TOOL_ACTIONS
+                tool
+                for tool in self.rule_card.allowed_tools
+                if tool in TOOL_ACTIONS and self._tool_has_runtime_resource(tool)
             ]
         else:
             self.unavailable_declared_tools = []
-            self.allowed_tools = list(COMPETITION_TOOL_REGISTRY.get(competition_id, []))
+            candidates = list(COMPETITION_TOOL_REGISTRY.get(competition_id, ()))
+            self.allowed_tools = [
+                tool for tool in candidates if self._tool_has_runtime_resource(tool)
+            ]
+            self.unavailable_declared_tools = sorted(
+                set(candidates) - set(self.allowed_tools)
+            )
         # Prefer tools declared in the rules audit when registry is empty but
         # rules list encoded tools (keeps DATA_COLLECTION + contest_rules aligned).
         if (
@@ -320,8 +263,13 @@ class OlympiadEnvironment:
             and self.contest_rules
             and self.contest_rules.encoded_tools
         ):
-            self.allowed_tools = list(self.contest_rules.encoded_tools)
-        self.problem_data = self._load_problem()
+            encoded = list(self.contest_rules.encoded_tools)
+            self.allowed_tools = [
+                tool for tool in encoded if self._tool_has_runtime_resource(tool)
+            ]
+            self.unavailable_declared_tools = sorted(
+                set(encoded) - set(self.allowed_tools)
+            )
         # Multi-item contests get a board; single-deliverable ones stay as they
         # were, and the board actions report themselves unavailable.
         self.workboard = Workboard.from_problem(self.problem_data)
@@ -342,31 +290,6 @@ class OlympiadEnvironment:
                 f"range {self.rule_card.team_size_min}-{self.rule_card.team_size_max}."
             )
         self.record_budget_snapshot("initialized")
-
-    def _resolve_computer_capacity(self, explicit_capacity: int | None) -> int:
-        if explicit_capacity is not None:
-            if explicit_capacity < 1:
-                raise ValueError("computer_capacity must be positive")
-            return explicit_capacity
-        if self.rule_card is not None:
-            resources = self.rule_card.resources or {}
-            for key in (
-                "shared_workstation_count",
-                "contest_machine_capacity",
-                "computer_capacity",
-            ):
-                value = resources.get(key)
-                if isinstance(value, int) and value > 0:
-                    return value
-        if self.contest_rules is not None:
-            match = re.search(
-                r"(\d+)\s+(?:shared )?(?:workstation|VMs?|computers?)",
-                self.contest_rules.shared_computers,
-                re.IGNORECASE,
-            )
-            if match:
-                return int(match.group(1))
-        return DEFAULT_COMPUTER_CAPACITY
 
     @staticmethod
     def _resolve_team_size(
@@ -422,6 +345,28 @@ class OlympiadEnvironment:
 
     def get_available_tools(self) -> list[str]:
         return list(self.allowed_tools)
+
+    def _tool_has_runtime_resource(self, tool: str) -> bool:
+        role = {
+            "read_lab_equipment": "lab",
+            "read_star_chart": "star",
+        }.get(tool)
+        if role is None:
+            return True
+        fixtures = self.problem_data.get("tool_fixtures") or {}
+        if role in fixtures or any(role in str(key).lower() for key in fixtures):
+            return True
+        for asset in self.problem_data.get("assets") or []:
+            if not isinstance(asset, dict):
+                continue
+            path_text = str(asset.get("path") or "")
+            label = f"{asset.get('role', '')} {path_text}".lower()
+            path = Path(path_text)
+            if not path.is_absolute():
+                path = Path(REPO_ROOT) / path
+            if role in label and path.is_file():
+                return True
+        return False
 
     def rules_metadata(self) -> dict[str, Any]:
         metadata = self.rules_baseline.metadata()
@@ -482,7 +427,6 @@ class OlympiadEnvironment:
             "duration_minutes": self.duration_minutes,
             "max_turns": self.max_turns,
             "minutes_per_turn": self.minutes_per_turn,
-            "computer_capacity": self.k,
             **self.rules_metadata(),
         }
         if self.rule_card is not None:
@@ -533,14 +477,6 @@ class OlympiadEnvironment:
                 f"{self.simulated_minutes:g}/{self.duration_minutes} min"
                 if self.duration_minutes is not None
                 else f"{self.simulated_minutes:g} min"
-            ),
-            "computer_capacity": self.k,
-            "computers_used_this_turn": len(
-                self.computer_uses_by_turn.get(self.current_turn, [])
-            ),
-            "computers_available_this_turn": max(
-                0,
-                self.k - len(self.computer_uses_by_turn.get(self.current_turn, [])),
             ),
         }
 
@@ -796,23 +732,20 @@ class OlympiadEnvironment:
     # Reads and personal bookkeeping: the result goes back to the actor only.
     # The mutating board actions stay team-visible — a board nobody else can
     # see would not coordinate anything.
-    PRIVATE_WORKSPACE_ACTIONS = {
-        "list_problems",
-        "open_problem",
-        "check_budget",
-        "remember",
-        "recall",
-    }
+    PRIVATE_WORKSPACE_ACTIONS = frozenset(
+        {"inspect_problem", "check_budget", "query_rules", "remember", "recall"}
+    )
 
     def _action_visibility(self, action_type: str) -> str:
-        if action_type in {
+        canonical = canonical_action_name(action_type)
+        if canonical in {
             "write_private_notes",
             "rest",
             *TOOL_ACTIONS,
             *self.PRIVATE_WORKSPACE_ACTIONS,
         }:
             return "private"
-        if action_type == "submit_code":
+        if canonical == "submit_code":
             return "team" if self.submit_code_is_team_visible() else "private"
         return "team"
 
@@ -843,6 +776,7 @@ class OlympiadEnvironment:
             "total": feedback.get("total"),
             "finalized": bool(feedback.get("finalized")),
             "code": payload.strip(),
+            "source_hash": self._source_hash(payload),
         }
         cases = feedback.get("cases") or feedback.get("tests") or []
         if cases:
@@ -856,6 +790,31 @@ class OlympiadEnvironment:
             "The full source is available in TEAM CODE SUBMISSIONS."
         )
         self.chat_history.append({"sender": "Contest_Control", "message": summary})
+
+    @staticmethod
+    def _source_hash(payload: str) -> str:
+        normalized = "\n".join(
+            line.rstrip() for line in payload.strip().splitlines()
+        )
+        return hashlib.sha256(normalized.encode("utf-8")).hexdigest()
+
+    def _unchanged_failed_source_error(self, payload: str) -> str | None:
+        if not self.code_submissions:
+            return None
+        latest = self.code_submissions[-1]
+        verdict = str(latest.get("verdict") or "").upper()
+        if verdict in {"", "AC", "PENDING", "SUBMIT_FAILED"}:
+            return None
+        prior_hash = latest.get("source_hash")
+        if prior_hash is None and latest.get("code"):
+            prior_hash = self._source_hash(str(latest["code"]))
+        if prior_hash != self._source_hash(payload):
+            return None
+        return (
+            f"SUBMISSION BLOCKED: unchanged source after {verdict}. "
+            "Diagnose the verdict, change the implementation, and validate it "
+            "before submitting again."
+        )
 
     def format_team_code_submissions(self, *, include_source: bool = True) -> str:
         if not self.code_submissions:
@@ -1010,14 +969,12 @@ class OlympiadEnvironment:
         *,
         metadata: dict[str, Any] | None = None,
     ) -> None:
-        public_action, _ = normalize_action_name(action_type)
         visibility = self._action_visibility(action_type)
         entry = {
             "turn": self.current_turn,
             "agent": agent_name,
             "sender": agent_name,
-            "action": public_action,
-            "legacy_action": action_type if public_action != action_type else None,
+            "action": action_type,
             "payload": payload,
             "result": result,
             "visibility": visibility,
@@ -1026,13 +983,13 @@ class OlympiadEnvironment:
         self.action_log.append(entry)
         observation = {
             "turn": self.current_turn,
-            "action": public_action,
+            "action": action_type,
             "result": result,
             "visibility": visibility,
         }
         if visibility == "private":
             self.agent_observations.setdefault(agent_name, []).append(observation)
-        elif action_type in CORE_WORKSPACE_ACTIONS:
+        elif canonical_action_name(action_type) in CORE_WORKSPACE_ACTIONS:
             # Team-visible board work still needs its result to reach the actor:
             # the rejection notice is the whole point of recording a repeat.
             self.agent_observations.setdefault(agent_name, []).append(observation)
@@ -1046,30 +1003,32 @@ class OlympiadEnvironment:
                 self.agent_observations.setdefault(peer, []).append(observation)
 
     def validate_action(self, action_type: str, agent_name: str | None = None) -> Optional[str]:
-        _, action_type = normalize_action_name(action_type)
-        if action_type not in ALL_ACTIONS:
+        """Contest-rule gate. Accepts canonical names and legacy aliases alike."""
+        invoked = str(action_type or "").strip().lower()
+        canonical = canonical_action_name(invoked)
+        if invoked not in ALL_ACTIONS:
             return f"Unrecognized action '{action_type}'."
         if (
             self.rules_mode is not RulesMode.ENFORCED
-            and action_type in DELIBERATION_ACTIONS | {"write_private_notes"}
+            and canonical in DELIBERATION_ACTIONS | {"write_private_notes"}
         ):
             return f"Unrecognized action '{action_type}'."
         if (
             self.rules_mode is not RulesMode.PROMPT_ONLY
-            and action_type in TOOL_ACTIONS
-            and action_type not in self.allowed_tools
+            and canonical in TOOL_ACTIONS
+            and canonical not in self.allowed_tools
         ):
             return (
                 f"RULE VIOLATION: Tool '{action_type}' is banned in {self.competition_id}. "
                 f"Allowed tools: {self.allowed_tools or 'none (paper and pencil only)'}"
             )
-        if action_type == "submit_code" and action_type not in COMPETITION_ACTION_REGISTRY.get(
+        if canonical == "submit_code" and canonical not in COMPETITION_ACTION_REGISTRY.get(
             self.competition_id, []
         ):
             return f"RULE VIOLATION: submit_code is unavailable in {self.competition_id}."
         if (
             self.rules_mode is RulesMode.ENFORCED
-            and action_type in DELIBERATION_ACTIONS
+            and canonical in DELIBERATION_ACTIONS
             and not (
                 self.rule_card
                 and self.rule_card.deliberation.get("mode") == "structured"
@@ -1081,222 +1040,479 @@ class OlympiadEnvironment:
             )
         if (
             self.rules_mode is RulesMode.ENFORCED
-            and action_type == "submit_final"
+            and canonical == "submit"
             and agent_name is not None
             and self.rule_card is not None
         ):
             role = self.rule_card.role_for(agent_name)
             if role is None or not role.may_submit:
                 return f"RULE VIOLATION: {agent_name} is not authorized to submit."
-        if action_type == "submit_final" and self.submitted:
+        if canonical == "submit" and self.submitted:
             return "Submission already finalized; further submit_final actions are ignored."
         if self.phase_schedule is not None:
             phase_violation = self.phase_schedule.validate_action(
-                self.current_turn, action_type
+                self.current_turn, invoked
             )
             if phase_violation:
                 return phase_violation
         return None
 
+    # Handler table: canonical action name -> bound-method name. Legacy
+    # spellings never appear here; ``normalize_invocation`` maps them first.
+    _HANDLERS: dict[str, str] = {
+        "speak": "_act_speak",
+        "work": "_act_work",
+        "write_private_notes": "_act_write_private_notes",
+        "rest": "_act_rest",
+        "select_problem": "_act_select_problem",
+        "skip_problem": "_act_skip_problem",
+        "inspect_problem": "_act_inspect_problem",
+        "triage_problem": "_act_triage_problem",
+        "verify_problem": "_act_verify_problem",
+        "review_answer": "_act_review_answer",
+        "remember": "_act_remember",
+        "recall": "_act_recall",
+        "share_note": "_act_share_note",
+        "direct_message": "_act_direct_message",
+        "check_budget": "_act_check_budget",
+        "query_rules": "_act_query_rules",
+        "submit": "_act_submit",
+        **{name: "_act_deliberation" for name in DELIBERATION_ACTIONS},
+        **{name: "_act_tool" for name in TOOL_ACTIONS | {"submit_code"}},
+    }
+
+    @classmethod
+    def unimplemented_actions(cls) -> frozenset[str]:
+        """Registry env actions this runtime has no handler for (should be empty)."""
+        return ENV_ACTIONS - set(cls._HANDLERS)
+
     def execute_action(
         self,
         agent_name: str,
         action_type: str,
-        payload: str,
+        payload: str | dict[str, Any],
         *,
         metadata: dict[str, Any] | None = None,
     ) -> str:
+        """Run one action given in either wire encoding.
+
+        ``payload`` is the legacy text after ``PAYLOAD:`` or a typed argument
+        mapping; both are normalized onto the registry before dispatch.
+        """
         self.action_count += 1
+        invocation = normalize_invocation(action_type, payload)
+        invoked = invocation.invoked_as or str(action_type)
+        # The log records the canonical name; the spelling the agent used is
+        # kept alongside so legacy transcripts stay diagnosable.
+        canonical = invocation.action
+        log_payload = (
+            payload
+            if isinstance(payload, str)
+            else json.dumps(invocation.arguments, ensure_ascii=False)
+        )
+        if invocation.is_alias:
+            metadata = {**(metadata or {}), "invoked_as": invoked}
 
-        public_action, action_type = normalize_action_name(action_type)
-
-        if public_action == "inspect_problem" and not payload.strip():
-            action_type = "list_problems"
-        elif public_action == "work" and "|" in payload and self.workboard is not None:
-            action_type = "submit_problem"
-        elif public_action == "triage_problem" and "|" in payload:
-            _, priority = payload.split("|", 1)
-            action_type = (
-                "mark_hopeless"
-                if priority.strip().lower().startswith("hopeless")
-                else "set_priority"
-            )
-
-        violation = self.validate_action(action_type, agent_name)
+        violation = self.validate_action(invoked, agent_name)
         if violation:
             self.rule_violations.append(violation)
-            self._log_action(
-                agent_name,
-                action_type,
-                payload,
-                violation,
-                metadata=metadata,
-            )
+            self._log_action(agent_name, canonical, log_payload, violation, metadata=metadata)
             return violation
 
-        if action_type in COMPUTER_ACTIONS:
-            used = self.computer_uses_by_turn.setdefault(self.current_turn, [])
-            if len(used) >= self.k:
-                result = (
-                    f"Resource error: all {self.k} computer(s) are occupied this turn; "
-                    "try again next turn."
-                )
-                self._log_action(agent_name, action_type, payload, result, metadata=metadata)
-                return result
-            used.append(agent_name)
+        arguments, errors = (
+            self._fill_text_defaults(invocation)
+            if isinstance(payload, str)
+            else (dict(invocation.arguments), invocation.errors)
+        )
+        if errors:
+            result = f"Usage error: {invoked}: " + "; ".join(errors)
+            self._log_action(agent_name, canonical, log_payload, result, metadata=metadata)
+            return result
 
+        message_key = self._message_argument(canonical)
+        message = str(arguments.get(message_key) or "") if message_key else log_payload
         max_message_chars = self.communication.max_message_chars
         if (
-            self.communication.is_counted(action_type)
+            self.communication.is_counted(canonical)
             and max_message_chars
-            and len(payload.strip()) > max_message_chars
+            and len(message.strip()) > max_message_chars
         ):
-            payload, compacted_metadata = self.communication.compact_payload(
+            message, compacted_metadata = self.communication.compact_payload(
                 agent_name=agent_name,
-                action_type=action_type,
-                payload=payload,
+                action_type=invoked,
+                payload=message,
                 turn=self.current_turn,
                 max_chars=max_message_chars,
             )
             metadata = {**(metadata or {}), **compacted_metadata}
+            if message_key:
+                arguments[message_key] = message
+                if isinstance(payload, str):
+                    log_payload = message
 
         communication_violation = self.communication.check(
             agent_name=agent_name,
-            action_type=action_type,
-            payload=payload,
+            action_type=canonical,
+            payload=message,
             turn=self.current_turn,
         )
         if communication_violation:
             self.rule_violations.append(communication_violation)
             self._log_action(
-                agent_name,
-                action_type,
-                payload,
-                communication_violation,
-                metadata=metadata,
+                agent_name, canonical, log_payload, communication_violation, metadata=metadata
             )
             return communication_violation
 
-        if action_type == "speak":
-            self.chat_history.append({"sender": agent_name, "message": payload})
-            result = "Message broadcast to all agents."
-        elif action_type == "write_scratchpad":
-            self.workspace["scratchpad"] = payload
-            result = "Shared scratchpad updated."
-        elif action_type == "write_private_notes":
-            self.private_notes[agent_name] = payload
-            result = "Private notes updated; no communication budget used."
-        elif action_type in DELIBERATION_ACTIONS:
-            role = self.rule_card.role_for(agent_name) if self.rule_card else None
-            result = self.deliberation.record(
-                agent_name=agent_name,
-                action_type=action_type,
-                payload=payload,
-                turn=self.current_turn,
-                may_decide=bool(role and role.may_submit),
-            )
-        elif action_type == "sleep":
-            reason = payload.strip() or "passing this turn"
-            result = f"{agent_name} sleeps ({reason})."
-        elif action_type in BOARD_ACTIONS:
-            result = self._board_action(agent_name, action_type, payload)
-        elif action_type in MEMORY_ACTIONS:
-            result = self._memory_action(agent_name, action_type, payload)
-        elif action_type == "check_budget":
-            result = self._check_budget(agent_name)
-        elif action_type == "message_group":
-            audience, message, error = self._parse_recipients(payload)
-            if error:
-                result = error
-            else:
-                self.group_messages.append(
-                    {
-                        "turn": self.current_turn,
-                        "sender": agent_name,
-                        "recipients": audience,
-                        "message": message,
-                        "visibility": "group",
-                    }
-                )
-                metadata = {
-                    **(metadata or {}),
-                    "visibility": "group",
-                    "recipients": audience,
-                }
-                result = f"Message sent to {', '.join(audience)}."
-        elif action_type == "submit_final":
-            payload = self._resolve_final_payload(payload)
-            error = self._validate_submission(payload)
-            if error:
-                result = error
-            else:
-                evaluation = self.problem_data.get("evaluation") or {}
-                is_programming = self.problem_data.get("task_type") in {
-                    "algorithmic_programming",
-                    "programming",
-                } or evaluation.get("evaluator_id") == "programming_judge"
-                from judge.vjudge_gateway_client import gateway_enabled
-
-                if is_programming and gateway_enabled():
-                    result = self._submit_code(payload, agent_name=agent_name)
-                    self._record_shared_code_submission(agent_name, payload, result)
-                else:
-                    self.workspace["final_answer"] = payload.strip()
-                    self.submitted = True
-                    self.submitted_by = agent_name
-                    result = (
-                        f"Submission finalized by {agent_name}."
-                        f"{self._board_submission_note()}"
-                    )
-        elif action_type == "submit_code":
-            result = self._submit_code(payload, agent_name=agent_name)
-            if not result.startswith("RULE VIOLATION"):
-                self._record_shared_code_submission(agent_name, payload, result)
-        elif action_type == "use_calculator":
-            result = self._run_calculator(payload)
-        elif action_type == "execute_code":
-            result = self._run_code(payload)
-        elif action_type == "web_search":
-            result = self._run_web_search(payload)
-        elif action_type == "read_lab_equipment":
-            loaded = self._tool_asset_text("lab", payload)
-            result = (
-                f"[read_lab_equipment]\n{loaded}"
-                if loaded
-                else (
-                    f"[read_lab_equipment] No fixture for {payload!r}. "
-                    "Add problem assets/tool_fixtures with lab readings."
-                )
-            )
-        elif action_type == "read_star_chart":
-            loaded = self._tool_asset_text("star", payload)
-            result = (
-                f"[read_star_chart]\n{loaded}"
-                if loaded
-                else (
-                    f"[read_star_chart] No fixture for {payload!r}. "
-                    "Add problem assets/tool_fixtures with chart data."
-                )
-            )
-        elif action_type == "query_rules":
-            result = self.query_rules(agent_name)
+        handler = getattr(self, self._HANDLERS[canonical], None)
+        if handler is None:
+            result: str = f"Operational error: action '{invoked}' not implemented."
         else:
-            result = f"Operational error: action '{action_type}' not implemented."
+            outcome = handler(agent_name, arguments, invocation)
+            if isinstance(outcome, tuple):
+                result, extra = outcome
+                metadata = {**(metadata or {}), **extra}
+            else:
+                result = str(outcome)
 
         if result.startswith(OPERATIONAL_ERROR_PREFIXES):
             # A refused board/memory call is a no-op, not a broken contest rule.
             if result.startswith("Deliberation error:"):
                 self.rule_violations.append(result)
         else:
-            self.communication.record(agent_name=agent_name, action_type=action_type)
-        self._log_action(
-            agent_name,
-            action_type,
-            payload,
-            result,
-            metadata=metadata,
-        )
+            self.communication.record(agent_name=agent_name, action_type=canonical)
+        self._log_action(agent_name, canonical, log_payload, result, metadata=metadata)
         return result
+
+    @staticmethod
+    def _message_argument(canonical: str) -> str | None:
+        """Which argument carries the communication-budgeted text, if any."""
+        spec = ACTION_REGISTRY.get(canonical)
+        if spec is None:
+            return None
+        for candidate in ("content", "answer", "code", "reason"):
+            if any(argument.name == candidate for argument in spec.arguments):
+                return candidate
+        return None
+
+    @staticmethod
+    def _fill_text_defaults(invocation: Invocation) -> tuple[dict[str, Any], tuple[str, ...]]:
+        """Text protocol: an empty payload is the handler's problem, not a schema error.
+
+        The legacy prompts let ``submit_final`` with nothing attached fail with
+        the environment's own message ("final answer cannot be empty"), so
+        missing required free-text arguments are filled with ``""`` and the
+        matching validation errors dropped; type and enum errors stand.
+        """
+        arguments = dict(invocation.arguments)
+        if invocation.spec is None:
+            return arguments, invocation.errors
+        filled: set[str] = set()
+        for argument in invocation.spec.arguments:
+            if (
+                argument.required
+                and argument.name not in arguments
+                and argument.type == "string"
+                and not argument.enum
+            ):
+                arguments[argument.name] = ""
+                filled.add(f"missing required argument: {argument.name}")
+        errors = tuple(error for error in invocation.errors if error not in filled)
+        return arguments, errors
+
+    # ------------------------------------------------------------ handlers
+
+    def _act_speak(self, agent_name: str, arguments: dict[str, Any], _: Invocation) -> str:
+        self.chat_history.append({"sender": agent_name, "message": arguments["content"]})
+        return "Message broadcast to all agents."
+
+    def _act_work(self, agent_name: str, arguments: dict[str, Any], invocation: Invocation) -> str:
+        content = str(arguments.get("content") or "")
+        problem_id = str(arguments.get("problem_id") or "").strip()
+        if invocation.invoked_as == "write_scratchpad" or self.workboard is None and not problem_id:
+            self.workspace["scratchpad"] = content
+            return "Shared scratchpad updated."
+        if self.workboard is None:
+            return self._board_unavailable()
+        if not problem_id:
+            held = self._held_item(agent_name)
+            if held is None:
+                # No current problem: the note is team work, not an answer.
+                self.workspace["scratchpad"] = content
+                return (
+                    "Shared scratchpad updated. To record an answer for an item, "
+                    "pass problem_id (or claim the item first)."
+                )
+            problem_id = held.item_id
+        item = self.workboard.resolve(problem_id)
+        if item is None:
+            return self.workboard.unknown_ref_message(problem_id)
+        result = self.workboard.record_answer(agent_name, item, content, turn=self.current_turn)
+        self._sync_answer_sheet()
+        self._broadcast_board_event(agent_name, "work", item, result)
+        return result
+
+    def _act_write_private_notes(
+        self, agent_name: str, arguments: dict[str, Any], _: Invocation
+    ) -> str:
+        self.private_notes[agent_name] = str(arguments.get("content") or "")
+        return "Private notes updated; no communication budget used."
+
+    def _act_deliberation(
+        self, agent_name: str, arguments: dict[str, Any], invocation: Invocation
+    ) -> str:
+        role = self.rule_card.role_for(agent_name) if self.rule_card else None
+        return self.deliberation.record(
+            agent_name=agent_name,
+            action_type=invocation.action,
+            payload=deliberation_payload(invocation.action, arguments),
+            turn=self.current_turn,
+            may_decide=bool(role and role.may_submit),
+        )
+
+    def _act_rest(self, agent_name: str, arguments: dict[str, Any], _: Invocation) -> str:
+        reason = str(arguments.get("reason") or "").strip() or "passing this turn"
+        return f"{agent_name} sleeps ({reason})."
+
+    def _act_select_problem(
+        self, agent_name: str, arguments: dict[str, Any], _: Invocation
+    ) -> str:
+        item, error = self._board_item(arguments.get("problem_id"))
+        if error:
+            return error
+        result = self.workboard.claim(agent_name, item, turn=self.current_turn)
+        self._broadcast_board_event(agent_name, "select_problem", item, result)
+        return result
+
+    def _act_skip_problem(
+        self, agent_name: str, arguments: dict[str, Any], _: Invocation
+    ) -> str:
+        if self.workboard is None:
+            return self._board_unavailable()
+        # ``release_problem <item>`` arrives with the item in ``reason``.
+        reason = str(arguments.get("reason") or "").strip()
+        item = self.workboard.resolve(reason) if reason else None
+        if item is None:
+            item = self._held_item(agent_name)
+        if item is None:
+            return "Board error: you hold no item to release; name one, e.g. P3."
+        result = self.workboard.release(agent_name, item, turn=self.current_turn)
+        self._broadcast_board_event(agent_name, "skip_problem", item, result)
+        return result
+
+    def _act_inspect_problem(
+        self, agent_name: str, arguments: dict[str, Any], _: Invocation
+    ) -> str:
+        problem_id = str(arguments.get("problem_id") or "").strip()
+        focus = str(arguments.get("focus") or "").strip()
+        if self.workboard is not None:
+            if not problem_id:
+                return self.workboard.overview(turn=self.current_turn, agent_name=agent_name)
+            item = self.workboard.resolve(problem_id)
+            if item is None:
+                return self.workboard.unknown_ref_message(problem_id)
+            return self.workboard.detail(item, turn=self.current_turn)
+        if "execute_code" in self.allowed_tools:
+            return self._code_history(agent_name, focus or problem_id)
+        # Single-deliverable, no sandbox: show the team's current draft.
+        return "\n".join(
+            [
+                self._board_unavailable(),
+                "=== WORKSPACE ===",
+                f"Scratchpad: {self.workspace.get('scratchpad') or '(empty)'}",
+                f"Final answer: {self.workspace.get('final_answer') or '(not submitted)'}",
+            ]
+        )
+
+    def _code_history(self, agent_name: str, focus: str) -> str:
+        """Legacy ``verify``: latest code plus the visible run/submission history."""
+        visible_history = [
+            {
+                "turn": item.get("turn"),
+                "agent": item.get("agent"),
+                "action": item.get("action"),
+                "payload": item.get("payload"),
+                "result": item.get("result"),
+            }
+            for item in self.action_log
+            if item.get("visibility") != "private" or item.get("agent") == agent_name
+        ][-20:]
+        latest_code = next(
+            (
+                str(item.get("payload") or "")
+                for item in reversed(visible_history)
+                if canonical_action_name(str(item.get("action") or ""))
+                in {"execute_code", "submit_code", "submit"}
+                and str(item.get("payload") or "").strip()
+            ),
+            str(self.workspace.get("final_answer") or ""),
+        )
+        return json.dumps(
+            {
+                "focus": focus,
+                "latest_code": latest_code,
+                "history": visible_history,
+                "note": (
+                    "Self-verification context only; this does not count as an "
+                    "independent review approval."
+                ),
+            },
+            ensure_ascii=False,
+        )
+
+    def _act_triage_problem(
+        self, agent_name: str, arguments: dict[str, Any], invocation: Invocation
+    ) -> str:
+        item, error = self._board_item(arguments.get("problem_id"))
+        if error:
+            return error
+        priority = str(arguments.get("priority") or "").strip().lower()
+        reason = str(arguments.get("reason") or "").strip()
+        if priority == "hopeless":
+            result = self.workboard.mark_hopeless(item, reason, hopeless=True)
+            self._broadcast_board_event(agent_name, "mark_hopeless", item, result)
+            return result
+        if item.hopeless:
+            result = self.workboard.mark_hopeless(item, "", hopeless=False)
+            self._broadcast_board_event(agent_name, "mark_hopeless", item, result)
+            if invocation.invoked_as == "mark_hopeless" or priority == "normal" and item.priority == "normal":
+                return result
+        result = self.workboard.set_priority(item, priority)
+        self._broadcast_board_event(agent_name, "set_priority", item, result)
+        return result
+
+    def _act_verify_problem(
+        self, agent_name: str, arguments: dict[str, Any], _: Invocation
+    ) -> str:
+        item, error = self._board_item(arguments.get("problem_id"))
+        if error:
+            return error
+        verdict, _, comment = str(arguments.get("content") or "").strip().partition(" ")
+        result = self.workboard.review(agent_name, item, verdict, comment, turn=self.current_turn)
+        self._broadcast_board_event(agent_name, "verify_problem", item, result)
+        return result
+
+    def _act_review_answer(
+        self, agent_name: str, arguments: dict[str, Any], _: Invocation
+    ) -> str:
+        item, error = self._board_item(arguments.get("problem_id"))
+        if error:
+            return error
+        if not item.attempts:
+            return f"Board error: {item.item_id} has no recorded answer to review yet."
+        expected = self.workboard.answer_hash(item)
+        given = str(arguments.get("version_hash") or "").strip().lower()
+        if given and not expected.startswith(given):
+            return (
+                f"Board error: version_hash {given!r} does not match the answer "
+                f"currently recorded for {item.item_id} (version {expected}). "
+                "Re-open the item and review the current version."
+            )
+        verdict = "agree" if arguments.get("decision") == "approve" else "disagree"
+        result = self.workboard.review(
+            agent_name, item, verdict, str(arguments.get("content") or ""), turn=self.current_turn
+        )
+        self._broadcast_board_event(agent_name, "verify_problem", item, result)
+        return result
+
+    def _act_remember(self, agent_name: str, arguments: dict[str, Any], _: Invocation) -> str:
+        problem_ref, text = self._memory_scope(arguments.get("problem_id"), arguments.get("content"))
+        if not text:
+            return "Memory error: nothing to remember."
+        item = self.memory.add(agent_name, text, turn=self.current_turn, problem_ref=problem_ref)
+        scope = f" against item {problem_ref}" if problem_ref else ""
+        return (
+            f"Stored {item.memory_id}{scope} (private). "
+            f"Publish it with: share_note | {item.memory_id}"
+        )
+
+    def _act_recall(self, agent_name: str, arguments: dict[str, Any], _: Invocation) -> str:
+        problem_ref, query = self._memory_scope(arguments.get("problem_id"), arguments.get("query"))
+        items = self.memory.recall(agent_name, query, problem_ref=problem_ref, top_k=8)
+        if not items:
+            return "Recall: nothing stored yet."
+        return f"Recall ({len(items)} item(s)):\n{MemoryStore.render(items)}"
+
+    def _act_share_note(self, agent_name: str, arguments: dict[str, Any], _: Invocation) -> str:
+        text = str(arguments.get("note_id") or "")
+        ids = [chunk for chunk in re.split(r"[,\s]+", text) if chunk]
+        if not ids:
+            return "Memory error: name the memory ids to publish, e.g. M1, M2."
+        try:
+            published = self.memory.publish(agent_name, ids, turn=self.current_turn)
+        except KeyError as exc:
+            return f"Memory error: {exc}"
+        names = ", ".join(item.memory_id for item in published)
+        return f"Published to the team as {names}."
+
+    def _memory_scope(self, problem_id: Any, text: Any) -> tuple[str, str]:
+        """Resolve an optional board reference; an unresolvable one is just text."""
+        text = str(text or "").strip()
+        ref = str(problem_id or "").strip()
+        if not ref:
+            return "", text
+        item = self.workboard.resolve(ref) if self.workboard is not None else None
+        if item is None:
+            return "", f"{ref} {text}".strip()
+        return item.item_id, text
+
+    def _act_direct_message(
+        self, agent_name: str, arguments: dict[str, Any], _: Invocation
+    ) -> str | tuple[str, dict[str, Any]]:
+        audience, message, error = self._resolve_recipients(
+            arguments.get("recipients") or [], str(arguments.get("content") or "")
+        )
+        if error:
+            return error
+        self.group_messages.append(
+            {
+                "turn": self.current_turn,
+                "sender": agent_name,
+                "recipients": audience,
+                "message": message,
+                "visibility": "group",
+            }
+        )
+        return (
+            f"Message sent to {', '.join(audience)}.",
+            {"visibility": "group", "recipients": audience},
+        )
+
+    def _act_check_budget(self, agent_name: str, _: dict[str, Any], __: Invocation) -> str:
+        return self._check_budget(agent_name)
+
+    def _act_query_rules(self, agent_name: str, _: dict[str, Any], __: Invocation) -> str:
+        return self.query_rules(agent_name)
+
+    def _act_submit(self, agent_name: str, arguments: dict[str, Any], _: Invocation) -> str:
+        payload = self._resolve_final_payload(str(arguments.get("answer") or ""))
+        error = self._validate_submission(payload)
+        if error:
+            return error
+        evaluation = self.problem_data.get("evaluation") or {}
+        is_programming = self.problem_data.get("task_type") in {
+            "algorithmic_programming",
+            "programming",
+        } or evaluation.get("evaluator_id") == "programming_judge"
+        from judge.vjudge_gateway_client import gateway_enabled
+
+        if is_programming and gateway_enabled():
+            result = self._submit_code(payload, agent_name=agent_name)
+            self._record_shared_code_submission(agent_name, payload, result)
+            return result
+        self.workspace["final_answer"] = payload.strip()
+        self.submitted = True
+        self.submitted_by = agent_name
+        return f"Submission finalized by {agent_name}.{self._board_submission_note()}"
+
+    def _act_tool(self, agent_name: str, arguments: dict[str, Any], invocation: Invocation) -> str:
+        key = invocation.spec.primary_argument if invocation.spec else None
+        payload = str(arguments.get(key) or "") if key else invocation.text_payload
+        dispatched = dispatch_environment_action(
+            self, agent_name=agent_name, action_name=invocation.action, payload=payload
+        )
+        if dispatched is NotImplemented:
+            return f"Operational error: action '{invocation.action}' not implemented."
+        return str(dispatched)
 
     def get_private_notes(self, agent_name: str) -> str:
         return self.private_notes.get(agent_name, "")
@@ -1329,122 +1545,66 @@ class OlympiadEnvironment:
             return
         self.workspace["answer_sheet"] = self.workboard.answer_sheet()
 
-    def _board_action(self, agent_name: str, action_type: str, payload: str) -> str:
+    def _board_unavailable(self) -> str:
+        return (
+            "Board unavailable: this contest is graded as a single "
+            "deliverable, so there are no separate items to pick up. "
+            "Use submit for the team's answer."
+        )
+
+    def _board_item(self, problem_id: Any) -> tuple[Any, str]:
+        """Resolve a board reference into (item, "") or (None, error)."""
         if self.workboard is None:
-            return (
-                "Board unavailable: this contest is graded as a single "
-                "deliverable, so there are no separate items to pick up. "
-                "Use submit_final for the team's answer."
-            )
-        board = self.workboard
-        turn = self.current_turn
-        if action_type == "list_problems":
-            return board.overview(turn=turn, agent_name=agent_name)
-
-        ref, rest = board.split_ref(payload)
-        item = board.resolve(ref)
+            return None, self._board_unavailable()
+        ref = str(problem_id or "").strip()
+        item = self.workboard.resolve(ref)
         if item is None:
-            return board.unknown_ref_message(ref)
+            return None, self.workboard.unknown_ref_message(ref)
+        return item, ""
 
-        if action_type == "open_problem":
-            return board.detail(item, turn=turn)
-
-        if action_type == "claim_problem":
-            result = board.claim(agent_name, item, turn=turn)
-        elif action_type == "release_problem":
-            result = board.release(agent_name, item, turn=turn)
-        elif action_type == "submit_problem":
-            result = board.record_answer(agent_name, item, rest, turn=turn)
-            self._sync_answer_sheet()
-        elif action_type == "verify_problem":
-            verdict, _, comment = rest.partition(" ")
-            result = board.review(agent_name, item, verdict, comment, turn=turn)
-        elif action_type == "set_priority":
-            result = board.set_priority(item, rest)
-        elif action_type == "mark_hopeless":
-            undo = rest.strip().lower() in {"undo", "clear", "false", "reopen"}
-            result = board.mark_hopeless(item, rest, hopeless=not undo)
-        else:
-            return f"Board error: '{action_type}' is not a board action."
-
-        self._broadcast_board_event(agent_name, action_type, item, result)
-        return result
+    def _held_item(self, agent_name: str) -> Any:
+        """The board item this agent currently holds a live claim on, if any."""
+        if self.workboard is None:
+            return None
+        for item in self.workboard.items.values():
+            if item.holder(self.current_turn, self.workboard.claim_ttl_turns) == agent_name:
+                return item
+        return None
 
     def _broadcast_board_event(
-        self, agent_name: str, action_type: str, item: Any, result: str
+        self, agent_name: str, event: str, item: Any, result: str
     ) -> None:
         """Put board changes in the shared log; a private board coordinates nothing."""
         if result.startswith("Board error:"):
             return
-        if action_type == "submit_problem":
+        if event == "work":
             summary = (
                 f"{agent_name} recorded an answer for {item.item_id}: "
                 f"{item.answer} (attempt {len(item.attempts)})."
             )
-        elif action_type == "claim_problem":
+        elif event == "select_problem":
             summary = f"{agent_name} is now working on {item.item_id}."
-        elif action_type == "release_problem":
+        elif event == "skip_problem":
             summary = f"{agent_name} released {item.item_id}."
-        elif action_type == "verify_problem":
+        elif event == "verify_problem":
             review = item.reviews[-1]
             summary = (
                 f"{agent_name} reviewed {item.item_id} ({review.verdict})"
                 + (f": {review.comment}" if review.comment else ".")
             )
-        elif action_type == "mark_hopeless":
+        elif event == "mark_hopeless":
             summary = (
                 f"{agent_name} marked {item.item_id} hopeless."
                 if item.hopeless
                 else f"{agent_name} put {item.item_id} back in play."
             )
-        elif action_type == "set_priority":
+        elif event == "set_priority":
             summary = f"{agent_name} set {item.item_id} priority to {item.priority}."
         else:
             return
         self.chat_history.append(
             {"sender": "Contest_Control", "message": f"[board] {summary}"}
         )
-
-    def _memory_action(self, agent_name: str, action_type: str, payload: str) -> str:
-        text = str(payload or "").strip()
-        problem_ref = ""
-        if self.workboard is not None and action_type in {"remember", "recall"}:
-            ref, rest = self.workboard.split_ref(text)
-            item = self.workboard.resolve(ref)
-            if item is not None and rest:
-                problem_ref, text = item.item_id, rest
-
-        if action_type == "remember":
-            if not text:
-                return "Memory error: nothing to remember."
-            item = self.memory.add(
-                agent_name, text, turn=self.current_turn, problem_ref=problem_ref
-            )
-            scope = f" against item {problem_ref}" if problem_ref else ""
-            return (
-                f"Stored {item.memory_id}{scope} (private). "
-                f"Publish it with: publish_memory | {item.memory_id}"
-            )
-        if action_type == "recall":
-            items = self.memory.recall(
-                agent_name, text, problem_ref=problem_ref, top_k=8
-            )
-            if not items:
-                return "Recall: nothing stored yet."
-            return f"Recall ({len(items)} item(s)):\n{MemoryStore.render(items)}"
-        if action_type == "publish_memory":
-            ids = [chunk for chunk in re.split(r"[,\s]+", text) if chunk]
-            if not ids:
-                return "Memory error: name the memory ids to publish, e.g. M1, M2."
-            try:
-                published = self.memory.publish(
-                    agent_name, ids, turn=self.current_turn
-                )
-            except KeyError as exc:
-                return f"Memory error: {exc}"
-            names = ", ".join(item.memory_id for item in published)
-            return f"Published to the team as {names}."
-        return f"Memory error: '{action_type}' is not a memory action."
 
     def _check_budget(self, agent_name: str) -> str:
         state = self.get_state()
@@ -1476,20 +1636,19 @@ class OlympiadEnvironment:
                 )
         return "\n".join(lines)
 
-    def _parse_recipients(self, payload: str) -> tuple[list[str], str, str]:
-        """Split 'Agent_2, Agent_3 | message' into (audience, message, error)."""
-        head, sep, tail = str(payload or "").partition("|")
-        if not sep:
+    def _resolve_recipients(
+        self, recipients: list[str], message: str
+    ) -> tuple[list[str], str, str]:
+        """Check a direct message's audience against the roster."""
+        requested = [str(name).strip() for name in recipients if str(name).strip()]
+        message = str(message or "").strip()
+        if not requested:
             return (
                 [],
                 "",
-                "Board error: message_group needs "
+                "Board error: direct_message needs "
                 "'<recipients> | <message>', e.g. Agent_2, Agent_3 | ...",
             )
-        requested = [name.strip() for name in re.split(r"[,;]+", head) if name.strip()]
-        message = tail.strip()
-        if not requested:
-            return [], "", "Board error: name at least one recipient."
         if not message:
             return [], "", "Board error: the message body is empty."
         if self.agent_names:
@@ -1563,10 +1722,55 @@ class OlympiadEnvironment:
         return None
 
     def _submit_code(self, payload: str, *, agent_name: str) -> str:
-        """Judge locally, then remotely when the VJudge gateway is enabled."""
-        from evaluation.programming_judge import judge_programming_submission
+        """Use the remote judge when configured, otherwise fall back locally."""
+        from judge.vjudge_gateway_client import gateway_enabled
 
         self.submission_attempts += 1
+        if gateway_enabled():
+            remote = self._maybe_vjudge_remote_submit(
+                payload,
+                local_language="python3",
+            ) or {"status": "failed", "verdict": "SUBMIT_FAILED"}
+            self.remote_submission = remote
+            self.remote_submission_source = payload.strip()
+            remote_status = str(remote.get("status") or "")
+            remote_verdict = str(remote.get("verdict") or "")
+            if remote_status == "final" and remote_verdict == "AC":
+                self.workspace["final_answer"] = payload.strip()
+                self.submitted = True
+                self.submitted_by = agent_name
+            elif remote_status == "final":
+                self.record_wrong_submission()
+            elif remote_status == "needs_human":
+                self.workspace["final_answer"] = payload.strip()
+                self.submitted = True
+                self.submitted_by = agent_name
+
+            feedback = {
+                "action": "submit_code",
+                "attempt": self.submission_attempts,
+                "verdict": remote_verdict or "PENDING",
+                "test_scope": "remote",
+                "grading_scope_label": "remote official judge",
+                "passed": 1 if remote_verdict == "AC" else 0,
+                "total": 1,
+                "finalized": self.submitted,
+                "penalty_minutes": self.penalty_minutes(),
+                "simulated_minutes": self.simulated_minutes,
+                "continue_allowed": not self.submitted and self.can_begin_turn(),
+                "remote": remote,
+            }
+            if self.submitted and remote_verdict == "AC":
+                feedback["note"] = "Remote judge AC; submission finalized."
+            elif self.submitted and remote_status == "needs_human":
+                feedback["note"] = (
+                    "Remote judge requires human verification; run paused with this "
+                    "candidate preserved."
+                )
+            return json.dumps(feedback, sort_keys=True)
+
+        from evaluation.programming_judge import judge_programming_submission
+
         judged = judge_programming_submission(
             self.problem_data,
             payload,
@@ -1575,30 +1779,8 @@ class OlympiadEnvironment:
             fetch_kattis=False,
             test_scope="sample",
         )
-        remote = None
         if judged.wrong_submission:
             self.record_wrong_submission()
-        elif judged.verdict == "AC":
-            remote = self._maybe_vjudge_remote_submit(
-                payload, local_language=judged.language
-            )
-            if remote is not None:
-                self.remote_submission = remote
-                self.remote_submission_source = payload.strip()
-                remote_status = str(remote.get("status") or "")
-                remote_verdict = str(remote.get("verdict") or "")
-                if remote_status == "final" and remote_verdict == "AC":
-                    self.workspace["final_answer"] = payload.strip()
-                    self.submitted = True
-                    self.submitted_by = agent_name
-                elif remote_status == "final":
-                    self.record_wrong_submission()
-                elif remote_status == "needs_human":
-                    # Preserve the exact candidate and pause the run. A browser
-                    # must resolve Turnstile; synthesis must not replace it.
-                    self.workspace["final_answer"] = payload.strip()
-                    self.submitted = True
-                    self.submitted_by = agent_name
         feedback = judged.to_dict()
         feedback.update(
             {
@@ -1610,16 +1792,7 @@ class OlympiadEnvironment:
                 "continue_allowed": not self.submitted and self.can_begin_turn(),
             }
         )
-        if remote is not None:
-            feedback["remote"] = remote
-        if self.submitted and remote and remote.get("verdict") == "AC":
-            feedback["note"] = "Remote judge AC; submission finalized."
-        elif self.submitted and remote and remote.get("status") == "needs_human":
-            feedback["note"] = (
-                "Remote judge requires human verification; run paused with this "
-                "candidate preserved."
-            )
-        elif judged.verdict == "AC" and remote is None:
+        if judged.verdict == "AC":
             feedback["note"] = (
                 "Sample AC only; final hidden tests may still reject this solution."
             )
@@ -1819,23 +1992,20 @@ class OlympiadEnvironment:
         return f"Calculator output: {self._safe_calculate(payload)}"
 
     def _run_code(self, payload: str) -> str:
+        from isolated_python import IsolationUnavailable, run_python_isolated
         try:
-            proc = subprocess.run(
-                [sys.executable, "-c", payload],
-                capture_output=True,
-                text=True,
-                timeout=5,
-                cwd=REPO_ROOT,
-            )
+            proc = run_python_isolated(payload)
+            if proc.timed_out:
+                return "Code error: execution timed out after 5 seconds."
+            if proc.output_limited:
+                return "Code error: output limit exceeded."
             if proc.returncode == 0:
                 output = (proc.stdout or "").strip() or "(no stdout)"
                 return f"Code output:\n{output}"
             stderr = (proc.stderr or proc.stdout or "unknown error").strip()
             return f"Code error (exit {proc.returncode}):\n{stderr}"
-        except subprocess.TimeoutExpired:
-            return "Code error: execution timed out after 5 seconds."
-        except OSError as exc:
-            return f"Code error: {exc}"
+        except IsolationUnavailable as exc:
+            return f"Operational error: {exc}"
 
     @staticmethod
     def _normalize_answer(text: str) -> str:
@@ -1885,6 +2055,36 @@ class OlympiadEnvironment:
         if task_type in {"algorithmic_programming", "programming"} or evaluation.get(
             "evaluator_id"
         ) == "programming_judge":
+            from judge.vjudge_gateway_client import gateway_enabled
+
+            remote = (
+                self.remote_submission
+                if self.remote_submission_source == answer.strip()
+                else self._maybe_vjudge_remote_submit(
+                    answer,
+                    local_language="python3",
+                )
+                if gateway_enabled()
+                else None
+            )
+            if remote is not None:
+                status = str(remote.get("status") or "")
+                verdict = str(remote.get("verdict") or "")
+                is_final = status == "final"
+                is_ac = is_final and verdict == "AC"
+                return {
+                    "graded": is_final,
+                    "method": "vjudge_remote",
+                    "score": 1.0 if is_ac else 0.0 if is_final else None,
+                    "max_score": 1.0,
+                    "correct": is_ac,
+                    "verdict": verdict,
+                    "remote": remote,
+                    "penalty_minutes": self.penalty_minutes(),
+                    "simulated_minutes": self.simulated_minutes,
+                    "submitted_by": self.submitted_by,
+                }
+
             from evaluation.programming_judge import judge_programming_submission
 
             judged = judge_programming_submission(
@@ -1903,15 +2103,6 @@ class OlympiadEnvironment:
             if judged.verdict == "AC":
                 # Clock already includes any prior WA burns; do not add again.
                 grade["icpc_time_score"] = int(self.simulated_minutes)
-            remote = (
-                self.remote_submission
-                if self.remote_submission_source == answer.strip()
-                else self._maybe_vjudge_remote_submit(
-                    answer, local_language=judged.language
-                )
-            )
-            if remote is not None:
-                grade["remote"] = remote
             return grade
 
         if expected:

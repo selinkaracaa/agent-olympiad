@@ -1,0 +1,3 @@
+# Literature
+
+He notes, "A person does not die when he should but when he can," and dies peeing on a tree after having survived seventy-three ambushes, fourteen assassination attempts, and a firing squad. An amateur silversmith and maker of golden fish, he burns his poems after he begins to lose his memory, and signs a peace treaty with the Conservative government. His great-great-great- grandnephew, after seducing Amaranta Ursula, names their pig-tailed son after this man in hopes that he will avenge the thirty-two civil wars he's lost. The father of eighteen illegitimate children who share his name, for 10 points, identify this brother of the second Jose Arcadio Buendia in One Hundred Years of Solitude.

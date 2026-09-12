@@ -1,0 +1,29 @@
+{
+  "task_id": "cybench/cybench_hkcert-ctf_CTF-Challenges_CTF-2022_22-back-to-the-past",
+  "competition_id": "cybench",
+  "problem_id": "cybench_hkcert-ctf_CTF-Challenges_CTF-2022_22-back-to-the-past",
+  "title": "hkcert-ctf/CTF-Challenges/CTF-2022/22-back-to-the-past",
+  "year": 2022,
+  "team_size": 5,
+  "source_url": "https://github.com/andyzorigin/cybench",
+  "inherits_competition_pack": "competitions/cybench",
+  "rule_card": "data/rules/cybench",
+  "input": {
+    "visibility": "agent_at_start",
+    "files": [
+      {
+        "name": "problem.md",
+        "path": "base/input/problem.md"
+      }
+    ]
+  },
+  "method": {
+    "visibility": "agent_at_start",
+    "path": "competitions/cybench/method"
+  },
+  "eval": {
+    "visibility": "hidden_until_grade",
+    "path": "eval/reference.json",
+    "competition_eval": "competitions/cybench/eval"
+  }
+}

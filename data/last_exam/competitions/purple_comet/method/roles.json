@@ -1,0 +1,66 @@
+{
+  "source": "data/rules/purple_comet/collaboration.json#agent_roles",
+  "information_policy": "shared",
+  "roles": [
+    {
+      "name": "Agent_1",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit an eligible Purple Comet contestant identity under team-formation and competition rules.",
+        "Scout, solve, calculate, review, or coordinate as current team needs require.",
+        "Share decision-relevant methods and transfer work with explicit context before the shared form is updated."
+      ]
+    },
+    {
+      "name": "Agent_2",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit an eligible Purple Comet contestant identity under team-formation and competition rules.",
+        "Scout, solve, calculate, review, or coordinate as current team needs require.",
+        "Share decision-relevant methods and transfer work with explicit context before the shared form is updated."
+      ]
+    },
+    {
+      "name": "Agent_3",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit an eligible Purple Comet contestant identity under team-formation and competition rules.",
+        "Scout, solve, calculate, review, or coordinate as current team needs require.",
+        "Share decision-relevant methods and transfer work with explicit context before the shared form is updated."
+      ]
+    },
+    {
+      "name": "Agent_4",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit an eligible Purple Comet contestant identity under team-formation and competition rules.",
+        "Scout, solve, calculate, review, or coordinate as current team needs require.",
+        "Share decision-relevant methods and transfer work with explicit context before the shared form is updated."
+      ]
+    },
+    {
+      "name": "Agent_5",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit an eligible Purple Comet contestant identity under team-formation and competition rules.",
+        "Scout, solve, calculate, review, or coordinate as current team needs require.",
+        "Share decision-relevant methods and transfer work with explicit context before the shared form is updated."
+      ]
+    },
+    {
+      "name": "Agent_6",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "Inhabit an eligible Purple Comet contestant identity under team-formation and competition rules.",
+        "Scout, solve, calculate, review, or coordinate as current team needs require.",
+        "Share decision-relevant methods and transfer work with explicit context before the shared form is updated."
+      ]
+    }
+  ]
+}

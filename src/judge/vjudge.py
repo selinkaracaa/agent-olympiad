@@ -77,6 +77,22 @@ def _env(name: str, default: str = "") -> str:
     return (os.environ.get(name) or default).strip()
 
 
+def _oj_env_suffix(oj: str) -> str:
+    return re.sub(r"[^A-Z0-9]+", "_", (oj or "").strip().upper()).strip("_")
+
+
+def resolve_submit_method(oj: str, fallback: int) -> int:
+    suffix = _oj_env_suffix(oj)
+    value = _env(f"VJUDGE_SUBMIT_METHOD_{suffix}") if suffix else ""
+    return int(value) if value else fallback
+
+
+def resolve_binding_id(oj: str) -> str:
+    suffix = _oj_env_suffix(oj)
+    value = _env(f"VJUDGE_BINDING_ID_{suffix}") if suffix else ""
+    return value or _env("VJUDGE_BINDING_ID")
+
+
 def resolve_language_id(language: str) -> str:
     raw = (language or "").strip()
     if raw.isdigit():
@@ -92,6 +108,17 @@ def resolve_language_id(language: str) -> str:
     raise ValueError(
         f"Unsupported language {language!r}; use cpp17/python3 or a numeric VJudge id."
     )
+
+
+def resolve_problem_language(language: str, oj: str) -> str:
+    """Resolve the problem-mode language value expected by each remote OJ."""
+    if (oj or "").strip().lower() == "kattis":
+        key = (language or "").strip().lower()
+        if key in {"python", "python3", "py"}:
+            return "Python 3"
+        if key in {"cpp", "cpp17", "c++", "c++17"}:
+            return "C++"
+    return resolve_language_id(language)
 
 
 def problem_num(problem: str) -> str:
@@ -264,7 +291,7 @@ class VJudgeClient:
             referer=f"{self.base_url}/contest/{contest_id}",
         )
         if not isinstance(payload, dict):
-            return _env("VJUDGE_BINDING_ID")
+            return resolve_binding_id(oj_hint)
         for item in payload.get("myBindings") or []:
             if not isinstance(item, dict):
                 continue
@@ -273,7 +300,7 @@ class VJudgeClient:
             binding = item.get("bindingId") or item.get("id")
             if binding is not None:
                 return str(binding)
-        return _env("VJUDGE_BINDING_ID")
+        return resolve_binding_id(oj_hint)
 
     def submit(self, request: RemoteSubmitRequest) -> RemoteRun:
         if str(request.contest_id or "").strip():
@@ -281,18 +308,19 @@ class VJudgeClient:
         return self._submit_problem(request)
 
     def _submit_problem(self, request: RemoteSubmitRequest) -> RemoteRun:
-        language_id = resolve_language_id(request.language)
+        method = resolve_submit_method(request.oj, self.method)
+        language_id = resolve_problem_language(request.language, request.oj)
         key = problem_submit_key(oj=request.oj, problem=request.problem)
         referer = f"{self.base_url}/problem/{key}"
         form: dict[str, Any] = {
-            "method": str(self.method),
+            "method": str(method),
             "language": language_id,
             "open": "1" if request.open_source else "0",
             "source": request.source,
             "token": "",
         }
-        if self.method in {1, 2}:
-            binding_id = _env("VJUDGE_BINDING_ID")
+        if method in {1, 2}:
+            binding_id = resolve_binding_id(request.oj)
             if not binding_id:
                 # Reuse contest submitMethods as a binding lookup (same OJ account).
                 contest_hint = _env("VJUDGE_BINDING_CONTEST_ID") or _env(
@@ -309,6 +337,7 @@ class VJudgeClient:
         return self._finalize_submit_response(result)
 
     def _submit_contest(self, request: RemoteSubmitRequest) -> RemoteRun:
+        method = resolve_submit_method(request.oj, self.method)
         language_id = resolve_language_id(request.language)
         num = problem_num(request.problem)
         contest_id = request.contest_id
@@ -331,7 +360,7 @@ class VJudgeClient:
             )
 
         form: dict[str, Any] = {
-            "method": str(self.method),
+            "method": str(method),
             "language": language_id,
             "open": "1" if request.open_source else "0",
             "source": request.source,
@@ -339,8 +368,8 @@ class VJudgeClient:
             "version": version,
             "token": "",
         }
-        if self.method in {1, 2}:
-            binding_id = self.fetch_binding_id(contest_id)
+        if method in {1, 2}:
+            binding_id = self.fetch_binding_id(contest_id, oj_hint=request.oj)
             if binding_id:
                 form["bindingId"] = binding_id
 

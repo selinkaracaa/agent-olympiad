@@ -9,6 +9,7 @@ from .collaboration_score import (
     score_coordination,
     score_interaction_helpfulness,
 )
+from .cce import CCEAction, CCEResult, normalize_actions, score_cce
 from .gold import GoldAnswerEvaluator, load_gold_parts
 from .modes import (
     EvalMode,
@@ -51,6 +52,8 @@ from .team_metrics import (
 __all__ = [
     "Criterion",
     "CriterionResult",
+    "CCEAction",
+    "CCEResult",
     "ERROR_CODES",
     "EvalMode",
     "EvalPacket",
@@ -72,6 +75,8 @@ __all__ = [
     "apply_registered_judge",
     "classify_errors",
     "compute_team_metrics",
+    "normalize_actions",
+    "score_cce",
     "score_coordination",
     "build_competition_packet",
     "build_question_packet",

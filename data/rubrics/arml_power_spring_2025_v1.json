@@ -1,0 +1,143 @@
+{
+  "rubric_id": "arml_power_spring_2025_v1",
+  "title": "Power Round \u2014 Spring 2025 \u2014 ARML Power sub-problem rubric",
+  "total_points": 40.0,
+  "criteria": [
+    {
+      "id": "problem_01",
+      "name": "Problem 1",
+      "max_score": 3.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 1 (3 pts). Statement: 1."
+    },
+    {
+      "id": "problem_02",
+      "name": "Problem 2",
+      "max_score": 3.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 2 (3 pts). Statement: 2. Show, by writing out all possible cases, that B(50) = 5 and that there is only one Fibonacci-like sequence with b = 5 that contains the number 50."
+    },
+    {
+      "id": "problem_03",
+      "name": "Problem 3",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 3 (2 pts). Statement: 3. Showing work, compute B(22)."
+    },
+    {
+      "id": "problem_04",
+      "name": "Problem 4",
+      "max_score": 3.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 4 (3 pts). Statement: 4. Note that the general Fibonacci-like sequence F (a, b) begins a, b, a + b, a + 2b, 2a + 3b, 3a + 5b, 5a + 8b, . . . . You might recognize those coe\ufb03cients of a and b as the regular Fibonacci numbers. Prove that for k \u2265 3 that F (a, b)k = Fk\u22122a + Fk\u22121b. (This relationship actually holds for all integers k, by running the sequences backward as explained in the background material.)"
+    },
+    {
+      "id": "problem_05",
+      "name": "Problem 5",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 5 (2 pts). Statement: 5. Prove that if F (a1, b)k = F (a2, b)k then a1 = a2. That is, if the same number occurs in the same location in two Fibonacci-like sequences with the same b value, they must be the exact same sequence."
+    },
+    {
+      "id": "problem_06",
+      "name": "Problem 6",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 6 (2 pts). Statement: 6. Prove that for any integers 1 \u2264 j < k that Fk\u2212 Fk\u2212j Fk\u2212j\u22121 \u2265 1, with equality if and only if j = 1."
+    },
+    {
+      "id": "problem_07",
+      "name": "Problem 7",
+      "max_score": 4.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 7 (4 pts). Statement: 7. Let F (a, b)k = F (a\u2032, b\u2032)k\u2212j for some 1 \u2264 j < k . That is, the same number appears in both Fibonacci-like sequences F (a, b) and F (a\u2032, b\u2032) but appears earlier in the latter. Prove that b < b\u2032."
+    },
+    {
+      "id": "problem_08",
+      "name": "Problem 8",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 8 (2 pts). Statement: 8. Given a Fibonacci-like sequence a1, a2, a3, . . . , ak\u22121, ak that contains ak = n. Let b1, b2, . . . , bk be another sequence of the same length, with bk = ak = n that also satis- \ufb01es the Fibonacci recursion, and that bk\u22121 = ak\u22121\u22121. Show that bk\u2212j = ak\u2212j+(\u22121)jFj."
+    },
+    {
+      "id": "problem_09a",
+      "name": "Problem 9a",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 9a (1 pt). Statement: 9. Lengthen each Fibonacci-like sequence backward as far as possible while staying Fibonacci- like: (a) 11 , 17, . . .."
+    },
+    {
+      "id": "problem_09b",
+      "name": "Problem 9b",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 9b (1 pt). Statement: (b) 6 , 8, . . .."
+    },
+    {
+      "id": "problem_09c",
+      "name": "Problem 9c",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 9c (1 pt). Statement: (c) 7 , 16, . . .."
+    },
+    {
+      "id": "problem_10a",
+      "name": "Problem 10a",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 10a (2 pts). Statement: 10. Given a\u2264 b, under what conditions on a and b may the sequence a, b, . . . be extended backward (a) by exactly one term?"
+    },
+    {
+      "id": "problem_10b",
+      "name": "Problem 10b",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 10b (2 pts). Statement: (b) by two or more terms?"
+    },
+    {
+      "id": "problem_11",
+      "name": "Problem 11",
+      "max_score": 3.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 11 (3 pts). Statement: 11. Use this algorithm to \ufb01nd B(199) and B(201)."
+    },
+    {
+      "id": "problem_12",
+      "name": "Problem 12",
+      "max_score": 4.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 12 (4 pts). Statement: 12. Prove that algorithm is correct. That is, given any positive integer n, prove the al- gorithm always stops after a \ufb01nite number of steps and produces the correct value of B(n)."
+    },
+    {
+      "id": "problem_13",
+      "name": "Problem 13",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 13 (2 pts). Statement: 13. Prove that if each sequence is lengthened as much as possible, then for each positive integer b there are exactly 1 + \u230a(b\u2212 1)/2\u230b Fibonacci-like sequences with b as their second term."
+    },
+    {
+      "id": "problem_14",
+      "name": "Problem 14",
+      "max_score": 3.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 14 (3 pts). Statement: 14. For each b in the range 1 \u2264 b\u2264 10, compute L(b), which is the least number n such that B(n) = b. (Note: if you \ufb01nd that one of these values is larger than 100 you have made an error.)"
+    }
+  ],
+  "not_observable_from_deck": [
+    "oral defense",
+    "diagrams that were not recovered from the source PDF"
+  ],
+  "provenance": {
+    "competition_id": "arml_power",
+    "problem_id": "arml_power_spring_2025",
+    "year": 2025,
+    "source_file": "data/raw/arml/Spring_2025/ARMLPower_Spring_2025.pdf",
+    "solution_file": null,
+    "official_total_points": 40.0,
+    "parsed_total_points": 40.0,
+    "points_coverage": 1.0,
+    "awards_parsed": 17,
+    "problems_parsed": 14,
+    "derived_by": "scripts/build_arml_power_rubrics.py"
+  }
+}

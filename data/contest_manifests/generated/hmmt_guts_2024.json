@@ -1,0 +1,11 @@
+{
+  "session_id": "hmmt_guts_2024",
+  "competition_id": "hmmt_guts",
+  "problem_ids": [
+    "hmmt_guts_2024"
+  ],
+  "description": "OTC contest-session manifest for hmmt_guts_2024",
+  "split_parts": false,
+  "task_family": "mathematics",
+  "competition_description": "HMMT Guts Round: a fast team mathematics contest with a long numbered packet (36 questions in the 2024 case); prioritize broad answer-sheet coverage and preserve every solved numbered answer."
+}

@@ -1,0 +1,185 @@
+{
+  "rubric_id": "arml_national_power_2010_v1",
+  "title": "Power Round \u2014 2010 \u2014 ARML Power sub-problem rubric",
+  "total_points": 50.0,
+  "criteria": [
+    {
+      "id": "problem_03a",
+      "name": "Problem 3a",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 3a (2 pts). Statement: 3."
+    },
+    {
+      "id": "problem_03b",
+      "name": "Problem 3b",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 3b (2 pts). Statement: b. Find the combined area of the six remaining curvilinear territories."
+    },
+    {
+      "id": "problem_03c",
+      "name": "Problem 3c",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 3c (2 pts). Statement: On day 2, the plots bounded by the incircles of the six remaining curvilinear territories are sold. 2a. Determine the number of curvilinear territories remaining at the end of day 3."
+    },
+    {
+      "id": "problem_03d",
+      "name": "Problem 3d",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 3d (2 pts). Statement: 2b. Let Xn be the number of plots sold on day n. Find a formula for Xn in terms of n."
+    },
+    {
+      "id": "problem_03e",
+      "name": "Problem 3e",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 3e (2 pts). Statement: 2c. Determine the total number of plots sold up to and including day n."
+    },
+    {
+      "id": "problem_03a_2",
+      "name": "Problem 3a (award 2)",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 3a (award 2) (2 pts). Statement: 3a. Two unit circles and a circle of radius 2 3 are mutually externally tangent. Compute all possible values of r such that a circle of radius r is tangent to all three circles."
+    },
+    {
+      "id": "problem_03b_2",
+      "name": "Problem 3b (award 2)",
+      "max_score": 3.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 3b (award 2) (3 pts). Statement: 3b. Given three mutually tangent circles with curvatures a,b,c> 0, suppose that (a,b,c, 0) does not satisfy Descartes\u2019 Circle Formula. Show that there are two distinct values of r such that there is a circle of radius r tangent to the given circles."
+    },
+    {
+      "id": "problem_04a",
+      "name": "Problem 4a",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 4a (2 pts). Statement: 4. Find a geometric interpretation for this situation."
+    },
+    {
+      "id": "problem_04b",
+      "name": "Problem 4b",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 4b (2 pts). Statement: 4. Let \u03c6 = 1 + \u221a 5 2 , and let \u03c1 =\u03c6 +\u221a\u03c6. a. Prove that \u03c14 = 2\u03c13 + 2\u03c12 + 2\u03c1\u2212 1."
+    },
+    {
+      "id": "problem_04c",
+      "name": "Problem 4c",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 4c (2 pts). Statement: b. Show that four pairwise externally tangent circles with nonequal radii in geometric progression must have common ratio \u03c1."
+    },
+    {
+      "id": "problem_05",
+      "name": "Problem 5",
+      "max_score": 4.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 5 (4 pts). Statement: 5. Use Descartes\u2019 Circle Formula to show that a\u2032 = 2s\u2212 3a and therefore s\u2032 =a\u2032 +b +c +d = 3s\u2212 4a."
+    },
+    {
+      "id": "problem_06a",
+      "name": "Problem 6a",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 6a (2 pts). Statement: 6a. Use the result of problem 5 to compute the curvatures of all circles removed on day 2, and the corresponding values of s\u2032."
+    },
+    {
+      "id": "problem_06b",
+      "name": "Problem 6b",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 6b (1 pt). Statement: 6b. Show that by area, 12% of the kingdom is sold on day 2."
+    },
+    {
+      "id": "problem_06c",
+      "name": "Problem 6c",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 6c (2 pts). Statement: 6c. Find the areas of the circles removed on day 3."
+    },
+    {
+      "id": "problem_06d",
+      "name": "Problem 6d",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 6d (1 pt). Statement: 6d. Show that the plots sold on day 3 have mean curvature of 23 ."
+    },
+    {
+      "id": "problem_07",
+      "name": "Problem 7",
+      "max_score": 3.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 7 (3 pts). Statement: 7. Prove that the curvature of each circular plot is an integer."
+    },
+    {
+      "id": "problem_08a",
+      "name": "Problem 8a",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 8a (2 pts). Statement: 8a. Suppose that A\u2032 is a circle conjugate to A with centerzA\u2032 and curvaturea\u2032, and \u02c6s =a\u00b7zA +b\u00b7 zB +c\u00b7zC +d\u00b7zD. Use Descartes\u2019 Extended Circle Formula to show that a\u2032\u00b7zA\u2032 = 2\u02c6s\u2212 3a\u00b7zA and therefore a\u2032\u00b7zA\u2032 +b\u00b7zB +c\u00b7zC +d\u00b7zD = 3\u02c6s\u2212 4a\u00b7zA."
+    },
+    {
+      "id": "problem_08b",
+      "name": "Problem 8b",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 8b (2 pts). Statement: 8b. Prove that the center of each circular plot has coordinates (u c, v c ) where u and v are integers, and c is the curvature of the plot."
+    },
+    {
+      "id": "problem_09a",
+      "name": "Problem 9a",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 9a (2 pts). Statement: 9. Let P and Q be two proper c-triangles such that P dominates Q. Let C(P ) = (a,b,c,d ) and C(Q) = (w,x,y,z ). a. Show that P (3) dominates P (2) and that P (2) dominates P (1)."
+    },
+    {
+      "id": "problem_09b",
+      "name": "Problem 9b",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 9b (2 pts). Statement: b. Prove that P (1) dominates Q(1)."
+    },
+    {
+      "id": "problem_09c",
+      "name": "Problem 9c",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 9c (2 pts). Statement: c. Prove that P (3) dominates Q(3)."
+    },
+    {
+      "id": "problem_10a",
+      "name": "Problem 10a",
+      "max_score": 3.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 10a (3 pts). Statement: 10a. Prove that the largest plot sold by the king on day n has curvature n2 + 2."
+    },
+    {
+      "id": "problem_10b",
+      "name": "Problem 10b",
+      "max_score": 3.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 10b (3 pts). Statement: 10b. If \u03c1 =\u03c6 +\u221a\u03c6, as in problem 4, prove that the curvature of the smallest plot sold by the king on day n does not exceed 2\u03c1n."
+    }
+  ],
+  "not_observable_from_deck": [
+    "oral defense",
+    "diagrams that were not recovered from the source PDF"
+  ],
+  "provenance": {
+    "competition_id": "arml_national_power",
+    "problem_id": "arml_national_power_2010",
+    "year": 2010,
+    "source_file": "data/raw/arml_national/ARML_2009_2014.pdf",
+    "solution_file": null,
+    "official_total_points": 50.0,
+    "parsed_total_points": 50.0,
+    "points_coverage": 1.0,
+    "awards_parsed": 23,
+    "problems_parsed": 8,
+    "derived_by": "scripts/build_arml_power_rubrics.py"
+  }
+}

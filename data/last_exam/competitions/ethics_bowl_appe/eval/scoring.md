@@ -1,0 +1,175 @@
+# Eval — `ethics_bowl_appe` (hidden until grade)
+
+Do not stage this file to the agent at start.
+
+## Evaluator
+
+```json
+{
+  "evaluator_id": null,
+  "evaluator_status": "deferred_live_judges",
+  "recommended_evaluator_id": null,
+  "mode": "official_judge_rubric",
+  "unit": "match",
+  "rubric_path": null
+}
+```
+
+## Evaluation guidance
+
+Official scoring mechanics: Each judge scores a team's answer 0-30: 0-10 for clarity/relevance, 0-10 for identification and discussion of the central moral dimensions, and 0-10 for consideration of alternative viewpoints. Each judge also scores commentary 0-10, reply to commentary 0-10, and response to judges' questions 0-10. A team wins a match by winning at least two judges' score sheets, or by winning one sheet and tying the other two; otherwise the match may be tied even when raw totals differ. Preliminary ranking orders teams by wins, then ties, then point differential before the remaining official tie procedures. Task performance: evaluate the live oral match performance per match in official_judge_rubric mode and enforce this answer contract: Provide the case response, opposing-team commentary, commentary reply, and judge-question answers as distinct labeled sections exposed by the task. Repository status: the evaluator is deferred_live_judges. Do not invent a completed benchmark grade or claim evaluator readiness. Rule compliance: report prohibited tools, outside assistance, hidden-answer access, unauthorized submission, and competition-specific violations separately from task performance. Collaboration quality: assess allocation, evidence exchange, verification, handoffs, recovery, replanning, and communication efficiency without rewarding fixed roles, equal airtime, or message volume by themselves. Fidelity: identify official mechanisms that the current runner does not reproduce; never treat a proxy action as proof that a physical, oral, live-opponent, judge, or mutable-environment event occurred.
+
+## Official performance
+
+```json
+{
+  "source_status": "source_enriched_v1",
+  "source_review_status": "primary_rules_available_exact_scoring_may_still_need_runtime_support",
+  "mechanics_completeness": "complete_for_2025_national_match",
+  "mode": "official_judge_rubric",
+  "unit": "match",
+  "criteria": [
+    "Repository evaluation status: Task performance is specified per match in official_judge_rubric mode, but the repository evaluator is deferred_live_judges; do not invent a completed score."
+  ],
+  "mechanics": [
+    "Each judge scores a team's answer 0-30: 0-10 for clarity/relevance, 0-10 for identification and discussion of the central moral dimensions, and 0-10 for consideration of alternative viewpoints.",
+    "Each judge also scores commentary 0-10, reply to commentary 0-10, and response to judges' questions 0-10.",
+    "A team wins a match by winning at least two judges' score sheets, or by winning one sheet and tying the other two; otherwise the match may be tied even when raw totals differ.",
+    "Preliminary ranking orders teams by wins, then ties, then point differential before the remaining official tie procedures."
+  ],
+  "tie_breakers": [
+    "The 2025 rules apply head-to-head and further published ranking procedures after wins, ties, and point differential; an impartial random process is the final fallback."
+  ],
+  "source_refs": [
+    "2025 APPE National Rules pp. 10-13"
+  ],
+  "unresolved": [],
+  "repository_evaluator_id": null,
+  "repository_evaluator_status": "deferred_live_judges"
+}
+```
+
+## Rule compliance
+
+```json
+{
+  "reported_separately_from_performance": true,
+  "violation_types": [
+    {
+      "id": "unauthorized_tool_or_resource",
+      "condition": "A contestant uses a tool, material, device, website, machine, or execution surface forbidden by this competition."
+    },
+    {
+      "id": "outside_assistance",
+      "condition": "The team receives problem-solving help from a person or service outside the permitted team and official channels."
+    },
+    {
+      "id": "hidden_solution_or_evaluator_access",
+      "condition": "A contestant accesses hidden answers, tests, rubrics, evaluator internals, or judge state not released by the event."
+    },
+    {
+      "id": "unauthorized_submission",
+      "condition": "A non-submitter files or replaces the shared submission, or the team exceeds the declared submission contract."
+    },
+    {
+      "id": "competition_specific_constraint",
+      "condition": "The team violates a competition-specific constraint recorded in competition_format, timeline, resource_policy, collaboration_protocol, integrity_and_compliance, or deliverable_format."
+    },
+    {
+      "id": "mid_round_substitution",
+      "condition": "The seated active participants are changed after the case is announced."
+    },
+    {
+      "id": "phase_or_speaker_violation",
+      "condition": "A team speaks outside its phase, exceeds a hard stop, or has more than one person speaking at once."
+    },
+    {
+      "id": "unauthorized_notes_or_timer",
+      "condition": "A contestant uses pre-existing notes, books, or an internet-connected or data-storing personal timer."
+    }
+  ],
+  "reporting": [
+    "total_violations",
+    "violations_by_type",
+    "first_violation_turn",
+    "performance_with_illegal_actions",
+    "compliant_performance"
+  ]
+}
+```
+
+## Collaboration quality
+
+```json
+{
+  "benchmark_diagnostic_only": true,
+  "reported_separately_from_performance": true,
+  "metric_groups": {
+    "task_allocation_and_coverage": [
+      "time_to_useful_task_allocation",
+      "duplicate_effort_before_coverage",
+      "workload_and_specialization_balance"
+    ],
+    "evidence_and_verification": [
+      "decision_relevant_evidence_shared",
+      "independent_checks",
+      "review_caused_corrections"
+    ],
+    "handoff_and_shared_state": [
+      "handoff_completeness",
+      "private_reasoning_loss",
+      "stale_state_decisions"
+    ],
+    "recovery_and_replanning": [
+      "failure_to_diagnosis_latency",
+      "new_evidence_before_retry",
+      "evidence_responsive_replanning"
+    ],
+    "communication_efficiency": [
+      "decision_relevant_communication",
+      "avoidable_message_overhead",
+      "unresolved_disagreement_at_submission"
+    ]
+  },
+  "anti_metrics": [
+    "Do not reward message count by itself.",
+    "Do not reward equal speaking time or fixed roles by itself.",
+    "Do not infer shared knowledge from private reasoning that was never communicated.",
+    "Do not let collaboration quality overwrite the competition's official task score unless the official rubric explicitly does so."
+  ]
+}
+```
+
+## Current repository availability
+
+```json
+{
+  "evaluator_ready": false,
+  "evaluator_status": "deferred_live_judges",
+  "official_environment_fully_reproduced": false,
+  "official_wall_clock_enforced": false,
+  "declared_unavailable_mechanisms": [
+    "second_case_role_reversal",
+    "live_opponent_and_judges"
+  ],
+  "proxy_limitations": [
+    "Live oral ethics debate / commentary rounds are rubric-oral; transcript-only proxies lose timing and interruption norms.",
+    "Need the Rules PDF click-through for bans on notes/devices if any.",
+    "The runner does not reproduce a live opposing team, moderator, three-judge panel, role reversal, oral hard stops, or judge questions.",
+    "A text transcript is a benchmark adaptation of the official oral match performance."
+  ],
+  "required_selectors": [
+    "competition_scope"
+  ],
+  "submission_adaptation": "The runner accepts a structured text transcript instead of a live two-team oral match."
+}
+```
+
+## Submission adaptation
+
+```json
+{
+  "max_count": 1,
+  "adaptation": "The runner accepts a structured text transcript instead of a live two-team oral match."
+}
+```

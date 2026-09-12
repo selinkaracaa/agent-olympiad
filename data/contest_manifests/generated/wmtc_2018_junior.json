@@ -1,0 +1,11 @@
+{
+  "session_id": "wmtc_2018_junior",
+  "competition_id": "wmtc",
+  "problem_ids": [
+    "wmtc_2018_junior"
+  ],
+  "description": "OTC contest-session manifest for wmtc_2018_junior",
+  "split_parts": false,
+  "task_family": "mathematics",
+  "competition_description": "World Mathematics Team Championship team round: solve 14 linked or standalone numbered mathematics questions on one shared answer sheet."
+}

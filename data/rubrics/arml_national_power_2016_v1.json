@@ -1,0 +1,143 @@
+{
+  "rubric_id": "arml_national_power_2016_v1",
+  "title": "Power Round \u2014 2016 \u2014 ARML Power sub-problem rubric",
+  "total_points": 38.0,
+  "criteria": [
+    {
+      "id": "problem_01a",
+      "name": "Problem 1a",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 1a (2 pts). Statement: 4. Let O have coordinates (0, 0), let P have coordinates (1, 0), and let A be the point (4 , 2). The point B has coordinates (m,n ), where m andn are both positive integers, m is relatively prime to n, and \u2220BOA\u223c= \u2220AOP (considered as Euclidean angles). a. Compute the ordered pair ( m,n )."
+    },
+    {
+      "id": "problem_01b",
+      "name": "Problem 1b",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 1b (2 pts). Statement: b. Compute the taxi-lengths of the segments intercepted by \u2220BOA and \u2220AOP on the line x +y = 1."
+    },
+    {
+      "id": "problem_01c",
+      "name": "Problem 1c",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 1c (1 pt). Statement: ept taxi-congruent arcs. One way to \ufb01x this problem is to de\ufb01ne the measure of an angle analogously to the way the radian measure of an angle is de\ufb01ned in Euclidean geometry, namely, as a quotient. The numerator is the length of the arc that the angle intercepts on a circle centered at the angle\u2019s vertex. The denominator is the radius of that circle. If P and R are equidistant from Q, then the measure of \u2220PQR in taxi-radians is given by the formula mT \u2220PQR = taxi-length of the arc from P to R on the taxi-circle centered at Q passing through P dT (Q,P ) . 5. Let\u2019s \ufb02esh out the above de\ufb01nition with an example. a. Find an equation to describe the taxi-circle centered at the origin of radius 17."
+    },
+    {
+      "id": "problem_01d",
+      "name": "Problem 1d",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 1d (1 pt). Statement: b. Compute the value of taxi-pi, \u03c0T , by dividing the semi-taxi-circumference of the taxi-circle from part 5a by its radius."
+    },
+    {
+      "id": "problem_01e",
+      "name": "Problem 1e",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 1e (2 pts). Statement: c. Show that the value you computed in part 5b is independent of the taxi-circle\u2019s radius."
+    },
+    {
+      "id": "problem_01f",
+      "name": "Problem 1f",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 1f (1 pt). Statement: d. Given that C = (3, 1), O = (0, 0), and B = (\u22121, 3), compute mT \u2220COB ."
+    },
+    {
+      "id": "problem_01g",
+      "name": "Problem 1g",
+      "max_score": 3.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 1g (3 pts). Statement: Using taxi-circles and taxi-angles, de\ufb01ne a rotation by \u03b8 taxi-radians about the origin as follows. The point P\u2032 is the image ofP under a counterclockwise rotation of\u03b8 taxi-radians aroundO = (0, 0) if and only if dT (O,P ) =dT (O,P\u2032) and the measure of the taxi-arc from P to P\u2032 (going counterclockwise around the taxi-circle centered at O) is dT (O,P )\u00b7\u03b8. 6. Let O = (0, 0), A = (8, 0), and R = (3, 1). a. Let \u25b3O\u2032A\u2032R\u2032 be the image of \u25b3OAR under a rotation of 1 taxi-radian about the origin. Compute the coordinates of O\u2032,A\u2032, and R\u2032."
+    },
+    {
+      "id": "problem_01h",
+      "name": "Problem 1h",
+      "max_score": 3.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 1h (3 pts). Statement: b. Is \u25b3O\u2032A\u2032R\u2032\u223c=T\u25b3OAR? Justify your answer."
+    },
+    {
+      "id": "problem_01i",
+      "name": "Problem 1i",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 1i (2 pts). Statement: 7. We now consider conditions for two triangles to be measure-congruent in Euclidean geometry and apply them to taxicab geometry to discover whether or not measure-congruence still holds. Let \u25b3MOD have vertices M = (0, 2), O = (0, 0), and D = (2, 0). a. Show that there exists a triangle \u25b3CAB such that dT (C,A ) = dT (M,O ), dT (A,B ) = dT (O,D ), and mT \u2220CAB = mT \u2220MOD , but \u25b3MOD \u2247T \u25b3CAB. (Thus SAS congruence does not hold in taxicab geometry.)"
+    },
+    {
+      "id": "problem_01j",
+      "name": "Problem 1j",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 1j (2 pts). Statement: b. Show that there exists a triangle \u25b3PIG such that dT (P,I ) = dT (M,O ), dT (I,G ) = dT (O,D ), and dT (P,G ) =dT (M,D ), but\u25b3MOD \u2247T\u25b3PIG . (Thus SSS congruence does not hold in taxicab geometry.)"
+    },
+    {
+      "id": "problem_01k",
+      "name": "Problem 1k",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 1k (1 pt). Statement: 8. De\ufb01ne the taxi-cosine and taxi-sine of an angle as follows: cosT \u2220ACB = dE(C,A )\u00b7dE(C,B ) dT (C,A )\u00b7dT (C,B ) cos \u2220ACB sinT \u2220ACB = dE(C,A )\u00b7dE(C,B ) dT (C,A )\u00b7dT (C,B ) sin \u2220ACB, where cos \u2220ACB and sin \u2220ACB are the ordinary (Euclidean) cosine and sine functions, respectively. 9 a. Given A = (3, 0), O = (0, 0), and B = (3, 4), compute cosT \u2220AOB."
+    },
+    {
+      "id": "problem_01l",
+      "name": "Problem 1l",
+      "max_score": 3.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 1l (3 pts). Statement: b. Show that if \u2212\u2192OA is parallel to the x-axis, then cosT \u2220AOB = cos \u2220AOB | cos \u2220AOB| +| sin \u2220AOB|."
+    },
+    {
+      "id": "problem_01m",
+      "name": "Problem 1m",
+      "max_score": 3.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 1m (3 pts). Statement: c. Let \u2212 \u2212 \u2192QP be parallel to the x-axis, and let A and B be points not on \u2212 \u2212 \u2192QP . Show that cosT \u2220AQB = cos \u2220AQB (| cos \u2220AQP| +| sin \u2220AQP|)(| cos \u2220BQP| +| sin \u2220BQP|)."
+    },
+    {
+      "id": "problem_01n",
+      "name": "Problem 1n",
+      "max_score": 3.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 1n (3 pts). Statement: 9. Suppose that triangle ABC is given with AB parallel to the x-axis, and that the perpendicular dropped from C to\u2190\u2192AB intersectsAB at C\u2032 and has taxi-length hT . As with conventional trigonometry, let aT =dT (B,C ), bT =dT (A,C ), and cT =dT (A,B ). Prove the following: a. aT =bT +cT\u2212 2bT cosTA."
+    },
+    {
+      "id": "problem_01o",
+      "name": "Problem 1o",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 1o (2 pts). Statement: b. bT =aT +cT\u2212 2aT cosTB."
+    },
+    {
+      "id": "problem_01p",
+      "name": "Problem 1p",
+      "max_score": 3.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 1p (3 pts). Statement: c. cT = a2 T +b2 T\u2212 2aTbT cosTC aT +bT ."
+    },
+    {
+      "id": "problem_01q",
+      "name": "Problem 1q",
+      "max_score": 4.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 1q (4 pts). Statement: 10. Given\u25b3ABC, prove that aT sinTA = bT sinTB = cT sinTC , where aT , bT , and cT are de\ufb01ned as in the previous problem."
+    }
+  ],
+  "not_observable_from_deck": [
+    "oral defense",
+    "diagrams that were not recovered from the source PDF"
+  ],
+  "provenance": {
+    "competition_id": "arml_national_power",
+    "problem_id": "arml_national_power_2016",
+    "year": 2016,
+    "source_file": "data/raw/arml_national/2016/2016_Contest_Final_Version.pdf",
+    "solution_file": null,
+    "official_total_points": 50.0,
+    "parsed_total_points": 38.0,
+    "points_coverage": 0.76,
+    "awards_parsed": 17,
+    "problems_parsed": 1,
+    "derived_by": "scripts/build_arml_power_rubrics.py"
+  }
+}

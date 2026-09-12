@@ -60,8 +60,16 @@ def sync_icpc() -> dict:
         evaluation["vjudge_oj"] = "Kattis"
         evaluation["vjudge_prob_num"] = kattis_id
         evaluation["vjudge_submit_mode"] = "problem"
+        evaluation["status"] = "remote_judge_ready"
+        evaluation["reason"] = (
+            "VJudge problem-mode mapping configured; the remote verdict is authoritative."
+        )
         evaluation.pop("vjudge_contest_id", None)
         evaluation.pop("vjudge_problem", None)
+        remote_note = "Remote upload uses VJudge problem mode Kattis-{probNum}."
+        notes = str(evaluation.get("notes") or "").strip()
+        if remote_note not in notes:
+            evaluation["notes"] = f"{notes} {remote_note}".strip()
         row["evaluation"] = evaluation
         updated += 1
     _write(path, rows)

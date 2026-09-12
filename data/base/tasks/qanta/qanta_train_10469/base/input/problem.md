@@ -1,0 +1,3 @@
+# Science
+
+The meter type of this device incorporates a one meter long wire with a sliding contact which can run along it, while other popular versions utilize one or more rheostats to vary the quantity involved. One major advantage is that no calibration is required of the measuring device, which is usually a galvanometer placed between two opposite junctions. When the galvanometer registers no deflection, the device is balanced, and can be used to calculate an unknown resistance based on the known values of three other resistances. FTP, what is this famous "bridge" named for the man who popularized it?

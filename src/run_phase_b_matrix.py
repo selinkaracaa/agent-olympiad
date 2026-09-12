@@ -49,7 +49,6 @@ DEFAULT_SCHEMAS = [
     "centralized",
     "round_table",
     "decentralized",
-    "open_table_coach",
     "debate",
     "self_consistency",
     "memory_solo",
@@ -67,8 +66,6 @@ def agent_roster(schema: str, team_size: int) -> list[str]:
     if schema == "centralized":
         return ["Group_Leader", *[f"Agent_{i}" for i in range(2, team_size + 1)]]
     agents = [f"Agent_{i}" for i in range(1, team_size + 1)]
-    if schema == "open_table_coach":
-        return [*agents, "Coach"]
     return agents
 
 
@@ -95,8 +92,6 @@ def models_for_team(
         "single_agent", "self_consistency", "memory_solo", "liveoi_best_of_8", "subagent"
     }:
         agents = [role.name for role in env.rule_card.roster(env.team_size)]
-        if schema == "open_table_coach":
-            agents.append("Coach")
     else:
         agents = agent_roster(schema, env.team_size)
     if team == "hetero":

@@ -1,0 +1,8 @@
+{
+  "status": "base_only",
+  "source": "https://hub.docker.com/r/cyberbotics/webots",
+  "license": "Apache-2.0",
+  "image": "cyberbotics/webots:R2025a-ubuntu22.04",
+  "compose_file": "docker-compose.yml",
+  "notes": "Webots is a valid robotics simulator base and is used in WRO Future Engineers preparation, but this repository does not yet contain edition-specific WRO worlds, robots, randomization, or score controllers. The base image alone is not a runnable WRO benchmark."
+}

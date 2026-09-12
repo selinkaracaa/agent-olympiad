@@ -32,7 +32,7 @@ Multi-agent AI teams take olympiad-style **team contests**. Three layers:
 | **Smoke test** | End-to-end pipeline check — not a quality score. |
 | **Gold answer** | Short official finals for automatic matching. |
 | **LLM judge / rubric** | Model scores open-ended work against a rubric. |
-| **Submitted** | Team called `submit_final`. |
+| **Submitted** | Team called `submit` (legacy `submit_final`). |
 | **Pipeline OK** | Load → act → submit → no crash. |
 
 ---
@@ -64,7 +64,7 @@ Example: ARML Local 2009, round table, 2 turns, 6 agents.
 
 Registry: `src/contest_budget.py`.
 
-Rule: ≤1 LLM call per agent per turn, or `ACTION: sleep`.
+Rule: ≤1 LLM call per agent per turn, or `ACTION: rest` (legacy `sleep`).
 
 ---
 
@@ -277,6 +277,12 @@ python3 src/run_exam.py --all-schemas --rounds 2
 Pilots under `results/arml_local_2009_*_20260812-183636.json`.
 
 Pilot only: small model, 2 turns, diagram problem often unsolved from text.
+
+**Historical Open Table Coach batch results** (32-task structured gold,
+CF/ICPC pilots): see
+[`docs/from_zhongzheng/archive/open-table-coach-batch-results.md`](from_zhongzheng/archive/open-table-coach-batch-results.md).
+For the current protocol, start with the
+[contest-session pipeline](from_zhongzheng/pipeline-overview-20260910.md).
 
 ---
 

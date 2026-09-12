@@ -1,0 +1,157 @@
+{
+  "rubric_id": "arml_national_power_2017_v1",
+  "title": "Power Round \u2014 2017 \u2014 ARML Power sub-problem rubric",
+  "total_points": 50.0,
+  "criteria": [
+    {
+      "id": "problem_03a",
+      "name": "Problem 3a",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 3a (2 pts). Statement: y we do math. In the parallel universe, students are taught two operations: \u2295 and\u2299. Elle notices that a\u2295b = min(a,b ) and a\u2299b =a +b for all real numbers a and b. Elle decides to investigate the properties of these two new operations. Throughout this Power Question, a\u2295b and a\u2299b will always denote parallel-universe addition and multiplication, respectively, while a +b and a\u00b7b will denote addition and multiplication in the usual sense. The standard order of operations (\u2299 \ufb01rst, then \u2295) will apply, although parentheses are sometimes included for clari\ufb01cation. All variables refer to real numbers unless otherwise speci\ufb01ed. 1. a. Determine whether there is a real number O such thatO\u2295 x =x for all x."
+    },
+    {
+      "id": "problem_03b",
+      "name": "Problem 3b",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 3b (2 pts). Statement: b. Show that there is a real number I such thatI\u2299 x =x for all x."
+    },
+    {
+      "id": "problem_03c",
+      "name": "Problem 3c",
+      "max_score": 3.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 3c (3 pts). Statement: 2. Show that\u2299 distributes over\u2295; that is, a\u2299 (b\u2295c) = (a\u2299b)\u2295 (a\u2299c) for all a,b,c ."
+    },
+    {
+      "id": "problem_03d",
+      "name": "Problem 3d",
+      "max_score": 3.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 3d (3 pts). Statement: 3. Find all solutions to each of the following equations: a. (x\u2299x)\u2295 (2\u2299x)\u2295 1 =x\u2295 2;"
+    },
+    {
+      "id": "problem_03e",
+      "name": "Problem 3e",
+      "max_score": 3.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 3e (3 pts). Statement: b. (x\u2299x)\u2295 (\u22121) = (x\u2295 1)\u2299 (x\u2295 (\u22121))."
+    },
+    {
+      "id": "problem_03f",
+      "name": "Problem 3f",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 3f (2 pts). Statement: Next, Elle investigates the properties of exponents and polynomials. She uses the notation a\u2299b =a\u2299a\u2299a\u2299\u00b7\u00b7\u00b7\u2299 a\ued19 \ued18\ued17 \ued1a b copies of a , wherea is a real number and b is a positive integer. Furthermore, by de\ufb01nition, a\u22990 = 0. Elle wonders if exponenti- ation works in the parallel universe the way it works in ours. 4. Show that for any real numbers x and y, and any positive integer n: a. (x\u2299y)\u2299n =x\u2299n\u2299y\u2299n;"
+    },
+    {
+      "id": "problem_03g",
+      "name": "Problem 3g",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 3g (2 pts). Statement: b. (x\u2295y)\u2299n =x\u2299n\u2295y\u2299n;"
+    },
+    {
+      "id": "problem_03h",
+      "name": "Problem 3h",
+      "max_score": 3.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 3h (3 pts). Statement: c. (x\u2295y)\u22992 =x\u22992\u2295y\u22992 = (x\u22992)\u2295 (x\u2299y)\u2295 (y\u22992)."
+    },
+    {
+      "id": "problem_03i",
+      "name": "Problem 3i",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 3i (2 pts). Statement: 5. a. Show that for any a, there is exactly one solution to the equation x\u22992 = a. This is called the parallel square root of a and is denoted by \u25e6\u221aa."
+    },
+    {
+      "id": "problem_03j",
+      "name": "Problem 3j",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 3j (2 pts). Statement: b. Show that for any a, there is exactly one solution to the equation a\u2299x =I, where I is de\ufb01ned in Problem 1b. This is called the parallel reciprocal of a and is denoted by \u02c6a."
+    },
+    {
+      "id": "problem_03k",
+      "name": "Problem 3k",
+      "max_score": 3.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 3k (3 pts). Statement: c. Show that for any a, \u25e6\u221a \u02c6a =\u02c6\u25e6\u221aa."
+    },
+    {
+      "id": "problem_03l",
+      "name": "Problem 3l",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 3l (2 pts). Statement: x\u22990), where eachai is a real number. As a convenient shorthand, x\u22991 will simply be written as x anda0\u2299x\u22990 will simply be written as a0. For example: \u2022 f(x) = (5\u2299x)\u2295 3 is a degree-1 PUP, but not a degree-2 PUP. \u2022 f(x) = (1\u2299x\u22992)\u2295 1 is not a PUP at all, because the x term is missing. \u2022 f(x) = (0\u2299x\u22992)\u2295 (0\u2299x)\u2295 0 is a degree-2 PUP. \u2022 f(x) = (x\u22992)\u2295x\u2295 1 is not a PUP; it should instead be written as (0 \u2299x\u22992)\u2295 (0\u2299x)\u2295 1. Elle now examines the properties of degree-2 (quadratic) PUPs. In the parallel universe, a root of a PUP f is a real numberx such that f(x) = 0. 6. In our universe, a quadratic equation has either zero, one, or two distinct real roots. a. Find a quadratic PUP that has exactly one root."
+    },
+    {
+      "id": "problem_03m",
+      "name": "Problem 3m",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 3m (2 pts). Statement: b. Could a quadratic PUP have zero roots? Justify your answer."
+    },
+    {
+      "id": "problem_03n",
+      "name": "Problem 3n",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 3n (2 pts). Statement: c. Could a quadratic PUP have in\ufb01nitely many distinct roots? Justify your answer."
+    },
+    {
+      "id": "problem_03o",
+      "name": "Problem 3o",
+      "max_score": 3.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 3o (3 pts). Statement: d. Suppose that f(x) is a PUP of positive degree. Prove that if f has more than one root, then it has in\ufb01nitely many distinct roots."
+    },
+    {
+      "id": "problem_03p",
+      "name": "Problem 3p",
+      "max_score": 5.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 3p (5 pts). Statement: 7. Supposef(x) = (a\u2299x\u22992)\u2295(b\u2299x)\u2295c is a quadratic PUP that has exactly one root. Find a formula for this root in terms of a, b, and c. Express the formula using only the operations \u2295,\u2299, parallel-universe exponentiation, parallel square roots, and parallel reciprocals."
+    },
+    {
+      "id": "problem_03q",
+      "name": "Problem 3q",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 3q (2 pts). Statement: Suppose f(x) = (a\u2299x\u22992)\u2295 (b\u2299x)\u2295c is a quadratic PUP. A factorization off is an ordered triple of real numbers (k,r,s ) such that r\u2264s, and f(x) =k\u2299 (x\u2295r)\u2299 (x\u2295s), for all real numbers x. 8. Prove that if (k,r,s ) is a factorization of f, then: a. k =a, and"
+    },
+    {
+      "id": "problem_03r",
+      "name": "Problem 3r",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 3r (2 pts). Statement: b. r\u2299s =c\u2299\u02c6a."
+    },
+    {
+      "id": "problem_03s",
+      "name": "Problem 3s",
+      "max_score": 5.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 3s (5 pts). Statement: 9. Prove that every quadratic PUP has exactly one factorization."
+    }
+  ],
+  "not_observable_from_deck": [
+    "oral defense",
+    "diagrams that were not recovered from the source PDF"
+  ],
+  "provenance": {
+    "competition_id": "arml_national_power",
+    "problem_id": "arml_national_power_2017",
+    "year": 2017,
+    "source_file": "data/raw/arml_national/2017/2017_Contest_Final_Version.pdf",
+    "solution_file": null,
+    "official_total_points": 50.0,
+    "parsed_total_points": 50.0,
+    "points_coverage": 1.0,
+    "awards_parsed": 19,
+    "problems_parsed": 1,
+    "derived_by": "scripts/build_arml_power_rubrics.py"
+  }
+}

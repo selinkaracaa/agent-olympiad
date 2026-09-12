@@ -267,9 +267,9 @@
     "mode": "unlimited"
   },
   "simulation": {
-    "max_turns": 30,
+    "max_turns": 12,
     "scheduler": "src_collaboration_draft",
-    "turn_budget_basis": "standardized experiment budget: 30 global turns; official contest timing is recorded separately",
+    "turn_budget_basis": "official duration 60 min / 5 min per turn = 12 turns (hard cap 90); src/contest_budget.py is the source of truth",
     "full_hunt_unlock_state": "unavailable",
     "hint_and_interaction_state": "unavailable",
     "runaround_and_coin_state": "unavailable",
@@ -288,7 +288,7 @@
         ],
         "exactly_one_action": true,
         "unstructured_response": "rest",
-        "final_submission": "synthesis_only",
+        "final_submission": "reviewed_answer_sheet",
         "visibility": {
           "think": "private",
           "work": "shared",
@@ -315,7 +315,7 @@
         }
       },
       "precontest_brief": {
-        "turn": 1,
+        "turn": 0,
         "problem_access": false,
         "allowed_actions": [
           "speak",
@@ -330,16 +330,24 @@
         ]
       },
       "opening_discussion": {
-        "turn": 2,
-        "problem_access": true,
-        "allowed_actions": [
-          "speak",
-          "sleep"
-        ],
-        "purpose": "summarize the contestants' opening discussion into priorities and checkpoints, and suggest temporary working groups that contestants may later change"
+        "enabled": false,
+        "problem_access": false,
+        "allowed_actions": [],
+        "purpose": "Coach exits permanently after the single turn-0 blind brief."
       },
       "after_opening_access": false,
-      "min_turns": 10
+      "min_turns": 10,
+      "protocol_version": "otc_turn0_review_v1",
+      "review_required": true,
+      "action_surface": "registry_bundles_v1",
+      "action_bundles": [
+        "common",
+        "desk",
+        "memory",
+        "independent_review",
+        "competition_tools",
+        "deliberation_if_structured"
+      ]
     }
   }
 }

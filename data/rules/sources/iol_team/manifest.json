@@ -1,0 +1,28 @@
+{
+  "competition_id": "iol_team",
+  "crawled_at": "2026-08-11T16:07:28.288839+00:00",
+  "sources": [
+    {
+      "title": "IOL Regulations PDF",
+      "url": "https://ioling.org/rules/rules.pdf",
+      "status": "ok",
+      "content_type": "application/pdf",
+      "bytes": 881494,
+      "raw_file": "data/rules/sources/iol_team/01_rules.pdf",
+      "text_file": "data/rules/sources/iol_team/01_rules.txt",
+      "text_chars": 39193,
+      "text_preview": "language \nRegulations of the International \nLinguistics Olympiad (IOL) \n \nWhereas the faculty of using language is one of the most prominent \ndefining characteristics of the human species and curiosity towards \nlanguage is natural and universal, \nand whereas linguistic research is one of the foremost ways of learning \nabout mankind and the language technologies are among the leading \nindustries in a world intent to maintain its diversity in this age of global \ncommunication, \nand whereas the popularisation of linguistics increases prestige of \neveryone's mother tongue and linguistic pluralism in general,  \nand whereas the sciences of language are but scantily represented in the \ncurricula of secondary schools, yet the genre of the self-sufficient \nlinguistic problem has shown a great capacity to attract the interest of \nsecondary school students and recruit able young minds for careers in \ntheoretical, mathematical and computational linguistics, \nand whereas the art of running contests in solving such problems has, \nafter decades of experience, reached a mature stage in several countries \nand the potential for international co-operation in this field has been \ndemonstrated by several visits of contestants, organisers and experts \nfrom Bulgaria to linguistic olympiads in Russia and vice versa, \nand whereas international science olympiads are now organised in many \nfields and universally recognised as an outstanding method for \ndiscovering, encouraging and challenging talented "
+    },
+    {
+      "title": "IOL Contestant Guidelines",
+      "url": "https://ioling.org/guidelines/en/",
+      "status": "ok",
+      "content_type": "text/html",
+      "bytes": 30106,
+      "raw_file": "data/rules/sources/iol_team/02_en.html",
+      "text_file": "data/rules/sources/iol_team/02_en.txt",
+      "text_chars": 12050,
+      "text_preview": "IOL rules and guidelines for contestants \n\n \n\n \n\n \n\n \n \n\n \n \n \n\n \n \n \n \n \n \n \n \n \n\n \n \n \n \n \n \n \n\n \n \n\n \n \n \n \n \n \n \n \n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n \n\n \n\n \n\n \n\n \n\n \n\n \n\n \n \n \n \n \n \n \n \n IOL \n \n \n Menu \n \n \n\n \n \n\n \n\n \n \n\n \n \n Home \n \n\n \n \n \n \n\n \n\n \n \n\n \n \n\n \n Contests \n\n \n \n\n \n\n Upcoming \n \n\n \n\n Past Contests \n \n\n \n\n How to Participate \n \n \n\n \n \n \n \n \n\n \n\n \n \n\n \n \n Countries \n \n\n \n \n \n \n\n \n\n \n \n\n \n \n\n \n Results \n\n \n \n\n \n\n By year \n \n\n \n\n By country \n \n\n \n\n Hall of Fame \n \n\n \n\n Best Solutions \n \n \n\n \n \n \n \n \n\n \n\n \n \n\n \n \n\n \n Problems \n\n \n \n\n \n\n Samples \n \n\n \n\n By year \n \n\n \n\n Slides \n \n\n \n\n Solvers&#39; Choice \n \n\n \n\n Average Scores \n \n \n\n \n \n \n \n \n\n \n\n \n \n\n \n \n\n \n About \n\n \n \n\n \n\n FAQ \n \n\n \n\n History \n \n\n \n\n A Tale of Two Trophies \n \n\n \n\n Regulations \n \n\n \n\n Sponsorship \n \n \n\n \n \n \n \n \n\n \n\n \n \n\n \n \n News \n \n\n \n \n \n \n\n \n\n \n \n\n \n \n Sponsors \n \n\n \n \n \n \n\n \n\n \n \n\n \n \n Contact \n \n\n \n \n \n \n \n \n \n \n\n \n \n\n \n\n \n \n \n\n \n\n \n \n \n\n \n\n \n \n \n\n \n\n \n \n \n\n \n\n \n \n \n\n \n\n \n \n \n\n \n\n \n \n \n\n \n\n \n \n \n\n \n\n \n \n \n \n \n \n \n \n \n\n \n\n \n\n \n \n \n \n International Linguistics Olympiad \n \n \n \n \n\n \n \n \n \n \n\n \n \n IOL rules and guidelines for contestants \n \n \n\n \n\n \n English\n\n Rules for the individual competition \n\n The following are rules and guidelines for contestants in the individual round. They will be presented (in English) at the opening ceremony. All language versions of these rules have equal validity.\n\n \n Working language\n \n Each contestant chooses their working language from among those offered when reg"
+    }
+  ]
+}

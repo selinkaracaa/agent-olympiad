@@ -1,0 +1,15 @@
+{
+  "competition_id": "cfa_research_challenge",
+  "rule_id": "cfa_research_challenge:draft_v1",
+  "profile": "proxy",
+  "protocol": "research_artifact",
+  "visibility": {
+    "agent_at_start": [
+      "input",
+      "method"
+    ],
+    "hidden_until_grade": [
+      "eval"
+    ]
+  }
+}

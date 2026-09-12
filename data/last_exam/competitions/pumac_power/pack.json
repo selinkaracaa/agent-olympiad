@@ -1,0 +1,15 @@
+{
+  "competition_id": "pumac_power",
+  "rule_id": "pumac_power:draft_v1",
+  "profile": "proxy",
+  "protocol": "proof_packet",
+  "visibility": {
+    "agent_at_start": [
+      "input",
+      "method"
+    ],
+    "hidden_until_grade": [
+      "eval"
+    ]
+  }
+}

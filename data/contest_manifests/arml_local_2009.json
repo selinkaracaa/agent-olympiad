@@ -1,0 +1,9 @@
+{
+  "session_id": "arml_local_2009",
+  "competition_id": "arml_local",
+  "problem_ids": [
+    "arml_local_2009"
+  ],
+  "split_parts": true,
+  "description": "ARML Local 2009 team packet, split into independently managed questions."
+}

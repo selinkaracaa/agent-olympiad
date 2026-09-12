@@ -1,0 +1,11 @@
+{
+  "session_id": "history_olympiad_bowl_2019_2020_asia_beta_set_bowl_round_5",
+  "competition_id": "history_olympiad",
+  "problem_ids": [
+    "history_olympiad_bowl_2019_2020_asia_beta_set_bowl_round_5"
+  ],
+  "description": "OTC contest-session manifest for history_olympiad_bowl_2019_2020_asia_beta_set_bowl_round_5",
+  "split_parts": false,
+  "task_family": "short_answer",
+  "competition_description": "History Bowl/Olympiad packets containing many numbered history toss-up and bonus questions that require concise factual answers."
+}

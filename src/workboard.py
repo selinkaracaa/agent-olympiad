@@ -12,6 +12,7 @@ contests do not, and the gold label must never reach the team through here.
 
 from __future__ import annotations
 
+import hashlib
 import re
 from dataclasses import dataclass, field
 from typing import Any, Iterable, Optional
@@ -306,6 +307,13 @@ class Workboard:
             return head.strip(), tail.strip()
         return text, ""
 
+    @staticmethod
+    def answer_hash(item: BoardItem) -> str:
+        """Stable id of the answer currently recorded; ``review_answer`` binds to it."""
+        return hashlib.sha256(
+            str(item.answer or "").strip().encode("utf-8")
+        ).hexdigest()[:12]
+
     def unknown_ref_message(self, ref: str) -> str:
         known = ", ".join(list(self.items)[:12])
         suffix = "..." if len(self.items) > 12 else ""
@@ -373,6 +381,7 @@ class Workboard:
                     "identical to an answer already recorded)"
                 )
             lines.append(f"Currently recorded: {item.answer}")
+            lines.append(f"Recorded version: {self.answer_hash(item)}")
         else:
             lines.append("--- ANSWER HISTORY ---")
             lines.append("(nothing recorded yet)")

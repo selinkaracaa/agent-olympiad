@@ -1,0 +1,3 @@
+# Science
+
+The Laplacian of this quantity equals charge density over epsilon-nought, according to an application of Poisson's equation. This quantity due to an infinite line of charge is proportional to the logarithm of distance, while this quantity due to an electric dipole is proportional to distance to the negative second power. The charge stored in a capacitor equals capacitance times the (*) difference in this quantity. In physics without calculus, this quantity divided by distance is the electric field. The power emitted by a resistor equals this quantity times current. For 10 points, name this quantity which, according to Ohm's law, is equal to current times resistance.

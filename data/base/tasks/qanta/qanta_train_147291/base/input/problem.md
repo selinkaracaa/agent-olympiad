@@ -1,0 +1,3 @@
+# Geography
+
+: This archipelago's most populous island is home to the second-oldest synagogue in the Western Hemisphere. The barking noises of monk seals inspired the name of this archipelago's Dog Islands. A city in this island group originally had a name meaning "beer hall" and is home to Bluebeard's and Blackbeard's Castles. The large Hovensa refinery in this island group processes Venezuelan oil. An airport on Beef Island serves a capital city in this archipelago called (*) Road Town. Part of this archipelago is the only U.S.-owned territory that drives on the left, a remnant from when it was owned by the Danish. For 10 points, name this Caribbean archipelago divided between British and American parts, the latter of which includes St. Thomas and St. Croix.

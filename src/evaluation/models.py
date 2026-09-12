@@ -153,6 +153,11 @@ def load_rubric(path: str | Path) -> Rubric:
         criteria=criteria,
         not_observable_from_deck=tuple(raw.get("not_observable_from_deck", [])),
     )
+    ids = [item.id for item in criteria]
+    if len(ids) != len(set(ids)):
+        # A judge cannot return a unique score per duplicated id, so catch this
+        # at load time rather than as a confusing validation failure later.
+        raise EvaluationError(f"Rubric {rubric.rubric_id} has duplicate criterion IDs.")
     if abs(sum(item.max_score for item in criteria) - rubric.total_points) > 1e-6:
         raise EvaluationError("Rubric criterion maxima do not sum to total_points.")
     return rubric
@@ -197,6 +202,17 @@ def parse_evaluation_payload(
             )
             for item in payload["criteria"]
         ]
+        # total_score is derived from the criterion scores, so trust those and
+        # recompute rather than discarding an otherwise-valid scoring over the
+        # judge's arithmetic. Long rubrics make that slip common.
+        reported_total = float(payload["total_score"])
+        computed_total = sum(item.score for item in criteria)
+        total_warnings = list(warnings or [])
+        if abs(reported_total - computed_total) > 1e-6:
+            total_warnings.append(
+                f"Judge reported total_score={reported_total:g} but the criterion "
+                f"scores sum to {computed_total:g}; using the criterion sum."
+            )
         result = EvaluationResult(
             evaluator_id=evaluator_id,
             evaluator_version=evaluator_version,
@@ -204,9 +220,9 @@ def parse_evaluation_payload(
             model=model,
             rubric_id=rubric.rubric_id,
             criteria=criteria,
-            total_score=float(payload["total_score"]),
+            total_score=computed_total,
             max_score=float(payload["max_score"]),
-            warnings=list(warnings or []) + [str(value) for value in payload.get("warnings", [])],
+            warnings=total_warnings + [str(value) for value in payload.get("warnings", [])],
             limitations=[str(value) for value in payload.get("limitations", [])],
             artifact_checks=dict(artifact_checks or {}),
             usage=dict(usage or {}),

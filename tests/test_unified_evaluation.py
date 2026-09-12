@@ -116,6 +116,15 @@ class GoldEvaluatorTests(unittest.TestCase):
         self.assertTrue(answers_match("-21", "slope -21"))
         self.assertTrue(answers_match("-21", "-21"))
 
+    def test_radical_spelling_is_equivalent(self):
+        self.assertTrue(
+            answers_match(
+                "(6+√3)/2",
+                "3+sqrt(3)/2",
+                aliases=("3+√3/2",),
+            )
+        )
+
     def test_arml_q4_log_form_does_not_score_against_radical_gold(self):
         parts = load_gold_parts(
             {

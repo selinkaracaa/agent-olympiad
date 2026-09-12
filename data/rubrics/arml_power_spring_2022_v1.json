@@ -1,0 +1,143 @@
+{
+  "rubric_id": "arml_power_spring_2022_v1",
+  "title": "Power Round \u2014 Spring 2022 \u2014 ARML Power sub-problem rubric",
+  "total_points": 39.0,
+  "criteria": [
+    {
+      "id": "problem_03a",
+      "name": "Problem 3a",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 3a (2 pts). Statement:  The Problems There are 40 points available on this contest. The numbers at the end of each problem are the number of points that problem is worth. Be sure you have read and are familiar with the background material. Note especially the instructions about notation and vocabulary given in that material 1. When m doctors must each operate on each ofn patients, explain why at least \u2308 m + n 2 \u2309 pairs of gloves are needed, given the restriction noted in the background material that pairs of gloves cannot be separated. Recall: \u2308x\u2309 is the ceiling of x, the least integer greater than or equal to x. (Hint: think about why one pair of gloves cannot su\ufb03ce for three people, or two pairs for \ufb01ve people.)"
+    },
+    {
+      "id": "problem_03b",
+      "name": "Problem 3b",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 3b (2 pts). Statement: rn together. Let there be t total people, doctors and patients combined. Number them A1, A2, . . . , At, without regard to whether they are doctors or patients. Give each person a right glove (which could be a left glove turned inside-out), and number the gloves according to the person to whom it is given so that person Ai starts by possessing right glove Gi. Then, if person Ai needs to operate on patient Aj, Ai can wear gloves Gi Gi+1 . . . G j\u22121 on their right hand. If j < i then after glove Gt is reached the next layer will be gloveG1. That is, the sequence i, i+1, . . . , j\u22121 is treated modulo t. 2. What glove(s), and in what order, can person Ai wear on their left hand to operate on Aj?"
+    },
+    {
+      "id": "problem_03c",
+      "name": "Problem 3c",
+      "max_score": 3.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 3c (3 pts). Statement:  person could operate on any collection of other people, any number of times, with the operations between various people occurring in any order. This obviously makes the problem somewhat trivial, and engenders our requirement that both gloves be worn as a pair. 3. According to problem 1, at least three pairs of gloves are needed when three doctors need to operate on two patients, each doctor operating once on each patient. Describe a protocol that allows each doctor to operate on each patient with no one ever touching a side of the gloves that already touched someone else, using exactly three pairs of gloves. Make sure to notate your solution in the notation given in the background material."
+    },
+    {
+      "id": "problem_04",
+      "name": "Problem 4",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 4 (2 pts). Statement: 4. Explain why the problem is symmetric in doctors and patients. In other words, if there is a protocol for m doctors and n patients using only k pairs of gloves, show that there is a protocol for n doctors and m patients using k pairs of gloves."
+    },
+    {
+      "id": "problem_05a",
+      "name": "Problem 5a",
+      "max_score": 5.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 5a (5 pts). Statement: 5. Assume that every operation takes exactly one hour, that no doctor may operate on more than one patient at a time, and that no patient may be operated upon by more than one doctor at a time. Operations on di\ufb00erent patients by di\ufb00erent doctors using di\ufb00erent pairs of gloves can be performed at the same time. (a) In terms of x and y, determine the makespan of each of the \ufb01ve steps making up the protocol for 2 x patients and 3y doctors given in the background material. Assume that operations from di\ufb00erent steps maynot be performed simultaneously. (There should be \ufb01ve separate calculations, one for each step, in your answer to this problem.)"
+    },
+    {
+      "id": "problem_05b",
+      "name": "Problem 5b",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 5b (2 pts). Statement: (b) If, instead, there are 2 x+3y pairs of gloves available, each doctor and each patient can receive their own pair. Then any doctor can operate on any patient at any time, as the outsides of the doctors\u2019 gloves and the insides of the patients\u2019 gloves never become contaminated and no exchanges of gloves need to take place. Com- pute the makespan for completing all operations under these conditions, assuming as many operations take place simultaneously as possible."
+    },
+    {
+      "id": "problem_06",
+      "name": "Problem 6",
+      "max_score": 3.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 6 (3 pts). Statement: 6. Recall that the protocol given in the introductory notes allows for 2 x patients and 3y doctors, and uses x + 2y + 1 pairs of gloves. Create a protocol that allows for 2 x patients and 3y + 1 doctors, still using x + 2y + 1 pairs of gloves."
+    },
+    {
+      "id": "problem_07",
+      "name": "Problem 7",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 7 (1 pt). Statement: 7. Explain how to modify your protocol from problem 6 to allow for 2x patients and 3y+2 doctors, using x + 2y + 2 pairs of gloves. That is, allow for one extra doctor by using one extra pair of gloves."
+    },
+    {
+      "id": "problem_08",
+      "name": "Problem 8",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 8 (1 pt). Statement: 8. Explain how to modify your protocol from problem 6 to allow for 2 x + 1 patients and 3y + 1 doctors, using x + 2y + 2 pairs of gloves. That is, allow for one extra patient by using one extra pair of gloves."
+    },
+    {
+      "id": "problem_09",
+      "name": "Problem 9",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 9 (2 pts). Statement: 9. Show that, given the information in the above paragraph and preceding problems, there is a protocol for m doctors and n patients using\u2308 2 3 m+ 1 2 n\u2309 pairs of gloves."
+    },
+    {
+      "id": "problem_10",
+      "name": "Problem 10",
+      "max_score": 1.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 10 (1 pt). Statement: 10. Show that there is also a protocol requiring \u2308 1 2 m + 2 3 n\u2309 pairs of gloves. This could be fewer pairs if m > n ."
+    },
+    {
+      "id": "problem_11",
+      "name": "Problem 11",
+      "max_score": 3.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 11 (3 pts). Statement: 11. Recall the protocol given in the introductory material for 2 x patients and 3 y doctors using x + 2y + 1 pairs of gloves. Draw a diagram for this protocol when there are 4 patients, 6 doctors, and 7 pairs of gloves."
+    },
+    {
+      "id": "problem_12",
+      "name": "Problem 12",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 12 (2 pts). Statement: 12. Explain why, for any protocol allowing all doctors to operate on all patients, every point in the corresponding diagram has at least one arrow coming out of it or at least one arrow pointing into it."
+    },
+    {
+      "id": "problem_13",
+      "name": "Problem 13",
+      "max_score": 3.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 13 (3 pts). Statement: 13. Let s\u2192 t be a component of the diagram. That is, there is a single arrow from s to t, and no other arrows going into or coming out of either s or t. Prove that any operation involving s but not t must occur before any operation involving t but not s."
+    },
+    {
+      "id": "problem_14a",
+      "name": "Problem 14a",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 14a (2 pts). Statement: 14. Consider a protocol in which every doctor operates on every patient. (a) Prove that the diagram for this protocol cannot both a 2-component connecting two doctors and a 2-component connecting two patients."
+    },
+    {
+      "id": "problem_14b",
+      "name": "Problem 14b",
+      "max_score": 2.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 14b (2 pts). Statement: (b) Prove that the diagram for this protocol has at most two 2-components connecting a doctor and a patient."
+    },
+    {
+      "id": "problem_15",
+      "name": "Problem 15",
+      "max_score": 3.0,
+      "observable": true,
+      "description": "Correct, justified solution to Problem 15 (3 pts). Statement: 15. Assume that there are n patients and m doctors with n\u2265 m, n\u2265 2 and m\u2265 1. Prove that at least \u2308 1 2 n + 2 3 m\u2212 1 3\u2309 pairs of gloves are needed for any protocol that allows every doctor to operate on every patient with no contamination."
+    }
+  ],
+  "not_observable_from_deck": [
+    "oral defense",
+    "diagrams that were not recovered from the source PDF"
+  ],
+  "provenance": {
+    "competition_id": "arml_power",
+    "problem_id": "arml_power_spring_2022",
+    "year": 2022,
+    "source_file": "data/raw/arml/Spring_2022/ARMLPower_Spring_2022.pdf",
+    "solution_file": null,
+    "official_total_points": 40.0,
+    "parsed_total_points": 39.0,
+    "points_coverage": 0.975,
+    "awards_parsed": 17,
+    "problems_parsed": 13,
+    "derived_by": "scripts/build_arml_power_rubrics.py"
+  }
+}

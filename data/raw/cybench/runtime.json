@@ -1,0 +1,9 @@
+{
+  "status": "runnable",
+  "source": "https://github.com/andyzorigin/cybench",
+  "license": "Apache-2.0",
+  "upstream_root": "upstream",
+  "solver_image": "cybench/cybench:latest",
+  "build_solver_image": true,
+  "notes": "Sparse checkout contains the 39 promoted challenge directories, metadata, Dockerfiles, compose files, and official start/stop scripts. Challenge containers are isolated per problem."
+}

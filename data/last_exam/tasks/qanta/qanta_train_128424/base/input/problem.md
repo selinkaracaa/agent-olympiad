@@ -1,0 +1,3 @@
+# Literature
+
+Christopher Hampton translated this play for its 2008 Broadway run directed by Ian Rickson. A speech regarding a "universal soul" is given during an avant-garde play-within-this-play that is lambasted by the playwright's mother Arkadina. Stanislavski's first success with the (*) Moscow Art Theatre was an 1898 staging of this play, and the line "If you ever need my life, come and take it" is inscribed on a medallion Nina gives in this play to her beloved, the novelist Trigorin. Konstantin shoots himself at the end of this play, and he had earlier shot the title animal as a gift. For 10 points, name this play by Anton Chekhov titled after an aquatic bird.

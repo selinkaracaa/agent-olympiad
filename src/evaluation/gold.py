@@ -9,14 +9,16 @@ from typing import Any
 from .models import Criterion, CriterionResult, EvaluationError, EvaluationResult, Rubric
 
 
-# Classic: "1. answer" / "1) answer" / "Problem 1: answer"
+# Classic: "1. answer" / "1) answer" / "Problem 1: answer" / "Q1. answer"
+# Require space after '.' so decimals / sci-notation like "6.0e7" are not ids.
 ANSWER_LINE_RE = re.compile(
-    r"(?m)^\s*(?:(?:problem|q|part)\s*)?(\d+)\s*[.):=\-]\s*(.+?)\s*$",
+    r"(?m)^\s*(?:(?:problem|q|part)\s*)?(\d+)\s*(?:[):=\-]|\.(?=\s))\s*(.+?)\s*$",
     re.IGNORECASE,
 )
-# Inline numbered tokens anywhere in the blob
+# Inline numbered tokens anywhere in the blob.
+# Avoid treating decimals / sci-notation (6.0e7) as answer ids.
 INLINE_NUM_RE = re.compile(
-    r"(?i)(?:^|[;\s])(?:(?:problem|q|part|t|team)\s*)?(\d+)\s*[.):=\-]\s*",
+    r"(?i)(?:^|[;\s])(?:(?:problem|q|part|t|team)\s*)?(?<!\d)(\d+)(?:[):=\-]|\.(?=\s))\s*",
 )
 
 
@@ -26,8 +28,31 @@ def normalize_answer(value: str) -> str:
     text = text.replace("√", "sqrt")
     text = re.sub(r"sqrt\s*\(", "sqrt(", text)
     text = re.sub(r"\\sqrt\s*\{([^}]+)\}", r"sqrt(\1)", text)
+    # Treat the compact radical spelling ``sqrt3`` (including the form
+    # produced by replacing Unicode ``√3`` above) as ``sqrt(3)``.  Without
+    # this, otherwise equivalent answers such as ``3+√3/2`` and
+    # ``3+sqrt(3)/2`` normalize to different strings.
+    text = re.sub(r"\bsqrt\s*([A-Za-z0-9]+)", r"sqrt(\1)", text)
     text = re.sub(r"\\frac\s*\{([^}]+)\}\s*\{([^}]+)\}", r"(\1)/(\2)", text)
     text = text.replace("$", "").replace("\\", "")
+    # Collapse common scientific-notation spellings before stripping spaces.
+    # 6.0 x 10^7 / 6.0×10^{7} / 6.0e7 / 6.0 x 107  -> 6.0*10^7
+    text = text.replace("×", "x").replace("·", "x")
+    text = re.sub(
+        r"(\d+(?:\.\d+)?)\s*[x*]\s*10\s*[\^]?\s*\{?\s*([+-]?\d+)\s*\}?",
+        r"\1*10^\2",
+        text,
+    )
+    text = re.sub(
+        r"(\d+(?:\.\d+)?)\s*[x*]\s*10([+-]?\d+)\b",
+        r"\1*10^\2",
+        text,
+    )
+    text = re.sub(
+        r"(\d+(?:\.\d+)?)\s*[eE]\s*([+-]?\d+)\b",
+        r"\1*10^\2",
+        text,
+    )
     text = re.sub(r"\s+", "", text)
     return text
 
@@ -207,17 +232,40 @@ def _embedded_in_actual(expected: str, actual: str) -> bool:
 def answers_match(expected: str, actual: str, aliases: tuple[str, ...] = ()) -> bool:
     candidates = (expected,) + aliases
     norm_actual = normalize_answer(actual)
+    # Drop trailing unit-ish suffixes so "6.0e7 m/s" can match "6.0 x 10^7".
+    norm_actual_core = re.sub(r"[a-z/%°]+$", "", norm_actual)
+    actuals = {norm_actual, norm_actual_core}
     for candidate in candidates:
         norm_expected = normalize_answer(candidate)
         if not norm_expected:
             continue
-        if norm_expected == norm_actual:
+        if any(norm_expected == item for item in actuals if item):
             return True
         if _is_unsigned_number(norm_expected):
             continue
-        if _embedded_in_actual(norm_expected, norm_actual):
+        if any(_embedded_in_actual(norm_expected, item) for item in actuals if item):
             return True
     return False
+
+
+def _digit_part_id(part_id: str) -> str | None:
+    """Map Q1/q1/Problem1 style ids onto bare digit keys used by parsers."""
+    text = str(part_id).strip()
+    if text.isdigit():
+        return text
+    match = re.fullmatch(r"(?i)(?:q|part|problem|t|team)?-?(\d+)", text)
+    if match:
+        return match.group(1)
+    return None
+
+
+def _lookup_parsed_answer(parsed: dict[str, str], part_id: str) -> str:
+    if part_id in parsed and parsed[part_id]:
+        return parsed[part_id]
+    digit_id = _digit_part_id(part_id)
+    if digit_id and parsed.get(digit_id):
+        return parsed[digit_id]
+    return ""
 
 
 @dataclass
@@ -260,14 +308,32 @@ class GoldAnswerEvaluator:
                 + ", ".join(skipped)
             )
 
+        if not parsed and len(gradeable) == 1:
+            # Single-part contests often submit a bare short answer (or
+            # "Final answer: ...") without a leading "1.".
+            final_markers = re.findall(
+                r"(?im)\bfinal\s+answer\s*:\s*([^\r\n]+)",
+                self.submission_text,
+            )
+            bare = (
+                final_markers[-1].strip().rstrip(".")
+                if final_markers
+                else self.submission_text.strip()
+            )
+            if bare:
+                parsed = {gradeable[0].id: bare}
+                digit_id = _digit_part_id(gradeable[0].id)
+                if digit_id:
+                    parsed[digit_id] = bare
+
         if not parsed:
             warnings.append(
                 "Could not parse numbered answers "
-                "(expected '1. ...', 'T-1 ...', or semicolon-separated values)."
+                "(expected '1. ...', 'T-1 ...', 'Q1. ...', or semicolon-separated values)."
             )
 
         for part in gradeable:
-            actual = parsed.get(part.id, "")
+            actual = _lookup_parsed_answer(parsed, part.id)
             correct = bool(actual) and answers_match(part.expected, actual, part.aliases)
             score = part.points if correct else 0.0
             evidence = [

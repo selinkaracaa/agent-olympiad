@@ -4,10 +4,14 @@ from dataclasses import dataclass, field
 import re
 from typing import Any
 
+from tool_registry import action_matches
 
+
+# Rule cards may spell these either way (``write_scratchpad`` / ``work``);
+# membership is checked alias-blind via ``action_matches``.
 DEFAULT_COUNTED_ACTIONS = {
     "speak",
-    "write_scratchpad",
+    "work",
     "propose",
     "challenge",
     "provide_evidence",
@@ -32,7 +36,7 @@ class CommunicationBudget:
         actions = set(
             self.policy.get("counted_actions") or DEFAULT_COUNTED_ACTIONS
         )
-        return self.enabled and action_type in actions
+        return self.enabled and action_matches(action_type, actions)
 
     @property
     def max_message_chars(self) -> int:

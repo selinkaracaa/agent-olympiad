@@ -1,0 +1,11 @@
+{
+  "session_id": "purple_comet_hs_2019",
+  "competition_id": "purple_comet",
+  "problem_ids": [
+    "purple_comet_hs_2019"
+  ],
+  "description": "OTC contest-session manifest for purple_comet_hs_2019",
+  "split_parts": false,
+  "task_family": "mathematics",
+  "competition_description": "Purple Comet online team mathematics: solve a timed numbered set for the middle- or high-school division and submit short final answers."
+}

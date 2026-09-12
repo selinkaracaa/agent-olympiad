@@ -1,0 +1,53 @@
+{
+  "competition_id": "icpc",
+  "source": "data/rules/icpc",
+  "canonical": "data/rules stays the source of truth; this pack is a projection",
+  "input": {
+    "from_competition.json": [
+      "allowed_tools",
+      "comparability",
+      "competition_id",
+      "deliverable",
+      "execution",
+      "human_constraints",
+      "profile",
+      "protocol",
+      "provenance",
+      "resources",
+      "rule_id",
+      "rules_text",
+      "schema_version",
+      "team"
+    ]
+  },
+  "method": {
+    "from_collaboration.json": [
+      "agent_constraints",
+      "agent_roles",
+      "communication",
+      "deliberation",
+      "information_policy",
+      "rule_sections",
+      "simulation"
+    ],
+    "simulation_owned_keys": [
+      "draft",
+      "exclusive_workstation_lease",
+      "max_turns",
+      "pending_run_policy",
+      "run_judging_latency_basis",
+      "run_judging_latency_turns",
+      "scheduler",
+      "turn_budget_basis"
+    ]
+  },
+  "eval": {
+    "from_evaluation.json": [
+      "evaluation_guidance",
+      "scoring",
+      "submission"
+    ],
+    "hidden_until_grade": true,
+    "gold_answers_stay_in": "data/benchmarks and data/rubrics, not this pack"
+  }
+}

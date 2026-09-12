@@ -1,0 +1,115 @@
+{
+  "source": "data/rules/mystery_hunt/collaboration.json#agent_roles",
+  "information_policy": "role_specialized",
+  "roles": [
+    {
+      "name": "Agent_1",
+      "title": "captain and batch submitter",
+      "may_submit": true,
+      "duties": [
+        "Decide when the current batch is good enough to commit.",
+        "Keep a running list of which problems are answered and which are open.",
+        "Submit only after the format and rule checks pass."
+      ]
+    },
+    {
+      "name": "Agent_2",
+      "title": "fast solver A",
+      "may_submit": false,
+      "duties": [
+        "Clear the easy problems in the current batch quickly and accurately.",
+        "Hand off anything that needs deep work instead of stalling the batch."
+      ]
+    },
+    {
+      "name": "Agent_3",
+      "title": "fast solver B",
+      "may_submit": false,
+      "duties": [
+        "Clear the easy problems in the current batch quickly and accurately.",
+        "Hand off anything that needs deep work instead of stalling the batch."
+      ]
+    },
+    {
+      "name": "Agent_4",
+      "title": "verifier",
+      "may_submit": false,
+      "duties": [
+        "Challenge weak arguments and demand an independent check.",
+        "Reject an answer rather than let an unverified one be submitted."
+      ]
+    },
+    {
+      "name": "Agent_5",
+      "title": "strategy lead",
+      "may_submit": false,
+      "duties": [
+        "Decide which problems are worth attempting for the points available.",
+        "Call the trade-off between accuracy and speed for each batch."
+      ]
+    },
+    {
+      "name": "Agent_6",
+      "title": "scribe",
+      "may_submit": false,
+      "duties": [
+        "Keep the shared workspace readable and current.",
+        "Write answers in the required format as they are settled."
+      ]
+    },
+    {
+      "name": "Agent_7",
+      "title": "backup solver",
+      "may_submit": false,
+      "duties": [
+        "Take the problems nobody has claimed rather than duplicating work.",
+        "Say early when a problem is beyond the remaining time."
+      ]
+    },
+    {
+      "name": "Agent_8",
+      "title": "completeness checker",
+      "may_submit": false,
+      "duties": [
+        "Scan for unanswered problems before the team submits.",
+        "Confirm every required part of the deliverable is present."
+      ]
+    },
+    {
+      "name": "Agent_9",
+      "title": "specialist and completeness checker",
+      "may_submit": false,
+      "duties": [
+        "Scan for unanswered problems before the team submits.",
+        "Confirm every required part of the deliverable is present."
+      ]
+    },
+    {
+      "name": "Agent_10",
+      "title": "specialist and completeness checker",
+      "may_submit": false,
+      "duties": [
+        "Scan for unanswered problems before the team submits.",
+        "Confirm every required part of the deliverable is present."
+      ]
+    },
+    {
+      "name": "Agent_11",
+      "title": "specialist and completeness checker",
+      "may_submit": false,
+      "duties": [
+        "Scan for unanswered problems before the team submits.",
+        "Confirm every required part of the deliverable is present."
+      ]
+    },
+    {
+      "name": "Agent_12",
+      "title": "specialist and completeness checker",
+      "may_submit": false,
+      "duties": [
+        "Scan for unanswered problems before the team submits.",
+        "Confirm every required part of the deliverable is present."
+      ]
+    }
+  ]
+}

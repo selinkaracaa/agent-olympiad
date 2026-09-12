@@ -1,0 +1,15 @@
+{
+  "competition_id": "ccdc",
+  "rule_id": "ccdc:draft_v1",
+  "profile": "non_comparable",
+  "protocol": "cyber_defense_proxy",
+  "visibility": {
+    "agent_at_start": [
+      "input",
+      "method"
+    ],
+    "hidden_until_grade": [
+      "eval"
+    ]
+  }
+}

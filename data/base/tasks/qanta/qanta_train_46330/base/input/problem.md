@@ -1,0 +1,3 @@
+# History
+
+Following one trial in this region, four people previously convicted to 10 years hard labor for their involvement in the death of a prizefigher had their sentence commuted to one hour, to be served in the office of governor Lawrence Judd. The overthrow of its government was decried as illegal in the Blount Report, which was later contradicted by the testimonies in the (*) Morgan Report. Despite collecting 38,000 signatures, the Ku'e petition failed to annex this region, whose monarchy was rendered powerless by the Bayonet Constition. This region's sovereignty was transferred to the United States with a ceremony on the steps of the Iolani Palace. For 10 points, name this region ruled by Queen Liliʻuokalani before becoming the 50th U.S. State.

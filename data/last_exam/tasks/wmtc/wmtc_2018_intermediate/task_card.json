@@ -1,0 +1,33 @@
+{
+  "task_id": "wmtc/wmtc_2018_intermediate",
+  "competition_id": "wmtc",
+  "problem_id": "wmtc_2018_intermediate",
+  "title": "WMTC 2018 Intermediate — Team Round",
+  "year": 2018,
+  "team_size": 6,
+  "source_url": "https://wmtc.international/problems",
+  "inherits_competition_pack": "competitions/wmtc",
+  "rule_card": "data/rules/wmtc",
+  "input": {
+    "visibility": "agent_at_start",
+    "files": [
+      {
+        "name": "problem.md",
+        "path": "base/input/problem.md"
+      },
+      {
+        "name": "2018_Intermediate_Indivi_Relay_Team_Problems.pdf.path",
+        "path": "base/input/2018_Intermediate_Indivi_Relay_Team_Problems.pdf.path"
+      }
+    ]
+  },
+  "method": {
+    "visibility": "agent_at_start",
+    "path": "competitions/wmtc/method"
+  },
+  "eval": {
+    "visibility": "hidden_until_grade",
+    "path": "eval/reference.json",
+    "competition_eval": "competitions/wmtc/eval"
+  }
+}

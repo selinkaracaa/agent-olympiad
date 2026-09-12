@@ -1,0 +1,33 @@
+{
+  "task_id": "debatebench/debatebench_doxbridge_pre_wu_dc_2022_round_5",
+  "competition_id": "debatebench",
+  "problem_id": "debatebench_doxbridge_pre_wu_dc_2022_round_5",
+  "title": "doxbridge_pre_wu_dc_2022_round_5",
+  "year": 2022,
+  "team_size": 8,
+  "source_url": null,
+  "inherits_competition_pack": "competitions/debatebench",
+  "rule_card": "data/rules/debatebench",
+  "input": {
+    "visibility": "agent_at_start",
+    "files": [
+      {
+        "name": "problem.md",
+        "path": "base/input/problem.md"
+      },
+      {
+        "name": "doxbridge_pre_wu_dc_2022_round_5.txt.path",
+        "path": "base/input/doxbridge_pre_wu_dc_2022_round_5.txt.path"
+      }
+    ]
+  },
+  "method": {
+    "visibility": "agent_at_start",
+    "path": "competitions/debatebench/method"
+  },
+  "eval": {
+    "visibility": "hidden_until_grade",
+    "path": "eval/reference.json",
+    "competition_eval": "competitions/debatebench/eval"
+  }
+}

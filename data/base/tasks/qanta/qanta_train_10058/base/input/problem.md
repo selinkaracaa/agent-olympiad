@@ -1,0 +1,3 @@
+# Literature
+
+This drama originally began with the poem "They Sat There, the Two," about the title character's deceased sons.  Emilie Bardach served as the inspiration for one of its main characters, a child from the author's earlier play The Lady from the Sea.  The title character attempts to prevent Kaja Fosli from marrying his competitor Ragnar Brovik, whose dream of returning to his old career is shattered when the title character forgets a promise made ten years ago to Hilde Wangel, who convinces him to climb the spire of his new home.  FTP, name this play about the architect Halvard Solness by Henrik Ibsen.

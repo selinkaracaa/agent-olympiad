@@ -1,0 +1,33 @@
+{
+  "task_id": "ieo_business_case/ieo_business_case_2024",
+  "competition_id": "ieo_business_case",
+  "problem_id": "ieo_business_case_2024",
+  "title": "Business Case — Housing Challenges in Hong Kong",
+  "year": 2024,
+  "team_size": 5,
+  "source_url": "https://ieo-official.org/prepare",
+  "inherits_competition_pack": "competitions/ieo_business_case",
+  "rule_card": "data/rules/ieo_business_case",
+  "input": {
+    "visibility": "agent_at_start",
+    "files": [
+      {
+        "name": "problem.md",
+        "path": "base/input/problem.md"
+      },
+      {
+        "name": "2024.pdf.path",
+        "path": "base/input/2024.pdf.path"
+      }
+    ]
+  },
+  "method": {
+    "visibility": "agent_at_start",
+    "path": "competitions/ieo_business_case/method"
+  },
+  "eval": {
+    "visibility": "hidden_until_grade",
+    "path": "eval/reference.json",
+    "competition_eval": "competitions/ieo_business_case/eval"
+  }
+}

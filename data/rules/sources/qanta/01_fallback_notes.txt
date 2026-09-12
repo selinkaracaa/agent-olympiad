@@ -1,0 +1,7 @@
+QANTA / Pinafore quiz-bowl AI project (fallback crawl via https://github.com/Pinafore/qb).
+
+Contestant-facing simulation notes for Agent Olympiad:
+- QANTA is a quiz-bowl question corpus / research dataset, not a live buzzer match harness.
+- Human quiz bowl normally forbids electronic lookup during a match.
+- Answers should be short canonical entity names.
+- This benchmark row is question-level; opposing-team buzzer dynamics are not fully simulated.

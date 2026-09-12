@@ -56,7 +56,6 @@ DEFAULT_SCHEMAS = [
     "centralized",
     "round_table",
     "decentralized",
-    "open_table_coach",
 ]
 
 

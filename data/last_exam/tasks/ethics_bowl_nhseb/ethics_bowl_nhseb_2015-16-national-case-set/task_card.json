@@ -1,0 +1,33 @@
+{
+  "task_id": "ethics_bowl_nhseb/ethics_bowl_nhseb_2015-16-national-case-set",
+  "competition_id": "ethics_bowl_nhseb",
+  "problem_id": "ethics_bowl_nhseb_2015-16-national-case-set",
+  "title": "2015-16-national-case-set",
+  "year": 2015,
+  "team_size": 5,
+  "source_url": "https://nhseb.org/case-library",
+  "inherits_competition_pack": "competitions/ethics_bowl_nhseb",
+  "rule_card": "data/rules/ethics_bowl_nhseb",
+  "input": {
+    "visibility": "agent_at_start",
+    "files": [
+      {
+        "name": "problem.md",
+        "path": "base/input/problem.md"
+      },
+      {
+        "name": "2015-16-national-case-set.pdf.path",
+        "path": "base/input/2015-16-national-case-set.pdf.path"
+      }
+    ]
+  },
+  "method": {
+    "visibility": "agent_at_start",
+    "path": "competitions/ethics_bowl_nhseb/method"
+  },
+  "eval": {
+    "visibility": "hidden_until_grade",
+    "path": "eval/reference.json",
+    "competition_eval": "competitions/ethics_bowl_nhseb/eval"
+  }
+}

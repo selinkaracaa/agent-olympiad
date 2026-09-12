@@ -1,0 +1,33 @@
+{
+  "task_id": "arml_national_team/arml_national_team_2016",
+  "competition_id": "arml_national_team",
+  "problem_id": "arml_national_team_2016",
+  "title": "Team Round — 2016",
+  "year": 2016,
+  "team_size": 15,
+  "source_url": "https://www.arml.com/ARML/arml_2019/public_contest_files/2016_contest_file/2016_Contest_Final_Version.pdf",
+  "inherits_competition_pack": "competitions/arml_national_team",
+  "rule_card": "data/rules/arml_national_team",
+  "input": {
+    "visibility": "agent_at_start",
+    "files": [
+      {
+        "name": "problem.md",
+        "path": "base/input/problem.md"
+      },
+      {
+        "name": "2016_Contest_Final_Version.pdf.path",
+        "path": "base/input/2016_Contest_Final_Version.pdf.path"
+      }
+    ]
+  },
+  "method": {
+    "visibility": "agent_at_start",
+    "path": "competitions/arml_national_team/method"
+  },
+  "eval": {
+    "visibility": "hidden_until_grade",
+    "path": "eval/reference.json",
+    "competition_eval": "competitions/arml_national_team/eval"
+  }
+}
