@@ -3,22 +3,20 @@
     "mode": "rubric",
     "unit": "artifact",
     "evaluator_id": null,
-    "evaluator_status": "unassigned",
+    "evaluator_status": "not_ready",
     "official_performance": {
       "source_status": "source_enriched_v1",
       "source_review_status": "material_official_fields_remain_unverified",
       "mechanics_completeness": "not_fully_encoded",
       "mode": "rubric",
       "unit": "artifact",
-      "criteria": [
-        "Repository evaluation status: Task performance is specified per artifact in rubric mode, but the repository evaluator is unassigned; do not invent a completed score."
-      ],
+      "criteria": [],
       "mechanics": [],
       "tie_breakers": [],
       "source_refs": [],
       "unresolved": [],
       "repository_evaluator_id": null,
-      "repository_evaluator_status": "unassigned"
+      "repository_evaluator_status": "not_ready"
     },
     "rule_compliance": {
       "reported_separately_from_performance": true,
@@ -91,7 +89,7 @@
     },
     "current_repository_availability": {
       "evaluator_ready": false,
-      "evaluator_status": "unassigned",
+      "evaluator_status": "not_ready",
       "official_environment_fully_reproduced": false,
       "official_wall_clock_enforced": false,
       "declared_unavailable_mechanisms": [
@@ -103,11 +101,35 @@
         "Speaker points and the extension obligations of Closing teams depend on what earlier speakers actually said in the room."
       ],
       "required_selectors": [],
-      "submission_adaptation": null
+      "submission_adaptation": null,
+      "readiness_scope": "Per-record metadata; evaluator availability does not imply official-environment reproduction."
+    },
+    "rubric_reuse_policy": {
+      "same_competition_only": true,
+      "cross_year_rubric_reuse": true,
+      "copy_other_year_answers": false,
+      "invent_official_weights": false,
+      "missing_packet_or_environment_stays_not_ready": true,
+      "excluded_competitions": [
+        "envirothon"
+      ]
+    },
+    "benchmark_readiness_source": "data/benchmarks/debatebench/benchmark.json",
+    "evaluation_status_counts": {
+      "not_ready": 32
+    },
+    "evaluator_selection": "Use each benchmark record's evaluation; rule values are defaults only.",
+    "record_evaluator_overrides": {},
+    "record_rubric_overrides": {},
+    "dataset_source_review": {
+      "original_task": "adjudicate_archived_debate",
+      "paper_url": "https://arxiv.org/abs/2502.06279",
+      "historical_scores_path": "data/rubrics/debatebench_historical_scores_20260913.json",
+      "current_adaptation": "Existing eight-speaker generation task retained; historical scores are reference-only."
     }
   },
   "submission": {
     "max_count": 1
   },
-  "evaluation_guidance": "Task performance: evaluate the oral speech per artifact in rubric mode and enforce this answer contract: Submit eight labeled speeches in official order: PM, LO, DPM, DLO, MG, MO, GW, OW. Preserve coalition privacy and identify POIs separately. Repository status: the evaluator is unassigned. Do not invent a completed benchmark grade or claim evaluator readiness. Rule compliance: report prohibited tools, outside assistance, hidden-answer access, unauthorized submission, and competition-specific violations separately from task performance. Collaboration quality: assess allocation, evidence exchange, verification, handoffs, recovery, replanning, and communication efficiency without rewarding fixed roles, equal airtime, or message volume by themselves. Fidelity: identify official mechanisms that the current runner does not reproduce; never treat a proxy action as proof that a physical, oral, live-opponent, judge, or mutable-environment event occurred."
+  "evaluation_guidance": "Resolve readiness, evaluator, rubric, and score basis from the selected benchmark record. Task performance: evaluate the oral speech per artifact in rubric mode and enforce this answer contract: Submit eight labeled speeches in official order: PM, LO, DPM, DLO, MG, MO, GW, OW. Preserve coalition privacy and identify POIs separately. Do not invent a completed benchmark grade or claim evaluator readiness. Rule compliance: report prohibited tools, outside assistance, hidden-answer access, unauthorized submission, and competition-specific violations separately from task performance. Collaboration quality: assess allocation, evidence exchange, verification, handoffs, recovery, replanning, and communication efficiency without rewarding fixed roles, equal airtime, or message volume by themselves. Fidelity: identify official mechanisms that the current runner does not reproduce; never treat a proxy action as proof that a physical, oral, live-opponent, judge, or mutable-environment event occurred."
 }
