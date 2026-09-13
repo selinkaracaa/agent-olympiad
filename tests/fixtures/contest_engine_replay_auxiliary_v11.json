@@ -1,0 +1,28 @@
+{
+  "protocol_version": "contest_session_v11",
+  "action_set_version": 8,
+  "module_version": 3,
+  "description": "v11 auxiliary memory calls and isolated final-answer extraction. Captured only after independent runtime/grading guard tests passed; earlier snapshots are preserved.",
+  "cases": {
+    "single_agent/math/fresh": "aa208a775866453c73b38aca9179b86ae285c2be494f224bb85ffae1ed8e256e",
+    "single_agent/math/resume": "d264db29cf280c22bd18065516fcc531539216ae7615a879d860386293254f90",
+    "single_agent/code/fresh": "7dc692459dd3fbb08b2e630a2808cc59a6fb58f6fd5171595b7816f93016653b",
+    "single_agent/code/resume": "c69c9124d0fd85c504d36ab32070c4d0e6cdcb7c10a8832fa04e2e99ca7f19cb",
+    "decentralized/math/fresh": "881ee5ce983959fa23bc683d3cd802b8da2554238cc9496cab382d569ba1304d",
+    "decentralized/math/resume": "b82570418018bd7b6f995ee5cd19e9833da7f2155e04a02a4317b395e46f7a35",
+    "decentralized/code/fresh": "89ab40414a8d73a43ee94c74c78636c4ffca0b32c1a2adb5b0c8b8cfd44877f6",
+    "decentralized/code/resume": "3e74a086db6f0e67f92be26e9452aeaa367de7f9b5fa9d4700ef1f77c39d74a2",
+    "centralized/math/fresh": "46973f389383f6020f86a004db06cccb139838f3f7fa09c8e5f75b66551b208d",
+    "centralized/math/resume": "23003d4afa4b6c1cc459a54f22b395f3eef04c467c476d3e5f333158c3bb9768",
+    "centralized/code/fresh": "daa1166e30a08d6526e253ebcb756f71d2c2788edd4d18b66b250024012d51fc",
+    "centralized/code/resume": "f80133fbcf5cbf39705a02dc37c9e8b2928215326fbb0435e10ca08fa24a95ae",
+    "vallina_otc/math/fresh": "6598521c509553cea62471ec272f95793bcfa0c4113625ce3c6b56c7332610ed",
+    "vallina_otc/math/resume": "841988aa58011cec603e3a8a9fb747bc40c15e481f7c2c6176f0b4a89b6cf4d1",
+    "vallina_otc/code/fresh": "4404570cb28c262b19d235b7cf6d821d520c317f5ab3298e44f639b7728ba0b6",
+    "vallina_otc/code/resume": "8ee52d4751212737078c283030f256c6ee3fb341e04ae6eac599a00043f02870",
+    "otc/math/fresh": "a0a31669b9763bac29ccf29c4d16a76358e0c0249c981b23e3a095701470d2c7",
+    "otc/math/resume": "30c59ec498e13d043b80d8344c6d38156b5aabf7b1619150469297436fa1dfed",
+    "otc/code/fresh": "cdce92d6ec563aeed9ffaa98c15631b69c032bdfe8e32ce75ffee92290933757",
+    "otc/code/resume": "cbcfda0a4e1bdf517bd46de54ee584d4b329f4663aa4326e4a7180bc9744bfc1"
+  }
+}

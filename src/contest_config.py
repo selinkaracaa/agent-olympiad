@@ -6,10 +6,13 @@ from dataclasses import dataclass, field, replace
 from typing import Any, Callable, Literal
 
 from contest_manifest import ManifestTask
+from contest_modules import ContestModules
+from action_modules.contracts import ActionSpec
+from computer_capacity import validate_computer_capacity
 from rulecard_policy import OpenTablePolicy, open_table_policy
 from rules.models import RuleCard
 
-PROTOCOL_VERSION = "contest_session_v6"
+PROTOCOL_VERSION = "contest_session_v11"
 QueryFn = Callable[[str, str], str]
 TaskActionExecutor = Callable[[ManifestTask, str, dict[str, Any]], dict[str, Any]]
 CheckpointCallback = Callable[[dict[str, Any], str], None]
@@ -46,11 +49,6 @@ class BaselineFeatures:
     leader_submits: bool
     rule_card: RuleCardMode = "off"
 
-    @property
-    def basic_open_table(self) -> bool:
-        return self.coach == "card" and not self.review_workflow and not self.memory_actions
-
-
 _NO_COACH = BaselineFeatures(
     coach="none",
     review_workflow=False,
@@ -63,12 +61,6 @@ _NO_COACH = BaselineFeatures(
     leader_submits=False,
 )
 BASELINES: dict[str, BaselineFeatures] = {
-    "vallina_otc": BaselineFeatures(
-        coach="card", review_workflow=False, memory_actions=False,
-        desk_actions=True, private_channel=False, structured_context=False,
-        submission_cooldown=False, mechanical_switch=False,
-        leader_submits=False, rule_card="enforced",
-    ),
     # Same environment as decentralized; team_size is pinned to 1.
     "single_agent": _NO_COACH,
     "decentralized": _NO_COACH,
@@ -101,7 +93,13 @@ BASELINES: dict[str, BaselineFeatures] = {
         rule_card="enforced",
     ),
 }
-# Old spellings resolve to the sole current OTC implementation, not old protocols.
+# The matched pair shares every coordination policy. Only memory is optional.
+# Retain the historical CLI key, but v10 never reuses the old basic-OTC overlay.
+BASELINES["vallina_otc"] = replace(BASELINES["otc"], memory_actions=False)
+BASELINES = {name: BASELINES[name] for name in (
+    "single_agent", "decentralized", "centralized", "vallina_otc", "otc",
+)}
+# Aliases resolve to current presets; run identity prevents old-protocol resume.
 BASELINE_ALIASES: dict[str, str] = {
     "OTC": "otc",
     "vanilla_otc": "vallina_otc",
@@ -112,6 +110,8 @@ BASELINE_ALIASES: dict[str, str] = {
     "strategic_team": "otc",
     "open_table_coach": "otc",
     "open_table_coach_memory": "otc",
+    "otc_rule_card": "vallina_otc",
+    "otc_rule_card_memory": "otc",
 }
 BASELINE_NAMES: tuple[str, ...] = tuple(BASELINES)
 
@@ -143,18 +143,22 @@ class ContestRunConfig:
     require_final_review: bool | None = None
     start_seat: int = 0
     rule_guidance: str = ""
-    programming_deadline_submit: bool = False
+    # Common contest-end collection, independent of in-contest review gates.
+    deadline_submit: bool = True
     # Filled from ``BASELINES[system_variant]`` unless given explicitly
     # (ablations may override single switches).
     features: BaselineFeatures | None = None
     # The competition's rule card; required when ``features.rule_card != "off"``.
     rule_card: RuleCard | None = None
+    # Explicit opt-in; workstation lease and rule-card defaults remain separate.
+    computer_capacity: int | None = None
     # Derived from ``rule_card`` for ``coach == "card"``; never set by callers.
     otc_policy: OpenTablePolicy | None = field(
         default=None, init=False, repr=False, compare=False
     )
 
     def __post_init__(self) -> None:
+        validate_computer_capacity(self.computer_capacity)
         if self.team_size < 1 or self.max_turns < 1:
             raise ValueError("team_size and max_turns must be positive")
         canonical = canonical_baseline(self.system_variant)
@@ -183,7 +187,7 @@ class ContestRunConfig:
         if self.features.coach == "card":
             if self.features.rule_card != "enforced" or self.rule_card is None:
                 raise ValueError("coach='card' requires an enforced rule card")
-            if not self.review_required and not self.features.basic_open_table:
+            if not self.review_required:
                 raise ValueError("otc requires independent review approval")
             if self.team_size < 2:
                 raise ValueError("otc independent review requires at least two contestants")
@@ -195,16 +199,28 @@ class ContestRunConfig:
                     self.rule_card, team_size=self.team_size, programming=True
                 ),
             )
-            if self.features.basic_open_table:
-                from basic_otc import basic_policy
-                object.__setattr__(self, "otc_policy", basic_policy(self.otc_policy))
-        if canonical == "otc" and not self.review_required:
-            raise ValueError("otc requires review; use vallina_otc for the basic baseline")
-        if canonical == "vallina_otc" and (
-            self.features != BASELINES[canonical] or self.require_review is True
-            or self.require_final_review is True
-        ):
-            raise ValueError("vallina_otc is a fixed basic Coach + rule-card baseline")
+
+    @property
+    def modules(self) -> ContestModules:
+        # A centralized contestant leader is not the external, blind Coach.
+        return ContestModules(
+            memory=self.features.memory_actions,
+            coach=self.features.coach == "card",
+        )
+
+    def allows_action(self, spec: ActionSpec) -> bool:
+        """Module ownership alone does not enable an optional workflow."""
+        if not self.modules.allows(spec.module):
+            return False
+        if spec.name in {"request_review", "review_answer"}:
+            return self.review_required or self.final_review_required
+        if spec.pack == "deliberation":
+            return self.otc_policy is not None and self.otc_policy.structured_deliberation
+        if spec.name == "direct_message":
+            return self.features.private_channel and self.team_size >= 2
+        if spec.name == "assign_problem":
+            return self.features.leader_submits and self.features.coach != "card"
+        return True
 
     @property
     def review_required(self) -> bool:

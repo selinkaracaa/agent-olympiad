@@ -3,7 +3,7 @@
     "mode": "gold_or_judge",
     "unit": "problem_or_question",
     "evaluator_id": null,
-    "evaluator_status": "unassigned",
+    "evaluator_status": "not_ready",
     "official_performance": {
       "source_status": "source_enriched_v1",
       "source_review_status": "primary_rules_partial_or_variant_selector_required",
@@ -11,7 +11,6 @@
       "mode": "gold_or_judge",
       "unit": "problem_or_question",
       "criteria": [
-        "Repository evaluation status: Task performance is specified per problem_or_question in gold_or_judge mode, but the repository evaluator is unassigned; do not invent a completed score.",
         "Source-recorded competition rule: You gain points for keeping required services up, preventing unauthorized access, and completing business injects, and lose them for SLA violations, using recovery services, and successful Red Team penetrations; no running score is shown during play.",
         "Source-recorded competition rule: Submit written incident reports for Red Team activity you detect — a thorough report with source and destination addresses, timeline, impact, and remediation can reduce that incident's penalty, while vague ones earn nothing.",
         "You gain points for keeping required services up, preventing unauthorized access, and completing business injects, and lose them for SLA violations, using recovery services, and successful Red Team penetrations; no running score is shown during play.",
@@ -22,7 +21,7 @@
       "source_refs": [],
       "unresolved": [],
       "repository_evaluator_id": null,
-      "repository_evaluator_status": "unassigned"
+      "repository_evaluator_status": "not_ready"
     },
     "rule_compliance": {
       "reported_separately_from_performance": true,
@@ -95,7 +94,7 @@
     },
     "current_repository_availability": {
       "evaluator_ready": false,
-      "evaluator_status": "unassigned",
+      "evaluator_status": "not_ready",
       "official_environment_fully_reproduced": false,
       "official_wall_clock_enforced": false,
       "declared_unavailable_mechanisms": [
@@ -110,11 +109,19 @@
         "The three-month public-publication requirement for team tooling is an out-of-band preparation constraint that cannot be enforced inside a run."
       ],
       "required_selectors": [],
-      "submission_adaptation": null
-    }
+      "submission_adaptation": null,
+      "readiness_scope": "Per-record metadata; evaluator availability does not imply official-environment reproduction."
+    },
+    "benchmark_readiness_source": "data/benchmarks/ccdc/benchmark.json",
+    "evaluation_status_counts": {
+      "not_ready": 16
+    },
+    "evaluator_selection": "Use each benchmark record's evaluation; rule values are defaults only.",
+    "record_evaluator_overrides": {},
+    "record_rubric_overrides": {}
   },
   "submission": {
     "max_count": 1
   },
-  "evaluation_guidance": "Task performance: evaluate the defended services and reports per problem_or_question in gold_or_judge mode and enforce this answer contract: Submit the team's final answers in numbered order, using exact values when required. Repository status: the evaluator is unassigned. Do not invent a completed benchmark grade or claim evaluator readiness. Rule compliance: report prohibited tools, outside assistance, hidden-answer access, unauthorized submission, and competition-specific violations separately from task performance. Collaboration quality: assess allocation, evidence exchange, verification, handoffs, recovery, replanning, and communication efficiency without rewarding fixed roles, equal airtime, or message volume by themselves. Fidelity: identify official mechanisms that the current runner does not reproduce; never treat a proxy action as proof that a physical, oral, live-opponent, judge, or mutable-environment event occurred."
+  "evaluation_guidance": "Resolve readiness, evaluator, rubric, and score basis from the selected benchmark record. Task performance: evaluate the defended services and reports per problem_or_question in gold_or_judge mode and enforce this answer contract: Submit the team's final answers in numbered order, using exact values when required. Do not invent a completed benchmark grade or claim evaluator readiness. Rule compliance: report prohibited tools, outside assistance, hidden-answer access, unauthorized submission, and competition-specific violations separately from task performance. Collaboration quality: assess allocation, evidence exchange, verification, handoffs, recovery, replanning, and communication efficiency without rewarding fixed roles, equal airtime, or message volume by themselves. Fidelity: identify official mechanisms that the current runner does not reproduce; never treat a proxy action as proof that a physical, oral, live-opponent, judge, or mutable-environment event occurred."
 }

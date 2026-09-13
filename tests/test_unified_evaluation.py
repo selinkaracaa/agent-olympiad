@@ -196,14 +196,14 @@ class RubricScaleTests(unittest.TestCase):
 class RubricDocumentTests(unittest.TestCase):
     def test_mock_document_judge(self):
         ensure_default_rubrics()
-        rubric = load_rubric(REPO_ROOT / "data/rubrics/wsc_writing_28_v1.json")
+        rubric = load_rubric(REPO_ROOT / "data/rubrics/wsc_writing_100_v1.json")
 
         def mock_request(request: LLMRequest) -> LLMResponse:
             payload = {
                 "criteria": [
                     {
                         "id": c.id,
-                        "score": c.max_score / 2,
+                        "score": (c.min_score + c.max_score) / 2,
                         "max_score": c.max_score,
                         "evidence": ["para 1"],
                         "justification": "ok",
@@ -212,7 +212,7 @@ class RubricDocumentTests(unittest.TestCase):
                     }
                     for c in rubric.criteria
                 ],
-                "total_score": rubric.total_points / 2,
+                "total_score": sum((c.min_score + c.max_score) / 2 for c in rubric.criteria),
                 "max_score": rubric.total_points,
                 "warnings": [],
                 "limitations": [],
@@ -226,7 +226,7 @@ class RubricDocumentTests(unittest.TestCase):
             submission_text="Cooperation enables teams to solve harder problems.",
             media="text",
         ).evaluate()
-        self.assertEqual(result.total_score, 14)
+        self.assertEqual(result.total_score, 80)
         self.assertEqual(result.evaluator_id, "rubric_llm_v1")
 
 
@@ -240,12 +240,12 @@ class FinalizeJudgeTests(unittest.TestCase):
             "evaluation": {
                 "evaluator_id": "rubric_llm_v1",
                 "status": "ready",
-                "rubric_path": "data/rubrics/wsc_writing_28_v1.json",
+                "rubric_path": "data/rubrics/wsc_writing_100_v1.json",
                 "deliverable": "written_essay",
             },
             "gold_label": {"grading_rubric": "Clear thesis."},
         }
-        rubric = load_rubric(REPO_ROOT / "data/rubrics/wsc_writing_28_v1.json")
+        rubric = load_rubric(REPO_ROOT / "data/rubrics/wsc_writing_100_v1.json")
 
         def mock_request(request: LLMRequest) -> LLMResponse:
             payload = {
@@ -285,8 +285,8 @@ class FinalizeJudgeTests(unittest.TestCase):
         )
         self.assertTrue(graded["graded"])
         self.assertEqual(graded["method"], "rubric_llm_v1")
-        self.assertEqual(graded["score"], 28)
-        self.assertEqual(graded["max_score"], 28)
+        self.assertEqual(graded["score"], 100)
+        self.assertEqual(graded["max_score"], 100)
 
     def test_leaves_gold_and_offline_untouched(self):
         gold_grade = {

@@ -144,10 +144,7 @@ def main() -> int:
             turns_override, api_override = args.sb_max_turns, args.sb_max_api_calls
         max_turns = resolve_contest_budget(competition, max_turns=turns_override).max_turns
         team_size = team_size_for(competition, args.team_size, args.system_variant)
-        default_turns, default_api = budget_for(competition, team_size, args.system_variant)
-        coach_calls = 2 if args.system_variant == "otc" else 1
-        calls_per_turn = (default_api - coach_calls) // default_turns
-        max_api = api_override if api_override is not None else max_turns * calls_per_turn + coach_calls
+        max_api = api_override
         print(
             f"[{index}/{len(manifests)}] {manifest.stem} "
             f"variant={args.system_variant} (turns={max_turns}, api={max_api})",

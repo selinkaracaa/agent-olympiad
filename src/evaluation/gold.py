@@ -7,6 +7,7 @@ from dataclasses import dataclass
 from typing import Any
 
 from .models import Criterion, CriterionResult, EvaluationError, EvaluationResult, Rubric
+from .final_answer import extract_final_answer
 
 
 # Classic: "1. answer" / "1) answer" / "Problem 1: answer" / "Q1. answer"
@@ -203,49 +204,23 @@ def gold_parts_to_rubric(
     )
 
 
-def _is_unsigned_number(value: str) -> bool:
-    return bool(re.fullmatch(r"\d+(?:\.\d+)?(?:/\d+)?", value))
-
-
-def _embedded_in_actual(expected: str, actual: str) -> bool:
-    """Allow prose wrappers like ``slope -21`` without digit-prefix false positives."""
-    start = 0
-    while True:
-        idx = actual.find(expected, start)
-        if idx < 0:
-            return False
-        before = actual[idx - 1] if idx > 0 else ""
-        after = actual[idx + len(expected)] if idx + len(expected) < len(actual) else ""
-        if expected[0].isdigit() or expected.startswith("-"):
-            if before.isdigit():
-                start = idx + 1
-                continue
-        elif before.isalnum() and before not in "([{":
-            start = idx + 1
-            continue
-        if after.isalnum() and after not in ")]},.":
-            start = idx + 1
-            continue
-        return True
-
-
 def answers_match(expected: str, actual: str, aliases: tuple[str, ...] = ()) -> bool:
-    candidates = (expected,) + aliases
-    norm_actual = normalize_answer(actual)
-    # Drop trailing unit-ish suffixes so "6.0e7 m/s" can match "6.0 x 10^7".
-    norm_actual_core = re.sub(r"[a-z/%°]+$", "", norm_actual)
-    actuals = {norm_actual, norm_actual_core}
-    for candidate in candidates:
-        norm_expected = normalize_answer(candidate)
-        if not norm_expected:
-            continue
-        if any(norm_expected == item for item in actuals if item):
-            return True
-        if _is_unsigned_number(norm_expected):
-            continue
-        if any(_embedded_in_actual(norm_expected, item) for item in actuals if item):
-            return True
-    return False
+    """Compare the selected final value, never an incidental number in a proof."""
+    selected = extract_final_answer(actual).final_answer
+    norm_actual = normalize_answer(selected)
+    # Only recognised units may be omitted. Removing arbitrary letters turns
+    # "8 is incorrect" or "8garbage" into the accepted numeric answer "8".
+    norm_actual_core = re.sub(
+        r"(?<=[0-9)\]])(?:[kmc]?m(?:\^[23])?(?:/s(?:\^2)?)?|kg|g|s|"
+        r"dollars?|degrees?|\u00b0)$",
+        "", norm_actual,
+    )
+    actuals = {value for value in (norm_actual, norm_actual_core) if value}
+    return any(
+        normalize_answer(candidate) in actuals
+        for candidate in (expected,) + aliases
+        if normalize_answer(candidate)
+    )
 
 
 def _digit_part_id(part_id: str) -> str | None:
@@ -275,7 +250,7 @@ class GoldAnswerEvaluator:
     parts: list[GoldPart]
     submission_text: str
     evaluator_id: str = "gold_answer_v1"
-    evaluator_version: str = "1.0.0"
+    evaluator_version: str = "1.1.2"
     model: str = "deterministic"
 
     def evaluate(self) -> EvaluationResult:
@@ -296,7 +271,12 @@ class GoldAnswerEvaluator:
                 "No short-answer gold parts to grade. Use rubric_llm_v1 instead."
             )
         rubric = gold_parts_to_rubric(gradeable)
-        parsed = parse_numbered_answers(self.submission_text)
+        single_part = len(gradeable) == 1
+        parsed = (
+            {gradeable[0].id: self.submission_text}
+            if single_part and self.submission_text.strip()
+            else parse_numbered_answers(self.submission_text)
+        )
         criteria: list[CriterionResult] = []
         warnings: list[str] = []
         skipped = [
@@ -308,24 +288,6 @@ class GoldAnswerEvaluator:
                 + ", ".join(skipped)
             )
 
-        if not parsed and len(gradeable) == 1:
-            # Single-part contests often submit a bare short answer (or
-            # "Final answer: ...") without a leading "1.".
-            final_markers = re.findall(
-                r"(?im)\bfinal\s+answer\s*:\s*([^\r\n]+)",
-                self.submission_text,
-            )
-            bare = (
-                final_markers[-1].strip().rstrip(".")
-                if final_markers
-                else self.submission_text.strip()
-            )
-            if bare:
-                parsed = {gradeable[0].id: bare}
-                digit_id = _digit_part_id(gradeable[0].id)
-                if digit_id:
-                    parsed[digit_id] = bare
-
         if not parsed:
             warnings.append(
                 "Could not parse numbered answers "
@@ -333,11 +295,17 @@ class GoldAnswerEvaluator:
             )
 
         for part in gradeable:
-            actual = _lookup_parsed_answer(parsed, part.id)
+            raw_actual = _lookup_parsed_answer(parsed, part.id)
+            extracted = extract_final_answer(
+                raw_actual, part_id=part.id if single_part else None,
+            )
+            actual = extracted.final_answer
             correct = bool(actual) and answers_match(part.expected, actual, part.aliases)
             score = part.points if correct else 0.0
             evidence = [
+                f"submitted_raw[{part.id}]={raw_actual or '(missing)'}",
                 f"submitted[{part.id}]={actual or '(missing)'}",
+                f"answer_extraction[{part.id}]={extracted.method}",
                 f"expected[{part.id}]={part.expected}",
             ]
             criteria.append(
@@ -359,7 +327,7 @@ class GoldAnswerEvaluator:
         result = EvaluationResult(
             evaluator_id=self.evaluator_id,
             evaluator_version=self.evaluator_version,
-            prompt_version="deterministic_gold_v2",
+            prompt_version="deterministic_gold_v4",
             model=self.model,
             rubric_id=rubric.rubric_id,
             criteria=criteria,

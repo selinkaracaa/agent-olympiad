@@ -1,0 +1,28 @@
+{
+  "protocol_version": "contest_session_v10",
+  "action_set_version": 8,
+  "module_version": 3,
+  "capture_note": "v10: five baselines, OTC pair differs only in optional memory; explicit recall guidance and visibility-safe query status. Historical v8/v9 snapshots remain unchanged.",
+  "cases": {
+    "single_agent/math/fresh": "c50b7e4083247016bef0372dde41c9a8553f234617c8491918e7ec28ab3e7be3",
+    "single_agent/math/resume": "6e40e36352b7313de15aa3ae5da59cbf31259693b296029d3b56b4dbf5967bdc",
+    "single_agent/code/fresh": "5bf4514dfa2c543ffe1fc604989f0ce0b3cb97b27f5f81ab789e7c1d432ee8e5",
+    "single_agent/code/resume": "341e20d975f6e6386ed2517213a5ac3131b47cbe8e1ea92fbd076cc8fdb049af",
+    "decentralized/math/fresh": "0a8b544f8815e093a616cc36bf501abb292e51a67f24618f0655cb03eb49b91c",
+    "decentralized/math/resume": "a4d4a98bb31c849d95f4ff0cc8a3b823c77d5e08096b1389e19bc02833fc618d",
+    "decentralized/code/fresh": "c6c903ff2af9483011e3fa80f6364b5526f8eae9e3d8f85f7366d390210aeb0c",
+    "decentralized/code/resume": "287dd206464cb585bcf508d8b29141c6ba7091d5c8b16a0ab3746a2e88f13fa7",
+    "centralized/math/fresh": "dd97edb1d5ecca118aa106356baaba91f4effc60bb50521e2f754fde7215d000",
+    "centralized/math/resume": "e290eeb204962228b5ecf411ce4318f17cecc540aabd844a228a7e5b282c8b51",
+    "centralized/code/fresh": "2e65b860637202387172e9693561d296161ad27ff5d64b1135c5cd1ee8e395e6",
+    "centralized/code/resume": "77efea3aa3e47511316b6d81557468d8a85ad93886a434da8c99f709e38797a9",
+    "vallina_otc/math/fresh": "444ab96ac338c7a8740048d41424db23ee008caf4da42a5d996bd290306883ef",
+    "vallina_otc/math/resume": "eb3263365253954009aa813236089f146b5d6eda978ea92a248574697909d007",
+    "vallina_otc/code/fresh": "3e6cc82bdeeb878ea6d9d41806498bc6c55f3354b833d2d88a13b4b4c3185f78",
+    "vallina_otc/code/resume": "7b6e28b1500eaa52e98975368e42ce1460721f6f6a0b1a2ad56242edc00ed360",
+    "otc/math/fresh": "54df9cd46ac39093609b347918ab75f0602af358fdfad8de49e81e634661c95a",
+    "otc/math/resume": "58ab5ae16d750e898b6e80f14165c1a0a463a7437f367e65f7de11117c122b27",
+    "otc/code/fresh": "bfa4bed899b107bdd5008dd3dfa33c792dae92640027c0f2e0507f10c1585fcb",
+    "otc/code/resume": "6bcc7791987f69214168f6d5299e0e2da9641283daa1c303279dfd4a25fc302e"
+  }
+}

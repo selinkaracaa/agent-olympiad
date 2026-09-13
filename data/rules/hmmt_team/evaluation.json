@@ -1,0 +1,34 @@
+{
+  "evaluation_guidance": "Resolve readiness, evaluator, rubric, and score basis from the selected benchmark record. Score the shared answer/proof packet against an edition-matched official key or solution. Report rule compliance and collaboration quality separately.",
+  "scoring": {
+    "mode": "rubric",
+    "unit": "session",
+    "evaluator_id": "rubric_llm_v1",
+    "evaluator_status": "ready_with_limitations",
+    "rubric_path": "data/rubrics/hmmt_team/2013_official_proofs_v1.json",
+    "benchmark_readiness_source": "data/benchmarks/hmmt_team/benchmark.json",
+    "evaluation_status_counts": {
+      "ready_with_limitations": 14
+    },
+    "evaluator_selection": "Use each benchmark record's evaluation; rule values are defaults only.",
+    "record_evaluator_overrides": {},
+    "record_rubric_overrides": {
+      "hmmt_team_2014": "data/rubrics/hmmt_team/2014_official_proofs_v1.json",
+      "hmmt_team_2015": "data/rubrics/hmmt_team/2015_official_proofs_v1.json",
+      "hmmt_team_2016": "data/rubrics/hmmt_team/2016_official_proofs_v1.json",
+      "hmmt_team_2017": "data/rubrics/hmmt_team/2017_official_proofs_v1.json",
+      "hmmt_team_2018": "data/rubrics/hmmt_team/2018_official_proofs_v1.json",
+      "hmmt_team_2019": "data/rubrics/hmmt_team/2019_official_proofs_v1.json",
+      "hmmt_team_2020": "data/rubrics/hmmt_team/2020_official_proofs_v1.json",
+      "hmmt_team_2021": "data/rubrics/hmmt_team/2021_official_proofs_v1.json",
+      "hmmt_team_2022": "data/rubrics/hmmt_team/2022_official_proofs_v1.json",
+      "hmmt_team_2023": "data/rubrics/hmmt_team/2023_official_proofs_v1.json",
+      "hmmt_team_2024": "data/rubrics/hmmt_team/2024_official_proofs_v1.json",
+      "hmmt_team_2025": "data/rubrics/hmmt_team/2025_official_proofs_v1.json",
+      "hmmt_team_2026": "data/rubrics/hmmt_team/2026_official_proofs_v1.json"
+    }
+  },
+  "submission": {
+    "max_count": 1
+  }
+}

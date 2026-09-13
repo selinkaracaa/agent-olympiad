@@ -40,10 +40,16 @@ def rel(path: Path) -> str:
     return str(path.relative_to(ROOT))
 
 
-def write_benchmark(competition_id: str, entries: list[dict]) -> None:
+def write_benchmark(competition_id: str, entries: list[dict], *, preserve_existing: bool = True) -> None:
     out_dir = BENCH / competition_id
     out_dir.mkdir(parents=True, exist_ok=True)
     out_path = out_dir / "benchmark.json"
+    if out_path.exists() and preserve_existing:
+        existing = json.loads(out_path.read_text(encoding="utf-8-sig"))
+        merged = {e["problem_id"]: e for e in entries}
+        for item in existing:
+            merged[item["problem_id"]] = {**merged.get(item["problem_id"], {}), **item}
+        entries = list(merged.values())
     entries = sorted(entries, key=lambda e: (e.get("year") or 0, e.get("problem_id") or ""))
     for item in entries:
         item.setdefault("competition_id", competition_id)
@@ -53,43 +59,31 @@ def write_benchmark(competition_id: str, entries: list[dict]) -> None:
 
 
 def build_iypt() -> None:
+    try:
+        from .iypt_sources import collect_sources, title_year
+    except ImportError:
+        from iypt_sources import collect_sources, title_year
+    manifest = collect_sources(ROOT)
+    if manifest["errors"]:
+        raise RuntimeError("IYPT collection incomplete; keeping existing benchmark")
+    benchmark_path = BENCH / "iypt" / "benchmark.json"
+    existing = {r["problem_id"]: r for r in json.loads(benchmark_path.read_text(encoding="utf-8-sig"))} if benchmark_path.exists() else {}
     entries = []
-    for pdf in sorted((RAW / "iypt").rglob("iypt_*_problems.pdf")):
-        m = re.search(r"iypt_(\d{4})_problems", pdf.name)
-        if not m:
-            continue
-        year = int(m.group(1))
-        text = extract_pdf_text(pdf)
-        if len(text) < 200:
-            print(f"  iypt {year}: skip (thin text)")
-            continue
-        entries.append(
-            {
-                "problem_id": f"iypt_{year}",
-                "competition": "International Young Physicists' Tournament",
-                "year": year,
-                "topic": f"IYPT Problems {year}",
-                "task_type": "open_research",
-                "team_size": 5,
-                "source_url": "https://www.iypt.org/",
-                "source_file": rel(pdf),
-                "total_points": None,
-                "problem_description": text,
-                "gold_label": {
-                    "expected_answer": None,
-                    "grading_rubric": (
-                        "IYPT Physics Fight: Reporter / Opponent / Reviewer. "
-                        "Score presentation quality, physics depth, and debate."
-                    ),
-                    "human_baseline": None,
-                },
-                "assets": [
-                    {"path": rel(pdf), "mime_type": "application/pdf", "role": "agent_visible"}
-                ],
-            }
-        )
-    write_benchmark("iypt", entries)
-
+    for source in manifest["sources"]:
+        year = source["year"]
+        if title_year(source["problem_description"]) != year:
+            raise ValueError(f"IYPT edition mismatch: {year}")
+        row = dict(existing.get(f"iypt_{year}", {}))
+        row.update(problem_id=f"iypt_{year}", competition="International Young Physicists Tournament",
+                   competition_id="iypt", year=year, topic=f"IYPT Problems {year}",
+                   task_type="open_research", team_size=5, source_url=source["source_url"],
+                   source_file=source["source_file"], problem_description=source["problem_description"],
+                   assets=source["assets"], status="collected")
+        row.setdefault("gold_label", {"expected_answer": None, "human_baseline": None})
+        row.setdefault("provenance", {}).update(source_url=row["source_url"], source_file=row["source_file"],
+            files=[{k: a[k] for k in ("path", "role", "sha256")} for a in row["assets"]])
+        entries.append(row)
+    write_benchmark("iypt", entries, preserve_existing=False)
 
 def build_hmmt(kind: str) -> None:
     """kind = team | guts"""

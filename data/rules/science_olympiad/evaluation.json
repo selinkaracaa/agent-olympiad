@@ -3,7 +3,7 @@
     "mode": "gold_or_judge",
     "unit": "problem_or_question",
     "evaluator_id": null,
-    "evaluator_status": "deferred_event_rules_not_selected",
+    "evaluator_status": "not_ready",
     "official_performance": {
       "source_status": "hand_written_fallback_v1",
       "source_review_status": "blocked_no_adequate_current_primary_ruleset",
@@ -11,7 +11,6 @@
       "mode": "gold_or_judge",
       "unit": "problem_or_question",
       "criteria": [
-        "Repository evaluation status: Task performance is specified per problem_or_question in gold_or_judge mode, but the repository evaluator is deferred_event_rules_not_selected; do not invent a completed score.",
         "Source-recorded competition rule: The event score sheet or rubric, not a generic Science Olympiad formula, determines official performance."
       ],
       "mechanics": [],
@@ -23,7 +22,7 @@
         "All official scoring and tie breakers are event-, division-, and season-specific."
       ],
       "repository_evaluator_id": null,
-      "repository_evaluator_status": "deferred_event_rules_not_selected"
+      "repository_evaluator_status": "not_ready"
     },
     "rule_compliance": {
       "reported_separately_from_performance": true,
@@ -96,7 +95,7 @@
     },
     "current_repository_availability": {
       "evaluator_ready": false,
-      "evaluator_status": "deferred_event_rules_not_selected",
+      "evaluator_status": "not_ready",
       "official_environment_fully_reproduced": false,
       "official_wall_clock_enforced": false,
       "declared_unavailable_mechanisms": [],
@@ -111,7 +110,8 @@
         "division",
         "event"
       ],
-      "submission_adaptation": null
+      "submission_adaptation": null,
+      "readiness_scope": "Per-record metadata; evaluator availability does not imply official-environment reproduction."
     },
     "official_scoring": {
       "completeness": "unavailable_until_event_selected",
@@ -124,10 +124,18 @@
         "All official scoring and tie breakers are event-, division-, and season-specific."
       ]
     },
-    "official_rule_violations": []
+    "official_rule_violations": [],
+    "rubric_path": "data/rubrics/science_olympiad_official_scoring_protocol_v1.json",
+    "benchmark_readiness_source": "data/benchmarks/science_olympiad/benchmark.json",
+    "evaluation_status_counts": {
+      "not_ready": 1
+    },
+    "evaluator_selection": "Use each benchmark record's evaluation; rule values are defaults only.",
+    "record_evaluator_overrides": {},
+    "record_rubric_overrides": {}
   },
   "submission": {
     "max_count": 1
   },
-  "evaluation_guidance": "Unresolved official evaluation state: All official scoring and tie breakers are event-, division-, and season-specific. Task performance: evaluate the event answer sheet per problem_or_question in gold_or_judge mode and enforce this answer contract: Submit the team's final answers in numbered order, using exact values when required. Repository status: the evaluator is deferred_event_rules_not_selected. Do not invent a completed benchmark grade or claim evaluator readiness. Rule compliance: report prohibited tools, outside assistance, hidden-answer access, unauthorized submission, and competition-specific violations separately from task performance. Collaboration quality: assess allocation, evidence exchange, verification, handoffs, recovery, replanning, and communication efficiency without rewarding fixed roles, equal airtime, or message volume by themselves. Fidelity: identify official mechanisms that the current runner does not reproduce; never treat a proxy action as proof that a physical, oral, live-opponent, judge, or mutable-environment event occurred."
+  "evaluation_guidance": "Resolve readiness, evaluator, rubric, and score basis from the selected benchmark record. Unresolved official evaluation state: All official scoring and tie breakers are event-, division-, and season-specific. Task performance: evaluate the event answer sheet per problem_or_question in gold_or_judge mode and enforce this answer contract: Submit the team's final answers in numbered order, using exact values when required. Repository status: the evaluator is deferred_event_rules_not_selected. Do not invent a completed benchmark grade or claim evaluator readiness. Rule compliance: report prohibited tools, outside assistance, hidden-answer access, unauthorized submission, and competition-specific violations separately from task performance. Collaboration quality: assess allocation, evidence exchange, verification, handoffs, recovery, replanning, and communication efficiency without rewarding fixed roles, equal airtime, or message volume by themselves. Fidelity: identify official mechanisms that the current runner does not reproduce; never treat a proxy action as proof that a physical, oral, live-opponent, judge, or mutable-environment event occurred."
 }

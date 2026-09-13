@@ -28,6 +28,13 @@ def _default_executor(
             "result": f"Calculator output: {OlympiadEnvironment._safe_calculate(arguments['expression'])}",
             "valid": True,
         }
+    if action == "render_pdf":
+        from pathlib import Path
+        from tempfile import mkdtemp
+        from artifact_contract import ArtifactContract
+        from artifacts.contest_delivery import ArtifactRenderer
+        return ArtifactRenderer(Path(mkdtemp(prefix="agent-olympiad-pdf-")),
+                                ArtifactContract("document"))(_task, action, arguments)
     if action == "submit_code":
         return {
             "verdict": "SUBMIT_FAILED",
@@ -117,7 +124,6 @@ def _collect_programming_deadline(
     memory: ContestMemory,
     executor: TaskActionExecutor,
     persist: Callable[[], None],
-    *, require_approval: bool = False,
 ) -> None:
     """One unattempted candidate per unsolved programming task, without LLM turns.
 
@@ -150,19 +156,10 @@ def _collect_programming_deadline(
                     turn=session.budget.turns_used,
                 )
             continue  # Notes and empty drafts are never submitted as code.
-        if task.state is TaskState.BLOCKED and session.budget.turns_used < (task.blocked_until_turn or 0):
-            memory.append(task_id=task.task_id, question_id=None, actor="Contest_Control", visibility="public",
-                          kind="programming_deadline_skipped", payload={"reason": "active_cooldown"},
-                          turn=session.budget.turns_used)
-            continue
-        if require_approval:
-            from contest_actions import _task_has_independent_approval
-            if source is not task.versions[-1] or not _task_has_independent_approval(task) or not source.evidence_refs:
-                memory.append(task_id=task.task_id, question_id=None, actor="Contest_Control",
-                              visibility="public", kind="programming_deadline_skipped",
-                              payload={"reason": "independent_approval_or_sample_evidence_required"},
-                              turn=session.budget.turns_used)
-                continue
+        cooldown_waived = task.state is TaskState.BLOCKED
+        if cooldown_waived:
+            task.state = TaskState.CANDIDATE
+            task.blocked_until_turn = None
         selected_version_hash = source.version_hash
         session.select_task(task.task_id)
         if source is not task.versions[-1]:
@@ -173,7 +170,8 @@ def _collect_programming_deadline(
             kind="programming_deadline_submit_started",
             payload={"version_hash": source.version_hash, "selected_version_hash": selected_version_hash,
                      "source_identity": source_identity(source.content), "selection_reason": selection_reason,
-                     "review_gate_waived": not require_approval, "sample_gate_waived": not require_approval},
+                     "review_gate_waived": True, "sample_gate_waived": True,
+                     "cooldown_gate_waived": cooldown_waived},
             turn=session.budget.turns_used,
         )
         persist()

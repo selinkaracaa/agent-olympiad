@@ -4,7 +4,7 @@ from __future__ import annotations
 import sys
 import tempfile
 import unittest
-from dataclasses import replace
+from dataclasses import asdict, replace
 from pathlib import Path
 from unittest.mock import Mock, patch
 
@@ -40,7 +40,15 @@ class OtcMigrationTests(unittest.TestCase):
 
     def test_five_canonical_presets_remain(self):
         self.assertEqual(set(BASELINES), {"single_agent", "decentralized", "centralized", "otc", "vallina_otc"})
-        self.assertEqual(PROTOCOL_VERSION, "contest_session_v6")
+        self.assertEqual(PROTOCOL_VERSION, "contest_session_v11")
+        without_memory = asdict(BASELINES["vallina_otc"])
+        with_memory = asdict(BASELINES["otc"])
+        self.assertEqual(
+            {key for key in without_memory if without_memory[key] != with_memory[key]},
+            {"memory_actions"},
+        )
+        self.assertFalse(without_memory["memory_actions"])
+        self.assertTrue(with_memory["memory_actions"])
         self.assertFalse(hasattr(collaboration, "run_open_table_coach"))
         self.assertFalse(hasattr(contest_runner, "_precontest_coach_prompts"))
 
@@ -63,7 +71,8 @@ class OtcMigrationTests(unittest.TestCase):
                 _, config, _, _ = cli._prepare_contest_run(args)
             self.assertEqual(config.system_variant, "otc")
             self.assertEqual(config.team_size, self.card.team_size_default)
-            self.assertEqual(config.max_api_calls, config.max_turns * config.team_size * 2 + 1)
+            self.assertIsNone(config.max_api_calls)
+            self.assertTrue(config.deadline_submit)
 
     def test_batch_helpers_normalize_before_roster_and_budget_resolution(self):
         for name in OTC_NAMES:

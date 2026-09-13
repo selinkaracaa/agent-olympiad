@@ -13,6 +13,7 @@ from contest_manifest import ContestManifest, ManifestTask  # noqa: E402
 from contest_memory import ContestMemory  # noqa: E402
 from contest_runner import (  # noqa: E402
     ContestRunConfig,
+    PROTOCOL_VERSION,
     _apply_action,
     _actions_for_agent,
     _scheduled_agent_task,
@@ -27,7 +28,7 @@ from contest_session import (  # noqa: E402
 )
 from llm import LLMResponse, LLMToolCall  # noqa: E402
 from strategy import StrategicPolicy  # noqa: E402
-from tool_registry import ACTION_REGISTRY  # noqa: E402
+from tool_registry import ACTION_REGISTRY, ACTION_SET_VERSION  # noqa: E402
 
 
 def task(
@@ -384,11 +385,11 @@ class ContestRunnerTests(unittest.TestCase):
             action_request_fn=request_fn,
         )
 
-        # finish_contest is the only gated common action: its handler rejects it
-        # until every task holds a valid submission, so it stays hidden here.
+        # Completion is gated; skip additionally needs an active problem.
         expected = set(result["action_names"]) - {"finish_contest"}
+        self.assertEqual({tool["name"] for tool in requests[0].tools}, expected - {"skip_problem"})
         self.assertTrue(
-            all({tool["name"] for tool in request.tools} == expected for request in requests)
+            all({tool["name"] for tool in request.tools} == expected for request in requests[1:])
         )
 
     def test_vanilla_uses_latest_submission_without_review_gate(self) -> None:
@@ -423,7 +424,9 @@ class ContestRunnerTests(unittest.TestCase):
         self.assertEqual(result["metrics"]["action_balance"], 1.0)
         rendered = "\n".join(prompts).lower()
         self.assertNotIn("mandatory review", rendered)
-        self.assertNotIn("rule card", rendered)
+        # query_rules is common; its description does not enable rule enforcement.
+        self.assertEqual(result["baseline"]["rule_card"], "off")
+        self.assertFalse(result["baseline"]["review_workflow"])
         self.assertNotIn("coach", rendered)
 
     def test_math_packet_submits_the_entire_draft_sheet_once(self) -> None:
@@ -1111,9 +1114,10 @@ class ContestRunnerTests(unittest.TestCase):
     def test_baselines_share_the_core_action_set_and_differ_only_by_bundles(self) -> None:
         manifest = ContestManifest("icpc", "icpc", (task("a", programming=True),))
         core = {
-            "select_problem", "speak", "work", "request_review", "review_answer",
+            "select_problem", "speak", "work",
             "submit", "skip_problem", "rest", "finish_contest", "execute_code",
             "submit_code",
+            "inspect_problem", "triage_problem", "check_budget", "query_rules",
         }
         surfaces = {
             name: set(
@@ -1131,11 +1135,12 @@ class ContestRunnerTests(unittest.TestCase):
         }
         for name, names in surfaces.items():
             self.assertTrue(core <= names, name)
+            self.assertFalse({'request_review', 'review_answer'} & names, name)
         self.assertEqual(surfaces["single_agent"], core)
         self.assertEqual(surfaces["decentralized"], core)
         self.assertEqual(
             surfaces["centralized"] - core,
-            {"inspect_problem", "triage_problem", "direct_message", "assign_problem"},
+            {"direct_message", "assign_problem"},
         )
 
     def test_legacy_variant_names_are_aliases_and_team_size_rules_hold(self) -> None:
@@ -1617,8 +1622,8 @@ class ContestRunnerTests(unittest.TestCase):
         self.assertEqual(result["diagnostics"]["switch_count"], 0)
         self.assertEqual(result["diagnostics"]["inspect_count"], 2)
         self.assertEqual(result["session_checkpoint"]["tasks"][0]["reviews"], [])
-        self.assertEqual(result["protocol_version"], "contest_session_v6")
-        self.assertEqual(result["action_set_version"], 5)
+        self.assertEqual(result["protocol_version"], PROTOCOL_VERSION)
+        self.assertEqual(result["action_set_version"], ACTION_SET_VERSION)
         self.assertEqual(result["baseline"]["coach"], "none")
 
     def test_remember_recall_and_share_note_round_trip(self) -> None:
@@ -1681,6 +1686,53 @@ class ContestRunnerTests(unittest.TestCase):
             {row["note_id"] for row in projection["recent_notes"]},
             {note_events[0].event_id, shared.event_id},
         )
+
+    def test_check_budget_query_rules_and_unpinned_review_on_the_session_path(self) -> None:
+        manifest = ContestManifest("quiz", "quiz", (task("q1"), task("q2")))
+        session = ContestSession(
+            [TaskUnit("q1", kind="non_programming"), TaskUnit("q2", kind="non_programming")],
+            ContestBudgetState(max_turns=10),
+        )
+        session.select_task("q1")
+        memory = ContestMemory(run_id="run", session_id="quiz", competition_id="quiz")
+        config = review_ablation_config(team_size=2, max_turns=10)
+
+        def apply(agent: str, action: str, arguments: dict) -> None:
+            _apply_action(
+                action=action,
+                arguments=arguments,
+                agent=agent,
+                manifest=manifest,
+                session=session,
+                memory=memory,
+                config=config,
+                strategic_policy=StrategicPolicy(),
+                task_action_executor=lambda _task, _action, _args: {},
+            )
+
+        apply("Agent_1", "work", {"content": "17"})
+        # Bookkeeping actions answer privately, like recall / inspect_problem.
+        apply("Agent_2", "check_budget", {})
+        budget = next(e for e in memory.view("Agent_2") if e.kind == "budget_result")
+        self.assertEqual(budget.visibility, "private")
+        self.assertEqual(budget.payload["blank_tasks"], ["q2"])
+        self.assertEqual(budget.payload["max_turns"], 10)
+        self.assertFalse([e for e in memory.view("Agent_1") if e.kind == "budget_result"])
+        apply("Agent_2", "query_rules", {})
+        rules = next(e for e in memory.view("Agent_2") if e.kind == "rules_result")
+        self.assertEqual(rules.payload["competition_id"], "quiz")
+        self.assertIn("baseline", rules.payload)
+        # review_answer without a version pin binds to the current version.
+        apply("Agent_2", "review_answer", {"problem_id": "q1", "decision": "approve", "content": "ok"})
+        review = session.task("q1").reviews[-1]
+        self.assertEqual(review.version_hash, session.task("q1").versions[-1].version_hash)
+        self.assertEqual(review.decision, "approve")
+        with self.assertRaises(ValueError):
+            apply(
+                "Agent_2",
+                "review_answer",
+                {"problem_id": "q1", "version_hash": "stale", "decision": "reject", "content": "x"},
+            )
 
     def test_triage_problem_reorders_scheduler_and_keeps_hopeless_on_sheet(self) -> None:
         manifest = ContestManifest("quiz", "quiz", (task("a"), task("b"), task("c")))
@@ -1836,7 +1888,8 @@ class ContestRunnerTests(unittest.TestCase):
                 actions, session, ContestRunConfig("decentralized", 2, 10), "Agent_1"
             )
         }
-        self.assertFalse((readonly | notes | {"direct_message"}) & decentralized)
+        self.assertTrue(readonly <= decentralized)
+        self.assertFalse((notes | {"direct_message"}) & decentralized)
         # Off-assignment coach agents keep the desk but lose work/skip.
         coach = _actions_for_agent(
             actions,
@@ -2020,10 +2073,10 @@ class ContestRunnerTests(unittest.TestCase):
                 manifest, lambda _s, _u: next(first), config,
                 checkpoint_callback=interrupt,
             )
-        seen: list[str] = []
+        seen: list[tuple[str, str]] = []
 
         def resumed_query(_system: str, user: str) -> str:
-            seen.append(user)
+            seen.append((_system, user))
             return '{"action":"rest","arguments":{}}'
 
         resumed = run_with_test_plan(
@@ -2035,7 +2088,7 @@ class ContestRunnerTests(unittest.TestCase):
         self.assertEqual(
             sum(e["kind"] == "precontest_coach_guidance" for e in resumed["memory"]["events"]), 1
         )
-        worker_prompt = next(u for u in seen if "You are Agent_2" not in u and '"agent": "Agent_2"' in u)
+        worker_prompt = next(u for system, u in seen if "You are Agent_2," in system)
         self.assertIn('"work_tasks": ["b"]', worker_prompt)
 
     def test_sample_failure_blocks_evidence_and_reviewers_see_full_source(self) -> None:
@@ -2108,6 +2161,7 @@ class ContestRunnerTests(unittest.TestCase):
                 team_size=2,
                 max_turns=6,
                 max_api_calls=12,
+                deadline_submit=False,  # This test inspects only the in-contest sample/review gate.
             ),
             task_action_executor=executor,
         )
@@ -2133,7 +2187,9 @@ class ContestRunnerTests(unittest.TestCase):
             [passing_hash],
         )
         # Turn 5, Agent_2: the reviewer sees the full source, sample report and author report.
-        pending = json.loads(prompts[9].split("YOUR ELIGIBLE PENDING REVIEWS\n", 1)[1].split("\n\nVISIBLE MEMORY", 1)[0])
+        pending, _ = json.JSONDecoder().raw_decode(
+            prompts[9].split("YOUR ELIGIBLE PENDING REVIEWS\n", 1)[1].lstrip()
+        )
         self.assertEqual(len(pending), 1)
         self.assertEqual(pending[0]["version_hash"], passing_hash)
         self.assertEqual(pending[0]["source"], "print(2)")

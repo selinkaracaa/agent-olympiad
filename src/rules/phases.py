@@ -9,15 +9,12 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Any
 
-from tool_registry import action_matches, canonical_action_name
-
 # Reads and personal bookkeeping. Phase allowlists were written to constrain
 # what a team may *do* during a phase (research on prep day, no edits after the
 # deck locks), not to stop a contestant checking the clock or rereading their
 # own notes. Cards predate these actions, so an allowlist would otherwise ban
 # them by omission. Actions that change shared contest state — recording an
-# answer, claiming an item — stay subject to the allowlist.  Names are
-# canonical; cards may still use the legacy spellings.
+# answer, claiming an item — stay subject to the allowlist.
 IMPLICITLY_ALLOWED_ACTIONS = frozenset(
     {
         "inspect_problem",
@@ -114,21 +111,20 @@ class PhaseSchedule:
         phase = self.phase_at(turn)
         if phase is None:
             return None
-        canonical = canonical_action_name(action_type)
-        if canonical == "submit" and not phase.allow_submit_final:
+        if action_type == "submit" and not phase.allow_submit_final:
             return (
-                f"RULE VIOLATION: {phase.label} — submit_final is locked until "
+                f"RULE VIOLATION: {phase.label} — submit is locked until "
                 f"the slide-lock phase begins."
             )
-        if action_matches(action_type, phase.banned_actions):
+        if action_type in phase.banned_actions:
             return (
                 f"RULE VIOLATION: {phase.label} — action '{action_type}' is banned "
                 f"during this phase."
             )
         if (
             phase.allowed_actions is not None
-            and not action_matches(action_type, phase.allowed_actions)
-            and canonical not in IMPLICITLY_ALLOWED_ACTIONS
+            and action_type not in phase.allowed_actions
+            and action_type not in IMPLICITLY_ALLOWED_ACTIONS
         ):
             return (
                 f"RULE VIOLATION: {phase.label} — action '{action_type}' is not "

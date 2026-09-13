@@ -1,0 +1,19 @@
+{
+  "protocol_version": "contest_session_v7",
+  "module_version": 2,
+  "capture_reason": "Explicit four-module migration and frozen-work guards; old v6 hashes remain in the test source.",
+  "cases": {
+    "decentralized/math/fresh": "6affe8a77e0b53a6ca4825faf58125142971018c9712404e42c1cfdc6b069a3c",
+    "decentralized/math/resume": "e0da137c7cba6f012fc4f4fc4ddd784084ba6900ddb72a1b2a3f81573eebf31e",
+    "decentralized/code/fresh": "f6b39167838b40555e2c29ef9ae16478822afc7447afb7580c9c18480cb14b71",
+    "decentralized/code/resume": "8d4dfd025ad2330c558fe90ee07bfa2d3a74a3242285709369c74cf38b24976e",
+    "centralized/math/fresh": "58aad351b8b6efe70a43073db21bfbf46bace18596c83b0d60443d0b7ddae140",
+    "centralized/math/resume": "277ebfd2bd8917301398d38a9aeb36189dc1cbf74fd0c84042e8ea28cc1e96bd",
+    "centralized/code/fresh": "de12dad22fdcf4c7cc2b42d8b3db82adc3d4e934648deaf8458ee72f156ade7c",
+    "centralized/code/resume": "4f4e192c46be1442d3feeeedad59542a5817926ebcb44dde6840445daa52dfda",
+    "otc/math/fresh": "424f620d14cede9b435ef130214f3d08e6a811443e0602124d964a1ed1f6b292",
+    "otc/math/resume": "385dd9f765a455bbf873b0661554d11c8e2d35435296334c008f637483b67ee5",
+    "otc/code/fresh": "fd667115b11ac934d5046f3d7cb82d93f2fe3ec725c4cabf0de79a0959467df3",
+    "otc/code/resume": "04843026da696cf445742cfb70e493505f2118d5341dfbbcb7d16c0817297e60"
+  }
+}

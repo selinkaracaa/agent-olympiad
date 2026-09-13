@@ -13,15 +13,14 @@ from tool_registry import (  # noqa: E402
     ACTION_REGISTRY,
     ACTION_SET_VERSION,
     COMMON_ACTION_NAMES,
+    BASE_ACTION_NAMES,
+    MODULE_ACTION_NAMES,
     DESK_ACTION_NAMES,
     DESK_READONLY_ACTION_NAMES,
     LEADER_ACTION_NAMES,
-    LEGACY_ACTION_ALIASES,
     MEMORY_ACTION_NAMES,
     ActionSpec,
     Resolution,
-    action_matches,
-    action_name_variants,
     actions_for_runtime,
     render_action_instructions,
     render_function_tools,
@@ -37,7 +36,7 @@ from tool_registry import (  # noqa: E402
 class ActionRegistryTests(unittest.TestCase):
     def test_common_actions_are_exact_and_registry_is_source_of_truth(self) -> None:
         self.assertEqual(
-            COMMON_ACTION_NAMES,
+            BASE_ACTION_NAMES,
             frozenset(
                 {
                     "select_problem",
@@ -56,28 +55,32 @@ class ActionRegistryTests(unittest.TestCase):
                     "recall",
                     "share_note",
                     "assign_problem",
+                    "check_budget",
+                    "query_rules",
                 }
             ),
         )
         self.assertEqual(
             {name for name, spec in ACTION_REGISTRY.items() if spec.pack == "common"},
-            set(COMMON_ACTION_NAMES),
+            set(BASE_ACTION_NAMES),
         )
-        self.assertTrue(DESK_ACTION_NAMES <= COMMON_ACTION_NAMES)
+        self.assertEqual(COMMON_ACTION_NAMES, MODULE_ACTION_NAMES['common'])
+        self.assertTrue(DESK_ACTION_NAMES <= BASE_ACTION_NAMES)
         self.assertEqual(
             MEMORY_ACTION_NAMES | DESK_READONLY_ACTION_NAMES, DESK_ACTION_NAMES
         )
         self.assertTrue(LEADER_ACTION_NAMES <= COMMON_ACTION_NAMES)
         # v4 added the rule-card ``deliberation`` pack; v5 unified the legacy
-        # environment surface (aliases + runtime tags). Neither is common.
-        self.assertEqual(ACTION_SET_VERSION, 5)
+        # environment surface (aliases + runtime tags); v6 made every action
+        # available in both runtimes. Deliberation is still not common.
+        self.assertEqual(ACTION_SET_VERSION, 8)
         self.assertEqual(
             {name for name, spec in ACTION_REGISTRY.items() if spec.pack == "deliberation"},
             {"propose", "challenge", "provide_evidence", "revise", "decide"},
         )
         self.assertFalse(
             {"propose", "challenge", "provide_evidence", "revise", "decide"}
-            & COMMON_ACTION_NAMES
+            & BASE_ACTION_NAMES
         )
         self.assertEqual(validate_registry(), ())
 
@@ -168,12 +171,20 @@ class ActionRegistryTests(unittest.TestCase):
     def test_pack_membership(self) -> None:
         self.assertEqual(ACTION_REGISTRY["use_calculator"].pack, "math")
         self.assertEqual(ACTION_REGISTRY["execute_code"].pack, "programming")
-        # ``verify`` folded into the desk's ``inspect_problem``.
-        self.assertNotIn("verify", ACTION_REGISTRY)
-        self.assertEqual(LEGACY_ACTION_ALIASES["verify"], "inspect_problem")
         self.assertEqual(ACTION_REGISTRY["submit_code"].pack, "programming")
-        self.assertEqual(ACTION_REGISTRY["verify_problem"].pack, "workboard")
-        self.assertEqual(ACTION_REGISTRY["check_budget"].pack, "workspace")
+        # v7: no legacy spellings exist anywhere in the registry.
+        for legacy in (
+            "verify",
+            "verify_problem",
+            "write_private_notes",
+            "write_scratchpad",
+            "sleep",
+            "submit_final",
+            "message_group",
+        ):
+            self.assertNotIn(legacy, ACTION_REGISTRY)
+        self.assertEqual(ACTION_REGISTRY["check_budget"].pack, "common")
+        self.assertEqual(ACTION_REGISTRY["query_rules"].pack, "common")
         self.assertEqual(ACTION_REGISTRY["web_search"].pack, "research")
         self.assertEqual(ACTION_REGISTRY["read_lab_equipment"].pack, "resources")
         self.assertEqual(ACTION_REGISTRY["read_star_chart"].pack, "resources")
@@ -195,7 +206,7 @@ class ActionRegistryTests(unittest.TestCase):
         self.assertIsInstance(vanilla, frozenset)
         self.assertEqual(vanilla, strategic)
         self.assertEqual(
-            {spec.name for spec in vanilla} - COMMON_ACTION_NAMES,
+            {spec.name for spec in vanilla} - BASE_ACTION_NAMES,
             {"execute_code", "submit_code"},
         )
         self.assertEqual(
@@ -217,18 +228,18 @@ class ActionRegistryTests(unittest.TestCase):
             },
             registered_handlers=set(ACTION_REGISTRY),
         )
-        self.assertTrue(COMMON_ACTION_NAMES <= names)
+        self.assertTrue(BASE_ACTION_NAMES <= names)
         self.assertTrue({"use_calculator", "web_search"} <= names)
 
     def test_resources_require_explicit_available_capability(self) -> None:
         handlers = set(ACTION_REGISTRY)
         demanded_only = resolve_action_names(
-            competition="ijso_practical",
+            competition="resource_fixture",
             benchmark_requirements={"required_tools": ["read_lab_equipment"]},
             registered_handlers=handlers,
         )
         declared = resolve_action_names(
-            competition="ijso_practical",
+            competition="resource_fixture",
             benchmark_requirements={"required_tools": ["read_lab_equipment"]},
             declared_capabilities={"read_lab_equipment"},
             registered_handlers=handlers,
@@ -240,7 +251,7 @@ class ActionRegistryTests(unittest.TestCase):
         result = resolve_actions_with_diagnostics(
             competition="custom",
             declared_capabilities={"teleport", "web_search"},
-            registered_handlers=COMMON_ACTION_NAMES,
+            registered_handlers=BASE_ACTION_NAMES,
         )
         self.assertIsInstance(result, Resolution)
         self.assertNotIn("teleport", result.names)
@@ -323,44 +334,66 @@ class ActionRegistryTests(unittest.TestCase):
         self.assertIn("use_calculator", text)
         self.assertNotIn("web_search", text)
 
-    def test_legacy_aliases_are_adapter_only(self) -> None:
-        self.assertEqual(LEGACY_ACTION_ALIASES["submit_final"], "submit")
-        self.assertEqual(LEGACY_ACTION_ALIASES["sleep"], "rest")
-        self.assertEqual(LEGACY_ACTION_ALIASES["publish_memory"], "share_note")
-        self.assertEqual(LEGACY_ACTION_ALIASES["message_group"], "direct_message")
-        self.assertEqual(LEGACY_ACTION_ALIASES["set_priority"], "triage_problem")
-        self.assertEqual(LEGACY_ACTION_ALIASES["mark_hopeless"], "triage_problem")
-        self.assertEqual(LEGACY_ACTION_ALIASES["submit_problem"], "work")
-        for alias in LEGACY_ACTION_ALIASES:
-            self.assertNotIn(alias, ACTION_REGISTRY)
+    def test_legacy_spellings_are_unknown_actions(self) -> None:
+        from action_wire import normalize_invocation
+
+        for legacy in (
+            "submit_final",
+            "sleep",
+            "write_scratchpad",
+            "write_private_notes",
+            "publish_memory",
+            "message_group",
+            "set_priority",
+            "mark_hopeless",
+            "submit_problem",
+            "verify",
+            "verify_problem",
+            "list_problems",
+            "open_problem",
+            "claim_problem",
+            "release_problem",
+        ):
+            invocation = normalize_invocation(legacy, "anything")
+            self.assertFalse(invocation.ok, legacy)
+            self.assertEqual(invocation.errors, (f"unknown action: {legacy}",))
 
     def test_runtime_tags_split_the_surface_without_forking_common(self) -> None:
         env_names = actions_for_runtime("env")
         session_names = actions_for_runtime("session")
-        # Both runtimes implement every common action except the session-only
-        # coordination verbs the environment has no equivalent for.
-        self.assertEqual(
-            COMMON_ACTION_NAMES - env_names,
-            {"assign_problem", "request_review", "finish_contest"},
-        )
-        self.assertTrue(COMMON_ACTION_NAMES <= session_names)
-        self.assertEqual(
-            env_names - session_names,
-            {"verify_problem", "check_budget", "query_rules", "write_private_notes"},
-        )
+        # v6: one vocabulary, implemented on both paths.
+        self.assertEqual(env_names, session_names)
+        self.assertEqual(env_names, frozenset(ACTION_REGISTRY))
+        self.assertEqual(len(env_names), 30)
         env_icpc = resolve_action_names("icpc", runtime="env")
         session_icpc = resolve_action_names("icpc", runtime="session")
-        self.assertIn("check_budget", env_icpc)
-        self.assertNotIn("check_budget", session_icpc)
-        self.assertNotIn("assign_problem", env_icpc)
-        # Without a runtime the canonical (non-desk-legacy) surface is returned.
-        self.assertNotIn("check_budget", resolve_action_names("icpc"))
-        self.assertTrue(action_matches("write_scratchpad", {"work"}))
-        self.assertTrue(action_matches("work", {"write_scratchpad"}))
+        self.assertEqual(env_icpc, session_icpc)
+        for name in ("check_budget", "query_rules", "assign_problem", "request_review", "finish_contest"):
+            self.assertIn(name, env_icpc)
+        self.assertEqual(resolve_action_names("icpc"), env_icpc)
+
+    def test_text_payloads_split_by_declared_fields(self) -> None:
+        from action_wire import normalize_invocation
+
+        review = normalize_invocation("review_answer", "3 | reject | the sign looks off")
+        self.assertEqual(review.errors, ())
         self.assertEqual(
-            action_name_variants("inspect_problem"),
-            {"inspect_problem", "verify", "list_problems", "open_problem"},
+            review.arguments,
+            {"problem_id": "3", "decision": "reject", "content": "the sign looks off"},
         )
+        self.assertEqual(
+            normalize_invocation("remember", "keep 17 in mind").arguments,
+            {"content": "keep 17 in mind"},
+        )
+        self.assertEqual(
+            normalize_invocation("work", "3 | 268").arguments,
+            {"problem_id": "3", "content": "268"},
+        )
+        # review_answer without a version pin is a valid typed call.
+        typed = normalize_invocation(
+            "review_answer", {"problem_id": "3", "decision": "approve", "content": "ok"}
+        )
+        self.assertEqual(typed.errors, ())
 
 
 if __name__ == "__main__":

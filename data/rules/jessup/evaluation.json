@@ -13,7 +13,6 @@
       "mode": "rubric",
       "unit": "artifact",
       "criteria": [
-        "Repository evaluation status: Task performance is evaluated per artifact in rubric mode by rubric_llm_v1; repository evaluator status is ready.",
         "Source-recorded competition rule: Arguments must withstand judge questioning.",
         "Arguments must withstand judge questioning."
       ],
@@ -105,12 +104,20 @@
         "AI policy: not a blanket ban in the sections reviewed; still subordinate to exclusive Team Member work-product rule — do not invent a permission."
       ],
       "required_selectors": [],
-      "submission_adaptation": "Official memorials are filed as PDF; the runner submits the memorial text."
-    }
+      "submission_adaptation": "Official memorials are filed as PDF; the runner submits the memorial text.",
+      "readiness_scope": "Per-record metadata; evaluator availability does not imply official-environment reproduction."
+    },
+    "benchmark_readiness_source": "data/benchmarks/jessup/benchmark.json",
+    "evaluation_status_counts": {
+      "ready": 1
+    },
+    "evaluator_selection": "Use each benchmark record's evaluation; rule values are defaults only.",
+    "record_evaluator_overrides": {},
+    "record_rubric_overrides": {}
   },
   "submission": {
     "max_count": 1,
     "adaptation": "Official memorials are filed as PDF; the runner submits the memorial text."
   },
-  "evaluation_guidance": "Task performance: evaluate the written memorial per artifact in rubric mode and enforce this answer contract: Submit the written memorial/case analysis and a concise oral outline. Repository status: the evaluator is ready. Use the declared evaluator and preserve any stated limitations. Rule compliance: report prohibited tools, outside assistance, hidden-answer access, unauthorized submission, and competition-specific violations separately from task performance. Collaboration quality: assess allocation, evidence exchange, verification, handoffs, recovery, replanning, and communication efficiency without rewarding fixed roles, equal airtime, or message volume by themselves. Fidelity: identify official mechanisms that the current runner does not reproduce; never treat a proxy action as proof that a physical, oral, live-opponent, judge, or mutable-environment event occurred."
+  "evaluation_guidance": "Resolve readiness, evaluator, rubric, and score basis from the selected benchmark record. Task performance: evaluate the written memorial per artifact in rubric mode and enforce this answer contract: Submit the written memorial/case analysis and a concise oral outline. Repository status: the evaluator is ready. Use the declared evaluator and preserve any stated limitations. Rule compliance: report prohibited tools, outside assistance, hidden-answer access, unauthorized submission, and competition-specific violations separately from task performance. Collaboration quality: assess allocation, evidence exchange, verification, handoffs, recovery, replanning, and communication efficiency without rewarding fixed roles, equal airtime, or message volume by themselves. Fidelity: identify official mechanisms that the current runner does not reproduce; never treat a proxy action as proof that a physical, oral, live-opponent, judge, or mutable-environment event occurred."
 }

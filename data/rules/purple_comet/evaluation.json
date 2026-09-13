@@ -1,10 +1,10 @@
 {
-  "evaluation_guidance": "Report performance, rule compliance, and collaboration quality separately. Official performance is the count of problems whose last submitted non-negative integer matches the official answer; partial submissions accumulate and earlier answers on a problem are replaced by the last one. Do not invent a time penalty. Competitive small-school, large-school, and mixed-school results may be posted; non-competitive teams are not posted; judges' decisions are final. Because generative AI is forbidden to produce, explain, or verify answers or code, LLM-agent participation is non-comparable even when the integer sheet matches. Treat supervisor non-solving, age and school-size categories, and the 244-hour window as contestant conscience. Collaboration evidence should cover packet triage across 20 or 30 problems, method stated before calculation, independent numeric checks, remote or shared-form coordination, and last-answer hygiene. Do not reward fixed subject specialists, equal airtime, message volume, or calculator use that invents methods. Do not treat six independent solo solves as good Purple Comet collaboration.",
+  "evaluation_guidance": "Resolve readiness, evaluator, rubric, and score basis from the selected benchmark record. Report performance, rule compliance, and collaboration quality separately. Official performance is the count of problems whose last submitted non-negative integer matches the official answer; partial submissions accumulate and earlier answers on a problem are replaced by the last one. Do not invent a time penalty. Competitive small-school, large-school, and mixed-school results may be posted; non-competitive teams are not posted; judges' decisions are final. Because generative AI is forbidden to produce, explain, or verify answers or code, LLM-agent participation is non-comparable even when the integer sheet matches. Treat supervisor non-solving, age and school-size categories, and the 244-hour window as contestant conscience. Collaboration evidence should cover packet triage across 20 or 30 problems, method stated before calculation, independent numeric checks, remote or shared-form coordination, and last-answer hygiene. Do not reward fixed subject specialists, equal airtime, message volume, or calculator use that invents methods. Do not treat six independent solo solves as good Purple Comet collaboration.",
   "scoring": {
     "mode": "gold",
     "unit": "problem",
     "notes": "Exact match against the official numeric answer list.",
-    "evaluator_id": "rubric_llm_v1",
+    "evaluator_id": "gold_answer_v1",
     "evaluator_status": "ready",
     "recommended_evaluator_id": "gold_answer_v1",
     "official_performance": {
@@ -37,7 +37,10 @@
       ],
       "unresolved_official_mechanics": [
         "No published tie-break beyond judges' final decision is stated in the 24 January 2026 rules."
-      ]
+      ],
+      "repository_evaluator_id": "gold_answer_v1",
+      "repository_evaluator_status": "ready",
+      "criteria": []
     },
     "sanctions": {
       "possible_outcomes": [
@@ -163,7 +166,7 @@
     },
     "current_repository_availability": {
       "gold_evaluator_ready": false,
-      "evaluator_status": "deferred_benchmark_metadata_missing",
+      "evaluator_status": "ready",
       "last_answer_web_form": false,
       "supervisor_clock_and_244_hour_window": false,
       "cas_desmos_wolfram_instrumented": false,
@@ -176,10 +179,18 @@
       "ai_non_comparability_documented": true,
       "official_environment_fully_reproduced": false,
       "official_wall_clock_enforced": false,
-      "evaluator_ready": false
+      "evaluator_ready": true,
+      "readiness_scope": "Per-record metadata; evaluator availability does not imply official-environment reproduction."
     },
-    "rubric_path": "data/rubrics/worked_answer_100_v1.json",
-    "evaluator_strategy": "structured_rubric_llm_judge"
+    "rubric_path": "data/rubrics/purple_comet_verified_answer_key_20260912.json",
+    "evaluator_strategy": "structured_rubric_llm_judge",
+    "benchmark_readiness_source": "data/benchmarks/purple_comet/benchmark.json",
+    "evaluation_status_counts": {
+      "ready": 44
+    },
+    "evaluator_selection": "Use each benchmark record's evaluation; rule values are defaults only.",
+    "record_evaluator_overrides": {},
+    "record_rubric_overrides": {}
   },
   "submission": {
     "max_count": 1,

@@ -185,7 +185,7 @@
     "max_message_chars": 1200,
     "counted_actions": [
       "speak",
-      "write_scratchpad",
+      "work",
       "propose",
       "challenge",
       "provide_evidence",
@@ -217,13 +217,13 @@
         "allowed_actions": [
           "web_search",
           "speak",
-          "write_scratchpad",
-          "write_private_notes",
+          "work",
+          "remember",
           "propose",
           "challenge",
           "provide_evidence",
           "revise",
-          "sleep"
+          "rest"
         ],
         "allow_submit_final": false,
         "prompt": "Research and analysis only. Use web_search and team deliberation to build evidence and a deck outline on the scratchpad. You may not submit the final slide deck yet."
@@ -235,11 +235,11 @@
         "turn_end": 30,
         "allowed_actions": [
           "speak",
-          "write_scratchpad",
-          "write_private_notes",
+          "work",
+          "remember",
           "decide",
-          "submit_final",
-          "sleep"
+          "submit",
+          "rest"
         ],
         "banned_actions": [
           "web_search",
@@ -295,7 +295,7 @@
         "problem_access": false,
         "allowed_actions": [
           "speak",
-          "sleep"
+          "rest"
         ],
         "advice_scope": [
           "time allocation within the rule card",

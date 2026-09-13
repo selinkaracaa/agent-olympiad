@@ -21,7 +21,7 @@ class ContestPhaseTests(unittest.TestCase):
         self.assertIsNotNone(env.phase_schedule)
         env.begin_turn()
         self.assertEqual(env.current_turn, 1)
-        violation = env.validate_action("submit_final", "Agent_1")
+        violation = env.validate_action("submit", "Agent_1")
         self.assertIsNotNone(violation)
         assert violation is not None
         self.assertIn("locked", violation)
@@ -58,7 +58,7 @@ class ContestPhaseTests(unittest.TestCase):
         env = OlympiadEnvironment("ieo_business_case", "ieo_business_case_2021")
         self.assertIsNone(env.phase_schedule)
         env.begin_turn()
-        self.assertIsNone(env.validate_action("submit_final", "Solo"))
+        self.assertIsNone(env.validate_action("submit", "Solo"))
 
 
 if __name__ == "__main__":

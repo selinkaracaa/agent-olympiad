@@ -1,0 +1,21 @@
+{
+  "evaluation_guidance": "Resolve readiness, evaluator, rubric, and score basis from the selected benchmark record. Score the rendered presentation deck with the research-report rubric. Keep this normalized artifact score separate from official 1-10 juror grades and Physics Fight coefficients.",
+  "scoring": {
+    "mode": "rubric",
+    "unit": "session",
+    "evaluator_id": "slide_deck_v1",
+    "evaluator_status": "ready_with_limitations",
+    "rubric_path": "data/rubrics/iypt_research_report_100_v1.json",
+    "benchmark_readiness_source": "data/benchmarks/iypt/benchmark.json",
+    "evaluation_status_counts": {
+      "ready_with_limitations": 39
+    },
+    "evaluator_selection": "Use each benchmark record's evaluation; rule values are defaults only.",
+    "record_evaluator_overrides": {},
+    "record_rubric_overrides": {}
+  },
+  "submission": {
+    "max_count": 1,
+    "mime_type": "application/pdf"
+  }
+}

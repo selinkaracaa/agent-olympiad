@@ -1,7 +1,8 @@
-"""Run the canonical OTC team on a slide/document artifact and rubric evaluation."""
+"""Run any canonical baseline on a slide/document artifact and rubric evaluation."""
 import argparse
 import json
 from pathlib import Path
+from contest_config import BASELINE_NAMES, BASELINE_ALIASES
 from llm import resolve_request_fn
 from otc_artifact_pipeline import prepare_artifact_run, run_artifact_contest
 
@@ -9,7 +10,7 @@ from otc_artifact_pipeline import prepare_artifact_run, run_artifact_contest
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--competition', required=True)
-    parser.add_argument('--system-variant', choices=['otc', 'vallina_otc', 'vanilla_otc'], default='otc')
+    parser.add_argument('--system-variant', choices=(*BASELINE_NAMES, *BASELINE_ALIASES), default='otc')
     parser.add_argument('--task-pdf', type=Path, required=True)
     parser.add_argument('--task-pages')
     parser.add_argument('--task-text', default='')

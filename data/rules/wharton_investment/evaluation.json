@@ -1,10 +1,10 @@
 {
-  "evaluation_guidance": "Competition-specific criteria: Judges prioritize the quality of the investment strategy, fit to the client's objectives and risk tolerance, depth of research and analysis, and clarity of the team's defense—not raw portfolio returns. Task performance: evaluate the investment report per artifact in rubric mode and enforce this answer contract: Submit clearly separated Investment Policy Statement and Comprehensive Final Report sections covering client objectives, risk tolerance, strategy, evidence, portfolio decisions, and citations. Repository status: the evaluator is unassigned. Do not invent a completed benchmark grade or claim evaluator readiness. Rule compliance: report prohibited tools, outside assistance, hidden-answer access, unauthorized submission, and competition-specific violations separately from task performance. Collaboration quality: assess allocation, evidence exchange, verification, handoffs, recovery, replanning, and communication efficiency without rewarding fixed roles, equal airtime, or message volume by themselves. Fidelity: identify official mechanisms that the current runner does not reproduce; never treat a proxy action as proof that a physical, oral, live-opponent, judge, or mutable-environment event occurred.",
+  "evaluation_guidance": "Resolve readiness, evaluator, rubric, and score basis from the selected benchmark record. The archived public case pages support strategy-report work, but repository scoring is not ready: the live OTIS market, approved stock list, full season deliverable packet, private judge scorecard, and calibrated numeric weights are unavailable. Do not invent a benchmark grade.",
   "scoring": {
     "mode": "rubric",
     "unit": "artifact",
     "evaluator_id": null,
-    "evaluator_status": "unassigned",
+    "evaluator_status": "not_ready",
     "competition_specific_criteria": "Judges prioritize the quality of the investment strategy, fit to the client's objectives and risk tolerance, depth of research and analysis, and clarity of the team's defense—not raw portfolio returns.",
     "official_performance": {
       "source_status": "source_enriched_v1",
@@ -13,7 +13,6 @@
       "mode": "rubric",
       "unit": "artifact",
       "criteria": [
-        "Repository evaluation status: Task performance is specified per artifact in rubric mode, but the repository evaluator is unassigned; do not invent a completed score.",
         "Judging rewards strategy quality, client fit, research depth, analysis, and clarity—not portfolio returns."
       ],
       "mechanics": [],
@@ -21,7 +20,7 @@
       "source_refs": [],
       "unresolved": [],
       "repository_evaluator_id": null,
-      "repository_evaluator_status": "unassigned"
+      "repository_evaluator_status": "not_ready"
     },
     "rule_compliance": {
       "reported_separately_from_performance": true,
@@ -94,7 +93,7 @@
     },
     "current_repository_availability": {
       "evaluator_ready": false,
-      "evaluator_status": "unassigned",
+      "evaluator_status": "not_ready",
       "official_environment_fully_reproduced": false,
       "official_wall_clock_enforced": false,
       "declared_unavailable_mechanisms": [],
@@ -104,8 +103,17 @@
         "Semifinal and finale rounds are live oral defenses before judges."
       ],
       "required_selectors": [],
-      "submission_adaptation": "Official entries are PDF reports; the runner submits the report as text."
-    }
+      "submission_adaptation": "Official entries are PDF reports; the runner submits the report as text.",
+      "readiness_scope": "Per-record metadata; evaluator availability does not imply official-environment reproduction."
+    },
+    "rubric_path": "data/rubrics/wharton_investment_current_v1.json",
+    "benchmark_readiness_source": "data/benchmarks/wharton_investment/benchmark.json",
+    "evaluation_status_counts": {
+      "not_ready": 4
+    },
+    "evaluator_selection": "Use each benchmark record's evaluation; rule values are defaults only.",
+    "record_evaluator_overrides": {},
+    "record_rubric_overrides": {}
   },
   "submission": {
     "max_count": 1,

@@ -1,11 +1,11 @@
 {
-  "evaluation_guidance": "Report Power performance, rule compliance, and collaboration quality separately. Official Power is a 50-point packet; extra packets keep the lowest score. Score justification depth against the verbs: list/compute, determine/find/show, justify/prove. Earlier parts may support later ones. Treat eligibility, frozen roster, device collection, one-sided pages, and team-number cover identity as contestant conscience. Collaboration evidence should cover part allocation among 15 contestants, earlier-part reuse, packet synthesis, and proof review. Do not reward fixed roles or message volume. Do not treat a list of bare answers as a complete Power packet. Do not encode a 60-minute clock.",
+  "evaluation_guidance": "Resolve readiness, evaluator, rubric, and score basis from the selected benchmark record. Report Power performance, rule compliance, and collaboration quality separately. Official Power is a 50-point packet; extra packets keep the lowest score. Score justification depth against the verbs: list/compute, determine/find/show, justify/prove. Earlier parts may support later ones. Treat eligibility, frozen roster, device collection, one-sided pages, and team-number cover identity as contestant conscience. Collaboration evidence should cover part allocation among 15 contestants, earlier-part reuse, packet synthesis, and proof review. Do not reward fixed roles or message volume. Do not treat a list of bare answers as a complete Power packet. Do not encode a 60-minute clock.",
   "scoring": {
     "mode": "gold",
     "unit": "problem_or_question",
     "evaluator_id": "rubric_llm_v1",
     "evaluator_status": "ready",
-    "rubric_path": "data/rubrics/arml_national_power_proof_40_v1.json",
+    "rubric_path": "data/rubrics/team_power_proof_40_v1.json",
     "evaluator_strategy": "structured_rubric_llm_judge",
     "official_performance": {
       "round": "power_round",
@@ -31,7 +31,10 @@
         "parts_missing_required_justification",
         "extra_packet_count",
         "cover_identity_violations"
-      ]
+      ],
+      "repository_evaluator_id": "rubric_llm_v1",
+      "repository_evaluator_status": "ready",
+      "criteria": []
     },
     "rule_compliance": {
       "reported_separately_from_performance": true,
@@ -140,7 +143,23 @@
       "role_immersion_eligibility_text": true,
       "limited_communication_overlay": true,
       "structured_deliberation_overlay": true,
-      "submission_adaptation": "The runner accepts one plain-text packet instead of handwritten one-sided pages."
+      "submission_adaptation": "The runner accepts one plain-text packet instead of handwritten one-sided pages.",
+      "readiness_scope": "Per-record metadata; evaluator availability does not imply official-environment reproduction."
+    },
+    "benchmark_readiness_source": "data/benchmarks/arml_national_power/benchmark.json",
+    "evaluation_status_counts": {
+      "ready": 11
+    },
+    "evaluator_selection": "Use each benchmark record's evaluation; rule values are defaults only.",
+    "record_evaluator_overrides": {},
+    "record_rubric_overrides": {
+      "arml_national_power_2009": "data/rubrics/arml_national_power_2009_v1.json",
+      "arml_national_power_2010": "data/rubrics/arml_national_power_2010_v1.json",
+      "arml_national_power_2011": "data/rubrics/arml_national_power_2011_v1.json",
+      "arml_national_power_2012": "data/rubrics/arml_national_power_2012_v1.json",
+      "arml_national_power_2013": "data/rubrics/arml_national_power_2013_v1.json",
+      "arml_national_power_2014": "data/rubrics/arml_national_power_2014_v1.json",
+      "arml_national_power_2017": "data/rubrics/arml_national_power_2017_v1.json"
     }
   },
   "submission": {

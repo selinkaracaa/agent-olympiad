@@ -38,6 +38,7 @@ class LLMRequest:
     metadata: dict[str, Any] = field(default_factory=dict)
     tools: tuple[dict[str, Any], ...] = ()
     tool_choice: Literal["auto", "required", "none"] = "auto"
+    parallel_tool_calls: bool | None = None
 
 
 @dataclass
@@ -222,6 +223,8 @@ def make_openai_responses_caller(model: str = "gpt-4.1", *, max_output_tokens: i
         if request.tools:
             kwargs["tools"] = list(request.tools)
             kwargs["tool_choice"] = request.tool_choice
+            if request.parallel_tool_calls is not None:
+                kwargs["parallel_tool_calls"] = request.parallel_tool_calls
         response = client.responses.create(
             **kwargs,
         )
@@ -261,24 +264,19 @@ def make_perplexity_responses_caller(
 
     def call(request: LLMRequest, max_retries: int = 5) -> LLMResponse:
         content = _openai_style_content(request)
-        # Prepend system guidance into the first text block for Agent API.
-        if request.system_prompt.strip():
-            content = [
-                {
-                    "type": "input_text",
-                    "text": f"{request.system_prompt.strip()}\n\n{request.user_prompt}",
-                },
-                *[part for part in content if part.get("type") != "input_text"],
-            ]
         payload = {
             "model": model,
             "input": [{"role": "user", "content": content}],
             "max_output_tokens": max_output_tokens,
             "temperature": temperature,
         }
+        if request.system_prompt.strip():
+            payload["instructions"] = request.system_prompt
         if request.tools:
             payload["tools"] = list(request.tools)
             payload["tool_choice"] = request.tool_choice
+            if request.parallel_tool_calls is not None:
+                payload["parallel_tool_calls"] = request.parallel_tool_calls
         last_error: Exception | None = None
         for attempt in range(max_retries):
             try:
@@ -615,14 +613,14 @@ def mock_agent_llm(system_prompt: str, user_prompt: str) -> str:
 
     if "synthesize" in combined.lower() or "final team answer" in combined.lower():
         return (
-            "ACTION: submit_final | PAYLOAD: "
+            "ACTION: submit | PAYLOAD: "
             "1. (-6, 13)  2. slope -21  3. $52  4. 5√11  5. 49√3/2"
         )
 
     if "group leader" in combined.lower() and "compile" in combined.lower():
         return (
-            "ACTION: write_scratchpad | PAYLOAD: Compiled team work: problems 1-5 solved.\n"
-            "ACTION: submit_final | PAYLOAD: Team answer sheet: 1.(-6,13) 2.-21 3.52 4.5√11 5.49√3/2"
+            "ACTION: work | PAYLOAD: Compiled team work: problems 1-5 solved.\n"
+            "ACTION: submit | PAYLOAD: Team answer sheet: 1.(-6,13) 2.-21 3.52 4.5√11 5.49√3/2"
         )
 
     if "group leader" in combined.lower() and "assign" in combined.lower():
@@ -654,7 +652,7 @@ def mock_agent_llm(system_prompt: str, user_prompt: str) -> str:
             + solution
             + "ACTION: submit_code | PAYLOAD: "
             + solution
-            + "ACTION: submit_final | PAYLOAD: "
+            + "ACTION: submit | PAYLOAD: "
             + solution
         )
 
@@ -663,7 +661,7 @@ def mock_agent_llm(system_prompt: str, user_prompt: str) -> str:
 
     if "decentralized" in combined.lower():
         return (
-            "ACTION: write_scratchpad | PAYLOAD: Node patch: verified approach for problem 7.\n"
+            "ACTION: work | PAYLOAD: Node patch: verified approach for problem 7.\n"
             "ACTION: speak | PAYLOAD: Updated scratchpad with probability calculation."
         )
 

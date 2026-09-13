@@ -1,5 +1,5 @@
 {
-  "evaluation_guidance": "Competition-specific criteria: Judges reward a clear recommendation supported by economic reasoning, credible evidence, quantitative analysis, feasibility, and a coherent slide-supported presentation. This is contestant-facing guidance, not the hidden evaluator rubric. Task performance: evaluate the slide deck per artifact in rubric mode and enforce this answer contract: Submit a structured report or slide outline covering analysis, recommendation, and evidence. Repository status: the evaluator is ready. Use the declared evaluator and preserve any stated limitations. Rule compliance: report prohibited tools, outside assistance, hidden-answer access, unauthorized submission, and competition-specific violations separately from task performance. Collaboration quality: assess allocation, evidence exchange, verification, handoffs, recovery, replanning, and communication efficiency without rewarding fixed roles, equal airtime, or message volume by themselves. Fidelity: identify official mechanisms that the current runner does not reproduce; never treat a proxy action as proof that a physical, oral, live-opponent, judge, or mutable-environment event occurred.",
+  "evaluation_guidance": "Resolve readiness, evaluator, rubric, and score basis from the selected benchmark record. Competition-specific criteria: Judges reward a clear recommendation supported by economic reasoning, credible evidence, quantitative analysis, feasibility, and a coherent slide-supported presentation. This is contestant-facing guidance, not the hidden evaluator rubric. Task performance: evaluate the slide deck per artifact in rubric mode and enforce this answer contract: Submit a structured report or slide outline covering analysis, recommendation, and evidence. Repository status: the evaluator is ready. Use the declared evaluator and preserve any stated limitations. Rule compliance: report prohibited tools, outside assistance, hidden-answer access, unauthorized submission, and competition-specific violations separately from task performance. Collaboration quality: assess allocation, evidence exchange, verification, handoffs, recovery, replanning, and communication efficiency without rewarding fixed roles, equal airtime, or message volume by themselves. Fidelity: identify official mechanisms that the current runner does not reproduce; never treat a proxy action as proof that a physical, oral, live-opponent, judge, or mutable-environment event occurred.",
   "scoring": {
     "mode": "rubric",
     "unit": "artifact",
@@ -15,7 +15,6 @@
       "mode": "rubric",
       "unit": "artifact",
       "criteria": [
-        "Repository evaluation status: Task performance is evaluated per artifact in rubric mode by slide_deck_v1; repository evaluator status is ready.",
         "Source-recorded competition rule: Business Case contributes 50 final points (raw then Z-normalized); group stage then Finals for group winners; criterion scores use median of judges.",
         "Business Case contributes 50 final points (raw then Z-normalized); group stage then Finals for group winners; criterion scores use median of judges.",
         "Business Case contributes 50 final points; criterion scores use the median of judges."
@@ -107,8 +106,16 @@
         "Case partner / host-specific scoring guide is not universal across years."
       ],
       "required_selectors": [],
-      "submission_adaptation": "Official entries are slide files; the runner submits the deck as structured text."
-    }
+      "submission_adaptation": "Official entries are slide files; the runner submits the deck as structured text.",
+      "readiness_scope": "Per-record metadata; evaluator availability does not imply official-environment reproduction."
+    },
+    "benchmark_readiness_source": "data/benchmarks/ieo_business_case/benchmark.json",
+    "evaluation_status_counts": {
+      "ready": 5
+    },
+    "evaluator_selection": "Use each benchmark record's evaluation; rule values are defaults only.",
+    "record_evaluator_overrides": {},
+    "record_rubric_overrides": {}
   },
   "submission": {
     "max_count": 1,

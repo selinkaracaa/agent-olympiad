@@ -1,0 +1,71 @@
+{
+  "schema_version": "1.0",
+  "rule_id": "itym:current_proxy_v1",
+  "competition_id": "itym",
+  "profile": "proxy",
+  "protocol": "research_math_fight",
+  "team": {
+    "active_min": 4,
+    "active_default": 6,
+    "active_max": 6,
+    "roster_max": 6,
+    "range_basis": "source_record",
+    "collaboration": "Team members jointly investigate the published problems and prepare final solution papers.",
+    "range_basis_detail": "official_current_rules"
+  },
+  "execution": {
+    "official_minutes": null,
+    "official_window_note": "Problems are published months before the tournament; the benchmark turn budget is not an official wall-clock conversion."
+  },
+  "allowed_tools": [
+    "query_rules",
+    "use_calculator",
+    "execute_code",
+    "work",
+    "render_pdf"
+  ],
+  "resources": {
+    "internet": "allowed_with_citation_during_preparation",
+    "calculator": "allowed_during_preparation",
+    "code_execution": "allowed_during_preparation",
+    "outside_communication": "adult_leader_guidance_allowed_during_preparation_only"
+  },
+  "rules_text": "Work as an ITYM team of four to six students. Investigate the published open research problems, document original reasoning and evidence, and prepare final solution papers. Keep citations and computational evidence reproducible. This benchmark grades one paper and does not simulate the later mathematical fight.",
+  "provenance": {
+    "status": "source_grounded_current_rules_proxy",
+    "sources": [
+      {
+        "title": "ITYM official website",
+        "url": "https://www.itym.org/",
+        "authority": "official"
+      },
+      {
+        "title": "ITYM Regulations",
+        "url": "https://www.itym.org/rules",
+        "authority": "official",
+        "edition": "current page retrieved 2026-09-11"
+      }
+    ],
+    "adaptations": [
+      "The months-long preparation period is represented by a bounded agent-turn budget.",
+      "The final solution-paper PDF is evaluated without a live Reporter/Opponent/Reviewer fight or jury."
+    ]
+  },
+  "comparability": {
+    "overall": "proxy"
+  },
+  "deliverable": {
+    "answer_format": "One self-contained mathematical research solution paper.",
+    "shared": true,
+    "mime_types": [
+      "application/pdf"
+    ],
+    "task_types": [
+      "open_research"
+    ],
+    "official_deliverable": "proof_packet"
+  },
+  "human_constraints": [
+    "Work as an ITYM team of four to six students. Investigate the published open research problems, document original reasoning and evidence, and prepare final solution papers. Keep citations and computational evidence reproducible. This benchmark grades one paper and does not simulate the later mathematical fight."
+  ]
+}

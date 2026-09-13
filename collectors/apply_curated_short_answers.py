@@ -124,7 +124,9 @@ def apply_contest(contest: str) -> dict:
                     entry["expected"] = expected
                     entry["match_mode"] = str(spec.get("match_mode") or "normalized")
                     entry["points"] = each
-                    if not entry["reference"]:
+                    if not entry["reference"] or entry["reference"].startswith(
+                        "Official short answer:"
+                    ):
                         entry["reference"] = f"Official short answer: {expected}"
                     updated += 1
                 else:

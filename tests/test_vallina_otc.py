@@ -2,6 +2,7 @@ import json
 import tempfile
 import unittest
 from pathlib import Path
+from dataclasses import replace
 from unittest.mock import Mock
 
 from pypdf import PdfWriter
@@ -18,7 +19,7 @@ from evaluation.models import load_rubric
 from llm import LLMResponse
 
 
-class VallinaOTCTests(unittest.TestCase):
+class OtcWithoutMemoryTests(unittest.TestCase):
     def config(self, name='vallina_otc', turns=3):
         card = load_rule_card('arml_local')
         return ContestRunConfig(name, card.team_size_default, turns, rule_card=card)
@@ -32,26 +33,24 @@ class VallinaOTCTests(unittest.TestCase):
     def test_presets_and_aliases_are_separate(self):
         self.assertEqual(canonical_baseline('vanilla'), 'decentralized')
         self.assertEqual(canonical_baseline('vanilla_otc'), 'vallina_otc')
-        self.assertTrue(self.config().features.basic_open_table)
-        self.assertFalse(self.config().review_required)
+        self.assertFalse(self.config().modules.memory)
+        self.assertTrue(self.config().review_required)
         self.assertTrue(self.config('otc').review_required)
         self.assertTrue(BASELINES['otc'].memory_actions)
         with self.assertRaises(ValueError):
-            ContestRunConfig('vallina_otc', 3, 3, rule_card=load_rule_card('wsc_writing'), require_review=True)
+            ContestRunConfig('vallina_otc', 3, 3, rule_card=load_rule_card('wsc_writing'), require_review=False)
         with self.assertRaises(ValueError):
             ContestRunConfig('otc', 3, 3, rule_card=load_rule_card('wsc_writing'),
-                             features=BASELINES['vallina_otc'])
+                             features=replace(BASELINES['vallina_otc'], review_workflow=False))
 
     def test_tools_and_card_immutability(self):
         config = self.config()
         names = {s.name for s in _resolved_actions(self.manifest(), config)}
         self.assertTrue({'work', 'speak', 'rest', 'submit'} <= names)
-        self.assertFalse(names & {'remember', 'retrieve_memory', 'share_note', 'review_answer',
-                                  'request_review', 'propose', 'challenge', 'provide_evidence',
-                                  'revise', 'decide', 'direct_message'})
+        self.assertFalse(names & {'remember', 'recall', 'share_note'})
+        self.assertTrue({'review_answer', 'direct_message'} <= names)
         self.assertTrue(config.rule_card.simulation['open_table_coach']['review_required'])
-        self.assertFalse(config.otc_policy.structured_deliberation)
-        self.assertFalse(config.otc_policy.discussion.report_after_work)
+        self.assertEqual(config.otc_policy, self.config('otc').otc_policy)
 
     def test_deadline_collects_unreviewed_draft_and_coach_blind_once(self):
         requests = []
@@ -59,17 +58,18 @@ class VallinaOTCTests(unittest.TestCase):
             requests.append((system, user))
             if system.startswith('You are Coach'):
                 self.assertNotIn('TASK_SECRET', user)
-                self.assertIn('"review_required": false', user)
+                self.assertIn('"review_required": true', user)
                 return 'Discuss freely and respect contest rules.'
             return 'CURRENT_THOUGHT_' + str(len(requests))
-        team = MockTeam('4')
+        team = MockTeam('4', approve=False)
         result = run_contest(self.manifest(), query, self.config(turns=1),
                              action_request_fn=team, action_transport='native')
         self.assertEqual(sum(s.startswith('You are Coach') for s,u in requests), 1)
         self.assertIn('4', result['submissions'].values())
         for request in team.requests:
-            self.assertNotIn('Mandatory review:', request.system_prompt)
-            self.assertNotIn('SHARED ANSWER REVIEW HISTORY', request.user_prompt)
+            self.assertIn('Mandatory review:', request.system_prompt)
+            self.assertIn('SHARED ANSWER REVIEW HISTORY', request.user_prompt)
+            self.assertNotIn('MEMORY DECISION:', request.system_prompt)
 
     def test_identity_blocks_cross_baseline_resume(self):
         basic = build_run_identity(self.manifest(), self.config(), execution={}, evaluation={})
@@ -125,12 +125,13 @@ class VallinaOTCTests(unittest.TestCase):
                 output=root / 'run', max_turns=3, provider='openai', model='mock',
                 system_variant='vallina_otc')
             rubric = load_rubric(p['rubric'])
-            payload = dict(criteria=[dict(id=c.id, score=0, max_score=c.max_score,
+            payload = dict(criteria=[dict(id=c.id, score=c.min_score, max_score=c.max_score,
                 evidence=['Fixture'], justification='Synthetic test only.', confidence=1,
-                observable=c.observable) for c in rubric.criteria], total_score=0,
+                observable=c.observable) for c in rubric.criteria],
+                total_score=sum(c.min_score for c in rubric.criteria),
                 max_score=rubric.total_points, warnings=[], limitations=[])
             judge = Mock(return_value=LLMResponse(json.dumps(payload), 'mock', 'mock'))
-            result = run_artifact_contest(p, agent_request=MockTeam(source), judge_request=judge)
+            result = run_artifact_contest(p, agent_request=MockTeam(source, approve=False), judge_request=judge)
             if not valid:
                 self.assertEqual(result['status'], 'unsubmitted')
                 judge.assert_not_called()
@@ -138,7 +139,8 @@ class VallinaOTCTests(unittest.TestCase):
             self.assertEqual(result['status'], 'complete')
             self.assertTrue(Path(result['artifact']['pdf']).is_file())
             saved = json.loads(Path(result['contest_file']).read_text())
-            self.assertEqual(saved['session_checkpoint']['tasks'][0]['reviews'], [])
+            self.assertTrue(any(r['decision'] == 'reject' for r in saved['session_checkpoint']['tasks'][0]['reviews']))
+            self.assertFalse(saved['modules']['memory'])
             judge.assert_called_once()
 
 

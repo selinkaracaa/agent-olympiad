@@ -4,15 +4,14 @@ Agents reach the registry through two encodings:
 
 * typed — ``{"action": "triage_problem", "arguments": {...}}`` (contest
   sessions, provider-native function calls);
-* text — ``ACTION: set_priority | PAYLOAD: P3 | high`` (the original
+* text — ``ACTION: triage_problem | PAYLOAD: P3 | high`` (the original
   environment protocol, still what the vanilla baseline emits).
 
-Both runtimes used to parse these separately and with their own spellings.
-:func:`normalize_invocation` is the single entry point: it resolves legacy
-aliases, splits ``|``-separated text payloads by the spec's declared field
-order, coerces obvious scalar/array mismatches, and validates against the
-registry.  Handlers downstream only ever see canonical names and argument
-dictionaries.
+:func:`normalize_invocation` is the single entry point: it splits
+``|``-separated text payloads by the spec's declared field order, coerces
+obvious scalar/array mismatches, and validates against the registry.  Only
+canonical registry names are accepted; handlers downstream only ever see
+canonical names and argument dictionaries.
 """
 
 from __future__ import annotations
@@ -23,9 +22,7 @@ from typing import Any, Iterable, Mapping
 
 from tool_registry import (
     ACTION_REGISTRY,
-    LEGACY_ALIASES,
     ActionSpec,
-    canonical_action_name,
     validate_action_payload,
 )
 
@@ -34,7 +31,7 @@ __all__ = [
     "normalize_invocation",
     "render_text_signature",
     "render_text_protocol_lines",
-    "split_legacy_payload",
+    "split_text_payload",
 ]
 
 # Signatures the generic renderer gets wrong because the split rule is
@@ -60,7 +57,6 @@ class Invocation:
 
     action: str
     arguments: dict[str, Any] = field(default_factory=dict)
-    invoked_as: str = ""
     spec: ActionSpec | None = None
     errors: tuple[str, ...] = ()
     text_payload: str = ""
@@ -69,12 +65,8 @@ class Invocation:
     def ok(self) -> bool:
         return not self.errors and self.spec is not None
 
-    @property
-    def is_alias(self) -> bool:
-        return bool(self.invoked_as) and self.invoked_as != self.action
 
-
-def split_legacy_payload(
+def split_text_payload(
     spec: ActionSpec,
     fields: tuple[str, ...] | None,
     text: str,
@@ -113,7 +105,7 @@ def render_text_signature(spec: ActionSpec) -> str:
     """How the text protocol spells this action's PAYLOAD, e.g. ``[<problem_id> |] <content>``."""
     if spec.name in _SIGNATURE_OVERRIDES:
         return _SIGNATURE_OVERRIDES[spec.name]
-    fields = spec.legacy_payload_fields
+    fields = spec.text_payload_fields
     if fields is None:
         fields = (spec.primary_argument,) if spec.primary_argument else ()
     if not fields:
@@ -187,48 +179,36 @@ def normalize_invocation(
     specs: Mapping[str, ActionSpec] | None = None,
     coerce: bool = True,
 ) -> Invocation:
-    """Resolve any wire spelling of an action into a validated canonical call.
+    """Resolve one wire-format action into a validated canonical call.
 
     ``payload`` is either an argument mapping (typed protocol) or the raw
-    text after ``PAYLOAD:`` (legacy protocol).  ``allowed`` optionally
-    restricts the result to a set of action names, matched alias-blind.
+    text after ``PAYLOAD:`` (text protocol).  ``allowed`` optionally
+    restricts the result to a set of action names.
     """
-    invoked = str(name or "").strip().lower()
-    alias = LEGACY_ALIASES.get(invoked)
-    canonical = alias.canonical if alias else canonical_action_name(invoked)
-    spec = (ACTION_REGISTRY if specs is None else specs).get(canonical)
+    action = str(name or "").strip().lower()
+    spec = (ACTION_REGISTRY if specs is None else specs).get(action)
     text_payload = payload if isinstance(payload, str) else ""
     if spec is None:
         return Invocation(
-            action=canonical,
-            invoked_as=invoked,
-            errors=((f"action {invoked!r} is not available" if specs is not None
-                     else f"unknown action: {invoked or '(empty)'}"),),
+            action=action,
+            errors=((f"action {action!r} is not available" if specs is not None
+                     else f"unknown action: {action or '(empty)'}"),),
             text_payload=text_payload,
         )
 
     if isinstance(payload, Mapping):
         arguments = dict(payload)
     else:
-        fields = alias.fields if alias and alias.fields is not None else spec.legacy_payload_fields
-        arguments = split_legacy_payload(spec, fields, text_payload)
-    if alias is not None:
-        for key, value in alias.defaults.items():
-            arguments.setdefault(key, value)
-        if alias.transform is not None:
-            arguments = alias.transform(arguments)
+        arguments = split_text_payload(spec, spec.text_payload_fields, text_payload)
     if coerce:
         arguments = _coerce_arguments(spec, arguments)
 
     errors = list(validate_action_payload(spec, arguments))
-    if allowed is not None:
-        permitted = {canonical_action_name(item) for item in allowed}
-        if canonical not in permitted:
-            errors.append(f"action not available here: {invoked}")
+    if allowed is not None and action not in {str(item).strip().lower() for item in allowed}:
+        errors.append(f"action not available here: {action}")
     return Invocation(
-        action=canonical,
+        action=action,
         arguments=arguments,
-        invoked_as=invoked,
         spec=spec,
         errors=tuple(errors),
         text_payload=text_payload,

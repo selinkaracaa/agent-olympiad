@@ -1,0 +1,28 @@
+{
+  "protocol_version": "contest_session_v11",
+  "previous_fixture": "contest_engine_replay_auxiliary_v11.json",
+  "change": "Durable round/seat/memory cursor and finalized export recovery. Fresh result/prompt hashes match prior behavior after removing engine_state.",
+  "cases": {
+    "single_agent/math/fresh": "180275087f3a12705bc246343e657d667a0dba75fe3346be59b672b3fc1d0a44",
+    "single_agent/math/resume": "66f63fd30378c865abd910b566de3f88c455d6cbc7b1752fefefdd13c284486c",
+    "single_agent/code/fresh": "2808f262284d8c9c8743b3763c494a769a32296696e204f174b82928b1bc8a40",
+    "single_agent/code/resume": "856025a206eb109c4beeb61c7941ae15307a374d4c2aede023d38035731db7fc",
+    "decentralized/math/fresh": "aa9d5ba4e88739e58f4c769c03c38b920412f06da1795a97f81bd7662f695091",
+    "decentralized/math/resume": "323fa42b9c70419228efd6717fa246f733c51facff59efa05b19ace7d61112de",
+    "decentralized/code/fresh": "4489e5053524060a753c5c09b50637590ff989e596e2019f2d663d63b2673d4d",
+    "decentralized/code/resume": "e1cee862a2c166c67e83ef136915bad614c5f08b24729582f62ce3003e649bce",
+    "centralized/math/fresh": "df14484e8a8f2f9066418c54ffe0db48886f4832af0ac51c074205e018beb0b0",
+    "centralized/math/resume": "626a573a3d403bb0674ab199d6a8d533f8540af992872fb781de18ab017c92a4",
+    "centralized/code/fresh": "c2131120c1feba1ef4e339f91b1b8e0dab53ce760b5984c7e831c2f9540bf9f1",
+    "centralized/code/resume": "52819a7579b0c728867357563249efc0adf176daca43fa93740c22f72649440d",
+    "vallina_otc/math/fresh": "e0cbf20dedcb5c9567aac80a894787d52fbe930310262a05ae8e5b3351d38b74",
+    "vallina_otc/math/resume": "e7dc4be8478a39d4cdf3d6108d30c3c722a022596ace4c8838e46d767253297e",
+    "vallina_otc/code/fresh": "6b8c5df91593eb053a3aa83f3aaab14b63fb08fb14e268f35a2b27db512f3309",
+    "vallina_otc/code/resume": "bcc8be40b6ed274fe6c90553a438158a557bef2374fe70b833fc507d96fc8278",
+    "otc/math/fresh": "e3f63033420e56760bef0fb34b32e9dd023e3e3d51755ea1925ac1c44a373ddc",
+    "otc/math/resume": "ea8897a58aea581fc17574489e222e96255b97b3642484807387f9d301f828c4",
+    "otc/code/fresh": "93d1eb1248c59f83a842d0b2a6af59c478d43cd4faa8c1e7f32833156a90bb89",
+    "otc/code/resume": "47b356862ad64ac99fdfa0a57f1488af6b2103232bb1f530636e92849f87370e"
+  },
+  "checkpoint_runtime_version": 1
+}

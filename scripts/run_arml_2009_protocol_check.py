@@ -36,10 +36,10 @@ def main():
     source_paths = sorted((ROOT/'src').rglob('*.py'))
     source_paths += [manifest_path, ROOT/'data/benchmarks/arml_local/benchmark.json']
     # Turn budget follows the official clock (ARML Local 45 min / 5 min = 9 turns, cap 90);
-    # API calls = think + action per seat per turn, plus one turn-0 Coach.
+    # API usage is recorded without a separate limit.
     max_turns = resolve_contest_budget(manifest.competition_id).max_turns
     team_size = load_rule_card(manifest.competition_id).team_size_default
-    max_api_calls = max_turns * team_size * 2 + 1
+    max_api_calls = None
     config = {'protocol_version':PROTOCOL_VERSION,'provider':'perplexity','model':'openai/gpt-5.4-mini','team_size':team_size,'max_turns':max_turns,'max_api_calls':max_api_calls,'max_output_tokens_budget':220000,'task_ids':[task.task_id for task in manifest.tasks],'source_sha256':{str(path.relative_to(ROOT)):hashlib.sha256(path.read_bytes()).hexdigest() for path in source_paths}}
     (out/'paired_config.json').write_text(json.dumps(config, indent=2), encoding='utf-8')
     for source in source_paths:
@@ -57,7 +57,7 @@ def main():
             '--live','--provider',config['provider'],'--model',config['model'],
             '--contest-manifest',str(manifest_path),'--system-variant',variant,
             '--action-calling','native','--team-size',str(team_size),'--max-turns',str(max_turns),
-            '--max-api-calls',str(max_api_calls),'--max-total-tokens','220000',
+            '--max-total-tokens','220000',
             '--no-judge-task','--no-judge-cce','--output',str(dest)]
         (dest/'command.json').write_text(json.dumps(command, indent=2), encoding='utf-8')
         with (dest/'run.log').open('w', encoding='utf-8') as log:

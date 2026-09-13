@@ -2,8 +2,8 @@
   "scoring": {
     "mode": "edition_specific_match_score",
     "unit": "session",
-    "evaluator_id": null,
-    "evaluator_status": "deferred_ruleset_and_match_engine",
+    "evaluator_id": "gold_answer_v1",
+    "evaluator_status": "ready",
     "recommended_evaluator_id": "gold_answer_v1",
     "official_performance": {
       "source_status": "source_enriched_v1",
@@ -12,7 +12,6 @@
       "mode": "edition_specific_match_score",
       "unit": "session",
       "criteria": [
-        "Repository evaluation status: Task performance is specified per session in edition_specific_match_score mode, but the repository evaluator is deferred_ruleset_and_match_engine; do not invent a completed score.",
         "Source-recorded competition rule: The third-quarter category round gives each team sixty seconds, permits conferral, allows passes without return, and may award a twenty-point sweep bonus.",
         "Source-recorded competition rule: A tied first or second place is broken by zero-point tossup questions until one team answers correctly."
       ],
@@ -31,8 +30,8 @@
       "unresolved": [
         "Historical benchmark rows require an edition selector before official match scoring is comparable."
       ],
-      "repository_evaluator_id": null,
-      "repository_evaluator_status": "deferred_ruleset_and_match_engine"
+      "repository_evaluator_id": "gold_answer_v1",
+      "repository_evaluator_status": "ready"
     },
     "rule_compliance": {
       "reported_separately_from_performance": true,
@@ -116,8 +115,8 @@
       ]
     },
     "current_repository_availability": {
-      "evaluator_ready": false,
-      "evaluator_status": "deferred_ruleset_and_match_engine",
+      "evaluator_ready": true,
+      "evaluator_status": "ready",
       "official_environment_fully_reproduced": false,
       "official_wall_clock_enforced": false,
       "declared_unavailable_mechanisms": [
@@ -133,7 +132,8 @@
         "rules_edition",
         "division"
       ],
-      "submission_adaptation": "The runner grades a text packet or session without live buzzer, opponent, moderator, or protest state."
+      "submission_adaptation": "The runner grades a text packet or session without live buzzer, opponent, moderator, or protest state.",
+      "readiness_scope": "Per-record metadata; evaluator availability does not imply official-environment reproduction."
     },
     "official_scoring": {
       "completeness": "complete_for_2025_world_championship_summary",
@@ -166,11 +166,19 @@
         "id": "outside_resource",
         "condition": "A contestant uses a pre-existing resource during the match."
       }
-    ]
+    ],
+    "benchmark_readiness_source": "data/benchmarks/history_olympiad/benchmark.json",
+    "evaluation_status_counts": {
+      "ready": 95
+    },
+    "evaluator_selection": "Use each benchmark record's evaluation; rule values are defaults only.",
+    "record_evaluator_overrides": {},
+    "rubric_path": "data/rubrics/numerical_sheet_reference_40_v1.json",
+    "record_rubric_overrides": {}
   },
   "submission": {
     "max_count": 1,
     "adaptation": "The runner grades a text packet or session without live buzzer, opponent, moderator, or protest state."
   },
-  "evaluation_guidance": "Official scoring mechanics: Quarter 1 correct tossups are worth 10 points and incorrect answers incur no point deduction. Quarter 2 correct tossups and their bonuses are each worth 10 points; bonuses do not bounce back. Quarter 3 awards points for category answers and a 20-point bonus for a complete sweep under the published phase rules. Quarter 4 correct tossups are worth 30, 20, or 10 points according to the clue boundary reached. Unresolved official evaluation state: Historical benchmark rows require an edition selector before official match scoring is comparable. Task performance: evaluate the live four quarter buzzer match responses per session in edition_specific_match_score mode and enforce this answer contract: Return numbered answers for the exposed questions and identify the quarter or phase; do not claim a live buzz, opponent outcome, or moderator ruling. Repository status: the evaluator is deferred_ruleset_and_match_engine. Do not invent a completed benchmark grade or claim evaluator readiness. Rule compliance: report prohibited tools, outside assistance, hidden-answer access, unauthorized submission, and competition-specific violations separately from task performance. Collaboration quality: assess allocation, evidence exchange, verification, handoffs, recovery, replanning, and communication efficiency without rewarding fixed roles, equal airtime, or message volume by themselves. Fidelity: identify official mechanisms that the current runner does not reproduce; never treat a proxy action as proof that a physical, oral, live-opponent, judge, or mutable-environment event occurred."
+  "evaluation_guidance": "Resolve readiness, evaluator, rubric, and score basis from the selected benchmark record. Official scoring mechanics: Quarter 1 correct tossups are worth 10 points and incorrect answers incur no point deduction. Quarter 2 correct tossups and their bonuses are each worth 10 points; bonuses do not bounce back. Quarter 3 awards points for category answers and a 20-point bonus for a complete sweep under the published phase rules. Quarter 4 correct tossups are worth 30, 20, or 10 points according to the clue boundary reached. Unresolved official evaluation state: Historical benchmark rows require an edition selector before official match scoring is comparable. Task performance: evaluate the live four quarter buzzer match responses per session in edition_specific_match_score mode and enforce this answer contract: Return numbered answers for the exposed questions and identify the quarter or phase; do not claim a live buzz, opponent outcome, or moderator ruling. Repository status: the evaluator is deferred_ruleset_and_match_engine. Do not invent a completed benchmark grade or claim evaluator readiness. Rule compliance: report prohibited tools, outside assistance, hidden-answer access, unauthorized submission, and competition-specific violations separately from task performance. Collaboration quality: assess allocation, evidence exchange, verification, handoffs, recovery, replanning, and communication efficiency without rewarding fixed roles, equal airtime, or message volume by themselves. Fidelity: identify official mechanisms that the current runner does not reproduce; never treat a proxy action as proof that a physical, oral, live-opponent, judge, or mutable-environment event occurred."
 }

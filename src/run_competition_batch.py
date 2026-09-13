@@ -28,6 +28,7 @@ import time
 from dataclasses import replace
 from datetime import datetime, timezone
 from pathlib import Path
+from computer_capacity import parse_computer_capacity
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO_ROOT / "src"))
@@ -35,7 +36,8 @@ sys.path.insert(0, str(REPO_ROOT / "src"))
 from collaboration import CollabConfig, SCHEMAS, run_collaboration
 from contest_adapters import EnvironmentTaskExecutor, grade_contest_result
 from contest_budget import resolve_contest_budget
-from contest_run_identity import build_run_identity, inspect_contest_output, RunCompatibilityError
+from contest_run_identity import (build_run_identity, inspect_contest_output, RunCompatibilityError,
+                                  pending_contest_evaluations, read_finalized_contest_result)
 from contest_manifest import load_contest_manifest
 from contest_runner import (
     BASELINE_ALIASES,
@@ -45,7 +47,6 @@ from contest_runner import (
     ContestRunConfig,
     canonical_baseline,
 )
-from rulecard_policy import open_table_policy
 from rules.loader import load_rule_card
 from rules.views import agent_view, assert_agent_view_hides_eval
 from tool_registry import ACTION_SET_VERSION
@@ -286,6 +287,12 @@ def _discover_structured_gold_cases(
     benchmark_root: Path,
     competitions: list[str] | None = None,
 ) -> list[tuple[str, str]]:
+    ready_statuses = {
+        "ready",
+        "ready_with_limitations",
+        "sample_tests_ready",
+        "remote_judge_ready",
+    }
     wanted = set(competitions or ())
     cases: list[tuple[str, str]] = []
     for benchmark_path in sorted(benchmark_root.glob("*/benchmark.json")):
@@ -297,6 +304,9 @@ def _discover_structured_gold_cases(
             continue
         for problem in problems:
             if not isinstance(problem, dict) or not _has_structured_gold(problem):
+                continue
+            evaluation = problem.get("evaluation") or {}
+            if evaluation.get("status") not in ready_statuses:
                 continue
             problem_id = problem.get("problem_id")
             if isinstance(problem_id, str) and problem_id:
@@ -330,8 +340,7 @@ def summarize_action_log(action_log: list[dict] | None) -> dict[str, int | str]:
         "tool_errors": tool_errors,
         "tool_usage_summary": "; ".join(used_bits) if used_bits else "",
         "speak_count": counts.get("speak", 0),
-        # Canonical ``work`` since action set v5; older logs say ``write_scratchpad``.
-        "scratchpad_count": counts.get("work", 0) + counts.get("write_scratchpad", 0),
+        "scratchpad_count": counts.get("work", 0),
     }
 
 
@@ -623,11 +632,11 @@ def _load_resume_rows(path: Path, metadata: dict) -> tuple[list[dict], str | Non
     if not path.exists():
         return [], None
     prior = json.loads(path.read_text(encoding="utf-8"))
-    for field in ("mode", "provider", "model", "schema", "rules_mode"):
-        if prior.get(field) != metadata[field]:
+    for field in ("mode", "provider", "model", "schema", "rules_mode", "computer_capacity"):
+        if prior.get(field) != metadata.get(field):
             raise ValueError(
                 f"Cannot resume: {field} changed from "
-                f"{prior.get(field)!r} to {metadata[field]!r}."
+                f"{prior.get(field)!r} to {metadata.get(field)!r}."
             )
     return list(prior.get("results") or []), prior.get("timestamp")
 
@@ -743,6 +752,7 @@ def run_one(
     temperature: float | None = None,
     judge_cce: bool = False,
     cce_request_fn=None,
+    computer_capacity: int | None = None,
 ) -> dict:
     started_at = time.perf_counter()
     env = OlympiadEnvironment(
@@ -752,6 +762,7 @@ def run_one(
         rules_mode=rules_mode,
         rules_root=rules_root,
         rules_strict=rules_strict,
+        computer_capacity=computer_capacity,
     )
     baseline = env.rules_metadata()
     # Layout: <out>/<competition>/transcripts/<problem>__<schema>__<rules_mode>.json
@@ -1069,23 +1080,6 @@ def _prepare_contest_run(args: argparse.Namespace) -> tuple:
                 f"rule card range {contest_rule_card.team_size_min}-"
                 f"{contest_rule_card.team_size_max}."
             )
-        if args.max_api_calls is None and baseline_features.coach == "card":
-            # Card turn = private think call(s) + one action per seat, plus
-            # the Coach's single turn-0 brief.
-            policy_probe = open_table_policy(
-                contest_rule_card, team_size=team_size, programming=True
-            )
-            contest_budget = resolve_contest_budget(
-                manifest.competition_id,
-                max_turns=args.max_turns,
-                max_api_calls=(
-                    contest_budget.max_turns
-                    * team_size
-                    * (1 + policy_probe.private_think_calls_per_turn)
-                    + 1
-                ),
-                max_total_tokens=args.max_total_tokens,
-            )
     rule_guidance = ""
     if contest_rules:
         rule_guidance = (
@@ -1122,16 +1116,21 @@ def _prepare_contest_run(args: argparse.Namespace) -> tuple:
         require_final_review=args.require_final_review,
         start_seat=args.start_seat,
         rule_guidance=rule_guidance,
-        programming_deadline_submit=args.programming_deadline_submit,
+        deadline_submit=args.deadline_submit,
+        computer_capacity=getattr(args, "computer_capacity", None),
         rule_card=contest_rule_card,
         features=baseline_features,
     )
-    if run_config.otc_policy is not None:
-        from artifact_contract import delivery_route
-        route = delivery_route(contest_rule_card)
-        if route in {"slides", "document", "artifact_bundle"}:
-            raise ValueError(f"{manifest.competition_id} requires the {route} delivery pipeline; "
-                             "use src/run_otc_artifact.py, not a text-only contest run")
+    # Delivery is an environment contract, not an OTC strategy feature.
+    # Inspect the card without attaching it to rule-card-off contestants.
+    from artifact_contract import delivery_route
+    delivery_card = contest_rule_card or load_rule_card(
+        manifest.competition_id, rules_root=args.rules_root,
+    )
+    route = delivery_route(delivery_card) if delivery_card is not None else None
+    if route in {"slides", "document", "artifact_bundle"}:
+        raise ValueError(f"{manifest.competition_id} requires the {route} delivery pipeline; "
+                         "use src/run_otc_artifact.py, not a text-only contest run")
     model = _resolve_model(args.provider, args.model) if args.live else "mock"
     judge_provider = _resolve_judge_provider(args.provider, args.judge_provider)
     judge_model = _resolve_judge_model(judge_provider, args.provider, model, args.judge_model)
@@ -1196,6 +1195,13 @@ def _build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument("--no-synthesize", action="store_true")
     parser.add_argument(
+        "--computer-capacity", type=parse_computer_capacity, default=None,
+        help=(
+            "Opt-in shared execute_code/use_calculator executions per turn. "
+            "Omit to preserve existing rules; workstation leases still apply."
+        ),
+    )
+    parser.add_argument(
         "--judge-task",
         action=argparse.BooleanOptionalAction,
         default=None,
@@ -1250,11 +1256,12 @@ def _build_parser() -> argparse.ArgumentParser:
         default="otc",
         help=(
             "Contest-session baseline: single_agent, decentralized, centralized, "
-            "otc (rule-card Open Table "
-            "Coach: data/rules/<competition>/collaboration.json drives the coach "
+            "otc_rule_card (vallina_otc, memory off), otc_rule_card_memory (otc, memory on). "
+            "Both OTC presets share the same rule-card Open Table Coach: "
+            "data/rules/<competition>/collaboration.json drives the coach "
             "stages, think call, limits, budgets and roster; team size defaults to "
-            "the card's) (legacy aliases: vanilla[_team] -> decentralized, "
-            "strategic[_team] and open_table_coach[_memory] -> otc)."
+            "the card's. Legacy aliases: vanilla[_team] -> decentralized, "
+            "strategic[_team] and open_table_coach[_memory] -> otc."
         ),
     )
     parser.add_argument(
@@ -1276,7 +1283,7 @@ def _build_parser() -> argparse.ArgumentParser:
         "--max-api-calls",
         type=int,
         default=None,
-        help="Shared contest-session API-call limit.",
+        help="Optional explicit API-call limit; default unlimited (contest turns control duration).",
     )
     parser.add_argument(
         "--max-total-tokens",
@@ -1297,14 +1304,14 @@ def _build_parser() -> argparse.ArgumentParser:
         help="Rotate the first acting seat for matched-pair repetitions.",
     )
     parser.add_argument(
-        "--programming-deadline-submit",
+        "--deadline-submit", "--programming-deadline-submit",
+        dest="deadline_submit",
         action=argparse.BooleanOptionalAction,
-        default=False,
+        default=True,
         help=(
-            "At contest end, submit one eligible recorded source per "
-            "never-officially-submitted programming task. OTC still requires "
-            "current independent approval and sample evidence; other variants "
-            "may waive those gates. May incur WA penalties."
+            "At contest end, submit available candidates in every task family, "
+            "including unreviewed, rejected, or sample-failing candidates (default: on). "
+            "In-contest review gates remain unchanged."
         ),
     )
     parser.add_argument(
@@ -1350,6 +1357,104 @@ def _build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--rules-root", type=Path, default=None)
     parser.add_argument("--rules-strict", action="store_true")
     return parser
+
+
+def _run_contest_auxiliary_judges(
+    result, manifest, run_config, run_identity, *, request_fn, cce_request_fn, persist,
+):
+    """Persist each independent judge so retries never repeat contestant execution."""
+    evaluation = run_identity["settings"]["evaluation"]
+    if not (evaluation.get("judge_collab") or evaluation.get("judge_cce")):
+        return []
+    stages = result.setdefault("evaluation_stages", {})
+    events = result["memory"]["events"]
+    agents = [f"Agent_{index + 1}" for index in range(run_config.team_size)]
+    chat_history = [
+        {"sender": event["actor"], "content": str(
+            event.get("payload", {}).get("content") or event.get("payload", {}).get("report")
+            or event.get("payload", {}))}
+        for event in events if event.get("actor") in agents and event.get("kind") in {
+            "speak", "direct_message", "request_review", "review_answer",
+        }
+    ]
+    action_log = [
+        {"agent": event["actor"], "action": event["kind"], "payload": event.get("payload", {})}
+        for event in events if event.get("actor") in agents
+    ]
+    task_text = "\n\n".join(f"{task.task_id}\n{task.prompt}" for task in manifest.tasks)
+    task_results = (
+        f"submitted={any(result['submissions'].values())} "
+        f"grade_method={result['grade']['method']} "
+        f"score={result['grade']['score']}/{result['grade']['max_score']}"
+    )
+    common = dict(request_fn=request_fn, task_text=task_text, agents=agents,
+                  schema=run_config.system_variant, chat_history=chat_history,
+                  action_log=action_log, task_results=task_results)
+    pending = set(pending_contest_evaluations(result, run_identity))
+    for name in ("coordination", "interaction"):
+        if name not in pending:
+            continue
+        stages[name] = {"status": "started"}
+        persist()
+        try:
+            if name == "coordination":
+                value = score_coordination(**common).to_dict()
+            else:
+                value = score_interaction_helpfulness(
+                    **common, final_answer=json.dumps(result["submissions"], ensure_ascii=False),
+                ).to_dict()
+            result[name] = value
+            if name in pending_contest_evaluations(result, run_identity):
+                raise ValueError(f"{name} judge returned incomplete or non-finite scores")
+            stages[name] = {"status": "complete"}
+            result.pop(name + "_error", None)
+            if name == "coordination":
+                result["metrics"].update({key: value[key] for key in (
+                    "communication_score", "planning_score", "coordination_score")})
+        except Exception as exc:
+            result.pop(name, None)
+            result[name + "_error"] = _sanitize_exception(exc)
+            stages[name] = {"status": "failed", "error": result[name + "_error"]}
+        persist()
+    if evaluation.get("judge_cce"):
+        rows = result.setdefault("cce", {})
+        errors = result.setdefault("cce_errors", {})
+        for task in manifest.tasks:
+            utility = result["grade"]["tasks"][task.task_id]["utility"]
+            stage = "cce:" + task.task_id
+            if utility is None or stage not in pending_contest_evaluations(result, run_identity):
+                continue
+            stages[stage] = {"status": "started"}
+            persist()
+            try:
+                rows[task.task_id] = score_cce(
+                    request_fn=cce_request_fn, task_text=task.prompt,
+                    action_log=[{"turn": event["turn"], "agent": event["actor"],
+                                 "action": event["kind"], "payload": event["payload"]}
+                                for event in events if event.get("task_id") == task.task_id],
+                    task_utility=utility,
+                    task_outcome=json.dumps(result["grade"]["tasks"][task.task_id], ensure_ascii=False),
+                    agents=agents, trace_partial_credit=0 < utility < 1,
+                ).to_dict()
+                if stage in pending_contest_evaluations(result, run_identity):
+                    raise ValueError("CCE judge returned incomplete or non-finite scores")
+                errors.pop(task.task_id, None)
+                stages[stage] = {"status": "complete"}
+            except Exception as exc:
+                rows.pop(task.task_id, None)
+                errors[task.task_id] = _sanitize_exception(exc)
+                stages[stage] = {"status": "failed", "error": errors[task.task_id]}
+            persist()
+        incomplete = any(name.startswith("cce") for name in pending_contest_evaluations(result, run_identity))
+        result["metrics"]["cce"] = (
+            sum(row["cce"] for row in rows.values()) / len(rows) if rows and not incomplete else None)
+        result["diagnostics"]["cce"] = result["metrics"]["cce"]
+        result["diagnostics"]["cce_status"] = (
+            "pending" if incomplete else "scored" if rows else "grading_unavailable")
+    pending = pending_contest_evaluations(result, run_identity)
+    result["evaluation_pending"] = pending
+    persist()
+    return pending
 
 
 def main() -> None:
@@ -1411,10 +1516,13 @@ def main() -> None:
     out_dir = args.output or (REPO_ROOT / "results" / "competition_batch" / timestamp)
     prepared_contest = None
     output_state = "new"
+    finalized_result = None
     if args.contest_manifest:
         try:
             prepared_contest = _prepare_contest_run(args)
             output_state = inspect_contest_output(out_dir, prepared_contest[3])
+            if output_state == "resume" and (out_dir / "contest_session.json").is_file():
+                finalized_result = read_finalized_contest_result(out_dir, prepared_contest[3])
             if output_state != "new" and not args.resume:
                 raise RunCompatibilityError(
                     f"{out_dir} already contains a matching {output_state} run. "
@@ -1459,7 +1567,7 @@ def main() -> None:
                 f"--judge-provider {judge_provider}, or disable the enabled judges."
             )
     try:
-        query_fn = (
+        query_fn = None if finalized_result is not None else (
             _make_live_query(
                 args.provider,
                 model,
@@ -1504,13 +1612,13 @@ def main() -> None:
                 max_output_tokens=args.max_output_tokens,
                 temperature=args.temperature,
             )
-            if request_actions
+            if request_actions and finalized_result is None
             else None
         )
         checkpoint_path = out_dir / "contest_checkpoint.json"
         session_checkpoint = None
         memory_checkpoint = None
-        if output_state == "resume":
+        if output_state == "resume" and finalized_result is None:
             restored = json.loads(checkpoint_path.read_text(encoding="utf-8"))
             session_checkpoint = restored["session"]
             memory_checkpoint = restored["memory"]
@@ -1530,176 +1638,70 @@ def main() -> None:
                 },
             )
 
-        run_kwargs = {
-            "action_request_fn": action_request_fn,
-            "action_transport": transport,
-            "task_action_executor": EnvironmentTaskExecutor(
-                manifest,
-                benchmark_root=REPO_ROOT / "data" / "benchmarks",
-            ),
-            "session_checkpoint": session_checkpoint,
-            "memory_checkpoint": memory_checkpoint,
-            "checkpoint_callback": persist_contest_checkpoint,
-        }
-        if run_config.features.coach == "none":
-            result = run_vanilla_contest(
-                manifest,
-                query_fn,
-                run_config,
-                **run_kwargs,
-            )
-        else:
-            result = run_strategic_contest(
-                manifest,
-                query_fn,
-                run_config,
-                coach_query_fn=query_fn,
-                **run_kwargs,
-            )
-        result["grade"] = grade_contest_result(manifest, result)
-        result["metrics"]["task_utility"] = result["grade"]["task_utility"]
-        if judge_collab and request_fn is not None:
-            events = result["memory"]["events"]
-            agents = [f"Agent_{index + 1}" for index in range(team_size)]
-            chat_history = [
-                {
-                    "sender": event["actor"],
-                    "content": str(
-                        event.get("payload", {}).get("content")
-                        or event.get("payload", {}).get("report")
-                        or event.get("payload", {})
-                    ),
-                }
-                for event in events
-                if event.get("actor") in agents
-                and event.get("kind")
-                in {
-                    "speak",
-                    "direct_message",
-                    "request_review",
-                    "review_answer",
-                }
-            ]
-            action_log = [
-                {
-                    "agent": event["actor"],
-                    "action": event["kind"],
-                    "payload": event.get("payload", {}),
-                }
-                for event in events
-                if event.get("actor") in agents
-            ]
-            task_text = "\n\n".join(
-                f"{task.task_id}\n{task.prompt}" for task in manifest.tasks
-            )
-            task_results = (
-                f"submitted={any(result['submissions'].values())} "
-                f"grade_method={result['grade']['method']} "
-                f"score={result['grade']['score']}/{result['grade']['max_score']}"
-            )
-            try:
-                coordination = score_coordination(
-                    request_fn=request_fn,
-                    task_text=task_text,
-                    agents=agents,
-                    schema=system_variant,
-                    chat_history=chat_history,
-                    action_log=action_log,
-                    task_results=task_results,
-                ).to_dict()
-                interaction = score_interaction_helpfulness(
-                    request_fn=request_fn,
-                    task_text=task_text,
-                    agents=agents,
-                    schema=system_variant,
-                    chat_history=chat_history,
-                    action_log=action_log,
-                    final_answer=json.dumps(
-                        result["submissions"],
-                        ensure_ascii=False,
-                    ),
-                    task_results=task_results,
-                ).to_dict()
-                result["coordination"] = coordination
-                result["interaction"] = interaction
-                result["metrics"].update(
-                    {
-                        "communication_score": coordination[
-                            "communication_score"
-                        ],
-                        "planning_score": coordination["planning_score"],
-                        "coordination_score": coordination[
-                            "coordination_score"
-                        ],
-                    }
+        if finalized_result is None:
+            run_kwargs = {
+                "action_request_fn": action_request_fn,
+                "action_transport": transport,
+                "task_action_executor": EnvironmentTaskExecutor(
+                    manifest,
+                    benchmark_root=REPO_ROOT / "data" / "benchmarks",
+                ),
+                "session_checkpoint": session_checkpoint,
+                "memory_checkpoint": memory_checkpoint,
+                "checkpoint_callback": persist_contest_checkpoint,
+            }
+            if run_config.features.coach == "none":
+                result = run_vanilla_contest(
+                    manifest,
+                    query_fn,
+                    run_config,
+                    **run_kwargs,
                 )
-            except Exception as exc:
-                result["coordination_error"] = _sanitize_exception(exc)
-        if cce_request_fn is not None:
-            cce_rows = {}
-            events = result["memory"]["events"]
-            agents = [f"Agent_{index + 1}" for index in range(team_size)]
-            for task in manifest.tasks:
-                utility = result["grade"]["tasks"][task.task_id]["utility"]
-                if utility is None:
-                    continue
-                action_log = [
-                    {
-                        "turn": event["turn"],
-                        "agent": event["actor"],
-                        "action": event["kind"],
-                        "payload": event["payload"],
-                    }
-                    for event in events
-                    if event.get("task_id") == task.task_id
-                ]
-                cce_rows[task.task_id] = score_cce(
-                    request_fn=cce_request_fn,
-                    task_text=task.prompt,
-                    action_log=action_log,
-                    task_utility=utility,
-                    task_outcome=json.dumps(
-                        result["grade"]["tasks"][task.task_id],
-                        ensure_ascii=False,
-                    ),
-                    agents=agents,
-                    trace_partial_credit=0 < utility < 1,
-                ).to_dict()
-            result["cce"] = cce_rows
-            result["metrics"]["cce"] = (
-                sum(row["cce"] for row in cce_rows.values()) / len(cce_rows)
-                if cce_rows
-                else None
+            else:
+                result = run_strategic_contest(
+                    manifest,
+                    query_fn,
+                    run_config,
+                    coach_query_fn=query_fn,
+                    **run_kwargs,
+                )
+            result["grade"] = grade_contest_result(manifest, result)
+            result["metrics"]["task_utility"] = result["grade"]["task_utility"]
+        else:
+            result = finalized_result
+        if finalized_result is None:
+            result["run_identity"] = run_identity
+            result["run"] = {
+                "mode": "live" if args.live else "mock",
+                "provider": args.provider,
+                "model": model if args.live else "mock",
+                "system_variant": system_variant,
+                "requested_variant": args.system_variant,
+                "baseline": result["baseline"],
+                "action_calling": result["action_calling"],
+                "max_output_tokens": args.max_output_tokens if args.live else None,
+                "temperature": args.temperature if args.live else None,
+                "rules_mode": run_config.features.rule_card,
+                "rules_root": str(args.rules_root or DEFAULT_RULES_ROOT) if run_config.rule_card else None,
+                "rules_strict": args.rules_strict,
+                "review_required": run_config.review_required,
+                "final_review_required": run_config.final_review_required,
+                "manifest": str(args.contest_manifest),
+                "start_seat": args.start_seat,
+                "elapsed_seconds": (result.get("timing") or {}).get("elapsed_seconds"),
+                "started_at": (result.get("timing") or {}).get("started_at"),
+                "ended_at": (result.get("timing") or {}).get("ended_at"),
+            }
+            persist_contest_checkpoint(
+                result["session_checkpoint"],
+                json.dumps(result["memory"], ensure_ascii=False),
             )
-            result["diagnostics"]["cce"] = result["metrics"]["cce"]
-            result["diagnostics"]["cce_status"] = "scored" if cce_rows else "grading_unavailable"
-        result["run_identity"] = run_identity
-        result["run"] = {
-            "mode": "live" if args.live else "mock",
-            "provider": args.provider,
-            "model": model if args.live else "mock",
-            "system_variant": system_variant,
-            "requested_variant": args.system_variant,
-            "baseline": result["baseline"],
-            "action_calling": result["action_calling"],
-            "max_output_tokens": args.max_output_tokens if args.live else None,
-            "temperature": args.temperature if args.live else None,
-            "rules_mode": run_config.features.rule_card,
-            "rules_root": str(args.rules_root or DEFAULT_RULES_ROOT) if run_config.rule_card else None,
-            "rules_strict": args.rules_strict,
-            "review_required": run_config.review_required,
-            "final_review_required": run_config.final_review_required,
-            "manifest": str(args.contest_manifest),
-            "start_seat": args.start_seat,
-            "elapsed_seconds": (result.get("timing") or {}).get("elapsed_seconds"),
-            "started_at": (result.get("timing") or {}).get("started_at"),
-            "ended_at": (result.get("timing") or {}).get("ended_at"),
-        }
-        persist_contest_checkpoint(
-            result["session_checkpoint"],
-            json.dumps(result["memory"], ensure_ascii=False),
+            _write_json_atomic(out_dir / "contest_session.json", result)
+        pending_evaluations = _run_contest_auxiliary_judges(
+            result, manifest, run_config, run_identity, request_fn=request_fn,
+            cce_request_fn=cce_request_fn,
+            persist=lambda: _write_json_atomic(out_dir / "contest_session.json", result),
         )
-        _write_json_atomic(out_dir / "contest_session.json", result)
         elapsed = (result.get("timing") or {}).get("elapsed_seconds")
         elapsed_text = (
             f"{float(elapsed):.1f}s" if elapsed is not None else "N/A"
@@ -1716,6 +1718,9 @@ def main() -> None:
             f"CS={result.get('metrics', {}).get('coordination_score', 'N/A')}"
         )
         print(f"Saved: {out_dir / 'contest_session.json'}")
+        if pending_evaluations:
+            print("Auxiliary evaluation pending: " + ", ".join(pending_evaluations))
+            raise SystemExit(1)
         return
 
     print(
@@ -1738,6 +1743,7 @@ def main() -> None:
         "schema": args.schema,
         "rules_mode": args.rules_mode,
         "max_turns": args.max_turns,
+        **({"computer_capacity": args.computer_capacity} if args.computer_capacity is not None else {}),
         "structured_gold": args.structured_gold,
         "benchmark_suite": args.benchmark_suite,
         "selected_cases": [
@@ -1815,6 +1821,7 @@ def main() -> None:
                 temperature=args.temperature if args.live else None,
                 judge_cce=args.judge_cce,
                 cce_request_fn=cce_request_fn,
+                computer_capacity=args.computer_capacity,
             )
             if row.get("status") == "rules_baseline_unavailable":
                 print(f"  UNAVAILABLE: {row['error']}", flush=True)

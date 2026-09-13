@@ -103,7 +103,7 @@ class IdentityTests(unittest.TestCase):
             {"max_tokens": 1000}, {"max_simulated_minutes": 20},
             {"minutes_per_turn": 2}, {"start_seat": 1},
             {"require_review": True}, {"require_final_review": True},
-            {"programming_deadline_submit": True},
+            {"deadline_submit": False},
             {"features": replace(self.config.features, memory_actions=True)},
         ):
             with self.subTest(updates=updates):

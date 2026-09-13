@@ -13,9 +13,10 @@ from contest_memory import ContestMemory
 from contest_session import ContestSession, TaskState, TaskUnit
 from rulecard_policy import MESSAGE_ACTION_NAMES, WORKSTATION_ACTION_NAMES
 from strategy import StrategicPolicy
-from tool_registry import ACTION_REGISTRY, DELIBERATION_ACTION_NAMES, DESK_READONLY_ACTION_NAMES, LEADER_ACTION_NAMES, MEMORY_ACTION_NAMES, ActionSpec, resolve_actions
+from tool_registry import ACTION_REGISTRY, DELIBERATION_ACTION_NAMES, DESK_BOOKKEEPING_ACTION_NAMES, DESK_READONLY_ACTION_NAMES, LEADER_ACTION_NAMES, MEMORY_ACTION_NAMES, ActionSpec, resolve_actions
 
 from contest_config import ContestRunConfig
+from action_modules.task_specific import resolve_contest_interface
 
 
 from contest_prompts import (
@@ -28,51 +29,16 @@ def _resolved_actions(
     config: ContestRunConfig | None = None,
 ) -> frozenset[ActionSpec]:
     """Baseline-level action surface; per-turn gating lives in _actions_for_agent."""
-    specs: set[ActionSpec] = set()
-    handlers = set(ACTION_REGISTRY)
-    for task in manifest.tasks:
-        benchmark = task.benchmark
-        declared = set(benchmark.get("available_capabilities") or ())
-        assets = benchmark.get("assets") or []
-        if any("lab" in str(asset).lower() for asset in assets):
-            declared.add("read_lab_equipment")
-        if any("star" in str(asset).lower() for asset in assets):
-            declared.add("read_star_chart")
-        requirements = dict(benchmark.get("tool_requirements") or {})
-        specs.update(
-            resolve_actions(
-                competition=manifest.competition_id,
-                task_type=task.task_type,
-                benchmark_requirements=requirements,
-                declared_capabilities=declared,
-                registered_handlers=handlers,
-                runtime="session",
-            )
-        )
+    interface = resolve_contest_interface(
+        manifest, rule_card=config.rule_card if config is not None else None
+    )
+    specs = set(interface.actions)
     if config is not None and config.otc_policy is not None:
         # Card-declared competition-specific bundle on top of the common set.
         if config.otc_policy.structured_deliberation:
             specs.update(ACTION_REGISTRY[name] for name in DELIBERATION_ACTION_NAMES)
         if "submit_code" not in config.otc_policy.allowed_actions:
             specs.discard(ACTION_REGISTRY["submit_code"])
-    if _is_answer_sheet_contest(manifest):
-        submit = ACTION_REGISTRY["submit"]
-        specs.discard(submit)
-        specs.discard(ACTION_REGISTRY["request_review"])
-        specs.add(
-            replace(
-                submit,
-                description=(
-                    "Submit the complete current answer sheet once and end the contest."
-                ),
-                arguments=(),
-            )
-        )
-    if manifest.metadata.get("artifact_contract"):
-        # Artifact delivery exposes collaboration actions; external research/lab
-        # tools need their own adapter and must not silently claim availability.
-        specs = {spec for spec in specs if spec.pack in {"common", "desk", "memory", "deliberation"}
-                 or spec.name in {"review_answer", "request_review", "direct_message"}}
     if config is not None:
         specs = _trim_to_baseline(specs, config)
     return frozenset(specs)
@@ -82,23 +48,8 @@ def _trim_to_baseline(
     specs: set[ActionSpec],
     config: ContestRunConfig,
 ) -> set[ActionSpec]:
-    """Drop the optional action bundles a baseline does not include."""
-    features = config.features
-    hidden: set[str] = set()
-    if features.basic_open_table:
-        hidden |= DELIBERATION_ACTION_NAMES | {"review_answer", "request_review"}
-    if not features.memory_actions:
-        hidden |= MEMORY_ACTION_NAMES
-    if not features.desk_actions:
-        hidden |= DESK_READONLY_ACTION_NAMES
-    if not features.private_channel or config.team_size < 2:
-        hidden.add("direct_message")
-    if not features.leader_submits:
-        hidden |= LEADER_ACTION_NAMES
-    if features.coach == "card":
-        # Discussion and independent review coexist; Coach never assigns tasks.
-        hidden |= {"assign_problem"}
-    return {spec for spec in specs if spec.name not in hidden}
+    """Use the same module/workflow boundary as direct action dispatch."""
+    return {spec for spec in specs if config.allows_action(spec)}
 
 
 def _card_submission_blocks(
@@ -280,9 +231,84 @@ def _actions_for_agent(
             session, config, agent, memory, answer_sheet_contest=answer_sheet_contest
         ),
     )
-    return _card_gate(
+    gated = _card_gate(
         base, session, config, agent, memory, answer_sheet_contest=answer_sheet_contest
     )
+    gated = _gate_work_targets(gated, session, config, work_task_ids)
+    return _gate_task_operations(gated, session, config, work_task_ids)
+
+
+def _gate_task_operations(actions, session, config, work_task_ids):
+    """Expose tools and submissions only where their shared handlers can act."""
+    active = session.active_task
+    hidden = set()
+    if active is None or active.locked:
+        hidden.update(spec.name for spec in actions if spec.is_tool)
+        hidden.update({"submit_code", "skip_problem"})
+    if active is not None and active.kind == "programming":
+        hidden.add("submit")
+        if active.submissions and active.submissions[-1].verdict == 'PENDING':
+            hidden.update({'execute_code', 'submit_code'})
+    elif active is None and all(t.kind == "programming" for t in session.tasks):
+        hidden.add("submit")
+    render = next((s for s in actions if s.name == "render_pdf"), None)
+    if (render is not None and render.visibility == "team" and active is not None
+            and config.review_required and _task_has_independent_approval(active)):
+        hidden.add("render_pdf")
+    allowed = {s for s in actions if s.name not in hidden}
+    select = next((s for s in allowed if s.name == "select_problem"), None)
+    if select is not None:
+        existing = select.arguments[0].enum
+        targets = tuple(t.task_id for t in session.tasks if not t.locked
+                        and (not existing or t.task_id in existing)
+                        and (work_task_ids is None or t.task_id in work_task_ids))
+        allowed.discard(select)
+        if targets:
+            allowed.add(replace(select, arguments=(replace(select.arguments[0], enum=targets),)))
+    return frozenset(allowed)
+
+
+def _gate_work_targets(
+    actions: frozenset[ActionSpec],
+    session: ContestSession,
+    config: ContestRunConfig,
+    work_task_ids: set[str] | None,
+) -> frozenset[ActionSpec]:
+    """Do not advertise a work target whose version the handler must preserve."""
+    work = next((spec for spec in actions if spec.name == "work"), None)
+    if work is None:
+        return actions
+
+    def editable(task: TaskUnit) -> bool:
+        if task.locked or (work_task_ids is not None and task.task_id not in work_task_ids):
+            return False
+        if task.kind == "programming":
+            # Reviewed programming work is analysis, not a source mutation.
+            return config.review_required or not (
+                task.submissions and task.submissions[-1].verdict == "PENDING"
+            )
+        return not (config.review_required and _task_has_independent_approval(task))
+
+    targets = tuple(task.task_id for task in session.tasks if editable(task))
+    available = set(actions)
+    available.discard(work)
+    if targets:
+        current = session.active_task
+        explicit_target = current is None or current.task_id not in targets
+        available.add(replace(
+            work,
+            arguments=tuple(
+                replace(
+                    argument, enum=targets, required=explicit_target,
+                    description=(
+                        "Choose an editable problem; the current task is frozen."
+                        if explicit_target else argument.description
+                    ),
+                ) if argument.name == "problem_id" else argument
+                for argument in work.arguments
+            ),
+        ))
+    return frozenset(available)
 
 
 def _actions_for_agent_base(
@@ -600,6 +626,7 @@ def _leader_plan_prompts(
         "alone submit. You can change assignments later with assign_problem. "
     )
     plan_title = "OPENING LEADER PLAN"
+    review_enabled = config.review_required or config.final_review_required
     system = (
         role
         + "Base the choice on the actual "
@@ -609,7 +636,9 @@ def _leader_plan_prompts(
         "non-programming family. Return only one JSON object with this schema: "
         '{"summary":"...",'
         '"work_assignments":{"Agent_1":["exact problem_id"]},'
-        '"review_assignments":{"Agent_1":["exact problem_id"]},'
+        + ('"review_assignments":{"Agent_1":["exact problem_id"]},'
+           if review_enabled else "")
+        +
         '"task_order":["exact problem_id"],'
         '"switch_conditions":["..."],"final_check":["..."]}.'
     )
@@ -622,11 +651,15 @@ def _leader_plan_prompts(
         f"Budget: turns={config.max_turns}, api_calls={config.max_api_calls}, "
         f"tokens={config.max_tokens}, minutes={config.max_simulated_minutes}\n"
         f"Rules: {config.rule_guidance or 'No additional rule-card guidance.'}\n"
-        "Assign every listed task to at least one worker and at least one reviewer. "
+        + ("Assign every listed task to at least one worker and at least one reviewer. "
+           if review_enabled else "Assign every listed task to at least one worker. ")
+        +
         "A task may appear under multiple workers for group collaboration. "
         "Use only the exact Agent_N names and exact problem_id strings shown here. "
         "Work assignments will be enforced by the runtime and copied into each "
-        "agent's private memory.\n"
+        + ("agent's private memory.\n" if config.modules.memory
+           else "agent's assignment context.\n")
+        +
         f"Tasks:\n{json.dumps(tasks, ensure_ascii=False)}"
     )
     return system, user
@@ -797,27 +830,54 @@ def _card_focus_task(
     """
     chosen: str | None = None
     own_recent: str | None = None
+    programming_recent: str | None = None
+    released_task: str | None = None
     for event in reversed(memory.archival_snapshot()["events"]):
+        if (
+            event["kind"] == "programming_repair_yield"
+            and event.get("payload", {}).get("agent") == agent
+        ):
+            # This seat exhausted its repair visit. Earlier actions/choices
+            # must not immediately reclaim the task and undo the yield.
+            released_task = str(event["task_id"])
+            break
         if event["actor"] != agent:
             continue
+        if event["kind"] == "skip_problem":
+            released_task = str(event["task_id"])
+            break
         if own_recent is None and event.get("task_id") and event["kind"] != "think":
             own_recent = str(event["task_id"])
+        if (
+            programming_recent is None and event.get("task_id")
+            and event["kind"] in {"work", "execute_code", "submit_code"}
+        ):
+            programming_recent = str(event["task_id"])
         if event["kind"] == "select_problem":
             payload = event["payload"] if isinstance(event["payload"], dict) else {}
             chosen = str(payload.get("problem_id") or "") or None
-            break
-        if event["kind"] == "skip_problem":
             break
     by_id = {task.task_id: task for task in session.tasks}
     if chosen is not None:
         task = by_id.get(chosen)
         if task is not None and not task.locked and task.state is not TaskState.BLOCKED:
             return task
+    # Continue the seat's programming repair, rather than replacing its source
+    # context with an untouched problem on every turn. Inspecting/reviewing a
+    # teammate's task does not transfer ownership of the current repair.
+    recent = by_id.get(programming_recent or own_recent or "")
+    if (
+        recent is not None and recent.kind == "programming"
+        and recent.task_id != released_task and not recent.locked
+        and not recent.hopeless and recent.state is not TaskState.BLOCKED
+    ):
+        return recent
     assigned: list[TaskUnit] = []
     if personal_assignment is not None:
         for task_id in personal_assignment.get("work_tasks", []):
             task = by_id.get(str(task_id))
-            if task is not None and not task.locked and not task.hopeless:
+            if (task is not None and task.task_id != released_task
+                    and not task.locked and not task.hopeless):
                 assigned.append(task)
         # The coach's suggestions are worked in order; an answer-sheet problem
         # that already holds a draft is settled for scheduling purposes (the
@@ -826,7 +886,7 @@ def _card_focus_task(
         for task in assigned:
             if not _card_task_settled(task):
                 return task
-    unseen = _next_task(session, strategic_policy)
+    unseen = _next_task(session, strategic_policy, exclude_task_id=released_task)
     if (
         unseen is not None
         and not _card_task_settled(unseen)
@@ -841,10 +901,11 @@ def _card_focus_task(
     # than following the shared cursor onto a teammate's.
     if own_recent is not None:
         recent = by_id.get(own_recent)
-        if recent is not None and not recent.locked and recent.state is not TaskState.BLOCKED:
+        if (recent is not None and recent.task_id != released_task
+                and not recent.locked and recent.state is not TaskState.BLOCKED):
             return recent
     active = session.active_task
-    if active is not None and not active.locked:
+    if active is not None and active.task_id != released_task and not active.locked:
         return active
     return unseen
 

@@ -276,7 +276,7 @@
         "problem_access": false,
         "allowed_actions": [
           "speak",
-          "sleep"
+          "rest"
         ],
         "advice_scope": [
           "time allocation within the rule card",
@@ -316,7 +316,7 @@
       "max_file_size_mb": 20,
       "review_rendered_version": true,
       "post_review_synthesis": false,
-      "grading_status": "requires_explicit_sourced_rubric",
+      "grading_status": "ready_with_limitations_by_row",
       "fidelity": "benchmark_adaptation_not_official_equivalence"
     }
   }

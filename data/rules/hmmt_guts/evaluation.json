@@ -1,10 +1,10 @@
 {
-  "evaluation_guidance": "Report Guts performance, rule compliance, and collaboration quality separately. Official Guts performance is the sum of printed problem weights for correct short answers on released sets; this session is Guts only and must not add Individual or Team Sweepstakes points. Immediate grading and live standings are official during the round: report whether the team treated handed-in sets as final and whether it claimed unreleased later sets. Repository status is deferred_benchmark_metadata_missing; do not invent a completed benchmark grade. Treat season roster, Appeals Room, and Sweepstakes scaling as contestant conscience. Collaboration evidence should cover current-set coverage, useful parallel solving, independent checks before a runner hand-in, conflict resolution with evidence, recovery after a wrong posted score, and idle-time waste. Do not reward fixed runner or captain offices, equal speaking time, or message volume by themselves. Fidelity: progressive release, batch finality, and the live scoreboard are specified and not reproduced.",
+  "evaluation_guidance": "Resolve readiness, evaluator, rubric, and score basis from the selected benchmark record. Report Guts performance, rule compliance, and collaboration quality separately. Official Guts performance is the sum of printed problem weights for correct short answers on released sets; this session is Guts only and must not add Individual or Team Sweepstakes points. Immediate grading and live standings are official during the round: report whether the team treated handed-in sets as final and whether it claimed unreleased later sets. Treat season roster, Appeals Room, and Sweepstakes scaling as contestant conscience. Collaboration evidence should cover current-set coverage, useful parallel solving, independent checks before a runner hand-in, conflict resolution with evidence, recovery after a wrong posted score, and idle-time waste. Do not reward fixed runner or captain offices, equal speaking time, or message volume by themselves. Fidelity: progressive release, batch finality, and the live scoreboard are specified and not reproduced.",
   "scoring": {
     "mode": "gold",
     "unit": "problem_or_question",
     "evaluator_id": "rubric_llm_v1",
-    "evaluator_status": "ready",
+    "evaluator_status": "per_record",
     "recommended_evaluator_id": "gold_answer_v1",
     "official_performance": {
       "source_status": "source_grounded",
@@ -46,8 +46,8 @@
         "answers_submitted_before_release",
         "scoreboard_consultations"
       ],
-      "repository_evaluator_id": null,
-      "repository_evaluator_status": "deferred_benchmark_metadata_missing"
+      "repository_evaluator_id": "rubric_llm_v1",
+      "repository_evaluator_status": "per_record"
     },
     "rule_compliance": {
       "reported_separately_from_performance": true,
@@ -158,8 +158,8 @@
       ]
     },
     "current_repository_availability": {
-      "evaluator_ready": false,
-      "evaluator_status": "deferred_benchmark_metadata_missing",
+      "evaluator_ready": true,
+      "evaluator_status": "per_record",
       "official_environment_fully_reproduced": false,
       "official_wall_clock_enforced": false,
       "official_packet_scoring": false,
@@ -180,10 +180,23 @@
       "required_selectors": [
         "season"
       ],
-      "submission_adaptation": null
+      "submission_adaptation": null,
+      "readiness_scope": "Per-record metadata; evaluator availability does not imply official-environment reproduction."
     },
     "rubric_path": "data/rubrics/worked_answer_100_v1.json",
-    "evaluator_strategy": "structured_rubric_llm_judge"
+    "evaluator_strategy": "structured_rubric_llm_judge",
+    "benchmark_readiness_source": "data/benchmarks/hmmt_guts/benchmark.json",
+    "evaluation_status_counts": {
+      "ready_with_limitations": 44,
+      "ready": 1
+    },
+    "evaluator_selection": "Use each benchmark record's evaluation; rule values are defaults only.",
+    "record_evaluator_overrides": {
+      "hmmt_guts_2024": "gold_answer_v1"
+    },
+    "record_rubric_overrides": {
+      "hmmt_guts_2024": "data/rubrics/hmmt_guts_2024_official_weights_v1.json"
+    }
   },
   "submission": {
     "max_count": 1

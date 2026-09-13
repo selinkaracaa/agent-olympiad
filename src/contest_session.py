@@ -29,7 +29,7 @@ class TaskBlockedError(RuntimeError):
 
 
 class TaskLockedError(RuntimeError):
-    """Raised after a programming task has been accepted."""
+    """Raised when a programming source is frozen or its task is accepted."""
 
 
 @dataclass
@@ -336,6 +336,14 @@ class ContestSession:
                 and latest.evidence_refs == tuple(evidence_refs)
             ):
                 return latest
+        if (
+            task.kind == "programming"
+            and task.submissions
+            and task.submissions[-1].verdict == "PENDING"
+        ):
+            # Freeze at the mutation seam, including direct calls and restores.
+            # Identical versions above remain safe, idempotent reads.
+            raise TaskLockedError("source is frozen while the verdict is pending")
         parent = task.versions[-1].version_hash if task.versions else None
         digest_input = "\0".join((task.task_id, part or "", parent or "", content))
         version = AnswerVersion(

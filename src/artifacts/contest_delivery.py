@@ -11,6 +11,7 @@ from pypdf import PdfReader
 from artifact_contract import ArtifactContract
 from artifacts.assets import file_sha256
 from artifacts.slides import normalize_submission, _chrome_binary
+from artifacts.pdf_ingest import render_pdf_pages
 
 
 class _SafeHTML(HTMLParser):
@@ -82,7 +83,7 @@ class ArtifactRenderer:
         self.latest = None
 
     def __call__(self, task, action, arguments):
-        if action != 'render_artifact':
+        if action != 'render_pdf':
             raise ValueError(f'No artifact adapter for tool {action}; not executed')
         content = str(arguments['content'])
         validate_source(content, self.contract)
@@ -91,9 +92,16 @@ class ArtifactRenderer:
         receipt_path = folder / 'receipt.json'
         if receipt_path.exists():
             receipt = json.loads(receipt_path.read_text(encoding='utf-8'))
+            if receipt.get('contract') != asdict(self.contract):
+                raise ValueError('Artifact receipt/contract mismatch')
             if (file_sha256(Path(receipt['pdf'])) != receipt['pdf_sha256'] or
                     file_sha256(Path(receipt['source'])) != digest):
                 raise ValueError('Artifact receipt/hash mismatch')
+            if len(receipt.get('previews', [])) != receipt['pages']:
+                raise ValueError('Artifact receipt lacks page previews')
+            for preview in receipt['previews']:
+                if file_sha256(Path(preview['path'])) != preview['sha256']:
+                    raise ValueError('Artifact preview/hash mismatch')
             self.latest = receipt
             return receipt
         folder.mkdir(parents=True, exist_ok=True)
@@ -114,9 +122,12 @@ class ArtifactRenderer:
             raise ValueError(f'Rendered page count {pages} violates delivery contract')
         if pdf.stat().st_size > self.contract.max_file_size_mb * 1024**2:
             raise ValueError('Rendered PDF exceeds file size limit')
+        images, _ = render_pdf_pages(pdf, folder / 'previews', image_format='png')
+        previews = [dict(path=str(image.path.resolve()), page_number=image.page_number,
+                         mime_type=image.mime_type, sha256=file_sha256(image.path)) for image in images]
         receipt = dict(valid=True, source=str(source.resolve()), pdf=str(pdf.resolve()),
                        source_sha256=digest, pdf_sha256=file_sha256(pdf), pages=pages,
-                       contract=asdict(self.contract))
+                       previews=previews, contract=asdict(self.contract))
         receipt_path.write_text(json.dumps(receipt, indent=2), encoding='utf-8')
         self.latest = receipt
         return receipt

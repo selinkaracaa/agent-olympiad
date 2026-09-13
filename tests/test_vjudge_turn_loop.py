@@ -106,7 +106,7 @@ class VJudgeTurnLoopTests(unittest.TestCase):
             ),
         ):
             response = json.loads(
-                env.execute_action("Agent_1", "submit_final", SOLUTION)
+                env.execute_action("Agent_1", "submit", SOLUTION)
             )
 
         self.assertEqual(response["remote"]["verdict"], "WA")

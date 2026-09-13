@@ -13,6 +13,8 @@ from dataclasses import dataclass, replace
 
 MAX_TURNS_CAP = 90
 DEFAULT_MINUTES_PER_TURN = 5.0
+# Advisory only: official short contests and explicit smoke overrides stay valid.
+MIN_RECOMMENDED_TURNS = 10
 
 
 def turns_for_duration(

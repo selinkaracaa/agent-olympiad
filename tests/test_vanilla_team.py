@@ -53,7 +53,7 @@ class VanillaTeamTests(unittest.TestCase):
             env,
             lambda _system, _user: (
                 "ACTION: speak | PAYLOAD: first\n"
-                "ACTION: submit_final | PAYLOAD: forbidden second action"
+                "ACTION: submit | PAYLOAD: forbidden second action"
             ),
             CollabConfig(max_turns=1, max_api_calls=1, synthesize=False),
         )

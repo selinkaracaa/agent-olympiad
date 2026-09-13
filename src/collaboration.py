@@ -17,8 +17,6 @@ from env import TurnLimitExceededError
 from memory import MemoryStore
 from rules import AgentRole, RulesMode, agent_view
 from rules.describe import describe_resources
-from tool_registry import canonical_action_name
-
 SchemaName = Literal[
     "round_table",
     "centralized",
@@ -277,7 +275,7 @@ def _agent_user_prompt(
     if group_memory:
         group_section = f"{group_memory}\n\n"
     default_turn_instruction = """You may act once this turn, or:
-ACTION: sleep | PAYLOAD: <short reason>
+ACTION: rest | PAYLOAD: <short reason>
 What is your contribution?"""
     return f"""{private_result}{team_code_section}=== SCHEMA ===
 {schema_note}
@@ -369,7 +367,7 @@ def _submit_synthesis_response(env, synthesizer: str, response: str) -> int:
             return 0
 
     for action_type, payload in parse_agent_response(response):
-        if canonical_action_name(action_type) == "submit":
+        if action_type == "submit":
             text = payload.strip()
             break
 
@@ -380,8 +378,8 @@ def _submit_synthesis_response(env, synthesizer: str, response: str) -> int:
             text = stripped
             parts = _count_numbered_parts(text)
 
-    env.execute_action(synthesizer, "submit_final", text)
-    # env.submit_final backs the sheet with the board; count what it kept.
+    env.execute_action(synthesizer, "submit", text)
+    # env.submit backs the sheet with the board; count what it kept.
     return max(parts, _count_numbered_parts(env.workspace.get("final_answer", "")))
 
 
@@ -444,7 +442,7 @@ def _all_agents_slept(env, agents: list[str], turn: int) -> bool:
         for item in env.action_log
         if item.get("turn") == turn
         and item.get("agent") in agents
-        and canonical_action_name(str(item.get("action") or "")) == "rest"
+        and str(item.get("action") or "") == "rest"
         and not item.get("protocol_error")
     }
     return sleeping_agents == set(agents)
@@ -543,7 +541,7 @@ def _run_synthesis(
         _log(f"  submission has only {parts} numbered parts — retrying synthesis")
 
     if best_answer and not env.submitted:
-        env.execute_action(synthesizer, "submit_final", best_answer)
+        env.execute_action(synthesizer, "submit", best_answer)
     elif best_answer and _count_numbered_parts(env.workspace.get("final_answer", "")) < best_parts:
         env.workspace["final_answer"] = best_answer
         env.submitted = True
@@ -765,7 +763,7 @@ def run_single_agent(env, query_llm_fn: QueryFn, config: CollabConfig | None = N
     agent = authorized_role.name if env.rule_card is not None else "Solo"
     programming = _is_programming_contest(env)
     single_agent_actions = {
-        "write_private_notes",
+        "remember",
         "submit",
         "rest",
     }
@@ -777,7 +775,7 @@ def run_single_agent(env, query_llm_fn: QueryFn, config: CollabConfig | None = N
         "=== SINGLE-AGENT ACTION PROTOCOL ===",
         "There are no teammates, so do not speak or use the shared scratchpad. "
         "Return one structured action:",
-        "- ACTION: write_private_notes | PAYLOAD: <private calculations>",
+        "- ACTION: remember | PAYLOAD: <private calculations>",
     ]
     if "execute_code" in single_agent_actions:
         action_lines.append(
@@ -850,9 +848,7 @@ def run_single_agent(env, query_llm_fn: QueryFn, config: CollabConfig | None = N
                 system_prompt=single_agent_system,
                 progress=config.progress,
             )
-            if env.action_log and canonical_action_name(
-                str(env.action_log[-1].get("action") or "")
-            ) == "rest":
+            if env.action_log and str(env.action_log[-1].get("action") or "") == "rest":
                 break
         if stop_reason is not None:
             break
@@ -946,7 +942,7 @@ def run_self_consistency(
         tie_behavior=config.self_consistency_tie_behavior,
     )
     if final:
-        env.execute_action("Solo", "submit_final", final)
+        env.execute_action("Solo", "submit", final)
     result = _result(env, "self_consistency")
     result.update({"candidates": candidates, "aggregation": "per_part_majority"})
     return result
@@ -980,7 +976,7 @@ def run_memory_solo(
         memory.add("Solo", response, turn=turn)
     final = candidates[-1].strip() if candidates else ""
     if final:
-        env.execute_action("Solo", "submit_final", final)
+        env.execute_action("Solo", "submit", final)
     snapshot = memory.snapshot()
     snapshot["private"]["Solo"] = snapshot["private"]["Solo"][-config.memory_bound :]
     result = _result(env, "memory_solo")
@@ -1042,7 +1038,7 @@ def run_subagent(
             f"DECOMPOSITION:\n{plan}\n\nWORKER RETURNS:\n{context}",
         )
         final = query(system, user)
-        env.execute_action(orchestrator, "submit_final", final)
+        env.execute_action(orchestrator, "submit", final)
     result = _result(env, "subagent")
     result.update(
         {
@@ -1116,7 +1112,7 @@ def run_debate(
             "Synthesize the decided proposals into the final answer only.",
             rendered,
         )
-        env.execute_action(agents[0], "submit_final", query(system, user))
+        env.execute_action(agents[0], "submit", query(system, user))
     counts = Counter(event["phase"] for event in events)
     result = _result(env, "debate")
     result.update(
@@ -1156,7 +1152,7 @@ def run_liveoi_best_of_8(
             range(len(candidates)),
             key=lambda index: (scores[index], -index),
         )
-        env.execute_action("Solo", "submit_final", candidates[selected_index])
+        env.execute_action("Solo", "submit", candidates[selected_index])
     result = _result(env, "liveoi_best_of_8")
     result.update(
         {
@@ -1212,10 +1208,9 @@ def _apply_vanilla_response(
         )
         return
     assert action_type is not None
-    canonical = canonical_action_name(action_type)
-    if canonical == "work":
+    if action_type == "work":
         env.record_work_artifact(agent_name, payload)
-    elif canonical == "rest":
+    elif action_type == "rest":
         env.record_rest(agent_name, payload)
     else:
         env.execute_action(agent_name, action_type, payload)
@@ -1270,7 +1265,7 @@ def run_vanilla_team(
         except TurnLimitExceededError:
             answer = ""
         if answer.strip():
-            env.execute_action("Agent_1", "submit_final", answer.strip())
+            env.execute_action("Agent_1", "submit", answer.strip())
 
     return _result(env, "vanilla_team")
 

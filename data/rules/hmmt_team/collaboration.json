@@ -1,0 +1,238 @@
+{
+  "agent_constraints": [
+    "Use only the roster size and answer style selected for the benchmark row's season.",
+    "Share discoveries explicitly; private reasoning is not silently visible to teammates.",
+    "Do not use calculators, online sources, hidden solutions, or outside help."
+  ],
+  "information_policy": {
+    "mode": "shared",
+    "shared": [
+      "problem",
+      "contest_rules",
+      "team_discussion",
+      "scratchpad"
+    ],
+    "coordination_requirement": "Communicate decisions and evidence explicitly; shared artifacts and citations are recorded in scratchpad/work, while private reasoning remains private."
+  },
+  "deliberation": {
+    "mode": "unstructured",
+    "min_challenges": 0,
+    "evaluation_dimensions": [
+      "evidence_responsiveness",
+      "revision_after_challenge",
+      "decision_traceability"
+    ]
+  },
+  "communication": {
+    "mode": "limited",
+    "team_message_budget": 24,
+    "per_agent_message_budget": 4,
+    "max_message_chars": 1200
+  },
+  "simulation": {
+    "max_turns": 12,
+    "turn_budget_basis": "One 5-minute benchmark turn per official 60 minutes.",
+    "open_table_coach": {
+      "enabled": true,
+      "may_submit": false,
+      "allowed_tools": [],
+      "counts_toward_shared_api_and_token_budget": true,
+      "after_opening_access": false,
+      "min_turns": 3,
+      "protocol_version": "otc_turn0_review_v1",
+      "review_required": true,
+      "contestant_turn_policy": {
+        "mode": "private_deliberation_then_single_action",
+        "allowed_actions": [
+          "work",
+          "speak",
+          "rest"
+        ],
+        "exactly_one_action": true,
+        "final_submission": "reviewed_answer_sheet",
+        "private_think_calls_per_turn": 1,
+        "max_chars_by_action": {
+          "think": 2400,
+          "work": 8000,
+          "speak": 1000,
+          "rest": 80
+        },
+        "memory_entries": {
+          "private_think_per_agent": 3,
+          "shared_work": 18,
+          "group_messages": 12,
+          "public_messages": 24
+        },
+        "discussion_policy": {
+          "report_after_work": true,
+          "silent_work_turn_requires_discussion": true,
+          "conflicts_require_targeted_speak": true
+        }
+      },
+      "precontest_brief": {
+        "turn": 0,
+        "problem_access": false,
+        "allowed_actions": [
+          "speak",
+          "rest"
+        ],
+        "advice_scope": [
+          "time allocation within the rule card",
+          "team coordination and handoffs",
+          "independent verification",
+          "reconciling the final deliverable"
+        ]
+      },
+      "opening_discussion": {
+        "enabled": false,
+        "problem_access": false,
+        "allowed_actions": [],
+        "purpose": "Coach exits permanently after the single turn-0 blind brief."
+      },
+      "action_surface": "registry_bundles_v1",
+      "action_bundles": [
+        "common",
+        "desk",
+        "memory",
+        "independent_review",
+        "competition_tools",
+        "deliberation_if_structured"
+      ]
+    },
+    "deliverable_pipeline": {
+      "version": "otc_artifact_v1",
+      "kind": "document",
+      "fidelity": "benchmark_adaptation_not_official_equivalence"
+    }
+  },
+  "agent_roles": [
+    {
+      "name": "Agent_1",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "All members of one team work together on the Team Round."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": []
+    },
+    {
+      "name": "Agent_2",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "All members of one team work together on the Team Round."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": []
+    },
+    {
+      "name": "Agent_3",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "All members of one team work together on the Team Round."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": []
+    },
+    {
+      "name": "Agent_4",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "All members of one team work together on the Team Round."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": []
+    },
+    {
+      "name": "Agent_5",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "All members of one team work together on the Team Round."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": []
+    },
+    {
+      "name": "Agent_6",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "All members of one team work together on the Team Round."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": []
+    },
+    {
+      "name": "Agent_7",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "All members of one team work together on the Team Round."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": []
+    },
+    {
+      "name": "Agent_8",
+      "title": "contestant",
+      "may_submit": true,
+      "duties": [
+        "All members of one team work together on the Team Round."
+      ],
+      "information_access": [
+        "contest_rules"
+      ],
+      "rule_expertise": []
+    }
+  ],
+  "rule_sections": {
+    "competition_format": [
+      "Work as one HMMT team for 60 minutes on the 10-problem Team Round. November uses short answers and a 4–6 person team; February uses proofs, permits partial credit, and uses a 6–8 person team. Use the season attached to the benchmark row. Books, notes, calculators, drawing aids, phones, computers, online sources, and outside help are forbidden. Submit one shared numbered answer or proof packet."
+    ],
+    "timeline": [
+      "Apply the execution timing and selectors in this rule card."
+    ],
+    "resource_policy": [
+      "internet: forbidden",
+      "calculator: forbidden",
+      "code_execution: forbidden",
+      "paper_pencil: allowed",
+      "provided_materials_only: True",
+      "outside_communication: forbidden"
+    ],
+    "collaboration_protocol": [
+      "All members of one team work together on the Team Round."
+    ],
+    "integrity_and_compliance": [
+      "Work as one HMMT team for 60 minutes on the 10-problem Team Round. November uses short answers and a 4–6 person team; February uses proofs, permits partial credit, and uses a 6–8 person team. Use the season attached to the benchmark row. Books, notes, calculators, drawing aids, phones, computers, online sources, and outside help are forbidden. Submit one shared numbered answer or proof packet."
+    ],
+    "deliverable_format": [
+      "One shared numbered answer/proof packet."
+    ],
+    "evaluation_criteria": [
+      "Score the shared answer/proof packet against an edition-matched official key or solution. Report rule compliance and collaboration quality separately."
+    ],
+    "runtime_limitations": [
+      "The benchmark runner does not reproduce the Appeals Room or on-site proctoring.",
+      "Rows without a verified season remain proxy rather than official-equivalent."
+    ]
+  }
+}

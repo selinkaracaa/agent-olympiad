@@ -1,0 +1,21 @@
+{
+  "evaluation_guidance": "Resolve readiness, evaluator, rubric, and score basis from the selected benchmark record. Evaluate the final PDF as a modeling report. Keep report quality, rule compliance, source integrity, and collaboration diagnostics separate; do not equate a rubric score with a COMAP award designation.",
+  "scoring": {
+    "mode": "rubric",
+    "unit": "session",
+    "evaluator_id": "rubric_llm_v1",
+    "evaluator_status": "ready",
+    "rubric_path": "data/rubrics/icm_modeling_report_100_v1.json",
+    "benchmark_readiness_source": "data/benchmarks/icm/benchmark.json",
+    "evaluation_status_counts": {
+      "ready": 19
+    },
+    "evaluator_selection": "Use each benchmark record's evaluation; rule values are defaults only.",
+    "record_evaluator_overrides": {},
+    "record_rubric_overrides": {}
+  },
+  "submission": {
+    "max_count": 1,
+    "mime_type": "application/pdf"
+  }
+}

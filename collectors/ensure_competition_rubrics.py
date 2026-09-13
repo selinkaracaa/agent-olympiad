@@ -177,34 +177,6 @@ def programming_protocol(dataset: str, title: str, out_name: str) -> Path:
     return out
 
 
-def envirothon_protocol() -> Path:
-    payload = {
-        "rubric_id": "envirothon_scoring_protocol_v1",
-        "dataset": "envirothon",
-        "title": "Envirothon scoring protocol placeholder",
-        "rubric_type": "official_scoring_protocol",
-        "scoring_direction": "higher_is_better",
-        "official_scoring_components": [
-            {
-                "id": "station_scores",
-                "name": "Station / test scores",
-                "basis": "Official station or written-test scoring when packet materials are promoted.",
-            }
-        ],
-        "applicability": {
-            "scope": "Benchmark shell exists but currently has zero promoted tasks.",
-            "repository_status": "deferred_until_benchmark_records_exist",
-        },
-        "coverage": {
-            "promoted_benchmark_records": 0,
-            "mapped_records": 0,
-        },
-    }
-    out = RUBRICS / "envirothon_scoring_protocol_v1.json"
-    write_json(out, payload)
-    return out
-
-
 def set_rubric_path(competition: str, rel_path: str) -> None:
     path = RULES / competition / "evaluation.json"
     if not path.exists():
@@ -330,7 +302,6 @@ def main() -> None:
                 "codeforces_programming_judge_v1.json",
             ),
         ),
-        ("envirothon", envirothon_protocol()),
     ]
 
     for competition, path in mapping:

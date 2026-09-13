@@ -219,7 +219,7 @@ def plan_for_item(item: dict, rubric_paths: dict[str, Path]) -> dict:
             "evaluation": {
                 "evaluator_id": "rubric_llm_v1",
                 "status": "ready",
-                "rubric_path": rel(rubric_paths["wsc_writing_28_v1"]),
+                "rubric_path": rel(rubric_paths["wsc_writing_100_v1"]),
                 "deliverable": "written_essay",
             },
             "parts": [],

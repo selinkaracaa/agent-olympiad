@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import math
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
 from typing import Any
@@ -12,12 +13,22 @@ class EvaluationError(ValueError):
     """Raised when an evaluator returns malformed or inconsistent scoring."""
 
 
+def _require_finite_numbers(label: str, *values: float) -> None:
+    try:
+        finite = all(math.isfinite(value) for value in values)
+    except (TypeError, ValueError):
+        finite = False
+    if not finite:
+        raise EvaluationError(f"{label} must contain only finite numbers.")
+
+
 @dataclass(frozen=True)
 class Criterion:
     id: str
     name: str
     max_score: float
     description: str
+    min_score: float = 0
     observable: bool = True
 
 
@@ -69,6 +80,7 @@ class EvaluationResult:
         return asdict(self)
 
     def validate(self, rubric: Rubric) -> None:
+        _require_finite_numbers("Evaluation totals", self.total_score, self.max_score, rubric.total_points)
         expected = {criterion.id: criterion for criterion in rubric.criteria}
         actual_ids = [criterion.id for criterion in self.criteria]
         if len(actual_ids) != len(set(actual_ids)):
@@ -80,21 +92,28 @@ class EvaluationResult:
 
         for result in self.criteria:
             definition = expected[result.id]
+            _require_finite_numbers(
+                f"Criterion {result.id}", result.score, result.max_score, result.confidence,
+                definition.min_score, definition.max_score,
+            )
+            if type(result.observable) is not bool or result.observable != definition.observable:
+                raise EvaluationError(f"Observability for {result.id} must match the rubric.")
             if abs(result.max_score - definition.max_score) > 1e-6:
                 raise EvaluationError(
                     f"Wrong maximum for {result.id}: "
                     f"{result.max_score} != {definition.max_score}"
                 )
-            if result.score < 0 or result.score > result.max_score:
+            if result.score < definition.min_score or result.score > result.max_score:
                 raise EvaluationError(
-                    f"Score out of range for {result.id}: {result.score}/{result.max_score}"
+                    f"Score out of range for {result.id}: "
+                    f"{result.score} not in [{definition.min_score}, {result.max_score}]"
                 )
             if result.confidence < 0 or result.confidence > 1:
                 raise EvaluationError(
                     f"Confidence out of range for {result.id}: {result.confidence}"
                 )
-            if result.observable and not result.evidence:
-                raise EvaluationError(f"Observable criterion {result.id} has no slide evidence.")
+            if definition.observable and not any(str(value).strip() for value in result.evidence):
+                raise EvaluationError(f"Observable criterion {result.id} has no submission evidence.")
 
         computed_total = sum(result.score for result in self.criteria)
         if abs(computed_total - self.total_score) > 1e-6:
@@ -109,6 +128,7 @@ class EvaluationResult:
 
 def scale_rubric(rubric: Rubric, total_points: float) -> Rubric:
     """Proportionally rescale criterion maxima to a target total."""
+    _require_finite_numbers("Rubric scale", rubric.total_points, total_points)
     if abs(rubric.total_points - total_points) < 1e-6:
         return rubric
     if rubric.total_points <= 0:
@@ -120,6 +140,7 @@ def scale_rubric(rubric: Rubric, total_points: float) -> Rubric:
             name=item.name,
             max_score=item.max_score * factor,
             description=item.description,
+            min_score=item.min_score * factor,
             observable=item.observable,
         )
         for item in rubric.criteria
@@ -142,6 +163,7 @@ def load_rubric(path: str | Path) -> Rubric:
             name=item["name"],
             max_score=float(item["max_score"]),
             description=item["description"],
+            min_score=float(item.get("min_score", 0)),
             observable=bool(item.get("observable", True)),
         )
         for item in raw["criteria"]
@@ -153,6 +175,9 @@ def load_rubric(path: str | Path) -> Rubric:
         criteria=criteria,
         not_observable_from_deck=tuple(raw.get("not_observable_from_deck", [])),
     )
+    _require_finite_numbers("Rubric total", rubric.total_points)
+    for item in criteria:
+        _require_finite_numbers(f"Rubric criterion {item.id}", item.min_score, item.max_score)
     ids = [item.id for item in criteria]
     if len(ids) != len(set(ids)):
         # A judge cannot return a unique score per duplicated id, so catch this
@@ -190,6 +215,7 @@ def parse_evaluation_payload(
             raise EvaluationError(f"Malformed evaluator JSON: {nested_exc}") from nested_exc
 
     try:
+        observability = {item.id: item.observable for item in rubric.criteria}
         criteria = [
             CriterionResult(
                 id=item["id"],
@@ -198,7 +224,7 @@ def parse_evaluation_payload(
                 evidence=[str(value) for value in item.get("evidence", [])],
                 justification=str(item["justification"]),
                 confidence=float(item["confidence"]),
-                observable=bool(item.get("observable", True)),
+                observable=item.get("observable", observability.get(item["id"], True)),
             )
             for item in payload["criteria"]
         ]
@@ -206,6 +232,7 @@ def parse_evaluation_payload(
         # recompute rather than discarding an otherwise-valid scoring over the
         # judge's arithmetic. Long rubrics make that slip common.
         reported_total = float(payload["total_score"])
+        _require_finite_numbers("Reported total_score", reported_total)
         computed_total = sum(item.score for item in criteria)
         total_warnings = list(warnings or [])
         if abs(reported_total - computed_total) > 1e-6:

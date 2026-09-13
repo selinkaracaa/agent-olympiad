@@ -8,12 +8,13 @@ import re
 import subprocess
 import sys
 import tempfile
+from dataclasses import replace
 from pathlib import Path
 from typing import Any
 
 from contest_manifest import ContestManifest, ManifestTask
 from env import OlympiadEnvironment
-from tool_registry import ACTION_REGISTRY, TOOL_PACKS
+from tool_registry import ACTION_REGISTRY
 from evaluation.gold import GoldAnswerEvaluator, answers_match, load_gold_parts
 from evaluation.programming_judge import (
     _extract_source,
@@ -121,11 +122,15 @@ class EnvironmentTaskExecutor:
         manifest: ContestManifest,
         *,
         benchmark_root: str | Path,
+        renderer=None,
+        rule_card=None,
     ) -> None:
         self.manifest = manifest
         self.benchmark_root = str(benchmark_root)
         self.repo_root = _repo_root_from_benchmark_root(self.benchmark_root)
         self._environments: dict[str, OlympiadEnvironment] = {}
+        self.renderer = renderer
+        self.rule_card = rule_card
 
     def execution_context_key(self, task: ManifestTask) -> str | None:
         """Fingerprint local samples and judge code, without fetching or judging.
@@ -163,12 +168,20 @@ class EnvironmentTaskExecutor:
 
     def _environment(self, task: ManifestTask) -> OlympiadEnvironment:
         if task.parent_problem_id not in self._environments:
+            # Artifact tasks come from an attached task packet, not a catalog row.
+            # Reuse the real environment backend with that public task context.
+            public_task = None
+            if self.manifest.metadata.get("artifact_contract"):
+                public_task = {**task.benchmark, "problem_id": task.parent_problem_id,
+                               "problem_description": task.prompt, "task_type": task.task_type}
             self._environments[task.parent_problem_id] = OlympiadEnvironment(
                 self.manifest.competition_id,
                 task.parent_problem_id,
                 base_path=self.benchmark_root,
                 max_turns=100000,
                 rules_mode="off",
+                problem_data=public_task,
+                rule_card=self.rule_card,
             )
         return self._environments[task.parent_problem_id]
 
@@ -194,9 +207,11 @@ class EnvironmentTaskExecutor:
         *,
         force_submit: bool = False,
     ) -> dict[str, Any]:
+        if action == "render_pdf" and self.renderer is not None:
+            return self.renderer(task, action, arguments)
         env = self._environment(task)
         spec = ACTION_REGISTRY.get(action)
-        if spec is None or spec.pack not in TOOL_PACKS:
+        if spec is None or not (spec.is_tool or action == "submit_code"):
             return {"valid": False, "error": f"Unsupported task action: {action}"}
         payload = str(arguments.get(spec.primary_argument or "") or "")
         sample_report: dict[str, Any] | None = None
@@ -228,6 +243,11 @@ class EnvironmentTaskExecutor:
         # dispatcher: the same gate (tool allowlist) and the same tool
         # implementation the legacy protocol uses, with no text re-encoding.
         raw = env.execute_action("Team", action, {spec.primary_argument: payload})
+        if action == "render_pdf":
+            try:
+                return json.loads(raw)
+            except (TypeError, ValueError):
+                return {"valid": False, "error": raw}
         if action != "submit_code":
             response: dict[str, Any] = {
                 "valid": not raw.startswith(("RULE VIOLATION", "Operational error")),
@@ -253,7 +273,7 @@ class EnvironmentTaskExecutor:
         return {
             "valid": remote_status != "needs_human"
             and not sample_only
-            and verdict.upper() not in {"", "PENDING", "SUBMIT_FAILED", "CHALLENGE"},
+            and verdict.upper() not in {"", "PENDING", "SUBMIT_FAILED", "CHALLENGE", "JUDGE_ERROR", "NEEDS_HUMAN"},
             "verdict": verdict,
             "feedback": feedback,
         }
@@ -309,8 +329,8 @@ def _grade_non_programming(task: ManifestTask, answer: str, competition_id: str 
             if str(item.get("expected") or "").strip()
             and item.get("match_mode") != "reference_llm"
         ]
-        if not gradeable:
-            raise GradingUnavailable("Reference/rubric evaluator is unavailable")
+        if len(gradeable) != len(parts):
+            raise GradingUnavailable("Some parts lack a supported exact gold evaluator")
         # Bare short answers for single-part contests (Science Bowl / Qanta / etc.).
         if len(gradeable) == 1:
             part = gradeable[0]
@@ -324,60 +344,165 @@ def _grade_non_programming(task: ManifestTask, answer: str, competition_id: str 
         result = GoldAnswerEvaluator(load_gold_parts({**gold, "parts": gradeable}), answer).evaluate()
         return float(result.total_score), float(result.max_score)
     expected = str(gold.get("expected_answer") or "")
-    if not expected.strip():
+    if not expected.strip() or gold.get("match_mode") == "reference_llm":
         raise GradingUnavailable("No supported gold answer or evaluator")
     maximum = float(task.max_score)
     correct = bool(candidate) and bool(expected) and match(expected, candidate, tuple(gold.get('aliases') or ()))
     return (maximum if correct else 0.0), maximum
 
 
+def _non_programming_evaluation(
+    task: ManifestTask, answer: str, competition_id: str,
+) -> dict[str, Any]:
+    """Retain the complete selected scope, even when only a subset is assessable."""
+    gold = task.benchmark.get("gold_label") or {}
+    parts = list(gold.get("parts") or [])
+    if task.question_id is not None:
+        parts = [part for part in parts if str(part.get("id")) == task.question_id]
+        if not parts:
+            parts = [{"id": task.question_id, "points": task.max_score}]
+    elif not parts:
+        parts = [{
+            "id": task.task_id, "expected": gold.get("expected_answer"),
+            "points": task.max_score, "match_mode": gold.get("match_mode"),
+        }]
+    fallback = task.max_score if len(parts) == 1 else 1.0
+    weighted = [
+        {**part, "points": float(part.get("points", part.get("max_score", fallback)))}
+        for part in parts
+    ]
+    supported = [
+        part for part in weighted
+        if str(part.get("expected") or "").strip()
+        and part.get("match_mode") != "reference_llm"
+    ]
+    missing = [
+        str(part.get("id")) for part in weighted
+        if not str(part.get("expected") or "").strip()
+        or part.get("match_mode") == "reference_llm"
+    ]
+    maximum = sum(part["points"] for part in weighted)
+    graded_maximum = sum(part["points"] for part in supported)
+    partial_score = None
+    if supported:
+        if not missing:
+            partial_score, maximum = _grade_non_programming(task, answer, competition_id)
+            graded_maximum = maximum
+        else:
+            # Normalize weights before filtering: one remaining part must not
+            # inherit the maximum of the original multipart packet.
+            partial_task = replace(
+                task, benchmark={**task.benchmark,
+                                 "gold_label": {**gold, "parts": supported}},
+            )
+            partial_score, _ = _grade_non_programming(partial_task, answer, competition_id)
+    complete = not missing
+    row = {
+        "graded": complete,
+        "status": "graded" if complete else ("partial" if supported else "unavailable"),
+        "score": partial_score if complete else None,
+        "max_score": maximum,
+        "utility": (partial_score / maximum if maximum > 0 else 0.0) if complete else None,
+        "partial_score": partial_score,
+        "graded_max_score": graded_maximum,
+        "graded_parts": len(supported),
+        "ungraded_part_ids": missing,
+    }
+    if missing:
+        row["reason"] = "No supported exact gold evaluator for parts: " + ", ".join(missing)
+    return row
+
+
+def _programming_evaluation(task: ManifestTask, result: dict[str, Any]) -> dict[str, Any]:
+    state = (result.get("tasks") or {}).get(task.task_id) or {}
+    solved = state.get("state") == "solved"
+    attempts = []
+    for event in (result.get("memory") or {}).get("events") or []:
+        if event.get("task_id") != task.task_id:
+            continue
+        kind = event.get("kind")
+        if kind in {"programming_deadline_submit_started", "verdict_queued"}:
+            attempts.append({"valid": False, "verdict": "PENDING"})
+        elif kind in {"submit_code_result", "programming_deadline_submit_result"}:
+            attempts.append(event.get("payload") or {})
+    if not attempts:
+        checkpoint_tasks = (result.get("session_checkpoint") or {}).get("tasks") or []
+        checkpoint_task = next((item for item in checkpoint_tasks
+                                if item.get("task_id") == task.task_id), None)
+        attempts = list((checkpoint_task or state).get("submissions") or [])
+    if not attempts and state.get("terminal_verdict") not in {None, "NO_AC"}:
+        attempts = [{"verdict": state["terminal_verdict"], "valid": True}]
+    unavailable = None
+    nonterminal = {"", "PENDING", "SUBMIT_FAILED", "CHALLENGE", "NEEDS_HUMAN",
+                   "JUDGE_ERROR", "NO_TESTS", "NO_AC"}
+    local_rejections = {"SAMPLE_WA", "SAMPLE_TLE", "SAMPLE_MLE", "SAMPLE_RE",
+                        "SAMPLE_CE", "SAMPLE_OLE"}
+    for attempt in attempts:
+        verdict = str(attempt.get("verdict") or "").upper()
+        if verdict in local_rejections:
+            # A failed local sample gate is not an official judge outage, and
+            # cannot resolve an earlier uncertain remote submission.
+            continue
+        if (verdict in nonterminal or verdict.startswith("SAMPLE_")
+                or not attempt.get("valid", True)):
+            unavailable = verdict or "MISSING_VERDICT"
+        else:
+            # A later conclusive official result resolves an earlier outage.
+            unavailable = None
+    if solved:
+        unavailable = None  # Official AC locks the task and remains definitive.
+    score = 1.0 if solved else 0.0
+    complete = unavailable is None
+    row = {
+        "graded": complete, "status": "graded" if complete else "unavailable",
+        "score": score if complete else None, "max_score": 1.0,
+        "utility": score if complete else None,
+        "partial_score": score if complete else None,
+        "graded_max_score": 1.0 if complete else 0.0,
+        "graded_parts": int(complete),
+        "ungraded_part_ids": [] if complete else [task.task_id],
+    }
+    if unavailable is not None:
+        row["reason"] = "Official programming verdict unavailable: " + unavailable
+    return row
+
+
 def grade_contest_result(
     manifest: ContestManifest,
     result: dict[str, Any],
 ) -> dict[str, Any]:
-    """Grade the latest valid per-task submissions without exposing gold to agents."""
+    """Grade submissions without confusing partial coverage with an official score."""
     rows: dict[str, dict[str, Any]] = {}
-    normalized: list[float] = []
-    total_score = 0.0
-    total_max = 0.0
-    task_states = result.get("tasks") or {}
     submissions = result.get("submissions") or {}
     for task in manifest.tasks:
         if task.programming:
-            state = task_states.get(task.task_id) or {}
-            score = 1.0 if state.get("state") == "solved" else 0.0
-            maximum = 1.0
+            rows[task.task_id] = _programming_evaluation(task, result)
         else:
-            try:
-                score, maximum = _grade_non_programming(
-                    task,
-                    str(submissions.get(task.task_id) or ""),
-                    manifest.competition_id,
-                )
-            except GradingUnavailable as exc:
-                rows[task.task_id] = {
-                    "graded": False, "status": "unavailable", "reason": str(exc),
-                    "score": None, "max_score": None, "utility": None,
-                }
-                continue
-        rows[task.task_id] = {
-            "graded": True,
-            "score": score,
-            "max_score": maximum,
-            "utility": score / maximum if maximum > 0 else 0.0,
-        }
-        total_score += score
-        total_max += maximum
-        normalized.append(rows[task.task_id]["utility"])
+            rows[task.task_id] = _non_programming_evaluation(
+                task, str(submissions.get(task.task_id) or ""), manifest.competition_id,
+            )
+    normalized = [row["utility"] for row in rows.values() if row["graded"]]
+    assessed = [row["partial_score"] for row in rows.values() if row["partial_score"] is not None]
+    total_max = sum(row["max_score"] for row in rows.values())
+    graded_max = sum(row["graded_max_score"] for row in rows.values())
+    graded_parts = sum(row["graded_parts"] for row in rows.values())
+    ungraded_parts = sum(len(row["ungraded_part_ids"]) for row in rows.values())
     all_supported = bool(rows) and len(normalized) == len(rows)
     return {
         "graded": all_supported,
         "evaluation_coverage": len(normalized) / len(rows) if rows else 0.0,
+        "part_evaluation_coverage": graded_parts / (graded_parts + ungraded_parts)
+        if graded_parts + ungraded_parts else 0.0,
+        "score_evaluation_coverage": graded_max / total_max if total_max > 0 else float(all_supported),
         "graded_tasks": len(normalized),
         "ungraded_tasks": len(rows) - len(normalized),
+        "graded_parts": graded_parts,
+        "ungraded_parts": ungraded_parts,
         "method": "contest_session_v1",
-        "score": total_score if normalized else None,
-        "max_score": total_max if normalized else None,
-        "task_utility": sum(normalized) / len(normalized) if normalized else None,
+        "score": sum(assessed) if all_supported else None,
+        "max_score": total_max if rows else None,
+        "partial_score": sum(assessed) if assessed else None,
+        "graded_max_score": graded_max,
+        "task_utility": sum(normalized) / len(normalized) if all_supported else None,
         "tasks": rows,
     }
