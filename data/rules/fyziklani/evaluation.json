@@ -1,5 +1,5 @@
 {
-  "evaluation_guidance": "Report Physics Brawl performance, rule compliance, and collaboration quality separately. Official performance is total points after attempt-decay, skip charges, and any Hurry-up triplet bonus, then rank by higher points and earlier last correct answer. Correctness alone is insufficient: a first-attempt solve outranks the same number after several wrong tries, and a skip permanently removes that problem for −1. Do not invent an exact remaining Main-series length. Repository status is deferred_benchmark_metadata_missing; do not invent a completed benchmark grade. Treat category placement, scoreboard hide, and fairness video calls as contestant conscience. Collaboration evidence should cover unlocked-series coverage, attempt-economy versus speed, skip discipline, useful parallel work during a lockout, conflict resolution with evidence, and idle-time waste. Do not reward fixed series offices, equal speaking time, or message volume by themselves. Fidelity: progressive unlock, lockout, skips, scoreboard hide, and video calls are specified and not reproduced. Generative-AI use is a disqualifying compliance event even if numeric answers match.",
+  "evaluation_guidance": "Resolve readiness, evaluator, rubric, and score basis from the selected benchmark record. Report Physics Brawl performance, rule compliance, and collaboration quality separately. Official performance is total points after attempt-decay, skip charges, and any Hurry-up triplet bonus, then rank by higher points and earlier last correct answer. Correctness alone is insufficient: a first-attempt solve outranks the same number after several wrong tries, and a skip permanently removes that problem for −1. Do not invent an exact remaining Main-series length. Treat category placement, scoreboard hide, and fairness video calls as contestant conscience. Collaboration evidence should cover unlocked-series coverage, attempt-economy versus speed, skip discipline, useful parallel work during a lockout, conflict resolution with evidence, and idle-time waste. Do not reward fixed series offices, equal speaking time, or message volume by themselves. Fidelity: progressive unlock, lockout, skips, scoreboard hide, and video calls are specified and not reproduced. Generative-AI use is a disqualifying compliance event even if numeric answers match.",
   "scoring": {
     "mode": "gold",
     "unit": "problem_or_question",
@@ -63,8 +63,8 @@
         "skip_charges",
         "attempt_counts_by_series"
       ],
-      "repository_evaluator_id": null,
-      "repository_evaluator_status": "deferred_benchmark_metadata_missing"
+      "repository_evaluator_id": "rubric_llm_v1",
+      "repository_evaluator_status": "ready"
     },
     "rule_compliance": {
       "reported_separately_from_performance": true,
@@ -191,8 +191,8 @@
       ]
     },
     "current_repository_availability": {
-      "evaluator_ready": false,
-      "evaluator_status": "deferred_benchmark_metadata_missing",
+      "evaluator_ready": true,
+      "evaluator_status": "ready",
       "official_environment_fully_reproduced": false,
       "official_wall_clock_enforced": false,
       "official_packet_scoring": false,
@@ -216,10 +216,18 @@
         "Generative-AI prohibition makes LLM participation non-comparable."
       ],
       "required_selectors": [],
-      "submission_adaptation": null
+      "submission_adaptation": null,
+      "readiness_scope": "Per-record metadata; evaluator availability does not imply official-environment reproduction."
     },
     "rubric_path": "data/rubrics/worked_answer_100_v1.json",
-    "evaluator_strategy": "structured_rubric_llm_judge"
+    "evaluator_strategy": "structured_rubric_llm_judge",
+    "benchmark_readiness_source": "data/benchmarks/fyziklani/benchmark.json",
+    "evaluation_status_counts": {
+      "ready": 14
+    },
+    "evaluator_selection": "Use each benchmark record's evaluation; rule values are defaults only.",
+    "record_evaluator_overrides": {},
+    "record_rubric_overrides": {}
   },
   "submission": {
     "max_count": 1

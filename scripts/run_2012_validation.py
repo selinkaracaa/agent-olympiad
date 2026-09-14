@@ -35,9 +35,9 @@ def gateway_ready():
 
 def commands(output, paired):
     jobs = []
-    for contest, manifest, size, turns, calls, minutes in (
-        ("arml_local_2012", "data/contest_manifests/generated/arml_local_2012.json", 6, 9, 109, 45),
-        ("icpc_wf_2012", "data/contest_manifests/icpc_wf_2012.json", 3, 60, 361, 300),
+    for contest, manifest, size, turns, minutes in (
+        ("arml_local_2012", "data/contest_manifests/generated/arml_local_2012.json", 6, 9, 45),
+        ("icpc_wf_2012", "data/contest_manifests/icpc_wf_2012.json", 3, 60, 300),
     ):
         for variant in (("otc", "decentralized") if paired else ("otc",)):
             dest = output / f"{contest}_{variant}"
@@ -46,13 +46,12 @@ def commands(output, paired):
                 "--live", "--provider", "perplexity", "--model", "openai/gpt-5.4-mini",
                 "--contest-manifest", str(ROOT / manifest), "--system-variant", variant,
                 "--action-calling", "native", "--team-size", str(size),
-                "--max-turns", str(turns), "--max-api-calls", str(calls),
+                "--max-turns", str(turns),
                 "--max-total-tokens", "220000", "--max-simulated-minutes", str(minutes),
                 "--start-seat", "0", "--no-judge-task", "--no-judge-cce",
                 "--output", str(dest),
             ]
-            if contest.startswith("icpc"):
-                command.append("--programming-deadline-submit")
+            command.append("--deadline-submit")
             state, identity = inspect_contest_run(command[4:])
             if state != "new":
                 raise RuntimeError(f"Fresh validation output required: {dest} ({state})")

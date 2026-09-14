@@ -1,0 +1,20 @@
+{
+  "protocol_version": "contest_session_v8",
+  "action_set_version": 8,
+  "module_version": 3,
+  "cases": {
+    "decentralized/math/fresh": "769ad76b9f10282e0992f20aec8e45ae8fa2468eddd54117685ba9345a17e042",
+    "decentralized/math/resume": "30ac59e543e4631a24e59d43bdda2c079a08204ce0c0515f95444e52f4a43ab5",
+    "decentralized/code/fresh": "c1b66c745dfd5cff24830421ffc03e9b17d385e63761d112e440c6a4777a28e3",
+    "decentralized/code/resume": "bb064205eaf5ac2fadf496f2b1197fcf43814dd993f51cd8aa966a4df08425e6",
+    "centralized/math/fresh": "5d36ab0738fd25a89bc2a58fbda750639ce7e78681eb9c910230c7003c100294",
+    "centralized/math/resume": "c67cd4670db9a9fa753130aaf6499735190bbb4c377c60a0f9ad32fcf6f1185e",
+    "centralized/code/fresh": "a5ecbee4b48fafa7eba26b4e2d14a4e6bfa64b071112ca8d92b9a7fb1b4d2948",
+    "centralized/code/resume": "df3d6617af00f32f6ad10c0a4c8cc4af748ff4f14936d0624e9e2ba3fb5a05ca",
+    "otc/math/fresh": "87ae43c35fac792c4bcd0370e2a644096ac5488131b586b089780bf7bc01343d",
+    "otc/math/resume": "e0b185d1e3287572cc19266300d505f5f1c44be003eff19ad515ff7bf370f450",
+    "otc/code/fresh": "e3964be1d595ca18a09069ca260e84725b75276cf0bde5536b5d20b2ac8b8f05",
+    "otc/code/resume": "1a05d0dc3f5e75f4648db9375522b0eebb88ea251b3448c576718acf7bed1bf1"
+  },
+  "capture_note": "2026-09-12: desk guidance follows available actions; removed contradictory programming work instruction. All 12 results, user contexts and checkpoints unchanged versus old prompt replay."
+}

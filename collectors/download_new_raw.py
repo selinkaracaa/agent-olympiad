@@ -96,32 +96,12 @@ ITYM_DRIVE = {
 
 
 def collect_iypt(entries):
-    print("IYPT...")
-    base_dir = os.path.join(RAW, "iypt")
-    index = curl_html("https://www.iypt.org/problems/")
-    year_links = re.findall(r'href="(https://www\.iypt\.org/problems/[^"]+)"', index)
-    year_links += re.findall(r'href="(/problems/[^"]+)"', index)
-    seen = set()
-    for link in year_links:
-        if link in seen:
-            continue
-        seen.add(link)
-        url = link if link.startswith("http") else f"https://www.iypt.org{link}"
-        page = curl_html(url)
-        pdfs = re.findall(r'href="(https://www\.iypt\.org/wp-content/uploads/[^"]+\.pdf)"', page, re.I)
-        if not pdfs:
-            continue
-        pdf_url = pdfs[0]
-        year_m = re.search(r"20\d{2}|19\d{2}", pdf_url + url)
-        if not year_m:
-            continue
-        year = int(year_m.group())
-        dest = os.path.join(base_dir, str(year), f"iypt_{year}_problems.pdf")
-        if curl(pdf_url, dest):
-            q = count_questions("iypt", dest, pdf_text(dest))
-            entries.append({"comp": "iypt", "year": year, "file": dest, "questions": q, "url": pdf_url})
-            print(f"  {year}: ok ({q} q)")
-
+    from pathlib import Path
+    try:
+        from .iypt_sources import collect_entries
+    except ImportError:
+        from iypt_sources import collect_entries
+    collect_entries(entries, Path(ROOT))
 
 def collect_itym(entries):
     print("ITYM...")

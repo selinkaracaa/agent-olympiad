@@ -501,20 +501,22 @@ class ContestMemory:
         groups: Iterable[str] = (),
         top_k: int | None = 8,
     ) -> list[dict[str, Any]]:
-        """Rank the viewer's own notes and team-shared notes.
+        """Search visible notes; an empty query explicitly browses recent notes.
 
-        Ordering mirrors the legacy ``MemoryStore.recall``: exact problem tag
-        first, then query-term hits, then recency; identical contents are
-        collapsed so a shared copy does not shadow its private original.
+        Nonempty keywords must match content. Among matches, prefer the problem
+        tag, then keyword hits and recency. Collapse identical note contents.
         """
         viewer = self._required_id("viewer", viewer)
-        terms = {term.lower() for term in str(query or "").split() if len(term) > 1}
+        terms = {term.lower() for term in str(query or "").split()}
         wanted = str(problem_id or "").strip().lower()
         candidates = [
             self._note_row(event)
             for event in self.view(viewer, groups=groups)
             if self._is_note(event)
         ]
+        if str(query or "").strip():
+            candidates = [row for row in candidates
+                          if any(term in row["content"].lower() for term in terms)]
         candidates.sort(
             key=lambda row: (
                 bool(wanted) and str(row["task_id"] or "").lower() == wanted,
@@ -535,6 +537,27 @@ class ContestMemory:
             if top_k is not None and len(selected) >= max(1, int(top_k)):
                 break
         return selected
+
+    def recall_status(self, viewer: str, *, current_task_id: str | None = None) -> dict[str, Any]:
+        """Small, visibility-safe catalog for the agent's recall decision."""
+        notes = self.recall(viewer, top_k=None)
+        visible = self.view(viewer)
+        previous = next((e for e in reversed(visible) if e.kind == 'recall_result'), None)
+        def note_state(events):
+            return {(e.task_id, str(e.payload['content']).strip()) for e in events if self._is_note(e)}
+        changed = (note_state(visible) != note_state(visible[:visible.index(previous)])
+                   if previous is not None else None)
+        payload = previous.payload if previous is not None else {}
+        return {
+            'status': 'available' if notes else 'empty',
+            'visible_note_count': len(notes),
+            'current_task_note_count': sum(row['task_id'] == current_task_id for row in notes),
+            'last_recall': ({'query': str(payload.get('query') or '')[:160],
+                            'problem_id': str(payload.get('problem_id') or '')[:120],
+                            'turn': previous.turn, 'result_count': len(payload.get('notes') or [])}
+                           if previous is not None else None),
+            'notes_changed_since_last_recall': changed,
+        }
 
     @staticmethod
     def _shrink_to_budget(projection: dict[str, Any], max_chars: int) -> None:

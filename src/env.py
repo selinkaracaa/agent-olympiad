@@ -11,6 +11,10 @@ from pathlib import Path
 from typing import Any, Optional
 
 from communication import CommunicationBudget
+from computer_capacity import (
+    COMPUTER_ACTIONS, computer_capacity_state, require_computer_slot,
+    validate_computer_capacity,
+)
 from contest_budget import (
     ContestBudget,
     estimate_tokens,
@@ -26,12 +30,9 @@ from tool_registry import (
     ACTION_REGISTRY,
     COMPETITION_ACTION_REGISTRY,
     COMPETITION_TOOL_REGISTRY,
-    LEGACY_ACTION_ALIASES,
-    PACK_ACTION_NAMES,
-    TOOL_PACKS,
-    action_matches,
+    TOOL_ACTION_NAMES,
+    competition_permissions,
     actions_for_runtime,
-    canonical_action_name,
     dispatch_environment_action,
 )
 from tools_search import live_web_search, looks_like_answer_lookup
@@ -67,8 +68,8 @@ TEAM_SIZE_MATRIX = {
 # COMPETITION_TOOL_REGISTRY / COMPETITION_ACTION_REGISTRY live in tool_registry.
 
 # Every set below is derived from the registry: the environment implements
-# the canonical actions tagged ``runtimes={"env"}`` (or both) and accepts the
-# legacy spellings in ``LEGACY_ACTION_ALIASES`` at its boundary.
+# the canonical actions tagged for the ``env`` runtime and accepts nothing else
+# on the wire.
 ENV_ACTIONS = actions_for_runtime("env")
 
 # Per-item board: pick a problem, record an answer, review a teammate's.
@@ -79,7 +80,8 @@ BOARD_ACTIONS = frozenset(
         "work",
         "triage_problem",
         "review_answer",
-        "verify_problem",
+        "request_review",
+        "assign_problem",
     }
 )
 
@@ -100,22 +102,12 @@ OPERATIONAL_ERROR_PREFIXES = (
     "Board unavailable:",
 )
 
-# Contest instruments: gated by the competition's tool allowlist. Submissions
-# (``submit_code``) live in a tool pack but are gated by the competition's
-# action registry instead.
-TOOL_ACTIONS = frozenset(
-    name
-    for pack in TOOL_PACKS
-    for name in PACK_ACTION_NAMES[pack]
-    if not ACTION_REGISTRY[name].submission
-) & ENV_ACTIONS
+# Tools are the same derived view in both runtimes. Source submission is a
+# distinct action, with permission resolved by the same competition interface.
+TOOL_ACTIONS = TOOL_ACTION_NAMES & ENV_ACTIONS
 
-# Every spelling the wire may carry: canonical env actions plus their aliases.
-ALL_ACTIONS = ENV_ACTIONS | frozenset(
-    alias
-    for alias, canonical in LEGACY_ACTION_ALIASES.items()
-    if canonical in ENV_ACTIONS
-)
+# Every name the wire may carry.
+ALL_ACTIONS = ENV_ACTIONS
 
 _SAFE_BINOPS = {
     ast.Add: operator.add,
@@ -154,7 +146,13 @@ class OlympiadEnvironment:
         rules_mode: RulesMode | str = RulesMode.OFF,
         rules_root: str | Path | None = None,
         rules_strict: bool = False,
+        computer_capacity: int | None = None,
+        problem_data: dict[str, Any] | None = None,
+        rule_card=None,
     ):
+        validate_computer_capacity(computer_capacity)
+        self.computer_capacity = computer_capacity
+        self.computer_uses_by_turn: dict[int, int] = {}
         self.competition_id = competition_id
         self.problem_id = problem_id
         self.base_path = base_path
@@ -165,7 +163,9 @@ class OlympiadEnvironment:
             strict=rules_strict,
         )
         self.rules_mode = self.rules_baseline.mode
-        self.rule_card = self.rules_baseline.card
+        self.rule_card = rule_card if rule_card is not None else self.rules_baseline.card
+        if self.rule_card is not None and self.rule_card.competition_id != competition_id:
+            raise ValueError("Environment rule card belongs to another competition")
 
         budget = resolve_contest_budget(
             competition_id,
@@ -230,46 +230,21 @@ class OlympiadEnvironment:
             else None
         )
         # Loaded before tool resolution: runtime-resource checks read fixtures.
-        self.problem_data = self._load_problem()
+        self.problem_data = dict(problem_data) if problem_data is not None else self._load_problem()
 
-        if self.rule_card is not None and self.rules_mode is RulesMode.ENFORCED:
-            self.unavailable_declared_tools = sorted(
-                {
-                    tool
-                    for tool in self.rule_card.allowed_tools
-                    if tool not in TOOL_ACTIONS
-                    or not self._tool_has_runtime_resource(tool)
-                }
-            )
-            self.allowed_tools = [
-                tool
-                for tool in self.rule_card.allowed_tools
-                if tool in TOOL_ACTIONS and self._tool_has_runtime_resource(tool)
-            ]
-        else:
-            self.unavailable_declared_tools = []
-            candidates = list(COMPETITION_TOOL_REGISTRY.get(competition_id, ()))
-            self.allowed_tools = [
-                tool for tool in candidates if self._tool_has_runtime_resource(tool)
-            ]
-            self.unavailable_declared_tools = sorted(
-                set(candidates) - set(self.allowed_tools)
-            )
-        # Prefer tools declared in the rules audit when registry is empty but
-        # rules list encoded tools (keeps DATA_COLLECTION + contest_rules aligned).
-        if (
-            self.rules_mode is not RulesMode.ENFORCED
-            and not self.allowed_tools
-            and self.contest_rules
-            and self.contest_rules.encoded_tools
-        ):
-            encoded = list(self.contest_rules.encoded_tools)
-            self.allowed_tools = [
-                tool for tool in encoded if self._tool_has_runtime_resource(tool)
-            ]
-            self.unavailable_declared_tools = sorted(
-                set(encoded) - set(self.allowed_tools)
-            )
+        self.permitted_actions = competition_permissions(
+            competition_id, rule_card=self.rule_card,
+            task_type=str(self.problem_data.get("task_type") or ""),
+        ) or set()
+        self.allowed_tools = sorted(
+            name for name in self.permitted_actions & TOOL_ACTIONS
+            if self._tool_has_runtime_resource(name)
+        )
+        self.unavailable_declared_tools = sorted(
+            (self.permitted_actions - set(ACTION_REGISTRY))
+            | ((self.permitted_actions & TOOL_ACTIONS) - set(self.allowed_tools))
+        )
+        self._pdf_renderer = None
         # Multi-item contests get a board; single-deliverable ones stay as they
         # were, and the board actions report themselves unavailable.
         self.workboard = Workboard.from_problem(self.problem_data)
@@ -408,6 +383,12 @@ class OlympiadEnvironment:
                 }
         return json.dumps(visible, ensure_ascii=False, indent=2)
 
+    def computer_resource_state(self) -> dict:
+        return computer_capacity_state(
+            self.computer_capacity,
+            self.computer_uses_by_turn.get(self.current_turn, 0),
+        )
+
     def get_metadata(self) -> dict:
         rules = self.contest_rules
         metadata = {
@@ -427,6 +408,7 @@ class OlympiadEnvironment:
             "duration_minutes": self.duration_minutes,
             "max_turns": self.max_turns,
             "minutes_per_turn": self.minutes_per_turn,
+            **self.computer_resource_state(),
             **self.rules_metadata(),
         }
         if self.rule_card is not None:
@@ -464,6 +446,7 @@ class OlympiadEnvironment:
             "turn_status": f"{self.current_turn}/{self.max_turns}",
             "api_call_status": api_status,
             "token_status": token_status,
+            **self.computer_resource_state(),
             "output_token_cap_per_call": per_call_cap,
             "submitted": self.submitted,
             "wrong_submissions": self.wrong_submissions,
@@ -484,6 +467,7 @@ class OlympiadEnvironment:
         self.budget_snapshots.append(
             {
                 "event": event,
+                **self.computer_resource_state(),
                 "turn": self.current_turn,
                 "api_calls": self.api_calls,
                 "tokens_used": self.tokens_used,
@@ -737,15 +721,13 @@ class OlympiadEnvironment:
     )
 
     def _action_visibility(self, action_type: str) -> str:
-        canonical = canonical_action_name(action_type)
-        if canonical in {
-            "write_private_notes",
+        if action_type in {
             "rest",
             *TOOL_ACTIONS,
             *self.PRIVATE_WORKSPACE_ACTIONS,
         }:
             return "private"
-        if canonical == "submit_code":
+        if action_type == "submit_code":
             return "team" if self.submit_code_is_team_visible() else "private"
         return "team"
 
@@ -989,7 +971,7 @@ class OlympiadEnvironment:
         }
         if visibility == "private":
             self.agent_observations.setdefault(agent_name, []).append(observation)
-        elif canonical_action_name(action_type) in CORE_WORKSPACE_ACTIONS:
+        elif action_type in CORE_WORKSPACE_ACTIONS:
             # Team-visible board work still needs its result to reach the actor:
             # the rejection notice is the whole point of recording a repeat.
             self.agent_observations.setdefault(agent_name, []).append(observation)
@@ -1003,14 +985,13 @@ class OlympiadEnvironment:
                 self.agent_observations.setdefault(peer, []).append(observation)
 
     def validate_action(self, action_type: str, agent_name: str | None = None) -> Optional[str]:
-        """Contest-rule gate. Accepts canonical names and legacy aliases alike."""
-        invoked = str(action_type or "").strip().lower()
-        canonical = canonical_action_name(invoked)
-        if invoked not in ALL_ACTIONS:
+        """Contest-rule gate on a canonical action name."""
+        canonical = str(action_type or "").strip().lower()
+        if canonical not in ALL_ACTIONS:
             return f"Unrecognized action '{action_type}'."
         if (
             self.rules_mode is not RulesMode.ENFORCED
-            and canonical in DELIBERATION_ACTIONS | {"write_private_notes"}
+            and canonical in DELIBERATION_ACTIONS
         ):
             return f"Unrecognized action '{action_type}'."
         if (
@@ -1022,9 +1003,7 @@ class OlympiadEnvironment:
                 f"RULE VIOLATION: Tool '{action_type}' is banned in {self.competition_id}. "
                 f"Allowed tools: {self.allowed_tools or 'none (paper and pencil only)'}"
             )
-        if canonical == "submit_code" and canonical not in COMPETITION_ACTION_REGISTRY.get(
-            self.competition_id, []
-        ):
+        if canonical == "submit_code" and canonical not in self.permitted_actions:
             return f"RULE VIOLATION: submit_code is unavailable in {self.competition_id}."
         if (
             self.rules_mode is RulesMode.ENFORCED
@@ -1048,28 +1027,28 @@ class OlympiadEnvironment:
             if role is None or not role.may_submit:
                 return f"RULE VIOLATION: {agent_name} is not authorized to submit."
         if canonical == "submit" and self.submitted:
-            return "Submission already finalized; further submit_final actions are ignored."
+            return "Submission already finalized; further submit actions are ignored."
         if self.phase_schedule is not None:
             phase_violation = self.phase_schedule.validate_action(
-                self.current_turn, invoked
+                self.current_turn, canonical
             )
             if phase_violation:
                 return phase_violation
         return None
 
-    # Handler table: canonical action name -> bound-method name. Legacy
-    # spellings never appear here; ``normalize_invocation`` maps them first.
+    # Handler table: canonical action name -> bound-method name.
     _HANDLERS: dict[str, str] = {
         "speak": "_act_speak",
         "work": "_act_work",
-        "write_private_notes": "_act_write_private_notes",
         "rest": "_act_rest",
         "select_problem": "_act_select_problem",
         "skip_problem": "_act_skip_problem",
         "inspect_problem": "_act_inspect_problem",
         "triage_problem": "_act_triage_problem",
-        "verify_problem": "_act_verify_problem",
         "review_answer": "_act_review_answer",
+        "request_review": "_act_request_review",
+        "assign_problem": "_act_assign_problem",
+        "finish_contest": "_act_finish_contest",
         "remember": "_act_remember",
         "recall": "_act_recall",
         "share_note": "_act_share_note",
@@ -1096,22 +1075,18 @@ class OlympiadEnvironment:
     ) -> str:
         """Run one action given in either wire encoding.
 
-        ``payload`` is the legacy text after ``PAYLOAD:`` or a typed argument
+        ``payload`` is the text after ``PAYLOAD:`` or a typed argument
         mapping; both are normalized onto the registry before dispatch.
         """
         self.action_count += 1
         invocation = normalize_invocation(action_type, payload)
-        invoked = invocation.invoked_as or str(action_type)
-        # The log records the canonical name; the spelling the agent used is
-        # kept alongside so legacy transcripts stay diagnosable.
         canonical = invocation.action
+        invoked = canonical or str(action_type)
         log_payload = (
             payload
             if isinstance(payload, str)
             else json.dumps(invocation.arguments, ensure_ascii=False)
         )
-        if invocation.is_alias:
-            metadata = {**(metadata or {}), "invoked_as": invoked}
 
         violation = self.validate_action(invoked, agent_name)
         if violation:
@@ -1163,6 +1138,16 @@ class OlympiadEnvironment:
             )
             return communication_violation
 
+        if canonical in COMPUTER_ACTIONS and self.computer_capacity is not None:
+            used = self.computer_uses_by_turn.get(self.current_turn, 0)
+            try:
+                require_computer_slot(self.computer_capacity, used)
+            except ValueError as exc:
+                result = str(exc)
+                self._log_action(agent_name, canonical, log_payload, result, metadata=metadata)
+                return result
+            self.computer_uses_by_turn[self.current_turn] = used + 1
+
         handler = getattr(self, self._HANDLERS[canonical], None)
         if handler is None:
             result: str = f"Operational error: action '{invoked}' not implemented."
@@ -1198,8 +1183,8 @@ class OlympiadEnvironment:
     def _fill_text_defaults(invocation: Invocation) -> tuple[dict[str, Any], tuple[str, ...]]:
         """Text protocol: an empty payload is the handler's problem, not a schema error.
 
-        The legacy prompts let ``submit_final`` with nothing attached fail with
-        the environment's own message ("final answer cannot be empty"), so
+        The text prompts let ``submit`` with nothing attached fail with the
+        environment's own message ("final answer cannot be empty"), so
         missing required free-text arguments are filled with ``""`` and the
         matching validation errors dropped; type and enum errors stand.
         """
@@ -1225,10 +1210,10 @@ class OlympiadEnvironment:
         self.chat_history.append({"sender": agent_name, "message": arguments["content"]})
         return "Message broadcast to all agents."
 
-    def _act_work(self, agent_name: str, arguments: dict[str, Any], invocation: Invocation) -> str:
+    def _act_work(self, agent_name: str, arguments: dict[str, Any], _: Invocation) -> str:
         content = str(arguments.get("content") or "")
         problem_id = str(arguments.get("problem_id") or "").strip()
-        if invocation.invoked_as == "write_scratchpad" or self.workboard is None and not problem_id:
+        if self.workboard is None and not problem_id:
             self.workspace["scratchpad"] = content
             return "Shared scratchpad updated."
         if self.workboard is None:
@@ -1250,12 +1235,6 @@ class OlympiadEnvironment:
         self._sync_answer_sheet()
         self._broadcast_board_event(agent_name, "work", item, result)
         return result
-
-    def _act_write_private_notes(
-        self, agent_name: str, arguments: dict[str, Any], _: Invocation
-    ) -> str:
-        self.private_notes[agent_name] = str(arguments.get("content") or "")
-        return "Private notes updated; no communication budget used."
 
     def _act_deliberation(
         self, agent_name: str, arguments: dict[str, Any], invocation: Invocation
@@ -1288,7 +1267,7 @@ class OlympiadEnvironment:
     ) -> str:
         if self.workboard is None:
             return self._board_unavailable()
-        # ``release_problem <item>`` arrives with the item in ``reason``.
+        # ``skip_problem <item>`` may name the item in ``reason``.
         reason = str(arguments.get("reason") or "").strip()
         item = self.workboard.resolve(reason) if reason else None
         if item is None:
@@ -1324,7 +1303,7 @@ class OlympiadEnvironment:
         )
 
     def _code_history(self, agent_name: str, focus: str) -> str:
-        """Legacy ``verify``: latest code plus the visible run/submission history."""
+        """Programming self-check: latest code plus the visible run/submission history."""
         visible_history = [
             {
                 "turn": item.get("turn"),
@@ -1340,8 +1319,7 @@ class OlympiadEnvironment:
             (
                 str(item.get("payload") or "")
                 for item in reversed(visible_history)
-                if canonical_action_name(str(item.get("action") or ""))
-                in {"execute_code", "submit_code", "submit"}
+                if str(item.get("action") or "") in {"execute_code", "submit_code", "submit"}
                 and str(item.get("payload") or "").strip()
             ),
             str(self.workspace.get("final_answer") or ""),
@@ -1360,7 +1338,7 @@ class OlympiadEnvironment:
         )
 
     def _act_triage_problem(
-        self, agent_name: str, arguments: dict[str, Any], invocation: Invocation
+        self, agent_name: str, arguments: dict[str, Any], _: Invocation
     ) -> str:
         item, error = self._board_item(arguments.get("problem_id"))
         if error:
@@ -1372,23 +1350,13 @@ class OlympiadEnvironment:
             self._broadcast_board_event(agent_name, "mark_hopeless", item, result)
             return result
         if item.hopeless:
+            # Any non-hopeless priority reopens the item first.
             result = self.workboard.mark_hopeless(item, "", hopeless=False)
             self._broadcast_board_event(agent_name, "mark_hopeless", item, result)
-            if invocation.invoked_as == "mark_hopeless" or priority == "normal" and item.priority == "normal":
+            if priority == "normal" and item.priority == "normal":
                 return result
         result = self.workboard.set_priority(item, priority)
         self._broadcast_board_event(agent_name, "set_priority", item, result)
-        return result
-
-    def _act_verify_problem(
-        self, agent_name: str, arguments: dict[str, Any], _: Invocation
-    ) -> str:
-        item, error = self._board_item(arguments.get("problem_id"))
-        if error:
-            return error
-        verdict, _, comment = str(arguments.get("content") or "").strip().partition(" ")
-        result = self.workboard.review(agent_name, item, verdict, comment, turn=self.current_turn)
-        self._broadcast_board_event(agent_name, "verify_problem", item, result)
         return result
 
     def _act_review_answer(
@@ -1407,18 +1375,171 @@ class OlympiadEnvironment:
                 f"currently recorded for {item.item_id} (version {expected}). "
                 "Re-open the item and review the current version."
             )
+        comment = str(arguments.get("content") or "").strip()
         verdict = "agree" if arguments.get("decision") == "approve" else "disagree"
-        result = self.workboard.review(
-            agent_name, item, verdict, str(arguments.get("content") or ""), turn=self.current_turn
-        )
-        self._broadcast_board_event(agent_name, "verify_problem", item, result)
+        result = self.workboard.review(agent_name, item, verdict, comment, turn=self.current_turn)
+        self._broadcast_board_event(agent_name, "review_answer", item, result)
         return result
 
-    def _act_remember(self, agent_name: str, arguments: dict[str, Any], _: Invocation) -> str:
+    def _act_request_review(
+        self, agent_name: str, arguments: dict[str, Any], _: Invocation
+    ) -> str:
+        if self.workboard is None:
+            return self._board_unavailable()
+        item = self._held_item(agent_name) or next(
+            (
+                entry
+                for entry in reversed(list(self.workboard.items.values()))
+                if entry.attempts and entry.attempts[-1].agent == agent_name
+            ),
+            None,
+        )
+        if item is None:
+            return "Board error: record an answer (work) before requesting a review."
+        if not item.attempts:
+            return f"Board error: {item.item_id} has no recorded answer to review yet."
+        content = str(arguments.get("content") or "").strip()
+        reviewer = str(arguments.get("reviewer") or "").strip()
+        result = self.workboard.request_review(
+            agent_name, item, content, reviewer=reviewer, turn=self.current_turn
+        )
+        if result.startswith("Board error:"):
+            return result
+        self._broadcast_board_event(agent_name, "request_review", item, result)
+        if reviewer:
+            audience, message, error = self._resolve_recipients(
+                [reviewer],
+                f"Please review {item.item_id} (version {self.workboard.answer_hash(item)}): {content}",
+            )
+            if not error:
+                self.group_messages.append(
+                    {
+                        "turn": self.current_turn,
+                        "sender": agent_name,
+                        "recipients": audience,
+                        "message": message,
+                        "visibility": "group",
+                    }
+                )
+        return result
+
+    def _act_assign_problem(
+        self, agent_name: str, arguments: dict[str, Any], _: Invocation
+    ) -> str:
+        if self.workboard is None:
+            return self._board_unavailable()
+        if not self._may_assign(agent_name):
+            return (
+                f"Board error: {agent_name} is not the team leader; only a "
+                "designated submitter may assign problems."
+            )
+        target = str(arguments.get("agent") or "").strip()
+        roster = self._roster_names()
+        if target not in roster:
+            return f"Board error: unknown teammate {target!r}. Team: {', '.join(roster)}."
+        if target == agent_name:
+            return "Board error: assign problems to a teammate; use select_problem for yourself."
+        raw_ids = arguments.get("problem_ids") or []
+        if isinstance(raw_ids, str):
+            raw_ids = [raw_ids]
+        items = []
+        for raw in raw_ids:
+            item = self.workboard.resolve(str(raw))
+            if item is None:
+                return self.workboard.unknown_ref_message(str(raw))
+            if item not in items:
+                items.append(item)
+        if not items:
+            return "Board error: assign_problem needs at least one problem id."
+        result = self.workboard.assign(
+            agent_name, target, items, reason=str(arguments.get("reason") or ""), turn=self.current_turn
+        )
+        self._broadcast_board_event(agent_name, "assign_problem", items[0], result)
+        return result
+
+    def _act_finish_contest(
+        self, agent_name: str, arguments: dict[str, Any], _: Invocation
+    ) -> str:
+        if self.submitted:
+            return "Contest already finished; the submission is final."
+        if self.workboard is not None:
+            return (
+                "Board error: answer-sheet contests end only through submit, "
+                "which hands in the whole board."
+            )
+        evaluation = self.problem_data.get("evaluation") or {}
+        is_programming = self.problem_data.get("task_type") in {
+            "algorithmic_programming",
+            "programming",
+        } or evaluation.get("evaluator_id") == "programming_judge"
+        if not is_programming:
+            return "Board error: nothing has been submitted yet; use submit to hand in the answer."
+        # Session rule: finishing needs a valid submission for every task. The
+        # env has one programming task, so the latest submit_code that passed
+        # its judged tests is what gets finalized.
+        accepted_source = next(
+            (
+                str(entry.get("payload") or "")
+                for entry in reversed(self.action_log)
+                if str(entry.get("action") or "") == "submit_code"
+                and self._submission_passed(str(entry.get("result") or ""))
+            ),
+            "",
+        )
+        if not accepted_source.strip():
+            return (
+                "Board error: cannot finish before a code submission passes the "
+                "judge; use submit_code."
+            )
+        self.workspace["final_answer"] = accepted_source.strip()
+        self.submitted = True
+        self.submitted_by = agent_name
+        reason = str(arguments.get("reason") or "").strip()
+        return f"Contest finished by {agent_name}" + (f" ({reason})." if reason else ".")
+
+    @staticmethod
+    def _submission_passed(result: str) -> bool:
+        text = result.lstrip()
+        if not text.startswith("{"):
+            return False
+        try:
+            feedback = json.loads(text)
+        except ValueError:
+            return False
+        if feedback.get("verdict") == "AC":
+            return True
+        total = feedback.get("total")
+        return bool(total) and feedback.get("passed") == total
+
+    def _may_assign(self, agent_name: str) -> bool:
+        if self.rule_card is not None:
+            role = self.rule_card.role_for(agent_name)
+            if role is not None:
+                return bool(role.may_submit)
+        if agent_name == "Group_Leader":
+            return True
+        roster = self._roster_names()
+        return bool(roster) and agent_name == roster[0]
+
+    def _roster_names(self) -> list[str]:
+        if self.agent_names:
+            return list(self.agent_names)
+        if self.rule_card is not None:
+            return [role.name for role in self.rule_card.roster(self.team_size)]
+        return sorted({str(entry.get("agent")) for entry in self.action_log if entry.get("agent")})
+
+    def _act_remember(
+        self, agent_name: str, arguments: dict[str, Any], _: Invocation
+    ) -> str:
         problem_ref, text = self._memory_scope(arguments.get("problem_id"), arguments.get("content"))
         if not text:
             return "Memory error: nothing to remember."
         item = self.memory.add(agent_name, text, turn=self.current_turn, problem_ref=problem_ref)
+        # The prompt's private-notes block shows the agent's own notes, newest last.
+        self.private_notes[agent_name] = "\n".join(
+            f"[{note.memory_id}] {note.content}"
+            for note in self.memory.private.get(agent_name, {}).values()
+        )
         scope = f" against item {problem_ref}" if problem_ref else ""
         return (
             f"Stored {item.memory_id}{scope} (private). "
@@ -1586,12 +1707,21 @@ class OlympiadEnvironment:
             summary = f"{agent_name} is now working on {item.item_id}."
         elif event == "skip_problem":
             summary = f"{agent_name} released {item.item_id}."
-        elif event == "verify_problem":
+        elif event == "review_answer":
             review = item.reviews[-1]
             summary = (
                 f"{agent_name} reviewed {item.item_id} ({review.verdict})"
                 + (f": {review.comment}" if review.comment else ".")
             )
+        elif event == "request_review":
+            request = item.review_requests[-1]
+            target = f" from {request.reviewer}" if request.reviewer else ""
+            summary = (
+                f"{agent_name} requests a review of {item.item_id}{target}"
+                + (f": {request.content}" if request.content else ".")
+            )
+        elif event == "assign_problem":
+            summary = result
         elif event == "mark_hopeless":
             summary = (
                 f"{agent_name} marked {item.item_id} hopeless."
@@ -1670,6 +1800,10 @@ class OlympiadEnvironment:
     def _run_web_search(self, payload: str) -> str:
         """Live search with contest policy + answer-key anti-cheat."""
         policy = self.contest_rules.search_policy if self.contest_rules else "forbidden"
+        if "web_search" in self.permitted_actions and policy in {"forbidden", "judge_only"}:
+            policy = "no_solution_lookup"  # The current card overrides stale audit permissions.
+        elif "web_search" not in self.permitted_actions:
+            policy = "forbidden"
         query = (payload or "").strip()
         if policy == "forbidden":
             msg = "RULE VIOLATION: web_search is banned for this contest."
@@ -1699,6 +1833,21 @@ class OlympiadEnvironment:
             return report
         except Exception as exc:
             return f"web_search error: {exc}"
+
+    def _run_render_pdf(self, content: str) -> str:
+        from tempfile import mkdtemp
+        from artifact_contract import ArtifactContract, contract_for, delivery_route
+        from artifacts.contest_delivery import ArtifactRenderer
+        from rules.loader import load_rule_card
+
+        if self._pdf_renderer is None:
+            card = self.rule_card or load_rule_card(self.competition_id)
+            contract = (contract_for(card) if card is not None and
+                        delivery_route(card) in {"document", "slides"}
+                        else ArtifactContract("document"))
+            self._pdf_renderer = ArtifactRenderer(
+                Path(mkdtemp(prefix="agent-olympiad-pdf-")), contract)
+        return json.dumps(self._pdf_renderer(None, "render_pdf", {"content": content}))
 
     def _tool_asset_text(self, role_substring: str, payload: str) -> str | None:
         """Load text/JSON assets from problem metadata for lab/star tools."""

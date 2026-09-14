@@ -1,24 +1,23 @@
 {
-  "evaluation_guidance": "Report official performance, rule compliance, collaboration quality, and current repository availability separately. Official performance may record only verified championship identity and award-structure facts; do not invent a Team Round scoring formula, duration, or materials rule. Repository gold scoring per problem is deferred_benchmark_metadata_missing. Rule compliance covers outside help, hidden-answer access, default-deny tool use, and treating Individual or Relay items as Team Round work. Collaboration quality is a non-official research layer: assess allocation, evidence exchange, verification, handoffs, recovery, and communication efficiency. Do not reward fixed roles, equal airtime, or message volume by themselves, and do not treat six independent solo solves as good Team Round collaboration. Never treat a text sheet as proof that a live clock, paper collection, or official booklet was present.",
+  "evaluation_guidance": "Resolve readiness, evaluator, rubric, and score basis from the selected benchmark record. Archived 2018 benchmark scoring: use gold_answer_v1 for the 14 Team Round answers at 5 points each (70 points total, no wrong-answer penalty). Do not generalize the 2018 packet to current editions. Report rule compliance and collaboration quality separately, and do not treat the text runner as proof of live timing, paper collection, or proctoring.",
   "scoring": {
     "mode": "gold",
     "unit": "problem",
-    "evaluator_id": null,
-    "evaluator_status": "unassigned",
+    "evaluator_id": "gold_answer_v1",
+    "evaluator_status": "ready",
     "recommended_evaluator_id": "gold_answer_v1",
     "official_performance": {
       "source_status": "source_grounded",
-      "source_review_status": "blocked_no_adequate_current_primary_ruleset",
-      "mechanics_completeness": "identity_and_award_structure_only",
+      "source_review_status": "archived_2018_team_packet_verified",
+      "mechanics_completeness": "archived_2018_team_round_complete",
       "mode": "gold",
       "unit": "problem",
       "criteria": [
-        "Verified official facts stop at championship identity, the Individual/Team/Relay structure, the three levels, and published award-structure lines. They do not include a current Team Round scoring formula."
+        "For the archived 2018 Team Round, score 14 official short answers at 5 points each with no wrong-answer penalty."
       ],
       "mechanics": [
-        "The championship includes Individual, Team, and Relay examinations at Junior, Intermediate, and Advanced levels.",
-        "Awards are issued separately for teams, individuals, and relay at each level.",
-        "Relay-award ties are broken by Team Round total, then Individual Round total."
+        "The archived 2018 Team Round lasts 40 minutes and has 14 questions worth 5 points each.",
+        "No point penalty applies to a wrong answer."
       ],
       "tie_breakers": [
         "Relay awards: Team Round total, then Individual Round total. Team Round tie-breakers are unknown."
@@ -33,8 +32,8 @@
         "current official team size beyond historical six-person practice",
         "2026 homepage announcement figures for Individual 20+40 and Relay 7x3, pending a binding booklet"
       ],
-      "repository_evaluator_id": null,
-      "repository_evaluator_status": "deferred_benchmark_metadata_missing"
+      "repository_evaluator_id": "gold_answer_v1",
+      "repository_evaluator_status": "ready"
     },
     "rule_compliance": {
       "reported_separately_from_performance": true,
@@ -112,8 +111,8 @@
       ]
     },
     "current_repository_availability": {
-      "evaluator_ready": false,
-      "evaluator_status": "deferred_benchmark_metadata_missing",
+      "evaluator_ready": true,
+      "evaluator_status": "ready",
       "official_environment_fully_reproduced": false,
       "official_wall_clock_enforced": false,
       "declared_unavailable_mechanisms": [
@@ -128,8 +127,18 @@
         "Individual and Relay examinations, live clocks, and in-person proctoring are not simulated."
       ],
       "required_selectors": [],
-      "submission_adaptation": "Official Team Round uses a paper answer sheet; the runner accepts numbered plain-text answers."
-    }
+      "submission_adaptation": "Official Team Round uses a paper answer sheet; the runner accepts numbered plain-text answers.",
+      "readiness_scope": "Per-record metadata; evaluator availability does not imply official-environment reproduction."
+    },
+    "rubric_path": "data/rubrics/numerical_sheet_reference_40_v1.json",
+    "short_answer_source": "data/rubrics/wmtc_short_answers.json",
+    "benchmark_readiness_source": "data/benchmarks/wmtc/benchmark.json",
+    "evaluation_status_counts": {
+      "ready": 3
+    },
+    "evaluator_selection": "Use each benchmark record's evaluation; rule values are defaults only.",
+    "record_evaluator_overrides": {},
+    "record_rubric_overrides": {}
   },
   "submission": {
     "max_count": 1

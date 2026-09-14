@@ -103,7 +103,7 @@ class ContestBudgetTests(unittest.TestCase):
 
     def test_tokens_tracked_per_turn(self):
         def short(_s, _u):
-            return "ACTION: sleep | PAYLOAD: done"
+            return "ACTION: rest | PAYLOAD: done"
 
         env = OlympiadEnvironment(
             "arml_local",

@@ -3,7 +3,9 @@
 from __future__ import annotations
 
 import sys
+import os
 import unittest
+from unittest.mock import patch
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -15,6 +17,10 @@ from evaluation.programming_judge import judge_programming_submission, load_samp
 
 
 class ProgrammingJudgeTests(unittest.TestCase):
+    def setUp(self):
+        # These are local sample tests, independent of the user's live gateway.
+        self.enterContext(patch.dict(os.environ, {'VJUDGE_GATEWAY_URL': ''}))
+
     def test_bottles_samples_exist(self):
         dest = (
             REPO_ROOT
@@ -32,7 +38,7 @@ class ProgrammingJudgeTests(unittest.TestCase):
         env.begin_turn()
         minutes_before = env.simulated_minutes
         bad = "print('nope')\n"
-        env.execute_action("Agent_1", "submit_final", bad + " " * 10)
+        env.execute_action("Agent_1", "submit", bad + " " * 10)
         grade = env.grade_submission()
         self.assertTrue(grade.get("graded"))
         self.assertEqual(grade.get("method"), "programming_sample_judge")

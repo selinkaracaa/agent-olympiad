@@ -1,7 +1,10 @@
 from __future__ import annotations
 
+import json
+import os
 import sys
 import unittest
+from unittest.mock import patch
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -172,6 +175,9 @@ class BoardBehaviourTests(unittest.TestCase):
 
 
 class EnvironmentIntegrationTests(unittest.TestCase):
+    def setUp(self):
+        self.enterContext(patch.dict(os.environ, {'VJUDGE_GATEWAY_URL': ''}))
+
     """The board reaches the agents through real env actions, or not at all."""
 
     def _env(self) -> OlympiadEnvironment:
@@ -183,15 +189,15 @@ class EnvironmentIntegrationTests(unittest.TestCase):
     def test_board_actions_are_available_without_being_declared_tools(self):
         env = self._env()
         self.assertEqual(env.get_available_tools(), [])
-        result = env.execute_action("Agent_1", "list_problems", "")
+        result = env.execute_action("Agent_1", "inspect_problem", "")
         self.assertIn("PROBLEM BOARD", result)
         self.assertEqual(env.rule_violations, [])
 
     def test_repeat_rejection_reaches_the_agent_that_made_it(self):
         env = self._env()
-        env.execute_action("Agent_1", "submit_problem", "1 | 268")
+        env.execute_action("Agent_1", "work", "1 | 268")
         env.consume_agent_observations("Agent_1")
-        env.execute_action("Agent_1", "submit_problem", "1 | 268")
+        env.execute_action("Agent_1", "work", "1 | 268")
         observations = env.consume_agent_observations("Agent_1")
         self.assertTrue(
             any("already the recorded answer" in item["result"] for item in observations)
@@ -199,7 +205,7 @@ class EnvironmentIntegrationTests(unittest.TestCase):
 
     def test_board_changes_are_announced_to_the_team(self):
         env = self._env()
-        env.execute_action("Agent_1", "submit_problem", "1 | 268")
+        env.execute_action("Agent_1", "work", "1 | 268")
         announcements = [
             entry["message"]
             for entry in env.chat_history
@@ -209,37 +215,37 @@ class EnvironmentIntegrationTests(unittest.TestCase):
 
     def test_refused_board_calls_are_not_rule_violations(self):
         env = self._env()
-        env.execute_action("Agent_1", "submit_problem", "99 | nonsense")
-        env.execute_action("Agent_1", "open_problem", "")
+        env.execute_action("Agent_1", "work", "99 | nonsense")
+        env.execute_action("Agent_1", "inspect_problem", "")
         self.assertEqual(env.rule_violations, [])
 
     def test_bare_submit_final_falls_back_to_the_recorded_sheet(self):
         env = self._env()
-        env.execute_action("Agent_1", "submit_problem", "1 | 268")
-        env.execute_action("Agent_1", "submit_problem", "2 | 144")
-        env.execute_action("Agent_1", "submit_final", "submit")
+        env.execute_action("Agent_1", "work", "1 | 268")
+        env.execute_action("Agent_1", "work", "2 | 144")
+        env.execute_action("Agent_1", "submit", "submit")
         self.assertEqual(env.workspace["final_answer"], "1. 268\n2. 144")
         self.assertTrue(env.submitted)
 
     def test_written_submission_is_not_overwritten_by_the_board(self):
         env = self._env()
-        env.execute_action("Agent_1", "submit_problem", "1 | 268")
-        env.execute_action("Agent_1", "submit_final", "1. 999\n2. 144\n3. 6/25")
+        env.execute_action("Agent_1", "work", "1 | 268")
+        env.execute_action("Agent_1", "submit", "1. 999\n2. 144\n3. 6/25")
         self.assertTrue(env.workspace["final_answer"].startswith("1. 999"))
 
     def test_items_dropped_by_the_submitter_are_recovered_from_the_board(self):
         env = self._env()
-        env.execute_action("Agent_1", "submit_problem", "4 | 21")
-        env.execute_action("Agent_1", "submit_final", "1. 999\n2. 144\n3. 6/25")
+        env.execute_action("Agent_1", "work", "4 | 21")
+        env.execute_action("Agent_1", "submit", "1. 999\n2. 144\n3. 6/25")
         final = env.workspace["final_answer"]
         self.assertIn("1. 999", final)
         self.assertIn("4. 21", final)
 
     def test_a_submission_with_no_answers_falls_back_to_the_board(self):
         env = self._env()
-        env.execute_action("Agent_1", "submit_problem", "1 | 268")
+        env.execute_action("Agent_1", "work", "1 | 268")
         env.execute_action(
-            "Agent_1", "submit_final", "The team agreed on its answers."
+            "Agent_1", "submit", "The team agreed on its answers."
         )
         self.assertEqual(env.workspace["final_answer"], "1. 268")
 
@@ -248,7 +254,7 @@ class EnvironmentIntegrationTests(unittest.TestCase):
         env.register_agents(["Agent_1"])
         env.begin_turn()
         essay = "Tocharian B verbs mark the subjunctive with a palatalised stem."
-        env.execute_action("Agent_1", "submit_final", essay)
+        env.execute_action("Agent_1", "submit", essay)
         self.assertEqual(env.workspace["final_answer"], essay)
 
     def test_memory_round_trips_from_private_to_team(self):
@@ -256,14 +262,14 @@ class EnvironmentIntegrationTests(unittest.TestCase):
         stored = env.execute_action("Agent_1", "remember", "1 | digit product is 96")
         self.assertIn("M1", stored)
         self.assertNotIn("96", env.execute_action("Agent_2", "recall", "digit"))
-        env.execute_action("Agent_1", "publish_memory", "M1")
+        env.execute_action("Agent_1", "share_note", "M1")
         self.assertIn("96", env.execute_action("Agent_2", "recall", "digit"))
 
     def test_message_group_reaches_only_named_teammates(self):
         env = self._env()
         env.register_agents(["Agent_1", "Agent_2", "Agent_3"])
         result = env.execute_action(
-            "Agent_1", "message_group", "Agent_2 | you take items 5-10"
+            "Agent_1", "direct_message", "Agent_2 | you take items 5-10"
         )
         self.assertIn("Agent_2", result)
         self.assertIn("5-10", env.format_group_memory("Agent_2"))
@@ -271,7 +277,7 @@ class EnvironmentIntegrationTests(unittest.TestCase):
 
     def test_message_group_rejects_unknown_recipients(self):
         env = self._env()
-        result = env.execute_action("Agent_1", "message_group", "Agent_9 | hello")
+        result = env.execute_action("Agent_1", "direct_message", "Agent_9 | hello")
         self.assertIn("unknown recipient", result)
         self.assertFalse(env.group_messages)
 
@@ -286,16 +292,112 @@ class EnvironmentIntegrationTests(unittest.TestCase):
         env.register_agents(["Agent_1"])
         env.begin_turn()
         self.assertIsNone(env.workboard)
-        result = env.execute_action("Agent_1", "list_problems", "")
+        result = env.execute_action("Agent_1", "inspect_problem", "")
         self.assertIn("Board unavailable", result)
         self.assertEqual(env.rule_violations, [])
 
     def test_transcript_carries_board_and_memory_state(self):
         env = self._env()
-        env.execute_action("Agent_1", "submit_problem", "1 | 268")
+        env.execute_action("Agent_1", "work", "1 | 268")
         transcript = env.to_transcript()
         self.assertEqual(transcript["workboard"]["metrics"]["items_answered"], 1)
         self.assertIn("private", transcript["memory"])
+
+    # -- v6: actions merged from the contest-session runtime ---------------
+
+    def test_review_answer_text_form_reviews_the_current_version(self):
+        env = self._env()
+        env.execute_action("Agent_1", "work", "1 | 268")
+        result = env.execute_action("Agent_2", "review_answer", "1 | reject | double-check the carry")
+        self.assertIn("Review recorded on 1 (disagree)", result)
+        review = env.workboard.items["1"].reviews[-1]
+        self.assertEqual((review.verdict, review.comment), ("disagree", "double-check the carry"))
+        self.assertIn("agree", env.execute_action("Agent_2", "review_answer", "1 | approve | same here"))
+        self.assertEqual(env.workboard.items["1"].reviews[-1].verdict, "agree")
+        self.assertEqual(env.action_log[-1]["action"], "review_answer")
+        self.assertNotIn("invoked_as", env.action_log[-1])
+        # The old spelling is gone.
+        self.assertIn(
+            "Unrecognized action 'verify_problem'",
+            env.execute_action("Agent_2", "verify_problem", "1 | agree same here"),
+        )
+        # The typed form pins a version; a stale pin is refused.
+        typed = env.execute_action(
+            "Agent_2",
+            "review_answer",
+            {"problem_id": "1", "version_hash": "deadbeef", "decision": "reject", "content": "x"},
+        )
+        self.assertIn("does not match", typed)
+        untyped = env.execute_action(
+            "Agent_2", "review_answer", {"problem_id": "1", "decision": "reject", "content": "off by one"}
+        )
+        self.assertIn("(disagree)", untyped)
+
+    def test_request_review_marks_the_item_and_messages_the_reviewer(self):
+        env = self._env()
+        env.execute_action("Agent_1", "work", "2 | 144")
+        result = env.execute_action("Agent_1", "request_review", "please sanity-check | Agent_2")
+        self.assertIn("Review requested from Agent_2 on 2", result)
+        item = env.workboard.items["2"]
+        self.assertEqual(item.review_requests[-1].reviewer, "Agent_2")
+        self.assertIn("REVIEW REQUESTS", env.workboard.detail(item, turn=env.current_turn))
+        self.assertIn("sanity-check", env.format_group_memory("Agent_2"))
+        self.assertTrue(
+            any("requests a review of 2" in entry["message"] for entry in env.chat_history)
+        )
+        self.assertEqual(item.reviews, [])
+
+    def test_assign_problem_is_leader_only_and_claims_the_first_item(self):
+        env = self._env()
+        refused = env.execute_action("Agent_2", "assign_problem", "Agent_1 | 3, 4")
+        self.assertIn("not the team leader", refused)
+        result = env.execute_action("Agent_1", "assign_problem", "Agent_2 | 3, 4 | you know trig")
+        self.assertIn("assigned 3, 4 to Agent_2", result)
+        board = env.workboard
+        self.assertEqual(board.items["3"].holder(env.current_turn, board.claim_ttl_turns), "Agent_2")
+        self.assertEqual(board.items["4"].assigned_to, "Agent_2")
+        self.assertIn("Assigned to: Agent_2", board.detail(board.items["4"], turn=env.current_turn))
+        self.assertIn("unknown teammate", env.execute_action("Agent_1", "assign_problem", "Agent_9 | 3"))
+        self.assertEqual(env.rule_violations, [])
+
+    def test_finish_contest_is_refused_on_answer_sheet_contests(self):
+        env = self._env()
+        result = env.execute_action("Agent_1", "finish_contest", "done")
+        self.assertIn("end only through submit", result)
+        self.assertFalse(env.submitted)
+
+    def test_finish_contest_finalizes_a_judged_code_submission(self):
+        env = OlympiadEnvironment("codeforces", "cf_4A", max_turns=8)
+        env.register_agents(["Agent_1"])
+        env.begin_turn()
+        early = env.execute_action("Agent_1", "finish_contest", "")
+        self.assertIn("cannot finish before a code submission", early)
+        self.assertFalse(env.submitted)
+        solution = 'w = int(input())\nprint("YES" if w > 2 and w % 2 == 0 else "NO")\n'
+        feedback = json.loads(env.execute_action("Agent_1", "submit_code", solution))
+        self.assertFalse(feedback["finalized"])
+        result = env.execute_action("Agent_1", "finish_contest", "sample AC")
+        self.assertIn("Contest finished by Agent_1", result)
+        self.assertTrue(env.submitted)
+        self.assertEqual(env.workspace["final_answer"], solution.strip())
+        self.assertIn("already finished", env.execute_action("Agent_1", "finish_contest", ""))
+
+    def test_remember_feeds_the_private_notes_block(self):
+        env = self._env()
+        result = env.execute_action("Agent_1", "remember", "the carry is 1")
+        self.assertIn("Stored M1", result)
+        self.assertEqual(env.get_private_notes("Agent_1"), "[M1] the carry is 1")
+        env.execute_action("Agent_1", "remember", "2 | 144 checks out")
+        self.assertEqual(
+            env.get_private_notes("Agent_1"), "[M1] the carry is 1\n[M2] 144 checks out"
+        )
+        self.assertEqual(env.get_private_notes("Agent_2"), "")
+        self.assertIn("carry", env.execute_action("Agent_1", "recall", "carry"))
+        self.assertEqual(env.action_log[-2]["action"], "remember")
+        self.assertIn(
+            "Unrecognized action 'write_private_notes'",
+            env.execute_action("Agent_1", "write_private_notes", "x"),
+        )
 
 
 if __name__ == "__main__":
@@ -316,7 +418,7 @@ class PhaseGateTests(unittest.TestCase):
                         "label": "Prep day",
                         "turn_start": 1,
                         "turn_end": 5,
-                        "allowed_actions": ["speak", "write_private_notes", "sleep"],
+                        "allowed_actions": ["speak", "remember", "rest"],
                     }
                 ]
             }
@@ -324,12 +426,12 @@ class PhaseGateTests(unittest.TestCase):
 
     def test_reads_and_notes_survive_an_allowlist(self):
         schedule = self._schedule()
-        for action in ("check_budget", "recall", "remember", "list_problems"):
+        for action in ("check_budget", "recall", "remember", "inspect_problem"):
             self.assertIsNone(schedule.validate_action(1, action), action)
 
     def test_board_mutations_still_obey_the_allowlist(self):
         schedule = self._schedule()
-        for action in ("submit_problem", "claim_problem", "message_group"):
+        for action in ("work", "select_problem", "direct_message"):
             self.assertIsNotNone(schedule.validate_action(1, action), action)
 
     def test_banned_actions_beat_the_implicit_allowance(self):

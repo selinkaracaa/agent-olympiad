@@ -1,10 +1,10 @@
 {
-  "evaluation_guidance": "Report Power writeup quality, rule compliance, and collaboration quality separately. Official Power performance is hand-graded justification: a bare answer without proof earns no credit unless the packet says otherwise, earlier parts may be used if cited, and formatting or name-anonymity breaches can cost points. The first received packet is the only one graded. This session is Power only and must not add Individual or Team standings. Repository status is deferred; do not invent a completed benchmark grade or a year-specific point table that was not supplied. Treat age and enrollment eligibility, the week-long take-home, and packet-over-card authority as contestant conscience. Collaboration evidence should cover lemma exchange, citation of unproved earlier parts, independent proof review, conflict resolution with gaps or counterexamples, merge of consistent writeups, and idle-time waste. Do not reward fixed writer offices, equal speaking time, or message volume by themselves. Fidelity: the week-long workflow and physical page rules are specified and not reproduced by the turn budget.",
+  "evaluation_guidance": "Resolve readiness, evaluator, rubric, and score basis from the selected benchmark record. Report Power writeup quality, rule compliance, and collaboration quality separately. Official Power performance is hand-graded justification: a bare answer without proof earns no credit unless the packet says otherwise, earlier parts may be used if cited, and formatting or name-anonymity breaches can cost points. The first received packet is the only one graded. This session is Power only and must not add Individual or Team standings. Repository status is deferred; do not invent a completed benchmark grade or a year-specific point table that was not supplied. Treat age and enrollment eligibility, the week-long take-home, and packet-over-card authority as contestant conscience. Collaboration evidence should cover lemma exchange, citation of unproved earlier parts, independent proof review, conflict resolution with gaps or counterexamples, merge of consistent writeups, and idle-time waste. Do not reward fixed writer offices, equal speaking time, or message volume by themselves. Fidelity: the week-long workflow and physical page rules are specified and not reproduced by the turn budget.",
   "scoring": {
     "mode": "rubric",
     "unit": "problem_or_question",
-    "evaluator_id": null,
-    "evaluator_status": "unassigned",
+    "evaluator_id": "rubric_llm_v1",
+    "evaluator_status": "ready_with_limitations",
     "official_performance": {
       "source_status": "source_grounded",
       "source_review_status": "primary_rules_partial_or_variant_selector_required",
@@ -50,8 +50,8 @@
         "parts_used_via_citation_only",
         "formatting_defects"
       ],
-      "repository_evaluator_id": null,
-      "repository_evaluator_status": "deferred"
+      "repository_evaluator_id": "rubric_llm_v1",
+      "repository_evaluator_status": "ready_with_limitations"
     },
     "rule_compliance": {
       "reported_separately_from_performance": true,
@@ -170,8 +170,8 @@
       ]
     },
     "current_repository_availability": {
-      "evaluator_ready": false,
-      "evaluator_status": "deferred",
+      "evaluator_ready": true,
+      "evaluator_status": "ready_with_limitations",
       "official_environment_fully_reproduced": false,
       "official_wall_clock_enforced": false,
       "official_packet_scoring": false,
@@ -186,8 +186,17 @@
         "Formatting rules (one-sided pages, page labelling, anonymity) carry real point deductions but have no analogue in a plain-text submission."
       ],
       "required_selectors": [],
-      "submission_adaptation": null
-    }
+      "submission_adaptation": null,
+      "readiness_scope": "Per-record metadata; evaluator availability does not imply official-environment reproduction."
+    },
+    "rubric_path": "data/rubrics/team_power_proof_40_v1.json",
+    "benchmark_readiness_source": "data/benchmarks/pumac_power/benchmark.json",
+    "evaluation_status_counts": {
+      "ready_with_limitations": 13
+    },
+    "evaluator_selection": "Use each benchmark record's evaluation; rule values are defaults only.",
+    "record_evaluator_overrides": {},
+    "record_rubric_overrides": {}
   },
   "submission": {
     "max_count": 1

@@ -108,13 +108,15 @@ class ProtocolRegressionTests(unittest.TestCase):
         self.assertIsNotNone(selected)
         self.assertEqual(selected.task_id, 'q1')
 
-    def test_unavailable_grades_do_not_enter_denominator(self):
+    def test_unavailable_grades_preserve_denominator_without_official_score(self):
         m = ContestManifest('grading', 'custom', (task('known', {'expected_answer':'42'}), task('unknown')))
         result = grade_contest_result(m, {'submissions': {'known':'42', 'unknown':'report'}})
         self.assertFalse(result['graded'])
-        self.assertEqual(result['score'], 1)
-        self.assertEqual(result['max_score'], 1)
-        self.assertEqual(result['task_utility'], 1)
+        self.assertIsNone(result['score'])
+        self.assertEqual(result['max_score'], 2)
+        self.assertIsNone(result['task_utility'])
+        self.assertEqual(result['partial_score'], 1)
+        self.assertEqual(result['graded_max_score'], 1)
         self.assertEqual(result['evaluation_coverage'], 0.5)
         self.assertIsNone(result['tasks']['unknown']['score'])
 

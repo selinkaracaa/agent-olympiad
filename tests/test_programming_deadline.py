@@ -47,7 +47,7 @@ class ProgrammingDeadlineTests(unittest.TestCase):
             return {"valid": True, "verdict": "WA"}
         result = run_with_test_plan(
             manifest, lambda *_: json.dumps({"action": "execute_code", "arguments": {"code": "print(7)"}}),
-            review_ablation_config(1, 1, programming_deadline_submit=True),
+            review_ablation_config(1, 1, deadline_submit=True),
             session_checkpoint=session.checkpoint(), task_action_executor=execute)
         self.assertEqual(submitted, [("a", "print(7)")])
         self.assertEqual(result["budget"]["turns_used"], 1)
@@ -57,13 +57,13 @@ class ProgrammingDeadlineTests(unittest.TestCase):
         self.assertEqual(result["programming_deadline"]["no_source_task_ids"], ["blank"])
         self.assertEqual(result["programming_deadline"]["officially_submitted_before"], [])
 
-    def test_default_off_preserves_unsubmitted_code(self):
+    def test_explicitly_disabled_collection_preserves_unsubmitted_code(self):
         manifest, session, memory = self.seeded([task("a")])
         self.source(session, memory, "a")
         session.budget.turns_used = 1
         execute = Mock(side_effect=AssertionError("must not submit"))
         result = run_with_test_plan(manifest, Mock(side_effect=AssertionError("no budget")),
-                             review_ablation_config(1, 1), task_action_executor=execute,
+                             review_ablation_config(1, 1, deadline_submit=False), task_action_executor=execute,
                              session_checkpoint=session.checkpoint(), memory_checkpoint=memory.to_checkpoint_json())
         self.assertEqual(len(result["session_checkpoint"]["tasks"][0]["versions"]), 1)
         self.assertEqual(result["diagnostics"]["attempts"], 0)
@@ -142,7 +142,7 @@ class ProgrammingDeadlineTests(unittest.TestCase):
         self.source(session, memory, "a")
         session.finalize()
         with self.assertRaisesRegex(ValueError, "finalized checkpoint"):
-            run_with_test_plan(manifest, Mock(), review_ablation_config(1, 1, programming_deadline_submit=True),
+            run_with_test_plan(manifest, Mock(), review_ablation_config(1, 1, deadline_submit=True),
                         session_checkpoint=session.checkpoint(), memory_checkpoint=memory.to_checkpoint_json())
 
     def test_adapter_deadline_bypasses_only_the_local_sample_gate(self):

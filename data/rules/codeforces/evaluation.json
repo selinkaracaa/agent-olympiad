@@ -1,12 +1,19 @@
 {
-  "evaluation_guidance": "Report local sample verdicts and optional remote VJudge verdicts separately from collaboration quality. Prefer Accepted with diagnosis-backed recovery after rejects. Do not reward message volume alone.",
+  "evaluation_guidance": "Resolve readiness, evaluator, rubric, and score basis from the selected benchmark record. Report local sample verdicts and optional remote VJudge verdicts separately from collaboration quality. Prefer Accepted with diagnosis-backed recovery after rejects. Do not reward message volume alone.",
   "scoring": {
     "mode": "gold_or_judge",
     "unit": "problem",
     "evaluator_id": "programming_judge",
     "evaluator_status": "sample_tests_ready",
     "evaluator_strategy": "local_sample_then_optional_vjudge_gateway",
-    "rubric_path": "data/rubrics/codeforces_programming_judge_v1.json"
+    "rubric_path": "data/rubrics/codeforces_programming_judge_v1.json",
+    "benchmark_readiness_source": "data/benchmarks/codeforces/benchmark.json",
+    "evaluation_status_counts": {
+      "sample_tests_ready": 2
+    },
+    "evaluator_selection": "Use each benchmark record's evaluation; rule values are defaults only.",
+    "record_evaluator_overrides": {},
+    "record_rubric_overrides": {}
   },
   "submission": {
     "max_count": null,

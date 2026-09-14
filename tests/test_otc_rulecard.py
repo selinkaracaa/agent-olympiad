@@ -53,13 +53,13 @@ def task(task_id: str, *, programming: bool = False) -> ManifestTask:
 
 
 def arml_manifest() -> ContestManifest:
-    return ContestManifest("arml_local", "arml_test", (task("q1"), task("q2")))
+    return ContestManifest("arml_test", "arml_local", (task("q1"), task("q2")))
 
 
 def icpc_manifest() -> ContestManifest:
     return ContestManifest(
-        "icpc",
         "icpc_test",
+        "icpc",
         (task("p1", programming=True), task("p2", programming=True)),
     )
 
@@ -198,7 +198,7 @@ class ConfigAndActionSurfaceTests(unittest.TestCase):
             system_variant="otc", team_size=6, max_turns=12, rule_card=ARML
         )
         self.assertIsNotNone(config.otc_policy)
-        self.assertEqual(ACTION_SET_VERSION, 5)
+        self.assertEqual(ACTION_SET_VERSION, 8)
 
     def test_common_actions_plus_card_bundle(self) -> None:
         arml = ContestRunConfig(
@@ -277,7 +277,7 @@ class ConfigAndActionSurfaceTests(unittest.TestCase):
         )
         manifest = arml_manifest()
         session = ContestSession(
-            [TaskUnit("q1"), TaskUnit("q2")], ContestBudgetState(max_turns=12)
+            [TaskUnit("q1", kind="non_programming"), TaskUnit("q2", kind="non_programming")], ContestBudgetState(max_turns=12)
         )
         memory = ContestMemory(run_id="r", session_id="arml_test", competition_id="arml_local")
         actions = _resolved_actions(manifest, config)
@@ -297,7 +297,8 @@ class ConfigAndActionSurfaceTests(unittest.TestCase):
             }
 
         self.assertNotIn("submit", names())  # before min_turns, no challenge
-        self.assertIn("work", names())  # the desk stays open instead of a lone submit
+        self.assertNotIn("work", names())  # approved versions cannot be rewritten
+        self.assertTrue({"inspect_problem", "check_budget", "query_rules"} <= names())
         session.consume_budget(turns=5)  # turn 10 == min_turns
         self.assertNotIn("submit", names())  # still waiting on min_challenges
         memory.append(
@@ -310,7 +311,7 @@ class ConfigAndActionSurfaceTests(unittest.TestCase):
         config = ContestRunConfig(
             system_variant="otc", team_size=6, max_turns=12, rule_card=ARML
         )
-        session = ContestSession([TaskUnit("q1"), TaskUnit("q2")], ContestBudgetState(max_turns=12))
+        session = ContestSession([TaskUnit("q1", kind="non_programming"), TaskUnit("q2", kind="non_programming")], ContestBudgetState(max_turns=12))
         session.select_task("q1")
         memory = ContestMemory(run_id="r", session_id="arml_test", competition_id="arml_local")
         for turn in (3, 4):
@@ -419,8 +420,31 @@ class ArmlEndToEndTests(unittest.TestCase):
         # 1 brief + 12 turns x 6 seats x (think + action).
         self.assertEqual(result["budget"]["api_calls_used"], 1 + 12 * 6 * 2)
         self.assertEqual(result["budget"]["api_calls_used"], result["budget"]["max_api_calls"])
-        # Unreviewed drafts are never silently submitted at the deadline.
-        self.assertFalse(events_of(result, "deadline_drafts_submitted"))
+        # The environment owns the deadline: public drafts are handed in even
+        # when the team ran out of time before independent review completed.
+        deadline = events_of(result, "deadline_drafts_submitted")
+        self.assertEqual(len(deadline), 1)
+        self.assertEqual(
+            deadline[0]["payload"]["submitted_task_ids"], ["q1", "q2"]
+        )
+        self.assertTrue(deadline[0]["payload"]["review_gate_waived"])
+        self.assertEqual(
+            deadline[0]["payload"]["review_gate_waived_task_ids"], ["q1", "q2"]
+        )
+        self.assertEqual(
+            {
+                task_id: row["selection_reason"]
+                for task_id, row in deadline[0]["payload"]["selected_versions"].items()
+            },
+            {
+                "q1": "latest_public_draft_at_deadline",
+                "q2": "latest_public_draft_at_deadline",
+            },
+        )
+        self.assertEqual(
+            result["submissions"],
+            {"q1": "q1 answer: 42 because 6*7.", "q2": "q2 answer: 7."},
+        )
 
     def test_work_with_problem_id_switches_in_one_move_and_focus_advances(self) -> None:
         result, llm = self.run_arml(

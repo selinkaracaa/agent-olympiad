@@ -31,7 +31,7 @@ class VJudgeSchemaAdapterTests(unittest.TestCase):
 
         def query(system: str, _user: str) -> str:
             systems.append(system)
-            return "ACTION: sleep | PAYLOAD: ready"
+            return "ACTION: rest | PAYLOAD: ready"
 
         run_collaboration(
             "single_agent",
@@ -56,7 +56,7 @@ class VJudgeSchemaAdapterTests(unittest.TestCase):
 
         def query(system: str, _user: str) -> str:
             systems.append(system)
-            return "ACTION: sleep | PAYLOAD: ready"
+            return "ACTION: rest | PAYLOAD: ready"
 
         run_collaboration(
             "centralized",

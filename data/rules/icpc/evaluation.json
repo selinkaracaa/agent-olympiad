@@ -1,10 +1,10 @@
 {
-  "evaluation_guidance": "Report performance, rule compliance, and collaboration quality separately. Problems solved always outranks total time. Official performance is never correctness alone: rank by problems solved, then lower total time, then earlier last accepted submission. Total time includes wall-clock minutes to first Accepted plus 20 minutes per prior penalized rejection on that solved problem; Compilation Error is not time-penalized, but CE spam that disrupts the system is a compliance issue. Unsolved problems contribute 0 time even if they show wrong attempts on the Scoreboard. Report per-problem attempt counts by verdict, time-to-first-Accepted, realized penalty minutes, clarification use, and productive use of the one-turn pending wait. Treat Team Requirements, Attendance, coach non-participation, and Support and Prizes as contestant conscience. Collaboration evidence should cover packet triage, useful parallel off-workstation work, scoreboard-aware replanning, handoff quality, peer review, conflict resolution with evidence, recovery after rejected runs, duplicate-work avoidance, and idle-time waste. Do not reward fixed roles, equal keyboard time, exclusive problem ownership, or message volume by themselves.",
+  "evaluation_guidance": "Resolve readiness, evaluator, rubric, and score basis from the selected benchmark record. Report performance, rule compliance, and collaboration quality separately. Problems solved always outranks total time. Official performance is never correctness alone: rank by problems solved, then lower total time, then earlier last accepted submission. Total time includes wall-clock minutes to first Accepted plus 20 minutes per prior penalized rejection on that solved problem; Compilation Error is not time-penalized, but CE spam that disrupts the system is a compliance issue. Unsolved problems contribute 0 time even if they show wrong attempts on the Scoreboard. Report per-problem attempt counts by verdict, time-to-first-Accepted, realized penalty minutes, clarification use, and productive use of the one-turn pending wait. Treat Team Requirements, Attendance, coach non-participation, and Support and Prizes as contestant conscience. Collaboration evidence should cover packet triage, useful parallel off-workstation work, scoreboard-aware replanning, handoff quality, peer review, conflict resolution with evidence, recovery after rejected runs, duplicate-work avoidance, and idle-time waste. Do not reward fixed roles, equal keyboard time, exclusive problem ownership, or message volume by themselves.",
   "scoring": {
     "mode": "gold_or_judge",
     "unit": "problem_or_question",
     "evaluator_id": "programming_judge",
-    "evaluator_status": "deferred",
+    "evaluator_status": "remote_judge_ready",
     "evaluator_strategy": "official_tests_in_isolated_sandbox",
     "official_performance": {
       "ranking_order": [
@@ -38,7 +38,10 @@
         "pending_wait_turns_observed",
         "scoreboard_consultations",
         "clarifications_requested_and_received"
-      ]
+      ],
+      "repository_evaluator_id": "programming_judge",
+      "repository_evaluator_status": "remote_judge_ready",
+      "criteria": []
     },
     "sanctions": {
       "possible_outcomes": [
@@ -226,9 +229,19 @@
       "programming_judge_limitations": [
         "Only icpc_wf_2012_bottles currently declares a hidden problem package.",
         "The pilot package uses benchmark-native tests and Python 3, not official ICPC judge data or the full official language set."
-      ]
+      ],
+      "evaluator_ready": true,
+      "evaluator_status": "remote_judge_ready",
+      "readiness_scope": "Per-record metadata; evaluator availability does not imply official-environment reproduction."
     },
-    "rubric_path": "data/rubrics/icpc_programming_judge_v1.json"
+    "rubric_path": "data/rubrics/icpc_programming_judge_v1.json",
+    "benchmark_readiness_source": "data/benchmarks/icpc/benchmark.json",
+    "evaluation_status_counts": {
+      "remote_judge_ready": 158
+    },
+    "evaluator_selection": "Use each benchmark record's evaluation; rule values are defaults only.",
+    "record_evaluator_overrides": {},
+    "record_rubric_overrides": {}
   },
   "submission": {
     "max_count": null,

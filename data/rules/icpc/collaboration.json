@@ -227,7 +227,7 @@
         "problem_access": false,
         "allowed_actions": [
           "speak",
-          "sleep"
+          "rest"
         ],
         "advice_scope": [
           "time allocation",

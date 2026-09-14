@@ -1,5 +1,5 @@
 {
-  "evaluation_guidance": "Report Team Round performance, rule compliance, and collaboration quality separately. Official Team Round scoring is 10 questions × 5 points = 50. This session matches gold short answers. Meet-wide ties use Team+Power, then Relay, then Individual; do not invent those other-round scores here. Treat eligibility, seeding, substitutions, and device collection as contestant conscience. Collaboration evidence should cover coverage of ten questions among 15 contestants, independent checks, one-sheet reconciliation, and evidence-backed disagreements. Do not reward fixed roles or message volume. Do not treat 15 independent solo sheets as good Team Round collaboration. Do not encode a 20-minute clock.",
+  "evaluation_guidance": "Resolve readiness, evaluator, rubric, and score basis from the selected benchmark record. Report Team Round performance, rule compliance, and collaboration quality separately. Official Team Round scoring is 10 questions × 5 points = 50. This session matches gold short answers. Meet-wide ties use Team+Power, then Relay, then Individual; do not invent those other-round scores here. Treat eligibility, seeding, substitutions, and device collection as contestant conscience. Collaboration evidence should cover coverage of ten questions among 15 contestants, independent checks, one-sheet reconciliation, and evidence-backed disagreements. Do not reward fixed roles or message volume. Do not treat 15 independent solo sheets as good Team Round collaboration. Do not encode a 20-minute clock.",
   "scoring": {
     "mode": "gold",
     "unit": "problem_or_question",
@@ -25,7 +25,10 @@
         "correct_answers",
         "points_earned_out_of_50",
         "blank_or_unreconciled_questions"
-      ]
+      ],
+      "repository_evaluator_id": "gold_answer_v1",
+      "repository_evaluator_status": "ready",
+      "criteria": []
     },
     "rule_compliance": {
       "reported_separately_from_performance": true,
@@ -145,8 +148,16 @@
       "role_immersion_eligibility_text": true,
       "limited_communication_overlay": true,
       "structured_deliberation_overlay": true,
-      "submission_adaptation": null
-    }
+      "submission_adaptation": null,
+      "readiness_scope": "Per-record metadata; evaluator availability does not imply official-environment reproduction."
+    },
+    "benchmark_readiness_source": "data/benchmarks/arml_national_team/benchmark.json",
+    "evaluation_status_counts": {
+      "ready": 11
+    },
+    "evaluator_selection": "Use each benchmark record's evaluation; rule values are defaults only.",
+    "record_evaluator_overrides": {},
+    "record_rubric_overrides": {}
   },
   "submission": {
     "max_count": 1

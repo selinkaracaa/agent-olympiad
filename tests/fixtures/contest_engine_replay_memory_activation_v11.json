@@ -1,0 +1,33 @@
+{
+  "protocol_version": "contest_session_v11",
+  "action_set_version": 8,
+  "module_version": 3,
+  "capture_note": "Memory activation guidance from the 2026-09-12 handoff: corrected zero-turn desk/OTC prompts, conditional write/read/share guidance and native descriptions. Only the four OTC cases changed versus checkpoint_cursor_v11; all 16 memory-disabled cases retain their historical hashes. Transport before/after replay is identical; old fixtures are preserved.",
+  "cases": {
+    "single_agent/math/fresh": "180275087f3a12705bc246343e657d667a0dba75fe3346be59b672b3fc1d0a44",
+    "single_agent/math/resume": "66f63fd30378c865abd910b566de3f88c455d6cbc7b1752fefefdd13c284486c",
+    "single_agent/code/fresh": "2808f262284d8c9c8743b3763c494a769a32296696e204f174b82928b1bc8a40",
+    "single_agent/code/resume": "856025a206eb109c4beeb61c7941ae15307a374d4c2aede023d38035731db7fc",
+    "decentralized/math/fresh": "aa9d5ba4e88739e58f4c769c03c38b920412f06da1795a97f81bd7662f695091",
+    "decentralized/math/resume": "323fa42b9c70419228efd6717fa246f733c51facff59efa05b19ace7d61112de",
+    "decentralized/code/fresh": "4489e5053524060a753c5c09b50637590ff989e596e2019f2d663d63b2673d4d",
+    "decentralized/code/resume": "e1cee862a2c166c67e83ef136915bad614c5f08b24729582f62ce3003e649bce",
+    "centralized/math/fresh": "df14484e8a8f2f9066418c54ffe0db48886f4832af0ac51c074205e018beb0b0",
+    "centralized/math/resume": "626a573a3d403bb0674ab199d6a8d533f8540af992872fb781de18ab017c92a4",
+    "centralized/code/fresh": "c2131120c1feba1ef4e339f91b1b8e0dab53ce760b5984c7e831c2f9540bf9f1",
+    "centralized/code/resume": "52819a7579b0c728867357563249efc0adf176daca43fa93740c22f72649440d",
+    "vallina_otc/math/fresh": "e0cbf20dedcb5c9567aac80a894787d52fbe930310262a05ae8e5b3351d38b74",
+    "vallina_otc/math/resume": "e7dc4be8478a39d4cdf3d6108d30c3c722a022596ace4c8838e46d767253297e",
+    "vallina_otc/code/fresh": "6b8c5df91593eb053a3aa83f3aaab14b63fb08fb14e268f35a2b27db512f3309",
+    "vallina_otc/code/resume": "bcc8be40b6ed274fe6c90553a438158a557bef2374fe70b833fc507d96fc8278",
+    "otc/math/fresh": "358c99bac0494f52b527c5a5bcdecbee15385f07882570797a1a8f21333ce26d",
+    "otc/math/resume": "1655d9fd242342e74ee780e980218d84db58ca2bdb1adeea0e276c598b78e04e",
+    "otc/code/fresh": "7e642695f8fc843db1154d81370ee722f014e11fa3fc2cda07bb6bb7def57084",
+    "otc/code/resume": "27746aa9c9c1777d917832b2a6aae3719abe7914506ec5e27ed898f8afbb0e58"
+  },
+  "memory_descriptions": {
+    "recall": "Zero-turn auxiliary: search your own notes and team-shared notes when needed prior information is missing from context. Nonempty query requires a keyword match; omit query only to browse. Prefer matching problem tags, then hits and recency.",
+    "remember": "Zero-turn auxiliary: store a private note outside the visible transcript. Before switching tasks or handing off, preserve a useful intermediate result, failed approach, uncertainty, or next step with problem_id. Start a useful note even when the store is empty. Use work for candidate answers; do not duplicate a fully visible draft.",
+    "share_note": "Zero-turn auxiliary: publish one of your stored notes to the team when its finding, pitfall, or next step is useful and not already public. Use your actual note_id returned by remember or recall."
+  }
+}

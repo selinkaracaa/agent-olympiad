@@ -282,46 +282,8 @@ def role_line(card: RuleCard, agent: str, team_size: int) -> str:
     return f"YOUR ROLE: {role.title} ({submit}). Duties: {duties}"
 
 
-def coach_brief_prompts(
-    card: RuleCard,
-    policy: OpenTablePolicy,
-    manifest: ContestManifest,
-    *,
-    team_size: int,
-    max_turns: int,
-    max_api_calls: int | None,
-) -> tuple[str, str]:
-    """Turn-0 brief: the Coach has no problem access; advice within scope only."""
-    scope = "\n".join(f"- {item}" for item in policy.advice_scope)
-    system = (
-        f"You are Coach for a {card.competition_id} team during the pre-contest brief. "
-        "The problems are not available to you and you must not guess at them. "
-        "Give preparation advice only within this scope:\n"
-        f"{scope}\n"
-        "Do not assign problems (you have not seen them). Do not call actions. "
-        "Return plain text, at most "
-        f"{policy.char_limit('work') or 2400} characters, organised as short "
-        "numbered points the contestants can act on."
-    )
-    user = (
-        f"PRE-CONTEST BRIEF\nCompetition: {card.competition_id}\n"
-        f"Task family: {manifest.task_family}\n"
-        "Competition format: "
-        f"{manifest.metadata.get('competition_description') or 'see rule card'}\n"
-        f"Team size: {team_size}; problems on the sheet: {len(manifest.tasks)} "
-        f"(statements withheld until turn {policy.brief_turn + 1})\n"
-        f"Budget: turns={max_turns}, api_calls={max_api_calls}; every contestant "
-        f"turn is one private think call plus one action.\n"
-        + (
-            "This brief happens before the clock starts (turn 0) and costs the team "
-            "no contest turn.\n"
-            if policy.brief_turn == 0
-            else "This brief occupies turn 1 of the clock.\n"
-        )
-        + "You exit after this turn-0 brief and are never called again.\n"
-        f"CONTEST RULE CARD\n{_card_text(card, team_size)}"
-    )
-    return system, user
+# Compatibility import; the optional Coach module owns this lifecycle interface.
+from action_modules.coach import coach_brief_prompts
 
 
 def coach_opening_prompts(
@@ -381,6 +343,9 @@ def think_system_prompt(
     action_names: Iterable[str],
     retain_history: bool = True,
 ) -> str:
+    from action_modules.memory import decision_guidance
+    action_names = tuple(action_names)
+    memory_guidance = decision_guidance() if retain_history and 'recall' in action_names else ''
     limit = policy.char_limit("think") or 2400
     return (
         f"You are {agent}, one contestant in a {team_size}-agent {card.competition_id} "
@@ -392,6 +357,7 @@ def think_system_prompt(
         f"{', '.join(sorted(action_names))}. "
         f"Write plain text, at most {limit} characters, ending with one line "
         "'NEXT ACTION: <action name>'. Do not output JSON and do not call actions."
+        + ('\n' + memory_guidance if memory_guidance else '')
     )
 
 
@@ -409,6 +375,7 @@ def protocol_text(
     programming: bool,
     open_proposals: tuple[str, ...] = (),
     review_required: bool = True,
+    retain_history: bool = True,
 ) -> str:
     """The card-driven operating rules shown in every contestant system prompt."""
     limits = ", ".join(
@@ -419,13 +386,18 @@ def protocol_text(
         "Coach gave one problem-blind brief at turn 0 before the clock, then "
         "left permanently. There is no opening summary or Coach assignment.",
         ("Mandatory review: a different teammate must approve the current answer "
-        "version before submission, including deadline collection. A rejection "
-        "blocks submission; revision invalidates prior reviews." if review_required else
+        "version before voluntary submission during play. A rejection blocks that "
+        "submission; revision invalidates prior reviews. The controller's final "
+        "collection attempts available candidates even without approval." if review_required else
         "Basic Open Table: verification may be discussed voluntarily; no independent approval, memory tools, or structured proposal workflow is required. Submit the current version under the competition's format and resource rules."),
         ("Each turn you first think privately (your ledger is shown below), then "
-         if review_required else
+         if retain_history else
          "Each turn you first think privately (only this turn's thought is shown below), then ")
-        + "take exactly ONE action. Unstructured or invalid output counts as rest.",
+        + ("take exactly ONE ordinary contest action, optionally preceded by available "
+           "zero-turn memory calls. Call one function per response; after each memory "
+           "receipt continue in the same turn. Unstructured or invalid output counts as rest."
+           if retain_history else
+           "take exactly ONE action. Unstructured or invalid output counts as rest."),
         "Your work is recorded on the problem shown as your current problem. To "
         "move to another problem, call work with problem_id=<that problem> in the "
         "same turn (the switch and the draft are one move); a problem that already "
@@ -446,10 +418,11 @@ def protocol_text(
             "(speak or direct_message) before the next silent work turn."
         )
     if discussion.silent_work_turn_requires_discussion:
+        discussion_actions = 'speak/direct_message/share_note' if retain_history else 'speak/direct_message'
         lines.append(
             f"Discussion policy: after {discussion.silent_work_turns} consecutive "
             "work-only turns your next action must be a discussion action "
-            f"(speak/direct_message/share_note). Your current silent streak: {silent_streak}."
+            f"({discussion_actions}). Your current silent streak: {silent_streak}."
         )
     if discussion.conflicts_require_targeted_speak:
         lines.append(

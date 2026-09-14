@@ -1,11 +1,11 @@
 {
-  "evaluation_guidance": "Report packet quality, rule compliance, and collaboration separately. Do not claim a complete current Power Contest administrivia score: the Rules page is Under Construction. Where national Power constraints are the only published Power rules, treat the work as a 50-point one-packet proof with lowest-score extras. Score justification depth; do not accept bare answers as a complete packet. Treat invented clocks, rosters, and aid exceptions as compliance failures. Collaboration evidence should cover part allocation, proof review, and one-packet synthesis. Do not reward fixed roles or message volume.",
+  "evaluation_guidance": "Resolve readiness, evaluator, rubric, and score basis from the selected benchmark record. Report packet quality, rule compliance, and collaboration separately. Do not claim a complete current Power Contest administrivia score: the Rules page is Under Construction. Where national Power constraints are the only published Power rules, treat the work as a 50-point one-packet proof with lowest-score extras. Score justification depth; do not accept bare answers as a complete packet. Treat invented clocks, rosters, and aid exceptions as compliance failures. Collaboration evidence should cover part allocation, proof review, and one-packet synthesis. Do not reward fixed roles or message volume.",
   "scoring": {
     "mode": "gold",
     "unit": "problem_or_question",
     "evaluator_id": "rubric_llm_v1",
-    "evaluator_status": "ready",
-    "rubric_path": "data/rubrics/arml_power_proof_40_v1.json",
+    "evaluator_status": "per_record",
+    "rubric_path": "data/rubrics/arml_power_fall_2018_v1.json",
     "evaluator_strategy": "structured_rubric_llm_judge",
     "official_performance": {
       "track_identity": "mixed_national_power_rules_vs_standalone_power_contest",
@@ -26,7 +26,10 @@
         "justification_completeness",
         "extra_packet_count",
         "invented_administrivia_claims"
-      ]
+      ],
+      "repository_evaluator_id": "rubric_llm_v1",
+      "repository_evaluator_status": "per_record",
+      "criteria": []
     },
     "rule_compliance": {
       "reported_separately_from_performance": true,
@@ -110,7 +113,7 @@
     },
     "current_repository_availability": {
       "evaluator_ready": true,
-      "evaluator_status": "ready",
+      "evaluator_status": "per_record",
       "official_environment_fully_reproduced": false,
       "official_wall_clock_enforced": false,
       "official_minutes_encoded": false,
@@ -124,7 +127,31 @@
       "role_immersion_unresolved_status_text": true,
       "limited_communication_overlay": true,
       "structured_deliberation_overlay": true,
-      "submission_adaptation": null
+      "submission_adaptation": null,
+      "readiness_scope": "Per-record metadata; evaluator availability does not imply official-environment reproduction."
+    },
+    "benchmark_readiness_source": "data/benchmarks/arml_power/benchmark.json",
+    "evaluation_status_counts": {
+      "ready": 11,
+      "not_ready": 1,
+      "ready_with_limitations": 3
+    },
+    "evaluator_selection": "Use each benchmark record's evaluation; rule values are defaults only.",
+    "record_evaluator_overrides": {},
+    "record_rubric_overrides": {
+      "arml_power_fall_2019": "data/rubrics/arml_power_fall_2019_v1.json",
+      "arml_power_spring_2019": "data/rubrics/arml_power_spring_2019_v1.json",
+      "arml_power_fall_2020": "data/rubrics/arml_power_fall_2020_v1.json",
+      "arml_power_spring_2020": "data/rubrics/arml_power_spring_2020_v1.json",
+      "arml_power_fall_2021": "data/rubrics/arml_power_fall_2021_v1.json",
+      "arml_power_spring_2021": "data/rubrics/arml_power_spring_2021_v1.json",
+      "arml_power_fall_2022": "data/rubrics/arml_power_fall_2022_v1.json",
+      "arml_power_fall_2023": "data/rubrics/arml_power_fall_2023_v1.json",
+      "arml_power_spring_2023": "data/rubrics/arml_power_spring_2023_official_reference_v2.json",
+      "arml_power_fall_2024": "data/rubrics/arml_power_fall_2024_v1.json",
+      "arml_power_spring_2024": "data/rubrics/arml_power_spring_2024_official_reference_v2.json",
+      "arml_power_fall_2025": "data/rubrics/arml_power_fall_2025_v1.json",
+      "arml_power_spring_2025": "data/rubrics/arml_power_spring_2025_official_reference_v2.json"
     }
   },
   "submission": {

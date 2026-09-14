@@ -6,6 +6,13 @@ from dataclasses import asdict, dataclass
 from typing import Any, Callable, Literal
 
 import otc_runtime
+from answer_identity import conflicting_answer_task
+from action_modules.memory import share_note as _share_note, recall_notes
+from action_modules.task_specific import is_answer_sheet_contest as _is_answer_sheet_contest
+from computer_capacity import (
+    COMPUTER_ACTIONS, COMPUTER_USE_EVENT, require_computer_slot,
+    session_computer_state,
+)
 from contest_config import ContestRunConfig, TaskActionExecutor
 from contest_manifest import ContestManifest, ManifestTask
 from contest_memory import ContestMemory
@@ -29,17 +36,6 @@ _CARD_CLIPPED_FIELDS: dict[str, str] = {
     "revise": "content",
     "decide": "reason",
 }
-
-
-def _is_answer_sheet_contest(manifest: ContestManifest) -> bool:
-    if manifest.metadata.get("artifact_contract"):
-        return True  # One reviewed, frozen deliverable; no answer rewrite on submit.
-    return len(manifest.tasks) > 1 and all(
-        not task.programming for task in manifest.tasks
-    ) and (
-        manifest.competition_id.startswith("arml")
-        or all(task.task_type == "team_contest" for task in manifest.tasks)
-    )
 
 
 def _required_answer_sheet_task_ids(manifest: ContestManifest) -> set[str]:
@@ -195,54 +191,6 @@ def _inspect_problem_payload(
     }
 
 
-def _share_note(
-    *,
-    memory: ContestMemory,
-    session: ContestSession,
-    agent: str,
-    note_id: str,
-) -> tuple[bool, int]:
-    """Publish one of the agent's private notes as a public ``note_shared`` event."""
-    source = next(
-        (
-            event
-            for event in memory.view(agent)
-            if event.event_id == note_id
-            and event.kind == "note"
-            and event.actor == agent
-        ),
-        None,
-    )
-    if source is None:
-        raise ValueError(
-            f"{note_id} is not one of your notes; use recall to list note ids"
-        )
-    already = any(
-        event.kind == "note_shared"
-        and isinstance(event.payload, dict)
-        and event.payload.get("source_event_id") == note_id
-        for event in memory.view(agent)
-    )
-    if already:
-        raise ValueError(f"{note_id} has already been shared with the team")
-    payload = source.payload if isinstance(source.payload, dict) else {}
-    memory.append(
-        task_id=source.task_id,
-        question_id=None,
-        actor=agent,
-        visibility="public",
-        kind="note_shared",
-        payload={
-            "content": str(payload.get("content") or ""),
-            "problem_id": source.task_id,
-            "author": agent,
-            "source_event_id": note_id,
-        },
-        turn=session.budget.turns_used,
-    )
-    return False, 0
-
-
 def _apply_card_rules(
     *,
     action: str,
@@ -348,6 +296,10 @@ def _apply_action(
     final_review_complete: bool = True,
     personal_assignments: dict[str, dict[str, Any]] | None = None,
 ) -> tuple[bool, int]:
+    if not config.modules.allows(ACTION_REGISTRY[action].module):
+        raise ValueError(f"module {ACTION_REGISTRY[action].module!r} is disabled")
+    if not config.allows_action(ACTION_REGISTRY[action]):
+        raise ValueError(f"action {action!r} is unavailable in this baseline")
     task_by_id = {task.task_id: task for task in manifest.tasks}
     active = session.active_task
     if (
@@ -361,8 +313,20 @@ def _apply_action(
     )
     recipients: tuple[str, ...] = ()
     contract = manifest.metadata.get("artifact_contract")
-    if action == "work" and contract and len(str(arguments.get("content", ""))) > contract["max_source_chars"]:
+    if action in {"work", "render_pdf"} and contract and len(str(arguments.get("content", ""))) > contract["max_source_chars"]:
         raise ValueError("Oversized artifact source; revise it explicitly instead of silently clipping")
+    if action == "work" and not contract:
+        target_id = str(arguments.get("problem_id") or (active.task_id if active else "")).strip()
+        target = task_by_id.get(target_id)
+        if target is not None and not target.programming:
+            declared = conflicting_answer_task(str(arguments.get("content", "")), target_id)
+            if declared is not None:
+                # Validate before card clipping, focus changes, memory events,
+                # or answer mutation. A refused write leaves the old draft intact.
+                raise ValueError(
+                    f"answer task mismatch: content declares {declared!r}, "
+                    f"but work targets {target_id!r}; correct the problem_id or content"
+                )
     if config.otc_policy is not None:
         arguments = _apply_card_rules(
             action=action,
@@ -371,6 +335,14 @@ def _apply_action(
             session=session,
             memory=memory,
             policy=config.otc_policy,
+        )
+    if action in COMPUTER_ACTIONS and config.computer_capacity is not None:
+        resource_state = session_computer_state(
+            memory, session.budget.turns_used, config.computer_capacity,
+        )
+        # Reject before recording an action: a refused call must not renew a lease.
+        require_computer_slot(
+            config.computer_capacity, resource_state["computers_used_this_turn"],
         )
     requested_work = str(arguments.get("problem_id") or "").strip()
     if action == "work" and requested_work:
@@ -567,26 +539,11 @@ def _prepare_assign_problem(ctx: _ActionContext) -> None:
 
 
 def _session_recall(ctx: _ActionContext) -> tuple[bool, int]:
-    arguments = ctx.arguments
-    notes = ctx.memory.recall(
-        ctx.agent,
-        query=str(arguments.get("query") or ""),
-        problem_id=str(arguments.get("problem_id") or "") or None,
-    )
-    ctx.memory.append(
-        task_id=ctx.event_task_id,
-        question_id=None,
-        actor="Tool",
-        visibility="private",
-        recipients=(ctx.agent,),
-        kind="recall_result",
-        payload={
-            "query": str(arguments.get("query") or ""),
-            "problem_id": str(arguments.get("problem_id") or "") or None,
-            "notes": notes,
-            "note": "Empty means no matching note; use remember to store one.",
-        },
-        turn=ctx.turn,
+    recall_notes(
+        ctx.memory, agent=ctx.agent,
+        query=str(ctx.arguments.get("query") or ""),
+        problem_id=str(ctx.arguments.get("problem_id") or "") or None,
+        event_task_id=ctx.event_task_id, turn=ctx.turn,
     )
     return False, 0
 
@@ -677,6 +634,8 @@ def _session_speak(ctx: _ActionContext) -> tuple[bool, int]:
 def _session_work(ctx: _ActionContext) -> tuple[bool, int]:
     active = ctx.require_active("select a problem before work")
     ctx.require_work_allowed(active.task_id, "work on")
+    if active.locked:
+        raise ValueError(f"task {active.task_id!r} is locked")
     if active.kind == "programming" and ctx.config.review_required:
         # The work event above retains the note in team memory. It must not
         # replace executable source or invalidate its exact-version review.
@@ -727,7 +686,7 @@ def _session_work(ctx: _ActionContext) -> tuple[bool, int]:
     evidence_refs = ()
     if ctx.manifest.metadata.get("artifact_contract"):
         receipt = ctx.task_action_executor(ctx.task_by_id[active.task_id],
-                                           "render_artifact", {"content": content})
+                                           "render_pdf", {"content": content})
         if not receipt.get("valid"):
             raise ValueError("Artifact rendering failed; candidate not eligible for review")
         event = ctx.memory.append(task_id=active.task_id, question_id=None,
@@ -736,6 +695,13 @@ def _session_work(ctx: _ActionContext) -> tuple[bool, int]:
         evidence_refs = (event.event_id,)
     ctx.session.create_answer(content, author=ctx.agent, evidence_refs=evidence_refs)
     return False, 0
+
+
+def _session_render_pdf(ctx: _ActionContext) -> tuple[bool, int]:
+    if ctx.manifest.metadata.get("artifact_contract"):
+        # One version/render/review path, shared with artifact work.
+        return _session_work(ctx)
+    return _session_task_tool(ctx)
 
 
 def _session_request_review(ctx: _ActionContext) -> tuple[bool, int]:
@@ -770,12 +736,81 @@ def _session_review_answer(ctx: _ActionContext) -> tuple[bool, int]:
     decision = str(ctx.arguments["decision"])
     if decision not in {"approve", "reject"}:
         raise ValueError("review decision must be approve or reject")
+    # Without a hash the review binds to the version currently recorded.
+    version_hash = str(ctx.arguments.get("version_hash") or "").strip() or None
     ctx.session.record_task_review(
         task_id,
         ctx.agent,
         str(ctx.arguments["content"]),
         decision=decision,  # type: ignore[arg-type]
-        version_hash=str(ctx.arguments["version_hash"]),
+        version_hash=version_hash,
+    )
+    return False, 0
+
+
+def _session_check_budget(ctx: _ActionContext) -> tuple[bool, int]:
+    session = ctx.session
+    ctx.memory.append(
+        task_id=ctx.event_task_id,
+        question_id=None,
+        actor="Tool",
+        visibility="private",
+        recipients=(ctx.agent,),
+        kind="budget_result",
+        payload={
+            **asdict(session.budget),
+            **session_computer_state(ctx.memory, ctx.turn, ctx.config.computer_capacity),
+            "blank_tasks": [task.task_id for task in session.tasks if not task.versions],
+            "tasks": [
+                {
+                    "task_id": task.task_id,
+                    "state": task.state.value,
+                    "versions": len(task.versions),
+                    "submissions": len(task.submissions),
+                    "locked": task.locked,
+                    "priority": task.priority,
+                }
+                for task in session.tasks
+            ],
+        },
+        turn=ctx.turn,
+    )
+    return False, 0
+
+
+def _session_query_rules(ctx: _ActionContext) -> tuple[bool, int]:
+    config = ctx.config
+    payload: dict[str, Any] = {
+        "competition_id": ctx.manifest.competition_id,
+        "rule_guidance": config.rule_guidance,
+        "team_size": config.team_size,
+        "baseline": asdict(config.features),
+    }
+    from rules.loader import load_rule_card
+    card = config.rule_card or load_rule_card(ctx.manifest.competition_id)
+    if card is not None:
+        payload["competition_rules"] = {
+            "rules_text": card.rules_text,
+            "allowed_tools": list(card.allowed_tools),
+            "resources": card.raw.get("resources") or {},
+            "deliverable": card.deliverable,
+        }
+    if config.otc_policy is not None:
+        policy = config.otc_policy
+        payload["rule_card"] = {
+            "allowed_actions": sorted(policy.allowed_actions),
+            "structured_deliberation": policy.structured_deliberation,
+            "memory_entries": asdict(policy.memory_entries),
+        }
+    ctx.memory.append(
+        task_id=ctx.event_task_id,
+        question_id=None,
+        actor="Tool",
+        visibility="private",
+        recipients=(ctx.agent,),
+        kind="rules_result",
+        payload=payload,
+        turn=ctx.turn,
     )
     return False, 0
 
@@ -817,10 +852,15 @@ def _session_submit(ctx: _ActionContext) -> tuple[bool, int]:
     if active.kind == "programming":
         raise ValueError("programming tasks must use submit_code")
     answer = str(ctx.arguments["answer"])
-    if not active.versions or active.versions[-1].content != answer:
+    if config.review_required:
+        # Reject before mutation: a failed hand-in must preserve the exact
+        # reviewed draft and its approval, not silently create a new version.
+        if not session.has_independent_approval():
+            raise ValueError("strategic submission requires an independent approval")
+        if active.versions[-1].content != answer:
+            raise ValueError("submit cannot replace the independently approved answer")
+    elif not active.versions or active.versions[-1].content != answer:
         session.create_answer(answer, author=ctx.agent)
-    if config.review_required and not session.has_independent_approval():
-        raise ValueError("strategic submission requires an independent approval")
     session.submit("SUBMITTED", score=0.0, valid=True)
     return _contest_complete(session), 0
 
@@ -926,6 +966,15 @@ def _session_task_tool(ctx: _ActionContext) -> tuple[bool, int]:
                           visibility="private", recipients=(agent,), kind="execute_code_result",
                           payload=reused, turn=session.budget.turns_used)
             return False, 0  # No executor call, source overwrite, or new evidence.
+    if action in COMPUTER_ACTIONS and config.computer_capacity is not None:
+        # Cached failures above use no computer slot. Actual execution attempts
+        # consume one even when the sandbox reports an execution failure.
+        memory.append(
+            task_id=active.task_id, question_id=None, actor=agent,
+            visibility="public", kind=COMPUTER_USE_EVENT,
+            payload={"action": action, "capacity": config.computer_capacity},
+            turn=session.budget.turns_used,
+        )
     result = ctx.task_action_executor(task_by_id[active.task_id], action, arguments)
     if action == "submit_code" and config.otc_policy is not None and config.otc_policy.run_judging_latency_turns:
         from contest_judging import queue_verdict
@@ -944,7 +993,7 @@ def _session_task_tool(ctx: _ActionContext) -> tuple[bool, int]:
         turn=session.budget.turns_used,
     )
     if action != "submit_code":
-        if action == "execute_code":
+        if action == "execute_code" and active.kind == "programming":
             code = str(arguments["code"])
             latest = active.versions[-1] if active.versions else None
             # A local run only counts as evidence when the official samples pass
@@ -1062,10 +1111,12 @@ SESSION_HANDLERS: dict[str, SessionHandler] = {
     "select_problem": _session_select_problem,
     "speak": _session_speak,
     "work": _session_work,
+    "render_pdf": _session_render_pdf,
     "request_review": _session_request_review,
     "review_answer": _session_review_answer,
+    "check_budget": _session_check_budget,
+    "query_rules": _session_query_rules,
     "submit": _session_submit,
     "skip_problem": _session_skip_problem,
     "finish_contest": _session_finish_contest,
 }
-

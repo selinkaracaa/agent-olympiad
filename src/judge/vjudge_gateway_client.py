@@ -4,8 +4,11 @@ from __future__ import annotations
 
 import json
 import os
+import re
+import time
 import urllib.error
 import urllib.request
+import uuid
 from typing import Any
 
 
@@ -31,15 +34,49 @@ def submit_via_gateway(
     base = gateway_base()
     if not base:
         raise RuntimeError("VJUDGE_GATEWAY_URL is not set")
+    # A stable child key makes a repeated client call reuse the same quota retry.
+    attempt_key = idempotency_key or uuid.uuid4().hex
     payload = {
         "contest_id": contest_id,
         "oj": oj,
         "problem": problem,
         "language": language,
         "source": source,
-        "idempotency_key": idempotency_key,
+        "idempotency_key": attempt_key,
         "poll": poll,
     }
+    retries = []
+    for attempt in range(2):
+        result = _post_submission(base, payload, timeout)
+        delay = _quota_retry_delay(result, oj)
+        if attempt or delay is None:
+            return {**result, "quota_retries": retries} if retries else result
+        retries.append({"gateway_run_id": result.get("gateway_run_id"),
+                        "idempotency_key": payload["idempotency_key"],
+                        "message": result.get("message"), "wait_seconds": delay})
+        # The judge explicitly rejected this request before assigning a run ID.
+        # Network errors and any response with a remote ID never enter this path.
+        remaining = delay
+        while remaining > 0:
+            pause = min(60, remaining)
+            time.sleep(pause)
+            remaining -= pause
+        payload = {**payload, "idempotency_key": attempt_key + ":quota-retry-1"}
+
+
+def _quota_retry_delay(result: dict[str, Any], oj: str) -> int | None:
+    if (oj.strip().lower() != "kattis" or result.get("status") != "failed"
+            or result.get("verdict") != "SUBMIT_FAILED"
+            or any(result.get(key) for key in ("run_id", "remote_run_id", "vjudge_run_id"))):
+        return None
+    match = re.search(r"You are out of submission tokens\.\s*Your next token will regenerate in (\d+) seconds?\.",
+                      str(result.get("message") or ""), re.IGNORECASE)
+    if match and int(match.group(1)) <= 120:
+        return int(match.group(1)) + 1
+    return None
+
+
+def _post_submission(base: str, payload: dict[str, Any], timeout: float) -> dict[str, Any]:
     request = urllib.request.Request(
         f"{base}/v1/submit",
         data=json.dumps(payload).encode("utf-8"),

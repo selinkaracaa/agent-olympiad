@@ -1,32 +1,11 @@
-"""Open Table Coach policy read from a competition rule card.
-
-The ``otc`` baseline never hard-codes how the Coach behaves, how many private
-think calls a contestant gets, how long a message may be, or how much memory
-is projected. All of that lives in ``data/rules/<competition>/collaboration.json``
-under ``simulation.open_table_coach`` plus the card's ``communication``,
-``deliberation`` and ``agent_roles`` blocks. This module validates that block
-once (the same guards the legacy ``--schema open_table_coach`` path used) and
-exposes it as a typed object the contest engine can consult per turn.
-
-Everything derived here is pure: no engine state, so it is trivially
-checkpoint-safe and unit-testable.
-"""
-
 from __future__ import annotations
 
 from dataclasses import dataclass, field
 from typing import Any, Mapping
 
 from rules.models import RuleCard, RuleCardError
-from tool_registry import DELIBERATION_ACTION_NAMES
+from tool_registry import DELIBERATION_ACTION_NAMES, DESK_BOOKKEEPING_ACTION_NAMES
 
-# Rule-card action names -> contest-session typed actions. ``sleep`` is the
-# legacy name of ``rest``; ``write_scratchpad`` was chat in the old stack and
-# has no communication counterpart here (``work`` is an answer, not a message).
-CARD_ACTION_ALIASES: Mapping[str, str] = {
-    "sleep": "rest",
-    "submit_final": "submit",
-}
 # Communication-budget accounting: every way a contestant can talk.
 MESSAGE_ACTION_NAMES = frozenset({"speak", "direct_message", "share_note"})
 # Machine actions the ICPC workstation lease guards.
@@ -127,8 +106,7 @@ class OpenTablePolicy:
         if not self.communication_limited:
             return frozenset()
         declared = {
-            CARD_ACTION_ALIASES.get(str(name), str(name))
-            for name in (self.communication.get("counted_actions") or ())
+            str(name) for name in (self.communication.get("counted_actions") or ())
         }
         counted = set(MESSAGE_ACTION_NAMES)
         if "speak" not in declared and declared:
@@ -172,7 +150,7 @@ def open_table_policy(
     _require(
         brief_turn == 0
         and precontest.get("problem_access") is False
-        and set(precontest.get("allowed_actions") or ()) == {"speak", "sleep"},
+        and set(precontest.get("allowed_actions") or ()) == {"speak", "rest"},
         "unsafe open_table_coach precontest_brief policy",
     )
     assert isinstance(brief_turn, int)
@@ -202,14 +180,14 @@ def open_table_policy(
         mode == "private_deliberation_then_single_action",
         "otc baseline supports only private_deliberation_then_single_action",
     )
-    allowed = {
-        CARD_ACTION_ALIASES.get(str(name), str(name))
-        for name in (turn_policy.get("allowed_actions") or ())
-    }
+    allowed = {str(name) for name in (turn_policy.get("allowed_actions") or ())}
     _require(
         {"work", "speak", "rest"}.issubset(allowed)
-        and allowed.issubset({"work", "speak", "rest", "submit_code"}),
-        "contestant allowed_actions must be work/speak/rest with optional submit_code",
+        and allowed.issubset(
+            {"work", "speak", "rest", "submit_code", *DESK_BOOKKEEPING_ACTION_NAMES}
+        ),
+        "contestant allowed_actions must be work/speak/rest with optional "
+        "submit_code / check_budget / query_rules",
     )
     _require(
         turn_policy.get("exactly_one_action") is True
@@ -335,7 +313,6 @@ def clip_text(text: str, limit: int | None) -> tuple[str, bool]:
 
 
 __all__ = [
-    "CARD_ACTION_ALIASES",
     "DELIBERATION_ACTION_NAMES",
     "MESSAGE_ACTION_NAMES",
     "WORKSTATION_ACTION_NAMES",

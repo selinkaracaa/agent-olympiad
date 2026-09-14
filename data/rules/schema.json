@@ -342,7 +342,7 @@
           "items": {
             "enum": [
               "speak",
-              "write_scratchpad",
+              "work",
               "propose",
               "challenge",
               "provide_evidence",

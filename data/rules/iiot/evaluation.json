@@ -1,10 +1,10 @@
 {
-  "evaluation_guidance": "Report performance, rule compliance, and collaboration quality separately. Official performance is the automatic evaluator's judgment of the team's programs, not a one-workstation ICPC penalty table: the 3 October 2024 regulations publish results after working time, allow a team-leader appeal to the International Scientific Committee, exclude guest teams from the official ranking, and let the General Assembly set gold, silver, and bronze cutoffs in about a 1:2:3 proportion with at least 50 percent of contestants receiving medals. Do not invent a minutes-plus-rejection formula that the regulations do not state. Treat eligibility, same-school composition, team-leader non-participation, and guest ranking as contestant conscience. Collaboration evidence should cover packet triage across at least seven problems when a packet is present, useful parallel work on two machine leases, handoff quality, peer review, conflict resolution with evidence, recovery after rejected runs, and idle-machine waste. Do not reward fixed driver or tester offices, equal keyboard time, exclusive problem ownership, or message volume by themselves. Do not treat four independent solo solves as good IIOT collaboration.",
+  "evaluation_guidance": "Resolve readiness, evaluator, rubric, and score basis from the selected benchmark record. Report performance, rule compliance, and collaboration quality separately. Official performance is the automatic evaluator's judgment of the team's programs, not a one-workstation ICPC penalty table: the 3 October 2024 regulations publish results after working time, allow a team-leader appeal to the International Scientific Committee, exclude guest teams from the official ranking, and let the General Assembly set gold, silver, and bronze cutoffs in about a 1:2:3 proportion with at least 50 percent of contestants receiving medals. Do not invent a minutes-plus-rejection formula that the regulations do not state. Treat eligibility, same-school composition, team-leader non-participation, and guest ranking as contestant conscience. Collaboration evidence should cover packet triage across at least seven problems when a packet is present, useful parallel work on two machine leases, handoff quality, peer review, conflict resolution with evidence, recovery after rejected runs, and idle-machine waste. Do not reward fixed driver or tester offices, equal keyboard time, exclusive problem ownership, or message volume by themselves. Do not treat four independent solo solves as good IIOT collaboration.",
   "scoring": {
     "mode": "gold_or_judge",
     "unit": "problem_or_question",
-    "evaluator_id": "programming_judge",
-    "evaluator_status": "deferred",
+    "evaluator_id": null,
+    "evaluator_status": "not_ready",
     "evaluator_strategy": "official_tests_in_isolated_sandbox",
     "official_performance": {
       "ranking_order": [
@@ -38,7 +38,10 @@
       ],
       "unresolved_official_mechanics": [
         "The regulations do not publish a per-problem partial-score table or an ICPC-style 20-minute rejection penalty."
-      ]
+      ],
+      "repository_evaluator_id": null,
+      "repository_evaluator_status": "not_ready",
+      "criteria": []
     },
     "sanctions": {
       "possible_outcomes": [
@@ -199,11 +202,19 @@
       "cpp_overlay_documented": true,
       "medal_and_guest_ranking_contract_documented": true,
       "evaluator_ready": false,
-      "evaluator_status": "deferred",
+      "evaluator_status": "not_ready",
       "official_environment_fully_reproduced": false,
-      "official_wall_clock_enforced": false
+      "official_wall_clock_enforced": false,
+      "readiness_scope": "Per-record metadata; evaluator availability does not imply official-environment reproduction."
     },
-    "rubric_path": "data/rubrics/iiot_programming_judge_v1.json"
+    "rubric_path": "data/rubrics/iiot_programming_judge_v1.json",
+    "benchmark_readiness_source": "data/benchmarks/iiot/benchmark.json",
+    "evaluation_status_counts": {
+      "not_ready": 31
+    },
+    "evaluator_selection": "Use each benchmark record's evaluation; rule values are defaults only.",
+    "record_evaluator_overrides": {},
+    "record_rubric_overrides": {}
   },
   "submission": {
     "max_count": 1,

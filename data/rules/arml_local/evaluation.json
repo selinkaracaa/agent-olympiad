@@ -1,5 +1,5 @@
 {
-  "evaluation_guidance": "Report Team Round performance, rule compliance, and collaboration quality separately. Official Local Team Round work is 15 short answers graded by coaches or local coordinators; the official page does not publish a point-per-question formula, so do not invent 4-point scoring. This session matches up to 10 serialized gold answers. Treat eligibility, multi-team school identity, and coach grading as contestant conscience. Collaboration evidence should cover coverage of the sheet, independent checks, reconciliation onto one sheet, and conflict resolution with evidence. Do not reward fixed roles, equal airtime, or message volume. Do not treat six independent solo sheets as good Team Round collaboration. Do not score invented Individual or Relay play.",
+  "evaluation_guidance": "Resolve readiness, evaluator, rubric, and score basis from the selected benchmark record. Report Team Round performance, rule compliance, and collaboration quality separately. Official Local Team Round work is 15 short answers graded by coaches or local coordinators; the official page does not publish a point-per-question formula, so do not invent 4-point scoring. This session matches up to 10 serialized gold answers. Treat eligibility, multi-team school identity, and coach grading as contestant conscience. Collaboration evidence should cover coverage of the sheet, independent checks, reconciliation onto one sheet, and conflict resolution with evidence. Do not reward fixed roles, equal airtime, or message volume. Do not treat six independent solo sheets as good Team Round collaboration. Do not score invented Individual or Relay play.",
   "scoring": {
     "mode": "gold",
     "unit": "problem",
@@ -24,7 +24,10 @@
         "correct_answers_among_serialized_parts",
         "blank_or_unreconciled_parts",
         "exact_value_format_failures"
-      ]
+      ],
+      "repository_evaluator_id": "gold_answer_v1",
+      "repository_evaluator_status": "ready",
+      "criteria": []
     },
     "rule_compliance": {
       "reported_separately_from_performance": true,
@@ -126,8 +129,16 @@
       "role_immersion_eligibility_text": true,
       "limited_communication_overlay": true,
       "structured_deliberation_overlay": true,
-      "submission_adaptation": "The official Team Round contains 15 questions; current benchmark rows serialize only 10 answer parts."
-    }
+      "submission_adaptation": "The official Team Round contains 15 questions; current benchmark rows serialize only 10 answer parts.",
+      "readiness_scope": "Per-record metadata; evaluator availability does not imply official-environment reproduction."
+    },
+    "benchmark_readiness_source": "data/benchmarks/arml_local/benchmark.json",
+    "evaluation_status_counts": {
+      "ready": 6
+    },
+    "evaluator_selection": "Use each benchmark record's evaluation; rule values are defaults only.",
+    "record_evaluator_overrides": {},
+    "record_rubric_overrides": {}
   },
   "submission": {
     "max_count": 1,

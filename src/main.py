@@ -61,9 +61,9 @@ def test_environment_basics() -> None:
 
     _print_section("ENV: submission validation")
     env_icpc.reset()
-    rejected = env_icpc.execute_action("Agent_1", "submit_final", "short")
+    rejected = env_icpc.execute_action("Agent_1", "submit", "short")
     print(f"  short answer: {rejected}")
-    accepted = env_icpc.execute_action("Agent_1", "submit_final", "Case 1: 263.89\n0.51 1.06 1.66")
+    accepted = env_icpc.execute_action("Agent_1", "submit", "Case 1: 263.89\n0.51 1.06 1.66")
     print(f"  valid answer: {accepted}")
     print(f"  grade: {json.dumps(env_icpc.grade_submission(), indent=2)}")
 

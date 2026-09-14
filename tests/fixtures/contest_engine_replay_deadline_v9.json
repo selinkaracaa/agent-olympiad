@@ -1,0 +1,20 @@
+{
+  "protocol_version": "contest_session_v9",
+  "action_set_version": 8,
+  "module_version": 3,
+  "capture_note": "v9: common deadline collection attempts unreviewed/sample-failing candidates for every family; in-contest review and identity checks retained. Historical v8 snapshot remains unchanged.",
+  "cases": {
+    "decentralized/math/fresh": "75f5110223e466d4c4397592bd6b0c569c0c44e7e0f67fa5d630342c4cad7b03",
+    "decentralized/math/resume": "9616fa7cc2e5204365d4b2316e1fdc98f26747613e3d82d2e1354972ea0e5f44",
+    "decentralized/code/fresh": "2a8a72fe604d72acbbdcf4c58e6f58de1fe08cb82e395c0a97192b99673e65c9",
+    "decentralized/code/resume": "d0faab850c6fcdbb6bcf99edbcebe6d505e8f34a9e92db67f297a34c2d371569",
+    "centralized/math/fresh": "0c10995c6099a2aeed46c7fe2896b2b77e1fa5f23a2caa3bf751fc06afb97402",
+    "centralized/math/resume": "46fa1abe5ca66c435d289398c284a5e58be3218f39f2e6e663fb0fec34871b7f",
+    "centralized/code/fresh": "22916d5c05ecfe507c4bb74ba63113c03f048d7752da86fa799a1df025a45438",
+    "centralized/code/resume": "229706ae84238ab64a630cd86768cbd99abe16486869b45877c0a9911488b0ad",
+    "otc/math/fresh": "894f3f2f1959397f11f624e2b94c510f2013ff52a74f51aa6442b869a9ecd43c",
+    "otc/math/resume": "5b930e5597fd4c12bc94240f90f549068f0ad0b687744d2702d3d07718a80c4e",
+    "otc/code/fresh": "74426c1fc03c155154f7a9b211ced257b18471f771f640bb7b8df378ecd296e9",
+    "otc/code/resume": "16adbe7e21758fc047068250e234b693df1b9505decffd04a79ab888021a8933"
+  }
+}

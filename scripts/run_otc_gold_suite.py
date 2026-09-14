@@ -119,31 +119,23 @@ GROUPED_QUESTION_COMPETITIONS = frozenset(
 
 def budget_for(
     competition: str, team_size: int, system_variant: str = "otc"
-) -> tuple[int, int]:
+) -> tuple[int, int | None]:
     """(max_turns, max_api_calls) for one competition.
 
-    Turns come from the official clock (5 min/turn, cap 90, see
-    contest_budget.py); API calls allow one call per agent per turn plus the
-    single coach call. The rule-card ``otc`` baseline spends one private think
-    call plus one action per seat per turn and one turn-0 Coach call.
+    Turns come from the official clock; API usage is recorded without a cap.
     """
     max_turns = resolve_contest_budget(competition).max_turns
-    if canonical_baseline(system_variant) == "otc":
-        card = load_rule_card(competition)
-        think_calls = 1
-        if card is not None:
-            turn_policy = (
-                (card.simulation.get("open_table_coach") or {}).get("contestant_turn_policy")
-                or {}
-            )
-            think_calls = int(turn_policy.get("private_think_calls_per_turn") or 1)
-        return max_turns, max_turns * team_size * (1 + think_calls) + 1
-    return max_turns, max_turns * team_size + 1
+    return max_turns, None
 
 
 def team_size_for(competition: str, requested: int | None, system_variant: str) -> int:
-    """``otc`` runs the card's default roster unless --team-size is inside its range."""
-    if canonical_baseline(system_variant) != "otc":
+    """Pin single-agent to one seat and use the same roster for both OTC presets."""
+    variant = canonical_baseline(system_variant)
+    if variant == 'single_agent':
+        if requested not in (None, 1):
+            raise SystemExit('single_agent requires --team-size 1')
+        return 1
+    if variant not in {"otc", "vallina_otc"}:
         return requested or 3
     card = load_rule_card(competition)
     if card is None:
@@ -311,7 +303,7 @@ def run_one(
     out_root: Path,
     team_size: int,
     max_turns: int,
-    max_api_calls: int,
+    max_api_calls: int | None,
     system_variant: str,
 ) -> dict:
     problem_id = manifest.stem
@@ -335,8 +327,6 @@ def run_one(
         str(team_size),
         "--max-turns",
         str(max_turns),
-        "--max-api-calls",
-        str(max_api_calls),
         "--max-total-tokens",
         "220000",
         "--no-judge-task",
@@ -344,6 +334,8 @@ def run_one(
         "--output",
         str(out_dir),
     ]
+    if max_api_calls is not None:
+        cmd.extend(["--max-api-calls", str(max_api_calls)])
     try:
         output_state, expected_identity = inspect_contest_run(cmd[3:])
     except (ValueError, SystemExit) as exc:

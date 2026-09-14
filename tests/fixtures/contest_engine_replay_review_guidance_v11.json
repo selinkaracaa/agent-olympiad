@@ -1,0 +1,27 @@
+{
+  "protocol_version": "contest_session_v11",
+  "previous_fixture": "contest_engine_replay_auxiliary_v11.json",
+  "change": "Explicit independent-review target guidance; result and checkpoint payloads unchanged in all 20 cases.",
+  "cases": {
+    "single_agent/math/fresh": "aa208a775866453c73b38aca9179b86ae285c2be494f224bb85ffae1ed8e256e",
+    "single_agent/math/resume": "d264db29cf280c22bd18065516fcc531539216ae7615a879d860386293254f90",
+    "single_agent/code/fresh": "7dc692459dd3fbb08b2e630a2808cc59a6fb58f6fd5171595b7816f93016653b",
+    "single_agent/code/resume": "c69c9124d0fd85c504d36ab32070c4d0e6cdcb7c10a8832fa04e2e99ca7f19cb",
+    "decentralized/math/fresh": "881ee5ce983959fa23bc683d3cd802b8da2554238cc9496cab382d569ba1304d",
+    "decentralized/math/resume": "b82570418018bd7b6f995ee5cd19e9833da7f2155e04a02a4317b395e46f7a35",
+    "decentralized/code/fresh": "89ab40414a8d73a43ee94c74c78636c4ffca0b32c1a2adb5b0c8b8cfd44877f6",
+    "decentralized/code/resume": "3e74a086db6f0e67f92be26e9452aeaa367de7f9b5fa9d4700ef1f77c39d74a2",
+    "centralized/math/fresh": "46973f389383f6020f86a004db06cccb139838f3f7fa09c8e5f75b66551b208d",
+    "centralized/math/resume": "23003d4afa4b6c1cc459a54f22b395f3eef04c467c476d3e5f333158c3bb9768",
+    "centralized/code/fresh": "daa1166e30a08d6526e253ebcb756f71d2c2788edd4d18b66b250024012d51fc",
+    "centralized/code/resume": "f80133fbcf5cbf39705a02dc37c9e8b2928215326fbb0435e10ca08fa24a95ae",
+    "vallina_otc/math/fresh": "c48f6df632754dea692d0d328e0db545e6b918ffbe8161838ee48be08ae9194f",
+    "vallina_otc/math/resume": "1d37a3a9f6ddf6795f818f7746b1da678029b3602c470b1a52ae4deb69e7ceab",
+    "vallina_otc/code/fresh": "6d6ba77cf7495fb7bb8839c5475f636c9270e27b4bf0f3009ca3ed491ef61ee9",
+    "vallina_otc/code/resume": "b20ed1b4f342024fdb73dc194a59d66c616e2c24849ff46c6c74e8444a81ce87",
+    "otc/math/fresh": "b44ad51efad168ef8b7c4cd9e203a4ef2364732e257f372a7feb99df6626ac0f",
+    "otc/math/resume": "54e573ff67046413686703ba927b9106917f61e463a15d8ef21e9a43fe097f04",
+    "otc/code/fresh": "74db15cd96b888581d1a9a6361d1a7e36fadd72ca9464fa2012051ea37b2c283",
+    "otc/code/resume": "dd815bf55fe6e7b257fefdbc6f36da5c6d0b8ccee7a43b0a1758571588a164d9"
+  }
+}

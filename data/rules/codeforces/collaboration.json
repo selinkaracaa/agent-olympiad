@@ -68,6 +68,41 @@
     ],
     "failure_recovery": [
       "Simulation choice: after CE/RE/TLE/WA, diagnose before resubmitting."
+    ],
+    "timeline": [
+      "Apply the execution timing and selectors in this rule card."
+    ],
+    "resource_policy": [
+      "internet: forbidden",
+      "calculator: forbidden",
+      "code_execution: shared_workstation_only",
+      "paper_pencil: allowed",
+      "unapproved_materials: forbidden",
+      "shared_workstation: True",
+      "shared_workstation_count: 1",
+      "extra_computers: forbidden",
+      "external_llms_and_search_engines: forbidden",
+      "outside_communication: forbidden"
+    ],
+    "collaboration_protocol": [
+      "Three contestants collaborate on one shared programming workstation for a Codeforces problem proxied through VJudge."
+    ],
+    "integrity_and_compliance": [
+      "Compete as three co-located teammates on one shared workstation for this Codeforces problem.",
+      "Only one contestant at a time may edit, execute local tests, or submit a run.",
+      "Do not use the public Internet, external LLMs, search engines, or outside help.",
+      "Submit a complete stdin/stdout program; only an Accepted remote/local judge result solves the problem.",
+      "After a rejected run, diagnose before thrashing the same approach."
+    ],
+    "deliverable_format": [
+      "Submit a complete stdin/stdout program through submit_code / submit."
+    ],
+    "evaluation_criteria": [
+      "Report local sample verdicts and optional remote VJudge verdicts separately from collaboration quality. Prefer Accepted with diagnosis-backed recovery after rejects. Do not reward message volume alone."
+    ],
+    "runtime_limitations": [
+      "Team size is a simulation choice for collaboration schemas; Codeforces problems are normally individual.",
+      "Remote judging uses an experimental local VJudge gateway when configured."
     ]
   },
   "deliberation": {
@@ -133,7 +168,7 @@
         "problem_access": false,
         "allowed_actions": [
           "speak",
-          "sleep"
+          "rest"
         ],
         "advice_scope": [
           "time allocation",

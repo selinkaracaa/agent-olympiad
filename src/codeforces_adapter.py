@@ -20,6 +20,11 @@ from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
 try:
+    from dataset_catalog import complete_metadata, scorecard, update_track_index
+except ImportError:
+    from src.dataset_catalog import complete_metadata, scorecard, update_track_index
+
+try:
     from judge.models import JudgeError
     from judge.package import load_problem_package
     from problem_package_writer import SampleCase, write_problem_package as _write_problem_package
@@ -369,7 +374,7 @@ def build_benchmark_record(
     root = repo_root or REPO_ROOT
     rel_package = package_path.resolve().relative_to(root.resolve()).as_posix()
     tags = [str(tag) for tag in metadata.get("tags", [])]
-    return {
+    record = {
         "problem_id": ref.problem_id,
         "competition": "Codeforces",
         "competition_id": "codeforces",
@@ -383,6 +388,10 @@ def build_benchmark_record(
         "rating": metadata.get("rating"),
         "tags": tags,
         "source_url": ref.problemset_url,
+        "source_file": f"{rel_package}/statement.html",
+        "eval_unit": "problem",
+        "split": "unspecified",
+        "team_size_basis": "Three-agent benchmark adaptation; not an official Codeforces team-size claim.",
         "problem_description": problem_description
         or (
             f"Codeforces problem {ref.canonical_id}. "
@@ -410,6 +419,10 @@ def build_benchmark_record(
             "sample_tests_path": f"{rel_package}/tests/sample",
             "vjudge_oj": "CodeForces",
             "vjudge_prob_num": ref.canonical_id,
+            "rubric_path": "data/rubrics/codeforces_programming_judge_v1.json",
+            "test_scope": "sample_only_local",
+            "deliverable": "source_code",
+            "official_verdict_requires": "An authoritative remote verdict or authorized secret tests; public samples alone do not establish acceptance.",
             "notes": (
                 "Automatic judging is available for sample scope immediately. "
                 "Add tests/secret/*.in/*.ans and rebuild package.json to grade secrets. "
@@ -418,6 +431,9 @@ def build_benchmark_record(
             ),
         },
     }
+    if (root / record["source_file"]).is_file():
+        record["assets"] = [{"path": record["source_file"], "mime_type": "text/html", "role": "agent_visible"}]
+    return complete_metadata(record, "codeforces", root)
 
 
 def materialize_problem(
@@ -448,14 +464,16 @@ def materialize_problem(
             record = build_benchmark_record(
                 ref,
                 metadata=metadata or {"name": ref.canonical_id},
-                samples=[
-                    SampleCase("01", "", "")
-                ],  # placeholder; package already exists
+                samples=[SampleCase(p.stem, "", "") for p in sorted((destination / "tests/sample").glob("*.in"))],
                 time_ms=package.limits.time_ms,
                 memory_mb=package.limits.memory_mb,
                 package_path=destination,
                 repo_root=root,
+                problem_description=extract_problem_description_from_html((destination / "statement.html").read_text(encoding="utf-8"))
+                if (destination / "statement.html").exists() else None,
             )
+        complete_metadata(record, "codeforces", root)
+        _upsert_benchmark_record(record, repo_root=root)
         return {
             "ref": ref,
             "package_dir": destination,
@@ -513,10 +531,27 @@ def _upsert_benchmark_record(record: dict[str, Any], *, repo_root: Path) -> None
     updated = False
     for index, existing in enumerate(records):
         if existing.get("problem_id") == record.get("problem_id"):
-            records[index] = record
+            merged = {**existing, **record}
+            # Refresh the statement without discarding curated split/license or judge configuration.
+            for key in ("split", "license"):
+                if key in existing:
+                    merged[key] = existing[key]
+            merged["evaluation"] = {**record.get("evaluation", {}), **existing.get("evaluation", {})}
+            records[index] = complete_metadata(merged, "codeforces", repo_root)
             updated = True
             break
     if not updated:
-        records.append(record)
+        records.append(complete_metadata(record, "codeforces", repo_root))
     records.sort(key=lambda item: str(item.get("problem_id")))
     _atomic_write_text(path, json.dumps(records, indent=2) + "\n")
+    rubric_path = repo_root / "data/rubrics/codeforces_programming_judge_v1.json"
+    # Standalone package fixtures need not contain the full repository rubric tree.
+    if rubric_path.exists():
+        card_path = repo_root / "data/rubrics/task_scorecards/codeforces.json"
+        _atomic_write_text(card_path, json.dumps({"schema_version": "1.1", "dataset": "codeforces", "visibility": "judge_only",
+                           "records": [scorecard(r, repo_root) for r in records]}, indent=2) + "\n")
+    index_path = repo_root / "data/benchmarks/index.json"
+    if index_path.exists():
+        index = json.loads(index_path.read_text(encoding="utf-8-sig"))
+        update_track_index(index, "codeforces", records)
+        _atomic_write_text(index_path, json.dumps(index, indent=2) + "\n")

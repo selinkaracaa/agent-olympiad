@@ -100,22 +100,12 @@ def count(comp, text):
 
 
 def collect_iypt(entries):
-    print("IYPT...")
-    base = os.path.join(RAW, "iypt")
-    index = curl_html("https://www.iypt.org/problems/")
-    links = sorted(set(re.findall(r'href="(https://www\.iypt\.org/problems/iypt-\d{4}-problems/)"', index)))
-    for url in links:
-        year = int(re.search(r"iypt-(\d{4})-problems", url).group(1))
-        page = curl_html(url)
-        pdfs = re.findall(r'href="(https://www\.iypt\.org/wp-content/uploads/[^"]+\.pdf)"', page, re.I)
-        if not pdfs:
-            continue
-        dest = os.path.join(base, str(year), f"iypt_{year}_problems.pdf")
-        if curl(pdfs[0], dest):
-            q = count("iypt", pdf_text(dest))
-            entries.append({"comp": "iypt", "year": year, "file": dest, "questions": q})
-            print(f"  {year}: {q} q")
-
+    from pathlib import Path
+    try:
+        from .iypt_sources import collect_entries
+    except ImportError:
+        from iypt_sources import collect_entries
+    collect_entries(entries, Path(ROOT))
 
 def collect_purple_comet(entries):
     print("Purple Comet...")

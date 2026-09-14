@@ -123,7 +123,7 @@ class Phase3BaselineTests(unittest.TestCase):
                 result = run_collaboration(
                     schema,
                     rule_environment(12),
-                    lambda _system, _user: "ACTION: sleep | PAYLOAD: done",
+                    lambda _system, _user: "ACTION: rest | PAYLOAD: done",
                     CollabConfig(max_turns=12, synthesize=False),
                 )
 
@@ -137,7 +137,7 @@ class Phase3BaselineTests(unittest.TestCase):
 
         def query(system: str, _user: str) -> str:
             systems.append(system)
-            return "ACTION: sleep | PAYLOAD: ready"
+            return "ACTION: rest | PAYLOAD: ready"
 
         result = run_collaboration(
             "single_agent",
@@ -149,10 +149,10 @@ class Phase3BaselineTests(unittest.TestCase):
         self.assertEqual(result["turns_used"], 1)
         self.assertEqual(result["api_calls"], 1)
         self.assertEqual(result["stop_reason"], "all_participants_ready")
-        self.assertIn("ACTION: write_private_notes", systems[0])
+        self.assertIn("ACTION: remember", systems[0])
         self.assertIn("ACTION: submit |", systems[0])
         self.assertNotIn("ACTION: speak", systems[0])
-        self.assertNotIn("ACTION: write_scratchpad", systems[0])
+        self.assertNotIn("ACTION: work", systems[0])
         self.assertEqual(env.communication.team_used, 0)
         self.assertFalse(env.communication.rejected)
 
@@ -160,7 +160,7 @@ class Phase3BaselineTests(unittest.TestCase):
         def query(system: str, _user: str) -> str:
             if "official final answer sheet" in system:
                 return "\n".join(f"{index}. answer" for index in range(1, 11))
-            return "ACTION: sleep | PAYLOAD: ready"
+            return "ACTION: rest | PAYLOAD: ready"
 
         result = run_collaboration(
             "single_agent",

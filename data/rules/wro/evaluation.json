@@ -3,7 +3,7 @@
     "mode": "selected_game_score_then_time",
     "unit": "robot_attempt",
     "evaluator_id": null,
-    "evaluator_status": "deferred_physical_game_and_selectors",
+    "evaluator_status": "not_ready",
     "official_performance": {
       "source_status": "source_enriched_v1",
       "source_review_status": "primary_rules_partial_or_variant_selector_required",
@@ -11,7 +11,6 @@
       "mode": "selected_game_score_then_time",
       "unit": "robot_attempt",
       "criteria": [
-        "Repository evaluation status: Task performance is specified per robot_attempt in selected_game_score_then_time mode, but the repository evaluator is deferred_physical_game_and_selectors; do not invent a completed score.",
         "Source-recorded competition rule: At the end of an attempt the judge scores the observed field state, records full seconds, and the team signs the score sheet; after sign-off no further complaint is allowed.",
         "Source-recorded competition rule: A disqualified attempt receives the worst possible score and the maximum time of 120 seconds."
       ],
@@ -28,7 +27,7 @@
         "Age-group mission scoring, national tournament mode, number of runs, Q&A additions, and tie breakers are not selected."
       ],
       "repository_evaluator_id": null,
-      "repository_evaluator_status": "deferred_physical_game_and_selectors"
+      "repository_evaluator_status": "not_ready"
     },
     "rule_compliance": {
       "reported_separately_from_performance": true,
@@ -113,7 +112,7 @@
     },
     "current_repository_availability": {
       "evaluator_ready": false,
-      "evaluator_status": "deferred_physical_game_and_selectors",
+      "evaluator_status": "not_ready",
       "official_environment_fully_reproduced": false,
       "official_wall_clock_enforced": false,
       "declared_unavailable_mechanisms": [
@@ -134,7 +133,8 @@
         "game_document",
         "q_and_a_snapshot"
       ],
-      "submission_adaptation": "The runner accepts program text and analysis but cannot accept or score a physical robot attempt."
+      "submission_adaptation": "The runner accepts program text and analysis but cannot accept or score a physical robot attempt.",
+      "readiness_scope": "Per-record metadata; evaluator availability does not imply official-environment reproduction."
     },
     "official_scoring": {
       "completeness": "general_attempt_rules_only_game_scoring_unresolved",
@@ -164,11 +164,19 @@
         "id": "unselected_ruleset_claim",
         "condition": "A score or ranking is claimed without the selected game, national rules, and Q&A snapshot."
       }
-    ]
+    ],
+    "rubric_path": "data/rubrics/wro_official_rubrics.json",
+    "benchmark_readiness_source": "data/benchmarks/wro/benchmark.json",
+    "evaluation_status_counts": {
+      "not_ready": 20
+    },
+    "evaluator_selection": "Use each benchmark record's evaluation; rule values are defaults only.",
+    "record_evaluator_overrides": {},
+    "record_rubric_overrides": {}
   },
   "submission": {
     "max_count": 1,
     "adaptation": "The runner accepts program text and analysis but cannot accept or score a physical robot attempt."
   },
-  "evaluation_guidance": "Official scoring mechanics: The judge scores the field state when the robot attempt ends and records elapsed time in full seconds. A disqualified attempt receives the worst possible score and 120 seconds. Exact points, number of ranked runs, and tie resolution come from the selected game and national tournament format; Appendix D examples are not binding rules. Unresolved official evaluation state: Age-group mission scoring, national tournament mode, number of runs, Q&A additions, and tie breakers are not selected. Task performance: evaluate the inspected robot program and scored field attempt per robot_attempt in selected_game_score_then_time mode and enforce this answer contract: Submit the program and a structured design/run analysis; label simulated or hypothetical behavior and do not report an unobserved physical score. Repository status: the evaluator is deferred_physical_game_and_selectors. Do not invent a completed benchmark grade or claim evaluator readiness. Rule compliance: report prohibited tools, outside assistance, hidden-answer access, unauthorized submission, and competition-specific violations separately from task performance. Collaboration quality: assess allocation, evidence exchange, verification, handoffs, recovery, replanning, and communication efficiency without rewarding fixed roles, equal airtime, or message volume by themselves. Fidelity: identify official mechanisms that the current runner does not reproduce; never treat a proxy action as proof that a physical, oral, live-opponent, judge, or mutable-environment event occurred."
+  "evaluation_guidance": "Resolve readiness, evaluator, rubric, and score basis from the selected benchmark record. Official mission and scoring documents are archived, but repository scoring is not ready because the runner cannot observe the physical robot, randomized field, inspection, timed attempt, judge decisions, or signed score sheet. Do not invent a completed physical score."
 }

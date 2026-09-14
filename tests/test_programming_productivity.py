@@ -153,9 +153,17 @@ class ProgrammingProductivityTests(unittest.TestCase):
                 saved.update(session=session, memory=memory)
                 raise RuntimeError("pause test")
         config = review_ablation_config(2, 6)
+        def initial_action(request):
+            return LLMResponse("", "mock", "mock", tool_calls=(
+                LLMToolCall("rest", {"reason": "thinking"}),))
         with self.assertRaisesRegex(RuntimeError, "pause test"):
-            run_with_test_plan(m, lambda *_: json.dumps({"action": "rest", "arguments": {"reason": "thinking"}}), config,
+            run_with_test_plan(m, lambda *_: "", config, action_request_fn=initial_action,
                         coach_query_fn=lambda *_: plan, checkpoint_callback=checkpoint)
+        # Omitting the plan callback changes this fixture from leader-planned
+        # to unplanned; that incompatible baseline must be rejected.
+        with self.assertRaisesRegex(ValueError, "runtime version/settings mismatch"):
+            run_with_test_plan(m, lambda *_: "", config,
+                session_checkpoint=saved["session"], memory_checkpoint=saved["memory"])
         seen = []
         def model(request):
             names = {t["name"] for t in request.tools}
@@ -163,7 +171,10 @@ class ProgrammingProductivityTests(unittest.TestCase):
             call = (LLMToolCall("execute_code", {"code": "print(0)"}) if names == {"execute_code"}
                     else LLMToolCall("rest", {"reason": "thinking"}))
             return LLMResponse("", "mock", "mock", tool_calls=(call,))
+        def repeated_plan(*args):
+            raise AssertionError("Opening leader plan must not run twice")
         result = run_with_test_plan(m, lambda *_: "", config, action_request_fn=model,
+                            coach_query_fn=repeated_plan,
                             task_action_executor=lambda *_: {"valid": True, "sample_verdict": "WA"},
                             session_checkpoint=saved["session"], memory_checkpoint=saved["memory"])
         self.assertEqual(seen[:2], [{"execute_code"}, {"execute_code"}])

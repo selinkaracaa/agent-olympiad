@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import math
 from dataclasses import asdict, fields
 from pathlib import Path
 from typing import Any
@@ -15,6 +16,7 @@ from typing import Any
 from contest_manifest import ContestManifest
 from contest_config import PROTOCOL_VERSION, ContestRunConfig
 from tool_registry import ACTION_SET_VERSION
+from contest_modules import MODULE_VERSION
 
 
 class RunCompatibilityError(ValueError):
@@ -69,6 +71,8 @@ def build_run_identity(
         "schema_version": 1,
         "protocol_version": PROTOCOL_VERSION,
         "action_set_version": ACTION_SET_VERSION,
+        "module_version": MODULE_VERSION,
+        "modules": config.modules.as_dict(),
         "session_id": manifest.session_id,
         "competition_id": manifest.competition_id,
         "task_ids": [task.task_id for task in manifest.tasks],
@@ -122,6 +126,33 @@ def _read_artifact(path: Path) -> dict[str, Any]:
         raise RunCompatibilityError(f"Cannot reuse {path}: invalid artifact ({exc})") from exc
 
 
+def pending_contest_evaluations(result: dict[str, Any], expected: dict[str, Any]) -> list[str]:
+    """Requested post-contest judges must finish before a run is reusable as complete."""
+    evaluation = expected["settings"].get("evaluation") or {}
+    def has_scores(value, keys):
+        return isinstance(value, dict) and all(
+            isinstance(value.get(key), (int, float)) and not isinstance(value.get(key), bool)
+            and math.isfinite(value[key]) for key in keys
+        )
+    pending = []
+    if evaluation.get("judge_collab"):
+        if not has_scores(result.get("coordination"),
+                          ("communication_score", "planning_score", "coordination_score")):
+            pending.append("coordination")
+        if not has_scores(result.get("interaction"), ("interaction_helpfulness_score",)):
+            pending.append("interaction")
+    if evaluation.get("judge_cce"):
+        rows = result.get("cce")
+        eligible = [key for key, row in result["grade"].get("tasks", {}).items()
+                    if row.get("utility") is not None]
+        if not isinstance(rows, dict) and not eligible:
+            pending.append("cce")
+        for key in eligible:
+            if not has_scores((rows or {}).get(key), ("cce",)):
+                pending.append("cce:" + key)
+    return pending
+
+
 def _inspect_contest_output(
     out_dir: Path, expected: dict[str, Any],
 ) -> tuple[str, dict[str, Any] | None]:
@@ -162,7 +193,7 @@ def _inspect_contest_output(
             or result["session_checkpoint"].get("final_summary") is None
         ):
             raise RunCompatibilityError(f"Cannot reuse {result_path}: incomplete final result")
-        return "complete", result
+        return ("resume" if pending_contest_evaluations(result, expected) else "complete"), result
     return ("resume" if checkpoint_path.exists() else "new"), None
 
 
@@ -182,4 +213,14 @@ def read_completed_contest_result(
     state, result = _inspect_contest_output(out_dir, expected)
     if state != "complete" or result is None:
         raise RunCompatibilityError(f"Cannot summarize {out_dir}: final result is {state}")
+    return result
+
+
+def read_finalized_contest_result(
+    out_dir: Path, expected: dict[str, Any],
+) -> dict[str, Any]:
+    """Read finalized contestant work even if requested auxiliary judges are pending."""
+    _, result = _inspect_contest_output(out_dir, expected)
+    if result is None:
+        raise RunCompatibilityError(f"Cannot evaluate {out_dir}: contestant execution is not finalized")
     return result

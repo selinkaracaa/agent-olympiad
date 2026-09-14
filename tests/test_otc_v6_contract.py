@@ -122,15 +122,14 @@ class OtcV6ContractTests(unittest.TestCase):
         deliver_verdicts(session, memory, final=True)
         self.assertTrue(session.task('p1').locked)
 
-    def test_programming_deadline_does_not_waive_approval(self):
+    def test_programming_deadline_attempts_candidates_with_or_without_approval(self):
         for approved in (False, True):
             _, session, memory = self.table()
             if approved:
                 session.record_review('Agent_2', 'Read full source; samples pass')
             executor = Mock(spec=['__call__'], return_value={'verdict': 'AC', 'valid': True})
-            _collect_programming_deadline(icpc_manifest(), session, memory, executor,
-                                          lambda: None, require_approval=True)
-            self.assertEqual(executor.call_count, int(approved))
+            _collect_programming_deadline(icpc_manifest(), session, memory, executor, lambda: None)
+            self.assertEqual(executor.call_count, 1)
 
     def test_math_deadline_only_collects_approved_current_answer(self):
         config = ContestRunConfig('otc', 6, 2, rule_card=ARML)
@@ -164,11 +163,13 @@ class OtcV6ContractTests(unittest.TestCase):
         self.assertFalse(any(c['kind'] == 'opening' for c in llm.calls))
         self.assertEqual(result['budget']['api_calls_used'], 1 + 2 * 6 * 2)
 
-    def test_aliases_share_normalizer_without_bypassing_dynamic_schema(self):
+    def test_invocations_share_normalizer_without_bypassing_dynamic_schema(self):
         rest = ACTION_REGISTRY['rest']
-        canonical, arguments, error = validate_action_invocation('sleep', {'reason': 'wait'}, [rest])
+        canonical, arguments, error = validate_action_invocation('rest', {'reason': 'wait'}, [rest])
         self.assertIsNone(error)
-        self.assertEqual(canonical, normalize_invocation('sleep', {'reason': 'wait'}).action)
+        self.assertEqual(canonical, normalize_invocation('rest', {'reason': 'wait'}).action)
+        # Legacy spellings are not resolved anywhere on the session path.
+        self.assertIsNotNone(validate_action_invocation('sleep', {'reason': 'wait'}, [rest])[2])
         frozen = replace(ACTION_REGISTRY['submit_code'], arguments=())
         self.assertIsNotNone(validate_action_invocation('submit_code', {'code': 'print(1)'}, [frozen])[2])
         self.assertIsNotNone(validate_action_invocation('work', {'content': 'x'}, [rest])[2])

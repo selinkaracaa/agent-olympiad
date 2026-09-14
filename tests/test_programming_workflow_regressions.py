@@ -73,7 +73,7 @@ class ProgrammingWorkflowRegressions(unittest.TestCase):
             nonlocal calls
             calls += 1
             return json.dumps({"action": "execute_code", "arguments": {"code": "print(" + str(calls) + ")"}})
-        return run_with_test_plan(m, query, review_ablation_config(3, max_turns, stall_turns=3), coach_query_fn=lambda *_: plan, task_action_executor=lambda *_: {"valid": True, "sample_verdict": "WA", "result": "0"}, session_checkpoint=session_checkpoint, memory_checkpoint=memory_checkpoint, checkpoint_callback=checkpoint_callback)
+        return run_with_test_plan(m, query, review_ablation_config(3, max_turns, stall_turns=3, deadline_submit=False), coach_query_fn=lambda *_: plan, task_action_executor=lambda *_: {"valid": True, "sample_verdict": "WA", "result": "0"}, session_checkpoint=session_checkpoint, memory_checkpoint=memory_checkpoint, checkpoint_callback=checkpoint_callback)
 
     def test_three_agents_repeated_wa_rotate_without_official_penalty(self):
         result = self.run_failed_samples()

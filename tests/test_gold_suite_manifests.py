@@ -9,10 +9,21 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT / "scripts"))
 
-from run_otc_gold_suite import _group_problems  # noqa: E402
+from run_otc_gold_suite import _group_problems, team_size_for  # noqa: E402
 
 
 class GoldSuiteManifestGroupingTests(unittest.TestCase):
+    def test_cli_rosters_respect_single_agent_and_matched_otc_pair(self) -> None:
+        from rules.loader import load_rule_card
+        self.assertEqual(team_size_for('arml_local', None, 'single_agent'), 1)
+        with self.assertRaisesRegex(SystemExit, 'single_agent requires'):
+            team_size_for('arml_local', 3, 'single_agent')
+        card = load_rule_card('arml_local')
+        for variant in ('otc_rule_card', 'otc_rule_card_memory', 'vallina_otc', 'otc'):
+            self.assertEqual(team_size_for('arml_local', None, variant), card.team_size_default)
+            with self.assertRaises(SystemExit):
+                team_size_for('arml_local', card.team_size_max + 1, variant)
+
     def test_arml_2012_q10_prompt_does_not_include_pdf_page_number(self) -> None:
         benchmark = json.loads(
             (REPO_ROOT / "data/benchmarks/arml_local/benchmark.json").read_text(

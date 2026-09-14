@@ -320,7 +320,7 @@
     "max_message_chars": 1200,
     "counted_actions": [
       "speak",
-      "write_scratchpad",
+      "work",
       "propose",
       "challenge",
       "provide_evidence",
@@ -379,7 +379,7 @@
         "problem_access": false,
         "allowed_actions": [
           "speak",
-          "sleep"
+          "rest"
         ],
         "advice_scope": [
           "time allocation",

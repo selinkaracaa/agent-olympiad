@@ -2,8 +2,11 @@
 
 from __future__ import annotations
 
+from action_modules.memory import agent_context, decision_guidance
+
 import json
 from dataclasses import asdict
+from computer_capacity import session_computer_state
 from typing import Any
 
 from contest_actions import _is_answer_sheet_contest, _local_run_reports, _sample_reports, _task_has_independent_approval
@@ -351,19 +354,47 @@ def _system_prompt(
             "Do not include Markdown or a second action.\n"
             f"{render_action_instructions(actions)}"
         )
-    if any(spec.name in DESK_ACTION_NAMES for spec in actions):
-        base += (
-            "\nDESK TOOLS: inspect_problem reads any problem's statement and full "
+    action_names = {spec.name for spec in actions}
+    if config.modules.memory and 'recall' in action_names:
+        base += '\n' + decision_guidance()
+    elif not config.modules.memory:
+        base += ('\nOPTIONAL MEMORY MODULE: disabled. remember, recall and share_note '
+                 'are unavailable. Normal shared drafts, conversation and current task state remain available.')
+    if action_names & DESK_ACTION_NAMES:
+        desk_guidance = {
+            "inspect_problem": "inspect_problem reads any problem's statement and full "
             "version/review/submission history without moving the team's active "
             "problem; use it to check another problem or to self-verify before you "
-            "act. remember stores a private note (intermediate result, dead end, "
-            "reminder) that survives outside the visible transcript; recall searches "
-            "your notes and shared notes; share_note publishes one note to the team. "
-            "work is only for a candidate answer, never for notes. triage_problem "
+            "act.",
+            "remember": "remember stores a private note (intermediate result, dead end, "
+            "reminder) that survives outside the visible transcript.",
+            "recall": "recall searches your notes and shared notes.",
+            "share_note": "share_note publishes one note to the team.",
+            "triage_problem": "triage_problem "
             "sets the team priority of a problem (high/normal/low/hopeless) so the "
             "scheduler reorders remaining work; hopeless problems stay on the sheet "
-            "and their latest draft is still submitted at the deadline. Desk tools "
-            "consume a turn like any other action, so do not loop on them."
+            "and can be revisited.",
+        }
+        base += "\nDESK TOOLS: " + " ".join(
+            guidance for name, guidance in desk_guidance.items() if name in action_names
+        )
+        if any(spec.module == "memory" for spec in actions):
+            base += (
+                " inspect_problem and triage_problem consume an ordinary action; "
+                "remember, recall and share_note are zero-turn auxiliary calls. "
+                "After a memory receipt, continue your ordinary action in the same turn."
+            )
+        else:
+            base += (
+                " Desk tools "
+                "consume a turn like any other action, so do not loop on them."
+            )
+    if config.deadline_submit:
+        base += (
+            "\nDEADLINE RULE: When the contest clock ends, the controller attempts "
+            "available candidate answers in every task family, including rejected, "
+            "unreviewed, or sample-failing candidates. In-contest review and tool "
+            "rules still apply to your actions; they do not veto final collection."
         )
     features = config.features
     if features.coach == "none" and not features.structured_context:
@@ -444,7 +475,7 @@ def _system_prompt(
             "the answer invalidates old reviews. There is no frozen Coach allocation. "
             "After all scored answers are independently approved and card discussion "
             "requirements are met, call submit once to hand in the sheet. Deadline "
-            "collection includes only approved current versions. "
+            "collection attempts available candidates even without approval. "
             + ("A separate final review is also required. " if config.final_review_required
                else "No redundant contest-wide final-review round is required. ")
         )
@@ -538,7 +569,7 @@ def _system_prompt(
                 "code.",
                 "If review_answer rejects a version, fix the defect, re-run "
                 "execute_code and obtain approval of the new version. Rejection "
-                "is a veto, including at the deadline.",
+                "blocks voluntary submission during play; final collection still attempts the candidate.",
             ).replace("(4) After the independent review,",
                       "(4) After independent approval of the current version,")
     elif task_family == "mathematics":
@@ -548,18 +579,25 @@ def _system_prompt(
             "sample-run evidence. Read the numbered problems in the active prompt and "
             "solve as many as possible. Use work only for an actual candidate answer "
             "sheet containing explicit numbered final answers, with compact derivations "
-            "where useful for review. Preserve already-solved entries when revising the "
-            "sheet. Use the calculator when available for arithmetic checks. Reviewers "
-            "check the mathematics and answer numbering, not code. Submit the best "
-            "available answer sheet before the deadline even when some entries remain "
-            "blank or unreviewed."
+            + ("where useful for review. " if config.review_required or config.final_review_required
+               else "to support your answer. ")
+            + "Preserve already-solved entries when revising the "
+            "sheet. Use the calculator when available for arithmetic checks. "
+            + ("Reviewers check the mathematics and answer numbering, not code. "
+               if config.review_required or config.final_review_required
+               else "Check the mathematics and answer numbering. ")
+            + "Submit the best available answer sheet before the deadline even when some entries remain "
+            + ("blank or unreviewed." if config.review_required or config.final_review_required
+               else "blank.")
         )
     elif task_family == "short_answer":
         strategic += (
             "\nSHORT-ANSWER WORKFLOW: This is not a programming task. Answer the "
             "questions directly and concisely. For a packet, use work for a numbered "
             "answer sheet such as `Q1: answer`; for one question, give its explicit "
-            "final answer. Never save a status update or ask for source code. Reviewers "
+            "final answer. Never save a status update or ask for source code. "
+            + ("Reviewers " if config.review_required or config.final_review_required else "You ")
+            +
             "check factual correctness, aliases, and alignment between question numbers "
             "and answers. Submit the most complete answer set available by the deadline."
         )
@@ -614,22 +652,33 @@ def _user_prompt(
         else None
     )
     task_by_id = {task.task_id: task for task in manifest.tasks}
+    active_instruction = (
+        "This task is already selected for you; act on it directly instead of "
+        "calling select_problem again."
+    )
+    if config.review_required or final_review_phase:
+        active_instruction += (
+            " This is a work target, not a review assignment. For review_answer, "
+            "choose an eligible independent-review target from the queue below."
+        )
     active_text = (
         f"ACTIVE TASK {active.task_id}\n"
-        "(This task is already selected for you; act on it directly instead of "
-        f"calling select_problem again.)\n{task_by_id[active.task_id].prompt}"
+        f"({active_instruction})\n{task_by_id[active.task_id].prompt}"
         if active is not None
         else "NO ACTIVE TASK. Select one unfinished problem."
     )
     status = json.dumps(_task_rows(session), ensure_ascii=False)
-    shared_reviews = json.dumps(
-        _shared_review_history(
-            session,
-            max_versions_per_task=5,
-            max_content_chars=800,
-        ),
-        ensure_ascii=False,
+    review_enabled = config.review_required or config.final_review_required
+    answer_history = _shared_review_history(
+        session, max_versions_per_task=5, max_content_chars=800,
     )
+    if not review_enabled:
+        answer_history = {
+            task_id: [{key: value for key, value in row.items() if key != "reviews"}
+                      for row in rows]
+            for task_id, rows in answer_history.items()
+        }
+    shared_reviews = json.dumps(answer_history, ensure_ascii=False)
     local_run_reports = _local_run_reports(memory)
     sample_reports = _sample_reports(memory)
     pending_rows = _pending_review_queue(
@@ -637,7 +686,7 @@ def _user_prompt(
         reviewer=agent,
         reported_version_hashes=set(local_run_reports),
         allowed_task_ids=allowed_reviews,
-    )
+    ) if review_enabled else []
     if final_review_phase and active is not None and active.versions:
         version = active.versions[-1]
         if version.author != agent and (allowed_reviews is None or active.task_id in allowed_reviews):
@@ -667,39 +716,20 @@ def _user_prompt(
     budget = json.dumps(
         {
             **asdict(session.budget),
+            **session_computer_state(memory, session.budget.turns_used, config.computer_capacity),
             "blank_tasks": [task.task_id for task in session.tasks if not task.versions],
         },
         ensure_ascii=False,
     )
-    if policy is not None and active is not None and not config.features.basic_open_table:
-        # Projection sizes come from the card's memory_entries block.
-        entries = policy.memory_entries
-        context: Any = memory.strategic_projection(
-            viewer=agent,
-            current_task_id=active.task_id,
-            max_current_events=entries.shared_work,
-            max_direct_messages=entries.group_messages,
-            max_team_messages=entries.public_messages,
-            max_chars=max(6000, 300 * (entries.shared_work + entries.public_messages)),
-        )
-    elif config.features.structured_context and active is not None:
-        context = memory.strategic_projection(
-            viewer=agent,
-            current_task_id=active.task_id,
-            max_chars=6000,
-        )
-    else:
-        visible = memory.view(agent)
-        if config.features.basic_open_table:
-            visible = [event for event in visible if event.kind not in {'think', 'note', 'note_shared'}]
-        context = [
-            {
-                "turn": event.turn,
-                "actor": event.actor,
-                "kind": event.kind,
-                "payload": event.payload,
-            }
-            for event in visible[-12:]
+    context = agent_context(
+        memory, viewer=agent, enabled=config.modules.memory,
+        current_task_id=active.task_id if active is not None else None,
+        entries=policy.memory_entries if policy is not None else None,
+    )
+    if not config.modules.memory and think_ledger:
+        think_ledger = [
+            row for row in think_ledger
+            if row.get("turn") == session.budget.turns_used
         ]
     phase = (
         "FINAL REVIEW PHASE: Audit the active task's latest draft answer. "
@@ -737,7 +767,7 @@ def _user_prompt(
         (
             "COACH OPENING SUGGESTION FOR YOU (advice, not a lock)\n"
             if policy is not None
-            else "YOUR ENFORCED PERSONAL COACH MEMORY\n"
+            else "YOUR ENFORCED LEADER ASSIGNMENT\n"
         )
         + f"{json.dumps(personal_assignment, ensure_ascii=False)}\n\n"
         if personal_assignment is not None
@@ -749,7 +779,7 @@ def _user_prompt(
         if think_ledger
         else ""
     )
-    if config.features.basic_open_table:
+    if not config.modules.memory:
         think_block = think_block.replace('YOUR PRIVATE THINK LEDGER (newest last; nobody else sees this)',
                                           'CURRENT PRIVATE THOUGHT (this turn only)')
     source_block = ""
@@ -777,16 +807,36 @@ def _user_prompt(
         "algorithm; do not send an empty/TODO program or a hardcoded sample harness.\n\n"
         if programming_source_required else ""
     )
+    review_target_rule = ""
+    if config.review_required or final_review_phase:
+        review_target_rule = (
+            "REVIEW TARGET RULE: Copy problem_id and version_hash from the SAME row "
+            "of YOUR ELIGIBLE PENDING REVIEWS. That queue, not ACTIVE TASK or the "
+            "shared history, identifies versions you may review. Shared history "
+            "also contains your own answers and obsolete versions. Never review "
+            "your own answer, combine IDs and hashes from different rows, or reuse "
+            "a hash from an earlier turn. If the queue is empty, choose another "
+            "available action instead of inventing review arguments.\n"
+        )
+        if active is not None and active.versions and active.versions[-1].author == agent:
+            review_target_rule += (
+                f"CURRENT ANSWER IS YOUR OWN: {active.task_id}. Self-checking is "
+                "not independent approval. Ask a teammate to review it or review "
+                "a different eligible answer yourself.\n"
+            )
+        review_target_rule += "\n"
     review_block = (
+        review_target_rule
+        +
         "SHARED ANSWER REVIEW HISTORY (answer previews are truncated to 800 chars; "
         "the complete, untruncated source of every version you may review is given "
         f"under YOUR ELIGIBLE PENDING REVIEWS)\n{shared_reviews}\n\n"
         f"YOUR ELIGIBLE PENDING REVIEWS\n{pending_reviews}\n\n"
+    ) if review_enabled else (
+        "SHARED ANSWER HISTORY (answer previews are truncated to 800 chars; "
+        "use inspect_problem for complete versions)\n"
+        f"{shared_reviews}\n\n"
     )
-    if config.features.basic_open_table:
-        drafts = [{"problem_id": task.task_id, "content": task.versions[-1].content,
-                   "author": task.versions[-1].author} for task in session.tasks if task.versions]
-        review_block = 'CURRENT SHARED DRAFTS\n' + json.dumps(drafts, ensure_ascii=False) + '\n\n'
     return (
         f"CONTEST {manifest.session_id}\n"
         f"TASK FAMILY {manifest.task_family}\n"
@@ -805,5 +855,5 @@ def _user_prompt(
         f"{active_text}\n\n"
         f"{source_requirement}{source_block}"
         f"{review_block}"
-        f"{'VISIBLE CONVERSATION' if config.features.basic_open_table else 'VISIBLE MEMORY'}\n{json.dumps(context, ensure_ascii=False)}"
+        f"{'VISIBLE MEMORY' if config.modules.memory else 'VISIBLE CONVERSATION'}\n{json.dumps(context, ensure_ascii=False)}"
     )

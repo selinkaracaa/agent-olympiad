@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import io
 import json
+import os
 import sys
 import tempfile
 import unittest
@@ -201,6 +202,11 @@ class DockerTests(unittest.TestCase):
 
 
 class EnvironmentSubmissionTests(unittest.TestCase):
+    def setUp(self):
+        # These are local sample-judge tests. A developer's gateway configuration
+        # (also loaded by other CLI tests) must not route them to a remote judge.
+        self.enterContext(patch.dict(os.environ, {"VJUDGE_GATEWAY_URL": ""}))
+
     def test_submit_code_instructions_are_programming_only(self):
         self.assertIn(
             "submit_code",

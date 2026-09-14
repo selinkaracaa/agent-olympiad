@@ -111,6 +111,15 @@ class Review:
 
 
 @dataclass
+class ReviewRequest:
+    turn: int
+    agent: str
+    reviewer: str
+    content: str
+    version_hash: str
+
+
+@dataclass
 class BoardItem:
     item_id: str
     statement: str = ""
@@ -120,8 +129,10 @@ class BoardItem:
     hopeless_reason: str = ""
     claimed_by: Optional[str] = None
     claimed_turn: Optional[int] = None
+    assigned_to: Optional[str] = None
     attempts: list[Attempt] = field(default_factory=list)
     reviews: list[Review] = field(default_factory=list)
+    review_requests: list[ReviewRequest] = field(default_factory=list)
     repeat_attempts: int = 0
 
     @property
@@ -169,9 +180,11 @@ class BoardItem:
             "hopeless_reason": self.hopeless_reason,
             "claimed_by": self.claimed_by,
             "claimed_turn": self.claimed_turn,
+            "assigned_to": self.assigned_to,
             "answer": self.answer,
             "attempts": [vars(item) for item in self.attempts],
             "reviews": [vars(item) for item in self.reviews],
+            "review_requests": [vars(item) for item in self.review_requests],
             "repeat_attempts": self.repeat_attempts,
         }
 
@@ -362,6 +375,8 @@ class Workboard:
             lines.append(f"Points: {item.points:g}")
         lines.append(f"Status: {item.status()}")
         lines.append(f"Claimed by: {holder or '(unclaimed)'}")
+        if item.assigned_to:
+            lines.append(f"Assigned to: {item.assigned_to}")
         if item.priority != "normal":
             lines.append(f"Priority: {item.priority}")
         if item.hopeless:
@@ -385,6 +400,15 @@ class Workboard:
         else:
             lines.append("--- ANSWER HISTORY ---")
             lines.append("(nothing recorded yet)")
+        if item.review_requests:
+            lines.append("")
+            lines.append("--- REVIEW REQUESTS ---")
+            for request in item.review_requests:
+                target = f" -> {request.reviewer}" if request.reviewer else ""
+                lines.append(
+                    f"turn {request.turn} | {request.agent}{target} "
+                    f"(version {request.version_hash}): {request.content or '(no note)'}"
+                )
         if item.reviews:
             lines.append("")
             lines.append("--- REVIEWS ---")
@@ -516,6 +540,65 @@ class Workboard:
             f"{last.agent}'s answer {last.answer!r}. The recorded answer is "
             "unchanged; submit a new one to replace it."
         )
+
+    def request_review(
+        self,
+        agent_name: str,
+        item: BoardItem,
+        content: str,
+        *,
+        reviewer: str = "",
+        turn: int,
+    ) -> str:
+        if not item.attempts:
+            return f"Board error: {item.item_id} has no recorded answer to review."
+        version = self.answer_hash(item)
+        item.review_requests.append(
+            ReviewRequest(
+                turn=turn,
+                agent=agent_name,
+                reviewer=str(reviewer or "").strip(),
+                content=str(content or "").strip(),
+                version_hash=version,
+            )
+        )
+        target = f" from {reviewer}" if reviewer else " from a teammate"
+        return (
+            f"Review requested{target} on {item.item_id} (version {version}). "
+            "This does not approve the answer; a reviewer must call review_answer."
+        )
+
+    def assign(
+        self,
+        leader: str,
+        agent_name: str,
+        items: list[BoardItem],
+        *,
+        reason: str = "",
+        turn: int,
+    ) -> str:
+        """Leader hands a work list to a teammate; the first item is claimed for them."""
+        for other in self.items.values():
+            if other.assigned_to == agent_name and other not in items:
+                other.assigned_to = None
+        for item in items:
+            item.assigned_to = agent_name
+        first = items[0]
+        holder = first.holder(turn, self.claim_ttl_turns)
+        claimed = ""
+        if holder is None or holder == agent_name:
+            for other in self.items.values():
+                if other is not first and other.holder(turn, self.claim_ttl_turns) == agent_name:
+                    other.claimed_by = None
+                    other.claimed_turn = None
+            first.claimed_by = agent_name
+            first.claimed_turn = turn
+            claimed = f" {agent_name} now holds {first.item_id}."
+        else:
+            claimed = f" {first.item_id} stays with {holder} until released."
+        ids = ", ".join(item.item_id for item in items)
+        why = f" ({reason.strip()})" if str(reason or "").strip() else ""
+        return f"{leader} assigned {ids} to {agent_name}{why}.{claimed}"
 
     def set_priority(self, item: BoardItem, priority: str) -> str:
         value = str(priority or "").strip().lower()

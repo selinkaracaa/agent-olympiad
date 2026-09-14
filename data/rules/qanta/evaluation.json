@@ -2,8 +2,8 @@
   "scoring": {
     "mode": "gold",
     "unit": "question",
-    "evaluator_id": null,
-    "evaluator_status": "unassigned",
+    "evaluator_id": "gold_answer_v1",
+    "evaluator_status": "ready",
     "recommended_evaluator_id": "gold_answer_v1",
     "official_performance": {
       "source_status": "hand_written_fallback_v1",
@@ -12,7 +12,6 @@
       "mode": "gold",
       "unit": "question",
       "criteria": [
-        "Repository evaluation status: Task performance is specified per question in gold mode, but the repository evaluator is unassigned; do not invent a completed score.",
         "Source-recorded competition rule: Do not use reference materials or electronic devices at any point during play, and keep none on your table, in your lap, in view, or on your person.",
         "Source-recorded competition rule: A tossup answered correctly is worth 10 points and earns your team a three-part bonus totaling 30 points; NAQT additionally awards 15 for a correct answer before the power mark.",
         "Source-recorded competition rule: Interrupting a tossup before it is fully read and answering incorrectly costs your team 5 points; there is no penalty for a wrong answer after the question has been read in full.",
@@ -24,8 +23,8 @@
       "tie_breakers": [],
       "source_refs": [],
       "unresolved": [],
-      "repository_evaluator_id": null,
-      "repository_evaluator_status": "unassigned"
+      "repository_evaluator_id": "gold_answer_v1",
+      "repository_evaluator_status": "ready"
     },
     "rule_compliance": {
       "reported_separately_from_performance": true,
@@ -97,8 +96,8 @@
       ]
     },
     "current_repository_availability": {
-      "evaluator_ready": false,
-      "evaluator_status": "unassigned",
+      "evaluator_ready": true,
+      "evaluator_status": "ready",
       "official_environment_fully_reproduced": false,
       "official_wall_clock_enforced": false,
       "declared_unavailable_mechanisms": [],
@@ -108,11 +107,20 @@
         "Moderator prompting and answer-acceptability judgments are human calls that a string matcher approximates poorly."
       ],
       "required_selectors": [],
-      "submission_adaptation": null
-    }
+      "submission_adaptation": null,
+      "readiness_scope": "Per-record metadata; evaluator availability does not imply official-environment reproduction."
+    },
+    "rubric_path": "data/rubrics/numerical_sheet_reference_40_v1.json",
+    "benchmark_readiness_source": "data/benchmarks/qanta/benchmark.json",
+    "evaluation_status_counts": {
+      "ready": 240
+    },
+    "evaluator_selection": "Use each benchmark record's evaluation; rule values are defaults only.",
+    "record_evaluator_overrides": {},
+    "record_rubric_overrides": {}
   },
   "submission": {
     "max_count": 1
   },
-  "evaluation_guidance": "Task performance: evaluate the spoken answer per question in gold mode and enforce this answer contract: A short quiz-bowl style answer line. Prefer the canonical name; avoid sentences unless needed for disambiguation. Repository status: the evaluator is unassigned. Do not invent a completed benchmark grade or claim evaluator readiness. Rule compliance: report prohibited tools, outside assistance, hidden-answer access, unauthorized submission, and competition-specific violations separately from task performance. Collaboration quality: assess allocation, evidence exchange, verification, handoffs, recovery, replanning, and communication efficiency without rewarding fixed roles, equal airtime, or message volume by themselves. Fidelity: identify official mechanisms that the current runner does not reproduce; never treat a proxy action as proof that a physical, oral, live-opponent, judge, or mutable-environment event occurred."
+  "evaluation_guidance": "Resolve readiness, evaluator, rubric, and score basis from the selected benchmark record. Task performance: evaluate the spoken answer per question in gold mode and enforce this answer contract: A short quiz-bowl style answer line. Prefer the canonical name; avoid sentences unless needed for disambiguation. Do not invent a completed benchmark grade or claim evaluator readiness. Rule compliance: report prohibited tools, outside assistance, hidden-answer access, unauthorized submission, and competition-specific violations separately from task performance. Collaboration quality: assess allocation, evidence exchange, verification, handoffs, recovery, replanning, and communication efficiency without rewarding fixed roles, equal airtime, or message volume by themselves. Fidelity: identify official mechanisms that the current runner does not reproduce; never treat a proxy action as proof that a physical, oral, live-opponent, judge, or mutable-environment event occurred."
 }

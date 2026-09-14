@@ -1,5 +1,5 @@
 {
-  "evaluation_guidance": "Report official performance, rule compliance, collaboration quality, and current repository availability separately. Official performance may encode statute 13 facts only as universal mechanics: host-designed international-team task, at least five students from different countries, separate classification, and an award for the best international team. Treat 2023 time-penalty ranking, the 90-minute maximum, exact size five, and the provided kit as an edition example, not a current universal official score. Repository gold scoring per problem_or_question by rubric_llm_v1 is ready as a proxy and is not official time-ranked scoring. Rule compliance covers other-team communication, personal calculators when a host kit is provided, formula collections, hidden-answer access, and invented universal clocks. Collaboration quality is a non-official research layer: assess allocation, evidence exchange, verification, handoffs, recovery, and communication efficiency. Do not reward fixed roles, equal airtime, or message volume by themselves, and do not treat five independent solo writes as good international-team collaboration. Never treat a text answer as proof that a telescope, envelope, instrument, or live clock was present.",
+  "evaluation_guidance": "Resolve readiness, evaluator, rubric, and score basis from the selected benchmark record. Report official performance, rule compliance, collaboration quality, and current repository availability separately. Official performance may encode statute 13 facts only as universal mechanics: host-designed international-team task, at least five students from different countries, separate classification, and an award for the best international team. Treat 2023 time-penalty ranking, the 90-minute maximum, exact size five, and the provided kit as an edition example, not a current universal official score. Repository gold scoring per problem_or_question by rubric_llm_v1 is ready as a proxy and is not official time-ranked scoring. Rule compliance covers other-team communication, personal calculators when a host kit is provided, formula collections, hidden-answer access, and invented universal clocks. Collaboration quality is a non-official research layer: assess allocation, evidence exchange, verification, handoffs, recovery, and communication efficiency. Do not reward fixed roles, equal airtime, or message volume by themselves, and do not treat five independent solo writes as good international-team collaboration. Never treat a text answer as proof that a telescope, envelope, instrument, or live clock was present.",
   "scoring": {
     "mode": "gold",
     "unit": "problem_or_question",
@@ -139,8 +139,16 @@
       "required_selectors": [
         "host_year"
       ],
-      "submission_adaptation": "Official group work uses boxed paper answer sheets and, in some years, drawings or instrument readings; the runner accepts numbered worked-answer text."
-    }
+      "submission_adaptation": "Official group work uses boxed paper answer sheets and, in some years, drawings or instrument readings; the runner accepts numbered worked-answer text.",
+      "readiness_scope": "Per-record metadata; evaluator availability does not imply official-environment reproduction."
+    },
+    "benchmark_readiness_source": "data/benchmarks/ioaa_group/benchmark.json",
+    "evaluation_status_counts": {
+      "ready": 4
+    },
+    "evaluator_selection": "Use each benchmark record's evaluation; rule values are defaults only.",
+    "record_evaluator_overrides": {},
+    "record_rubric_overrides": {}
   },
   "submission": {
     "max_count": 1

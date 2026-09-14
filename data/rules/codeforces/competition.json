@@ -77,7 +77,7 @@
     }
   },
   "deliverable": {
-    "answer_format": "Submit a complete stdin/stdout program through submit_code / submit_final.",
+    "answer_format": "Submit a complete stdin/stdout program through submit_code / submit.",
     "shared": true,
     "mime_types": [
       "text/plain"

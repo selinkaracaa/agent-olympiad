@@ -109,7 +109,8 @@ class GapRepairTests(unittest.TestCase):
                              lambda *_: json.dumps({"action": "execute_code", "arguments": {"code": "print(0)"}}),
                              review_ablation_config(1, 4, stall_turns=10), task_action_executor=executor,
                              session_checkpoint=self.session.checkpoint())
-        self.assertEqual(len(calls), 1)
+        self.assertEqual(sum(c[1] == 'execute_code' for c in calls), 1)
+        self.assertEqual(sum(c[1] == 'submit_code' for c in calls), 1)
         self.assertEqual(result["diagnostics"]["programming_duplicate_executions_avoided"], 3)
         self.assertEqual(len(result["session_checkpoint"]["tasks"][0]["versions"]), 1)
         events = result["memory"]["events"]
@@ -213,14 +214,16 @@ class GapRepairTests(unittest.TestCase):
         self.source("print(2)", "AC")
         self.assertEqual(self.collect(), ["print(2)"])
 
-    def test_deadline_active_cooldown_does_not_crash_or_bypass_policy(self):
+    def test_deadline_attempts_unsubmitted_candidate_despite_active_cooldown(self):
         self.seed()
         self.source("print(0)", "AC")  # Historical, unsubmitted candidate.
         self.source("print(1)", "WA")
         for _ in range(3):
             self.session.submit("WA")
+        self.assertEqual(self.collect(), ['print(0)'])
+        intent = next(e for e in self.memory.archival_snapshot()["events"] if e['kind'] == 'programming_deadline_submit_started')
+        self.assertTrue(intent['payload']['cooldown_gate_waived'])
         self.assertEqual(self.collect(), [])
-        self.assertTrue(any(e["kind"] == "programming_deadline_skipped" for e in self.memory.archival_snapshot()["events"]))
 
     def test_empty_recorded_source_is_reported(self):
         self.seed()

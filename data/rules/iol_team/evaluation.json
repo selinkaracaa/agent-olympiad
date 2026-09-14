@@ -1,10 +1,10 @@
 {
-  "evaluation_guidance": "Report performance, rule compliance, and collaboration quality separately. Official performance is the International Jury's mark of one team script: explanations are required unless the question says otherwise, unexplained correct answers score lower, and alternative conflicting answers or explanations lose marks. Team medals are at most one gold, two silver, and three bronze, plus Honourable Mentions at Jury discretion; Jury decisions are final and there is no appeal. Do not apply individual-contest 1:2:3 medal ratios or a programming-judge penalty to this team contest. Treat eligibility, leader non-participation, and host logistics as contestant conscience. Collaboration evidence should cover joint data mapping, communicated counterexamples, one-language script merge, explanation completeness, and avoidance of unmerged solo writeups. Do not reward a fixed captain/analyst/tester/editor split, equal airtime, or message volume by themselves. Do not treat four independent high-quality writeups as good IOL team-contest collaboration.",
+  "evaluation_guidance": "Resolve readiness, evaluator, rubric, and score basis from the selected benchmark record. Report performance, rule compliance, and collaboration quality separately. Official performance is the International Jury's mark of one team script: explanations are required unless the question says otherwise, unexplained correct answers score lower, and alternative conflicting answers or explanations lose marks. Team medals are at most one gold, two silver, and three bronze, plus Honourable Mentions at Jury discretion; Jury decisions are final and there is no appeal. Do not apply individual-contest 1:2:3 medal ratios or a programming-judge penalty to this team contest. Treat eligibility, leader non-participation, and host logistics as contestant conscience. Collaboration evidence should cover joint data mapping, communicated counterexamples, one-language script merge, explanation completeness, and avoidance of unmerged solo writeups. Do not reward a fixed captain/analyst/tester/editor split, equal airtime, or message volume by themselves. Do not treat four independent high-quality writeups as good IOL team-contest collaboration.",
   "scoring": {
     "mode": "gold",
     "unit": "problem_or_question",
     "evaluator_id": "rubric_llm_v1",
-    "evaluator_status": "ready",
+    "evaluator_status": "per_record",
     "rubric_path": "data/rubrics/iol_team_worked_answer_100_v1.json",
     "evaluator_strategy": "structured_rubric_llm_judge",
     "official_performance": {
@@ -38,7 +38,10 @@
         "counterexample_use",
         "script_merge_incidents",
         "language_mixing_risk"
-      ]
+      ],
+      "repository_evaluator_id": "rubric_llm_v1",
+      "repository_evaluator_status": "per_record",
+      "criteria": []
     },
     "sanctions": {
       "possible_outcomes": [
@@ -162,7 +165,7 @@
     },
     "current_repository_availability": {
       "evaluator_ready": true,
-      "evaluator_status": "ready",
+      "evaluator_status": "per_record",
       "rubric_llm_proxy_for_jury": true,
       "live_international_jury": false,
       "allocated_team_room": false,
@@ -174,8 +177,18 @@
       "medal_caps_documented": true,
       "explanation_standard_documented": true,
       "official_environment_fully_reproduced": false,
-      "official_wall_clock_enforced": false
-    }
+      "official_wall_clock_enforced": false,
+      "readiness_scope": "Per-record metadata; evaluator availability does not imply official-environment reproduction."
+    },
+    "benchmark_readiness_source": "data/benchmarks/iol_team/benchmark.json",
+    "evaluation_status_counts": {
+      "not_ready": 2,
+      "ready": 16,
+      "ready_with_limitations": 2
+    },
+    "evaluator_selection": "Use each benchmark record's evaluation; rule values are defaults only.",
+    "record_evaluator_overrides": {},
+    "record_rubric_overrides": {}
   },
   "submission": {
     "max_count": 1

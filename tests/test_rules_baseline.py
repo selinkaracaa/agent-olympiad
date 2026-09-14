@@ -25,13 +25,13 @@ from run_competition_batch import run_one
 RULES_ROOT = REPO_ROOT / "data" / "rules"
 IEO_PROBLEM = "ieo_business_case_2021"
 ICPC_PROBLEM = "icpc_wf_2012_bottles"
-MISSING_CURRENT = {"hmmt_team", "icm", "itym", "iypt", "mcm"}
 
 
 class RuleBundleTests(unittest.TestCase):
-    def test_exactly_38_canonical_three_file_bundles_load(self):
+    def test_all_43_canonical_three_file_bundles_load(self):
         ids = iter_rule_card_ids(RULES_ROOT)
-        self.assertEqual(len(ids), 38)
+        self.assertEqual(len(ids), 43)
+        self.assertTrue({"hmmt_team", "icm", "itym", "iypt", "mcm"} <= set(ids))
         for competition_id in ids:
             with self.subTest(competition_id=competition_id):
                 directory = RULES_ROOT / competition_id
@@ -89,15 +89,21 @@ class RulesModeTests(unittest.TestCase):
             "RULE VIOLATION",
             env.execute_action(role.name, "read_star_chart", "missing"),
         )
+        # ``remember`` works in every rules mode, while structured deliberation
+        # stays enforced-only.
+        self.assertIn(
+            "Stored M1",
+            env.execute_action(role.name, "remember", "private"),
+        )
         self.assertIn(
             "Unrecognized action",
-            env.execute_action(role.name, "write_private_notes", "private"),
+            env.execute_action(role.name, "propose", "Use the mid market."),
         )
         non_submitter = next(item for item in env.rule_card.agent_roles if not item.may_submit)
         self.assertIn(
             "finalized",
             env.execute_action(
-                non_submitter.name, "submit_final", "a sufficiently long final answer"
+                non_submitter.name, "submit", "a sufficiently long final answer"
             ),
         )
 
@@ -113,7 +119,7 @@ class RulesModeTests(unittest.TestCase):
         self.assertIn(
             "not authorized",
             env.execute_action(
-                worker.name, "submit_final", "a sufficiently long final answer"
+                worker.name, "submit", "a sufficiently long final answer"
             ),
         )
         self.assertIn(
@@ -121,7 +127,7 @@ class RulesModeTests(unittest.TestCase):
             env.execute_action(worker.name, "read_star_chart", "missing"),
         )
         secret = "private sensitivity result"
-        env.execute_action(worker.name, "write_private_notes", secret)
+        env.execute_action(worker.name, "remember", secret)
         self.assertIn(secret, _agent_user_prompt(env, worker.name, "test"))
         self.assertNotIn(secret, _agent_user_prompt(env, other.name, "test"))
 
@@ -150,26 +156,22 @@ class RulesModeTests(unittest.TestCase):
         self.assertTrue(env.communication.rejected)
         self.assertTrue(env.rule_violations)
 
-    def test_missing_current_cards_are_explicitly_unavailable(self):
-        for competition_id in MISSING_CURRENT:
+    def test_missing_cards_are_explicitly_unavailable(self):
+        # Isolate missing-card behavior from the real, now-complete card catalog.
+        with tempfile.TemporaryDirectory() as empty_rules_root:
             baseline = OlympiadEnvironment(
-                competition_id,
-                {
-                    "hmmt_team": "hmmt_team_2024",
-                    "icm": "icm_2024_D",
-                    "itym": "itym_2024",
-                    "iypt": "iypt_2024",
-                    "mcm": "mcm_2024_A",
-                }[competition_id],
+                "mcm", "mcm_2024_A",
                 rules_mode="prompt_only",
+                rules_root=empty_rules_root,
             ).rules_baseline
             self.assertFalse(baseline.available)
             self.assertEqual(baseline.metadata()["rules_coverage"], "missing_card")
 
-        with self.assertRaises(RuleCardResolutionError):
-            OlympiadEnvironment(
-                "mcm", "mcm_2024_A", rules_mode="enforced", rules_strict=True
-            )
+            with self.assertRaises(RuleCardResolutionError):
+                OlympiadEnvironment(
+                    "mcm", "mcm_2024_A", rules_mode="enforced", rules_strict=True,
+                    rules_root=empty_rules_root,
+                )
 
     def test_runner_records_hash_coverage_and_analysis_separates_modes(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -177,7 +179,7 @@ class RulesModeTests(unittest.TestCase):
                 "icpc",
                 ICPC_PROBLEM,
                 schema="round_table",
-                query_fn=lambda _system, _user: "ACTION: sleep | PAYLOAD: test",
+                query_fn=lambda _system, _user: "ACTION: rest | PAYLOAD: test",
                 request_fn=None,
                 rounds=1,
                 synthesize=False,

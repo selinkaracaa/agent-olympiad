@@ -1,0 +1,68 @@
+{
+  "schema_version": "1.0",
+  "rule_id": "mcm:current_proxy_v1",
+  "competition_id": "mcm",
+  "profile": "proxy",
+  "protocol": "long_horizon_report",
+  "team": {
+    "active_min": 1,
+    "active_default": 3,
+    "active_max": 3,
+    "roster_max": 3,
+    "range_basis": "source_record",
+    "official_roster_note": "A team may contain up to three eligible students from the same school.",
+    "collaboration": "Only registered team members may work on the solution.",
+    "range_basis_detail": "official_current_rules"
+  },
+  "execution": {
+    "official_minutes": 5940,
+    "official_window_note": "The current published competition window is 99 hours; historical packets may specify different submission details and page limits."
+  },
+  "allowed_tools": [
+    "query_rules",
+    "use_calculator",
+    "execute_code",
+    "work",
+    "render_pdf"
+  ],
+  "resources": {
+    "internet": "allowed_with_citation",
+    "calculator": "allowed",
+    "code_execution": "allowed",
+    "outside_communication": "forbidden",
+    "generative_ai": "edition_rules_apply_and_use_must_be_disclosed"
+  },
+  "rules_text": "Work as one registered MCM team of at most three students. Solve one released MCM problem, document assumptions, model design, validation, sensitivity, conclusions, and sources, and submit one PDF report. Do not obtain solution help from anyone outside the team. Follow the evaluated packet when its page or disclosure instructions differ from this current proxy card.",
+  "provenance": {
+    "status": "source_grounded_current_rules_historical_timing_proxy",
+    "sources": [
+      {
+        "title": "COMAP MCM/ICM Rules, Registration and Instructions",
+        "url": "https://contest.comap.com/undergraduate/contests/mcm/instructions.php",
+        "authority": "official",
+        "edition": "current rules"
+      }
+    ],
+    "adaptations": [
+      "The official multi-day window is represented by a bounded agent-turn budget.",
+      "Historical problem rows use a current collaboration proxy while retaining packet-specific instructions."
+    ]
+  },
+  "comparability": {
+    "overall": "proxy"
+  },
+  "deliverable": {
+    "answer_format": "One self-contained modeling report with references and required disclosure material.",
+    "shared": true,
+    "mime_types": [
+      "application/pdf"
+    ],
+    "task_types": [
+      "modeling_report"
+    ],
+    "official_deliverable": "written_memorandum"
+  },
+  "human_constraints": [
+    "Work as one registered MCM team of at most three students. Solve one released MCM problem, document assumptions, model design, validation, sensitivity, conclusions, and sources, and submit one PDF report. Do not obtain solution help from anyone outside the team. Follow the evaluated packet when its page or disclosure instructions differ from this current proxy card."
+  ]
+}

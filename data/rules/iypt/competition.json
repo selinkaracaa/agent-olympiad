@@ -1,0 +1,71 @@
+{
+  "schema_version": "1.0",
+  "rule_id": "iypt:current_proxy_v1",
+  "competition_id": "iypt",
+  "profile": "proxy",
+  "protocol": "research_physics_fight",
+  "team": {
+    "active_min": 3,
+    "active_default": 5,
+    "active_max": 5,
+    "roster_max": 5,
+    "range_basis": "source_record",
+    "collaboration": "The team jointly researches the published problems and prepares presentations for Physics Fights.",
+    "range_basis_detail": "official_regulations"
+  },
+  "execution": {
+    "official_minutes": null,
+    "official_window_note": "Research occurs before the tournament and live fight timing is role-specific; the benchmark turn budget is a proxy."
+  },
+  "allowed_tools": [
+    "query_rules",
+    "use_calculator",
+    "execute_code",
+    "work",
+    "render_pdf"
+  ],
+  "resources": {
+    "internet": "allowed_with_citation_during_preparation",
+    "calculator": "allowed_during_preparation",
+    "code_execution": "allowed_during_preparation",
+    "outside_communication_during_fight": "forbidden"
+  },
+  "rules_text": "Work as an IYPT team preparing an original investigation of a published open physics problem. Build a clear presentation supported by theory, reproducible experiments or simulations, uncertainty analysis, and citations. During a live Physics Fight, outside communication is forbidden. This benchmark grades the deck only and does not simulate the Reporter/Opponent/Reviewer exchange.",
+  "provenance": {
+    "status": "source_grounded_current_regulations_proxy",
+    "sources": [
+      {
+        "title": "IYPT Regulations",
+        "url": "https://iypt.org/regulations/",
+        "authority": "official"
+      },
+      {
+        "title": "IYPT Regulations July 2025",
+        "url": "https://www.iypt.org/wp-content/uploads/2025/07/IYPT-Regulations-07-2025.pdf",
+        "authority": "official",
+        "edition": "July 2025"
+      }
+    ],
+    "adaptations": [
+      "Research preparation and fight stages are represented by a bounded turn budget.",
+      "The deck receives a normalized rubric score without opponent, reviewer, jury, or coefficient mechanics."
+    ]
+  },
+  "comparability": {
+    "overall": "proxy"
+  },
+  "deliverable": {
+    "answer_format": "One self-contained 16:9 research presentation deck.",
+    "shared": true,
+    "mime_types": [
+      "application/pdf"
+    ],
+    "task_types": [
+      "open_research"
+    ],
+    "official_deliverable": "slide_deck"
+  },
+  "human_constraints": [
+    "Work as an IYPT team preparing an original investigation of a published open physics problem. Build a clear presentation supported by theory, reproducible experiments or simulations, uncertainty analysis, and citations. During a live Physics Fight, outside communication is forbidden. This benchmark grades the deck only and does not simulate the Reporter/Opponent/Reviewer exchange."
+  ]
+}

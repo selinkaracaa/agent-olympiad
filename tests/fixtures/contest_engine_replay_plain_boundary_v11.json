@@ -1,0 +1,38 @@
+{
+  "protocol_version": "contest_session_v11",
+  "action_set_version": 8,
+  "module_version": 3,
+  "capture_note": "Plain baseline isolation: remove inactive review queues and reviewer planning/prompt guidance, enforce workflow permissions at offering and dispatch. Both OTC variants retain all eight previous replay fingerprints. Historical snapshots remain unchanged.",
+  "cases": {
+    "single_agent/math/fresh": "778da8393aa05b7bf3121194259762fc1dd2a0c596fb232084c1c8cd96ad7944",
+    "single_agent/math/resume": "e1e87dca3b27b2f0012d7f636655b02800631cbf588108edc2c87bc805a48683",
+    "single_agent/code/fresh": "d02bd6724ee041bf6524a1682fbd026b893e4b90a94ef326d3500979210fe739",
+    "single_agent/code/resume": "ae035cd28c167b429065ddeb25ccdae67f78dca6c0206f76fedf79f52d33d98a",
+    "decentralized/math/fresh": "d4b289908279c41fccc0ecb2174a0fffe86d620f626821f03925ca753246c553",
+    "decentralized/math/resume": "0615b2cfd853586ccd08a094a3daea816de9a82c14352e131a8291455a250133",
+    "decentralized/code/fresh": "3c6a8b4157ad5510913b5d18ce3a4c3ec82fdcdb33f353c49dae6bb3aa2a6ae3",
+    "decentralized/code/resume": "8634b7af779fcea7a47cb7d2aad8f08dddda23cf3ef075093d1379ccb46a135e",
+    "centralized/math/fresh": "f15daff056c56ea121acd543e067f21aa6bee71a0298cfb75ff76da914cbc353",
+    "centralized/math/resume": "3461c59f30766836c4568bc1fb68809d3cf24157c16ab15c7e1d643eb1c6f7d0",
+    "centralized/code/fresh": "89c3cf359c83bf844ed6612eaf48cc5e12e325c95fc7ffb4d67af8b6945c477d",
+    "centralized/code/resume": "388e990e055706a97cb29702d904c7317a7233d096fe381ac397be4fe1d70137",
+    "vallina_otc/math/fresh": "e0cbf20dedcb5c9567aac80a894787d52fbe930310262a05ae8e5b3351d38b74",
+    "vallina_otc/math/resume": "e7dc4be8478a39d4cdf3d6108d30c3c722a022596ace4c8838e46d767253297e",
+    "vallina_otc/code/fresh": "6b8c5df91593eb053a3aa83f3aaab14b63fb08fb14e268f35a2b27db512f3309",
+    "vallina_otc/code/resume": "bcc8be40b6ed274fe6c90553a438158a557bef2374fe70b833fc507d96fc8278",
+    "otc/math/fresh": "358c99bac0494f52b527c5a5bcdecbee15385f07882570797a1a8f21333ce26d",
+    "otc/math/resume": "1655d9fd242342e74ee780e980218d84db58ca2bdb1adeea0e276c598b78e04e",
+    "otc/code/fresh": "7e642695f8fc843db1154d81370ee722f014e11fa3fc2cda07bb6bb7def57084",
+    "otc/code/resume": "27746aa9c9c1777d917832b2a6aae3719abe7914506ec5e27ed898f8afbb0e58"
+  },
+  "unchanged_otc_cases": [
+    "vallina_otc/math/fresh",
+    "vallina_otc/math/resume",
+    "vallina_otc/code/fresh",
+    "vallina_otc/code/resume",
+    "otc/math/fresh",
+    "otc/math/resume",
+    "otc/code/fresh",
+    "otc/code/resume"
+  ]
+}

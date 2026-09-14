@@ -7,8 +7,6 @@ from tool_registry import (
     ACTION_REGISTRY,
     DELIBERATION_ACTION_NAMES,
     ActionSpec,
-    action_matches,
-    canonical_action_name,
     validate_action_payload,
 )
 
@@ -23,8 +21,9 @@ _BOARD_ACTIONS = (
     "skip_problem",
     "inspect_problem",
     "triage_problem",
+    "request_review",
     "review_answer",
-    "verify_problem",
+    "assign_problem",
 )
 _WORKSPACE_ACTIONS = ("remember", "recall", "share_note", "check_budget", "direct_message")
 
@@ -48,8 +47,16 @@ _ENV_NOTES = {
     "select_problem": "Take an item; one per agent at a time.",
     "skip_problem": "Hand your current item back (or name one).",
     "review_answer": (
-        "Approve or reject the answer version currently recorded for an item "
-        "(the version id is shown by inspect_problem)."
+        "Approve or reject the answer recorded for an item; the optional version "
+        "id (shown by inspect_problem) pins the exact version you read."
+    ),
+    "request_review": (
+        "Ask a teammate to review the item you hold (or last answered); "
+        "optionally name the reviewer."
+    ),
+    "assign_problem": (
+        "Team leader only: hand a teammate a list of items to work, e.g. "
+        "Agent_2 | 3, 4 | reason."
     ),
     "share_note": "Share stored notes with the team, e.g. M1, M2.",
     "direct_message": "Message named teammates only.",
@@ -133,7 +140,7 @@ def build_action_instructions(
             core.append("inspect_problem")
     core_lines = "\n".join(render_text_protocol_lines(_specs(core), notes=_ENV_NOTES))
 
-    tools = _specs(canonical_action_name(tool) for tool in allowed_tools)
+    tools = _specs(allowed_tools)
     if tools:
         tool_lines = "\nTools allowed in this contest:\n" + "\n".join(
             render_text_protocol_lines(tools)
@@ -162,8 +169,10 @@ def build_action_instructions(
         workspace_lines="\n".join(sections),
     )
     additions: list[str] = []
-    if private_notes:
-        additions.extend(render_text_protocol_lines(_specs(["write_private_notes"])))
+    if private_notes and not workspace_actions:
+        # ``remember`` is the private-notes action; it is already listed when
+        # the shared-workspace section is rendered.
+        additions.extend(render_text_protocol_lines(_specs(["remember"]), notes=_ENV_NOTES))
     if structured_deliberation:
         additions.append(
             "- propose/challenge/provide_evidence/revise/decide — structured "
@@ -250,7 +259,7 @@ def parse_single_structured_action(
         return None, "", "response must contain only one structured ACTION block"
     action = match.group("action").strip().lower()
     payload = match.group("payload").strip()
-    if not action_matches(action, allowed_actions):
+    if action not in allowed_actions:
         return None, "", (
             f"action '{action}' is not allowed; choose one of "
             f"{sorted(allowed_actions)}"
@@ -281,7 +290,7 @@ def parse_scoped_single_action(
             action = str(payload_obj.get("action") or "").strip().lower()
             target = str(payload_obj.get("target") or "public").strip()
             payload = str(payload_obj.get("payload") or "").strip()
-            if not action_matches(action, allowed_actions):
+            if action not in allowed_actions:
                 return (
                     None,
                     "",
@@ -301,8 +310,8 @@ def parse_scoped_single_action(
         )
     candidate = text[markers[0].start() :].strip()
     candidate = re.sub(r"\n?```\s*$", "", candidate).strip()
-    bare_rest = re.fullmatch(r"(?i)ACTION\s*:\s*(rest|sleep)", candidate)
-    if bare_rest is not None and action_matches("rest", allowed_actions):
+    bare_rest = re.fullmatch(r"(?i)ACTION\s*:\s*rest", candidate)
+    if bare_rest is not None and "rest" in allowed_actions:
         return "rest", "public", "", None
     match = SCOPED_ACTION_RE.fullmatch(candidate)
     if match is None:
@@ -315,7 +324,7 @@ def parse_scoped_single_action(
             "response must contain exactly one structured ACTION block",
         )
     action = match.group("action").strip().lower()
-    if not action_matches(action, allowed_actions):
+    if action not in allowed_actions:
         return (
             None,
             "",
@@ -338,7 +347,7 @@ def apply_agent_response(
     """Parse and execute all actions from an agent response. Returns result strings."""
     results = []
     for action_type, payload in parse_agent_response(response):
-        if allowed_actions is not None and not action_matches(action_type, allowed_actions):
+        if allowed_actions is not None and action_type not in allowed_actions:
             result = env.execute_action(
                 agent_name,
                 "rest",
@@ -346,19 +355,14 @@ def apply_agent_response(
             )
             results.append(result)
             continue
-        if (
-            canonical_action_name(action_type) == "submit"
-            and submitters is not None
-            and agent_name not in submitters
-        ):
+        if action_type == "submit" and submitters is not None and agent_name not in submitters:
             if getattr(getattr(env, "rules_mode", None), "value", None) == "enforced":
                 result = env.execute_action(agent_name, action_type, payload)
                 results.append(result)
                 continue
-            # ``write_scratchpad`` (not ``work``) so the text always lands on
-            # the shared scratchpad rather than on a held board item.
-            result = env.execute_action(agent_name, "write_scratchpad", payload)
-            results.append(f"(redirected {action_type} to scratchpad) {result}")
+            # A non-submitter's answer is recorded as team work, not submitted.
+            result = env.execute_action(agent_name, "work", payload)
+            results.append(f"(redirected submit to work) {result}")
             continue
         result = env.execute_action(agent_name, action_type, payload)
         results.append(result)
@@ -368,9 +372,9 @@ def apply_agent_response(
 
 
 def extract_final_answer_from_text(response: str) -> Optional[str]:
-    """Pull payload from submit / submit_final if present, else return full text."""
+    """Pull the payload of a ``submit`` action if present, else return full text."""
     for action_type, payload in parse_agent_response(response):
-        if canonical_action_name(action_type) == "submit":
+        if action_type == "submit":
             return payload
     stripped = response.strip()
     return stripped if stripped else None

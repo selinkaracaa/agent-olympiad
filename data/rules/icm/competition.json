@@ -1,0 +1,70 @@
+{
+  "schema_version": "1.0",
+  "rule_id": "icm:current_proxy_v1",
+  "competition_id": "icm",
+  "profile": "proxy",
+  "protocol": "long_horizon_report",
+  "team": {
+    "active_min": 1,
+    "active_default": 3,
+    "active_max": 3,
+    "roster_max": 3,
+    "range_basis": "source_record",
+    "official_roster_note": "A team may contain up to three eligible students from the same school.",
+    "collaboration": "Only registered team members may work on the solution.",
+    "range_basis_detail": "official_current_rules"
+  },
+  "execution": {
+    "official_minutes": 5940,
+    "official_window_note": "The current published 2027 window is Thursday 5:00 p.m. through Monday 8:00 p.m. EST (99 hours), followed by the electronic submission deadline. Historical packets may have edition-specific dates."
+  },
+  "allowed_tools": [
+    "query_rules",
+    "use_calculator",
+    "execute_code",
+    "work",
+    "render_pdf"
+  ],
+  "resources": {
+    "internet": "allowed_with_citation",
+    "calculator": "allowed",
+    "code_execution": "allowed",
+    "paper_pencil": "allowed",
+    "outside_communication": "forbidden",
+    "generative_ai": "edition_rules_apply_and_use_must_be_disclosed"
+  },
+  "rules_text": "Work as one registered ICM team of at most three students from the same school. Select and solve one released ICM problem, document assumptions, models, validation, sensitivity, conclusions, and sources, and submit one PDF solution report. Do not obtain solution help from anyone outside the team. Follow the edition-specific AI-use and disclosure requirements and do not fabricate citations or data provenance.",
+  "provenance": {
+    "status": "source_grounded_current_rules_historical_timing_proxy",
+    "sources": [
+      {
+        "title": "COMAP MCM/ICM Rules, Registration and Instructions",
+        "url": "https://contest.comap.com/undergraduate/contests/mcm/instructions.php",
+        "authority": "official",
+        "edition": "current published 2027 rules"
+      }
+    ],
+    "adaptations": [
+      "Official multi-day wall-clock execution is represented by a bounded agent-turn budget.",
+      "Historical rows retain their problem statements but use a current proxy collaboration card unless an edition card is added."
+    ],
+    "official_time_note": "Current published window is 99 hours; historical editions may differ."
+  },
+  "comparability": {
+    "overall": "proxy"
+  },
+  "deliverable": {
+    "answer_format": "One modeling solution report with references and required disclosure material.",
+    "shared": true,
+    "mime_types": [
+      "application/pdf"
+    ],
+    "task_types": [
+      "modeling_report"
+    ],
+    "official_deliverable": "solution_paper_pdf"
+  },
+  "human_constraints": [
+    "Work as one registered ICM team of at most three students from the same school. Select and solve one released ICM problem, document assumptions, models, validation, sensitivity, conclusions, and sources, and submit one PDF solution report. Do not obtain solution help from anyone outside the team. Follow the edition-specific AI-use and disclosure requirements and do not fabricate citations or data provenance."
+  ]
+}

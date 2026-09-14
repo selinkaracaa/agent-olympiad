@@ -251,14 +251,14 @@ CONTEST_RULES: dict[str, ContestRules] = {
         duration="20+40+15 min stages",
         shared_computers="none (devices banned)",
         tools_official="handwritten only; staged plan/write/edit",
-        scoring_official="essay rubric /28",
+        scoring_official="four criteria scored 15-25 each; total /100",
         penalties_official="cannot finish teammate's unfinished piece in edit stage",
         search_policy="forbidden",
         encoded_tools=(),
         fields=(
             _f("staged protocol", "plan/write/edit", "missing", "", "need stage machine"),
             _f("no devices", "banned", "encoded", "no tools"),
-            _f("rubric", "/28", "encoded", "rubric_llm_v1 + wsc_writing_28_v1"),
+            _f("rubric", "/100 (official range 60-100)", "encoded", "rubric_llm_v1 + wsc_writing_100_v1"),
         ),
     ),
     "jessup": ContestRules(
